@@ -1,0 +1,1380 @@
+txn_id,matter_id,location_id,date,type,category,amount,card_used,description
+OF000001,MAT00002,LOC01,2025-01-23,Fee income,"Wills, Probate & Estates",8000.75,,"Invoice - Wills, Probate & Estates matter"
+OF000002,MAT00003,LOC01,2024-06-03,Fee income,"Wills, Probate & Estates",1096.46,,"Invoice - Wills, Probate & Estates matter"
+OF000003,MAT00004,LOC02,2025-04-30,Fee income,Property Law,1279.89,,Invoice - Property Law matter
+OF000004,MAT00005,LOC01,2024-09-13,Fee income,General Litigation,2632.61,,Invoice - General Litigation matter
+OF000005,MAT00006,LOC02,2024-10-27,Fee income,Family Law,6742.47,,Invoice - Family Law matter
+OF000006,MAT00007,LOC01,2025-04-01,Fee income,Property Law,3789.56,,Invoice - Property Law matter
+OF000007,MAT00008,LOC01,2025-05-11,Fee income,Family Law,7471.94,,Invoice - Family Law matter
+OF000008,MAT00011,LOC02,2024-04-06,Fee income,"Wills, Probate & Estates",7581.24,,"Invoice - Wills, Probate & Estates matter"
+OF000009,MAT00012,LOC01,2024-11-22,Fee income,"Wills, Probate & Estates",5837.55,,"Invoice - Wills, Probate & Estates matter"
+OF000010,MAT00013,LOC01,2024-10-05,Fee income,"Wills, Probate & Estates",1754.72,,"Invoice - Wills, Probate & Estates matter"
+OF000011,MAT00014,LOC02,2025-09-06,Fee income,Family Law,18562.78,,Invoice - Family Law matter
+OF000012,MAT00015,LOC02,2025-04-12,Fee income,Family Law,8243.81,,Invoice - Family Law matter
+OF000013,MAT00016,LOC02,2024-04-23,Fee income,Family Law,604.5,,Invoice - Family Law matter
+OF000014,MAT00017,LOC01,2024-09-26,Fee income,Family Law,22145.28,,Invoice - Family Law matter
+OF000015,MAT00020,LOC01,2025-08-03,Fee income,Property Law,8802.43,,Invoice - Property Law matter
+OF000016,MAT00021,LOC01,2025-09-07,Fee income,Family Law,26823.86,,Invoice - Family Law matter
+OF000017,MAT00022,LOC01,2025-09-05,Fee income,Property Law,6417.07,,Invoice - Property Law matter
+OF000018,MAT00023,LOC01,2024-04-23,Fee income,Property Law,5351.79,,Invoice - Property Law matter
+OF000019,MAT00025,LOC02,2024-08-10,Fee income,"Wills, Probate & Estates",8514.9,,"Invoice - Wills, Probate & Estates matter"
+OF000020,MAT00027,LOC02,2025-09-20,Fee income,General Litigation,15190.06,,Invoice - General Litigation matter
+OF000021,MAT00029,LOC01,2024-03-07,Fee income,Family Law,3320.81,,Invoice - Family Law matter
+OF000022,MAT00032,LOC01,2025-04-28,Fee income,Property Law,1892.79,,Invoice - Property Law matter
+OF000023,MAT00034,LOC01,2025-01-17,Fee income,Family Law,7061.54,,Invoice - Family Law matter
+OF000024,MAT00035,LOC01,2024-11-18,Fee income,Property Law,4469.26,,Invoice - Property Law matter
+OF000025,MAT00036,LOC01,2024-04-05,Fee income,"Wills, Probate & Estates",6691.4,,"Invoice - Wills, Probate & Estates matter"
+OF000026,MAT00038,LOC02,2025-10-31,Fee income,General Litigation,5042.63,,Invoice - General Litigation matter
+OF000027,MAT00040,LOC02,2024-06-08,Fee income,Family Law,2099.77,,Invoice - Family Law matter
+OF000028,MAT00042,LOC01,2025-07-13,Fee income,Property Law,5933.86,,Invoice - Property Law matter
+OF000029,MAT00043,LOC02,2024-08-14,Fee income,General Litigation,5185.63,,Invoice - General Litigation matter
+OF000030,MAT00045,LOC01,2024-04-22,Fee income,Family Law,14317.53,,Invoice - Family Law matter
+OF000031,MAT00046,LOC02,2024-10-03,Fee income,General Litigation,933.1,,Invoice - General Litigation matter
+OF000032,MAT00047,LOC01,2024-05-18,Fee income,General Litigation,4325.05,,Invoice - General Litigation matter
+OF000033,MAT00050,LOC02,2025-09-25,Fee income,Family Law,15585.87,,Invoice - Family Law matter
+OF000034,MAT00051,LOC01,2025-08-19,Fee income,"Wills, Probate & Estates",7296.71,,"Invoice - Wills, Probate & Estates matter"
+OF000035,MAT00052,LOC01,2024-12-16,Fee income,Property Law,3136.14,,Invoice - Property Law matter
+OF000036,MAT00053,LOC01,2024-08-30,Fee income,Family Law,23245.55,,Invoice - Family Law matter
+OF000037,MAT00054,LOC01,2025-02-03,Fee income,General Litigation,2831.05,,Invoice - General Litigation matter
+OF000038,MAT00055,LOC02,2025-04-11,Fee income,Family Law,2155.34,,Invoice - Family Law matter
+OF000039,MAT00056,LOC01,2024-11-28,Fee income,"Wills, Probate & Estates",9363.29,,"Invoice - Wills, Probate & Estates matter"
+OF000040,MAT00057,LOC02,2025-03-28,Fee income,Family Law,6746.58,,Invoice - Family Law matter
+OF000041,MAT00058,LOC01,2025-06-24,Fee income,Property Law,22641.41,,Invoice - Property Law matter
+OF000042,MAT00059,LOC01,2024-12-17,Fee income,"Wills, Probate & Estates",9639.54,,"Invoice - Wills, Probate & Estates matter"
+OF000043,MAT00061,LOC02,2025-09-28,Fee income,"Wills, Probate & Estates",10062.32,,"Invoice - Wills, Probate & Estates matter"
+OF000044,MAT00062,LOC01,2025-05-23,Fee income,Property Law,3555.71,,Invoice - Property Law matter
+OF000045,MAT00065,LOC02,2025-04-21,Fee income,General Litigation,5428.98,,Invoice - General Litigation matter
+OF000046,MAT00067,LOC01,2024-09-17,Fee income,Property Law,12357.05,,Invoice - Property Law matter
+OF000047,MAT00068,LOC01,2024-12-25,Fee income,"Wills, Probate & Estates",3366.56,,"Invoice - Wills, Probate & Estates matter"
+OF000048,MAT00070,LOC02,2024-03-20,Fee income,Property Law,8205.36,,Invoice - Property Law matter
+OF000049,MAT00071,LOC01,2024-11-25,Fee income,Family Law,2961.09,,Invoice - Family Law matter
+OF000050,MAT00072,LOC01,2024-05-22,Fee income,Family Law,1813.59,,Invoice - Family Law matter
+OF000051,MAT00073,LOC02,2025-07-19,Fee income,"Wills, Probate & Estates",57929.97,,"Invoice - Wills, Probate & Estates matter"
+OF000052,MAT00074,LOC02,2025-03-15,Fee income,General Litigation,6781.28,,Invoice - General Litigation matter
+OF000053,MAT00078,LOC01,2025-01-24,Fee income,Family Law,2337.22,,Invoice - Family Law matter
+OF000054,MAT00079,LOC01,2024-10-10,Fee income,"Wills, Probate & Estates",3576.13,,"Invoice - Wills, Probate & Estates matter"
+OF000055,MAT00080,LOC01,2025-05-15,Fee income,Family Law,8564.21,,Invoice - Family Law matter
+OF000056,MAT00081,LOC02,2024-03-08,Fee income,Family Law,4762.48,,Invoice - Family Law matter
+OF000057,MAT00082,LOC01,2025-08-07,Fee income,Family Law,17493.45,,Invoice - Family Law matter
+OF000058,MAT00083,LOC01,2025-03-21,Fee income,"Wills, Probate & Estates",5019.43,,"Invoice - Wills, Probate & Estates matter"
+OF000059,MAT00084,LOC02,2025-01-01,Fee income,"Wills, Probate & Estates",5076.9,,"Invoice - Wills, Probate & Estates matter"
+OF000060,MAT00085,LOC01,2024-06-29,Fee income,Family Law,14730.91,,Invoice - Family Law matter
+OF000061,MAT00087,LOC01,2024-12-28,Fee income,General Litigation,2158.6,,Invoice - General Litigation matter
+OF000062,MAT00088,LOC02,2024-10-11,Fee income,"Wills, Probate & Estates",1856.6,,"Invoice - Wills, Probate & Estates matter"
+OF000063,MAT00089,LOC02,2025-06-19,Fee income,"Wills, Probate & Estates",2291.72,,"Invoice - Wills, Probate & Estates matter"
+OF000064,MAT00091,LOC01,2025-06-10,Fee income,"Wills, Probate & Estates",3851.98,,"Invoice - Wills, Probate & Estates matter"
+OF000065,MAT00092,LOC01,2025-07-15,Fee income,Property Law,3940.07,,Invoice - Property Law matter
+OF000066,MAT00093,LOC01,2025-04-02,Fee income,Family Law,2174.14,,Invoice - Family Law matter
+OF000067,MAT00094,LOC01,2024-07-12,Fee income,Family Law,2867.8,,Invoice - Family Law matter
+OF000068,MAT00095,LOC01,2024-11-03,Fee income,Family Law,4314.54,,Invoice - Family Law matter
+OF000069,MAT00097,LOC02,2024-04-20,Fee income,Property Law,2448.82,,Invoice - Property Law matter
+OF000070,MAT00099,LOC01,2025-09-15,Fee income,General Litigation,6247.01,,Invoice - General Litigation matter
+OF000071,MAT00100,LOC01,2024-12-02,Fee income,"Wills, Probate & Estates",15532.14,,"Invoice - Wills, Probate & Estates matter"
+OF000072,MAT00101,LOC01,2025-03-21,Fee income,"Wills, Probate & Estates",3886.96,,"Invoice - Wills, Probate & Estates matter"
+OF000073,MAT00103,LOC01,2025-02-26,Fee income,Property Law,4242.68,,Invoice - Property Law matter
+OF000074,MAT00104,LOC02,2024-08-20,Fee income,Family Law,5796.85,,Invoice - Family Law matter
+OF000075,MAT00105,LOC01,2025-02-25,Fee income,Family Law,23004.02,,Invoice - Family Law matter
+OF000076,MAT00106,LOC02,2024-02-11,Fee income,"Wills, Probate & Estates",3081.72,,"Invoice - Wills, Probate & Estates matter"
+OF000077,MAT00107,LOC01,2025-05-11,Fee income,"Wills, Probate & Estates",949.19,,"Invoice - Wills, Probate & Estates matter"
+OF000078,MAT00108,LOC01,2024-11-16,Fee income,"Wills, Probate & Estates",31297.52,,"Invoice - Wills, Probate & Estates matter"
+OF000079,MAT00109,LOC02,2025-09-08,Fee income,"Wills, Probate & Estates",667.36,,"Invoice - Wills, Probate & Estates matter"
+OF000080,MAT00111,LOC01,2024-10-03,Fee income,General Litigation,4958.38,,Invoice - General Litigation matter
+OF000081,MAT00113,LOC01,2024-10-16,Fee income,Property Law,4813.47,,Invoice - Property Law matter
+OF000082,MAT00115,LOC02,2024-04-09,Fee income,Property Law,7502.28,,Invoice - Property Law matter
+OF000083,MAT00116,LOC01,2025-01-12,Fee income,Family Law,7015.25,,Invoice - Family Law matter
+OF000084,MAT00117,LOC01,2025-03-16,Fee income,Property Law,4618.37,,Invoice - Property Law matter
+OF000085,MAT00118,LOC01,2025-10-18,Fee income,"Wills, Probate & Estates",2064.29,,"Invoice - Wills, Probate & Estates matter"
+OF000086,MAT00119,LOC01,2025-04-10,Fee income,General Litigation,8847.99,,Invoice - General Litigation matter
+OF000087,MAT00120,LOC01,2025-09-13,Fee income,Family Law,3343.23,,Invoice - Family Law matter
+OF000088,MAT00125,LOC01,2025-03-27,Fee income,"Wills, Probate & Estates",14224.37,,"Invoice - Wills, Probate & Estates matter"
+OF000089,MAT00126,LOC01,2025-01-21,Fee income,Family Law,3326.19,,Invoice - Family Law matter
+OF000090,MAT00128,LOC02,2025-02-06,Fee income,Family Law,6173.5,,Invoice - Family Law matter
+OF000091,MAT00129,LOC01,2025-06-08,Fee income,"Wills, Probate & Estates",1291.03,,"Invoice - Wills, Probate & Estates matter"
+OF000092,MAT00130,LOC02,2025-04-05,Fee income,General Litigation,6332.6,,Invoice - General Litigation matter
+OF000093,MAT00131,LOC01,2025-11-01,Fee income,Property Law,6115.83,,Invoice - Property Law matter
+OF000094,MAT00132,LOC01,2024-06-17,Fee income,Property Law,3448.57,,Invoice - Property Law matter
+OF000095,MAT00133,LOC01,2024-08-22,Fee income,Family Law,4003.37,,Invoice - Family Law matter
+OF000096,MAT00134,LOC02,2024-09-19,Fee income,General Litigation,18751.88,,Invoice - General Litigation matter
+OF000097,MAT00137,LOC01,2024-12-16,Fee income,Property Law,11447.82,,Invoice - Property Law matter
+OF000098,MAT00139,LOC02,2025-02-09,Fee income,"Wills, Probate & Estates",16908.43,,"Invoice - Wills, Probate & Estates matter"
+OF000099,MAT00140,LOC02,2025-05-26,Fee income,Property Law,1365.85,,Invoice - Property Law matter
+OF000100,MAT00141,LOC01,2024-08-11,Fee income,Family Law,9167.06,,Invoice - Family Law matter
+OF000101,MAT00142,LOC01,2025-06-29,Fee income,Family Law,4269.36,,Invoice - Family Law matter
+OF000102,MAT00144,LOC02,2024-12-03,Fee income,Property Law,20470.0,,Invoice - Property Law matter
+OF000103,MAT00145,LOC01,2024-08-31,Fee income,Family Law,7021.17,,Invoice - Family Law matter
+OF000104,MAT00146,LOC01,2024-08-07,Fee income,Family Law,2445.53,,Invoice - Family Law matter
+OF000105,MAT00147,LOC02,2025-10-05,Fee income,"Wills, Probate & Estates",5025.31,,"Invoice - Wills, Probate & Estates matter"
+OF000106,MAT00148,LOC02,2025-09-03,Fee income,General Litigation,8678.91,,Invoice - General Litigation matter
+OF000107,MAT00149,LOC02,2025-01-26,Fee income,"Wills, Probate & Estates",2383.4,,"Invoice - Wills, Probate & Estates matter"
+OF000108,MAT00151,LOC01,2024-06-01,Fee income,Family Law,2870.84,,Invoice - Family Law matter
+OF000109,MAT00152,LOC02,2024-09-02,Fee income,Family Law,1809.16,,Invoice - Family Law matter
+OF000110,MAT00153,LOC01,2024-10-12,Fee income,Property Law,5114.2,,Invoice - Property Law matter
+OF000111,MAT00154,LOC01,2025-08-11,Fee income,General Litigation,1785.37,,Invoice - General Litigation matter
+OF000112,MAT00155,LOC01,2024-06-17,Fee income,Family Law,5784.5,,Invoice - Family Law matter
+OF000113,MAT00156,LOC02,2025-08-17,Fee income,Property Law,7480.98,,Invoice - Property Law matter
+OF000114,MAT00158,LOC02,2025-08-23,Fee income,"Wills, Probate & Estates",1311.0,,"Invoice - Wills, Probate & Estates matter"
+OF000115,MAT00159,LOC01,2025-08-28,Fee income,General Litigation,6105.22,,Invoice - General Litigation matter
+OF000116,MAT00160,LOC02,2025-02-22,Fee income,Family Law,4261.1,,Invoice - Family Law matter
+OF000117,MAT00161,LOC01,2024-06-26,Fee income,"Wills, Probate & Estates",4136.31,,"Invoice - Wills, Probate & Estates matter"
+OF000118,MAT00162,LOC01,2025-05-12,Fee income,Family Law,67590.45,,Invoice - Family Law matter
+OF000119,MAT00163,LOC02,2025-08-24,Fee income,Property Law,10488.82,,Invoice - Property Law matter
+OF000120,MAT00164,LOC01,2025-04-25,Fee income,Family Law,12732.2,,Invoice - Family Law matter
+OF000121,MAT00165,LOC02,2024-03-17,Fee income,Family Law,1032.46,,Invoice - Family Law matter
+OF000122,MAT00166,LOC02,2024-04-15,Fee income,"Wills, Probate & Estates",596.73,,"Invoice - Wills, Probate & Estates matter"
+OF000123,MAT00169,LOC01,2024-08-24,Fee income,Property Law,1033.78,,Invoice - Property Law matter
+OF000124,MAT00171,LOC02,2024-09-18,Fee income,"Wills, Probate & Estates",5931.25,,"Invoice - Wills, Probate & Estates matter"
+OF000125,MAT00172,LOC01,2025-07-13,Fee income,Family Law,3915.46,,Invoice - Family Law matter
+OF000126,MAT00173,LOC01,2024-07-30,Fee income,Family Law,1473.01,,Invoice - Family Law matter
+OF000127,MAT00179,LOC02,2024-09-04,Fee income,Property Law,10370.06,,Invoice - Property Law matter
+OF000128,MAT00180,LOC02,2024-10-07,Fee income,Family Law,8185.72,,Invoice - Family Law matter
+OF000129,MAT00181,LOC01,2024-05-10,Fee income,Family Law,5863.62,,Invoice - Family Law matter
+OF000130,MAT00182,LOC02,2025-08-10,Fee income,"Wills, Probate & Estates",4951.15,,"Invoice - Wills, Probate & Estates matter"
+OF000131,MAT00184,LOC01,2025-02-03,Fee income,Family Law,1585.36,,Invoice - Family Law matter
+OF000132,MAT00186,LOC02,2025-03-04,Fee income,Family Law,8030.88,,Invoice - Family Law matter
+OF000133,MAT00187,LOC01,2025-05-19,Fee income,Property Law,2824.39,,Invoice - Property Law matter
+OF000134,MAT00188,LOC01,2025-03-10,Fee income,Property Law,9883.86,,Invoice - Property Law matter
+OF000135,MAT00189,LOC01,2024-12-10,Fee income,"Wills, Probate & Estates",3799.41,,"Invoice - Wills, Probate & Estates matter"
+OF000136,MAT00192,LOC02,2024-11-27,Fee income,Family Law,16190.98,,Invoice - Family Law matter
+OF000137,MAT00193,LOC02,2025-03-15,Fee income,"Wills, Probate & Estates",6027.44,,"Invoice - Wills, Probate & Estates matter"
+OF000138,MAT00194,LOC01,2025-01-03,Fee income,Property Law,3910.31,,Invoice - Property Law matter
+OF000139,MAT00196,LOC01,2025-05-25,Fee income,Property Law,5994.54,,Invoice - Property Law matter
+OF000140,MAT00197,LOC02,2025-09-13,Fee income,Property Law,6441.27,,Invoice - Property Law matter
+OF000141,MAT00199,LOC01,2025-06-05,Fee income,General Litigation,10063.48,,Invoice - General Litigation matter
+OF000142,MAT00203,LOC01,2024-08-23,Fee income,Family Law,4225.37,,Invoice - Family Law matter
+OF000143,MAT00204,LOC01,2025-01-24,Fee income,Family Law,2378.47,,Invoice - Family Law matter
+OF000144,MAT00205,LOC02,2024-06-02,Fee income,Family Law,21768.12,,Invoice - Family Law matter
+OF000145,MAT00206,LOC01,2025-01-23,Fee income,Property Law,11327.86,,Invoice - Property Law matter
+OF000146,MAT00209,LOC02,2024-04-16,Fee income,Family Law,2016.21,,Invoice - Family Law matter
+OF000147,MAT00210,LOC01,2025-11-20,Fee income,Property Law,1683.09,,Invoice - Property Law matter
+OF000148,MAT00211,LOC02,2024-05-09,Fee income,Family Law,1724.14,,Invoice - Family Law matter
+OF000149,MAT00212,LOC02,2024-07-30,Fee income,General Litigation,6181.58,,Invoice - General Litigation matter
+OF000150,MAT00214,LOC01,2025-07-08,Fee income,"Wills, Probate & Estates",2937.63,,"Invoice - Wills, Probate & Estates matter"
+OF000151,MAT00215,LOC02,2025-06-29,Fee income,"Wills, Probate & Estates",11330.74,,"Invoice - Wills, Probate & Estates matter"
+OF000152,MAT00217,LOC02,2024-06-09,Fee income,Property Law,2755.4,,Invoice - Property Law matter
+OF000153,MAT00218,LOC01,2024-04-16,Fee income,Property Law,3089.02,,Invoice - Property Law matter
+OF000154,MAT00222,LOC02,2024-09-07,Fee income,"Wills, Probate & Estates",2743.62,,"Invoice - Wills, Probate & Estates matter"
+OF000155,MAT00224,LOC02,2024-11-19,Fee income,Family Law,5594.15,,Invoice - Family Law matter
+OF000156,MAT00225,LOC02,2025-06-20,Fee income,"Wills, Probate & Estates",25262.03,,"Invoice - Wills, Probate & Estates matter"
+OF000157,MAT00226,LOC01,2024-12-16,Fee income,"Wills, Probate & Estates",2753.23,,"Invoice - Wills, Probate & Estates matter"
+OF000158,MAT00227,LOC01,2025-07-03,Fee income,Family Law,9545.97,,Invoice - Family Law matter
+OF000159,MAT00230,LOC02,2024-04-11,Fee income,Family Law,1616.8,,Invoice - Family Law matter
+OF000160,MAT00231,LOC01,2024-08-27,Fee income,General Litigation,5293.42,,Invoice - General Litigation matter
+OF000161,MAT00232,LOC02,2024-08-28,Fee income,Family Law,4912.94,,Invoice - Family Law matter
+OF000162,MAT00235,LOC01,2024-07-20,Fee income,"Wills, Probate & Estates",2432.63,,"Invoice - Wills, Probate & Estates matter"
+OF000163,MAT00236,LOC02,2024-09-18,Fee income,"Wills, Probate & Estates",1765.86,,"Invoice - Wills, Probate & Estates matter"
+OF000164,MAT00237,LOC01,2024-06-17,Fee income,General Litigation,1848.84,,Invoice - General Litigation matter
+OF000165,MAT00238,LOC01,2024-06-06,Fee income,Family Law,936.62,,Invoice - Family Law matter
+OF000166,MAT00240,LOC02,2024-08-08,Fee income,Family Law,7784.31,,Invoice - Family Law matter
+OF000167,MAT00241,LOC01,2025-02-01,Fee income,Family Law,1706.94,,Invoice - Family Law matter
+OF000168,MAT00242,LOC01,2025-02-20,Fee income,"Wills, Probate & Estates",8691.21,,"Invoice - Wills, Probate & Estates matter"
+OF000169,MAT00244,LOC01,2024-03-17,Fee income,Family Law,6567.4,,Invoice - Family Law matter
+OF000170,MAT00245,LOC01,2025-07-07,Fee income,Property Law,23353.75,,Invoice - Property Law matter
+OF000171,MAT00246,LOC01,2025-08-01,Fee income,Family Law,15971.86,,Invoice - Family Law matter
+OF000172,MAT00247,LOC02,2024-09-06,Fee income,General Litigation,5837.7,,Invoice - General Litigation matter
+OF000173,MAT00249,LOC01,2025-02-19,Fee income,"Wills, Probate & Estates",4892.26,,"Invoice - Wills, Probate & Estates matter"
+OF000174,MAT00250,LOC02,2024-02-27,Fee income,"Wills, Probate & Estates",13703.42,,"Invoice - Wills, Probate & Estates matter"
+OF000175,MAT00251,LOC02,2025-04-18,Fee income,Family Law,3901.32,,Invoice - Family Law matter
+OF000176,MAT00252,LOC01,2025-03-01,Fee income,"Wills, Probate & Estates",3306.28,,"Invoice - Wills, Probate & Estates matter"
+OF000177,MAT00253,LOC02,2024-09-18,Fee income,Family Law,3200.77,,Invoice - Family Law matter
+OF000178,MAT00254,LOC01,2025-11-12,Fee income,"Wills, Probate & Estates",2101.0,,"Invoice - Wills, Probate & Estates matter"
+OF000179,MAT00257,LOC01,2025-07-08,Fee income,Family Law,2062.24,,Invoice - Family Law matter
+OF000180,MAT00258,LOC01,2025-11-16,Fee income,"Wills, Probate & Estates",8495.74,,"Invoice - Wills, Probate & Estates matter"
+OF000181,MAT00259,LOC01,2024-09-25,Fee income,Family Law,2269.38,,Invoice - Family Law matter
+OF000182,MAT00260,LOC01,2024-04-02,Fee income,Property Law,31434.08,,Invoice - Property Law matter
+OF000183,MAT00261,LOC01,2025-03-07,Fee income,"Wills, Probate & Estates",6295.33,,"Invoice - Wills, Probate & Estates matter"
+OF000184,MAT00262,LOC01,2024-06-27,Fee income,Family Law,4211.83,,Invoice - Family Law matter
+OF000185,MAT00264,LOC01,2024-09-22,Fee income,Property Law,14223.49,,Invoice - Property Law matter
+OF000186,MAT00266,LOC02,2025-07-15,Fee income,General Litigation,2205.94,,Invoice - General Litigation matter
+OF000187,MAT00267,LOC02,2024-03-10,Fee income,Family Law,1791.89,,Invoice - Family Law matter
+OF000188,MAT00268,LOC01,2025-05-12,Fee income,Family Law,2415.61,,Invoice - Family Law matter
+OF000189,MAT00269,LOC01,2025-08-11,Fee income,Family Law,7951.02,,Invoice - Family Law matter
+OF000190,MAT00270,LOC01,2024-05-19,Fee income,Family Law,5257.52,,Invoice - Family Law matter
+OF000191,MAT00271,LOC01,2024-11-30,Fee income,"Wills, Probate & Estates",5479.52,,"Invoice - Wills, Probate & Estates matter"
+OF000192,MAT00273,LOC01,2024-05-10,Fee income,"Wills, Probate & Estates",1007.76,,"Invoice - Wills, Probate & Estates matter"
+OF000193,MAT00274,LOC02,2025-08-29,Fee income,General Litigation,317.6,,Invoice - General Litigation matter
+OF000194,MAT00275,LOC01,2024-07-07,Fee income,Family Law,15272.14,,Invoice - Family Law matter
+OF000195,MAT00276,LOC01,2025-10-06,Fee income,Family Law,1190.3,,Invoice - Family Law matter
+OF000196,MAT00277,LOC01,2025-09-09,Fee income,Family Law,56497.65,,Invoice - Family Law matter
+OF000197,MAT00278,LOC02,2024-03-26,Fee income,Property Law,2467.43,,Invoice - Property Law matter
+OF000198,MAT00279,LOC01,2025-02-11,Fee income,"Wills, Probate & Estates",4935.39,,"Invoice - Wills, Probate & Estates matter"
+OF000199,MAT00280,LOC01,2024-10-11,Fee income,General Litigation,8119.08,,Invoice - General Litigation matter
+OF000200,MAT00281,LOC01,2025-06-21,Fee income,Property Law,7760.27,,Invoice - Property Law matter
+OF000201,MAT00282,LOC01,2025-06-26,Fee income,Family Law,21760.51,,Invoice - Family Law matter
+OF000202,MAT00283,LOC01,2024-11-21,Fee income,Family Law,3649.53,,Invoice - Family Law matter
+OF000203,MAT00284,LOC01,2025-07-17,Fee income,General Litigation,928.01,,Invoice - General Litigation matter
+OF000204,MAT00286,LOC01,2025-03-28,Fee income,"Wills, Probate & Estates",812.14,,"Invoice - Wills, Probate & Estates matter"
+OF000205,MAT00289,LOC01,2025-05-14,Fee income,Family Law,4869.01,,Invoice - Family Law matter
+OF000206,MAT00290,LOC01,2025-02-19,Fee income,Property Law,8929.14,,Invoice - Property Law matter
+OF000207,MAT00293,LOC01,2024-06-04,Fee income,"Wills, Probate & Estates",11679.1,,"Invoice - Wills, Probate & Estates matter"
+OF000208,MAT00296,LOC01,2025-06-09,Fee income,Property Law,2182.73,,Invoice - Property Law matter
+OF000209,MAT00297,LOC01,2024-05-20,Fee income,Family Law,25783.57,,Invoice - Family Law matter
+OF000210,MAT00298,LOC01,2024-03-04,Fee income,Family Law,2821.32,,Invoice - Family Law matter
+OF000211,MAT00300,LOC02,2025-02-22,Fee income,Family Law,24083.56,,Invoice - Family Law matter
+OF000212,MAT00301,LOC01,2025-03-13,Fee income,Family Law,2122.47,,Invoice - Family Law matter
+OF000213,MAT00302,LOC01,2025-08-23,Fee income,"Wills, Probate & Estates",8827.17,,"Invoice - Wills, Probate & Estates matter"
+OF000214,MAT00303,LOC02,2025-05-07,Fee income,"Wills, Probate & Estates",3479.34,,"Invoice - Wills, Probate & Estates matter"
+OF000215,MAT00304,LOC02,2024-07-31,Fee income,General Litigation,3679.15,,Invoice - General Litigation matter
+OF000216,MAT00306,LOC01,2025-08-01,Fee income,Family Law,2939.58,,Invoice - Family Law matter
+OF000217,MAT00307,LOC01,2025-04-26,Fee income,Family Law,6448.25,,Invoice - Family Law matter
+OF000218,MAT00308,LOC02,2025-04-21,Fee income,General Litigation,11004.46,,Invoice - General Litigation matter
+OF000219,MAT00309,LOC02,2024-01-29,Fee income,Family Law,5369.56,,Invoice - Family Law matter
+OF000220,MAT00310,LOC01,2024-01-11,Fee income,"Wills, Probate & Estates",5837.42,,"Invoice - Wills, Probate & Estates matter"
+OF000221,MAT00311,LOC01,2024-12-29,Fee income,General Litigation,5155.9,,Invoice - General Litigation matter
+OF000222,MAT00312,LOC01,2025-01-11,Fee income,General Litigation,8381.38,,Invoice - General Litigation matter
+OF000223,MAT00313,LOC01,2025-09-06,Fee income,Property Law,4540.83,,Invoice - Property Law matter
+OF000224,MAT00314,LOC02,2025-03-01,Fee income,Family Law,3312.18,,Invoice - Family Law matter
+OF000225,MAT00315,LOC01,2025-10-08,Fee income,Property Law,27895.14,,Invoice - Property Law matter
+OF000226,MAT00316,LOC01,2024-11-28,Fee income,Family Law,5017.38,,Invoice - Family Law matter
+OF000227,MAT00319,LOC01,2024-08-10,Fee income,General Litigation,7544.71,,Invoice - General Litigation matter
+OF000228,MAT00320,LOC01,2025-05-26,Fee income,Property Law,33933.44,,Invoice - Property Law matter
+OF000229,MAT00322,LOC01,2024-05-22,Fee income,Property Law,20174.82,,Invoice - Property Law matter
+OF000230,MAT00324,LOC02,2024-12-09,Fee income,"Wills, Probate & Estates",21391.19,,"Invoice - Wills, Probate & Estates matter"
+OF000231,MAT00325,LOC01,2025-02-16,Fee income,General Litigation,19165.61,,Invoice - General Litigation matter
+OF000232,MAT00326,LOC01,2024-12-25,Fee income,Property Law,12291.26,,Invoice - Property Law matter
+OF000233,MAT00327,LOC01,2024-12-03,Fee income,General Litigation,7348.14,,Invoice - General Litigation matter
+OF000234,MAT00329,LOC01,2025-03-03,Fee income,"Wills, Probate & Estates",5526.06,,"Invoice - Wills, Probate & Estates matter"
+OF000235,MAT00330,LOC01,2025-05-11,Fee income,"Wills, Probate & Estates",11393.7,,"Invoice - Wills, Probate & Estates matter"
+OF000236,MAT00332,LOC01,2025-05-19,Fee income,"Wills, Probate & Estates",2870.29,,"Invoice - Wills, Probate & Estates matter"
+OF000237,MAT00333,LOC01,2024-12-10,Fee income,Property Law,6469.81,,Invoice - Property Law matter
+OF000238,MAT00334,LOC01,2025-06-01,Fee income,"Wills, Probate & Estates",4283.37,,"Invoice - Wills, Probate & Estates matter"
+OF000239,MAT00335,LOC02,2025-05-01,Fee income,"Wills, Probate & Estates",13074.61,,"Invoice - Wills, Probate & Estates matter"
+OF000240,MAT00338,LOC01,2025-01-12,Fee income,Family Law,857.51,,Invoice - Family Law matter
+OF000241,MAT00340,LOC01,2025-02-23,Fee income,Property Law,1518.54,,Invoice - Property Law matter
+OF000242,MAT00341,LOC02,2025-09-10,Fee income,Family Law,16779.35,,Invoice - Family Law matter
+OF000243,MAT00342,LOC02,2025-07-17,Fee income,Family Law,1050.54,,Invoice - Family Law matter
+OF000244,MAT00343,LOC02,2025-04-01,Fee income,Property Law,3186.8,,Invoice - Property Law matter
+OF000245,MAT00344,LOC02,2025-08-22,Fee income,Family Law,1672.07,,Invoice - Family Law matter
+OF000246,MAT00346,LOC02,2025-09-09,Fee income,"Wills, Probate & Estates",2006.56,,"Invoice - Wills, Probate & Estates matter"
+OF000247,MAT00347,LOC02,2024-04-02,Fee income,General Litigation,6838.02,,Invoice - General Litigation matter
+OF000248,MAT00348,LOC01,2025-05-01,Fee income,Property Law,4756.05,,Invoice - Property Law matter
+OF000249,MAT00349,LOC01,2024-10-13,Fee income,"Wills, Probate & Estates",1834.93,,"Invoice - Wills, Probate & Estates matter"
+OF000250,MAT00350,LOC01,2025-06-01,Fee income,"Wills, Probate & Estates",3817.66,,"Invoice - Wills, Probate & Estates matter"
+OF000251,MAT00351,LOC01,2025-03-14,Fee income,General Litigation,22166.57,,Invoice - General Litigation matter
+OF000252,MAT00352,LOC02,2025-02-18,Fee income,"Wills, Probate & Estates",56180.64,,"Invoice - Wills, Probate & Estates matter"
+OF000253,MAT00354,LOC01,2025-06-09,Fee income,Family Law,11166.26,,Invoice - Family Law matter
+OF000254,MAT00355,LOC01,2024-04-14,Fee income,Family Law,10122.69,,Invoice - Family Law matter
+OF000255,MAT00357,LOC01,2024-07-18,Fee income,"Wills, Probate & Estates",10265.79,,"Invoice - Wills, Probate & Estates matter"
+OF000256,MAT00358,LOC01,2024-06-16,Fee income,"Wills, Probate & Estates",4613.75,,"Invoice - Wills, Probate & Estates matter"
+OF000257,MAT00359,LOC01,2025-03-25,Fee income,Family Law,18651.46,,Invoice - Family Law matter
+OF000258,MAT00360,LOC01,2024-12-30,Fee income,Family Law,5832.56,,Invoice - Family Law matter
+OF000259,MAT00361,LOC01,2024-11-04,Fee income,"Wills, Probate & Estates",2377.19,,"Invoice - Wills, Probate & Estates matter"
+OF000260,MAT00363,LOC01,2025-01-12,Fee income,"Wills, Probate & Estates",13438.14,,"Invoice - Wills, Probate & Estates matter"
+OF000261,MAT00364,LOC02,2025-09-29,Fee income,"Wills, Probate & Estates",955.58,,"Invoice - Wills, Probate & Estates matter"
+OF000262,MAT00365,LOC01,2024-11-06,Fee income,Family Law,2928.24,,Invoice - Family Law matter
+OF000263,MAT00366,LOC02,2024-04-07,Fee income,Family Law,1170.97,,Invoice - Family Law matter
+OF000264,MAT00367,LOC02,2025-06-23,Fee income,Family Law,35019.99,,Invoice - Family Law matter
+OF000265,MAT00369,LOC02,2025-05-10,Fee income,Property Law,17648.21,,Invoice - Property Law matter
+OF000266,MAT00372,LOC01,2024-09-12,Fee income,"Wills, Probate & Estates",2322.18,,"Invoice - Wills, Probate & Estates matter"
+OF000267,MAT00373,LOC01,2024-01-30,Fee income,General Litigation,1238.45,,Invoice - General Litigation matter
+OF000268,MAT00374,LOC01,2025-07-07,Fee income,"Wills, Probate & Estates",7586.2,,"Invoice - Wills, Probate & Estates matter"
+OF000269,MAT00376,LOC02,2025-11-19,Fee income,Family Law,2915.48,,Invoice - Family Law matter
+OF000270,MAT00377,LOC01,2025-01-02,Fee income,Family Law,5393.36,,Invoice - Family Law matter
+OF000271,MAT00378,LOC01,2024-09-16,Fee income,Family Law,6978.16,,Invoice - Family Law matter
+OF000272,MAT00379,LOC01,2024-11-09,Fee income,Family Law,1523.95,,Invoice - Family Law matter
+OF000273,MAT00380,LOC01,2024-06-02,Fee income,"Wills, Probate & Estates",1235.76,,"Invoice - Wills, Probate & Estates matter"
+OF000274,MAT00381,LOC01,2024-10-11,Fee income,Family Law,1712.57,,Invoice - Family Law matter
+OF000275,MAT00382,LOC01,2025-01-11,Fee income,Property Law,829.32,,Invoice - Property Law matter
+OF000276,MAT00383,LOC02,2025-07-09,Fee income,Family Law,3018.11,,Invoice - Family Law matter
+OF000277,MAT00384,LOC02,2024-09-03,Fee income,Property Law,10189.43,,Invoice - Property Law matter
+OF000278,MAT00385,LOC01,2024-08-14,Fee income,"Wills, Probate & Estates",17850.42,,"Invoice - Wills, Probate & Estates matter"
+OF000279,MAT00386,LOC01,2025-09-14,Fee income,Property Law,3502.18,,Invoice - Property Law matter
+OF000280,MAT00387,LOC01,2024-09-23,Fee income,"Wills, Probate & Estates",4268.9,,"Invoice - Wills, Probate & Estates matter"
+OF000281,MAT00388,LOC02,2025-10-10,Fee income,General Litigation,2013.14,,Invoice - General Litigation matter
+OF000282,MAT00389,LOC01,2025-02-08,Fee income,Family Law,8981.06,,Invoice - Family Law matter
+OF000283,MAT00390,LOC02,2025-03-15,Fee income,Family Law,6992.67,,Invoice - Family Law matter
+OF000284,MAT00391,LOC01,2024-10-01,Fee income,Family Law,5890.49,,Invoice - Family Law matter
+OF000285,MAT00392,LOC02,2025-10-19,Fee income,Family Law,6789.17,,Invoice - Family Law matter
+OF000286,MAT00393,LOC02,2024-11-10,Fee income,Property Law,47751.86,,Invoice - Property Law matter
+OF000287,MAT00395,LOC01,2025-07-13,Fee income,"Wills, Probate & Estates",18995.56,,"Invoice - Wills, Probate & Estates matter"
+OF000288,MAT00396,LOC01,2024-06-16,Fee income,"Wills, Probate & Estates",2333.26,,"Invoice - Wills, Probate & Estates matter"
+OF000289,MAT00397,LOC01,2024-11-13,Fee income,Family Law,26355.98,,Invoice - Family Law matter
+OF000290,MAT00398,LOC01,2025-08-03,Fee income,General Litigation,4862.79,,Invoice - General Litigation matter
+OF000291,MAT00399,LOC01,2024-06-11,Fee income,Family Law,2851.44,,Invoice - Family Law matter
+OF000292,MAT00400,LOC02,2024-12-20,Fee income,"Wills, Probate & Estates",3443.76,,"Invoice - Wills, Probate & Estates matter"
+OF000293,MAT00401,LOC02,2025-06-24,Fee income,General Litigation,5611.64,,Invoice - General Litigation matter
+OF000294,MAT00403,LOC01,2025-05-27,Fee income,Property Law,4996.4,,Invoice - Property Law matter
+OF000295,MAT00404,LOC01,2025-04-16,Fee income,Property Law,3553.68,,Invoice - Property Law matter
+OF000296,MAT00405,LOC01,2024-10-20,Fee income,Family Law,11515.26,,Invoice - Family Law matter
+OF000297,MAT00406,LOC01,2025-01-19,Fee income,Family Law,3843.69,,Invoice - Family Law matter
+OF000298,MAT00407,LOC02,2025-01-16,Fee income,General Litigation,6376.36,,Invoice - General Litigation matter
+OF000299,MAT00408,LOC01,2025-08-14,Fee income,Property Law,33542.73,,Invoice - Property Law matter
+OF000300,MAT00409,LOC02,2024-03-07,Fee income,Property Law,18401.98,,Invoice - Property Law matter
+OF000301,MAT00410,LOC01,2024-08-25,Fee income,Family Law,1725.15,,Invoice - Family Law matter
+OF000302,MAT00411,LOC02,2024-08-03,Fee income,Family Law,6923.45,,Invoice - Family Law matter
+OF000303,MAT00412,LOC01,2024-10-09,Fee income,Property Law,26028.04,,Invoice - Property Law matter
+OF000304,MAT00413,LOC01,2024-11-28,Fee income,Property Law,1846.14,,Invoice - Property Law matter
+OF000305,MAT00417,LOC02,2025-08-03,Fee income,Property Law,10045.92,,Invoice - Property Law matter
+OF000306,MAT00418,LOC01,2025-06-12,Fee income,Property Law,2411.38,,Invoice - Property Law matter
+OF000307,MAT00421,LOC01,2025-10-09,Fee income,Family Law,26309.11,,Invoice - Family Law matter
+OF000308,MAT00423,LOC01,2024-08-05,Fee income,"Wills, Probate & Estates",5189.54,,"Invoice - Wills, Probate & Estates matter"
+OF000309,MAT00424,LOC01,2024-06-28,Fee income,General Litigation,3041.83,,Invoice - General Litigation matter
+OF000310,MAT00425,LOC01,2024-04-04,Fee income,Family Law,11863.41,,Invoice - Family Law matter
+OF000311,MAT00426,LOC01,2025-01-11,Fee income,General Litigation,1257.98,,Invoice - General Litigation matter
+OF000312,MAT00427,LOC01,2024-10-08,Fee income,Family Law,4031.18,,Invoice - Family Law matter
+OF000313,MAT00428,LOC02,2024-12-14,Fee income,Family Law,16009.23,,Invoice - Family Law matter
+OF000314,MAT00429,LOC01,2025-05-15,Fee income,Property Law,17351.28,,Invoice - Property Law matter
+OF000315,MAT00430,LOC01,2024-06-15,Fee income,"Wills, Probate & Estates",6698.09,,"Invoice - Wills, Probate & Estates matter"
+OF000316,MAT00431,LOC02,2024-02-26,Fee income,Family Law,1905.29,,Invoice - Family Law matter
+OF000317,MAT00432,LOC01,2025-03-26,Fee income,"Wills, Probate & Estates",14019.01,,"Invoice - Wills, Probate & Estates matter"
+OF000318,MAT00433,LOC01,2025-01-11,Fee income,General Litigation,3650.89,,Invoice - General Litigation matter
+OF000319,MAT00434,LOC02,2024-09-11,Fee income,Family Law,23969.25,,Invoice - Family Law matter
+OF000320,MAT00435,LOC02,2024-07-03,Fee income,Family Law,12106.3,,Invoice - Family Law matter
+OF000321,MAT00436,LOC01,2024-12-24,Fee income,Property Law,6916.05,,Invoice - Property Law matter
+OF000322,MAT00438,LOC01,2025-02-28,Fee income,"Wills, Probate & Estates",13425.97,,"Invoice - Wills, Probate & Estates matter"
+OF000323,MAT00439,LOC01,2024-07-22,Fee income,Family Law,2122.97,,Invoice - Family Law matter
+OF000324,MAT00440,LOC01,2025-10-16,Fee income,"Wills, Probate & Estates",389.55,,"Invoice - Wills, Probate & Estates matter"
+OF000325,MAT00441,LOC01,2025-06-11,Fee income,Property Law,5193.33,,Invoice - Property Law matter
+OF000326,MAT00442,LOC01,2025-01-15,Fee income,Family Law,3867.11,,Invoice - Family Law matter
+OF000327,MAT00443,LOC02,2025-03-01,Fee income,"Wills, Probate & Estates",11261.67,,"Invoice - Wills, Probate & Estates matter"
+OF000328,MAT00444,LOC01,2024-10-07,Fee income,"Wills, Probate & Estates",3606.07,,"Invoice - Wills, Probate & Estates matter"
+OF000329,MAT00445,LOC01,2024-10-13,Fee income,Family Law,4767.42,,Invoice - Family Law matter
+OF000330,MAT00446,LOC02,2025-01-07,Fee income,Family Law,85995.24,,Invoice - Family Law matter
+OF000331,MAT00448,LOC01,2025-04-26,Fee income,General Litigation,4865.4,,Invoice - General Litigation matter
+OF000332,MAT00450,LOC01,2025-09-11,Fee income,Property Law,4885.85,,Invoice - Property Law matter
+OF000333,MAT00452,LOC01,2024-12-06,Fee income,Property Law,6910.69,,Invoice - Property Law matter
+OF000334,MAT00453,LOC01,2024-06-26,Fee income,Property Law,11295.3,,Invoice - Property Law matter
+OF000335,MAT00454,LOC01,2024-12-24,Fee income,Family Law,5728.91,,Invoice - Family Law matter
+OF000336,MAT00456,LOC01,2025-06-24,Fee income,Family Law,770.58,,Invoice - Family Law matter
+OF000337,MAT00457,LOC01,2024-07-10,Fee income,Family Law,5897.15,,Invoice - Family Law matter
+OF000338,MAT00458,LOC01,2024-07-04,Fee income,Property Law,4540.28,,Invoice - Property Law matter
+OF000339,MAT00459,LOC01,2025-03-13,Fee income,Family Law,6849.4,,Invoice - Family Law matter
+OF000340,MAT00460,LOC01,2024-09-10,Fee income,Property Law,5591.38,,Invoice - Property Law matter
+OF000341,MAT00461,LOC01,2024-06-03,Fee income,Property Law,2171.82,,Invoice - Property Law matter
+OF000342,MAT00465,LOC01,2024-06-15,Fee income,Property Law,4455.99,,Invoice - Property Law matter
+OF000343,MAT00466,LOC01,2024-09-23,Fee income,General Litigation,5985.4,,Invoice - General Litigation matter
+OF000344,MAT00467,LOC02,2025-03-23,Fee income,"Wills, Probate & Estates",4042.99,,"Invoice - Wills, Probate & Estates matter"
+OF000345,MAT00468,LOC01,2024-01-03,Fee income,Property Law,8031.67,,Invoice - Property Law matter
+OF000346,MAT00472,LOC01,2025-02-19,Fee income,"Wills, Probate & Estates",11513.69,,"Invoice - Wills, Probate & Estates matter"
+OF000347,MAT00473,LOC02,2025-11-17,Fee income,Family Law,22038.9,,Invoice - Family Law matter
+OF000348,MAT00474,LOC01,2025-09-30,Fee income,"Wills, Probate & Estates",6541.94,,"Invoice - Wills, Probate & Estates matter"
+OF000349,MAT00475,LOC01,2025-03-07,Fee income,Family Law,16923.11,,Invoice - Family Law matter
+OF000350,MAT00476,LOC01,2025-01-25,Fee income,General Litigation,9544.08,,Invoice - General Litigation matter
+OF000351,MAT00477,LOC01,2025-04-03,Fee income,General Litigation,2939.56,,Invoice - General Litigation matter
+OF000352,MAT00478,LOC01,2025-05-13,Fee income,Family Law,5753.69,,Invoice - Family Law matter
+OF000353,MAT00480,LOC01,2025-06-18,Fee income,Family Law,4937.94,,Invoice - Family Law matter
+OF000354,MAT00482,LOC02,2024-05-17,Fee income,"Wills, Probate & Estates",2078.32,,"Invoice - Wills, Probate & Estates matter"
+OF000355,MAT00483,LOC02,2024-12-22,Fee income,Property Law,4692.24,,Invoice - Property Law matter
+OF000356,MAT00484,LOC02,2025-09-23,Fee income,General Litigation,2599.7,,Invoice - General Litigation matter
+OF000357,MAT00485,LOC02,2024-07-10,Fee income,Family Law,1740.34,,Invoice - Family Law matter
+OF000358,MAT00486,LOC01,2024-07-25,Fee income,Property Law,7345.81,,Invoice - Property Law matter
+OF000359,MAT00487,LOC01,2024-11-16,Fee income,Family Law,5531.24,,Invoice - Family Law matter
+OF000360,MAT00490,LOC01,2025-02-25,Fee income,Property Law,4208.08,,Invoice - Property Law matter
+OF000361,MAT00491,LOC01,2024-11-02,Fee income,Family Law,4027.45,,Invoice - Family Law matter
+OF000362,MAT00492,LOC01,2025-05-13,Fee income,Family Law,10201.16,,Invoice - Family Law matter
+OF000363,MAT00493,LOC02,2025-01-29,Fee income,Family Law,6324.23,,Invoice - Family Law matter
+OF000364,MAT00494,LOC02,2024-11-30,Fee income,Property Law,4769.7,,Invoice - Property Law matter
+OF000365,MAT00496,LOC01,2025-06-01,Fee income,Property Law,9187.48,,Invoice - Property Law matter
+OF000366,MAT00497,LOC02,2024-04-23,Fee income,Family Law,13263.55,,Invoice - Family Law matter
+OF000367,MAT00498,LOC02,2025-02-18,Fee income,General Litigation,9724.02,,Invoice - General Litigation matter
+OF000368,MAT00499,LOC02,2024-06-27,Fee income,Property Law,3411.8,,Invoice - Property Law matter
+OF000369,MAT00500,LOC02,2024-10-30,Fee income,General Litigation,5971.05,,Invoice - General Litigation matter
+OF000370,MAT00501,LOC02,2025-04-03,Fee income,Property Law,5171.12,,Invoice - Property Law matter
+OF000371,MAT00502,LOC01,2025-03-01,Fee income,General Litigation,16709.29,,Invoice - General Litigation matter
+OF000372,MAT00503,LOC02,2025-07-17,Fee income,"Wills, Probate & Estates",4526.08,,"Invoice - Wills, Probate & Estates matter"
+OF000373,MAT00505,LOC02,2024-07-30,Fee income,Property Law,22139.72,,Invoice - Property Law matter
+OF000374,MAT00507,LOC02,2025-02-02,Fee income,Family Law,5859.81,,Invoice - Family Law matter
+OF000375,MAT00508,LOC02,2025-09-23,Fee income,General Litigation,5726.46,,Invoice - General Litigation matter
+OF000376,MAT00509,LOC01,2025-01-31,Fee income,"Wills, Probate & Estates",8382.56,,"Invoice - Wills, Probate & Estates matter"
+OF000377,MAT00510,LOC02,2024-12-30,Fee income,General Litigation,6607.14,,Invoice - General Litigation matter
+OF000378,MAT00511,LOC02,2024-10-01,Fee income,Family Law,1962.45,,Invoice - Family Law matter
+OF000379,MAT00512,LOC02,2025-07-28,Fee income,Property Law,5728.11,,Invoice - Property Law matter
+OF000380,MAT00515,LOC02,2025-01-19,Fee income,Family Law,7569.92,,Invoice - Family Law matter
+OF000381,MAT00516,LOC01,2024-02-07,Fee income,"Wills, Probate & Estates",11132.11,,"Invoice - Wills, Probate & Estates matter"
+OF000382,MAT00517,LOC02,2024-02-27,Fee income,Family Law,12332.98,,Invoice - Family Law matter
+OF000383,MAT00519,LOC02,2024-10-01,Fee income,Family Law,3937.05,,Invoice - Family Law matter
+OF000384,MAT00520,LOC02,2025-07-22,Fee income,Family Law,1054.52,,Invoice - Family Law matter
+OF000385,MAT00521,LOC02,2025-03-26,Fee income,"Wills, Probate & Estates",2974.48,,"Invoice - Wills, Probate & Estates matter"
+OF000386,MAT00522,LOC02,2024-10-01,Fee income,Property Law,11958.67,,Invoice - Property Law matter
+OF000387,MAT00524,LOC01,2025-01-10,Fee income,Property Law,7718.29,,Invoice - Property Law matter
+OF000388,MAT00525,LOC01,2024-12-23,Fee income,"Wills, Probate & Estates",12193.84,,"Invoice - Wills, Probate & Estates matter"
+OF000389,MAT00526,LOC02,2024-12-06,Fee income,Property Law,13768.78,,Invoice - Property Law matter
+OF000390,MAT00527,LOC02,2025-01-27,Fee income,General Litigation,892.15,,Invoice - General Litigation matter
+OF000391,MAT00528,LOC01,2024-05-21,Fee income,Family Law,25912.48,,Invoice - Family Law matter
+OF000392,MAT00529,LOC01,2024-01-17,Fee income,Family Law,1552.84,,Invoice - Family Law matter
+OF000393,MAT00531,LOC01,2024-12-13,Fee income,Property Law,438.4,,Invoice - Property Law matter
+OF000394,MAT00532,LOC01,2024-04-20,Fee income,Family Law,3718.39,,Invoice - Family Law matter
+OF000395,MAT00533,LOC01,2024-06-27,Fee income,"Wills, Probate & Estates",6962.92,,"Invoice - Wills, Probate & Estates matter"
+OF000396,MAT00534,LOC02,2025-09-13,Fee income,Property Law,4189.35,,Invoice - Property Law matter
+OF000397,MAT00535,LOC01,2024-06-27,Fee income,"Wills, Probate & Estates",7557.93,,"Invoice - Wills, Probate & Estates matter"
+OF000398,MAT00537,LOC01,2024-11-04,Fee income,"Wills, Probate & Estates",4319.35,,"Invoice - Wills, Probate & Estates matter"
+OF000399,MAT00538,LOC01,2024-09-03,Fee income,"Wills, Probate & Estates",708.39,,"Invoice - Wills, Probate & Estates matter"
+OF000400,MAT00539,LOC02,2024-10-10,Fee income,Property Law,10098.63,,Invoice - Property Law matter
+OF000401,MAT00540,LOC02,2024-08-09,Fee income,Property Law,1596.14,,Invoice - Property Law matter
+OF000402,MAT00543,LOC01,2024-11-26,Fee income,Family Law,4297.87,,Invoice - Family Law matter
+OF000403,MAT00545,LOC02,2025-05-18,Fee income,Family Law,4927.47,,Invoice - Family Law matter
+OF000404,MAT00546,LOC01,2024-05-05,Fee income,"Wills, Probate & Estates",10555.25,,"Invoice - Wills, Probate & Estates matter"
+OF000405,MAT00548,LOC01,2025-12-15,Fee income,Family Law,1160.48,,Invoice - Family Law matter
+OF000406,MAT00550,LOC02,2024-07-20,Fee income,"Wills, Probate & Estates",7456.27,,"Invoice - Wills, Probate & Estates matter"
+OF000407,MAT00551,LOC02,2025-05-07,Fee income,Family Law,11925.89,,Invoice - Family Law matter
+OF000408,MAT00552,LOC01,2024-07-04,Fee income,Family Law,6246.22,,Invoice - Family Law matter
+OF000409,MAT00554,LOC01,2024-07-04,Fee income,"Wills, Probate & Estates",6533.24,,"Invoice - Wills, Probate & Estates matter"
+OF000410,MAT00555,LOC01,2024-06-17,Fee income,Family Law,4864.42,,Invoice - Family Law matter
+OF000411,MAT00557,LOC02,2025-07-28,Fee income,Property Law,16629.61,,Invoice - Property Law matter
+OF000412,MAT00560,LOC01,2025-01-09,Fee income,Property Law,3499.88,,Invoice - Property Law matter
+OF000413,MAT00562,LOC01,2024-03-21,Fee income,"Wills, Probate & Estates",18102.78,,"Invoice - Wills, Probate & Estates matter"
+OF000414,MAT00563,LOC02,2024-12-31,Fee income,Family Law,7929.75,,Invoice - Family Law matter
+OF000415,MAT00564,LOC01,2024-12-14,Fee income,Family Law,9749.31,,Invoice - Family Law matter
+OF000416,MAT00565,LOC01,2024-08-10,Fee income,"Wills, Probate & Estates",9135.88,,"Invoice - Wills, Probate & Estates matter"
+OF000417,MAT00566,LOC01,2025-01-07,Fee income,"Wills, Probate & Estates",8399.82,,"Invoice - Wills, Probate & Estates matter"
+OF000418,MAT00567,LOC01,2025-05-25,Fee income,General Litigation,5221.14,,Invoice - General Litigation matter
+OF000419,MAT00568,LOC01,2024-08-27,Fee income,Property Law,1971.8,,Invoice - Property Law matter
+OF000420,MAT00569,LOC02,2024-11-11,Fee income,General Litigation,7558.77,,Invoice - General Litigation matter
+OF000421,MAT00570,LOC01,2024-10-01,Fee income,"Wills, Probate & Estates",5305.67,,"Invoice - Wills, Probate & Estates matter"
+OF000422,MAT00571,LOC02,2024-06-21,Fee income,"Wills, Probate & Estates",1426.41,,"Invoice - Wills, Probate & Estates matter"
+OF000423,MAT00572,LOC01,2024-08-30,Fee income,Property Law,5443.7,,Invoice - Property Law matter
+OF000424,MAT00573,LOC02,2024-02-05,Fee income,"Wills, Probate & Estates",7972.47,,"Invoice - Wills, Probate & Estates matter"
+OF000425,MAT00575,LOC02,2024-11-06,Fee income,"Wills, Probate & Estates",2484.8,,"Invoice - Wills, Probate & Estates matter"
+OF000426,MAT00576,LOC01,2024-10-30,Fee income,"Wills, Probate & Estates",5701.09,,"Invoice - Wills, Probate & Estates matter"
+OF000427,MAT00577,LOC02,2025-05-16,Fee income,Family Law,2321.97,,Invoice - Family Law matter
+OF000428,MAT00580,LOC01,2024-07-08,Fee income,"Wills, Probate & Estates",4848.5,,"Invoice - Wills, Probate & Estates matter"
+OF000429,MAT00581,LOC01,2024-03-20,Fee income,"Wills, Probate & Estates",12067.43,,"Invoice - Wills, Probate & Estates matter"
+OF000430,MAT00583,LOC01,2024-12-09,Fee income,Property Law,6005.82,,Invoice - Property Law matter
+OF000431,MAT00584,LOC02,2025-05-23,Fee income,Family Law,15192.57,,Invoice - Family Law matter
+OF000432,MAT00585,LOC01,2025-06-09,Fee income,Family Law,7049.69,,Invoice - Family Law matter
+OF000433,MAT00586,LOC01,2024-08-16,Fee income,Family Law,14935.84,,Invoice - Family Law matter
+OF000434,MAT00590,LOC01,2024-12-09,Fee income,Property Law,6100.18,,Invoice - Property Law matter
+OF000435,MAT00591,LOC02,2024-09-08,Fee income,Family Law,7948.21,,Invoice - Family Law matter
+OF000436,MAT00592,LOC01,2024-04-08,Fee income,"Wills, Probate & Estates",3680.78,,"Invoice - Wills, Probate & Estates matter"
+OF000437,MAT00593,LOC02,2025-03-20,Fee income,Family Law,10282.19,,Invoice - Family Law matter
+OF000438,MAT00595,LOC01,2024-03-13,Fee income,General Litigation,16951.74,,Invoice - General Litigation matter
+OF000439,MAT00596,LOC01,2024-01-06,Fee income,"Wills, Probate & Estates",8917.17,,"Invoice - Wills, Probate & Estates matter"
+OF000440,MAT00598,LOC01,2024-03-08,Fee income,Family Law,6726.57,,Invoice - Family Law matter
+OF000441,MAT00600,LOC01,2025-05-30,Fee income,"Wills, Probate & Estates",4035.1,,"Invoice - Wills, Probate & Estates matter"
+OF000442,MAT00601,LOC01,2024-09-16,Fee income,Property Law,4310.13,,Invoice - Property Law matter
+OF000443,MAT00603,LOC01,2024-08-18,Fee income,"Wills, Probate & Estates",6894.23,,"Invoice - Wills, Probate & Estates matter"
+OF000444,MAT00604,LOC02,2025-01-18,Fee income,Property Law,2582.2,,Invoice - Property Law matter
+OF000445,MAT00605,LOC01,2024-08-11,Fee income,"Wills, Probate & Estates",4576.61,,"Invoice - Wills, Probate & Estates matter"
+OF000446,MAT00606,LOC02,2025-09-29,Fee income,Property Law,2426.0,,Invoice - Property Law matter
+OF000447,MAT00607,LOC02,2024-11-09,Fee income,General Litigation,2661.21,,Invoice - General Litigation matter
+OF000448,MAT00609,LOC01,2025-05-04,Fee income,Family Law,14966.54,,Invoice - Family Law matter
+OF000449,MAT00610,LOC01,2025-02-26,Fee income,Property Law,2138.83,,Invoice - Property Law matter
+OF000450,MAT00611,LOC02,2024-09-13,Fee income,Family Law,29065.92,,Invoice - Family Law matter
+OF000451,MAT00612,LOC02,2024-06-19,Fee income,Family Law,2363.15,,Invoice - Family Law matter
+OF000452,MAT00613,LOC01,2024-06-21,Fee income,"Wills, Probate & Estates",23275.08,,"Invoice - Wills, Probate & Estates matter"
+OF000453,MAT00614,LOC02,2024-08-07,Fee income,"Wills, Probate & Estates",3655.53,,"Invoice - Wills, Probate & Estates matter"
+OF000454,MAT00615,LOC02,2025-07-16,Fee income,"Wills, Probate & Estates",4641.57,,"Invoice - Wills, Probate & Estates matter"
+OF000455,MAT00616,LOC01,2024-11-07,Fee income,Property Law,15695.63,,Invoice - Property Law matter
+OF000456,MAT00617,LOC01,2025-04-08,Fee income,General Litigation,711.08,,Invoice - General Litigation matter
+OF000457,MAT00618,LOC01,2024-07-24,Fee income,Family Law,5787.17,,Invoice - Family Law matter
+OF000458,MAT00619,LOC01,2025-06-03,Fee income,Family Law,1604.23,,Invoice - Family Law matter
+OF000459,MAT00620,LOC01,2024-09-30,Fee income,Family Law,1226.81,,Invoice - Family Law matter
+OF000460,MAT00621,LOC01,2025-08-08,Fee income,"Wills, Probate & Estates",7370.55,,"Invoice - Wills, Probate & Estates matter"
+OF000461,MAT00622,LOC01,2024-09-05,Fee income,Family Law,15077.11,,Invoice - Family Law matter
+OF000462,MAT00623,LOC02,2024-12-09,Fee income,"Wills, Probate & Estates",758.1,,"Invoice - Wills, Probate & Estates matter"
+OF000463,MAT00625,LOC02,2024-10-17,Fee income,"Wills, Probate & Estates",3854.99,,"Invoice - Wills, Probate & Estates matter"
+OF000464,MAT00626,LOC02,2025-04-26,Fee income,Family Law,672.36,,Invoice - Family Law matter
+OF000465,MAT00627,LOC02,2024-04-02,Fee income,Family Law,3542.05,,Invoice - Family Law matter
+OF000466,MAT00630,LOC01,2024-08-23,Fee income,Property Law,4452.48,,Invoice - Property Law matter
+OF000467,MAT00631,LOC02,2024-06-12,Fee income,General Litigation,2134.97,,Invoice - General Litigation matter
+OF000468,MAT00632,LOC01,2024-12-19,Fee income,General Litigation,5126.17,,Invoice - General Litigation matter
+OF000469,MAT00633,LOC01,2025-04-11,Fee income,"Wills, Probate & Estates",15119.25,,"Invoice - Wills, Probate & Estates matter"
+OF000470,MAT00635,LOC01,2024-12-02,Fee income,Family Law,17226.71,,Invoice - Family Law matter
+OF000471,MAT00636,LOC01,2025-06-15,Fee income,Property Law,1253.68,,Invoice - Property Law matter
+OF000472,MAT00637,LOC02,2025-11-06,Fee income,Property Law,4860.52,,Invoice - Property Law matter
+OF000473,MAT00638,LOC01,2024-10-25,Fee income,"Wills, Probate & Estates",8033.73,,"Invoice - Wills, Probate & Estates matter"
+OF000474,MAT00639,LOC01,2025-10-16,Fee income,"Wills, Probate & Estates",2449.1,,"Invoice - Wills, Probate & Estates matter"
+OF000475,MAT00640,LOC01,2025-05-15,Fee income,Family Law,1724.88,,Invoice - Family Law matter
+OF000476,MAT00641,LOC01,2025-07-12,Fee income,Family Law,1668.81,,Invoice - Family Law matter
+OF000477,MAT00644,LOC01,2024-04-11,Fee income,Family Law,2882.99,,Invoice - Family Law matter
+OF000478,MAT00645,LOC02,2024-05-11,Fee income,"Wills, Probate & Estates",2945.74,,"Invoice - Wills, Probate & Estates matter"
+OF000479,MAT00648,LOC01,2025-02-15,Fee income,Family Law,1548.34,,Invoice - Family Law matter
+OF000480,,LOC01,2025-04-27,Expense,Software subscriptions,-203.9,Amex,Operating expense
+OF000481,,LOC02,2024-11-17,Expense,Travel,-69.77,Visa,Operating expense
+OF000482,,LOC02,2025-10-21,Expense,IT equipment,-461.97,Amex,Operating expense
+OF000483,,LOC01,2025-09-11,Expense,Software subscriptions,-34.23,Amex,Operating expense
+OF000484,,LOC02,2024-01-13,Expense,Client entertainment,-479.51,Amex,Operating expense
+OF000485,,LOC01,2024-08-25,Expense,Software subscriptions,-169.34,Visa,Operating expense
+OF000486,,LOC01,2025-06-17,Expense,Travel,-519.44,Amex,Operating expense
+OF000487,,LOC02,2024-05-28,Expense,Software subscriptions,-270.78,Visa,Operating expense
+OF000488,,LOC02,2024-08-14,Expense,Professional development,-407.18,Visa,Operating expense
+OF000489,,LOC02,2024-09-03,Expense,Client entertainment,-393.24,Amex,Operating expense
+OF000490,,LOC02,2024-01-04,Expense,Software subscriptions,-1205.39,Visa,Operating expense
+OF000491,,LOC02,2025-11-14,Expense,Client entertainment,-44.37,Visa,Operating expense
+OF000492,,LOC01,2024-10-08,Expense,IT equipment,-272.66,Amex,Operating expense
+OF000493,,LOC02,2024-07-16,Expense,IT equipment,-744.68,Amex,Operating expense
+OF000494,,LOC02,2025-06-02,Expense,Office supplies,-64.91,,Operating expense
+OF000495,,LOC01,2024-10-30,Expense,Marketing,-1176.14,,Operating expense
+OF000496,,LOC01,2025-03-10,Expense,Client entertainment,-307.6,Amex,Operating expense
+OF000497,,LOC01,2025-01-13,Expense,Travel,-140.82,Visa,Operating expense
+OF000498,,LOC01,2024-10-11,Expense,Software subscriptions,-222.0,Visa,Operating expense
+OF000499,,LOC01,2024-10-27,Expense,Professional development,-295.89,Visa,Operating expense
+OF000500,,LOC01,2024-03-18,Expense,Client entertainment,-1319.33,Amex,Operating expense
+OF000501,,LOC02,2024-09-12,Expense,Marketing,-415.47,Visa,Operating expense
+OF000502,,LOC02,2024-12-31,Expense,Office supplies,-80.47,Amex,Operating expense
+OF000503,,LOC02,2025-11-15,Expense,Office supplies,-170.67,Amex,Operating expense
+OF000504,,LOC01,2024-05-01,Expense,IT equipment,-405.47,,Operating expense
+OF000505,,LOC01,2024-09-19,Expense,Professional development,-54.44,Amex,Operating expense
+OF000506,,LOC01,2024-09-18,Expense,Professional development,-423.05,,Operating expense
+OF000507,,LOC02,2024-07-23,Expense,Office supplies,-511.77,Amex,Operating expense
+OF000508,,LOC01,2024-06-13,Expense,Travel,-153.8,,Operating expense
+OF000509,,LOC02,2025-07-15,Expense,Software subscriptions,-845.37,,Operating expense
+OF000510,,LOC02,2025-01-02,Expense,Professional development,-145.11,Amex,Operating expense
+OF000511,,LOC02,2025-11-12,Expense,IT equipment,-112.78,Visa,Operating expense
+OF000512,,LOC01,2025-05-20,Expense,Software subscriptions,-79.13,,Operating expense
+OF000513,,LOC01,2025-03-10,Expense,Professional development,-4441.74,Visa,Operating expense
+OF000514,,LOC01,2025-06-01,Expense,Client entertainment,-506.53,Visa,Operating expense
+OF000515,,LOC02,2025-09-03,Expense,Client entertainment,-206.97,Amex,Operating expense
+OF000516,,LOC02,2025-10-11,Expense,Client entertainment,-114.99,Amex,Operating expense
+OF000517,,LOC01,2024-10-14,Expense,Marketing,-31.7,Visa,Operating expense
+OF000518,,LOC02,2025-10-12,Expense,Professional development,-693.92,Amex,Operating expense
+OF000519,,LOC02,2025-06-08,Expense,Software subscriptions,-135.88,Amex,Operating expense
+OF000520,,LOC02,2025-04-30,Expense,Travel,-230.08,Amex,Operating expense
+OF000521,,LOC02,2025-07-01,Expense,Software subscriptions,-999.37,Visa,Operating expense
+OF000522,,LOC01,2024-05-29,Expense,Software subscriptions,-317.75,,Operating expense
+OF000523,,LOC01,2024-01-08,Expense,Travel,-121.32,,Operating expense
+OF000524,,LOC02,2025-10-21,Expense,Professional development,-71.15,Amex,Operating expense
+OF000525,,LOC02,2024-10-19,Expense,Office supplies,-566.45,Amex,Operating expense
+OF000526,,LOC02,2024-06-24,Expense,Travel,-257.76,Visa,Operating expense
+OF000527,,LOC02,2025-02-25,Expense,Client entertainment,-31.53,,Operating expense
+OF000528,,LOC01,2025-05-11,Expense,Travel,-208.82,Visa,Operating expense
+OF000529,,LOC02,2024-02-19,Expense,Marketing,-2530.05,Amex,Operating expense
+OF000530,,LOC02,2024-11-24,Expense,Software subscriptions,-255.09,Amex,Operating expense
+OF000531,,LOC02,2025-02-16,Expense,Software subscriptions,-4129.15,Visa,Operating expense
+OF000532,,LOC02,2024-05-11,Expense,Client entertainment,-1501.55,Visa,Operating expense
+OF000533,,LOC02,2025-10-02,Expense,Client entertainment,-303.05,Amex,Operating expense
+OF000534,,LOC02,2024-03-21,Expense,Office supplies,-109.6,,Operating expense
+OF000535,,LOC02,2025-07-31,Expense,Software subscriptions,-188.49,Amex,Operating expense
+OF000536,,LOC01,2025-12-20,Expense,Client entertainment,-71.56,Visa,Operating expense
+OF000537,,LOC02,2025-03-26,Expense,IT equipment,-1390.67,,Operating expense
+OF000538,,LOC02,2024-09-01,Expense,Marketing,-11.21,Amex,Operating expense
+OF000539,,LOC01,2024-12-24,Expense,Software subscriptions,-616.78,Visa,Operating expense
+OF000540,,LOC01,2024-08-13,Expense,Travel,-369.81,Amex,Operating expense
+OF000541,,LOC01,2024-01-25,Expense,IT equipment,-798.49,,Operating expense
+OF000542,,LOC01,2024-01-27,Expense,Office supplies,-311.66,Amex,Operating expense
+OF000543,,LOC01,2024-06-13,Expense,Client entertainment,-47.41,Amex,Operating expense
+OF000544,,LOC01,2025-06-13,Expense,Software subscriptions,-321.28,Visa,Operating expense
+OF000545,,LOC01,2024-09-12,Expense,Client entertainment,-287.32,Amex,Operating expense
+OF000546,,LOC02,2025-08-01,Expense,Marketing,-435.29,Amex,Operating expense
+OF000547,,LOC02,2025-11-15,Expense,Travel,-39.46,Amex,Operating expense
+OF000548,,LOC02,2024-06-05,Expense,Travel,-436.95,Amex,Operating expense
+OF000549,,LOC02,2025-09-03,Expense,Client entertainment,-70.41,Visa,Operating expense
+OF000550,,LOC01,2025-07-02,Expense,Client entertainment,-37.4,,Operating expense
+OF000551,,LOC01,2024-09-11,Expense,Client entertainment,-166.75,Visa,Operating expense
+OF000552,,LOC01,2025-01-26,Expense,Travel,-54.52,Amex,Operating expense
+OF000553,,LOC01,2025-05-20,Expense,Marketing,-428.5,Visa,Operating expense
+OF000554,,LOC02,2025-12-03,Expense,Marketing,-186.16,,Operating expense
+OF000555,,LOC01,2024-08-20,Expense,Professional development,-65.28,Visa,Operating expense
+OF000556,,LOC01,2024-05-06,Expense,Client entertainment,-5243.41,Amex,Operating expense
+OF000557,,LOC01,2024-12-11,Expense,Client entertainment,-58.93,,Operating expense
+OF000558,,LOC02,2025-08-16,Expense,Travel,-156.07,Amex,Operating expense
+OF000559,,LOC02,2024-03-08,Expense,Office supplies,-60.28,,Operating expense
+OF000560,,LOC01,2024-03-18,Expense,Marketing,-427.92,Visa,Operating expense
+OF000561,,LOC02,2024-10-01,Expense,IT equipment,-43.78,Amex,Operating expense
+OF000562,,LOC01,2025-02-10,Expense,Software subscriptions,-912.73,Amex,Operating expense
+OF000563,,LOC02,2024-10-02,Expense,Marketing,-240.64,Amex,Operating expense
+OF000564,,LOC01,2025-11-29,Expense,Marketing,-429.89,Visa,Operating expense
+OF000565,,LOC02,2025-10-14,Expense,IT equipment,-46.8,Amex,Operating expense
+OF000566,,LOC02,2025-05-02,Expense,Travel,-284.62,Amex,Operating expense
+OF000567,,LOC01,2024-03-25,Expense,Client entertainment,-409.33,Visa,Operating expense
+OF000568,,LOC02,2025-12-09,Expense,Office supplies,-877.5,Amex,Operating expense
+OF000569,,LOC01,2025-07-11,Expense,IT equipment,-111.3,,Operating expense
+OF000570,,LOC02,2025-04-20,Expense,IT equipment,-558.65,Amex,Operating expense
+OF000571,,LOC01,2024-12-22,Expense,Client entertainment,-31.05,Visa,Operating expense
+OF000572,,LOC01,2024-08-05,Expense,Marketing,-309.39,Amex,Operating expense
+OF000573,,LOC02,2024-01-01,Expense,Marketing,-392.82,,Operating expense
+OF000574,,LOC01,2024-11-24,Expense,Software subscriptions,-86.0,Amex,Operating expense
+OF000575,,LOC01,2024-08-26,Expense,Software subscriptions,-324.78,Amex,Operating expense
+OF000576,,LOC01,2024-08-08,Expense,Software subscriptions,-1739.67,Amex,Operating expense
+OF000577,,LOC02,2024-07-26,Expense,Office supplies,-1127.16,,Operating expense
+OF000578,,LOC01,2024-12-19,Expense,Office supplies,-717.79,,Operating expense
+OF000579,,LOC02,2024-08-16,Expense,IT equipment,-3894.91,Visa,Operating expense
+OF000580,,LOC02,2024-02-03,Expense,Office supplies,-71.23,Amex,Operating expense
+OF000581,,LOC02,2025-10-08,Expense,Software subscriptions,-121.79,Visa,Operating expense
+OF000582,,LOC02,2024-01-07,Expense,Office supplies,-92.13,Amex,Operating expense
+OF000583,,LOC01,2024-01-12,Expense,Marketing,-147.54,,Operating expense
+OF000584,,LOC01,2024-09-05,Expense,Software subscriptions,-95.57,Visa,Operating expense
+OF000585,,LOC01,2024-02-27,Expense,IT equipment,-522.36,Amex,Operating expense
+OF000586,,LOC01,2024-04-16,Expense,Office supplies,-278.13,Visa,Operating expense
+OF000587,,LOC01,2024-01-01,Expense,Software subscriptions,-188.59,,Operating expense
+OF000588,,LOC01,2025-08-26,Expense,Travel,-233.76,,Operating expense
+OF000589,,LOC01,2025-11-30,Expense,Office supplies,-57.1,,Operating expense
+OF000590,,LOC01,2024-06-09,Expense,Office supplies,-88.04,Visa,Operating expense
+OF000591,,LOC01,2024-12-12,Expense,Travel,-29.0,Visa,Operating expense
+OF000592,,LOC01,2025-03-21,Expense,Travel,-207.37,Amex,Operating expense
+OF000593,,LOC01,2025-06-28,Expense,Software subscriptions,-679.77,Visa,Operating expense
+OF000594,,LOC01,2024-06-26,Expense,Software subscriptions,-2868.3,Amex,Operating expense
+OF000595,,LOC02,2025-03-27,Expense,Office supplies,-246.46,Visa,Operating expense
+OF000596,,LOC01,2025-11-03,Expense,Marketing,-224.24,Amex,Operating expense
+OF000597,,LOC02,2024-02-06,Expense,IT equipment,-189.36,Visa,Operating expense
+OF000598,,LOC01,2024-11-03,Expense,Professional development,-723.4,Visa,Operating expense
+OF000599,,LOC02,2024-01-29,Expense,Marketing,-210.99,Amex,Operating expense
+OF000600,,LOC01,2024-09-18,Expense,Marketing,-239.67,Amex,Operating expense
+OF000601,,LOC01,2024-01-13,Expense,Marketing,-831.05,,Operating expense
+OF000602,,LOC01,2025-05-21,Expense,Travel,-610.52,Amex,Operating expense
+OF000603,,LOC01,2024-11-08,Expense,IT equipment,-504.72,,Operating expense
+OF000604,,LOC02,2025-05-31,Expense,Marketing,-144.24,,Operating expense
+OF000605,,LOC02,2025-03-19,Expense,Software subscriptions,-1236.58,Amex,Operating expense
+OF000606,,LOC01,2025-01-20,Expense,Office supplies,-203.8,,Operating expense
+OF000607,,LOC01,2025-10-07,Expense,IT equipment,-88.64,Amex,Operating expense
+OF000608,,LOC01,2024-05-09,Expense,Professional development,-560.68,Visa,Operating expense
+OF000609,,LOC01,2024-09-19,Expense,Software subscriptions,-50.61,Amex,Operating expense
+OF000610,,LOC01,2024-08-16,Expense,Client entertainment,-201.69,,Operating expense
+OF000611,,LOC01,2025-08-13,Expense,Software subscriptions,-108.43,,Operating expense
+OF000612,,LOC01,2025-12-17,Expense,Client entertainment,-76.25,,Operating expense
+OF000613,,LOC01,2024-05-07,Expense,Office supplies,-371.65,,Operating expense
+OF000614,,LOC01,2024-10-01,Expense,Professional development,-142.7,,Operating expense
+OF000615,,LOC02,2024-03-25,Expense,Software subscriptions,-119.87,Amex,Operating expense
+OF000616,,LOC02,2024-11-05,Expense,Travel,-424.53,Visa,Operating expense
+OF000617,,LOC01,2025-03-04,Expense,Travel,-48.45,Visa,Operating expense
+OF000618,,LOC02,2025-03-16,Expense,Marketing,-268.72,Visa,Operating expense
+OF000619,,LOC01,2024-04-22,Expense,IT equipment,-405.17,Visa,Operating expense
+OF000620,,LOC02,2025-12-19,Expense,Travel,-701.47,Visa,Operating expense
+OF000621,,LOC02,2025-05-30,Expense,Client entertainment,-411.62,Amex,Operating expense
+OF000622,,LOC01,2025-10-11,Expense,Travel,-242.06,,Operating expense
+OF000623,,LOC01,2024-05-14,Expense,Office supplies,-106.67,,Operating expense
+OF000624,,LOC02,2024-09-10,Expense,Marketing,-345.02,Amex,Operating expense
+OF000625,,LOC02,2024-07-19,Expense,Professional development,-372.42,,Operating expense
+OF000626,,LOC01,2025-03-22,Expense,Office supplies,-91.11,Visa,Operating expense
+OF000627,,LOC02,2024-04-08,Expense,Marketing,-517.51,Amex,Operating expense
+OF000628,,LOC01,2024-04-06,Expense,Marketing,-79.65,Amex,Operating expense
+OF000629,,LOC01,2025-01-26,Expense,Client entertainment,-1127.08,,Operating expense
+OF000630,,LOC01,2024-09-09,Expense,Office supplies,-196.51,Visa,Operating expense
+OF000631,,LOC02,2025-10-19,Expense,IT equipment,-139.12,Visa,Operating expense
+OF000632,,LOC02,2025-02-27,Expense,Marketing,-42.24,Amex,Operating expense
+OF000633,,LOC01,2024-10-11,Expense,Travel,-214.49,Visa,Operating expense
+OF000634,,LOC02,2024-10-10,Expense,Professional development,-264.75,,Operating expense
+OF000635,,LOC02,2024-12-11,Expense,Travel,-5142.66,,Operating expense
+OF000636,,LOC02,2025-11-09,Expense,Travel,-198.16,Amex,Operating expense
+OF000637,,LOC02,2024-12-10,Expense,Client entertainment,-36.4,Amex,Operating expense
+OF000638,,LOC01,2024-10-12,Expense,Marketing,-447.89,,Operating expense
+OF000639,,LOC02,2025-05-01,Expense,Office supplies,-210.54,,Operating expense
+OF000640,,LOC01,2024-12-25,Expense,Client entertainment,-557.84,Visa,Operating expense
+OF000641,,LOC02,2025-01-31,Expense,Professional development,-370.92,Visa,Operating expense
+OF000642,,LOC01,2025-05-07,Expense,Marketing,-169.57,,Operating expense
+OF000643,,LOC02,2025-09-14,Expense,Travel,-47.52,Visa,Operating expense
+OF000644,,LOC02,2024-06-08,Expense,Office supplies,-839.71,,Operating expense
+OF000645,,LOC01,2024-02-12,Expense,Client entertainment,-225.23,Amex,Operating expense
+OF000646,,LOC02,2024-03-22,Expense,Office supplies,-378.66,Amex,Operating expense
+OF000647,,LOC02,2025-06-24,Expense,Marketing,-275.79,Amex,Operating expense
+OF000648,,LOC02,2024-01-11,Expense,Marketing,-297.38,Visa,Operating expense
+OF000649,,LOC02,2025-10-22,Expense,IT equipment,-134.8,,Operating expense
+OF000650,,LOC01,2025-04-08,Expense,Professional development,-383.85,Visa,Operating expense
+OF000651,,LOC01,2025-01-19,Expense,Professional development,-523.36,,Operating expense
+OF000652,,LOC01,2025-02-18,Expense,Professional development,-872.78,Visa,Operating expense
+OF000653,,LOC01,2024-11-03,Expense,Office supplies,-598.59,,Operating expense
+OF000654,,LOC02,2025-11-08,Expense,Professional development,-42.89,Amex,Operating expense
+OF000655,,LOC02,2024-01-12,Expense,Travel,-148.97,Amex,Operating expense
+OF000656,,LOC01,2025-05-05,Expense,Marketing,-254.5,Visa,Operating expense
+OF000657,,LOC01,2025-07-06,Expense,Software subscriptions,-230.53,Amex,Operating expense
+OF000658,,LOC01,2024-08-14,Expense,Client entertainment,-29.83,,Operating expense
+OF000659,,LOC01,2025-11-21,Expense,Software subscriptions,-371.96,,Operating expense
+OF000660,,LOC02,2024-05-17,Expense,Professional development,-713.42,Visa,Operating expense
+OF000661,,LOC01,2024-11-15,Expense,Marketing,-150.28,Amex,Operating expense
+OF000662,,LOC01,2024-11-06,Expense,Office supplies,-242.47,Visa,Operating expense
+OF000663,,LOC01,2025-04-02,Expense,Travel,-161.95,Visa,Operating expense
+OF000664,,LOC02,2025-12-28,Expense,Travel,-414.78,Amex,Operating expense
+OF000665,,LOC02,2025-11-22,Expense,Office supplies,-231.67,Amex,Operating expense
+OF000666,,LOC01,2025-12-23,Expense,Client entertainment,-140.61,Visa,Operating expense
+OF000667,,LOC02,2025-05-23,Expense,IT equipment,-109.72,Amex,Operating expense
+OF000668,,LOC02,2024-07-19,Expense,Professional development,-207.82,Visa,Operating expense
+OF000669,,LOC02,2024-07-31,Expense,Travel,-207.19,Visa,Operating expense
+OF000670,,LOC02,2025-01-19,Expense,Client entertainment,-249.7,Amex,Operating expense
+OF000671,,LOC01,2025-11-10,Expense,Client entertainment,-287.55,Visa,Operating expense
+OF000672,,LOC02,2025-05-29,Expense,Marketing,-232.59,Amex,Operating expense
+OF000673,,LOC02,2025-11-20,Expense,Travel,-251.36,Visa,Operating expense
+OF000674,,LOC02,2024-06-21,Expense,Software subscriptions,-975.66,Visa,Operating expense
+OF000675,,LOC02,2024-07-19,Expense,Office supplies,-673.72,Amex,Operating expense
+OF000676,,LOC01,2024-11-12,Expense,Client entertainment,-818.17,Amex,Operating expense
+OF000677,,LOC02,2024-07-10,Expense,Software subscriptions,-154.08,,Operating expense
+OF000678,,LOC02,2024-07-09,Expense,Software subscriptions,-786.79,Visa,Operating expense
+OF000679,,LOC01,2024-07-25,Expense,Client entertainment,-225.99,Visa,Operating expense
+OF000680,,LOC02,2024-11-24,Expense,Professional development,-171.22,,Operating expense
+OF000681,,LOC01,2025-07-24,Expense,Client entertainment,-434.63,Amex,Operating expense
+OF000682,,LOC02,2025-04-27,Expense,Travel,-545.75,,Operating expense
+OF000683,,LOC01,2025-10-26,Expense,Travel,-431.31,Visa,Operating expense
+OF000684,,LOC02,2025-07-05,Expense,Client entertainment,-186.97,Visa,Operating expense
+OF000685,,LOC01,2025-01-25,Expense,IT equipment,-133.18,Visa,Operating expense
+OF000686,,LOC01,2024-04-28,Expense,Marketing,-143.7,Visa,Operating expense
+OF000687,,LOC02,2025-05-25,Expense,Software subscriptions,-965.3,Visa,Operating expense
+OF000688,,LOC01,2025-11-25,Expense,Professional development,-192.78,,Operating expense
+OF000689,,LOC02,2025-06-17,Expense,Marketing,-102.91,,Operating expense
+OF000690,,LOC02,2025-12-03,Expense,Software subscriptions,-287.12,Visa,Operating expense
+OF000691,,LOC01,2024-04-07,Expense,Professional development,-179.61,Amex,Operating expense
+OF000692,,LOC01,2025-06-07,Expense,Client entertainment,-663.01,Amex,Operating expense
+OF000693,,LOC01,2024-06-07,Expense,IT equipment,-438.8,Visa,Operating expense
+OF000694,,LOC02,2025-11-06,Expense,IT equipment,-192.28,Visa,Operating expense
+OF000695,,LOC01,2025-05-09,Expense,Travel,-63.05,,Operating expense
+OF000696,,LOC01,2024-10-14,Expense,Marketing,-144.3,Visa,Operating expense
+OF000697,,LOC02,2024-05-23,Expense,Travel,-396.79,,Operating expense
+OF000698,,LOC01,2025-07-15,Expense,Travel,-755.21,,Operating expense
+OF000699,,LOC01,2025-11-01,Expense,IT equipment,-855.98,,Operating expense
+OF000700,,LOC02,2025-01-13,Expense,IT equipment,-236.2,,Operating expense
+OF000701,,LOC01,2024-07-20,Expense,Marketing,-782.38,Amex,Operating expense
+OF000702,,LOC02,2024-08-25,Expense,Marketing,-171.07,,Operating expense
+OF000703,,LOC02,2025-03-31,Expense,Office supplies,-561.79,Visa,Operating expense
+OF000704,,LOC02,2025-05-09,Expense,Office supplies,-281.42,,Operating expense
+OF000705,,LOC01,2025-06-23,Expense,Software subscriptions,-368.79,,Operating expense
+OF000706,,LOC01,2025-01-06,Expense,Travel,-151.37,Visa,Operating expense
+OF000707,,LOC01,2024-04-14,Expense,Professional development,-204.24,,Operating expense
+OF000708,,LOC02,2025-02-22,Expense,Travel,-1437.37,Amex,Operating expense
+OF000709,,LOC02,2025-12-21,Expense,Office supplies,-39.31,,Operating expense
+OF000710,,LOC02,2024-06-15,Expense,Software subscriptions,-195.58,Visa,Operating expense
+OF000711,,LOC01,2024-06-10,Expense,IT equipment,-683.84,,Operating expense
+OF000712,,LOC02,2024-03-27,Expense,Client entertainment,-104.14,Visa,Operating expense
+OF000713,,LOC02,2025-12-13,Expense,IT equipment,-1315.88,Amex,Operating expense
+OF000714,,LOC01,2025-10-04,Expense,Marketing,-240.8,Amex,Operating expense
+OF000715,,LOC02,2024-06-13,Expense,Office supplies,-62.15,Visa,Operating expense
+OF000716,,LOC01,2025-07-21,Expense,Professional development,-321.99,Visa,Operating expense
+OF000717,,LOC01,2025-01-22,Expense,Professional development,-62.95,Visa,Operating expense
+OF000718,,LOC02,2024-06-22,Expense,Office supplies,-1632.54,Amex,Operating expense
+OF000719,,LOC02,2025-03-29,Expense,Travel,-47.45,Amex,Operating expense
+OF000720,,LOC01,2025-04-08,Expense,Marketing,-608.32,Visa,Operating expense
+OF000721,,LOC01,2024-03-01,Expense,Client entertainment,-121.43,Visa,Operating expense
+OF000722,,LOC02,2025-05-24,Expense,Client entertainment,-357.27,,Operating expense
+OF000723,,LOC02,2025-02-09,Expense,Professional development,-50.89,Amex,Operating expense
+OF000724,,LOC02,2025-08-18,Expense,Software subscriptions,-162.9,Amex,Operating expense
+OF000725,,LOC01,2024-08-28,Expense,Marketing,-282.18,,Operating expense
+OF000726,,LOC02,2024-09-02,Expense,Client entertainment,-279.7,Amex,Operating expense
+OF000727,,LOC02,2025-06-10,Expense,Marketing,-214.37,Visa,Operating expense
+OF000728,,LOC01,2025-05-27,Expense,Travel,-23.62,,Operating expense
+OF000729,,LOC02,2025-11-25,Expense,Professional development,-129.58,Amex,Operating expense
+OF000730,,LOC01,2024-05-11,Expense,IT equipment,-88.39,Amex,Operating expense
+OF000731,,LOC01,2025-10-03,Expense,Office supplies,-455.23,,Operating expense
+OF000732,,LOC01,2025-02-23,Expense,Software subscriptions,-678.93,Visa,Operating expense
+OF000733,,LOC02,2024-12-30,Expense,Office supplies,-125.07,Visa,Operating expense
+OF000734,,LOC02,2025-08-17,Expense,Client entertainment,-154.3,,Operating expense
+OF000735,,LOC02,2024-05-29,Expense,IT equipment,-43.58,,Operating expense
+OF000736,,LOC01,2025-12-20,Expense,Professional development,-110.89,,Operating expense
+OF000737,,LOC02,2025-05-30,Expense,Travel,-118.62,,Operating expense
+OF000738,,LOC01,2024-12-08,Expense,Office supplies,-108.18,Visa,Operating expense
+OF000739,,LOC02,2024-01-05,Expense,IT equipment,-192.29,Visa,Operating expense
+OF000740,,LOC01,2025-05-03,Expense,Software subscriptions,-689.32,Amex,Operating expense
+OF000741,,LOC02,2025-07-09,Expense,Marketing,-147.45,Visa,Operating expense
+OF000742,,LOC01,2025-08-29,Expense,Marketing,-333.65,Visa,Operating expense
+OF000743,,LOC01,2024-09-06,Expense,Professional development,-221.61,Amex,Operating expense
+OF000744,,LOC02,2025-07-13,Expense,Office supplies,-776.18,Amex,Operating expense
+OF000745,,LOC02,2024-11-01,Expense,Travel,-176.47,Amex,Operating expense
+OF000746,,LOC01,2025-12-21,Expense,Software subscriptions,-643.83,,Operating expense
+OF000747,,LOC02,2024-08-25,Expense,IT equipment,-217.58,,Operating expense
+OF000748,,LOC02,2024-01-26,Expense,Client entertainment,-274.23,,Operating expense
+OF000749,,LOC02,2024-12-14,Expense,Marketing,-162.25,Visa,Operating expense
+OF000750,,LOC01,2025-06-10,Expense,Professional development,-203.27,Visa,Operating expense
+OF000751,,LOC02,2025-03-01,Expense,Software subscriptions,-176.82,,Operating expense
+OF000752,,LOC02,2025-01-12,Expense,Office supplies,-404.09,Visa,Operating expense
+OF000753,,LOC02,2024-10-10,Expense,Travel,-185.33,Amex,Operating expense
+OF000754,,LOC02,2025-05-12,Expense,IT equipment,-729.78,Amex,Operating expense
+OF000755,,LOC02,2025-02-07,Expense,IT equipment,-141.71,Visa,Operating expense
+OF000756,,LOC01,2025-10-19,Expense,Client entertainment,-50.94,Amex,Operating expense
+OF000757,,LOC02,2025-10-30,Expense,IT equipment,-329.65,Visa,Operating expense
+OF000758,,LOC02,2024-06-30,Expense,Professional development,-943.36,Visa,Operating expense
+OF000759,,LOC02,2024-06-11,Expense,Software subscriptions,-386.94,Amex,Operating expense
+OF000760,,LOC02,2025-03-03,Expense,Software subscriptions,-270.51,Amex,Operating expense
+OF000761,,LOC01,2024-03-15,Expense,Marketing,-162.85,,Operating expense
+OF000762,,LOC02,2024-12-05,Expense,Professional development,-1021.87,Visa,Operating expense
+OF000763,,LOC01,2025-06-06,Expense,IT equipment,-163.52,Amex,Operating expense
+OF000764,,LOC02,2024-05-08,Expense,Travel,-218.99,,Operating expense
+OF000765,,LOC02,2025-11-07,Expense,Client entertainment,-90.0,Amex,Operating expense
+OF000766,,LOC02,2024-05-13,Expense,Travel,-67.08,Amex,Operating expense
+OF000767,,LOC02,2024-02-10,Expense,Software subscriptions,-64.97,Amex,Operating expense
+OF000768,,LOC01,2024-02-14,Expense,Marketing,-176.59,Visa,Operating expense
+OF000769,,LOC02,2024-09-07,Expense,Office supplies,-140.69,Amex,Operating expense
+OF000770,,LOC02,2024-10-10,Expense,IT equipment,-671.42,Visa,Operating expense
+OF000771,,LOC01,2025-04-27,Expense,Software subscriptions,-23.78,Amex,Operating expense
+OF000772,,LOC01,2025-06-14,Expense,Professional development,-76.02,Amex,Operating expense
+OF000773,,LOC01,2025-12-21,Expense,Software subscriptions,-118.93,Amex,Operating expense
+OF000774,,LOC02,2024-07-24,Expense,Professional development,-155.23,Visa,Operating expense
+OF000775,,LOC02,2025-11-08,Expense,Professional development,-209.19,Visa,Operating expense
+OF000776,,LOC01,2024-01-31,Expense,Travel,-140.27,Amex,Operating expense
+OF000777,,LOC02,2024-03-02,Expense,Software subscriptions,-481.67,Amex,Operating expense
+OF000778,,LOC02,2024-03-30,Expense,Travel,-260.02,,Operating expense
+OF000779,,LOC02,2024-04-02,Expense,Travel,-886.66,,Operating expense
+OF000780,,LOC02,2025-10-23,Expense,Office supplies,-330.25,,Operating expense
+OF000781,,LOC01,2024-11-19,Expense,Marketing,-446.63,Visa,Operating expense
+OF000782,,LOC01,2025-03-18,Expense,Marketing,-170.12,,Operating expense
+OF000783,,LOC02,2024-06-26,Expense,Professional development,-647.5,Visa,Operating expense
+OF000784,,LOC01,2024-12-25,Expense,Marketing,-190.02,Visa,Operating expense
+OF000785,,LOC02,2024-08-28,Expense,Travel,-177.35,Visa,Operating expense
+OF000786,,LOC01,2024-01-25,Expense,Travel,-97.19,Amex,Operating expense
+OF000787,,LOC02,2025-02-01,Expense,Marketing,-136.92,Amex,Operating expense
+OF000788,,LOC02,2024-07-09,Expense,Travel,-56.48,,Operating expense
+OF000789,,LOC02,2025-07-13,Expense,Marketing,-210.09,Amex,Operating expense
+OF000790,,LOC02,2024-03-18,Expense,Client entertainment,-702.05,,Operating expense
+OF000791,,LOC02,2024-09-29,Expense,Client entertainment,-194.01,Amex,Operating expense
+OF000792,,LOC02,2025-09-12,Expense,IT equipment,-89.26,Visa,Operating expense
+OF000793,,LOC01,2024-01-17,Expense,Travel,-999.68,,Operating expense
+OF000794,,LOC01,2025-05-13,Expense,Office supplies,-287.89,,Operating expense
+OF000795,,LOC01,2024-11-20,Expense,Software subscriptions,-336.58,Amex,Operating expense
+OF000796,,LOC02,2024-08-16,Expense,Office supplies,-24.02,Visa,Operating expense
+OF000797,,LOC01,2024-06-09,Expense,Software subscriptions,-188.4,Visa,Operating expense
+OF000798,,LOC02,2025-08-13,Expense,Travel,-1682.56,,Operating expense
+OF000799,,LOC02,2024-08-30,Expense,Professional development,-311.19,Visa,Operating expense
+OF000800,,LOC01,2025-12-04,Expense,Professional development,-136.15,Visa,Operating expense
+OF000801,,LOC02,2024-03-15,Expense,Software subscriptions,-155.75,Visa,Operating expense
+OF000802,,LOC01,2025-06-07,Expense,IT equipment,-153.0,Visa,Operating expense
+OF000803,,LOC01,2024-10-05,Expense,Marketing,-190.62,,Operating expense
+OF000804,,LOC02,2024-09-19,Expense,Professional development,-641.07,Amex,Operating expense
+OF000805,,LOC02,2024-03-15,Expense,Marketing,-1783.38,Visa,Operating expense
+OF000806,,LOC02,2024-10-02,Expense,Software subscriptions,-487.8,,Operating expense
+OF000807,,LOC02,2025-12-11,Expense,Marketing,-73.09,Visa,Operating expense
+OF000808,,LOC01,2025-12-01,Expense,Professional development,-501.83,,Operating expense
+OF000809,,LOC02,2024-07-06,Expense,Travel,-661.01,Visa,Operating expense
+OF000810,,LOC02,2024-09-22,Expense,Software subscriptions,-1540.62,,Operating expense
+OF000811,,LOC02,2024-03-09,Expense,Client entertainment,-88.42,Visa,Operating expense
+OF000812,,LOC01,2025-12-21,Expense,Client entertainment,-28.9,Amex,Operating expense
+OF000813,,LOC01,2024-08-12,Expense,Professional development,-228.9,Visa,Operating expense
+OF000814,,LOC02,2025-01-09,Expense,IT equipment,-344.88,,Operating expense
+OF000815,,LOC02,2024-01-15,Expense,Marketing,-413.38,,Operating expense
+OF000816,,LOC02,2024-10-19,Expense,Marketing,-539.97,Visa,Operating expense
+OF000817,,LOC01,2025-11-18,Expense,Travel,-93.2,Visa,Operating expense
+OF000818,,LOC01,2024-09-03,Expense,Office supplies,-216.54,Amex,Operating expense
+OF000819,,LOC01,2024-09-25,Expense,Professional development,-30.01,Amex,Operating expense
+OF000820,,LOC01,2025-12-30,Expense,Office supplies,-2490.48,Amex,Operating expense
+OF000821,,LOC02,2025-07-23,Expense,IT equipment,-284.26,Visa,Operating expense
+OF000822,,LOC01,2025-09-10,Expense,Marketing,-195.29,,Operating expense
+OF000823,,LOC01,2024-01-01,Expense,Marketing,-474.95,,Operating expense
+OF000824,,LOC02,2024-01-30,Expense,Travel,-63.78,,Operating expense
+OF000825,,LOC02,2024-09-02,Expense,Software subscriptions,-174.53,,Operating expense
+OF000826,,LOC02,2024-09-04,Expense,Professional development,-1287.4,,Operating expense
+OF000827,,LOC02,2025-07-15,Expense,Professional development,-727.03,Amex,Operating expense
+OF000828,,LOC01,2025-02-20,Expense,Client entertainment,-274.66,Visa,Operating expense
+OF000829,,LOC01,2025-09-11,Expense,Professional development,-425.83,Visa,Operating expense
+OF000830,,LOC02,2025-12-05,Expense,Marketing,-477.62,,Operating expense
+OF000831,,LOC01,2025-01-16,Expense,Software subscriptions,-487.07,,Operating expense
+OF000832,,LOC01,2025-11-14,Expense,Office supplies,-621.46,Visa,Operating expense
+OF000833,,LOC01,2025-09-16,Expense,Marketing,-400.71,,Operating expense
+OF000834,,LOC01,2025-01-13,Expense,Travel,-1023.65,Visa,Operating expense
+OF000835,,LOC02,2024-12-14,Expense,Client entertainment,-19.35,Amex,Operating expense
+OF000836,,LOC01,2024-07-27,Expense,Marketing,-267.72,Visa,Operating expense
+OF000837,,LOC02,2025-04-30,Expense,Marketing,-262.98,Visa,Operating expense
+OF000838,,LOC02,2024-04-07,Expense,Travel,-167.08,Visa,Operating expense
+OF000839,,LOC02,2024-10-21,Expense,Office supplies,-755.52,,Operating expense
+OF000840,,LOC01,2024-07-06,Expense,Marketing,-139.32,,Operating expense
+OF000841,,LOC01,2024-07-12,Expense,Professional development,-188.91,Amex,Operating expense
+OF000842,,LOC01,2024-06-10,Expense,Office supplies,-311.03,Amex,Operating expense
+OF000843,,LOC02,2024-07-29,Expense,Office supplies,-2118.84,Visa,Operating expense
+OF000844,,LOC01,2024-03-26,Expense,Office supplies,-84.83,,Operating expense
+OF000845,,LOC01,2024-11-05,Expense,Office supplies,-310.96,Amex,Operating expense
+OF000846,,LOC01,2024-06-15,Expense,Travel,-411.75,,Operating expense
+OF000847,,LOC02,2025-05-27,Expense,Travel,-104.62,,Operating expense
+OF000848,,LOC02,2025-12-30,Expense,Marketing,-82.39,,Operating expense
+OF000849,,LOC02,2024-11-20,Expense,Professional development,-21.51,Visa,Operating expense
+OF000850,,LOC02,2025-05-10,Expense,Marketing,-539.16,Visa,Operating expense
+OF000851,,LOC01,2024-08-04,Expense,Software subscriptions,-154.69,Visa,Operating expense
+OF000852,,LOC02,2024-11-11,Expense,Marketing,-119.13,,Operating expense
+OF000853,,LOC01,2025-10-14,Expense,Professional development,-332.62,,Operating expense
+OF000854,,LOC01,2025-08-06,Expense,IT equipment,-2689.52,Visa,Operating expense
+OF000855,,LOC01,2024-03-10,Expense,Office supplies,-66.67,Visa,Operating expense
+OF000856,,LOC02,2024-11-06,Expense,Software subscriptions,-312.52,Visa,Operating expense
+OF000857,,LOC01,2025-11-26,Expense,Office supplies,-300.43,Visa,Operating expense
+OF000858,,LOC02,2025-10-19,Expense,Office supplies,-1901.33,Visa,Operating expense
+OF000859,,LOC02,2024-04-25,Expense,Client entertainment,-13.77,Amex,Operating expense
+OF000860,,LOC01,2024-06-11,Expense,Client entertainment,-65.82,Amex,Operating expense
+OF000861,,LOC02,2024-07-29,Expense,Travel,-38.19,Amex,Operating expense
+OF000862,,LOC01,2025-07-24,Expense,Professional development,-376.82,,Operating expense
+OF000863,,LOC02,2024-09-21,Expense,Marketing,-1159.92,Amex,Operating expense
+OF000864,,LOC01,2024-08-01,Expense,Software subscriptions,-193.43,,Operating expense
+OF000865,,LOC01,2024-11-02,Expense,Professional development,-124.26,Amex,Operating expense
+OF000866,,LOC01,2024-03-20,Expense,Professional development,-281.61,Visa,Operating expense
+OF000867,,LOC01,2024-09-07,Expense,Travel,-730.66,,Operating expense
+OF000868,,LOC01,2024-01-26,Expense,Travel,-112.83,,Operating expense
+OF000869,,LOC02,2024-08-16,Expense,Travel,-109.91,Amex,Operating expense
+OF000870,,LOC01,2024-07-01,Expense,Marketing,-731.73,,Operating expense
+OF000871,,LOC02,2025-08-28,Expense,Software subscriptions,-32.85,,Operating expense
+OF000872,,LOC01,2025-07-29,Expense,Office supplies,-431.77,Amex,Operating expense
+OF000873,,LOC02,2025-10-13,Expense,Client entertainment,-215.55,Visa,Operating expense
+OF000874,,LOC02,2024-11-06,Expense,Travel,-509.44,,Operating expense
+OF000875,,LOC02,2024-05-21,Expense,Travel,-91.26,Amex,Operating expense
+OF000876,,LOC01,2025-09-23,Expense,Office supplies,-161.93,Amex,Operating expense
+OF000877,,LOC01,2024-09-20,Expense,Marketing,-974.79,Amex,Operating expense
+OF000878,,LOC01,2024-10-24,Expense,IT equipment,-56.45,Amex,Operating expense
+OF000879,,LOC02,2024-08-09,Expense,Professional development,-177.03,Visa,Operating expense
+OF000880,,LOC01,2024-05-07,Expense,Travel,-35.0,Amex,Operating expense
+OF000881,,LOC01,2024-06-07,Expense,Software subscriptions,-346.47,Visa,Operating expense
+OF000882,,LOC01,2024-03-27,Expense,Software subscriptions,-230.1,Amex,Operating expense
+OF000883,,LOC02,2025-07-06,Expense,IT equipment,-570.11,Amex,Operating expense
+OF000884,,LOC02,2025-07-18,Expense,Office supplies,-128.88,Amex,Operating expense
+OF000885,,LOC01,2025-11-15,Expense,Software subscriptions,-257.17,,Operating expense
+OF000886,,LOC01,2025-01-17,Expense,Marketing,-203.26,,Operating expense
+OF000887,,LOC01,2025-09-01,Expense,Software subscriptions,-1195.22,Visa,Operating expense
+OF000888,,LOC01,2024-06-30,Expense,IT equipment,-126.78,Amex,Operating expense
+OF000889,,LOC02,2024-11-25,Expense,IT equipment,-23.21,Amex,Operating expense
+OF000890,,LOC02,2024-02-09,Expense,Marketing,-691.14,,Operating expense
+OF000891,,LOC02,2025-10-28,Expense,Marketing,-30.68,,Operating expense
+OF000892,,LOC02,2024-04-10,Expense,IT equipment,-241.48,,Operating expense
+OF000893,,LOC01,2024-09-12,Expense,Professional development,-89.86,,Operating expense
+OF000894,,LOC02,2024-06-21,Expense,Marketing,-324.25,Visa,Operating expense
+OF000895,,LOC01,2025-02-23,Expense,Marketing,-1421.76,,Operating expense
+OF000896,,LOC02,2024-05-25,Expense,IT equipment,-414.72,Visa,Operating expense
+OF000897,,LOC01,2025-09-27,Expense,Office supplies,-193.74,Visa,Operating expense
+OF000898,,LOC02,2025-02-13,Expense,Marketing,-320.8,,Operating expense
+OF000899,,LOC02,2025-06-12,Expense,Software subscriptions,-101.37,Amex,Operating expense
+OF000900,,LOC02,2025-05-14,Expense,Office supplies,-334.8,Amex,Operating expense
+OF000901,,LOC01,2025-07-24,Expense,Office supplies,-103.79,,Operating expense
+OF000902,,LOC01,2024-02-15,Expense,IT equipment,-252.18,Visa,Operating expense
+OF000903,,LOC01,2024-06-18,Expense,Office supplies,-789.82,Amex,Operating expense
+OF000904,,LOC01,2025-03-17,Expense,Professional development,-1677.76,Visa,Operating expense
+OF000905,,LOC01,2025-07-13,Expense,Travel,-1016.19,,Operating expense
+OF000906,,LOC02,2024-11-12,Expense,Office supplies,-97.37,Amex,Operating expense
+OF000907,,LOC02,2025-09-13,Expense,Travel,-3343.95,Visa,Operating expense
+OF000908,,LOC02,2025-09-12,Expense,Professional development,-70.71,,Operating expense
+OF000909,,LOC02,2024-08-01,Expense,Professional development,-84.87,Visa,Operating expense
+OF000910,,LOC02,2025-12-01,Expense,Travel,-142.33,,Operating expense
+OF000911,,LOC02,2024-12-20,Expense,Travel,-304.09,,Operating expense
+OF000912,,LOC01,2024-06-15,Expense,Software subscriptions,-139.45,Visa,Operating expense
+OF000913,,LOC02,2024-11-20,Expense,Travel,-895.92,Amex,Operating expense
+OF000914,,LOC01,2024-09-11,Expense,Travel,-57.14,Amex,Operating expense
+OF000915,,LOC02,2025-04-15,Expense,Office supplies,-229.86,Amex,Operating expense
+OF000916,,LOC02,2025-09-19,Expense,Travel,-367.89,Amex,Operating expense
+OF000917,,LOC01,2024-12-27,Expense,Software subscriptions,-2004.48,,Operating expense
+OF000918,,LOC02,2025-03-19,Expense,Professional development,-179.33,,Operating expense
+OF000919,,LOC01,2024-05-01,Expense,Software subscriptions,-11.21,Amex,Operating expense
+OF000920,,LOC02,2024-12-15,Expense,Client entertainment,-725.38,Visa,Operating expense
+OF000921,,LOC01,2024-07-18,Expense,Travel,-160.18,Amex,Operating expense
+OF000922,,LOC01,2025-05-23,Expense,Software subscriptions,-128.02,Visa,Operating expense
+OF000923,,LOC02,2025-02-18,Expense,Office supplies,-154.9,,Operating expense
+OF000924,,LOC02,2024-11-01,Expense,Office supplies,-50.72,Amex,Operating expense
+OF000925,,LOC01,2025-06-20,Expense,Travel,-305.89,Visa,Operating expense
+OF000926,,LOC01,2024-05-26,Expense,Client entertainment,-610.73,Amex,Operating expense
+OF000927,,LOC02,2025-03-30,Expense,Client entertainment,-249.11,Amex,Operating expense
+OF000928,,LOC02,2025-11-05,Expense,Travel,-216.77,Amex,Operating expense
+OF000929,,LOC02,2025-02-14,Expense,IT equipment,-590.02,Amex,Operating expense
+OF000930,,LOC02,2024-04-04,Expense,IT equipment,-123.81,,Operating expense
+OF000931,,LOC01,2024-03-28,Expense,Client entertainment,-59.47,Amex,Operating expense
+OF000932,,LOC01,2024-07-28,Expense,Marketing,-377.63,Visa,Operating expense
+OF000933,,LOC01,2024-09-15,Expense,Marketing,-258.06,Amex,Operating expense
+OF000934,,LOC01,2024-04-12,Expense,Professional development,-390.6,,Operating expense
+OF000935,,LOC01,2025-07-11,Expense,Office supplies,-52.64,Visa,Operating expense
+OF000936,,LOC02,2024-11-08,Expense,Marketing,-1293.29,,Operating expense
+OF000937,,LOC02,2024-07-20,Expense,IT equipment,-2063.8,Amex,Operating expense
+OF000938,,LOC02,2025-07-28,Expense,IT equipment,-375.91,Visa,Operating expense
+OF000939,,LOC01,2025-11-15,Expense,Professional development,-114.71,Visa,Operating expense
+OF000940,,LOC02,2024-09-28,Expense,Software subscriptions,-153.89,Visa,Operating expense
+OF000941,,LOC01,2024-05-25,Expense,Software subscriptions,-147.17,,Operating expense
+OF000942,,LOC01,2025-11-22,Expense,Professional development,-279.08,,Operating expense
+OF000943,,LOC02,2025-07-17,Expense,IT equipment,-2233.23,,Operating expense
+OF000944,,LOC02,2024-03-18,Expense,Client entertainment,-97.99,Visa,Operating expense
+OF000945,,LOC01,2024-09-18,Expense,Professional development,-191.73,,Operating expense
+OF000946,,LOC01,2024-02-24,Expense,Professional development,-179.89,,Operating expense
+OF000947,,LOC01,2024-12-23,Expense,IT equipment,-339.29,,Operating expense
+OF000948,,LOC02,2025-01-29,Expense,Marketing,-258.23,Amex,Operating expense
+OF000949,,LOC01,2025-10-06,Expense,IT equipment,-197.18,Amex,Operating expense
+OF000950,,LOC02,2024-07-14,Expense,Office supplies,-181.8,Amex,Operating expense
+OF000951,,LOC01,2024-11-01,Expense,IT equipment,-424.8,Amex,Operating expense
+OF000952,,LOC01,2025-01-31,Expense,Professional development,-11.87,,Operating expense
+OF000953,,LOC02,2024-08-27,Expense,Software subscriptions,-191.84,,Operating expense
+OF000954,,LOC02,2024-06-11,Expense,Software subscriptions,-233.08,Amex,Operating expense
+OF000955,,LOC02,2024-03-14,Expense,Marketing,-269.65,Visa,Operating expense
+OF000956,,LOC02,2024-07-30,Expense,Software subscriptions,-159.3,,Operating expense
+OF000957,,LOC02,2025-07-13,Expense,Office supplies,-259.99,,Operating expense
+OF000958,,LOC01,2024-10-18,Expense,IT equipment,-525.34,Amex,Operating expense
+OF000959,,LOC01,2024-07-06,Expense,Software subscriptions,-462.7,Amex,Operating expense
+OF000960,,LOC02,2025-09-17,Expense,IT equipment,-52.77,,Operating expense
+OF000961,,LOC02,2024-12-08,Expense,Professional development,-97.07,Amex,Operating expense
+OF000962,,LOC02,2024-07-23,Expense,Software subscriptions,-67.54,Visa,Operating expense
+OF000963,,LOC02,2024-12-12,Expense,Travel,-334.41,,Operating expense
+OF000964,,LOC02,2024-01-20,Expense,Client entertainment,-53.83,Amex,Operating expense
+OF000965,,LOC01,2025-09-09,Expense,Office supplies,-25.26,Amex,Operating expense
+OF000966,,LOC01,2025-01-24,Expense,IT equipment,-141.02,Visa,Operating expense
+OF000967,,LOC02,2025-12-29,Expense,Marketing,-282.8,Visa,Operating expense
+OF000968,,LOC01,2024-08-08,Expense,Marketing,-182.19,Visa,Operating expense
+OF000969,,LOC01,2025-08-26,Expense,Travel,-484.33,,Operating expense
+OF000970,,LOC01,2024-03-30,Expense,Professional development,-165.88,Amex,Operating expense
+OF000971,,LOC01,2025-03-08,Expense,Marketing,-757.51,Amex,Operating expense
+OF000972,,LOC01,2024-10-22,Expense,Client entertainment,-178.12,Amex,Operating expense
+OF000973,,LOC02,2025-01-13,Expense,Client entertainment,-147.49,,Operating expense
+OF000974,,LOC01,2025-06-12,Expense,Marketing,-214.06,,Operating expense
+OF000975,,LOC02,2024-06-01,Expense,Software subscriptions,-48.71,,Operating expense
+OF000976,,LOC01,2024-06-25,Expense,Office supplies,-479.94,Visa,Operating expense
+OF000977,,LOC01,2025-04-12,Expense,IT equipment,-139.28,,Operating expense
+OF000978,,LOC01,2024-11-08,Expense,Professional development,-541.21,,Operating expense
+OF000979,,LOC01,2025-08-05,Expense,Professional development,-189.46,Amex,Operating expense
+OF000980,,LOC01,2025-04-21,Expense,Software subscriptions,-205.41,Amex,Operating expense
+OF000981,,LOC02,2025-10-22,Expense,Software subscriptions,-421.44,,Operating expense
+OF000982,,LOC02,2024-05-28,Expense,Travel,-50.78,,Operating expense
+OF000983,,LOC02,2024-08-05,Expense,IT equipment,-904.81,Visa,Operating expense
+OF000984,,LOC01,2024-05-18,Expense,Professional development,-61.81,Amex,Operating expense
+OF000985,,LOC01,2025-06-05,Expense,IT equipment,-946.2,Visa,Operating expense
+OF000986,,LOC01,2025-08-30,Expense,Professional development,-389.5,,Operating expense
+OF000987,,LOC01,2025-01-17,Expense,IT equipment,-81.19,Amex,Operating expense
+OF000988,,LOC02,2024-06-08,Expense,Marketing,-129.85,Visa,Operating expense
+OF000989,,LOC02,2025-12-04,Expense,IT equipment,-214.9,Amex,Operating expense
+OF000990,,LOC02,2025-09-23,Expense,Professional development,-2631.0,,Operating expense
+OF000991,,LOC02,2025-12-19,Expense,Software subscriptions,-303.92,Amex,Operating expense
+OF000992,,LOC01,2024-06-21,Expense,IT equipment,-174.58,,Operating expense
+OF000993,,LOC02,2025-10-20,Expense,Travel,-126.69,Visa,Operating expense
+OF000994,,LOC02,2025-06-05,Expense,Travel,-254.5,Amex,Operating expense
+OF000995,,LOC02,2025-10-22,Expense,Travel,-91.86,,Operating expense
+OF000996,,LOC02,2024-03-14,Expense,Software subscriptions,-101.54,Visa,Operating expense
+OF000997,,LOC01,2024-09-24,Expense,Software subscriptions,-270.39,Amex,Operating expense
+OF000998,,LOC01,2024-06-17,Expense,Software subscriptions,-173.81,,Operating expense
+OF000999,,LOC02,2025-10-23,Expense,Office supplies,-183.59,Amex,Operating expense
+OF001000,,LOC02,2024-06-23,Expense,Marketing,-77.12,,Operating expense
+OF001001,,LOC01,2025-11-17,Expense,Professional development,-146.88,,Operating expense
+OF001002,,LOC01,2024-06-01,Expense,Travel,-414.15,,Operating expense
+OF001003,,LOC01,2025-03-12,Expense,Professional development,-55.9,Visa,Operating expense
+OF001004,,LOC02,2024-04-13,Expense,IT equipment,-148.25,Visa,Operating expense
+OF001005,,LOC02,2024-10-05,Expense,Professional development,-96.14,,Operating expense
+OF001006,,LOC01,2025-06-15,Expense,Software subscriptions,-27.05,Amex,Operating expense
+OF001007,,LOC01,2024-04-10,Expense,Professional development,-114.28,Amex,Operating expense
+OF001008,,LOC01,2024-09-12,Expense,Office supplies,-689.96,Amex,Operating expense
+OF001009,,LOC02,2025-07-01,Expense,Marketing,-95.35,Visa,Operating expense
+OF001010,,LOC02,2024-06-04,Expense,Client entertainment,-159.13,Visa,Operating expense
+OF001011,,LOC01,2025-04-29,Expense,Travel,-133.18,,Operating expense
+OF001012,,LOC01,2024-10-31,Expense,Client entertainment,-388.64,Amex,Operating expense
+OF001013,,LOC01,2025-07-08,Expense,Professional development,-293.75,,Operating expense
+OF001014,,LOC01,2024-11-29,Expense,Marketing,-291.39,Visa,Operating expense
+OF001015,,LOC01,2024-03-31,Expense,Marketing,-226.7,,Operating expense
+OF001016,,LOC02,2024-06-06,Expense,Travel,-266.1,Amex,Operating expense
+OF001017,,LOC02,2025-08-27,Expense,Office supplies,-139.87,Visa,Operating expense
+OF001018,,LOC01,2025-09-25,Expense,Software subscriptions,-34.28,,Operating expense
+OF001019,,LOC02,2025-12-04,Expense,Travel,-1186.03,Amex,Operating expense
+OF001020,,LOC01,2025-04-23,Expense,Software subscriptions,-63.11,Amex,Operating expense
+OF001021,,LOC02,2025-03-14,Expense,Travel,-101.38,Amex,Operating expense
+OF001022,,LOC02,2025-06-18,Expense,Office supplies,-38.88,Visa,Operating expense
+OF001023,,LOC02,2025-12-29,Expense,Office supplies,-772.56,,Operating expense
+OF001024,,LOC02,2025-01-02,Expense,IT equipment,-215.4,Amex,Operating expense
+OF001025,,LOC01,2025-03-13,Expense,Software subscriptions,-392.25,Visa,Operating expense
+OF001026,,LOC01,2025-03-24,Expense,Client entertainment,-69.69,Amex,Operating expense
+OF001027,,LOC01,2025-06-17,Expense,IT equipment,-118.42,,Operating expense
+OF001028,,LOC01,2025-06-08,Expense,Marketing,-103.21,Visa,Operating expense
+OF001029,,LOC02,2024-01-22,Expense,Marketing,-824.51,Visa,Operating expense
+OF001030,,LOC01,2024-02-04,Expense,Professional development,-436.81,Amex,Operating expense
+OF001031,,LOC01,2024-12-13,Expense,Professional development,-779.12,Amex,Operating expense
+OF001032,,LOC02,2024-10-02,Expense,Marketing,-80.15,,Operating expense
+OF001033,,LOC01,2024-03-22,Expense,IT equipment,-81.49,Visa,Operating expense
+OF001034,,LOC01,2025-02-26,Expense,IT equipment,-187.38,Visa,Operating expense
+OF001035,,LOC02,2025-09-01,Expense,Office supplies,-193.0,,Operating expense
+OF001036,,LOC01,2024-04-21,Expense,Professional development,-3891.17,Amex,Operating expense
+OF001037,,LOC02,2024-01-22,Expense,Software subscriptions,-354.33,Visa,Operating expense
+OF001038,,LOC01,2025-05-03,Expense,Office supplies,-80.82,Visa,Operating expense
+OF001039,,LOC02,2024-07-21,Expense,Office supplies,-404.5,Visa,Operating expense
+OF001040,,LOC02,2024-12-11,Expense,Client entertainment,-147.87,Amex,Operating expense
+OF001041,,LOC01,2025-01-14,Expense,Software subscriptions,-229.73,Visa,Operating expense
+OF001042,,LOC02,2024-01-09,Expense,IT equipment,-263.93,Amex,Operating expense
+OF001043,,LOC01,2024-11-19,Expense,Office supplies,-107.73,Visa,Operating expense
+OF001044,,LOC02,2024-01-19,Expense,Professional development,-538.32,Amex,Operating expense
+OF001045,,LOC01,2024-01-20,Expense,Client entertainment,-332.91,Amex,Operating expense
+OF001046,,LOC02,2025-02-25,Expense,Office supplies,-221.61,Visa,Operating expense
+OF001047,,LOC02,2024-01-14,Expense,Professional development,-435.25,Amex,Operating expense
+OF001048,,LOC01,2024-05-17,Expense,Client entertainment,-162.09,,Operating expense
+OF001049,,LOC02,2025-09-10,Expense,Travel,-724.14,Visa,Operating expense
+OF001050,,LOC01,2024-12-23,Expense,Professional development,-150.43,Amex,Operating expense
+OF001051,,LOC01,2024-12-24,Expense,IT equipment,-139.75,Visa,Operating expense
+OF001052,,LOC02,2025-06-24,Expense,Office supplies,-1608.2,Visa,Operating expense
+OF001053,,LOC02,2024-03-16,Expense,Marketing,-106.67,Amex,Operating expense
+OF001054,,LOC02,2025-12-04,Expense,Client entertainment,-915.35,Visa,Operating expense
+OF001055,,LOC02,2024-01-04,Expense,Marketing,-340.03,,Operating expense
+OF001056,,LOC01,2024-06-22,Expense,Client entertainment,-508.75,Amex,Operating expense
+OF001057,,LOC01,2024-02-05,Expense,Office supplies,-178.89,,Operating expense
+OF001058,,LOC01,2025-05-22,Expense,Client entertainment,-771.02,Amex,Operating expense
+OF001059,,LOC01,2025-11-11,Expense,Travel,-249.25,Amex,Operating expense
+OF001060,,LOC02,2024-06-02,Expense,Software subscriptions,-192.34,Visa,Operating expense
+OF001061,,LOC01,2025-03-17,Expense,Client entertainment,-432.75,Visa,Operating expense
+OF001062,,LOC01,2025-04-08,Expense,Professional development,-522.59,Amex,Operating expense
+OF001063,,LOC02,2025-11-12,Expense,Professional development,-91.2,Visa,Operating expense
+OF001064,,LOC02,2024-12-17,Expense,Office supplies,-431.15,,Operating expense
+OF001065,,LOC02,2024-09-26,Expense,Software subscriptions,-243.64,Amex,Operating expense
+OF001066,,LOC01,2024-09-25,Expense,Travel,-1411.92,,Operating expense
+OF001067,,LOC01,2025-08-06,Expense,Travel,-43.09,Visa,Operating expense
+OF001068,,LOC02,2025-01-23,Expense,Client entertainment,-515.57,,Operating expense
+OF001069,,LOC02,2025-10-18,Expense,IT equipment,-690.17,Visa,Operating expense
+OF001070,,LOC02,2024-09-13,Expense,IT equipment,-81.35,,Operating expense
+OF001071,,LOC01,2025-11-15,Expense,Software subscriptions,-649.19,Visa,Operating expense
+OF001072,,LOC01,2024-01-03,Expense,Marketing,-79.38,Visa,Operating expense
+OF001073,,LOC01,2024-05-12,Expense,Software subscriptions,-60.02,Amex,Operating expense
+OF001074,,LOC01,2025-03-07,Expense,Marketing,-473.89,,Operating expense
+OF001075,,LOC02,2025-07-09,Expense,Office supplies,-1565.66,Visa,Operating expense
+OF001076,,LOC02,2024-03-19,Expense,Software subscriptions,-729.89,,Operating expense
+OF001077,,LOC01,2024-04-03,Expense,Travel,-367.91,Visa,Operating expense
+OF001078,,LOC02,2024-01-25,Expense,Office supplies,-265.43,Amex,Operating expense
+OF001079,,LOC01,2025-10-15,Expense,Office supplies,-848.18,,Operating expense
+OF001080,,LOC02,2024-11-04,Expense,Office supplies,-195.37,Visa,Operating expense
+OF001081,,LOC01,2024-11-30,Expense,IT equipment,-125.14,Visa,Operating expense
+OF001082,,LOC01,2024-10-22,Expense,Office supplies,-782.78,Visa,Operating expense
+OF001083,,LOC02,2024-09-06,Expense,Client entertainment,-38.85,Amex,Operating expense
+OF001084,,LOC02,2025-08-18,Expense,Professional development,-1696.13,,Operating expense
+OF001085,,LOC02,2025-02-24,Expense,Marketing,-85.33,,Operating expense
+OF001086,,LOC02,2025-06-18,Expense,Client entertainment,-59.16,,Operating expense
+OF001087,,LOC01,2025-08-05,Expense,Office supplies,-411.84,,Operating expense
+OF001088,,LOC01,2025-08-31,Expense,Travel,-318.34,,Operating expense
+OF001089,,LOC02,2024-12-12,Expense,Professional development,-292.99,,Operating expense
+OF001090,,LOC01,2025-10-15,Expense,Marketing,-87.08,,Operating expense
+OF001091,,LOC01,2024-06-03,Expense,Marketing,-1929.85,Visa,Operating expense
+OF001092,,LOC01,2024-06-28,Expense,Office supplies,-180.67,Amex,Operating expense
+OF001093,,LOC02,2025-08-07,Expense,Marketing,-193.54,Visa,Operating expense
+OF001094,,LOC02,2025-09-16,Expense,Office supplies,-213.44,Visa,Operating expense
+OF001095,,LOC01,2025-02-16,Expense,IT equipment,-283.44,Amex,Operating expense
+OF001096,,LOC01,2024-05-31,Expense,Office supplies,-233.96,Visa,Operating expense
+OF001097,,LOC01,2025-07-22,Expense,Travel,-36.85,Amex,Operating expense
+OF001098,,LOC02,2025-06-10,Expense,Client entertainment,-1603.35,Amex,Operating expense
+OF001099,,LOC02,2025-08-15,Expense,IT equipment,-466.48,Amex,Operating expense
+OF001100,,LOC01,2024-08-22,Expense,Client entertainment,-110.27,Amex,Operating expense
+OF001101,,LOC01,2025-12-17,Expense,Marketing,-305.01,Amex,Operating expense
+OF001102,,LOC02,2025-01-12,Expense,Professional development,-81.46,Amex,Operating expense
+OF001103,,LOC01,2024-11-11,Expense,Travel,-50.45,Amex,Operating expense
+OF001104,,LOC02,2024-05-17,Expense,Client entertainment,-169.52,,Operating expense
+OF001105,,LOC02,2025-05-12,Expense,Travel,-2504.67,,Operating expense
+OF001106,,LOC01,2024-04-15,Expense,Marketing,-127.41,,Operating expense
+OF001107,,LOC01,2024-10-12,Expense,IT equipment,-323.32,Visa,Operating expense
+OF001108,,LOC02,2024-09-15,Expense,Travel,-91.29,Amex,Operating expense
+OF001109,,LOC02,2024-10-29,Expense,Travel,-178.49,Amex,Operating expense
+OF001110,,LOC01,2025-07-11,Expense,Professional development,-135.04,Visa,Operating expense
+OF001111,,LOC02,2025-07-02,Expense,Client entertainment,-225.53,Amex,Operating expense
+OF001112,,LOC01,2024-02-09,Expense,Software subscriptions,-726.32,,Operating expense
+OF001113,,LOC02,2025-11-12,Expense,Travel,-1176.44,Amex,Operating expense
+OF001114,,LOC02,2024-08-23,Expense,Professional development,-39.59,Amex,Operating expense
+OF001115,,LOC02,2025-06-29,Expense,Client entertainment,-48.17,Visa,Operating expense
+OF001116,,LOC02,2025-01-08,Expense,Office supplies,-281.02,Amex,Operating expense
+OF001117,,LOC02,2024-04-09,Expense,Travel,-601.05,Amex,Operating expense
+OF001118,,LOC01,2025-01-04,Expense,Professional development,-204.73,Visa,Operating expense
+OF001119,,LOC02,2024-09-05,Expense,Software subscriptions,-110.25,,Operating expense
+OF001120,,LOC01,2024-02-08,Expense,Software subscriptions,-60.4,Amex,Operating expense
+OF001121,,LOC02,2025-06-29,Expense,Office supplies,-111.6,Visa,Operating expense
+OF001122,,LOC01,2025-01-03,Expense,Travel,-132.74,Amex,Operating expense
+OF001123,,LOC01,2025-11-15,Expense,Client entertainment,-78.45,Visa,Operating expense
+OF001124,,LOC02,2025-10-25,Expense,Marketing,-875.37,Visa,Operating expense
+OF001125,,LOC02,2024-02-03,Expense,IT equipment,-467.7,,Operating expense
+OF001126,,LOC01,2024-08-25,Expense,Marketing,-43.54,Visa,Operating expense
+OF001127,,LOC01,2024-02-01,Expense,Software subscriptions,-103.01,Visa,Operating expense
+OF001128,,LOC02,2024-04-25,Expense,IT equipment,-151.0,Visa,Operating expense
+OF001129,,LOC01,2025-12-09,Expense,Client entertainment,-877.25,Visa,Operating expense
+OF001130,,LOC01,2024-04-02,Expense,Marketing,-239.93,Visa,Operating expense
+OF001131,,LOC02,2024-06-03,Expense,Office supplies,-181.92,Visa,Operating expense
+OF001132,,LOC01,2025-07-13,Expense,Professional development,-53.26,Visa,Operating expense
+OF001133,,LOC01,2025-06-01,Expense,Professional development,-3142.3,Visa,Operating expense
+OF001134,,LOC02,2024-08-01,Expense,Office supplies,-297.11,Visa,Operating expense
+OF001135,,LOC01,2025-03-30,Expense,Office supplies,-1128.07,Amex,Operating expense
+OF001136,,LOC01,2025-03-20,Expense,Client entertainment,-202.48,Amex,Operating expense
+OF001137,,LOC01,2024-10-23,Expense,Professional development,-185.34,Visa,Operating expense
+OF001138,,LOC01,2025-05-24,Expense,Travel,-341.93,Amex,Operating expense
+OF001139,,LOC01,2025-07-30,Expense,Marketing,-27.2,Visa,Operating expense
+OF001140,,LOC01,2024-05-01,Expense,Client entertainment,-219.41,Visa,Operating expense
+OF001141,,LOC01,2024-08-27,Expense,IT equipment,-62.53,Amex,Operating expense
+OF001142,,LOC02,2024-10-12,Expense,Office supplies,-716.26,,Operating expense
+OF001143,,LOC01,2024-11-20,Expense,Client entertainment,-630.71,,Operating expense
+OF001144,,LOC01,2025-04-29,Expense,Professional development,-321.1,Amex,Operating expense
+OF001145,,LOC02,2024-02-26,Expense,Travel,-124.02,Amex,Operating expense
+OF001146,,LOC01,2025-09-27,Expense,IT equipment,-246.79,Visa,Operating expense
+OF001147,,LOC01,2024-01-09,Expense,IT equipment,-276.16,,Operating expense
+OF001148,,LOC02,2025-04-13,Expense,Software subscriptions,-287.13,,Operating expense
+OF001149,,LOC01,2025-02-27,Expense,Software subscriptions,-199.95,Visa,Operating expense
+OF001150,,LOC02,2024-05-23,Expense,Marketing,-179.26,Visa,Operating expense
+OF001151,,LOC01,2024-04-29,Expense,IT equipment,-1270.99,Visa,Operating expense
+OF001152,,LOC02,2024-03-16,Expense,Software subscriptions,-52.5,,Operating expense
+OF001153,,LOC02,2024-03-30,Expense,Client entertainment,-254.99,Amex,Operating expense
+OF001154,,LOC02,2024-05-05,Expense,Travel,-2109.48,,Operating expense
+OF001155,,LOC01,2024-03-23,Expense,Marketing,-306.78,,Operating expense
+OF001156,,LOC01,2025-03-23,Expense,IT equipment,-172.09,Visa,Operating expense
+OF001157,,LOC02,2024-07-05,Expense,Marketing,-791.31,,Operating expense
+OF001158,,LOC01,2024-11-16,Expense,IT equipment,-262.35,,Operating expense
+OF001159,,LOC01,2024-06-15,Expense,Office supplies,-727.54,,Operating expense
+OF001160,,LOC01,2025-04-05,Expense,Client entertainment,-222.09,Visa,Operating expense
+OF001161,,LOC01,2024-12-25,Expense,Travel,-40.64,Amex,Operating expense
+OF001162,,LOC01,2025-04-22,Expense,Professional development,-227.46,Amex,Operating expense
+OF001163,,LOC01,2024-10-26,Expense,Travel,-312.19,Amex,Operating expense
+OF001164,,LOC02,2024-07-06,Expense,Professional development,-111.71,Visa,Operating expense
+OF001165,,LOC02,2024-07-08,Expense,IT equipment,-99.46,Visa,Operating expense
+OF001166,,LOC01,2025-01-14,Expense,Software subscriptions,-2754.65,Visa,Operating expense
+OF001167,,LOC01,2024-12-19,Expense,Office supplies,-185.08,Amex,Operating expense
+OF001168,,LOC01,2024-02-10,Expense,Client entertainment,-123.19,Visa,Operating expense
+OF001169,,LOC02,2024-04-29,Expense,Software subscriptions,-91.38,Visa,Operating expense
+OF001170,,LOC01,2025-12-20,Expense,Office supplies,-297.97,Visa,Operating expense
+OF001171,,LOC02,2024-04-15,Expense,Professional development,-413.21,,Operating expense
+OF001172,,LOC02,2024-06-11,Expense,IT equipment,-241.9,Amex,Operating expense
+OF001173,,LOC02,2025-04-15,Expense,Professional development,-127.96,Visa,Operating expense
+OF001174,,LOC02,2024-05-05,Expense,Office supplies,-370.13,Amex,Operating expense
+OF001175,,LOC02,2024-09-14,Expense,Professional development,-55.27,Amex,Operating expense
+OF001176,,LOC01,2025-07-12,Expense,Marketing,-285.95,Visa,Operating expense
+OF001177,,LOC01,2025-09-03,Expense,IT equipment,-902.71,,Operating expense
+OF001178,,LOC01,2025-01-16,Expense,Marketing,-468.59,Visa,Operating expense
+OF001179,,LOC02,2025-01-17,Expense,Software subscriptions,-286.92,Amex,Operating expense
+OF001180,,LOC02,2024-01-19,Expense,Office supplies,-731.03,Amex,Operating expense
+OF001181,,LOC02,2025-09-11,Expense,Software subscriptions,-211.81,Amex,Operating expense
+OF001182,,LOC02,2024-10-31,Expense,Professional development,-612.95,Visa,Operating expense
+OF001183,,LOC01,2024-10-09,Expense,IT equipment,-270.55,Amex,Operating expense
+OF001184,,LOC02,2024-05-04,Expense,Software subscriptions,-67.16,Amex,Operating expense
+OF001185,,LOC01,2024-12-30,Expense,Travel,-211.58,Amex,Operating expense
+OF001186,,LOC01,2025-06-20,Expense,Office supplies,-160.48,Visa,Operating expense
+OF001187,,LOC02,2024-11-15,Expense,Marketing,-565.37,Visa,Operating expense
+OF001188,,LOC02,2025-11-24,Expense,Marketing,-259.88,,Operating expense
+OF001189,,LOC01,2024-04-15,Expense,Travel,-293.62,Visa,Operating expense
+OF001190,,LOC01,2025-11-17,Expense,Office supplies,-130.09,Amex,Operating expense
+OF001191,,LOC02,2025-02-07,Expense,Travel,-328.57,Visa,Operating expense
+OF001192,,LOC01,2025-07-11,Expense,Client entertainment,-78.51,,Operating expense
+OF001193,,LOC01,2024-11-24,Expense,Travel,-40.87,Amex,Operating expense
+OF001194,,LOC02,2025-10-03,Expense,IT equipment,-239.99,Visa,Operating expense
+OF001195,,LOC02,2025-12-25,Expense,Office supplies,-387.22,,Operating expense
+OF001196,,LOC02,2024-09-13,Expense,Client entertainment,-419.72,,Operating expense
+OF001197,,LOC01,2024-01-08,Expense,Marketing,-602.66,Visa,Operating expense
+OF001198,,LOC01,2025-09-07,Expense,Software subscriptions,-30.46,Visa,Operating expense
+OF001199,,LOC01,2025-01-05,Expense,Marketing,-850.56,Visa,Operating expense
+OF001200,,LOC02,2024-09-21,Expense,Client entertainment,-433.6,Visa,Operating expense
+OF001201,,LOC01,2025-08-08,Expense,Travel,-84.86,Amex,Operating expense
+OF001202,,LOC02,2024-07-15,Expense,Office supplies,-658.06,Visa,Operating expense
+OF001203,,LOC02,2024-03-15,Expense,Software subscriptions,-68.29,Visa,Operating expense
+OF001204,,LOC02,2025-01-11,Expense,Software subscriptions,-12.5,,Operating expense
+OF001205,,LOC02,2025-03-26,Expense,Client entertainment,-203.91,,Operating expense
+OF001206,,LOC02,2024-04-21,Expense,Professional development,-77.6,Amex,Operating expense
+OF001207,,LOC02,2025-06-15,Expense,Client entertainment,-96.06,Visa,Operating expense
+OF001208,,LOC02,2025-03-28,Expense,Professional development,-138.15,Amex,Operating expense
+OF001209,,LOC01,2024-01-07,Expense,Travel,-28.36,,Operating expense
+OF001210,,LOC01,2024-02-07,Expense,Software subscriptions,-2384.01,Visa,Operating expense
+OF001211,,LOC01,2025-03-17,Expense,Client entertainment,-100.34,,Operating expense
+OF001212,,LOC02,2024-06-04,Expense,Marketing,-161.25,Visa,Operating expense
+OF001213,,LOC01,2025-07-04,Expense,Travel,-193.81,Amex,Operating expense
+OF001214,,LOC02,2024-05-12,Expense,Travel,-49.22,Amex,Operating expense
+OF001215,,LOC01,2024-08-08,Expense,IT equipment,-140.57,Amex,Operating expense
+OF001216,,LOC01,2024-11-04,Expense,Client entertainment,-112.15,,Operating expense
+OF001217,,LOC01,2025-01-01,Expense,Office supplies,-112.6,Amex,Operating expense
+OF001218,,LOC02,2025-07-02,Expense,Professional development,-289.6,,Operating expense
+OF001219,,LOC01,2024-08-12,Expense,IT equipment,-74.67,Amex,Operating expense
+OF001220,,LOC01,2024-10-01,Expense,Marketing,-352.69,Amex,Operating expense
+OF001221,,LOC01,2025-06-09,Expense,Professional development,-384.16,Visa,Operating expense
+OF001222,,LOC01,2025-04-19,Expense,Professional development,-44.1,Visa,Operating expense
+OF001223,,LOC02,2025-01-28,Expense,Marketing,-326.36,Amex,Operating expense
+OF001224,,LOC02,2025-03-07,Expense,Software subscriptions,-415.51,Visa,Operating expense
+OF001225,,LOC02,2025-11-14,Expense,Client entertainment,-1398.64,Visa,Operating expense
+OF001226,,LOC02,2025-10-27,Expense,Client entertainment,-196.78,Amex,Operating expense
+OF001227,,LOC02,2025-11-01,Expense,Office supplies,-147.57,Amex,Operating expense
+OF001228,,LOC01,2024-01-08,Expense,IT equipment,-438.87,Amex,Operating expense
+OF001229,,LOC01,2024-06-13,Expense,Client entertainment,-441.59,,Operating expense
+OF001230,,LOC01,2024-07-08,Expense,Software subscriptions,-60.44,,Operating expense
+OF001231,,LOC01,2025-12-09,Expense,IT equipment,-25.31,Visa,Operating expense
+OF001232,,LOC02,2024-01-14,Expense,Client entertainment,-117.01,Visa,Operating expense
+OF001233,,LOC01,2024-08-25,Expense,Professional development,-38.22,Visa,Operating expense
+OF001234,,LOC01,2024-12-16,Expense,Office supplies,-79.17,Amex,Operating expense
+OF001235,,LOC02,2025-01-20,Expense,IT equipment,-279.78,Visa,Operating expense
+OF001236,,LOC01,2025-09-02,Expense,Office supplies,-131.59,Visa,Operating expense
+OF001237,,LOC02,2025-11-13,Expense,Client entertainment,-416.74,Amex,Operating expense
+OF001238,,LOC01,2025-08-04,Expense,Software subscriptions,-46.4,Amex,Operating expense
+OF001239,,LOC02,2025-09-21,Expense,Software subscriptions,-85.4,Amex,Operating expense
+OF001240,,LOC02,2025-07-22,Expense,Travel,-919.92,Amex,Operating expense
+OF001241,,LOC01,2025-07-06,Expense,Travel,-56.01,,Operating expense
+OF001242,,LOC02,2024-06-06,Expense,Professional development,-453.2,Amex,Operating expense
+OF001243,,LOC02,2024-10-04,Expense,Professional development,-399.99,Visa,Operating expense
+OF001244,,LOC01,2024-12-11,Expense,Client entertainment,-107.25,,Operating expense
+OF001245,,LOC02,2025-07-08,Expense,IT equipment,-196.84,Visa,Operating expense
+OF001246,,LOC02,2024-05-11,Expense,Client entertainment,-54.2,Visa,Operating expense
+OF001247,,LOC02,2024-12-25,Expense,Software subscriptions,-1478.82,Amex,Operating expense
+OF001248,,LOC02,2025-08-22,Expense,Software subscriptions,-192.14,Visa,Operating expense
+OF001249,,LOC02,2024-10-03,Expense,Office supplies,-96.29,Amex,Operating expense
+OF001250,,LOC02,2025-06-21,Expense,Travel,-275.35,Amex,Operating expense
+OF001251,,LOC01,2024-03-28,Expense,Professional development,-155.68,Amex,Operating expense
+OF001252,,LOC02,2025-01-04,Expense,Travel,-266.6,,Operating expense
+OF001253,,LOC02,2025-11-06,Expense,Travel,-132.98,Amex,Operating expense
+OF001254,,LOC01,2025-01-06,Expense,Client entertainment,-163.96,,Operating expense
+OF001255,,LOC02,2024-12-28,Expense,Software subscriptions,-162.35,Amex,Operating expense
+OF001256,,LOC02,2025-02-06,Expense,Professional development,-145.75,,Operating expense
+OF001257,,LOC01,2024-01-02,Expense,Travel,-283.02,,Operating expense
+OF001258,,LOC02,2025-04-23,Expense,Client entertainment,-957.08,Amex,Operating expense
+OF001259,,LOC01,2024-06-08,Expense,Office supplies,-194.49,Visa,Operating expense
+OF001260,,LOC02,2025-11-27,Expense,Software subscriptions,-130.93,Amex,Operating expense
+OF001261,,LOC02,2024-07-31,Expense,Professional development,-102.11,Amex,Operating expense
+OF001262,,LOC01,2024-03-01,Expense,Office supplies,-227.82,Visa,Operating expense
+OF001263,,LOC01,2024-11-21,Expense,IT equipment,-1616.14,Amex,Operating expense
+OF001264,,LOC02,2024-10-12,Expense,Software subscriptions,-250.65,Visa,Operating expense
+OF001265,,LOC01,2025-02-23,Expense,Marketing,-342.11,,Operating expense
+OF001266,,LOC02,2024-03-01,Expense,Professional development,-270.16,Amex,Operating expense
+OF001267,,LOC02,2025-01-05,Expense,Travel,-39.01,Amex,Operating expense
+OF001268,,LOC01,2025-11-17,Expense,Marketing,-135.9,Visa,Operating expense
+OF001269,,LOC01,2025-07-24,Expense,Office supplies,-1565.9,,Operating expense
+OF001270,,LOC01,2025-05-10,Expense,Client entertainment,-1380.92,,Operating expense
+OF001271,,LOC02,2025-06-07,Expense,Professional development,-118.26,Visa,Operating expense
+OF001272,,LOC01,2025-12-15,Expense,Software subscriptions,-126.97,Amex,Operating expense
+OF001273,,LOC01,2024-06-27,Expense,Travel,-241.6,Visa,Operating expense
+OF001274,,LOC01,2025-04-09,Expense,Office supplies,-606.08,Amex,Operating expense
+OF001275,,LOC01,2024-10-21,Expense,Marketing,-279.54,,Operating expense
+OF001276,,LOC02,2025-09-28,Expense,IT equipment,-279.64,,Operating expense
+OF001277,,LOC01,2025-07-02,Expense,IT equipment,-294.32,,Operating expense
+OF001278,,LOC02,2025-04-18,Expense,Office supplies,-357.38,Visa,Operating expense
+OF001279,,LOC02,2024-04-18,Expense,Client entertainment,-107.47,Amex,Operating expense
+OF001280,,LOC02,2025-07-05,Expense,Office supplies,-93.82,Visa,Operating expense
+OF001281,,LOC02,2024-05-26,Expense,IT equipment,-1018.49,Visa,Operating expense
+OF001282,,LOC02,2024-04-02,Expense,IT equipment,-107.31,,Operating expense
+OF001283,,LOC01,2024-03-21,Expense,Marketing,-314.7,Visa,Operating expense
+OF001284,,LOC02,2025-12-19,Expense,IT equipment,-294.85,,Operating expense
+OF001285,,LOC02,2024-08-27,Expense,Professional development,-63.3,,Operating expense
+OF001286,,LOC01,2025-01-14,Expense,IT equipment,-894.23,Amex,Operating expense
+OF001287,,LOC01,2025-06-01,Expense,Office supplies,-542.24,,Operating expense
+OF001288,,LOC02,2024-11-16,Expense,Professional development,-286.78,Amex,Operating expense
+OF001289,,LOC02,2025-05-26,Expense,IT equipment,-61.29,Visa,Operating expense
+OF001290,,LOC02,2025-02-19,Expense,Marketing,-332.64,Visa,Operating expense
+OF001291,,LOC01,2024-12-24,Expense,Office supplies,-285.76,,Operating expense
+OF001292,,LOC02,2024-08-25,Expense,Client entertainment,-294.11,Amex,Operating expense
+OF001293,,LOC01,2025-04-19,Expense,IT equipment,-467.09,Amex,Operating expense
+OF001294,,LOC01,2024-07-14,Expense,Travel,-178.44,Visa,Operating expense
+OF001295,,LOC01,2024-12-23,Expense,Client entertainment,-60.03,Amex,Operating expense
+OF001296,,LOC02,2024-08-25,Expense,Software subscriptions,-96.7,Visa,Operating expense
+OF001297,,LOC02,2025-06-04,Expense,Marketing,-503.75,Amex,Operating expense
+OF001298,,LOC01,2024-10-31,Expense,IT equipment,-127.99,,Operating expense
+OF001299,,LOC01,2024-09-09,Expense,Software subscriptions,-158.69,Visa,Operating expense
+OF001300,,LOC01,2024-05-12,Expense,Software subscriptions,-1471.91,Amex,Operating expense
+OF001301,,LOC02,2025-01-16,Expense,Professional development,-500.01,,Operating expense
+OF001302,,LOC02,2024-01-26,Expense,Software subscriptions,-99.56,Amex,Operating expense
+OF001303,,LOC01,2025-04-12,Expense,IT equipment,-164.92,Amex,Operating expense
+OF001304,,LOC02,2025-04-12,Expense,Client entertainment,-48.32,Amex,Operating expense
+OF001305,,LOC02,2024-05-24,Expense,Office supplies,-221.89,Visa,Operating expense
+OF001306,,LOC01,2025-07-02,Expense,Client entertainment,-203.9,,Operating expense
+OF001307,,LOC02,2024-12-02,Expense,IT equipment,-87.37,Visa,Operating expense
+OF001308,,LOC01,2024-10-05,Expense,Software subscriptions,-173.39,,Operating expense
+OF001309,,LOC01,2025-10-31,Expense,Office supplies,-292.53,Amex,Operating expense
+OF001310,,LOC01,2024-06-17,Expense,Office supplies,-125.85,Visa,Operating expense
+OF001311,,LOC02,2025-08-13,Expense,Travel,-84.82,Visa,Operating expense
+OF001312,,LOC01,2024-10-17,Expense,IT equipment,-102.76,Amex,Operating expense
+OF001313,,LOC01,2025-05-21,Expense,Software subscriptions,-71.79,,Operating expense
+OF001314,,LOC02,2024-04-01,Expense,Software subscriptions,-124.21,,Operating expense
+OF001315,,LOC02,2025-11-10,Expense,Professional development,-138.79,,Operating expense
+OF001316,,LOC01,2024-06-26,Expense,Software subscriptions,-1382.05,,Operating expense
+OF001317,,LOC02,2025-04-27,Expense,Office supplies,-67.93,,Operating expense
+OF001318,,LOC02,2025-06-06,Expense,Client entertainment,-68.6,,Operating expense
+OF001319,,LOC01,2025-04-02,Expense,Professional development,-204.23,,Operating expense
+OF001320,,LOC02,2025-09-13,Expense,IT equipment,-78.8,Amex,Operating expense
+OF001321,,LOC01,2024-07-02,Expense,Client entertainment,-99.86,Amex,Operating expense
+OF001322,,LOC02,2024-04-18,Expense,Software subscriptions,-3584.51,,Operating expense
+OF001323,,LOC02,2025-10-17,Expense,Office supplies,-125.84,Visa,Operating expense
+OF001324,,LOC01,2025-08-19,Expense,IT equipment,-153.53,Visa,Operating expense
+OF001325,,LOC01,2025-10-07,Expense,Marketing,-531.0,Amex,Operating expense
+OF001326,,LOC02,2024-08-25,Expense,Office supplies,-94.17,Visa,Operating expense
+OF001327,,LOC01,2024-04-11,Expense,Travel,-147.21,Visa,Operating expense
+OF001328,,LOC01,2024-12-08,Expense,Client entertainment,-334.6,Amex,Operating expense
+OF001329,,LOC01,2024-07-20,Expense,Marketing,-621.07,,Operating expense
+OF001330,,LOC01,2025-06-20,Expense,Marketing,-2065.92,Visa,Operating expense
+OF001331,,LOC02,2025-03-11,Expense,Office supplies,-317.39,,Operating expense
+OF001332,,LOC02,2025-07-22,Expense,Travel,-171.09,Amex,Operating expense
+OF001333,,LOC02,2024-05-20,Expense,Marketing,-601.3,Amex,Operating expense
+OF001334,,LOC01,2025-04-06,Expense,Software subscriptions,-437.17,,Operating expense
+OF001335,,LOC01,2024-07-09,Expense,Professional development,-150.47,,Operating expense
+OF001336,,LOC02,2024-03-16,Expense,Marketing,-1360.25,Amex,Operating expense
+OF001337,,LOC02,2024-08-03,Expense,Client entertainment,-58.01,,Operating expense
+OF001338,,LOC02,2024-08-01,Expense,Software subscriptions,-420.73,,Operating expense
+OF001339,,LOC02,2025-09-24,Expense,Travel,-49.54,Amex,Operating expense
+OF001340,,LOC02,2025-11-26,Expense,IT equipment,-186.39,,Operating expense
+OF001341,,LOC01,2024-09-07,Expense,Travel,-192.27,Amex,Operating expense
+OF001342,,LOC02,2025-04-14,Expense,Client entertainment,-1000.19,Visa,Operating expense
+OF001343,,LOC02,2025-11-27,Expense,Travel,-268.53,,Operating expense
+OF001344,,LOC01,2024-09-29,Expense,Software subscriptions,-293.31,Visa,Operating expense
+OF001345,,LOC01,2025-10-01,Expense,Travel,-369.76,Amex,Operating expense
+OF001346,,LOC02,2024-07-29,Expense,Travel,-1310.64,Visa,Operating expense
+OF001347,,LOC02,2024-01-25,Expense,Office supplies,-79.51,,Operating expense
+OF001348,,LOC02,2024-05-11,Expense,Marketing,-123.7,Visa,Operating expense
+OF001349,,LOC01,2025-01-04,Expense,Software subscriptions,-555.89,Visa,Operating expense
+OF001350,,LOC01,2025-12-10,Expense,Travel,-214.54,Amex,Operating expense
+OF001351,,LOC01,2024-07-12,Expense,Professional development,-126.53,Amex,Operating expense
+OF001352,,LOC02,2025-07-27,Expense,Travel,-261.76,Visa,Operating expense
+OF001353,,LOC02,2025-08-31,Expense,Travel,-57.9,Amex,Operating expense
+OF001354,,LOC02,2025-10-06,Expense,IT equipment,-311.6,Amex,Operating expense
+OF001355,,LOC02,2024-12-19,Expense,Travel,-73.59,,Operating expense
+OF001356,,LOC02,2024-01-18,Expense,Office supplies,-186.43,,Operating expense
+OF001357,,LOC01,2025-09-04,Expense,IT equipment,-201.01,Amex,Operating expense
+OF001358,,LOC02,2024-08-16,Expense,Marketing,-387.0,Amex,Operating expense
+OF001359,,LOC02,2024-12-03,Expense,Client entertainment,-2046.89,,Operating expense
+OF001360,,LOC01,2024-08-23,Expense,Client entertainment,-569.34,Amex,Operating expense
+OF001361,,LOC02,2025-07-10,Expense,Professional development,-207.82,,Operating expense
+OF001362,,LOC01,2024-03-27,Expense,IT equipment,-204.72,Visa,Operating expense
+OF001363,,LOC02,2024-03-15,Expense,Professional development,-4553.46,,Operating expense
+OF001364,,LOC01,2024-06-25,Expense,Marketing,-543.99,,Operating expense
+OF001365,,LOC02,2025-07-26,Expense,Travel,-322.46,,Operating expense
+OF001366,,LOC02,2025-05-27,Expense,Marketing,-270.26,Amex,Operating expense
+OF001367,,LOC01,2024-05-29,Expense,Office supplies,-223.68,Amex,Operating expense
+OF001368,,LOC01,2025-11-12,Expense,Professional development,-122.02,Visa,Operating expense
+OF001369,,LOC02,2025-01-01,Expense,Professional development,-440.52,Visa,Operating expense
+OF001370,,LOC02,2024-05-10,Expense,IT equipment,-1360.33,Amex,Operating expense
+OF001371,,LOC02,2025-10-10,Expense,Professional development,-929.39,Amex,Operating expense
+OF001372,,LOC02,2025-03-11,Expense,Office supplies,-1583.63,Visa,Operating expense
+OF001373,,LOC02,2025-05-10,Expense,IT equipment,-359.86,,Operating expense
+OF001374,,LOC01,2024-08-24,Expense,Marketing,-34.63,Amex,Operating expense
+OF001375,,LOC02,2024-07-07,Expense,Professional development,-83.56,Visa,Operating expense
+OF001376,,LOC01,2025-08-28,Expense,Professional development,-176.74,Visa,Operating expense
+OF001377,,LOC01,2025-07-17,Expense,Marketing,-121.39,Amex,Operating expense
+OF001378,,LOC02,2024-10-10,Expense,Marketing,-183.37,Amex,Operating expense
+OF001379,,LOC01,2024-06-10,Expense,Client entertainment,-194.42,Amex,Operating expense
