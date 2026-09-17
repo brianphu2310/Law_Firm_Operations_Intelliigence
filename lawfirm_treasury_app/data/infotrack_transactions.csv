@@ -1,0 +1,403 @@
+txn_id,matter_id,location_id,date,service_type,amount,paid_from,status
+IT000001,MAT00001,LOC01,2024-09-18,Council rates search,43.42,Trust,Settled
+IT000002,MAT00001,LOC01,2024-09-07,Building & pest inspection lodgement,247.57,Office,Settled
+IT000003,MAT00001,LOC01,2024-06-25,PEXA settlement fee,107.68,Trust,Settled
+IT000004,MAT00006,LOC01,2024-08-06,Land tax certificate,150.99,Office,Pending reimbursement
+IT000005,MAT00006,LOC01,2024-08-19,Title search,491.31,Trust,Settled
+IT000006,MAT00009,LOC02,2024-07-02,Building & pest inspection lodgement,175.58,Trust,Settled
+IT000007,MAT00010,LOC01,2025-11-05,Building & pest inspection lodgement,368.8,Trust,Settled
+IT000008,MAT00010,LOC01,2025-10-19,Land tax certificate,121.97,Office,Settled
+IT000009,MAT00010,LOC01,2025-11-02,Building & pest inspection lodgement,176.97,Trust,Settled
+IT000010,MAT00011,LOC01,2025-12-19,Title search,370.61,Trust,Settled
+IT000011,MAT00011,LOC01,2025-12-25,PEXA settlement fee,119.36,Trust,Settled
+IT000012,MAT00011,LOC01,2025-12-03,Water rates search,114.49,Trust,Settled
+IT000013,MAT00012,LOC03,2025-04-18,Land tax certificate,131.35,Office,Settled
+IT000014,MAT00015,LOC04,2025-09-14,PEXA settlement fee,90.02,Trust,Settled
+IT000015,MAT00015,LOC04,2025-08-30,Land tax certificate,138.79,Trust,Pending reimbursement
+IT000016,MAT00015,LOC04,2025-08-20,Council rates search,317.51,Office,Settled
+IT000017,MAT00016,LOC01,2025-10-20,Water rates search,131.88,Trust,Settled
+IT000018,MAT00016,LOC01,2025-08-28,Title search,62.92,Trust,Settled
+IT000019,MAT00017,LOC05,2025-03-07,Water rates search,30.69,Trust,Settled
+IT000020,MAT00018,LOC03,2024-01-08,PEXA settlement fee,63.78,Trust,Settled
+IT000021,MAT00018,LOC03,2024-02-04,Water rates search,113.37,Trust,Settled
+IT000022,MAT00023,LOC01,2025-09-05,Land tax certificate,139.2,Office,Pending reimbursement
+IT000023,MAT00025,LOC01,2025-08-12,Water rates search,84.72,Trust,Settled
+IT000024,MAT00026,LOC02,2025-10-23,PEXA settlement fee,74.9,Trust,Settled
+IT000025,MAT00026,LOC02,2025-10-17,Water rates search,139.45,Trust,Settled
+IT000026,MAT00026,LOC02,2025-10-16,PEXA settlement fee,56.43,Trust,Settled
+IT000027,MAT00031,LOC05,2024-06-23,Council rates search,53.54,Trust,Settled
+IT000028,MAT00041,LOC01,2024-11-26,Council rates search,51.02,Trust,Pending reimbursement
+IT000029,MAT00041,LOC01,2024-12-03,Building & pest inspection lodgement,139.27,Office,Settled
+IT000030,MAT00041,LOC01,2024-12-04,Building & pest inspection lodgement,96.37,Trust,Settled
+IT000031,MAT00042,LOC01,2024-08-26,PEXA settlement fee,25.2,Trust,Settled
+IT000032,MAT00042,LOC01,2024-09-10,Water rates search,113.87,Trust,Settled
+IT000033,MAT00042,LOC01,2024-08-21,Building & pest inspection lodgement,76.4,Trust,Pending reimbursement
+IT000034,MAT00045,LOC05,2024-05-03,Building & pest inspection lodgement,272.83,Trust,Settled
+IT000035,MAT00045,LOC05,2024-05-26,Title search,404.71,Trust,Settled
+IT000036,MAT00051,LOC05,2025-05-03,Council rates search,122.19,Trust,Settled
+IT000037,MAT00051,LOC05,2025-02-21,Land tax certificate,142.97,Office,Settled
+IT000038,MAT00052,LOC03,2024-11-19,Water rates search,291.37,Trust,Settled
+IT000039,MAT00055,LOC02,2025-12-22,Title search,89.16,Trust,Pending reimbursement
+IT000040,MAT00055,LOC02,2025-12-18,Building & pest inspection lodgement,131.1,Trust,Pending reimbursement
+IT000041,MAT00058,LOC01,2024-11-15,Water rates search,53.54,Trust,Settled
+IT000042,MAT00058,LOC01,2024-11-04,Water rates search,59.35,Trust,Settled
+IT000043,MAT00058,LOC01,2024-11-18,Land tax certificate,161.99,Trust,Settled
+IT000044,MAT00067,LOC01,2025-07-31,Council rates search,92.3,Trust,Settled
+IT000045,MAT00067,LOC01,2025-08-17,Water rates search,147.64,Trust,Settled
+IT000046,MAT00069,LOC01,2024-12-19,Building & pest inspection lodgement,134.25,Office,Settled
+IT000047,MAT00070,LOC02,2025-01-23,Council rates search,108.38,Trust,Settled
+IT000048,MAT00074,LOC02,2025-10-19,Council rates search,182.32,Trust,Settled
+IT000049,MAT00074,LOC02,2025-07-09,PEXA settlement fee,159.31,Office,Settled
+IT000050,MAT00075,LOC03,2025-06-22,Title search,57.96,Office,Settled
+IT000051,MAT00075,LOC03,2025-08-03,Council rates search,89.83,Office,Settled
+IT000052,MAT00075,LOC03,2025-05-22,Water rates search,149.17,Office,Settled
+IT000053,MAT00078,LOC01,2025-11-01,PEXA settlement fee,72.79,Trust,Settled
+IT000054,MAT00078,LOC01,2025-12-07,Land tax certificate,224.39,Office,Settled
+IT000055,MAT00081,LOC02,2025-12-14,Water rates search,98.6,Trust,Settled
+IT000056,MAT00085,LOC03,2024-10-20,Water rates search,281.75,Office,Settled
+IT000057,MAT00088,LOC03,2025-10-05,Title search,103.81,Trust,Settled
+IT000058,MAT00088,LOC03,2025-08-05,PEXA settlement fee,47.52,Trust,Settled
+IT000059,MAT00090,LOC01,2024-10-02,Title search,206.65,Trust,Settled
+IT000060,MAT00090,LOC01,2024-05-09,Title search,241.84,Office,Settled
+IT000061,MAT00092,LOC04,2025-07-18,Council rates search,265.86,Trust,Settled
+IT000062,MAT00092,LOC04,2025-01-24,Council rates search,112.21,Trust,Settled
+IT000063,MAT00092,LOC04,2025-05-22,PEXA settlement fee,38.96,Office,Settled
+IT000064,MAT00094,LOC01,2024-12-12,Water rates search,170.0,Trust,Settled
+IT000065,MAT00094,LOC01,2025-01-11,Title search,205.4,Trust,Pending reimbursement
+IT000066,MAT00094,LOC01,2025-04-05,Building & pest inspection lodgement,233.71,Trust,Pending reimbursement
+IT000067,MAT00096,LOC03,2024-03-26,PEXA settlement fee,67.54,Office,Settled
+IT000068,MAT00096,LOC03,2024-01-09,PEXA settlement fee,73.64,Trust,Settled
+IT000069,MAT00098,LOC01,2025-04-08,Title search,152.72,Trust,Settled
+IT000070,MAT00098,LOC01,2025-04-24,Water rates search,114.09,Office,Pending reimbursement
+IT000071,MAT00099,LOC03,2024-10-23,Title search,149.36,Office,Settled
+IT000072,MAT00099,LOC03,2024-10-28,Title search,54.23,Office,Settled
+IT000073,MAT00100,LOC03,2025-04-06,Title search,162.37,Trust,Settled
+IT000074,MAT00100,LOC03,2025-05-08,Building & pest inspection lodgement,97.97,Trust,Settled
+IT000075,MAT00109,LOC05,2024-10-01,Water rates search,83.35,Office,Settled
+IT000076,MAT00109,LOC05,2024-08-06,PEXA settlement fee,48.42,Trust,Settled
+IT000077,MAT00112,LOC01,2025-10-12,Building & pest inspection lodgement,174.21,Trust,Settled
+IT000078,MAT00112,LOC01,2025-11-21,Title search,86.02,Trust,Settled
+IT000079,MAT00113,LOC03,2024-08-25,Water rates search,249.85,Trust,Settled
+IT000080,MAT00115,LOC03,2025-05-18,Title search,224.06,Office,Settled
+IT000081,MAT00115,LOC03,2025-05-31,Land tax certificate,58.39,Trust,Settled
+IT000082,MAT00115,LOC03,2025-05-25,PEXA settlement fee,104.1,Office,Settled
+IT000083,MAT00120,LOC01,2025-05-26,Building & pest inspection lodgement,119.68,Trust,Settled
+IT000084,MAT00120,LOC01,2025-03-23,Title search,160.31,Trust,Settled
+IT000085,MAT00120,LOC01,2025-09-20,Building & pest inspection lodgement,208.23,Trust,Settled
+IT000086,MAT00126,LOC01,2025-05-31,PEXA settlement fee,84.38,Trust,Settled
+IT000087,MAT00127,LOC01,2024-10-07,Land tax certificate,115.85,Trust,Settled
+IT000088,MAT00128,LOC02,2025-12-16,Land tax certificate,165.98,Trust,Settled
+IT000089,MAT00128,LOC02,2025-12-08,Land tax certificate,185.74,Office,Settled
+IT000090,MAT00128,LOC02,2025-11-09,Title search,102.12,Office,Pending reimbursement
+IT000091,MAT00133,LOC02,2025-11-14,Water rates search,79.33,Office,Settled
+IT000092,MAT00133,LOC02,2025-11-11,PEXA settlement fee,271.19,Trust,Settled
+IT000093,MAT00133,LOC02,2025-10-29,Title search,216.81,Trust,Settled
+IT000094,MAT00142,LOC05,2025-09-27,Building & pest inspection lodgement,31.78,Office,Settled
+IT000095,MAT00151,LOC01,2024-07-17,Title search,47.64,Trust,Settled
+IT000096,MAT00151,LOC01,2024-09-23,Council rates search,156.3,Trust,Pending reimbursement
+IT000097,MAT00152,LOC03,2024-09-05,Building & pest inspection lodgement,187.31,Office,Settled
+IT000098,MAT00152,LOC03,2024-09-04,PEXA settlement fee,68.45,Office,Settled
+IT000099,MAT00152,LOC03,2024-11-29,Title search,118.2,Office,Settled
+IT000100,MAT00153,LOC02,2025-11-04,Title search,32.27,Trust,Pending reimbursement
+IT000101,MAT00153,LOC02,2025-04-12,Council rates search,173.35,Trust,Settled
+IT000102,MAT00155,LOC02,2025-05-18,Water rates search,60.01,Trust,Settled
+IT000103,MAT00158,LOC04,2025-09-30,Building & pest inspection lodgement,132.27,Trust,Pending reimbursement
+IT000104,MAT00158,LOC04,2025-11-18,Title search,139.25,Office,Settled
+IT000105,MAT00158,LOC04,2025-08-23,Title search,70.95,Trust,Settled
+IT000106,MAT00162,LOC04,2024-01-31,Title search,76.57,Trust,Pending reimbursement
+IT000107,MAT00164,LOC03,2024-08-20,Building & pest inspection lodgement,166.14,Trust,Settled
+IT000108,MAT00164,LOC03,2024-08-12,Council rates search,96.93,Trust,Settled
+IT000109,MAT00164,LOC03,2024-06-14,Land tax certificate,63.89,Trust,Settled
+IT000110,MAT00168,LOC04,2024-11-01,Title search,141.64,Trust,Settled
+IT000111,MAT00168,LOC04,2025-02-20,Title search,189.36,Trust,Settled
+IT000112,MAT00168,LOC04,2024-10-09,Building & pest inspection lodgement,114.86,Trust,Settled
+IT000113,MAT00169,LOC01,2025-11-08,Land tax certificate,31.1,Office,Settled
+IT000114,MAT00169,LOC01,2025-12-09,Water rates search,292.78,Trust,Settled
+IT000115,MAT00171,LOC04,2025-10-23,Title search,46.13,Office,Settled
+IT000116,MAT00171,LOC04,2025-07-06,Title search,100.86,Office,Settled
+IT000117,MAT00177,LOC01,2025-10-08,Title search,84.92,Trust,Settled
+IT000118,MAT00177,LOC01,2025-09-26,Land tax certificate,107.02,Trust,Settled
+IT000119,MAT00183,LOC03,2025-11-13,Building & pest inspection lodgement,80.2,Trust,Settled
+IT000120,MAT00183,LOC03,2025-10-04,PEXA settlement fee,77.32,Trust,Settled
+IT000121,MAT00188,LOC01,2024-11-05,Land tax certificate,186.27,Trust,Settled
+IT000122,MAT00188,LOC01,2024-11-04,Building & pest inspection lodgement,154.49,Office,Settled
+IT000123,MAT00189,LOC01,2024-10-06,Title search,140.57,Trust,Settled
+IT000124,MAT00189,LOC01,2024-10-21,Council rates search,139.34,Trust,Settled
+IT000125,MAT00190,LOC03,2024-02-24,Building & pest inspection lodgement,157.96,Trust,Settled
+IT000126,MAT00190,LOC03,2024-02-17,Land tax certificate,167.71,Trust,Settled
+IT000127,MAT00197,LOC01,2025-12-12,Building & pest inspection lodgement,215.57,Trust,Settled
+IT000128,MAT00197,LOC01,2025-12-03,Water rates search,279.32,Trust,Settled
+IT000129,MAT00197,LOC01,2025-12-16,Water rates search,67.22,Office,Settled
+IT000130,MAT00205,LOC01,2025-09-09,Water rates search,122.47,Trust,Settled
+IT000131,MAT00210,LOC01,2025-02-01,Building & pest inspection lodgement,128.88,Trust,Pending reimbursement
+IT000132,MAT00210,LOC01,2025-02-28,Title search,46.55,Trust,Settled
+IT000133,MAT00210,LOC01,2025-03-10,Land tax certificate,258.9,Trust,Settled
+IT000134,MAT00211,LOC04,2025-10-07,Land tax certificate,51.46,Office,Settled
+IT000135,MAT00211,LOC04,2025-01-23,Water rates search,162.55,Trust,Settled
+IT000136,MAT00212,LOC01,2024-07-15,Water rates search,286.51,Trust,Settled
+IT000137,MAT00214,LOC01,2025-11-08,Building & pest inspection lodgement,167.4,Trust,Settled
+IT000138,MAT00214,LOC01,2025-09-22,Council rates search,170.74,Trust,Settled
+IT000139,MAT00215,LOC03,2025-10-27,Council rates search,88.34,Trust,Settled
+IT000140,MAT00217,LOC02,2024-05-18,Land tax certificate,159.44,Office,Settled
+IT000141,MAT00217,LOC02,2024-05-22,Title search,427.17,Trust,Settled
+IT000142,MAT00225,LOC04,2025-06-12,Council rates search,81.98,Trust,Settled
+IT000143,MAT00225,LOC04,2025-06-08,Water rates search,60.63,Trust,Pending reimbursement
+IT000144,MAT00226,LOC03,2025-11-19,Title search,120.23,Office,Settled
+IT000145,MAT00228,LOC02,2025-12-03,Land tax certificate,154.11,Trust,Settled
+IT000146,MAT00228,LOC02,2025-12-02,Water rates search,107.28,Trust,Settled
+IT000147,MAT00228,LOC02,2025-12-21,Council rates search,245.96,Trust,Settled
+IT000148,MAT00229,LOC02,2024-11-29,Building & pest inspection lodgement,167.31,Trust,Settled
+IT000149,MAT00229,LOC02,2025-04-28,Building & pest inspection lodgement,124.37,Trust,Settled
+IT000150,MAT00229,LOC02,2025-04-25,Council rates search,164.12,Trust,Settled
+IT000151,MAT00248,LOC02,2024-05-09,Building & pest inspection lodgement,354.18,Office,Settled
+IT000152,MAT00248,LOC02,2024-05-28,Land tax certificate,39.76,Trust,Settled
+IT000153,MAT00249,LOC04,2024-09-28,Building & pest inspection lodgement,155.33,Trust,Settled
+IT000154,MAT00249,LOC04,2025-02-07,Council rates search,153.66,Trust,Settled
+IT000155,MAT00249,LOC04,2024-12-24,Land tax certificate,86.03,Office,Settled
+IT000156,MAT00255,LOC03,2025-01-06,Water rates search,283.76,Trust,Settled
+IT000157,MAT00255,LOC03,2025-06-13,Building & pest inspection lodgement,51.43,Trust,Settled
+IT000158,MAT00255,LOC03,2025-05-06,Title search,31.04,Office,Settled
+IT000159,MAT00257,LOC04,2024-12-02,Water rates search,92.7,Trust,Settled
+IT000160,MAT00260,LOC02,2025-04-23,Water rates search,136.46,Office,Pending reimbursement
+IT000161,MAT00261,LOC01,2024-10-14,Council rates search,126.22,Trust,Settled
+IT000162,MAT00261,LOC01,2025-03-25,Council rates search,441.89,Trust,Settled
+IT000163,MAT00269,LOC03,2025-07-20,Building & pest inspection lodgement,84.22,Trust,Settled
+IT000164,MAT00280,LOC03,2025-01-30,PEXA settlement fee,400.2,Office,Settled
+IT000165,MAT00280,LOC03,2024-10-17,Water rates search,58.41,Office,Pending reimbursement
+IT000166,MAT00282,LOC02,2025-01-04,Building & pest inspection lodgement,77.64,Trust,Settled
+IT000167,MAT00282,LOC02,2025-02-08,Water rates search,58.38,Trust,Settled
+IT000168,MAT00282,LOC02,2024-11-21,Title search,36.98,Office,Settled
+IT000169,MAT00284,LOC02,2025-11-23,Building & pest inspection lodgement,113.18,Trust,Pending reimbursement
+IT000170,MAT00285,LOC05,2025-01-23,PEXA settlement fee,67.59,Trust,Settled
+IT000171,MAT00285,LOC05,2024-09-19,Building & pest inspection lodgement,454.26,Office,Settled
+IT000172,MAT00285,LOC05,2024-12-09,Land tax certificate,245.0,Trust,Settled
+IT000173,MAT00287,LOC01,2024-03-23,Land tax certificate,38.31,Trust,Settled
+IT000174,MAT00287,LOC01,2024-03-11,PEXA settlement fee,222.49,Trust,Settled
+IT000175,MAT00287,LOC01,2024-09-08,Title search,79.6,Trust,Pending reimbursement
+IT000176,MAT00292,LOC03,2024-09-05,Land tax certificate,69.58,Trust,Settled
+IT000177,MAT00292,LOC03,2024-12-07,PEXA settlement fee,80.86,Office,Settled
+IT000178,MAT00293,LOC01,2025-09-28,Land tax certificate,92.78,Trust,Settled
+IT000179,MAT00295,LOC01,2025-09-17,Building & pest inspection lodgement,204.39,Trust,Settled
+IT000180,MAT00299,LOC01,2025-04-19,Council rates search,203.15,Trust,Settled
+IT000181,MAT00300,LOC01,2024-08-13,Water rates search,81.01,Trust,Settled
+IT000182,MAT00300,LOC01,2024-11-10,Council rates search,418.68,Trust,Settled
+IT000183,MAT00301,LOC01,2024-04-09,Title search,459.24,Trust,Settled
+IT000184,MAT00301,LOC01,2024-07-01,Title search,106.93,Trust,Settled
+IT000185,MAT00301,LOC01,2024-03-30,Council rates search,119.8,Office,Pending reimbursement
+IT000186,MAT00304,LOC02,2025-12-27,Water rates search,372.69,Trust,Settled
+IT000187,MAT00304,LOC02,2025-12-29,Land tax certificate,123.72,Trust,Settled
+IT000188,MAT00305,LOC03,2025-03-20,Building & pest inspection lodgement,86.3,Trust,Settled
+IT000189,MAT00307,LOC01,2024-03-31,Building & pest inspection lodgement,86.48,Trust,Settled
+IT000190,MAT00307,LOC01,2024-05-12,Building & pest inspection lodgement,54.8,Trust,Settled
+IT000191,MAT00311,LOC03,2025-11-05,Water rates search,116.23,Office,Settled
+IT000192,MAT00317,LOC04,2025-05-27,Title search,277.23,Trust,Settled
+IT000193,MAT00318,LOC04,2024-09-27,Council rates search,80.2,Trust,Settled
+IT000194,MAT00318,LOC04,2024-11-11,Water rates search,50.77,Office,Settled
+IT000195,MAT00318,LOC04,2024-09-22,Land tax certificate,94.31,Office,Settled
+IT000196,MAT00319,LOC05,2025-07-19,Council rates search,209.27,Office,Settled
+IT000197,MAT00326,LOC04,2025-06-11,PEXA settlement fee,153.53,Office,Settled
+IT000198,MAT00326,LOC04,2025-06-04,Water rates search,110.75,Trust,Settled
+IT000199,MAT00326,LOC04,2025-06-30,Building & pest inspection lodgement,174.76,Office,Pending reimbursement
+IT000200,MAT00329,LOC03,2024-09-10,Building & pest inspection lodgement,59.18,Office,Settled
+IT000201,MAT00331,LOC01,2025-11-12,Water rates search,123.87,Trust,Settled
+IT000202,MAT00333,LOC02,2025-12-17,Council rates search,79.08,Trust,Settled
+IT000203,MAT00333,LOC02,2025-10-19,Title search,143.58,Trust,Settled
+IT000204,MAT00337,LOC01,2025-12-17,Title search,256.77,Trust,Settled
+IT000205,MAT00337,LOC01,2025-12-02,Title search,109.59,Trust,Settled
+IT000206,MAT00343,LOC01,2024-07-08,Title search,148.91,Trust,Settled
+IT000207,MAT00343,LOC01,2024-07-09,PEXA settlement fee,162.88,Office,Settled
+IT000208,MAT00343,LOC01,2024-08-07,Title search,245.37,Trust,Settled
+IT000209,MAT00353,LOC03,2024-09-12,Water rates search,101.1,Trust,Settled
+IT000210,MAT00354,LOC02,2025-12-16,Building & pest inspection lodgement,198.35,Trust,Settled
+IT000211,MAT00355,LOC05,2025-06-20,Building & pest inspection lodgement,128.25,Trust,Settled
+IT000212,MAT00355,LOC05,2025-02-26,Council rates search,177.99,Trust,Settled
+IT000213,MAT00355,LOC05,2025-04-27,Water rates search,199.72,Office,Pending reimbursement
+IT000214,MAT00356,LOC01,2025-07-10,Council rates search,175.17,Trust,Settled
+IT000215,MAT00361,LOC04,2025-03-05,Water rates search,423.74,Office,Settled
+IT000216,MAT00367,LOC01,2025-03-28,Building & pest inspection lodgement,140.94,Trust,Settled
+IT000217,MAT00371,LOC02,2025-09-14,PEXA settlement fee,80.09,Trust,Settled
+IT000218,MAT00371,LOC02,2025-12-15,Council rates search,140.35,Trust,Settled
+IT000219,MAT00371,LOC02,2025-12-29,PEXA settlement fee,119.12,Office,Pending reimbursement
+IT000220,MAT00374,LOC03,2025-08-28,Council rates search,82.78,Trust,Settled
+IT000221,MAT00377,LOC03,2025-01-01,Water rates search,114.63,Office,Settled
+IT000222,MAT00378,LOC05,2025-04-25,Title search,38.62,Trust,Settled
+IT000223,MAT00379,LOC03,2024-06-25,Title search,33.87,Trust,Pending reimbursement
+IT000224,MAT00381,LOC01,2025-12-08,Title search,109.2,Office,Settled
+IT000225,MAT00385,LOC01,2025-04-30,Title search,200.47,Office,Settled
+IT000226,MAT00386,LOC01,2024-12-16,Title search,273.27,Office,Settled
+IT000227,MAT00387,LOC01,2025-12-18,Water rates search,51.06,Trust,Settled
+IT000228,MAT00390,LOC05,2025-08-03,Water rates search,112.0,Office,Settled
+IT000229,MAT00394,LOC03,2025-11-25,Building & pest inspection lodgement,149.88,Trust,Pending reimbursement
+IT000230,MAT00394,LOC03,2025-12-14,Council rates search,101.76,Office,Settled
+IT000231,MAT00403,LOC05,2025-12-17,Land tax certificate,59.69,Trust,Pending reimbursement
+IT000232,MAT00403,LOC05,2025-12-22,Title search,150.28,Trust,Settled
+IT000233,MAT00404,LOC03,2024-08-01,PEXA settlement fee,143.92,Trust,Settled
+IT000234,MAT00404,LOC03,2024-08-09,Council rates search,53.65,Trust,Settled
+IT000235,MAT00404,LOC03,2024-07-31,Title search,152.63,Office,Settled
+IT000236,MAT00406,LOC02,2024-10-21,Land tax certificate,138.17,Trust,Settled
+IT000237,MAT00406,LOC02,2025-02-18,Council rates search,81.72,Office,Settled
+IT000238,MAT00406,LOC02,2025-01-19,Title search,113.92,Office,Settled
+IT000239,MAT00411,LOC03,2025-03-25,Building & pest inspection lodgement,205.51,Office,Settled
+IT000240,MAT00411,LOC03,2025-04-04,PEXA settlement fee,83.44,Trust,Settled
+IT000241,MAT00411,LOC03,2025-05-31,Building & pest inspection lodgement,246.86,Trust,Settled
+IT000242,MAT00413,LOC03,2025-11-17,Council rates search,101.67,Trust,Settled
+IT000243,MAT00413,LOC03,2025-08-08,Water rates search,94.98,Trust,Settled
+IT000244,MAT00413,LOC03,2025-09-29,PEXA settlement fee,62.26,Trust,Pending reimbursement
+IT000245,MAT00415,LOC01,2024-06-24,Building & pest inspection lodgement,153.18,Trust,Settled
+IT000246,MAT00416,LOC01,2025-06-17,PEXA settlement fee,35.38,Trust,Pending reimbursement
+IT000247,MAT00416,LOC01,2025-09-14,Council rates search,77.93,Office,Pending reimbursement
+IT000248,MAT00418,LOC05,2025-11-26,Building & pest inspection lodgement,494.44,Trust,Settled
+IT000249,MAT00421,LOC02,2024-06-04,PEXA settlement fee,123.81,Trust,Settled
+IT000250,MAT00424,LOC04,2024-03-03,PEXA settlement fee,94.05,Trust,Settled
+IT000251,MAT00424,LOC04,2024-07-24,PEXA settlement fee,48.83,Trust,Settled
+IT000252,MAT00424,LOC04,2024-11-26,PEXA settlement fee,78.22,Trust,Pending reimbursement
+IT000253,MAT00425,LOC03,2024-06-04,Land tax certificate,172.67,Office,Settled
+IT000254,MAT00425,LOC03,2024-06-03,Land tax certificate,166.45,Trust,Settled
+IT000255,MAT00425,LOC03,2024-05-29,Building & pest inspection lodgement,238.52,Trust,Settled
+IT000256,MAT00427,LOC03,2025-01-21,Land tax certificate,297.85,Office,Settled
+IT000257,MAT00427,LOC03,2025-01-11,PEXA settlement fee,164.69,Office,Settled
+IT000258,MAT00427,LOC03,2024-12-13,Council rates search,288.8,Trust,Pending reimbursement
+IT000259,MAT00429,LOC01,2024-03-21,PEXA settlement fee,223.64,Trust,Settled
+IT000260,MAT00432,LOC03,2025-01-15,Building & pest inspection lodgement,51.25,Trust,Settled
+IT000261,MAT00436,LOC04,2024-12-22,Land tax certificate,442.57,Office,Settled
+IT000262,MAT00438,LOC01,2025-09-24,Water rates search,203.89,Trust,Settled
+IT000263,MAT00438,LOC01,2025-09-02,Building & pest inspection lodgement,287.23,Office,Settled
+IT000264,MAT00438,LOC01,2025-10-27,Building & pest inspection lodgement,116.51,Trust,Settled
+IT000265,MAT00441,LOC01,2024-01-20,Council rates search,78.62,Office,Settled
+IT000266,MAT00445,LOC02,2024-01-11,Council rates search,124.57,Trust,Settled
+IT000267,MAT00446,LOC04,2025-02-01,PEXA settlement fee,117.39,Trust,Settled
+IT000268,MAT00446,LOC04,2025-03-01,Land tax certificate,237.0,Trust,Settled
+IT000269,MAT00446,LOC04,2024-12-27,Building & pest inspection lodgement,401.79,Trust,Settled
+IT000270,MAT00449,LOC02,2024-04-10,PEXA settlement fee,192.87,Trust,Settled
+IT000271,MAT00449,LOC02,2024-04-09,Title search,126.23,Trust,Pending reimbursement
+IT000272,MAT00449,LOC02,2024-04-27,PEXA settlement fee,48.94,Trust,Settled
+IT000273,MAT00450,LOC03,2025-04-20,PEXA settlement fee,142.81,Trust,Pending reimbursement
+IT000274,MAT00450,LOC03,2025-04-22,Council rates search,70.58,Trust,Settled
+IT000275,MAT00452,LOC01,2024-12-19,Council rates search,63.57,Trust,Settled
+IT000276,MAT00452,LOC01,2024-12-30,Land tax certificate,88.09,Office,Settled
+IT000277,MAT00453,LOC05,2024-07-11,Council rates search,65.58,Trust,Settled
+IT000278,MAT00453,LOC05,2024-04-07,Land tax certificate,61.03,Trust,Settled
+IT000279,MAT00455,LOC02,2024-04-01,Title search,150.77,Trust,Settled
+IT000280,MAT00455,LOC02,2024-03-18,Building & pest inspection lodgement,53.72,Office,Settled
+IT000281,MAT00457,LOC03,2025-08-17,PEXA settlement fee,270.32,Trust,Settled
+IT000282,MAT00457,LOC03,2025-09-08,Land tax certificate,152.24,Office,Settled
+IT000283,MAT00459,LOC01,2024-11-17,Council rates search,90.82,Trust,Settled
+IT000284,MAT00459,LOC01,2024-09-30,PEXA settlement fee,472.7,Trust,Settled
+IT000285,MAT00459,LOC01,2024-11-17,Title search,48.14,Trust,Settled
+IT000286,MAT00461,LOC01,2024-01-30,Council rates search,127.02,Trust,Settled
+IT000287,MAT00461,LOC01,2024-02-12,Building & pest inspection lodgement,197.45,Trust,Settled
+IT000288,MAT00464,LOC01,2025-02-14,Building & pest inspection lodgement,430.26,Trust,Settled
+IT000289,MAT00464,LOC01,2024-09-28,Land tax certificate,104.08,Trust,Settled
+IT000290,MAT00464,LOC01,2025-02-25,Building & pest inspection lodgement,164.06,Office,Settled
+IT000291,MAT00472,LOC03,2024-07-19,Water rates search,136.88,Trust,Settled
+IT000292,MAT00476,LOC03,2024-01-21,Building & pest inspection lodgement,174.39,Office,Settled
+IT000293,MAT00476,LOC03,2024-09-19,Land tax certificate,285.76,Trust,Pending reimbursement
+IT000294,MAT00478,LOC02,2024-01-30,Building & pest inspection lodgement,165.52,Trust,Settled
+IT000295,MAT00478,LOC02,2024-01-29,Council rates search,104.13,Trust,Settled
+IT000296,MAT00479,LOC01,2025-11-06,Title search,61.0,Trust,Settled
+IT000297,MAT00484,LOC01,2025-04-12,Council rates search,66.89,Trust,Settled
+IT000298,MAT00484,LOC01,2025-08-28,Council rates search,275.53,Trust,Pending reimbursement
+IT000299,MAT00484,LOC01,2025-03-24,Water rates search,298.73,Trust,Settled
+IT000300,MAT00485,LOC03,2025-02-05,Water rates search,98.92,Office,Settled
+IT000301,MAT00485,LOC03,2025-04-06,Building & pest inspection lodgement,172.43,Trust,Settled
+IT000302,MAT00485,LOC03,2025-04-28,Land tax certificate,34.63,Trust,Settled
+IT000303,MAT00491,LOC01,2024-02-01,Water rates search,105.99,Trust,Settled
+IT000304,MAT00491,LOC01,2024-06-04,Title search,140.18,Office,Settled
+IT000305,MAT00491,LOC01,2024-04-21,Building & pest inspection lodgement,69.29,Trust,Settled
+IT000306,MAT00503,LOC02,2024-01-25,Council rates search,148.05,Office,Pending reimbursement
+IT000307,MAT00504,LOC01,2024-02-14,Land tax certificate,212.93,Trust,Settled
+IT000308,MAT00504,LOC01,2024-01-18,Title search,205.15,Trust,Settled
+IT000309,MAT00508,LOC02,2024-06-28,Land tax certificate,293.26,Trust,Settled
+IT000310,MAT00508,LOC02,2024-06-13,Building & pest inspection lodgement,113.9,Office,Settled
+IT000311,MAT00508,LOC02,2024-06-10,Land tax certificate,251.61,Trust,Pending reimbursement
+IT000312,MAT00509,LOC03,2025-05-31,Title search,56.76,Trust,Settled
+IT000313,MAT00510,LOC03,2025-05-18,Land tax certificate,341.45,Office,Settled
+IT000314,MAT00510,LOC03,2025-05-15,Water rates search,111.45,Office,Settled
+IT000315,MAT00512,LOC03,2025-07-13,Land tax certificate,121.63,Office,Settled
+IT000316,MAT00513,LOC02,2024-07-01,Title search,116.8,Office,Pending reimbursement
+IT000317,MAT00513,LOC02,2024-07-24,Water rates search,501.48,Office,Settled
+IT000318,MAT00513,LOC02,2024-06-14,Water rates search,297.52,Trust,Settled
+IT000319,MAT00516,LOC01,2025-09-30,Council rates search,52.66,Office,Pending reimbursement
+IT000320,MAT00517,LOC03,2025-06-29,Land tax certificate,114.92,Trust,Settled
+IT000321,MAT00518,LOC01,2025-04-06,PEXA settlement fee,284.63,Trust,Settled
+IT000322,MAT00518,LOC01,2025-03-09,Water rates search,161.62,Trust,Settled
+IT000323,MAT00518,LOC01,2025-04-06,PEXA settlement fee,124.99,Office,Settled
+IT000324,MAT00525,LOC04,2025-10-30,Building & pest inspection lodgement,38.18,Trust,Settled
+IT000325,MAT00525,LOC04,2025-07-23,Title search,79.44,Trust,Settled
+IT000326,MAT00534,LOC05,2025-12-29,Council rates search,130.95,Office,Settled
+IT000327,MAT00534,LOC05,2025-11-16,Water rates search,363.62,Trust,Settled
+IT000328,MAT00534,LOC05,2025-11-16,Water rates search,24.37,Office,Settled
+IT000329,MAT00538,LOC05,2024-07-10,Building & pest inspection lodgement,107.13,Office,Settled
+IT000330,MAT00538,LOC05,2024-10-01,Water rates search,48.25,Office,Settled
+IT000331,MAT00540,LOC03,2025-10-22,PEXA settlement fee,338.41,Trust,Settled
+IT000332,MAT00540,LOC03,2025-07-18,Water rates search,174.85,Office,Settled
+IT000333,MAT00548,LOC01,2024-01-26,Title search,116.98,Office,Pending reimbursement
+IT000334,MAT00548,LOC01,2024-02-15,Council rates search,199.22,Trust,Settled
+IT000335,MAT00550,LOC01,2024-06-16,Council rates search,194.84,Trust,Settled
+IT000336,MAT00550,LOC01,2024-05-31,Land tax certificate,73.58,Trust,Settled
+IT000337,MAT00553,LOC03,2025-11-02,Water rates search,50.78,Trust,Settled
+IT000338,MAT00553,LOC03,2025-08-30,Water rates search,26.99,Office,Settled
+IT000339,MAT00555,LOC02,2024-09-21,Title search,197.05,Trust,Settled
+IT000340,MAT00555,LOC02,2024-08-11,Title search,272.6,Trust,Settled
+IT000341,MAT00560,LOC03,2024-12-02,Building & pest inspection lodgement,117.5,Trust,Settled
+IT000342,MAT00560,LOC03,2024-04-14,Water rates search,51.59,Office,Settled
+IT000343,MAT00560,LOC03,2024-09-03,Title search,198.8,Office,Settled
+IT000344,MAT00562,LOC04,2024-10-05,Title search,75.38,Trust,Settled
+IT000345,MAT00562,LOC04,2024-09-21,Land tax certificate,132.46,Trust,Settled
+IT000346,MAT00562,LOC04,2024-09-28,Building & pest inspection lodgement,63.62,Trust,Settled
+IT000347,MAT00565,LOC03,2024-04-23,Title search,78.91,Trust,Settled
+IT000348,MAT00565,LOC03,2024-04-30,Building & pest inspection lodgement,103.0,Office,Settled
+IT000349,MAT00569,LOC04,2024-01-29,Water rates search,95.89,Trust,Settled
+IT000350,MAT00571,LOC04,2025-05-07,Council rates search,131.04,Trust,Settled
+IT000351,MAT00571,LOC04,2025-04-22,Title search,47.55,Office,Settled
+IT000352,MAT00571,LOC04,2025-05-17,Land tax certificate,113.16,Trust,Settled
+IT000353,MAT00573,LOC03,2024-09-25,PEXA settlement fee,188.16,Office,Settled
+IT000354,MAT00573,LOC03,2024-12-12,PEXA settlement fee,95.94,Office,Settled
+IT000355,MAT00575,LOC04,2024-07-02,Council rates search,94.38,Trust,Settled
+IT000356,MAT00579,LOC01,2025-01-18,Water rates search,120.91,Trust,Settled
+IT000357,MAT00579,LOC01,2025-04-15,Land tax certificate,96.43,Trust,Settled
+IT000358,MAT00579,LOC01,2025-04-04,Title search,116.2,Trust,Pending reimbursement
+IT000359,MAT00582,LOC03,2024-06-24,Title search,304.75,Trust,Settled
+IT000360,MAT00583,LOC04,2025-07-15,Building & pest inspection lodgement,123.39,Trust,Settled
+IT000361,MAT00583,LOC04,2025-07-15,PEXA settlement fee,61.13,Office,Settled
+IT000362,MAT00583,LOC04,2025-11-03,Land tax certificate,150.1,Trust,Pending reimbursement
+IT000363,MAT00587,LOC03,2024-06-04,Building & pest inspection lodgement,200.51,Trust,Settled
+IT000364,MAT00587,LOC03,2024-06-20,Council rates search,179.71,Trust,Settled
+IT000365,MAT00587,LOC03,2024-05-18,Title search,34.55,Office,Settled
+IT000366,MAT00589,LOC01,2025-11-22,Land tax certificate,38.3,Trust,Settled
+IT000367,MAT00589,LOC01,2025-11-12,Land tax certificate,167.78,Office,Settled
+IT000368,MAT00591,LOC04,2025-09-18,Building & pest inspection lodgement,55.46,Office,Settled
+IT000369,MAT00596,LOC03,2024-03-04,Water rates search,168.72,Trust,Settled
+IT000370,MAT00596,LOC03,2024-02-14,Council rates search,78.57,Trust,Settled
+IT000371,MAT00596,LOC03,2024-02-28,Council rates search,66.11,Trust,Settled
+IT000372,MAT00599,LOC03,2025-05-14,Council rates search,256.74,Office,Settled
+IT000373,MAT00602,LOC01,2025-12-25,PEXA settlement fee,175.68,Trust,Settled
+IT000374,MAT00602,LOC01,2025-11-29,Land tax certificate,126.74,Office,Settled
+IT000375,MAT00602,LOC01,2025-11-30,Land tax certificate,139.49,Trust,Settled
+IT000376,MAT00605,LOC05,2024-07-23,Council rates search,80.6,Trust,Settled
+IT000377,MAT00605,LOC05,2024-08-30,Water rates search,230.31,Office,Settled
+IT000378,MAT00606,LOC03,2025-08-22,Water rates search,262.41,Trust,Settled
+IT000379,MAT00606,LOC03,2025-08-31,Land tax certificate,302.8,Trust,Settled
+IT000380,MAT00606,LOC03,2025-07-22,PEXA settlement fee,39.89,Trust,Settled
+IT000381,MAT00607,LOC01,2025-05-14,Title search,241.64,Trust,Settled
+IT000382,MAT00608,LOC01,2024-09-07,Building & pest inspection lodgement,62.39,Trust,Settled
+IT000383,MAT00608,LOC01,2025-01-14,Council rates search,73.51,Trust,Pending reimbursement
+IT000384,MAT00618,LOC02,2025-08-22,Council rates search,141.57,Office,Settled
+IT000385,MAT00618,LOC02,2025-11-27,Building & pest inspection lodgement,267.7,Trust,Settled
+IT000386,MAT00623,LOC01,2025-12-09,Council rates search,56.93,Trust,Settled
+IT000387,MAT00623,LOC01,2025-12-27,Title search,122.58,Office,Settled
+IT000388,MAT00631,LOC01,2025-06-26,PEXA settlement fee,161.73,Trust,Settled
+IT000389,MAT00631,LOC01,2025-11-17,Water rates search,142.12,Trust,Settled
+IT000390,MAT00631,LOC01,2025-10-22,Water rates search,241.32,Office,Settled
+IT000391,MAT00635,LOC05,2024-11-19,Council rates search,107.61,Trust,Settled
+IT000392,MAT00635,LOC05,2024-08-09,Water rates search,278.88,Trust,Settled
+IT000393,MAT00637,LOC04,2024-06-17,Council rates search,147.0,Trust,Settled
+IT000394,MAT00642,LOC03,2025-03-01,PEXA settlement fee,102.0,Trust,Settled
+IT000395,MAT00642,LOC03,2025-03-29,Water rates search,196.41,Trust,Pending reimbursement
+IT000396,MAT00644,LOC02,2024-08-04,Water rates search,60.32,Office,Pending reimbursement
+IT000397,MAT00644,LOC02,2024-09-07,Land tax certificate,352.56,Trust,Pending reimbursement
+IT000398,MAT00644,LOC02,2024-10-24,Building & pest inspection lodgement,110.9,Office,Settled
+IT000399,MAT00645,LOC02,2025-02-27,Building & pest inspection lodgement,59.03,Office,Pending reimbursement
+IT000400,MAT00650,LOC01,2024-10-02,Title search,107.63,Trust,Settled
+IT000401,MAT00650,LOC01,2024-12-04,Water rates search,98.09,Office,Settled
+IT000402,MAT00650,LOC01,2024-05-25,PEXA settlement fee,90.05,Trust,Settled

@@ -1,0 +1,6 @@
+location_id,location_name,state,city
+LOC01,Sydney CBD,NSW,Sydney
+LOC02,Parramatta,NSW,Parramatta
+LOC03,Melbourne CBD,VIC,Melbourne
+LOC04,Brisbane,QLD,Brisbane
+LOC05,Perth,WA,Perth
