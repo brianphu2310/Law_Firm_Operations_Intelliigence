@@ -1,0 +1,651 @@
+matter_id,client_id,location_id,matter_type,status,open_date,close_date,counsel_id,responsible_lawyer,fee_estimate,referred_matter,referral_source
+MAT00001,CLI0215,LOC02,Family Law,Written off,2024-03-24,2024-11-13,,Lawyer-02,3822.2,False,
+MAT00002,CLI0140,LOC02,"Wills, Probate & Estates",Closed,2024-10-01,2025-02-22,,Lawyer-04,9214.5,True,Real Estate Alliance
+MAT00003,CLI0025,LOC01,"Wills, Probate & Estates",Closed,2024-01-13,2025-02-01,,Lawyer-16,1184.69,False,
+MAT00004,CLI0086,LOC01,Property Law,Closed,2024-12-18,2025-07-26,,Lawyer-10,1268.9,False,
+MAT00005,CLI0175,LOC01,General Litigation,Closed,2024-06-13,2024-10-20,,Lawyer-14,2856.96,False,
+MAT00006,CLI0135,LOC01,Family Law,Closed,2024-07-28,2024-12-10,,Lawyer-02,7699.67,True,Real Estate Alliance
+MAT00007,CLI0089,LOC01,Property Law,Closed,2025-03-20,2025-09-16,,Lawyer-15,3670.68,False,
+MAT00008,CLI0012,LOC02,Family Law,Closed,2025-04-17,2025-07-02,,Lawyer-15,7206.0,False,
+MAT00009,CLI0197,LOC01,"Wills, Probate & Estates",Written off,2024-04-07,2024-04-30,,Lawyer-08,672.96,True,Mortgage Broker Co
+MAT00010,CLI0131,LOC02,Family Law,Open,2025-11-20,,,Lawyer-02,2147.95,False,
+MAT00011,CLI0039,LOC01,"Wills, Probate & Estates",Closed,2024-02-05,2024-12-14,,Lawyer-02,8979.45,True,Real Estate Alliance
+MAT00012,CLI0194,LOC01,"Wills, Probate & Estates",Closed,2024-10-02,2024-12-10,,Lawyer-01,5372.9,False,
+MAT00013,CLI0048,LOC01,"Wills, Probate & Estates",Closed,2024-07-11,2025-01-27,,Lawyer-14,2164.51,False,
+MAT00014,CLI0136,LOC02,Family Law,Closed,2025-06-30,2025-10-07,,Lawyer-09,20232.81,False,
+MAT00015,CLI0199,LOC02,Family Law,Closed,2024-06-21,2025-06-28,,Lawyer-05,8900.52,False,
+MAT00016,CLI0150,LOC01,Family Law,Closed,2024-04-15,2024-05-03,CSL10,Lawyer-04,718.71,True,Mortgage Broker Co
+MAT00017,CLI0111,LOC02,Family Law,Closed,2024-03-03,2024-10-20,,Lawyer-08,27387.31,True,Financial Planner Network
+MAT00018,CLI0213,LOC02,Family Law,Open,2025-09-19,,,Lawyer-07,2178.6,True,Financial Planner Network
+MAT00019,CLI0007,LOC02,Property Law,Open,2025-09-28,,,Lawyer-19,11725.45,False,
+MAT00020,CLI0195,LOC01,Property Law,Closed,2025-07-23,2025-09-15,,Lawyer-16,10572.51,False,
+MAT00021,CLI0074,LOC01,Family Law,Closed,2025-08-26,2025-09-16,CSL08,Lawyer-05,24677.2,False,
+MAT00022,CLI0032,LOC02,Property Law,Closed,2025-08-01,2025-12-12,,Lawyer-06,6519.27,False,
+MAT00023,CLI0152,LOC02,Property Law,Closed,2024-03-29,2024-05-01,,Lawyer-05,5187.06,False,
+MAT00024,CLI0066,LOC02,Family Law,Open,2025-01-22,,,Lawyer-15,5652.15,True,Financial Planner Network
+MAT00025,CLI0124,LOC02,"Wills, Probate & Estates",Closed,2024-04-25,2025-01-02,,Lawyer-12,8605.01,True,Real Estate Alliance
+MAT00026,CLI0187,LOC01,Property Law,Open,2025-11-14,,,Lawyer-02,14091.14,True,Real Estate Alliance
+MAT00027,CLI0062,LOC01,General Litigation,Closed,2025-08-10,2025-11-26,,Lawyer-19,17302.36,False,
+MAT00028,CLI0117,LOC02,"Wills, Probate & Estates",Written off,2025-04-19,2025-08-11,,Lawyer-19,6604.51,False,
+MAT00029,CLI0196,LOC01,Family Law,Closed,2024-01-25,2024-12-10,CSL10,Lawyer-03,3782.75,False,
+MAT00030,CLI0118,LOC01,Property Law,Written off,2024-11-24,2025-01-31,,Lawyer-18,1908.61,True,Mortgage Broker Co
+MAT00031,CLI0216,LOC01,"Wills, Probate & Estates",Open,2025-09-07,,,Lawyer-17,4886.1,False,
+MAT00032,CLI0203,LOC01,Property Law,Closed,2024-09-22,2025-06-13,,Lawyer-19,1968.44,False,
+MAT00033,CLI0212,LOC02,General Litigation,Open,2025-05-04,,,Lawyer-01,28385.91,True,Accountant Partners
+MAT00034,CLI0022,LOC01,Family Law,Closed,2024-05-27,2025-06-22,,Lawyer-16,7547.16,False,
+MAT00035,CLI0124,LOC02,Property Law,Closed,2024-10-03,2025-05-23,,Lawyer-15,3921.98,False,
+MAT00036,CLI0081,LOC01,"Wills, Probate & Estates",Closed,2024-02-17,2024-05-13,,Lawyer-20,7353.45,False,
+MAT00037,CLI0006,LOC01,Property Law,Written off,2024-04-01,2024-04-29,,Lawyer-09,1483.16,True,Real Estate Alliance
+MAT00038,CLI0127,LOC01,General Litigation,Closed,2025-06-11,2025-11-02,CSL03,Lawyer-02,5208.63,False,
+MAT00039,CLI0046,LOC01,Family Law,Written off,2024-11-23,2024-12-06,,Lawyer-13,931.94,False,
+MAT00040,CLI0059,LOC01,Family Law,Closed,2024-04-04,2024-08-06,,Lawyer-03,1998.21,False,
+MAT00041,CLI0078,LOC01,General Litigation,Open,2025-11-20,,CSL01,Lawyer-06,571.62,False,
+MAT00042,CLI0022,LOC01,Property Law,Closed,2025-01-22,2025-11-17,,Lawyer-16,5623.58,True,Real Estate Alliance
+MAT00043,CLI0215,LOC02,General Litigation,Closed,2024-04-22,2024-09-25,CSL06,Lawyer-21,5956.85,False,
+MAT00044,CLI0192,LOC01,Property Law,Written off,2024-10-10,2024-11-05,,Lawyer-06,4434.24,True,Existing Client Referral
+MAT00045,CLI0156,LOC01,Family Law,Closed,2024-03-11,2024-05-29,CSL09,Lawyer-05,13209.14,False,
+MAT00046,CLI0143,LOC02,General Litigation,Closed,2024-06-20,2025-02-08,,Lawyer-22,999.53,True,Accountant Partners
+MAT00047,CLI0033,LOC01,General Litigation,Closed,2024-04-22,2024-05-30,,Lawyer-23,4662.24,False,
+MAT00048,CLI0095,LOC02,"Wills, Probate & Estates",Open,2025-07-31,,,Lawyer-09,8131.43,True,Mortgage Broker Co
+MAT00049,CLI0062,LOC01,"Wills, Probate & Estates",Open,2025-08-07,,,Lawyer-10,1927.97,True,Real Estate Alliance
+MAT00050,CLI0054,LOC01,Family Law,Closed,2025-09-04,2025-09-25,,Lawyer-23,15998.91,False,
+MAT00051,CLI0055,LOC01,"Wills, Probate & Estates",Closed,2025-03-01,2025-10-03,,Lawyer-14,7666.36,False,
+MAT00052,CLI0003,LOC02,Property Law,Closed,2024-09-16,2025-03-27,,Lawyer-18,2861.52,False,
+MAT00053,CLI0202,LOC02,Family Law,Closed,2024-08-26,2024-09-27,,Lawyer-20,23276.21,False,
+MAT00054,CLI0142,LOC01,General Litigation,Closed,2025-01-06,2025-07-05,CSL06,Lawyer-25,2785.07,True,Accountant Partners
+MAT00055,CLI0142,LOC01,Family Law,Closed,2024-11-16,2025-05-14,CSL02,Lawyer-17,2127.22,False,
+MAT00056,CLI0213,LOC02,"Wills, Probate & Estates",Closed,2024-08-11,2024-12-17,,Lawyer-17,8242.28,False,
+MAT00057,CLI0021,LOC02,Family Law,Closed,2025-01-24,2025-04-13,,Lawyer-25,7316.86,True,Real Estate Alliance
+MAT00058,CLI0095,LOC02,Property Law,Closed,2024-07-13,2025-08-13,,Lawyer-05,20565.02,False,
+MAT00059,CLI0025,LOC01,"Wills, Probate & Estates",Closed,2024-07-30,2025-05-22,,Lawyer-19,10830.71,False,
+MAT00060,CLI0172,LOC01,"Wills, Probate & Estates",Open,2025-05-22,,,Lawyer-05,2817.6,False,
+MAT00061,CLI0202,LOC02,"Wills, Probate & Estates",Closed,2025-03-28,2025-10-05,,Lawyer-12,9927.57,True,Mortgage Broker Co
+MAT00062,CLI0045,LOC01,Property Law,Closed,2025-04-03,2025-08-09,,Lawyer-01,3461.06,True,Financial Planner Network
+MAT00063,CLI0190,LOC01,Family Law,Open,2025-08-25,,CSL07,Lawyer-20,9487.51,True,Mortgage Broker Co
+MAT00064,CLI0072,LOC02,Property Law,Open,2025-10-02,,,Lawyer-25,814.72,True,Real Estate Alliance
+MAT00065,CLI0173,LOC02,General Litigation,Closed,2025-02-11,2025-10-16,,Lawyer-18,6519.14,False,
+MAT00066,CLI0022,LOC01,Property Law,Open,2025-11-14,,,Lawyer-01,5424.86,False,
+MAT00067,CLI0075,LOC02,Property Law,Closed,2024-09-10,2025-03-12,,Lawyer-09,13049.5,False,
+MAT00068,CLI0165,LOC01,"Wills, Probate & Estates",Closed,2024-08-13,2025-02-11,,Lawyer-16,3347.95,True,Financial Planner Network
+MAT00069,CLI0217,LOC01,Property Law,Open,2025-10-08,,,Lawyer-25,4520.32,False,
+MAT00070,CLI0007,LOC02,Property Law,Closed,2024-03-14,2024-09-27,,Lawyer-16,7864.03,True,Existing Client Referral
+MAT00071,CLI0098,LOC01,Family Law,Closed,2024-11-19,2025-07-15,CSL07,Lawyer-21,3041.39,False,
+MAT00072,CLI0121,LOC01,Family Law,Closed,2024-01-28,2024-06-17,,Lawyer-18,1991.9,True,Existing Client Referral
+MAT00073,CLI0078,LOC01,"Wills, Probate & Estates",Closed,2024-11-11,2025-12-15,,Lawyer-01,68069.86,True,Real Estate Alliance
+MAT00074,CLI0140,LOC02,General Litigation,Closed,2024-07-21,2025-08-17,CSL06,Lawyer-20,5999.05,True,Accountant Partners
+MAT00075,CLI0109,LOC01,Family Law,Open,2025-04-09,,CSL09,Lawyer-13,5473.4,False,
+MAT00076,CLI0012,LOC02,Property Law,Written off,2025-01-21,2025-12-07,,Lawyer-17,5113.45,False,
+MAT00077,CLI0001,LOC01,Family Law,Open,2025-04-23,,,Lawyer-08,9439.79,False,
+MAT00078,CLI0091,LOC01,Family Law,Closed,2024-11-18,2025-04-20,,Lawyer-17,2656.75,False,
+MAT00079,CLI0013,LOC02,"Wills, Probate & Estates",Closed,2024-10-03,2025-02-15,,Lawyer-05,4374.76,False,
+MAT00080,CLI0138,LOC01,Family Law,Closed,2024-12-09,2025-07-29,CSL09,Lawyer-08,8146.03,False,
+MAT00081,CLI0086,LOC01,Family Law,Closed,2024-02-17,2024-03-31,CSL05,Lawyer-19,4971.11,False,
+MAT00082,CLI0108,LOC02,Family Law,Closed,2025-07-30,2025-09-03,,Lawyer-22,18836.22,False,
+MAT00083,CLI0091,LOC01,"Wills, Probate & Estates",Closed,2025-01-16,2025-11-09,,Lawyer-06,5450.25,False,
+MAT00084,CLI0202,LOC02,"Wills, Probate & Estates",Closed,2024-12-18,2025-04-27,,Lawyer-10,5503.15,True,Financial Planner Network
+MAT00085,CLI0052,LOC01,Family Law,Closed,2024-03-24,2024-08-12,,Lawyer-05,12918.19,False,
+MAT00086,CLI0181,LOC01,Family Law,Open,2025-11-22,,CSL10,Lawyer-10,20448.37,False,
+MAT00087,CLI0190,LOC01,General Litigation,Closed,2024-11-14,2025-02-06,,Lawyer-07,2238.04,True,Existing Client Referral
+MAT00088,CLI0195,LOC01,"Wills, Probate & Estates",Closed,2024-09-25,2025-08-24,,Lawyer-14,1930.85,True,Mortgage Broker Co
+MAT00089,CLI0040,LOC01,"Wills, Probate & Estates",Closed,2025-03-09,2025-06-28,,Lawyer-03,2735.92,False,
+MAT00090,CLI0044,LOC01,"Wills, Probate & Estates",Open,2025-08-01,,,Lawyer-07,1655.01,False,
+MAT00091,CLI0097,LOC02,"Wills, Probate & Estates",Closed,2025-03-23,2025-12-21,,Lawyer-01,4086.41,True,Accountant Partners
+MAT00092,CLI0186,LOC01,Property Law,Closed,2025-06-28,2025-09-13,,Lawyer-21,4311.37,False,
+MAT00093,CLI0069,LOC01,Family Law,Closed,2024-11-29,2025-04-20,CSL03,Lawyer-01,2095.5,False,
+MAT00094,CLI0096,LOC02,Family Law,Closed,2024-05-29,2024-07-18,CSL05,Lawyer-05,2860.91,False,
+MAT00095,CLI0003,LOC02,Family Law,Closed,2024-08-12,2025-03-14,,Lawyer-09,4594.61,True,Mortgage Broker Co
+MAT00096,CLI0179,LOC01,Family Law,Open,2025-10-12,,CSL02,Lawyer-11,17898.28,False,
+MAT00097,CLI0107,LOC02,Property Law,Closed,2024-03-26,2024-05-15,,Lawyer-21,2414.37,False,
+MAT00098,CLI0152,LOC02,"Wills, Probate & Estates",Written off,2024-02-13,2024-06-28,,Lawyer-23,3312.32,False,
+MAT00099,CLI0185,LOC01,General Litigation,Closed,2025-07-18,2025-12-02,,Lawyer-13,7290.36,False,
+MAT00100,CLI0197,LOC01,"Wills, Probate & Estates",Closed,2024-11-25,2025-01-23,,Lawyer-25,17141.93,True,Mortgage Broker Co
+MAT00101,CLI0158,LOC01,"Wills, Probate & Estates",Closed,2025-02-08,2025-07-07,,Lawyer-21,3748.33,False,
+MAT00102,CLI0089,LOC01,General Litigation,Open,2025-03-19,,CSL04,Lawyer-25,2651.23,False,
+MAT00103,CLI0174,LOC02,Property Law,Closed,2025-02-01,2025-06-27,,Lawyer-14,5246.5,False,
+MAT00104,CLI0020,LOC01,Family Law,Closed,2024-08-01,2024-10-14,CSL09,Lawyer-06,5194.72,False,
+MAT00105,CLI0149,LOC02,Family Law,Closed,2025-01-03,2025-12-01,,Lawyer-25,20018.46,False,
+MAT00106,CLI0209,LOC02,"Wills, Probate & Estates",Closed,2024-02-06,2024-03-27,,Lawyer-24,3166.0,True,Financial Planner Network
+MAT00107,CLI0156,LOC01,"Wills, Probate & Estates",Closed,2025-04-21,2025-06-02,,Lawyer-01,886.52,False,
+MAT00108,CLI0058,LOC01,"Wills, Probate & Estates",Closed,2024-11-12,2024-11-24,,Lawyer-23,32963.58,False,
+MAT00109,CLI0173,LOC02,"Wills, Probate & Estates",Closed,2025-09-07,2025-10-09,,Lawyer-07,799.29,False,
+MAT00110,CLI0210,LOC02,"Wills, Probate & Estates",Written off,2024-06-17,2025-07-08,,Lawyer-22,2278.3,False,
+MAT00111,CLI0188,LOC02,General Litigation,Closed,2024-05-11,2025-01-02,,Lawyer-10,4332.97,False,
+MAT00112,CLI0136,LOC02,General Litigation,Open,2025-05-25,,CSL10,Lawyer-10,1878.07,False,
+MAT00113,CLI0127,LOC01,Property Law,Closed,2024-06-03,2025-05-05,,Lawyer-19,4524.91,False,
+MAT00114,CLI0021,LOC02,"Wills, Probate & Estates",Open,2025-09-04,,,Lawyer-12,2739.53,False,
+MAT00115,CLI0089,LOC01,Property Law,Closed,2024-03-20,2024-08-23,,Lawyer-15,7070.17,True,Real Estate Alliance
+MAT00116,CLI0006,LOC01,Family Law,Closed,2024-11-09,2025-01-12,CSL02,Lawyer-03,6926.33,False,
+MAT00117,CLI0124,LOC02,Property Law,Closed,2024-10-17,2025-11-11,,Lawyer-25,4480.89,False,
+MAT00118,CLI0071,LOC02,"Wills, Probate & Estates",Closed,2025-09-01,2025-11-02,,Lawyer-11,2144.89,False,
+MAT00119,CLI0068,LOC02,General Litigation,Closed,2025-04-07,2025-05-02,CSL06,Lawyer-23,9009.6,True,Existing Client Referral
+MAT00120,CLI0015,LOC02,Family Law,Closed,2025-08-09,2025-12-07,CSL01,Lawyer-02,3754.44,False,
+MAT00121,CLI0050,LOC02,"Wills, Probate & Estates",Open,2025-10-03,,,Lawyer-12,1141.52,True,Accountant Partners
+MAT00122,CLI0047,LOC02,Family Law,Written off,2024-08-05,2025-03-03,CSL03,Lawyer-04,1389.53,False,
+MAT00123,CLI0086,LOC01,General Litigation,Open,2025-05-10,,,Lawyer-22,7540.78,True,Accountant Partners
+MAT00124,CLI0173,LOC02,"Wills, Probate & Estates",Open,2025-01-16,,,Lawyer-23,16373.68,False,
+MAT00125,CLI0217,LOC01,"Wills, Probate & Estates",Closed,2024-11-15,2025-05-21,,Lawyer-05,16711.99,False,
+MAT00126,CLI0163,LOC01,Family Law,Closed,2024-10-01,2025-05-20,,Lawyer-20,3333.23,False,
+MAT00127,CLI0100,LOC01,Family Law,Written off,2025-08-25,2025-11-23,CSL04,Lawyer-13,1527.16,False,
+MAT00128,CLI0068,LOC02,Family Law,Closed,2025-01-29,2025-02-27,CSL02,Lawyer-05,6838.45,False,
+MAT00129,CLI0124,LOC02,"Wills, Probate & Estates",Closed,2025-04-07,2025-12-17,,Lawyer-22,1324.6,False,
+MAT00130,CLI0115,LOC01,General Litigation,Closed,2025-03-08,2025-05-06,CSL04,Lawyer-16,5570.39,False,
+MAT00131,CLI0052,LOC01,Property Law,Closed,2025-10-23,2025-12-20,,Lawyer-14,6394.43,False,
+MAT00132,CLI0139,LOC01,Property Law,Closed,2024-04-23,2024-10-19,,Lawyer-23,4256.34,False,
+MAT00133,CLI0023,LOC01,Family Law,Closed,2024-04-28,2025-03-24,,Lawyer-03,3655.58,False,
+MAT00134,CLI0150,LOC01,General Litigation,Closed,2024-03-10,2024-09-25,CSL10,Lawyer-02,19827.69,False,
+MAT00135,CLI0001,LOC01,Property Law,Written off,2025-03-03,2025-04-01,,Lawyer-13,3184.66,False,
+MAT00136,CLI0183,LOC01,Family Law,Open,2025-09-19,,,Lawyer-21,20342.41,False,
+MAT00137,CLI0055,LOC01,Property Law,Closed,2024-05-15,2025-04-23,,Lawyer-11,12921.72,False,
+MAT00138,CLI0103,LOC01,General Litigation,Open,2025-04-08,,CSL04,Lawyer-10,1706.58,False,
+MAT00139,CLI0156,LOC01,"Wills, Probate & Estates",Closed,2024-12-20,2025-07-25,,Lawyer-06,14951.09,True,Accountant Partners
+MAT00140,CLI0183,LOC01,Property Law,Closed,2025-03-14,2025-06-19,,Lawyer-23,1463.49,True,Financial Planner Network
+MAT00141,CLI0049,LOC01,Family Law,Closed,2024-04-18,2024-09-29,,Lawyer-08,10936.36,False,
+MAT00142,CLI0135,LOC01,Family Law,Closed,2025-06-09,2025-11-05,CSL04,Lawyer-07,5321.89,False,
+MAT00143,CLI0009,LOC01,"Wills, Probate & Estates",Open,2025-08-03,,,Lawyer-11,7262.78,True,Real Estate Alliance
+MAT00144,CLI0128,LOC02,Property Law,Closed,2024-03-17,2025-02-07,,Lawyer-07,17901.36,False,
+MAT00145,CLI0155,LOC01,Family Law,Closed,2024-06-17,2024-09-25,CSL05,Lawyer-05,6118.74,False,
+MAT00146,CLI0169,LOC01,Family Law,Closed,2024-08-07,2024-08-22,CSL05,Lawyer-14,2854.38,True,Existing Client Referral
+MAT00147,CLI0098,LOC01,"Wills, Probate & Estates",Closed,2025-03-15,2025-11-30,,Lawyer-12,4399.68,False,
+MAT00148,CLI0096,LOC02,General Litigation,Closed,2025-03-05,2025-09-27,CSL08,Lawyer-15,9466.87,True,Real Estate Alliance
+MAT00149,CLI0206,LOC01,"Wills, Probate & Estates",Closed,2024-11-11,2025-06-30,,Lawyer-25,2290.48,False,
+MAT00150,CLI0086,LOC01,Property Law,Written off,2024-03-17,2024-04-22,,Lawyer-22,4294.93,False,
+MAT00151,CLI0157,LOC01,Family Law,Closed,2024-03-30,2024-09-12,,Lawyer-11,2636.17,False,
+MAT00152,CLI0096,LOC02,Family Law,Closed,2024-08-29,2024-12-01,CSL02,Lawyer-20,1574.48,False,
+MAT00153,CLI0164,LOC02,Property Law,Closed,2024-10-09,2025-07-07,,Lawyer-05,4763.66,False,
+MAT00154,CLI0057,LOC02,General Litigation,Closed,2025-06-22,2025-08-25,,Lawyer-25,1906.21,True,Accountant Partners
+MAT00155,CLI0086,LOC01,Family Law,Closed,2024-01-04,2024-06-29,CSL08,Lawyer-20,5368.78,False,
+MAT00156,CLI0006,LOC01,Property Law,Closed,2025-08-11,2025-11-12,,Lawyer-10,7414.21,False,
+MAT00157,CLI0089,LOC01,Family Law,Open,2025-11-26,,,Lawyer-13,4878.39,True,Accountant Partners
+MAT00158,CLI0063,LOC01,"Wills, Probate & Estates",Closed,2025-06-06,2025-09-16,,Lawyer-05,1559.63,False,
+MAT00159,CLI0127,LOC01,General Litigation,Closed,2025-01-03,2025-09-20,,Lawyer-17,6732.76,False,
+MAT00160,CLI0219,LOC02,Family Law,Closed,2024-10-09,2025-11-10,CSL08,Lawyer-04,4100.57,False,
+MAT00161,CLI0012,LOC02,"Wills, Probate & Estates",Closed,2024-05-20,2024-08-30,,Lawyer-08,3845.19,False,
+MAT00162,CLI0148,LOC01,Family Law,Closed,2025-02-24,2025-06-20,CSL01,Lawyer-24,74818.48,False,
+MAT00163,CLI0048,LOC01,Property Law,Closed,2025-03-18,2025-08-30,,Lawyer-20,10782.39,True,Existing Client Referral
+MAT00164,CLI0196,LOC01,Family Law,Closed,2024-10-01,2025-10-03,,Lawyer-14,14329.26,True,Mortgage Broker Co
+MAT00165,CLI0070,LOC01,Family Law,Closed,2024-03-10,2024-11-16,CSL02,Lawyer-20,1109.1,False,
+MAT00166,CLI0161,LOC02,"Wills, Probate & Estates",Closed,2024-02-09,2025-01-25,,Lawyer-02,618.5,False,
+MAT00167,CLI0169,LOC01,Family Law,Open,2025-07-28,,,Lawyer-06,15561.95,False,
+MAT00168,CLI0029,LOC01,"Wills, Probate & Estates",Open,2025-08-05,,,Lawyer-20,8801.41,False,
+MAT00169,CLI0090,LOC02,Property Law,Closed,2024-06-21,2024-10-07,,Lawyer-14,1114.51,False,
+MAT00170,CLI0119,LOC02,Property Law,Open,2025-07-23,,,Lawyer-10,4952.28,False,
+MAT00171,CLI0061,LOC01,"Wills, Probate & Estates",Closed,2024-09-03,2024-10-10,,Lawyer-25,5441.44,False,
+MAT00172,CLI0134,LOC02,Family Law,Closed,2024-12-27,2025-11-09,,Lawyer-20,4426.31,False,
+MAT00173,CLI0019,LOC01,Family Law,Closed,2024-07-29,2024-11-07,,Lawyer-16,1407.26,True,Financial Planner Network
+MAT00174,CLI0076,LOC02,"Wills, Probate & Estates",Open,2025-05-13,,,Lawyer-13,9664.28,True,Financial Planner Network
+MAT00175,CLI0116,LOC02,Family Law,Open,2025-08-28,,,Lawyer-10,1319.13,True,Real Estate Alliance
+MAT00176,CLI0082,LOC02,Property Law,Open,2025-08-29,,,Lawyer-23,7857.24,True,Real Estate Alliance
+MAT00177,CLI0163,LOC01,Family Law,Open,2025-06-29,,CSL03,Lawyer-12,6168.91,False,
+MAT00178,CLI0045,LOC01,Property Law,Open,2025-05-12,,,Lawyer-14,3611.6,False,
+MAT00179,CLI0098,LOC01,Property Law,Closed,2024-08-05,2024-11-01,,Lawyer-02,9671.04,False,
+MAT00180,CLI0105,LOC02,Family Law,Closed,2024-09-01,2024-12-22,,Lawyer-25,9373.69,False,
+MAT00181,CLI0174,LOC02,Family Law,Closed,2024-04-03,2024-05-18,CSL01,Lawyer-25,5930.38,True,Real Estate Alliance
+MAT00182,CLI0141,LOC02,"Wills, Probate & Estates",Closed,2025-08-02,2025-09-14,,Lawyer-20,5283.01,False,
+MAT00183,CLI0122,LOC01,"Wills, Probate & Estates",Open,2025-10-19,,,Lawyer-18,1585.25,False,
+MAT00184,CLI0173,LOC02,Family Law,Closed,2024-08-30,2025-02-20,CSL08,Lawyer-20,1667.99,True,Financial Planner Network
+MAT00185,CLI0146,LOC01,Property Law,Open,2025-03-28,,,Lawyer-23,3489.2,True,Existing Client Referral
+MAT00186,CLI0201,LOC02,Family Law,Closed,2024-11-12,2025-08-17,CSL10,Lawyer-15,9565.49,True,Accountant Partners
+MAT00187,CLI0143,LOC02,Property Law,Closed,2025-03-11,2025-05-20,,Lawyer-16,2697.7,False,
+MAT00188,CLI0220,LOC01,Property Law,Closed,2025-03-02,2025-04-09,,Lawyer-11,11590.19,False,
+MAT00189,CLI0134,LOC02,"Wills, Probate & Estates",Closed,2024-03-01,2025-01-29,,Lawyer-19,3618.28,False,
+MAT00190,CLI0094,LOC01,Property Law,Open,2025-11-03,,,Lawyer-03,7095.56,False,
+MAT00191,CLI0114,LOC01,"Wills, Probate & Estates",Open,2025-03-09,,,Lawyer-14,20254.25,False,
+MAT00192,CLI0022,LOC01,Family Law,Closed,2024-10-13,2025-05-12,,Lawyer-14,14739.01,False,
+MAT00193,CLI0143,LOC02,"Wills, Probate & Estates",Closed,2024-11-23,2025-07-20,,Lawyer-05,5393.16,True,Existing Client Referral
+MAT00194,CLI0129,LOC02,Property Law,Closed,2024-10-29,2025-06-06,,Lawyer-19,4753.97,False,
+MAT00195,CLI0159,LOC01,General Litigation,Open,2025-11-07,,,Lawyer-10,3756.77,False,
+MAT00196,CLI0067,LOC02,Property Law,Closed,2025-03-25,2025-06-02,,Lawyer-06,5629.21,False,
+MAT00197,CLI0120,LOC02,Property Law,Closed,2024-09-08,2025-10-12,,Lawyer-09,6330.66,True,Accountant Partners
+MAT00198,CLI0178,LOC02,"Wills, Probate & Estates",Open,2025-06-09,,,Lawyer-03,4295.2,False,
+MAT00199,CLI0050,LOC02,General Litigation,Closed,2025-01-03,2025-06-18,,Lawyer-24,9960.82,False,
+MAT00200,CLI0065,LOC01,"Wills, Probate & Estates",Written off,2024-06-18,2025-07-17,,Lawyer-15,5719.69,False,
+MAT00201,CLI0095,LOC02,Family Law,Open,2025-07-12,,,Lawyer-14,6618.52,False,
+MAT00202,CLI0098,LOC01,"Wills, Probate & Estates",Open,2025-04-20,,,Lawyer-11,5485.63,False,
+MAT00203,CLI0145,LOC01,Family Law,Closed,2024-08-19,2025-03-24,CSL09,Lawyer-25,3842.6,False,
+MAT00204,CLI0155,LOC01,Family Law,Closed,2025-01-22,2025-03-16,CSL02,Lawyer-01,2913.93,True,Mortgage Broker Co
+MAT00205,CLI0203,LOC01,Family Law,Closed,2024-01-16,2024-12-22,,Lawyer-17,19365.76,False,
+MAT00206,CLI0044,LOC01,Property Law,Closed,2024-11-05,2025-07-17,,Lawyer-23,10003.31,True,Accountant Partners
+MAT00207,CLI0118,LOC01,Family Law,Open,2025-01-19,,,Lawyer-06,1853.94,False,
+MAT00208,CLI0063,LOC01,General Litigation,Open,2025-09-01,,CSL10,Lawyer-12,1257.05,False,
+MAT00209,CLI0104,LOC01,Family Law,Closed,2024-03-14,2024-08-08,CSL04,Lawyer-11,2085.57,False,
+MAT00210,CLI0041,LOC01,Property Law,Closed,2024-12-31,2025-11-22,,Lawyer-22,1952.31,True,Real Estate Alliance
+MAT00211,CLI0134,LOC02,Family Law,Closed,2024-05-04,2024-05-30,,Lawyer-03,2062.84,False,
+MAT00212,CLI0117,LOC02,General Litigation,Closed,2024-05-03,2024-10-30,CSL03,Lawyer-13,5592.23,False,
+MAT00213,CLI0128,LOC02,Property Law,Open,2025-10-28,,,Lawyer-25,2690.84,False,
+MAT00214,CLI0201,LOC02,"Wills, Probate & Estates",Closed,2025-07-06,2025-08-15,,Lawyer-24,3119.9,False,
+MAT00215,CLI0041,LOC01,"Wills, Probate & Estates",Closed,2025-03-06,2025-09-27,,Lawyer-04,13687.18,True,Mortgage Broker Co
+MAT00216,CLI0073,LOC01,"Wills, Probate & Estates",Open,2025-08-17,,,Lawyer-13,3213.76,False,
+MAT00217,CLI0052,LOC01,Property Law,Closed,2024-01-17,2024-06-18,,Lawyer-19,2497.72,True,Real Estate Alliance
+MAT00218,CLI0055,LOC01,Property Law,Closed,2024-03-09,2024-06-10,,Lawyer-05,2952.63,False,
+MAT00219,CLI0021,LOC02,Property Law,Open,2025-08-19,,,Lawyer-24,1798.8,True,Existing Client Referral
+MAT00220,CLI0090,LOC02,Family Law,Open,2025-11-22,,,Lawyer-03,2479.73,False,
+MAT00221,CLI0044,LOC01,"Wills, Probate & Estates",Open,2025-06-12,,,Lawyer-13,3015.24,True,Accountant Partners
+MAT00222,CLI0055,LOC01,"Wills, Probate & Estates",Closed,2024-08-10,2025-07-14,,Lawyer-07,3205.28,False,
+MAT00223,CLI0136,LOC02,General Litigation,Open,2025-03-31,,CSL05,Lawyer-05,8405.02,True,Existing Client Referral
+MAT00224,CLI0039,LOC01,Family Law,Closed,2024-11-14,2025-01-17,CSL06,Lawyer-14,5968.32,True,Existing Client Referral
+MAT00225,CLI0144,LOC01,"Wills, Probate & Estates",Closed,2025-03-06,2025-07-22,,Lawyer-17,22416.99,True,Accountant Partners
+MAT00226,CLI0149,LOC02,"Wills, Probate & Estates",Closed,2024-11-15,2025-09-19,,Lawyer-21,2677.45,False,
+MAT00227,CLI0007,LOC02,Family Law,Closed,2025-03-18,2025-10-14,CSL08,Lawyer-03,8873.2,False,
+MAT00228,CLI0167,LOC01,Family Law,Open,2025-11-16,,,Lawyer-20,5002.1,True,Existing Client Referral
+MAT00229,CLI0115,LOC01,General Litigation,Open,2025-11-19,,CSL04,Lawyer-12,6813.55,False,
+MAT00230,CLI0171,LOC01,Family Law,Closed,2024-03-05,2025-04-04,,Lawyer-13,1740.47,False,
+MAT00231,CLI0111,LOC02,General Litigation,Closed,2024-08-14,2024-12-15,CSL05,Lawyer-25,5296.1,False,
+MAT00232,CLI0154,LOC01,Family Law,Closed,2024-07-05,2025-02-13,,Lawyer-11,6105.45,False,
+MAT00233,CLI0163,LOC01,"Wills, Probate & Estates",Open,2025-05-23,,,Lawyer-04,522.33,False,
+MAT00234,CLI0032,LOC02,"Wills, Probate & Estates",Written off,2024-07-14,2024-11-29,,Lawyer-14,9833.36,True,Mortgage Broker Co
+MAT00235,CLI0057,LOC02,"Wills, Probate & Estates",Closed,2024-01-22,2024-09-07,,Lawyer-06,2220.91,True,Accountant Partners
+MAT00236,CLI0164,LOC02,"Wills, Probate & Estates",Closed,2024-07-03,2024-12-16,,Lawyer-09,1569.9,False,
+MAT00237,CLI0114,LOC01,General Litigation,Closed,2024-02-08,2024-09-28,,Lawyer-19,1804.01,False,
+MAT00238,CLI0043,LOC02,Family Law,Closed,2024-01-28,2025-02-12,CSL03,Lawyer-23,1065.08,False,
+MAT00239,CLI0089,LOC01,Property Law,Open,2025-10-17,,,Lawyer-18,25594.27,False,
+MAT00240,CLI0153,LOC01,Family Law,Closed,2024-03-19,2024-10-17,CSL05,Lawyer-16,8757.14,True,Existing Client Referral
+MAT00241,CLI0084,LOC02,Family Law,Closed,2024-07-04,2025-07-17,CSL02,Lawyer-09,1706.98,True,Accountant Partners
+MAT00242,CLI0125,LOC01,"Wills, Probate & Estates",Closed,2024-10-19,2025-03-28,,Lawyer-09,7695.21,False,
+MAT00243,CLI0003,LOC02,Family Law,Written off,2024-03-03,2024-07-04,,Lawyer-19,3564.65,False,
+MAT00244,CLI0188,LOC02,Family Law,Closed,2024-01-24,2024-11-30,,Lawyer-05,5914.33,False,
+MAT00245,CLI0156,LOC01,Property Law,Closed,2024-10-31,2025-09-04,,Lawyer-08,21788.63,True,Real Estate Alliance
+MAT00246,CLI0033,LOC01,Family Law,Closed,2025-06-23,2025-10-18,,Lawyer-17,19164.09,False,
+MAT00247,CLI0120,LOC02,General Litigation,Closed,2024-08-31,2024-10-18,CSL09,Lawyer-02,6494.56,False,
+MAT00248,CLI0200,LOC01,"Wills, Probate & Estates",Open,2025-08-18,,,Lawyer-05,6591.84,False,
+MAT00249,CLI0096,LOC02,"Wills, Probate & Estates",Closed,2024-07-08,2025-05-09,,Lawyer-09,5772.75,False,
+MAT00250,CLI0073,LOC01,"Wills, Probate & Estates",Closed,2024-02-04,2024-04-13,,Lawyer-14,14208.79,False,
+MAT00251,CLI0156,LOC01,Family Law,Closed,2024-10-16,2025-07-14,,Lawyer-25,3958.53,False,
+MAT00252,CLI0190,LOC01,"Wills, Probate & Estates",Closed,2025-01-25,2025-04-11,,Lawyer-08,4028.09,False,
+MAT00253,CLI0180,LOC01,Family Law,Closed,2024-07-03,2024-11-27,CSL06,Lawyer-05,3913.0,False,
+MAT00254,CLI0017,LOC02,"Wills, Probate & Estates",Closed,2025-07-25,2025-11-27,,Lawyer-07,2063.14,True,Accountant Partners
+MAT00255,CLI0088,LOC01,Family Law,Open,2025-09-18,,,Lawyer-09,2780.89,False,
+MAT00256,CLI0168,LOC01,Family Law,Written off,2025-05-14,2025-07-03,,Lawyer-07,9362.75,False,
+MAT00257,CLI0064,LOC02,Family Law,Closed,2024-12-03,2025-11-28,,Lawyer-03,2525.67,False,
+MAT00258,CLI0172,LOC01,"Wills, Probate & Estates",Closed,2025-05-31,2025-11-19,,Lawyer-22,8374.33,False,
+MAT00259,CLI0153,LOC01,Family Law,Closed,2024-06-26,2025-02-21,CSL01,Lawyer-12,2203.63,False,
+MAT00260,CLI0077,LOC02,Property Law,Closed,2024-03-06,2024-08-19,,Lawyer-22,33184.34,False,
+MAT00261,CLI0093,LOC01,"Wills, Probate & Estates",Closed,2024-11-23,2025-03-28,,Lawyer-14,6346.8,False,
+MAT00262,CLI0092,LOC01,Family Law,Closed,2024-06-27,2025-04-04,CSL03,Lawyer-18,4632.38,False,
+MAT00263,CLI0127,LOC01,"Wills, Probate & Estates",Written off,2025-01-08,2025-05-11,,Lawyer-15,3602.77,False,
+MAT00264,CLI0038,LOC01,Property Law,Closed,2024-09-03,2024-10-05,,Lawyer-14,17370.31,False,
+MAT00265,CLI0102,LOC01,Family Law,Open,2025-11-21,,CSL06,Lawyer-01,3028.02,False,
+MAT00266,CLI0009,LOC01,General Litigation,Closed,2024-12-21,2025-08-21,,Lawyer-16,2018.9,False,
+MAT00267,CLI0065,LOC01,Family Law,Closed,2024-03-10,2024-10-22,,Lawyer-13,2059.45,False,
+MAT00268,CLI0074,LOC01,Family Law,Closed,2024-10-21,2025-08-01,CSL08,Lawyer-18,2410.87,False,
+MAT00269,CLI0124,LOC02,Family Law,Closed,2025-06-18,2025-09-11,,Lawyer-25,8459.69,False,
+MAT00270,CLI0189,LOC02,Family Law,Closed,2024-02-20,2024-12-10,CSL10,Lawyer-19,5033.81,False,
+MAT00271,CLI0089,LOC01,"Wills, Probate & Estates",Closed,2024-06-17,2025-01-02,,Lawyer-20,6781.92,False,
+MAT00272,CLI0187,LOC01,"Wills, Probate & Estates",Written off,2024-12-31,2025-09-13,,Lawyer-23,6151.09,True,Mortgage Broker Co
+MAT00273,CLI0001,LOC01,"Wills, Probate & Estates",Closed,2024-05-06,2024-07-12,,Lawyer-08,1031.01,False,
+MAT00274,CLI0023,LOC01,General Litigation,Closed,2025-08-12,2025-09-03,CSL08,Lawyer-03,344.67,True,Accountant Partners
+MAT00275,CLI0052,LOC01,Family Law,Closed,2024-05-26,2024-07-26,,Lawyer-15,14683.01,False,
+MAT00276,CLI0201,LOC02,Family Law,Closed,2025-05-30,2025-11-23,,Lawyer-14,1309.88,False,
+MAT00277,CLI0005,LOC02,Family Law,Closed,2025-02-01,2025-11-10,CSL01,Lawyer-01,55009.75,False,
+MAT00278,CLI0028,LOC01,Property Law,Closed,2024-02-16,2024-03-26,,Lawyer-03,2438.12,True,Existing Client Referral
+MAT00279,CLI0149,LOC02,"Wills, Probate & Estates",Closed,2024-06-13,2025-04-18,,Lawyer-11,5497.44,False,
+MAT00280,CLI0063,LOC01,General Litigation,Closed,2024-10-07,2024-12-14,CSL03,Lawyer-12,8488.85,False,
+MAT00281,CLI0114,LOC01,Property Law,Closed,2025-06-18,2025-10-08,,Lawyer-09,7922.95,False,
+MAT00282,CLI0071,LOC02,Family Law,Closed,2024-12-31,2025-10-08,CSL04,Lawyer-21,20392.93,True,Financial Planner Network
+MAT00283,CLI0185,LOC01,Family Law,Closed,2024-11-12,2025-08-19,CSL05,Lawyer-04,3489.85,True,Accountant Partners
+MAT00284,CLI0161,LOC02,General Litigation,Closed,2025-06-17,2025-10-10,CSL01,Lawyer-09,854.67,False,
+MAT00285,CLI0071,LOC02,Family Law,Written off,2025-06-13,2025-10-20,CSL06,Lawyer-13,10662.75,True,Mortgage Broker Co
+MAT00286,CLI0052,LOC01,"Wills, Probate & Estates",Closed,2024-06-03,2025-04-17,,Lawyer-10,759.15,False,
+MAT00287,CLI0008,LOC01,"Wills, Probate & Estates",Open,2025-07-18,,,Lawyer-08,22341.52,False,
+MAT00288,CLI0121,LOC01,Property Law,Open,2025-09-28,,,Lawyer-05,53035.36,False,
+MAT00289,CLI0045,LOC01,Family Law,Closed,2025-01-11,2025-06-21,CSL03,Lawyer-20,4382.64,False,
+MAT00290,CLI0097,LOC02,Property Law,Closed,2024-03-27,2025-02-26,,Lawyer-03,8552.68,False,
+MAT00291,CLI0200,LOC01,Property Law,Open,2025-08-15,,,Lawyer-02,11062.39,False,
+MAT00292,CLI0113,LOC01,"Wills, Probate & Estates",Open,2025-08-02,,,Lawyer-09,3125.42,False,
+MAT00293,CLI0005,LOC02,"Wills, Probate & Estates",Closed,2024-05-13,2025-02-06,,Lawyer-10,10253.48,False,
+MAT00294,CLI0151,LOC02,Family Law,Open,2025-11-29,,,Lawyer-14,3649.26,False,
+MAT00295,CLI0131,LOC02,"Wills, Probate & Estates",Open,2025-08-18,,,Lawyer-09,13123.66,False,
+MAT00296,CLI0062,LOC01,Property Law,Closed,2025-04-05,2025-08-04,,Lawyer-20,2491.53,False,
+MAT00297,CLI0216,LOC01,Family Law,Closed,2024-03-14,2024-07-08,,Lawyer-09,22429.0,False,
+MAT00298,CLI0137,LOC02,Family Law,Closed,2024-03-04,2024-03-19,,Lawyer-19,3075.19,False,
+MAT00299,CLI0148,LOC01,"Wills, Probate & Estates",Open,2025-08-09,,,Lawyer-10,21914.45,False,
+MAT00300,CLI0034,LOC01,Family Law,Closed,2024-12-29,2025-11-09,CSL02,Lawyer-10,27996.92,False,
+MAT00301,CLI0087,LOC01,Family Law,Closed,2024-12-19,2025-03-27,CSL04,Lawyer-21,2242.19,False,
+MAT00302,CLI0084,LOC02,"Wills, Probate & Estates",Closed,2025-07-15,2025-10-08,,Lawyer-02,9082.06,False,
+MAT00303,CLI0090,LOC02,"Wills, Probate & Estates",Closed,2025-03-25,2025-06-25,,Lawyer-05,3596.54,False,
+MAT00304,CLI0190,LOC01,General Litigation,Closed,2024-01-24,2024-08-14,CSL09,Lawyer-17,3753.78,False,
+MAT00305,CLI0031,LOC01,Property Law,Open,2025-10-17,,,Lawyer-12,1034.69,False,
+MAT00306,CLI0041,LOC01,Family Law,Closed,2025-05-06,2025-08-14,CSL01,Lawyer-06,2706.26,False,
+MAT00307,CLI0079,LOC01,Family Law,Closed,2024-10-05,2025-05-22,,Lawyer-11,7295.2,False,
+MAT00308,CLI0209,LOC02,General Litigation,Closed,2024-04-15,2025-04-29,,Lawyer-21,10785.25,False,
+MAT00309,CLI0132,LOC02,Family Law,Closed,2024-01-25,2025-02-11,,Lawyer-09,4900.59,False,
+MAT00310,CLI0159,LOC01,"Wills, Probate & Estates",Closed,2024-01-09,2024-01-19,,Lawyer-11,6679.64,True,Financial Planner Network
+MAT00311,CLI0119,LOC02,General Litigation,Closed,2024-09-19,2025-03-21,CSL02,Lawyer-07,4866.47,False,
+MAT00312,CLI0199,LOC02,General Litigation,Closed,2024-12-15,2025-05-01,CSL03,Lawyer-07,8400.18,True,Real Estate Alliance
+MAT00313,CLI0083,LOC01,Property Law,Closed,2025-03-06,2025-12-05,,Lawyer-17,4119.91,False,
+MAT00314,CLI0050,LOC02,Family Law,Closed,2025-02-26,2025-12-16,,Lawyer-03,3203.94,True,Existing Client Referral
+MAT00315,CLI0180,LOC01,Property Law,Closed,2025-06-09,2025-11-10,,Lawyer-14,27012.75,False,
+MAT00316,CLI0039,LOC01,Family Law,Closed,2024-04-06,2025-04-12,,Lawyer-19,5099.96,True,Mortgage Broker Co
+MAT00317,CLI0107,LOC02,"Wills, Probate & Estates",Open,2025-08-29,,,Lawyer-06,8848.26,True,Real Estate Alliance
+MAT00318,CLI0212,LOC02,Property Law,Open,2025-03-22,,,Lawyer-22,2482.54,False,
+MAT00319,CLI0196,LOC01,General Litigation,Closed,2024-03-28,2024-10-17,,Lawyer-03,7839.7,False,
+MAT00320,CLI0051,LOC01,Property Law,Closed,2024-12-31,2025-07-07,,Lawyer-03,33475.72,True,Mortgage Broker Co
+MAT00321,CLI0109,LOC01,Family Law,Open,2025-07-04,,CSL04,Lawyer-23,831.7,False,
+MAT00322,CLI0050,LOC02,Property Law,Closed,2024-03-01,2024-06-24,,Lawyer-10,20766.82,True,Financial Planner Network
+MAT00323,CLI0079,LOC01,General Litigation,Written off,2024-09-02,2025-08-20,CSL06,Lawyer-24,6510.75,False,
+MAT00324,CLI0140,LOC02,"Wills, Probate & Estates",Closed,2024-08-29,2025-01-19,,Lawyer-25,20456.82,True,Mortgage Broker Co
+MAT00325,CLI0198,LOC02,General Litigation,Closed,2025-01-15,2025-09-27,CSL03,Lawyer-12,18678.12,True,Accountant Partners
+MAT00326,CLI0188,LOC02,Property Law,Closed,2024-05-18,2025-04-15,,Lawyer-19,13291.97,False,
+MAT00327,CLI0025,LOC01,General Litigation,Closed,2024-08-25,2025-06-15,,Lawyer-02,8290.31,False,
+MAT00328,CLI0069,LOC01,Property Law,Open,2025-11-26,,,Lawyer-19,16549.24,False,
+MAT00329,CLI0188,LOC02,"Wills, Probate & Estates",Closed,2024-10-13,2025-05-31,,Lawyer-08,5018.81,True,Financial Planner Network
+MAT00330,CLI0164,LOC02,"Wills, Probate & Estates",Closed,2025-01-30,2025-05-15,,Lawyer-10,11435.24,False,
+MAT00331,CLI0073,LOC01,"Wills, Probate & Estates",Open,2025-09-18,,,Lawyer-12,3156.82,False,
+MAT00332,CLI0210,LOC02,"Wills, Probate & Estates",Closed,2024-12-14,2025-06-26,,Lawyer-04,2713.22,False,
+MAT00333,CLI0019,LOC01,Property Law,Closed,2024-11-26,2024-12-31,,Lawyer-09,6570.3,False,
+MAT00334,CLI0201,LOC02,"Wills, Probate & Estates",Closed,2025-04-10,2025-08-09,,Lawyer-19,5228.13,True,Existing Client Referral
+MAT00335,CLI0043,LOC02,"Wills, Probate & Estates",Closed,2024-04-26,2025-05-10,,Lawyer-06,16101.74,False,
+MAT00336,CLI0083,LOC01,Family Law,Open,2025-11-21,,,Lawyer-10,9225.96,False,
+MAT00337,CLI0193,LOC01,"Wills, Probate & Estates",Open,2025-05-26,,,Lawyer-01,4718.38,False,
+MAT00338,CLI0018,LOC02,Family Law,Closed,2024-11-23,2025-04-19,,Lawyer-05,984.34,True,Mortgage Broker Co
+MAT00339,CLI0015,LOC02,Family Law,Open,2025-08-25,,,Lawyer-13,2308.88,True,Real Estate Alliance
+MAT00340,CLI0193,LOC01,Property Law,Closed,2024-12-24,2025-04-11,,Lawyer-09,1501.27,True,Financial Planner Network
+MAT00341,CLI0162,LOC01,Family Law,Closed,2025-07-03,2025-09-13,CSL04,Lawyer-05,19779.08,True,Real Estate Alliance
+MAT00342,CLI0041,LOC01,Family Law,Closed,2025-02-19,2025-08-27,,Lawyer-03,1100.95,False,
+MAT00343,CLI0003,LOC02,Property Law,Closed,2025-02-06,2025-09-12,,Lawyer-05,2918.71,False,
+MAT00344,CLI0114,LOC01,Family Law,Closed,2025-06-26,2025-09-16,CSL10,Lawyer-06,1717.2,False,
+MAT00345,CLI0051,LOC01,Family Law,Open,2025-02-01,,,Lawyer-13,8482.37,False,
+MAT00346,CLI0151,LOC02,"Wills, Probate & Estates",Closed,2025-05-03,2025-10-30,,Lawyer-17,1996.52,True,Mortgage Broker Co
+MAT00347,CLI0207,LOC02,General Litigation,Closed,2024-02-20,2024-09-14,,Lawyer-12,7129.76,False,
+MAT00348,CLI0106,LOC01,Property Law,Closed,2024-06-02,2025-05-24,,Lawyer-16,4782.59,False,
+MAT00349,CLI0106,LOC01,"Wills, Probate & Estates",Closed,2024-09-05,2024-10-24,,Lawyer-07,2043.81,True,Mortgage Broker Co
+MAT00350,CLI0011,LOC02,"Wills, Probate & Estates",Closed,2025-03-22,2025-08-01,,Lawyer-06,3890.76,False,
+MAT00351,CLI0025,LOC01,General Litigation,Closed,2024-11-13,2025-04-22,CSL05,Lawyer-19,25711.06,False,
+MAT00352,CLI0054,LOC01,"Wills, Probate & Estates",Closed,2025-01-04,2025-09-15,,Lawyer-19,49633.4,False,
+MAT00353,CLI0018,LOC02,"Wills, Probate & Estates",Open,2025-06-23,,,Lawyer-02,2569.92,False,
+MAT00354,CLI0218,LOC01,Family Law,Closed,2025-03-23,2025-08-08,CSL10,Lawyer-05,10665.71,True,Real Estate Alliance
+MAT00355,CLI0097,LOC02,Family Law,Closed,2024-01-28,2024-08-10,,Lawyer-14,9651.64,False,
+MAT00356,CLI0060,LOC01,Family Law,Open,2025-04-17,,CSL09,Lawyer-24,3360.46,False,
+MAT00357,CLI0062,LOC01,"Wills, Probate & Estates",Closed,2024-06-20,2024-09-23,,Lawyer-04,11420.24,False,
+MAT00358,CLI0177,LOC02,"Wills, Probate & Estates",Closed,2024-06-04,2024-08-31,,Lawyer-21,4687.3,False,
+MAT00359,CLI0050,LOC02,Family Law,Closed,2024-12-31,2025-06-03,,Lawyer-14,21037.38,False,
+MAT00360,CLI0158,LOC01,Family Law,Closed,2024-11-02,2025-04-05,CSL06,Lawyer-18,5162.64,False,
+MAT00361,CLI0068,LOC02,"Wills, Probate & Estates",Closed,2024-09-20,2025-01-29,,Lawyer-21,2677.89,False,
+MAT00362,CLI0029,LOC01,Property Law,Open,2025-11-01,,,Lawyer-01,8993.85,False,
+MAT00363,CLI0114,LOC01,"Wills, Probate & Estates",Closed,2024-11-16,2025-02-17,,Lawyer-08,13001.55,False,
+MAT00364,CLI0111,LOC02,"Wills, Probate & Estates",Closed,2025-03-31,2025-11-13,,Lawyer-19,968.74,True,Existing Client Referral
+MAT00365,CLI0219,LOC02,Family Law,Closed,2024-10-30,2025-02-14,CSL02,Lawyer-07,3359.62,False,
+MAT00366,CLI0122,LOC01,Family Law,Closed,2024-03-28,2024-06-09,,Lawyer-12,1357.42,False,
+MAT00367,CLI0138,LOC01,Family Law,Closed,2025-01-18,2025-08-08,CSL10,Lawyer-23,30700.87,True,Financial Planner Network
+MAT00368,CLI0167,LOC01,Property Law,Open,2025-01-15,,,Lawyer-10,13009.67,True,Financial Planner Network
+MAT00369,CLI0158,LOC01,Property Law,Closed,2025-01-28,2025-07-20,,Lawyer-08,15941.89,False,
+MAT00370,CLI0079,LOC01,"Wills, Probate & Estates",Written off,2024-04-14,2025-01-09,,Lawyer-17,10494.77,True,Accountant Partners
+MAT00371,CLI0066,LOC02,Property Law,Open,2025-02-01,,,Lawyer-04,11021.24,False,
+MAT00372,CLI0037,LOC01,"Wills, Probate & Estates",Closed,2024-08-19,2024-10-28,,Lawyer-22,2592.29,False,
+MAT00373,CLI0091,LOC01,General Litigation,Closed,2024-01-25,2024-09-07,,Lawyer-01,1448.41,True,Accountant Partners
+MAT00374,CLI0134,LOC02,"Wills, Probate & Estates",Closed,2025-04-23,2025-11-04,,Lawyer-10,8596.62,False,
+MAT00375,CLI0111,LOC02,"Wills, Probate & Estates",Open,2025-05-17,,,Lawyer-20,2952.0,False,
+MAT00376,CLI0071,LOC02,Family Law,Closed,2024-11-26,2025-11-27,,Lawyer-07,3349.36,True,Financial Planner Network
+MAT00377,CLI0078,LOC01,Family Law,Closed,2024-04-28,2025-02-22,,Lawyer-11,5422.29,False,
+MAT00378,CLI0031,LOC01,Family Law,Closed,2024-03-06,2025-01-12,,Lawyer-05,7938.31,False,
+MAT00379,CLI0054,LOC01,Family Law,Closed,2024-08-23,2025-01-06,,Lawyer-07,1827.38,False,
+MAT00380,CLI0026,LOC01,"Wills, Probate & Estates",Closed,2024-03-20,2024-07-08,,Lawyer-21,1531.72,False,
+MAT00381,CLI0119,LOC02,Family Law,Closed,2024-07-17,2024-11-03,CSL05,Lawyer-24,1846.03,False,
+MAT00382,CLI0144,LOC01,Property Law,Closed,2024-12-20,2025-09-21,,Lawyer-18,726.67,False,
+MAT00383,CLI0092,LOC01,Family Law,Closed,2025-06-04,2025-07-22,CSL08,Lawyer-07,2836.16,True,Financial Planner Network
+MAT00384,CLI0076,LOC02,Property Law,Closed,2024-04-22,2024-12-23,,Lawyer-20,11166.21,False,
+MAT00385,CLI0178,LOC02,"Wills, Probate & Estates",Closed,2024-02-04,2024-08-16,,Lawyer-22,15683.53,True,Financial Planner Network
+MAT00386,CLI0016,LOC01,Property Law,Closed,2025-03-24,2025-11-20,,Lawyer-02,3785.26,False,
+MAT00387,CLI0091,LOC01,"Wills, Probate & Estates",Closed,2024-02-29,2024-10-04,,Lawyer-03,4171.11,False,
+MAT00388,CLI0026,LOC01,General Litigation,Closed,2024-12-07,2025-10-10,CSL09,Lawyer-18,1895.6,False,
+MAT00389,CLI0098,LOC01,Family Law,Closed,2024-11-01,2025-02-10,,Lawyer-03,8761.31,False,
+MAT00390,CLI0086,LOC01,Family Law,Closed,2025-02-03,2025-07-14,,Lawyer-07,7143.74,False,
+MAT00391,CLI0210,LOC02,Family Law,Closed,2024-09-17,2025-01-04,,Lawyer-18,5275.21,False,
+MAT00392,CLI0058,LOC01,Family Law,Closed,2025-03-08,2025-10-29,,Lawyer-16,7231.48,False,
+MAT00393,CLI0024,LOC01,Property Law,Closed,2024-05-27,2025-06-21,,Lawyer-18,43031.93,False,
+MAT00394,CLI0102,LOC01,General Litigation,Open,2025-10-05,,,Lawyer-03,1653.7,False,
+MAT00395,CLI0026,LOC01,"Wills, Probate & Estates",Closed,2024-11-18,2025-07-26,,Lawyer-13,18870.37,True,Accountant Partners
+MAT00396,CLI0195,LOC01,"Wills, Probate & Estates",Closed,2024-04-07,2024-07-21,,Lawyer-02,2724.89,False,
+MAT00397,CLI0095,LOC02,Family Law,Closed,2024-11-08,2025-01-12,CSL08,Lawyer-02,31873.01,False,
+MAT00398,CLI0003,LOC02,General Litigation,Closed,2025-07-25,2025-08-08,,Lawyer-23,4258.38,False,
+MAT00399,CLI0155,LOC01,Family Law,Closed,2024-06-06,2024-07-30,,Lawyer-14,3261.55,False,
+MAT00400,CLI0212,LOC02,"Wills, Probate & Estates",Closed,2024-08-09,2025-06-05,,Lawyer-14,3367.04,False,
+MAT00401,CLI0122,LOC01,General Litigation,Closed,2024-09-30,2025-10-21,CSL03,Lawyer-03,5496.75,False,
+MAT00402,CLI0093,LOC01,General Litigation,Written off,2024-06-03,2024-08-28,,Lawyer-02,1796.23,False,
+MAT00403,CLI0019,LOC01,Property Law,Closed,2025-04-18,2025-10-16,,Lawyer-05,4982.59,False,
+MAT00404,CLI0020,LOC01,Property Law,Closed,2025-02-20,2025-11-13,,Lawyer-04,3487.63,False,
+MAT00405,CLI0184,LOC01,Family Law,Closed,2024-04-21,2025-05-25,CSL03,Lawyer-20,13310.03,False,
+MAT00406,CLI0204,LOC01,Family Law,Closed,2024-11-13,2025-03-10,,Lawyer-14,3649.98,False,
+MAT00407,CLI0119,LOC02,General Litigation,Closed,2025-01-12,2025-03-01,,Lawyer-15,6332.54,False,
+MAT00408,CLI0158,LOC01,Property Law,Closed,2025-08-13,2025-09-07,,Lawyer-10,35208.41,True,Mortgage Broker Co
+MAT00409,CLI0064,LOC02,Property Law,Closed,2024-02-14,2024-07-31,,Lawyer-16,16998.17,False,
+MAT00410,CLI0111,LOC02,Family Law,Closed,2024-08-23,2024-09-02,CSL09,Lawyer-04,2002.35,True,Mortgage Broker Co
+MAT00411,CLI0122,LOC01,Family Law,Closed,2024-02-19,2024-12-30,,Lawyer-23,6239.6,False,
+MAT00412,CLI0042,LOC01,Property Law,Closed,2024-02-24,2024-10-25,,Lawyer-02,28101.79,True,Mortgage Broker Co
+MAT00413,CLI0081,LOC01,Property Law,Closed,2024-07-27,2025-08-25,,Lawyer-14,2176.74,False,
+MAT00414,CLI0103,LOC01,Family Law,Open,2025-11-20,,CSL09,Lawyer-01,10748.46,True,Real Estate Alliance
+MAT00415,CLI0117,LOC02,Family Law,Open,2025-07-24,,CSL01,Lawyer-02,23257.53,True,Mortgage Broker Co
+MAT00416,CLI0100,LOC01,Family Law,Open,2025-08-27,,CSL03,Lawyer-07,1765.4,True,Real Estate Alliance
+MAT00417,CLI0021,LOC02,Property Law,Closed,2025-06-15,2025-11-23,,Lawyer-15,8963.85,True,Mortgage Broker Co
+MAT00418,CLI0033,LOC01,Property Law,Closed,2024-08-04,2025-08-08,,Lawyer-14,2972.88,False,
+MAT00419,CLI0186,LOC01,Family Law,Open,2025-10-11,,CSL01,Lawyer-16,14173.32,True,Accountant Partners
+MAT00420,CLI0122,LOC01,Property Law,Open,2025-11-13,,,Lawyer-22,2662.13,True,Existing Client Referral
+MAT00421,CLI0118,LOC01,Family Law,Closed,2025-07-26,2025-11-22,CSL06,Lawyer-21,26877.58,False,
+MAT00422,CLI0008,LOC01,Family Law,Open,2025-07-05,,,Lawyer-08,3141.9,True,Existing Client Referral
+MAT00423,CLI0047,LOC02,"Wills, Probate & Estates",Closed,2024-06-15,2024-08-07,,Lawyer-13,5185.33,True,Mortgage Broker Co
+MAT00424,CLI0048,LOC01,General Litigation,Closed,2024-06-18,2024-10-17,CSL07,Lawyer-23,3109.82,False,
+MAT00425,CLI0102,LOC01,Family Law,Closed,2024-04-02,2024-05-26,CSL03,Lawyer-21,10928.47,False,
+MAT00426,CLI0001,LOC01,General Litigation,Closed,2024-12-24,2025-08-06,,Lawyer-07,1410.59,True,Financial Planner Network
+MAT00427,CLI0100,LOC01,Family Law,Closed,2024-07-10,2025-02-25,CSL02,Lawyer-18,3937.99,True,Financial Planner Network
+MAT00428,CLI0192,LOC01,Family Law,Closed,2024-08-25,2025-03-17,,Lawyer-05,14082.63,True,Accountant Partners
+MAT00429,CLI0172,LOC01,Property Law,Closed,2025-02-20,2025-11-26,,Lawyer-18,15477.56,False,
+MAT00430,CLI0200,LOC01,"Wills, Probate & Estates",Closed,2024-04-09,2024-08-23,,Lawyer-12,7247.45,False,
+MAT00431,CLI0153,LOC01,Family Law,Closed,2024-01-24,2024-04-05,,Lawyer-05,2158.87,False,
+MAT00432,CLI0185,LOC01,"Wills, Probate & Estates",Closed,2024-11-20,2025-04-16,,Lawyer-14,13381.8,False,
+MAT00433,CLI0016,LOC01,General Litigation,Closed,2024-12-10,2025-05-13,,Lawyer-19,3188.22,True,Real Estate Alliance
+MAT00434,CLI0047,LOC02,Family Law,Closed,2024-08-11,2025-07-26,CSL10,Lawyer-06,21139.18,True,Mortgage Broker Co
+MAT00435,CLI0191,LOC01,Family Law,Closed,2024-03-22,2025-03-31,,Lawyer-11,12310.94,False,
+MAT00436,CLI0137,LOC02,Property Law,Closed,2024-07-23,2025-07-06,,Lawyer-03,6852.86,False,
+MAT00437,CLI0163,LOC01,"Wills, Probate & Estates",Open,2025-07-12,,,Lawyer-14,11909.76,False,
+MAT00438,CLI0144,LOC01,"Wills, Probate & Estates",Closed,2025-02-27,2025-04-14,,Lawyer-22,12958.62,True,Real Estate Alliance
+MAT00439,CLI0034,LOC01,Family Law,Closed,2024-07-11,2024-08-21,CSL03,Lawyer-15,2032.53,False,
+MAT00440,CLI0167,LOC01,"Wills, Probate & Estates",Closed,2025-09-10,2025-12-02,,Lawyer-09,457.38,True,Existing Client Referral
+MAT00441,CLI0077,LOC02,Property Law,Closed,2024-12-18,2025-11-16,,Lawyer-20,4629.81,False,
+MAT00442,CLI0150,LOC01,Family Law,Closed,2025-01-02,2025-02-26,CSL03,Lawyer-13,3790.5,False,
+MAT00443,CLI0150,LOC01,"Wills, Probate & Estates",Closed,2025-01-29,2025-10-30,,Lawyer-05,13469.59,False,
+MAT00444,CLI0137,LOC02,"Wills, Probate & Estates",Closed,2024-08-30,2024-10-27,,Lawyer-08,4467.44,False,
+MAT00445,CLI0029,LOC01,Family Law,Closed,2024-09-17,2025-03-18,CSL09,Lawyer-22,5141.86,True,Existing Client Referral
+MAT00446,CLI0094,LOC01,Family Law,Closed,2024-10-24,2025-07-17,,Lawyer-23,87523.36,True,Real Estate Alliance
+MAT00447,CLI0216,LOC01,"Wills, Probate & Estates",Open,2025-10-07,,,Lawyer-06,3642.73,False,
+MAT00448,CLI0095,LOC02,General Litigation,Closed,2024-12-31,2025-06-30,CSL04,Lawyer-18,4695.93,False,
+MAT00449,CLI0009,LOC01,Property Law,Open,2025-08-27,,,Lawyer-19,4097.62,True,Mortgage Broker Co
+MAT00450,CLI0169,LOC01,Property Law,Closed,2025-08-19,2025-09-24,,Lawyer-13,5754.42,False,
+MAT00451,CLI0040,LOC01,Property Law,Open,2025-09-27,,,Lawyer-13,5264.75,True,Existing Client Referral
+MAT00452,CLI0165,LOC01,Property Law,Closed,2024-03-11,2025-04-14,,Lawyer-04,8426.97,True,Existing Client Referral
+MAT00453,CLI0137,LOC02,Property Law,Closed,2024-06-11,2024-07-15,,Lawyer-20,10980.93,False,
+MAT00454,CLI0013,LOC02,Family Law,Closed,2024-07-10,2025-04-03,CSL04,Lawyer-14,5758.59,True,Existing Client Referral
+MAT00455,CLI0184,LOC01,Property Law,Open,2025-10-09,,,Lawyer-15,476.55,False,
+MAT00456,CLI0178,LOC02,Family Law,Closed,2025-06-07,2025-07-16,CSL05,Lawyer-09,711.02,True,Accountant Partners
+MAT00457,CLI0023,LOC01,Family Law,Closed,2024-07-03,2024-07-31,,Lawyer-02,7135.17,False,
+MAT00458,CLI0003,LOC02,Property Law,Closed,2024-07-03,2024-11-17,,Lawyer-21,5391.33,False,
+MAT00459,CLI0009,LOC01,Family Law,Closed,2025-01-26,2025-04-08,,Lawyer-25,6656.0,False,
+MAT00460,CLI0106,LOC01,Property Law,Closed,2024-06-29,2024-12-31,,Lawyer-10,5318.36,True,Accountant Partners
+MAT00461,CLI0113,LOC01,Property Law,Closed,2024-02-19,2024-10-27,,Lawyer-20,2654.17,False,
+MAT00462,CLI0001,LOC01,"Wills, Probate & Estates",Open,2025-11-07,,,Lawyer-14,2407.9,False,
+MAT00463,CLI0054,LOC01,"Wills, Probate & Estates",Open,2025-07-18,,,Lawyer-05,11412.27,False,
+MAT00464,CLI0153,LOC01,"Wills, Probate & Estates",Open,2025-10-14,,,Lawyer-18,1767.17,False,
+MAT00465,CLI0158,LOC01,Property Law,Closed,2024-05-19,2025-03-17,,Lawyer-20,5237.98,False,
+MAT00466,CLI0129,LOC02,General Litigation,Closed,2024-05-26,2024-12-28,,Lawyer-16,5761.65,False,
+MAT00467,CLI0195,LOC01,"Wills, Probate & Estates",Closed,2024-10-18,2025-09-26,,Lawyer-10,4896.12,False,
+MAT00468,CLI0135,LOC01,Property Law,Closed,2024-01-01,2024-01-22,,Lawyer-15,7652.18,False,
+MAT00469,CLI0182,LOC01,Family Law,Open,2024-12-29,,,Lawyer-07,3996.58,False,
+MAT00470,CLI0143,LOC02,Property Law,Open,2025-11-10,,,Lawyer-16,3022.27,True,Financial Planner Network
+MAT00471,CLI0062,LOC01,"Wills, Probate & Estates",Open,2025-06-19,,,Lawyer-22,5663.87,True,Existing Client Referral
+MAT00472,CLI0088,LOC01,"Wills, Probate & Estates",Closed,2024-12-20,2025-09-20,,Lawyer-03,13104.8,False,
+MAT00473,CLI0075,LOC02,Family Law,Closed,2025-11-16,2025-12-02,CSL07,Lawyer-18,20244.11,False,
+MAT00474,CLI0095,LOC02,"Wills, Probate & Estates",Closed,2025-07-22,2025-09-30,,Lawyer-19,5952.93,False,
+MAT00475,CLI0005,LOC02,Family Law,Closed,2025-01-15,2025-03-19,,Lawyer-09,18512.7,False,
+MAT00476,CLI0048,LOC01,General Litigation,Closed,2024-11-17,2025-10-29,CSL02,Lawyer-13,8914.11,True,Financial Planner Network
+MAT00477,CLI0152,LOC02,General Litigation,Closed,2024-12-14,2025-07-11,,Lawyer-16,3466.69,False,
+MAT00478,CLI0028,LOC01,Family Law,Closed,2024-07-24,2025-08-17,,Lawyer-15,6897.92,False,
+MAT00479,CLI0133,LOC01,Property Law,Open,2025-08-09,,,Lawyer-04,2298.98,False,
+MAT00480,CLI0005,LOC02,Family Law,Closed,2025-02-22,2025-08-01,CSL08,Lawyer-19,4410.3,True,Existing Client Referral
+MAT00481,CLI0173,LOC02,"Wills, Probate & Estates",Open,2025-07-08,,,Lawyer-19,1860.43,False,
+MAT00482,CLI0157,LOC01,"Wills, Probate & Estates",Closed,2024-03-20,2024-10-04,,Lawyer-12,2136.75,True,Financial Planner Network
+MAT00483,CLI0064,LOC02,Property Law,Closed,2024-11-24,2025-01-06,,Lawyer-15,4839.08,False,
+MAT00484,CLI0126,LOC02,General Litigation,Closed,2025-08-31,2025-12-12,CSL05,Lawyer-25,2822.47,False,
+MAT00485,CLI0169,LOC01,Family Law,Closed,2024-06-03,2024-12-25,CSL02,Lawyer-09,1650.4,True,Existing Client Referral
+MAT00486,CLI0072,LOC02,Property Law,Closed,2024-01-11,2025-01-02,,Lawyer-12,7455.73,False,
+MAT00487,CLI0132,LOC02,Family Law,Closed,2024-09-12,2025-01-10,CSL10,Lawyer-04,6369.93,False,
+MAT00488,CLI0097,LOC02,"Wills, Probate & Estates",Open,2025-08-07,,,Lawyer-23,4273.73,False,
+MAT00489,CLI0167,LOC01,Family Law,Written off,2024-05-21,2024-07-11,,Lawyer-12,1870.17,False,
+MAT00490,CLI0071,LOC02,Property Law,Closed,2025-02-16,2025-03-26,,Lawyer-06,4490.0,False,
+MAT00491,CLI0001,LOC01,Family Law,Closed,2024-03-20,2025-02-11,CSL07,Lawyer-19,4661.6,False,
+MAT00492,CLI0135,LOC01,Family Law,Closed,2024-10-28,2025-10-08,CSL10,Lawyer-08,10437.26,True,Financial Planner Network
+MAT00493,CLI0022,LOC01,Family Law,Closed,2024-02-28,2025-02-18,CSL05,Lawyer-23,6421.76,True,Financial Planner Network
+MAT00494,CLI0028,LOC01,Property Law,Closed,2024-10-01,2025-01-12,,Lawyer-09,5138.42,True,Mortgage Broker Co
+MAT00495,CLI0173,LOC02,"Wills, Probate & Estates",Open,2025-09-10,,,Lawyer-19,2644.69,False,
+MAT00496,CLI0032,LOC02,Property Law,Closed,2024-07-26,2025-06-06,,Lawyer-22,8130.1,False,
+MAT00497,CLI0147,LOC01,Family Law,Closed,2024-02-13,2024-12-06,CSL08,Lawyer-13,12983.32,True,Real Estate Alliance
+MAT00498,CLI0084,LOC02,General Litigation,Closed,2024-08-31,2025-05-04,CSL07,Lawyer-16,11024.39,False,
+MAT00499,CLI0001,LOC01,Property Law,Closed,2024-03-05,2025-04-05,,Lawyer-11,3579.22,True,Mortgage Broker Co
+MAT00500,CLI0065,LOC01,General Litigation,Closed,2024-10-28,2024-12-11,,Lawyer-07,7430.75,True,Existing Client Referral
+MAT00501,CLI0087,LOC01,Property Law,Closed,2024-08-19,2025-07-12,,Lawyer-11,5128.23,False,
+MAT00502,CLI0027,LOC01,General Litigation,Closed,2025-02-08,2025-12-09,,Lawyer-11,15859.76,False,
+MAT00503,CLI0166,LOC02,"Wills, Probate & Estates",Closed,2025-07-15,2025-09-27,,Lawyer-16,4284.54,False,
+MAT00504,CLI0209,LOC02,Property Law,Open,2025-06-28,,,Lawyer-16,24301.62,False,
+MAT00505,CLI0002,LOC01,Property Law,Closed,2024-06-23,2025-01-31,,Lawyer-24,19551.08,False,
+MAT00506,CLI0121,LOC01,Family Law,Open,2025-05-25,,CSL05,Lawyer-19,11706.62,False,
+MAT00507,CLI0213,LOC02,Family Law,Closed,2024-11-20,2025-02-11,,Lawyer-03,5452.76,True,Existing Client Referral
+MAT00508,CLI0053,LOC01,General Litigation,Closed,2025-06-18,2025-10-26,CSL08,Lawyer-13,5478.56,False,
+MAT00509,CLI0047,LOC02,"Wills, Probate & Estates",Closed,2024-09-17,2025-02-08,,Lawyer-01,9049.4,True,Financial Planner Network
+MAT00510,CLI0079,LOC01,General Litigation,Closed,2024-11-29,2025-04-15,CSL09,Lawyer-02,5835.44,False,
+MAT00511,CLI0091,LOC01,Family Law,Closed,2024-06-04,2025-02-27,,Lawyer-11,1823.57,False,
+MAT00512,CLI0126,LOC02,Property Law,Closed,2025-04-21,2025-09-16,,Lawyer-13,5028.88,True,Mortgage Broker Co
+MAT00513,CLI0144,LOC01,Family Law,Open,2025-11-04,,,Lawyer-21,4679.35,True,Existing Client Referral
+MAT00514,CLI0212,LOC02,General Litigation,Open,2025-10-11,,CSL02,Lawyer-01,8691.7,False,
+MAT00515,CLI0141,LOC02,Family Law,Closed,2024-06-04,2025-05-02,,Lawyer-04,8294.98,False,
+MAT00516,CLI0152,LOC02,"Wills, Probate & Estates",Closed,2024-01-11,2024-05-06,,Lawyer-02,10853.39,True,Accountant Partners
+MAT00517,CLI0056,LOC02,Family Law,Closed,2024-02-05,2024-04-16,,Lawyer-07,12333.88,False,
+MAT00518,CLI0045,LOC01,Family Law,Open,2025-07-12,,CSL06,Lawyer-08,6783.89,False,
+MAT00519,CLI0056,LOC02,Family Law,Closed,2024-09-30,2024-12-05,,Lawyer-18,3635.18,False,
+MAT00520,CLI0065,LOC01,Family Law,Closed,2025-01-18,2025-11-05,CSL02,Lawyer-09,1167.29,False,
+MAT00521,CLI0212,LOC02,"Wills, Probate & Estates",Closed,2024-10-23,2025-07-02,,Lawyer-08,2823.6,False,
+MAT00522,CLI0015,LOC02,Property Law,Closed,2024-07-22,2025-08-20,,Lawyer-01,10742.89,True,Financial Planner Network
+MAT00523,CLI0066,LOC02,Property Law,Written off,2025-03-25,2025-05-01,,Lawyer-16,1729.06,False,
+MAT00524,CLI0001,LOC01,Property Law,Closed,2024-12-26,2025-04-07,,Lawyer-13,9239.92,False,
+MAT00525,CLI0167,LOC01,"Wills, Probate & Estates",Closed,2024-07-13,2025-01-11,,Lawyer-16,12516.35,False,
+MAT00526,CLI0150,LOC01,Property Law,Closed,2024-10-31,2024-12-11,,Lawyer-23,14493.05,True,Existing Client Referral
+MAT00527,CLI0171,LOC01,General Litigation,Closed,2025-01-23,2025-06-08,CSL02,Lawyer-16,1025.38,False,
+MAT00528,CLI0006,LOC01,Family Law,Closed,2024-04-24,2024-06-16,,Lawyer-06,26986.83,False,
+MAT00529,CLI0067,LOC02,Family Law,Closed,2024-01-02,2024-11-25,,Lawyer-11,1437.37,False,
+MAT00530,CLI0182,LOC01,General Litigation,Written off,2024-06-07,2024-07-02,,Lawyer-11,4075.73,False,
+MAT00531,CLI0093,LOC01,Property Law,Closed,2024-06-27,2025-01-11,,Lawyer-13,511.51,False,
+MAT00532,CLI0112,LOC02,Family Law,Closed,2024-01-27,2024-07-11,CSL05,Lawyer-04,3380.68,False,
+MAT00533,CLI0211,LOC01,"Wills, Probate & Estates",Closed,2024-03-14,2024-08-17,,Lawyer-12,6406.11,False,
+MAT00534,CLI0219,LOC02,Property Law,Closed,2025-09-08,2025-11-18,,Lawyer-13,5128.77,False,
+MAT00535,CLI0161,LOC02,"Wills, Probate & Estates",Closed,2024-05-04,2024-09-09,,Lawyer-10,6712.73,False,
+MAT00536,CLI0092,LOC01,Family Law,Open,2025-04-07,,CSL09,Lawyer-02,19692.42,False,
+MAT00537,CLI0111,LOC02,"Wills, Probate & Estates",Closed,2024-05-25,2025-03-22,,Lawyer-21,4662.8,False,
+MAT00538,CLI0077,LOC02,"Wills, Probate & Estates",Closed,2024-06-13,2025-01-07,,Lawyer-02,664.64,False,
+MAT00539,CLI0020,LOC01,Property Law,Closed,2024-07-03,2024-12-17,,Lawyer-13,9246.46,True,Financial Planner Network
+MAT00540,CLI0100,LOC01,Property Law,Closed,2024-05-13,2025-04-12,,Lawyer-05,1930.93,True,Financial Planner Network
+MAT00541,CLI0020,LOC01,Family Law,Written off,2025-09-05,2025-10-29,,Lawyer-11,23824.29,False,
+MAT00542,CLI0173,LOC02,"Wills, Probate & Estates",Written off,2024-05-21,2025-06-20,,Lawyer-02,9014.34,True,Accountant Partners
+MAT00543,CLI0028,LOC01,Family Law,Closed,2024-03-31,2025-01-05,CSL04,Lawyer-03,3776.6,False,
+MAT00544,CLI0131,LOC02,"Wills, Probate & Estates",Written off,2024-02-18,2024-04-23,,Lawyer-25,19263.24,True,Real Estate Alliance
+MAT00545,CLI0008,LOC01,Family Law,Closed,2025-03-14,2025-06-10,CSL07,Lawyer-13,4290.28,False,
+MAT00546,CLI0100,LOC01,"Wills, Probate & Estates",Closed,2024-02-06,2024-09-29,,Lawyer-06,9554.28,False,
+MAT00547,CLI0195,LOC01,"Wills, Probate & Estates",Written off,2024-02-20,2024-03-25,,Lawyer-25,7251.34,False,
+MAT00548,CLI0068,LOC02,Family Law,Closed,2025-08-11,2025-12-25,CSL07,Lawyer-03,1292.86,False,
+MAT00549,CLI0134,LOC02,Family Law,Open,2025-03-28,,CSL10,Lawyer-22,3539.8,True,Real Estate Alliance
+MAT00550,CLI0218,LOC01,"Wills, Probate & Estates",Closed,2024-05-08,2025-03-25,,Lawyer-04,6629.19,False,
+MAT00551,CLI0177,LOC02,Family Law,Closed,2024-05-12,2025-05-19,,Lawyer-17,12082.6,False,
+MAT00552,CLI0065,LOC01,Family Law,Closed,2024-06-24,2024-11-07,CSL08,Lawyer-11,7451.56,False,
+MAT00553,CLI0167,LOC01,General Litigation,Open,2025-09-23,,,Lawyer-17,8289.58,False,
+MAT00554,CLI0006,LOC01,"Wills, Probate & Estates",Closed,2024-05-06,2024-10-01,,Lawyer-21,6489.62,False,
+MAT00555,CLI0013,LOC02,Family Law,Closed,2024-03-27,2025-02-20,,Lawyer-22,5167.23,False,
+MAT00556,CLI0120,LOC02,Family Law,Open,2025-04-15,,,Lawyer-17,5560.07,True,Accountant Partners
+MAT00557,CLI0132,LOC02,Property Law,Closed,2024-11-04,2025-11-19,,Lawyer-13,17651.45,False,
+MAT00558,CLI0199,LOC02,Property Law,Written off,2024-11-10,2025-01-31,,Lawyer-08,2634.02,False,
+MAT00559,CLI0129,LOC02,General Litigation,Open,2025-06-02,,CSL05,Lawyer-15,6617.43,True,Existing Client Referral
+MAT00560,CLI0105,LOC02,Property Law,Closed,2024-07-15,2025-06-08,,Lawyer-23,4322.31,False,
+MAT00561,CLI0029,LOC01,"Wills, Probate & Estates",Open,2025-11-30,,,Lawyer-21,3937.19,True,Real Estate Alliance
+MAT00562,CLI0078,LOC01,"Wills, Probate & Estates",Closed,2024-02-10,2024-04-20,,Lawyer-09,15946.03,False,
+MAT00563,CLI0205,LOC02,Family Law,Closed,2024-07-10,2025-01-18,,Lawyer-14,9336.68,False,
+MAT00564,CLI0173,LOC02,Family Law,Closed,2024-11-30,2025-01-18,,Lawyer-04,12157.44,True,Accountant Partners
+MAT00565,CLI0193,LOC01,"Wills, Probate & Estates",Closed,2024-04-13,2024-12-21,,Lawyer-11,8289.35,False,
+MAT00566,CLI0135,LOC01,"Wills, Probate & Estates",Closed,2024-07-25,2025-02-03,,Lawyer-08,10079.49,True,Mortgage Broker Co
+MAT00567,CLI0187,LOC01,General Litigation,Closed,2025-05-24,2025-12-10,,Lawyer-13,5457.07,False,
+MAT00568,CLI0095,LOC02,Property Law,Closed,2024-08-10,2024-12-02,,Lawyer-25,2279.55,False,
+MAT00569,CLI0018,LOC02,General Litigation,Closed,2024-08-10,2025-03-21,CSL08,Lawyer-16,9214.48,False,
+MAT00570,CLI0130,LOC01,"Wills, Probate & Estates",Closed,2024-04-16,2024-11-30,,Lawyer-20,5346.31,False,
+MAT00571,CLI0126,LOC02,"Wills, Probate & Estates",Closed,2024-04-09,2024-11-04,,Lawyer-04,1481.63,True,Real Estate Alliance
+MAT00572,CLI0209,LOC02,Property Law,Closed,2024-04-30,2025-03-16,,Lawyer-20,5738.27,False,
+MAT00573,CLI0145,LOC01,"Wills, Probate & Estates",Closed,2024-01-24,2024-07-18,,Lawyer-07,9089.6,False,
+MAT00574,CLI0156,LOC01,"Wills, Probate & Estates",Open,2025-11-20,,,Lawyer-09,10322.84,False,
+MAT00575,CLI0134,LOC02,"Wills, Probate & Estates",Closed,2024-11-02,2024-12-02,,Lawyer-01,3020.36,True,Accountant Partners
+MAT00576,CLI0184,LOC01,"Wills, Probate & Estates",Closed,2024-05-25,2025-02-07,,Lawyer-08,4991.05,False,
+MAT00577,CLI0094,LOC01,Family Law,Closed,2025-05-14,2025-05-31,,Lawyer-23,2585.93,False,
+MAT00578,CLI0128,LOC02,General Litigation,Open,2025-11-04,,,Lawyer-08,14719.22,False,
+MAT00579,CLI0067,LOC02,General Litigation,Open,2025-10-15,,,Lawyer-20,2600.75,False,
+MAT00580,CLI0145,LOC01,"Wills, Probate & Estates",Closed,2024-03-30,2024-10-16,,Lawyer-23,5741.35,True,Mortgage Broker Co
+MAT00581,CLI0139,LOC01,"Wills, Probate & Estates",Closed,2024-02-18,2024-05-30,,Lawyer-03,11338.29,False,
+MAT00582,CLI0209,LOC02,Family Law,Open,2025-11-25,,CSL01,Lawyer-23,28720.63,True,Existing Client Referral
+MAT00583,CLI0164,LOC02,Property Law,Closed,2024-05-23,2025-04-28,,Lawyer-03,5579.48,False,
+MAT00584,CLI0007,LOC02,Family Law,Closed,2025-04-21,2025-05-25,CSL08,Lawyer-18,14976.67,False,
+MAT00585,CLI0032,LOC02,Family Law,Closed,2025-01-26,2025-09-14,,Lawyer-05,7487.88,True,Financial Planner Network
+MAT00586,CLI0132,LOC02,Family Law,Closed,2024-08-03,2024-08-18,CSL09,Lawyer-06,13567.87,False,
+MAT00587,CLI0133,LOC01,Family Law,Open,2025-11-05,,CSL08,Lawyer-25,18855.97,True,Accountant Partners
+MAT00588,CLI0173,LOC02,Family Law,Open,2025-06-25,,CSL02,Lawyer-12,7020.65,False,
+MAT00589,CLI0031,LOC01,Property Law,Open,2025-01-10,,,Lawyer-21,5912.88,False,
+MAT00590,CLI0081,LOC01,Property Law,Closed,2024-10-21,2025-02-10,,Lawyer-25,7619.47,True,Mortgage Broker Co
+MAT00591,CLI0220,LOC01,Family Law,Closed,2024-07-15,2024-09-21,,Lawyer-17,8187.89,False,
+MAT00592,CLI0018,LOC02,"Wills, Probate & Estates",Closed,2024-02-19,2024-09-11,,Lawyer-24,4433.7,False,
+MAT00593,CLI0176,LOC01,Family Law,Closed,2024-12-23,2025-11-16,,Lawyer-13,9380.12,False,
+MAT00594,CLI0017,LOC02,Property Law,Open,2025-07-24,,,Lawyer-25,2775.05,False,
+MAT00595,CLI0208,LOC01,General Litigation,Closed,2024-03-05,2024-06-05,CSL10,Lawyer-22,16059.52,True,Financial Planner Network
+MAT00596,CLI0123,LOC01,"Wills, Probate & Estates",Closed,2024-01-06,2024-03-06,,Lawyer-16,7782.03,False,
+MAT00597,CLI0042,LOC01,General Litigation,Open,2025-11-29,,,Lawyer-05,9123.97,False,
+MAT00598,CLI0080,LOC01,Family Law,Closed,2024-02-29,2025-01-01,CSL06,Lawyer-05,7233.38,False,
+MAT00599,CLI0171,LOC01,Property Law,Open,2025-02-16,,,Lawyer-12,36609.85,False,
+MAT00600,CLI0097,LOC02,"Wills, Probate & Estates",Closed,2025-05-23,2025-06-06,,Lawyer-05,3987.09,False,
+MAT00601,CLI0027,LOC01,Property Law,Closed,2024-08-28,2024-09-17,,Lawyer-14,4875.23,True,Real Estate Alliance
+MAT00602,CLI0091,LOC01,General Litigation,Open,2025-03-09,,,Lawyer-20,23404.32,False,
+MAT00603,CLI0180,LOC01,"Wills, Probate & Estates",Closed,2024-01-29,2024-10-06,,Lawyer-23,7766.0,True,Real Estate Alliance
+MAT00604,CLI0217,LOC01,Property Law,Closed,2024-09-21,2025-08-24,,Lawyer-17,2287.24,True,Financial Planner Network
+MAT00605,CLI0047,LOC02,"Wills, Probate & Estates",Closed,2024-01-19,2024-12-21,,Lawyer-24,5060.08,True,Mortgage Broker Co
+MAT00606,CLI0164,LOC02,Property Law,Closed,2025-09-18,2025-11-16,,Lawyer-03,2113.85,False,
+MAT00607,CLI0124,LOC02,General Litigation,Closed,2024-06-13,2025-07-14,,Lawyer-20,3088.41,False,
+MAT00608,CLI0207,LOC02,Family Law,Open,2025-05-01,,CSL05,Lawyer-23,2666.49,False,
+MAT00609,CLI0118,LOC01,Family Law,Closed,2025-05-04,2025-11-19,CSL08,Lawyer-14,14871.15,False,
+MAT00610,CLI0172,LOC01,Property Law,Closed,2025-02-22,2025-04-19,,Lawyer-11,2645.45,False,
+MAT00611,CLI0095,LOC02,Family Law,Closed,2024-04-12,2025-03-30,CSL02,Lawyer-06,28558.35,False,
+MAT00612,CLI0077,LOC02,Family Law,Closed,2024-04-28,2025-02-14,,Lawyer-23,2292.47,False,
+MAT00613,CLI0138,LOC01,"Wills, Probate & Estates",Closed,2024-03-15,2025-02-16,,Lawyer-13,24911.47,False,
+MAT00614,CLI0191,LOC01,"Wills, Probate & Estates",Closed,2024-04-17,2024-11-22,,Lawyer-06,3649.44,False,
+MAT00615,CLI0093,LOC01,"Wills, Probate & Estates",Closed,2025-01-17,2025-07-17,,Lawyer-09,4292.91,False,
+MAT00616,CLI0004,LOC01,Property Law,Closed,2024-04-19,2025-02-26,,Lawyer-19,14567.21,True,Financial Planner Network
+MAT00617,CLI0187,LOC01,General Litigation,Closed,2025-02-20,2025-09-03,CSL04,Lawyer-17,638.9,False,
+MAT00618,CLI0203,LOC01,Family Law,Closed,2024-02-06,2024-10-17,,Lawyer-07,5293.26,True,Existing Client Referral
+MAT00619,CLI0049,LOC01,Family Law,Closed,2024-12-23,2025-09-10,CSL02,Lawyer-07,1413.62,False,
+MAT00620,CLI0147,LOC01,Family Law,Closed,2024-09-22,2024-11-26,CSL03,Lawyer-21,1103.14,False,
+MAT00621,CLI0038,LOC01,"Wills, Probate & Estates",Closed,2025-08-04,2025-08-16,,Lawyer-15,9132.54,True,Accountant Partners
+MAT00622,CLI0040,LOC01,Family Law,Closed,2024-07-30,2024-11-24,,Lawyer-08,14907.29,True,Existing Client Referral
+MAT00623,CLI0151,LOC02,"Wills, Probate & Estates",Closed,2024-09-23,2025-01-22,,Lawyer-14,713.61,False,
+MAT00624,CLI0151,LOC02,Property Law,Open,2025-09-21,,,Lawyer-06,5884.29,False,
+MAT00625,CLI0050,LOC02,"Wills, Probate & Estates",Closed,2024-08-21,2024-12-29,,Lawyer-02,3919.23,False,
+MAT00626,CLI0039,LOC01,Family Law,Closed,2024-05-27,2025-06-19,CSL06,Lawyer-05,759.18,False,
+MAT00627,CLI0133,LOC01,Family Law,Closed,2024-03-06,2025-03-04,,Lawyer-24,3194.25,True,Real Estate Alliance
+MAT00628,CLI0104,LOC01,"Wills, Probate & Estates",Open,2025-09-21,,,Lawyer-11,1390.77,False,
+MAT00629,CLI0052,LOC01,Property Law,Open,2025-11-10,,,Lawyer-20,31265.98,True,Existing Client Referral
+MAT00630,CLI0028,LOC01,Property Law,Closed,2024-07-15,2024-10-02,,Lawyer-03,4209.05,False,
+MAT00631,CLI0113,LOC01,General Litigation,Closed,2024-05-28,2025-06-30,CSL01,Lawyer-09,2366.46,False,
+MAT00632,CLI0047,LOC02,General Litigation,Closed,2024-03-04,2025-01-08,,Lawyer-20,5199.74,False,
+MAT00633,CLI0202,LOC02,"Wills, Probate & Estates",Closed,2024-11-18,2025-10-03,,Lawyer-11,17035.23,False,
+MAT00634,CLI0050,LOC02,"Wills, Probate & Estates",Open,2025-06-28,,,Lawyer-25,19643.55,False,
+MAT00635,CLI0123,LOC01,Family Law,Closed,2024-03-26,2024-12-12,,Lawyer-11,16521.18,True,Real Estate Alliance
+MAT00636,CLI0127,LOC01,Property Law,Closed,2024-10-16,2025-10-22,,Lawyer-22,1510.88,False,
+MAT00637,CLI0125,LOC01,Property Law,Closed,2025-08-10,2025-11-19,,Lawyer-16,4583.1,False,
+MAT00638,CLI0190,LOC01,"Wills, Probate & Estates",Closed,2024-08-09,2025-03-02,,Lawyer-13,7632.47,False,
+MAT00639,CLI0076,LOC02,"Wills, Probate & Estates",Closed,2025-10-06,2025-11-03,,Lawyer-18,2284.21,False,
+MAT00640,CLI0007,LOC02,Family Law,Closed,2024-12-11,2025-09-21,,Lawyer-25,2059.13,True,Real Estate Alliance
+MAT00641,CLI0083,LOC01,Family Law,Closed,2025-04-23,2025-11-03,,Lawyer-17,1620.01,False,
+MAT00642,CLI0068,LOC02,Family Law,Written off,2024-09-14,2025-06-25,CSL01,Lawyer-07,6574.16,False,
+MAT00643,CLI0135,LOC01,Property Law,Open,2025-11-18,,,Lawyer-16,13194.52,True,Real Estate Alliance
+MAT00644,CLI0042,LOC01,Family Law,Closed,2024-03-01,2025-02-15,CSL05,Lawyer-22,2765.02,True,Financial Planner Network
+MAT00645,CLI0182,LOC01,"Wills, Probate & Estates",Closed,2024-02-25,2024-10-22,,Lawyer-02,3411.94,False,
+MAT00646,CLI0217,LOC01,General Litigation,Open,2025-04-17,,,Lawyer-11,6677.17,False,
+MAT00647,CLI0173,LOC02,General Litigation,Open,2025-09-30,,,Lawyer-06,7981.43,False,
+MAT00648,CLI0133,LOC01,Family Law,Closed,2024-04-02,2025-04-28,CSL10,Lawyer-09,1578.54,False,
+MAT00649,CLI0049,LOC01,General Litigation,Open,2025-03-26,,,Lawyer-19,14429.77,False,
+MAT00650,CLI0118,LOC01,Family Law,Written off,2024-08-13,2025-05-29,,Lawyer-03,2192.41,False,
