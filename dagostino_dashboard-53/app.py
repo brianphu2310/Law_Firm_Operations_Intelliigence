@@ -20,6 +20,7 @@ Run:
     streamlit run app.py
 """
 
+import math
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
@@ -47,6 +48,9 @@ GREEN_TINT = "#f0fdf4"
 RED_TINT = "#fef2f2"
 AMBER_TINT = "#fffbeb"
 
+# one accent colour per practice/search platform (same order as PLATFORM_OPTIONS)
+PLATFORM_COLOR_LIST = ["#22d3ee", "#34d399", "#fbbf24", "#fb7185", "#a78bfa", "#60a5fa", "#f472b6"]
+
 CSS = f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -66,14 +70,16 @@ section[data-testid="stSidebar"] > div {{
     background: {BG} !important;
 }}
 section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {{
-    background: #14171c; border-radius: 16px; padding: 12px 12px 8px 12px;
+    background: #14171c; border-radius: 16px; padding: 14px 12px 10px 12px;
     box-shadow: 0 10px 26px rgba(15,23,42,0.18), 0 3px 7px rgba(15,23,42,0.11);
+    /* kéo khối đen xuống tận chân trang: đáy cách viền dưới 11px = cùng đường đáy với hàng card cuối */
+    box-sizing: border-box; min-height: calc(100vh - 19px);
 }}
 section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] p,
 section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] label,
 section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] span {{ color: #ffffff !important; }}
 section[data-testid="stSidebar"] [data-testid="stCaptionContainer"] p {{ color: rgba(255,255,255,0.6) !important; }}
-.sidebar-brand {{ display:flex; align-items:center; gap:8px; margin-bottom:10px; }}
+.sidebar-brand {{ display:flex; align-items:center; gap:8px; margin-bottom:14px; }}
 .sidebar-brand-badge {{
     background:#ffffff; width:26px; height:26px; border-radius:7px;
     display:flex; align-items:center; justify-content:center;
@@ -82,7 +88,7 @@ section[data-testid="stSidebar"] [data-testid="stCaptionContainer"] p {{ color: 
 section[data-testid="stSidebar"] .sidebar-brand-badge {{ color:#14171c !important; }}
 .sidebar-brand-name {{ font-weight:700; font-size:13px; color:#ffffff !important; }}
 .sidebar-label {{ font-size:12.5px; font-weight:700; color:#ffffff; margin-bottom:2px; }}
-.sidebar-sub {{ font-size:11px; color:rgba(255,255,255,0.55); margin-bottom:8px; line-height:1.4; }}
+.sidebar-sub {{ font-size:11px; color:rgba(255,255,255,0.55); margin-bottom:12px; line-height:1.4; }}
 
 /* Plotly never draws narrower than ~150px — nudge it so the sidebar's polar chart isn't clipped */
 section[data-testid="stSidebar"] [data-testid="stPlotlyChart"] {{ overflow: visible !important; }}
@@ -91,10 +97,10 @@ section[data-testid="stSidebar"] [data-testid="stPlotlyChart"] .js-plotly-plot {
 /* Platform picker rows — real full-width clickable buttons, not radio dots */
 section[data-testid="stSidebar"] div[data-testid="stButton"] button {{
     width: 100% !important; text-align: left !important; justify-content: flex-start !important;
-    border-radius: 10px !important; padding: 5px 12px !important; font-size: 12.5px !important;
+    border-radius: 10px !important; padding: 6px 12px !important; font-size: 12.5px !important;
     font-weight: 500 !important; color: rgba(255,255,255,0.75) !important;
     background: rgba(255,255,255,0.06) !important; border: 1px solid transparent !important;
-    margin-bottom: 2px !important; white-space: normal !important; line-height: 1.2 !important;
+    margin-bottom: 4px !important; white-space: normal !important; line-height: 1.25 !important;
 }}
 section[data-testid="stSidebar"] div[data-testid="stButton"] button:hover {{
     background: rgba(255,255,255,0.14) !important; color: #ffffff !important;
@@ -207,7 +213,52 @@ table.simple td {{ padding:6px 8px; border-bottom:1px solid #f1f5f9; color:{INK}
 .branch-council {{ font-size:11px; color:{MUTED}; margin-bottom:8px; }}
 </style>
 """
-st.markdown(CSS, unsafe_allow_html=True)
+def _sidebar_fx_css():
+    per_btn = "".join(f'div[class*="st-key-platform_btn_{i}"]{{--pc:{c};}}' for i, c in enumerate(PLATFORM_COLOR_LIST))
+    return """<style>
+/* ===== Sidebar: soft gradient background + one colour cue per platform (no looping animation) ===== */
+section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {
+    background:
+        radial-gradient(120% 40% at 0% 0%, rgba(34,211,238,0.10), transparent 62%),
+        linear-gradient(180deg, #14181f 0%, #101720 100%) !important;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+section[data-testid="stSidebar"] .sidebar-brand-badge {
+    background: linear-gradient(135deg, #22b8cf, #3b82f6) !important; color: #ffffff !important;
+}
+.sidebar-divider { height: 1px; margin: 10px 0 8px; background: rgba(255,255,255,0.12); }
+
+section[data-testid="stSidebar"] div[data-testid="stButton"] button {
+    position: relative !important; padding: 6px 12px 6px 28px !important;
+    background: rgba(255,255,255,0.06) !important; border: 1px solid transparent !important;
+    color: rgba(255,255,255,0.80) !important; transition: background .15s ease, border-color .15s ease !important;
+}
+section[data-testid="stSidebar"] div[data-testid="stButton"] button::before {
+    content: ""; position: absolute; left: 12px; top: 50%; width: 7px; height: 7px; margin-top: -3.5px; border-radius: 50%;
+    background: var(--pc, #22d3ee);
+}
+section[data-testid="stSidebar"] div[data-testid="stButton"] button:hover {
+    background: rgba(255,255,255,0.12) !important; color: #ffffff !important;
+}
+section[data-testid="stSidebar"] div[data-testid="stButton"] button[kind="primary"] {
+    background: #ffffff !important; color: #14171c !important; font-weight: 700 !important;
+    border-color: #ffffff !important; box-shadow: 0 0 0 1.5px var(--pc, #22d3ee) !important;
+}
+/* short screens: drop the repeated legend (each button already carries its colour dot) and tighten spacing so the sidebar never scrolls */
+@media (max-height: 880px) {
+    .sb-legend { display: none !important; }
+    section[data-testid="stSidebar"] div[data-testid="stButton"] button { padding-top: 4px !important; padding-bottom: 4px !important; }
+    .sidebar-brand { margin-bottom: 8px !important; }
+    .sidebar-divider { margin: 6px 0 6px !important; }
+}
+@media (max-height: 800px) {
+    .sidebar-sub { display: none; }
+    section[data-testid="stSidebar"] div[data-testid="stButton"] button { margin-bottom: 3px !important; }
+}
+""" + per_btn + "</style>"
+
+
+st.markdown(CSS + _sidebar_fx_css(), unsafe_allow_html=True)
 
 # ----------------------------------------------------------------------
 # DATA — sample data, internally consistent across all sections.
@@ -809,6 +860,14 @@ def render_html_table(df, money_cols=None, status_col=None):
     st.write(show.to_html(escape=False, index=False, classes="simple"), unsafe_allow_html=True)
 
 
+PLATFORM_COLORS = dict(zip(PLATFORM_OPTIONS.keys(), PLATFORM_COLOR_LIST))
+
+
+def _rgba(hex_color, alpha):
+    h = hex_color.lstrip("#")
+    return f"rgba({int(h[0:2], 16)},{int(h[2:4], 16)},{int(h[4:6], 16)},{alpha})"
+
+
 # ----------------------------------------------------------------------
 # Sidebar — practice/search platform selector (drives the live panel
 # on Overview and the default alternative in Simulator Section 4)
@@ -837,8 +896,8 @@ with st.sidebar:
     }
     short_names = [SIDEBAR_SHORT_NAMES.get(n, n) for n in platform_names]
     short_to_full = {v: k for k, v in SIDEBAR_SHORT_NAMES.items()}
-    bar_colors = [TEAL if n == selected_platform else "rgba(127,208,214,0.35)" for n in platform_names]
-    line_colors = [TEAL if n == selected_platform else "rgba(255,255,255,0.3)" for n in platform_names]
+    bar_colors = [_rgba(PLATFORM_COLORS[n], 0.90 if n == selected_platform else 0.30) for n in platform_names]
+    line_colors = ["#ffffff" if n == selected_platform else "rgba(255,255,255,0.22)" for n in platform_names]
 
     st.markdown(
         '<div class="sidebar-label" style="margin-bottom:0px;">Annual cost — all platforms</div>'
@@ -853,7 +912,7 @@ with st.sidebar:
         customdata=[fmt_money(c) for c in platform_costs],
     ))
     fig_side.update_layout(
-        margin=dict(l=8, r=8, t=4, b=4), height=140,
+        margin=dict(l=8, r=8, t=6, b=6), height=140,
         paper_bgcolor="rgba(0,0,0,0)",
         font=dict(family="Inter, sans-serif", color="rgba(255,255,255,0.8)", size=9),
         polar=dict(
@@ -877,15 +936,15 @@ with st.sidebar:
 
     legend_items = "".join(
         f'<div style="display:flex; align-items:center; gap:5px; font-size:10px; '
-        f'color:{"#ffffff" if n == selected_platform else "rgba(255,255,255,0.6)"};">'
-        f'<span style="width:7px; height:7px; border-radius:999px; flex-shrink:0; '
-        f'background:{TEAL if n == selected_platform else "rgba(255,255,255,0.3)"};"></span>'
+        f'color:{"#ffffff" if n == selected_platform else "rgba(255,255,255,0.62)"}; font-weight:{"700" if n == selected_platform else "400"};">'
+        f'<span style="width:7px; height:7px; border-radius:999px; flex-shrink:0; background:{PLATFORM_COLORS[n]}; '
+        f'opacity:{"1" if n == selected_platform else "0.5"};"></span>'
         f'{SIDEBAR_SHORT_NAMES.get(n, n)}</div>'
         for n in platform_names
     )
     st.markdown(
-        f'<div style="display:grid; grid-template-columns:1fr 1fr; gap:3px 8px; margin-top:4px;">{legend_items}</div>'
-        '<div style="height:1px; background:rgba(255,255,255,0.15); margin:10px 0 8px;"></div>',
+        f'<div class="sb-legend" style="display:grid; grid-template-columns:1fr 1fr; gap:5px 8px; margin-top:8px;">{legend_items}</div>'
+        '<div class="sidebar-divider"></div>',
         unsafe_allow_html=True,
     )
 
@@ -894,9 +953,9 @@ with st.sidebar:
         '<div class="sidebar-sub">Switch to see the cost impact live on Overview.</div>',
         unsafe_allow_html=True,
     )
-    for platform_name in PLATFORM_OPTIONS:
+    for i, platform_name in enumerate(PLATFORM_OPTIONS):          # index keys → stable CSS hooks for the per-platform colour
         is_active = st.session_state.sidebar_platform == platform_name
-        if st.button(platform_name, key=f"platform_btn_{platform_name}",
+        if st.button(platform_name, key=f"platform_btn_{i}",
                      type="primary" if is_active else "secondary", width="stretch"):
             st.session_state.sidebar_platform = platform_name
             st.rerun()
@@ -948,18 +1007,25 @@ section = st.session_state.active_section
 def render_overview():
     # ================== CHỈNH 1 SỐ DUY NHẤT ==================
     # SCREEN_H = chiều cao vùng hiển thị của trình duyệt (px). Toàn bộ card/globe tự co giãn theo số này.
-    # Gợi ý: 768 (laptop nhỏ) · 800 · 900 (mặc định) · 927 · 1080
-    SCREEN_H = 900
+    # Gợi ý: 768 (laptop nhỏ) · 800 · 890 (mặc định) · 927 · 1080
+    SCREEN_H = 890
     # ==========================================================
 
-    _avail    = SCREEN_H - 245                                   # phần cao dành cho hero + 2 hàng card
-    GLOBE_H   = max(150, min(230, round(_avail * 0.32)))         # đường kính globe
-    ROW_H     = max(168, min(240, round((_avail - GLOBE_H) / 2)))  # mọi card nằm cạnh nhau cao bằng nhau
-    GLOBE_TOP = 30
-    NOTCH_R   = GLOBE_H // 2 + 12                                # bán kính vòng khoét
-    CX        = GLOBE_H // 2 + 14                                # tâm chung (tính từ mép phải)
+    _avail    = SCREEN_H - 179                                   # tổng cao của hero + 2 hàng card
+    ROW_H     = max(168, min(240, round(_avail * 0.31)))          # mọi card nằm cạnh nhau cao bằng nhau
+    HERO_H    = max(236, min(290, _avail - 2 * ROW_H))            # card hero lấy phần còn lại → tổng đúng _avail
+    ROW_H     = max(168, min(240, (_avail - HERO_H) // 2))        # cân lại nếu hero bị chặn min/max
+    GLOBE_TOP = 24                                               # lề trên của globe (không còn title)
+    GLOBE_H   = HERO_H - GLOBE_TOP - 32                          # 32px dưới globe dành cho dòng chú thích
+    GLOBE_H  -= GLOBE_H % 2                                      # số chẵn → tâm globe nằm đúng pixel
+    RIGHT_GAP = 14                                               # globe cách mép phải card hero
+    CX        = GLOBE_H // 2 + RIGHT_GAP                         # tâm chung (tính từ mép phải)
     CY        = GLOBE_TOP + GLOBE_H // 2                         # tâm chung (tính từ mép trên)
-    HERO_H    = GLOBE_TOP + GLOBE_H + 34
+    NOTCH_R   = GLOBE_H / 2 - 0.5                                # = bán kính quả cầu Plotly (vẽ vừa khít ô GLOBE_H×GLOBE_H);
+                                                                 #   trừ 0.5px để globe phủ lên mép khoét, không hở khe
+    SC_H      = HERO_H - 23                                      # Stage Conversion phủ kín chiều cao lòng card hero
+    BL_H      = ROW_H - 44                                       # vùng biểu đồ vòng của card Billing
+    TL_H      = ROW_H - 44                                       # vùng timeline của card Deadlines
     SHADOW    = "0 10px 28px rgba(15,23,42,0.20), 0 3px 8px rgba(15,23,42,0.12)"
 
     st.markdown(f"""
@@ -970,7 +1036,9 @@ def render_overview():
 
     /* nhịp dọc gọn hơn để cả Overview vừa 1 màn hình */
     .block-container {{ padding-bottom:0.3rem !important; }}
-    .kpi-card {{ margin-bottom:4px !important; }}
+    /* KPI: khung markdown của Streamlit có margin-bottom:-1rem → card PHẢI giữ margin-bottom:16px để bù lại,
+       nếu giảm số này hàng KPI thấp hơn card và card hero đè lên. */
+    .kpi-card {{ margin-bottom:16px !important; }}
     .st-key-topbar {{ padding:6px 16px !important; }}
     .bar-row {{ margin-bottom:9px; }}
     .bar-head {{ margin-bottom:3px; }}
@@ -989,7 +1057,6 @@ def render_overview():
     .deadline-item {{ display:flex; gap:12px; align-items:center; margin-bottom:12px; }}
     .deadline-item > div:last-child {{ min-width:0; }}
     .deadline-title, .deadline-sub {{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }}
-    .date-badge {{ height:38px !important; }}
 
     /* HERO: 1 card bị khoét tròn; globe nằm trong chỗ khoét. drop-shadow đặt ở wrapper để
        bóng đi theo đường khoét (mask sẽ cắt mất box-shadow) → khớp bóng với card bên cạnh. */
@@ -1002,15 +1069,70 @@ def render_overview():
         padding:0.7rem {CX + NOTCH_R + 10}px 0.6rem 0.85rem !important; overflow:hidden;
         -webkit-mask: radial-gradient(circle {NOTCH_R}px at calc(100% - {CX}px) {CY}px, transparent {NOTCH_R-1}px, #000 {NOTCH_R}px);
                 mask: radial-gradient(circle {NOTCH_R}px at calc(100% - {CX}px) {CY}px, transparent {NOTCH_R-1}px, #000 {NOTCH_R}px); }}
-    div[class*="st-key-heroglobe"] {{ position:absolute; top:{GLOBE_TOP}px; right:{CX - GLOBE_H//2}px; width:{GLOBE_H}px; height:{GLOBE_H}px; z-index:5; text-align:center; }}
-    div[class*="st-key-heroglobe"] .globe-title {{ position:absolute; top:-24px; left:0; right:0; font-size:12.5px; font-weight:700; color:{INK}; white-space:nowrap; }}
-    div[class*="st-key-heroglobe"] .globe-cap {{ margin-top:-4px; font-size:10.5px; color:{MUTED}; white-space:nowrap; text-align:center; }}
+    div[class*="st-key-heroglobe"] {{ position:absolute; top:{GLOBE_TOP}px; right:{RIGHT_GAP}px; width:{GLOBE_H}px; height:{GLOBE_H}px; z-index:5; text-align:center; }}
+    div[class*="st-key-heroglobe"] .globe-cap {{ font-size:10.5px; color:{MUTED}; white-space:nowrap; text-align:center; }}
+    /* ô đầu tiên của globe không được có lề → tâm quả cầu trùng tâm vòng khoét */
+    div[class*="st-key-heroglobe"] > div:first-child {{ margin:0 !important; }}
 
     /* Plotly không vẽ hẹp hơn ~150px → căn giữa để sidebar hẹp không cắt biểu đồ polar */
     section[data-testid="stSidebar"] [data-testid="stPlotlyChart"] {{ overflow:visible !important; }}
     section[data-testid="stSidebar"] [data-testid="stPlotlyChart"] .js-plotly-plot {{ margin-left:-9px; }}
     </style>
     """, unsafe_allow_html=True)
+
+    FX = """
+/* ============ STAGE CONVERSION — one colour per stage, flat and calm ============ */
+.sc-wrap { display:flex; flex-direction:column; gap:6px; height:__SC_H__px; }
+.sc-title { font-size:13.5px; font-weight:700; color:__INK__; line-height:1.2; flex:0 0 auto; }
+.sc-row { flex:1 1 0; min-height:0; display:flex; flex-direction:column; justify-content:center; gap:6px; padding:0 2px; }
+.sc-row + .sc-row { border-top:1px solid #f1f4f8; }
+.sc-top { display:flex; align-items:baseline; justify-content:space-between; gap:8px; min-width:0; }
+.sc-lbl { font-size:11px; color:__MUTED__; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
+.sc-pct { font-size:15px; font-weight:700; flex-shrink:0; line-height:1; }
+.sc-track { height:8px; border-radius:99px; background:#eef1f6; overflow:hidden; }
+.sc-fill { height:100%; border-radius:99px; animation:scGrow .9s cubic-bezier(.2,.8,.2,1) both; animation-delay:var(--d); }
+.sc-total { flex:0 0 auto; display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:7px 14px; border-radius:14px; color:#fff; background:linear-gradient(100deg, #0a8496, #2f7fd8); }
+.sc-total .big { font-size:21px; font-weight:800; line-height:1; flex-shrink:0; }
+.sc-total .txt { font-size:10.5px; line-height:1.25; text-align:right; min-width:0; }
+@keyframes scGrow { from { width:0; } }
+
+/* ============ BILLING — radial chart, draws itself once on load ============ */
+.bl-wrap { display:flex; align-items:center; gap:12px; height:__BL_H__px; }
+.bl-svg { flex:0 0 auto; height:100%; aspect-ratio:1; max-width:52%; overflow:visible; }
+.bl-ring { animation:blDraw 1.3s cubic-bezier(.3,.7,.2,1) both; animation-delay:var(--rd); }
+.bl-legend { flex:1; min-width:0; display:flex; flex-direction:column; justify-content:center; gap:10px; }
+.bl-item { display:flex; align-items:center; gap:8px; min-width:0; }
+.bl-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+.bl-txt { flex:1; min-width:0; }
+.bl-lab { font-size:11px; color:__MUTED__; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.bl-lab .s { display:none; }
+.bl-pct { font-size:9.5px; color:__FAINT__; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.bl-val { font-size:14px; font-weight:800; color:__INK__; flex-shrink:0; }
+div[class*="st-key-cardblock_r"] .card-title { overflow:hidden; text-overflow:ellipsis; }
+@media (max-width:1330px) { .bl-lab .f { display:none; } .bl-lab .s { display:inline; } .bl-pct { display:none; } .bl-svg { max-width:48%; } }
+@keyframes blDraw { from { stroke-dasharray:0 var(--c); } }
+
+/* ============ DEADLINES — quiet timeline ============ */
+.tl { position:relative; display:flex; flex-direction:column; justify-content:space-between; height:__TL_H__px; }
+.tl-line { position:absolute; left:22px; top:16px; bottom:16px; width:2px; border-radius:2px; background:#dbe7ec; }
+.tl-item { position:relative; z-index:1; display:flex; align-items:center; gap:10px; min-width:0; padding:2px 8px 2px 0;
+    border-radius:12px; transition:background .15s; animation:tlIn .45s ease-out both; animation-delay:var(--d); }
+.tl-item:hover { background:#f6fafb; }
+.tl-badge { width:44px; height:32px; border-radius:10px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+    font-size:11.5px; font-weight:800; background:var(--t); color:var(--ac); box-shadow:0 0 0 3px #fff; }
+.tl-body { min-width:0; flex:1; }
+.tl-body .deadline-title, .tl-body .deadline-sub { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.tl-chip { flex-shrink:0; font-size:9.5px; font-weight:700; padding:2px 7px; border-radius:99px; background:var(--t); color:var(--ac); }
+@keyframes tlIn { from { opacity:0; transform:translateY(6px); } }
+
+@media (prefers-reduced-motion: reduce) { .sc-fill, .bl-ring, .tl-item { animation:none !important; } }
+"""
+    FX = (FX.replace("__SC_H__", str(SC_H)).replace("__BL_H__", str(BL_H)).replace("__TL_H__", str(TL_H))
+            .replace("__INK__", INK).replace("__MUTED__", MUTED).replace("__FAINT__", FAINT))
+    FX = "\n".join(l for l in FX.splitlines() if l.strip())      # markdown kết thúc khối HTML ở dòng trống → không để dòng trống trong <style>
+    st.markdown('<span class="fit-css"></span>\n<style>\n' + FX + '\n</style>', unsafe_allow_html=True)
+
 
     def named_card(key):
         return st.container(border=True, key=f"cardblock_{key}")
@@ -1040,22 +1162,27 @@ def render_overview():
                                      font=dict(family="Inter, sans-serif", color=INK, size=11))
                     st.plotly_chart(ff, width="stretch", config={"displayModeBar": False})
                 with fc2:
-                    st.markdown('<div class="card-title">Stage Conversion</div>', unsafe_allow_html=True)
-                    spacer(4)
+                    STAGE_COLORS = [("#0a8496", "#4fb6c4"),      # teal
+                                    ("#2f7fd8", "#7ab0ec"),      # blue
+                                    ("#6366f1", "#a3a6f6"),      # indigo
+                                    ("#9061d6", "#bda2ec")]      # violet
+                    rows = ""
                     for i in range(1, len(funnel_stages)):
                         pct = round(funnel_values[i] / funnel_values[i - 1] * 100)
-                        st.markdown(
-                            f"""<div class="bar-row" style="margin-bottom:8px;">
-                              <div class="bar-head"><span class="lbl" style="font-size:11px;">{funnel_stages[i-1]} → {funnel_stages[i]}</span>
-                              <span class="val">{pct}%</span></div>
-                              <div class="bar-track"><div class="bar-fill" style="width:{pct}%; background:{TEAL};"></div></div></div>""",
-                            unsafe_allow_html=True)
+                        c1, c2 = STAGE_COLORS[i - 1]
+                        lbl = f"{funnel_stages[i-1]} → {funnel_stages[i]}"
+                        tip = f"{funnel_values[i-1]} → {funnel_values[i]}"
+                        rows += (f'<div class="sc-row" title="{tip}">'
+                                 f'<div class="sc-top"><span class="sc-lbl">{lbl}</span><span class="sc-pct" style="color:{c1};">{pct}%</span></div>'
+                                 f'<div class="sc-track"><div class="sc-fill" style="width:{pct}%;background:linear-gradient(90deg,{c1},{c2});--d:{0.08 * i:.2f}s;"></div></div></div>')
                     ov = round(funnel_values[-1] / funnel_values[0] * 100)
-                    st.markdown(f'<div style="font-size:11.5px; color:{MUTED};">Overall conversion: '
-                                f'<b style="color:{INK};">{ov}%</b> of inquiries become active matters.</div>', unsafe_allow_html=True)
+                    st.markdown(
+                        f'<div class="sc-wrap"><div class="sc-title">Stage Conversion</div>{rows}'
+                        f'<div class="sc-total"><span class="big">{ov}%</span>'
+                        f'<span class="txt">{funnel_values[-1]} of {funnel_values[0]} inquiries<br>become active matters</span></div></div>',
+                        unsafe_allow_html=True)
         with st.container(key="heroglobe"):
             gfig, g_total, g_n = branch_globe_fig(height=GLOBE_H)
-            st.markdown('<div class="globe-title">Global Matter Footprint</div>', unsafe_allow_html=True)
             st.plotly_chart(gfig, width="stretch", config={"displayModeBar": False, "scrollZoom": False})
             st.markdown(f'<div class="globe-cap"><b style="color:{INK};">{g_total}</b> matters · '
                         f'<b style="color:{INK};">{g_n}</b> countries · drag to rotate</div>', unsafe_allow_html=True)
@@ -1138,20 +1265,47 @@ def render_overview():
     with t2:
         with named_card("r3_bill"):
             st.markdown('<div class="card-title">Billing &amp; Trust Account Status (K$)</div>', unsafe_allow_html=True)
-            spacer(6)
-            gap = 20 if ROW_H >= 200 else 12
-            for lab, k, pct in [("Retainer Deposited (Trust)", 420, 76), ("Work-in-Progress (Unbilled)", 280, 50), ("Outstanding Invoices", 110, 20)]:
-                st.markdown(f'<div class="bar-row" style="margin-bottom:{gap}px;"><div class="bar-head"><span class="lbl">{lab}</span><span class="val">${k}K</span></div>'
-                            f'<div class="bar-track"><div class="bar-fill" style="width:{pct}%; background:{BILLING_BAR_COLORS[lab]};"></div></div></div>', unsafe_allow_html=True)
+            spacer(4)
+            BL = [("Retainer Deposited (Trust)", 420, 76, "#0a8496", "#4fb6c4"),
+                  ("Work-in-Progress (Unbilled)", 280, 50, "#6366f1", "#a3a6f6"),
+                  ("Outstanding Invoices", 110, 20, "#f59e0b", "#fbbf24")]
+            total_k = sum(x[1] for x in BL)
+            svg_defs, svg_rings, legend = "", "", ""
+            for n, (lab, k, pct, c1, c2) in enumerate(BL):
+                short = ["Trust retainer", "Work in progress", "Outstanding"][n]
+                r = 64 - n * 14
+                circ = 2 * math.pi * r
+                track = circ * 0.75                                  # 270° radial bar
+                fill = track * pct / 100
+                svg_defs += f'<linearGradient id="blg{n}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{c1}"/><stop offset="1" stop-color="{c2}"/></linearGradient>'
+                svg_rings += (f'<circle cx="80" cy="80" r="{r}" fill="none" stroke="#eef1f6" stroke-width="9" stroke-linecap="round" '
+                              f'stroke-dasharray="{track:.2f} {circ:.2f}" transform="rotate(135 80 80)"/>'
+                              f'<circle class="bl-ring" cx="80" cy="80" r="{r}" fill="none" stroke="url(#blg{n})" stroke-width="9" stroke-linecap="round" '
+                              f'stroke-dasharray="{fill:.2f} {circ:.2f}" transform="rotate(135 80 80)" style="--c:{circ:.2f};--rd:{n * 0.2:.2f}s;"/>')
+                legend += (f'<div class="bl-item" title="{lab}"><span class="bl-dot" style="background:{c1};"></span>'
+                           f'<div class="bl-txt"><div class="bl-lab"><span class="f">{lab}</span><span class="s">{short}</span></div><div class="bl-pct">{pct}% of target</div></div>'
+                           f'<span class="bl-val">${k}K</span></div>')
+            svg = (f'<svg class="bl-svg" viewBox="0 0 160 160" role="img" aria-label="Billing and trust account status"><defs>{svg_defs}</defs>{svg_rings}'
+                   f'<text x="80" y="79" text-anchor="middle" font-size="17" font-weight="800" fill="{INK}" font-family="Inter, sans-serif">${total_k}K</text>'
+                   f'<text x="80" y="92" text-anchor="middle" font-size="7.5" font-weight="600" fill="{FAINT}" letter-spacing="1.2" font-family="Inter, sans-serif">TOTAL</text></svg>')
+            st.markdown(f'<div class="bl-wrap">{svg}<div class="bl-legend">{legend}</div></div>', unsafe_allow_html=True)
     with t3:
         with named_card("r3_dead"):
             st.markdown('<div class="card-title">Upcoming Court Appearances &amp; Filings</div>', unsafe_allow_html=True)
-            spacer(6)
-            for d in DEADLINES[: (3 if ROW_H >= 200 else 2)]:
-                dt = pd.to_datetime(d["date"]); fg, bg = (TEAL, TEAL_TINT) if dt.month == 10 else (GREEN, GREEN_TINT)
-                st.markdown(f'<div class="deadline-item"><div class="date-badge" style="background:{bg}; color:{fg};">{dt.strftime("%b %d")}</div>'
-                            f'<div><div class="deadline-title">{d["title"]}</div><div class="deadline-sub">{d["court"]} · Assigned: {d["attorney"]}</div></div></div>',
-                            unsafe_allow_html=True)
+            spacer(4)
+            AS_OF = pd.Timestamp("2025-09-17")                      # ngày đồng bộ dữ liệu mẫu (cùng ngày với MYOB/CommBiz sync)
+            n_items = 4 if ROW_H >= 208 else (3 if ROW_H >= 178 else 2)
+            items = ""
+            for n, d in enumerate(DEADLINES[:n_items]):
+                dt = pd.to_datetime(d["date"]); days = (dt - AS_OF).days
+                soon = days <= 30                                    # sắp đến hạn → chip màu hổ phách, còn lại màu teal
+                ac, tint = ("#b45309", "#fffbeb") if soon else (TEAL, TEAL_TINT)
+                items += (f'<div class="tl-item" style="--ac:{TEAL};--t:{TEAL_TINT};--d:{0.06 * n:.2f}s;" title="{d["title"]}">'
+                          f'<div class="tl-badge">{dt.strftime("%b %d")}</div>'
+                          f'<div class="tl-body"><div class="deadline-title">{d["title"]}</div>'
+                          f'<div class="deadline-sub">{d["court"]} · Assigned: {d["attorney"]}</div></div>'
+                          f'<span class="tl-chip" style="--ac:{ac};--t:{tint};">in {days}d</span></div>')
+            st.markdown(f'<div class="tl"><div class="tl-line"></div>{items}</div>', unsafe_allow_html=True)
 
 
 # ----------------------------------------------------------------------
