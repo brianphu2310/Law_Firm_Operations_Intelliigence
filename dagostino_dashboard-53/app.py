@@ -3,11 +3,11 @@ D'Agostino Legal — Operations Dashboard (full practice-management build)
 
 Built from the Figma design at:
 https://www.figma.com/design/v2XzNdUJW2v3tcIcR28sCf/Untitled?node-id=3-4
-and extended per follow-up requirements into a full multi-section app:
-Office Account, Trust Account, CommBiz, MYOB, Billing & Invoices,
-Commission, RapidPay, InfoTrack, Council searches, Card Expenses
-(Amex/Visa), Matter Types, a branch map (Richmond / Camden / Liverpool),
-editable pay rates, and a hiring / branch-acquisition simulator.
+and extended into a full multi-section app: Office Account, Trust Account,
+CommBiz, MYOB, Billing & Invoices, Commission, RapidPay, InfoTrack, Council
+searches, Card Expenses (Amex/Visa), Matter Types, a branch map (Richmond /
+Camden / Liverpool), editable pay rates, and a hiring / branch-acquisition
+simulator.
 
 All data is SAMPLE DATA, defined in one place near the top, built to be
 internally consistent across every section (same attorneys, clients,
@@ -66,14 +66,14 @@ section[data-testid="stSidebar"] > div {{
     background: {BG} !important;
 }}
 section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {{
-    background: #14171c; border-radius: 16px; padding: 14px 12px 10px 12px;
+    background: #14171c; border-radius: 16px; padding: 12px 12px 8px 12px;
     box-shadow: 0 10px 26px rgba(15,23,42,0.18), 0 3px 7px rgba(15,23,42,0.11);
 }}
 section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] p,
 section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] label,
 section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] span {{ color: #ffffff !important; }}
 section[data-testid="stSidebar"] [data-testid="stCaptionContainer"] p {{ color: rgba(255,255,255,0.6) !important; }}
-.sidebar-brand {{ display:flex; align-items:center; gap:8px; margin-bottom:18px; }}
+.sidebar-brand {{ display:flex; align-items:center; gap:8px; margin-bottom:10px; }}
 .sidebar-brand-badge {{
     background:#ffffff; width:26px; height:26px; border-radius:7px;
     display:flex; align-items:center; justify-content:center;
@@ -82,15 +82,19 @@ section[data-testid="stSidebar"] [data-testid="stCaptionContainer"] p {{ color: 
 section[data-testid="stSidebar"] .sidebar-brand-badge {{ color:#14171c !important; }}
 .sidebar-brand-name {{ font-weight:700; font-size:13px; color:#ffffff !important; }}
 .sidebar-label {{ font-size:12.5px; font-weight:700; color:#ffffff; margin-bottom:2px; }}
-.sidebar-sub {{ font-size:11px; color:rgba(255,255,255,0.55); margin-bottom:12px; line-height:1.4; }}
+.sidebar-sub {{ font-size:11px; color:rgba(255,255,255,0.55); margin-bottom:8px; line-height:1.4; }}
+
+/* Plotly never draws narrower than ~150px — nudge it so the sidebar's polar chart isn't clipped */
+section[data-testid="stSidebar"] [data-testid="stPlotlyChart"] {{ overflow: visible !important; }}
+section[data-testid="stSidebar"] [data-testid="stPlotlyChart"] .js-plotly-plot {{ margin-left: -9px; }}
 
 /* Platform picker rows — real full-width clickable buttons, not radio dots */
 section[data-testid="stSidebar"] div[data-testid="stButton"] button {{
     width: 100% !important; text-align: left !important; justify-content: flex-start !important;
-    border-radius: 10px !important; padding: 7px 12px !important; font-size: 12.5px !important;
+    border-radius: 10px !important; padding: 5px 12px !important; font-size: 12.5px !important;
     font-weight: 500 !important; color: rgba(255,255,255,0.75) !important;
     background: rgba(255,255,255,0.06) !important; border: 1px solid transparent !important;
-    margin-bottom: 4px !important; white-space: normal !important; line-height: 1.25 !important;
+    margin-bottom: 2px !important; white-space: normal !important; line-height: 1.2 !important;
 }}
 section[data-testid="stSidebar"] div[data-testid="stButton"] button:hover {{
     background: rgba(255,255,255,0.14) !important; color: #ffffff !important;
@@ -670,8 +674,7 @@ def plotly_base(height):
 
 def branch_globe_fig(height=175):
     """Interactive orthographic 'globe' — every country with at least one
-    matter is highlighted, shaded by how many matters are there; AU branch
-    pins are sized and labelled by each branch's matter count. Plotly's
+    matter is highlighted, shaded by how many matters are there. Plotly's
     orthographic geo projection supports native click-drag rotation."""
     mdf = pd.DataFrame(MATTERS)
     country_counts = mdf.groupby("country").size().sort_values(ascending=False)
@@ -736,10 +739,8 @@ REVENUE_STREAM_DATA = {
 
 def revenue_stream_fig(height=210, label_threshold=100):
     """Streamgraph of collected revenue ($K) by practice area, layered by
-    payment method — built the same manually-offset-stacked-area way as the
-    reference 'Price by Room Type and Payment Mode' chart, with dollar
-    labels printed directly on the dominant (top) band for the larger
-    practice areas, matching the reference's in-chart value labels."""
+    payment method, with dollar labels printed on the dominant (top) band
+    for the larger practice areas."""
     categories = REVENUE_STREAM_CATEGORIES
     totals = [sum(REVENUE_STREAM_DATA[c].values()) for c in categories]
     baseline = [-t / 2.0 for t in totals]
@@ -790,13 +791,10 @@ _card_counter = [0]
 
 
 def card():
-    """Bordered card container with a real, verified-working background
-    color. st.container(border=True)'s own default styling is fully
-    transparent in this Streamlit version (its internal CSS testid changed
-    and no longer matches what CARD-color CSS used to target), so every
-    card gets a unique key and is styled via that key's real .st-key-*
-    class instead — the same technique verified against the live DOM for
-    the top bar."""
+    """Bordered card container with a real, verified-working background.
+    st.container(border=True)'s own default styling is transparent in recent
+    Streamlit versions, so every card gets a unique key and is styled via that
+    key's real .st-key-* class instead."""
     _card_counter[0] += 1
     return st.container(border=True, key=f"cardblock_{_card_counter[0]}")
 
@@ -844,7 +842,7 @@ with st.sidebar:
 
     st.markdown(
         '<div class="sidebar-label" style="margin-bottom:0px;">Annual cost — all platforms</div>'
-        '<div style="font-size:10px; color:rgba(255,255,255,0.5); margin-bottom:6px;">Click a wedge to switch platform</div>',
+        '<div style="font-size:10px; color:rgba(255,255,255,0.5); margin-bottom:2px;">Click a wedge to switch platform</div>',
         unsafe_allow_html=True,
     )
 
@@ -855,7 +853,7 @@ with st.sidebar:
         customdata=[fmt_money(c) for c in platform_costs],
     ))
     fig_side.update_layout(
-        margin=dict(l=8, r=8, t=8, b=8), height=160,
+        margin=dict(l=8, r=8, t=4, b=4), height=140,
         paper_bgcolor="rgba(0,0,0,0)",
         font=dict(family="Inter, sans-serif", color="rgba(255,255,255,0.8)", size=9),
         polar=dict(
@@ -886,8 +884,8 @@ with st.sidebar:
         for n in platform_names
     )
     st.markdown(
-        f'<div style="display:grid; grid-template-columns:1fr 1fr; gap:5px 8px; margin-top:8px;">{legend_items}</div>'
-        '<div style="height:1px; background:rgba(255,255,255,0.15); margin:14px 0 10px;"></div>',
+        f'<div style="display:grid; grid-template-columns:1fr 1fr; gap:3px 8px; margin-top:4px;">{legend_items}</div>'
+        '<div style="height:1px; background:rgba(255,255,255,0.15); margin:10px 0 8px;"></div>',
         unsafe_allow_html=True,
     )
 
@@ -937,233 +935,223 @@ with st.container(key="topbar"):
             unsafe_allow_html=True,
         )
 
-spacer()
+spacer(2)
 section = st.session_state.active_section
 
 
 # ----------------------------------------------------------------------
-# Overview
+# Overview — fits one screen. Set SCREEN_H (below) to your browser's visible
+# height in px; cards and globe scale to fit. Cards that sit side by side
+# share one fixed height, and the hero card is carved by a circular notch
+# that holds the globe.
 # ----------------------------------------------------------------------
 def render_overview():
-    kpi_cols = st.columns(6)
-    for col, k in zip(kpi_cols, KPIS):
+    # ================== CHỈNH 1 SỐ DUY NHẤT ==================
+    # SCREEN_H = chiều cao vùng hiển thị của trình duyệt (px). Toàn bộ card/globe tự co giãn theo số này.
+    # Gợi ý: 768 (laptop nhỏ) · 800 · 900 (mặc định) · 927 · 1080
+    SCREEN_H = 900
+    # ==========================================================
+
+    _avail    = SCREEN_H - 245                                   # phần cao dành cho hero + 2 hàng card
+    GLOBE_H   = max(150, min(230, round(_avail * 0.32)))         # đường kính globe
+    ROW_H     = max(168, min(240, round((_avail - GLOBE_H) / 2)))  # mọi card nằm cạnh nhau cao bằng nhau
+    GLOBE_TOP = 30
+    NOTCH_R   = GLOBE_H // 2 + 12                                # bán kính vòng khoét
+    CX        = GLOBE_H // 2 + 14                                # tâm chung (tính từ mép phải)
+    CY        = GLOBE_TOP + GLOBE_H // 2                         # tâm chung (tính từ mép trên)
+    HERO_H    = GLOBE_TOP + GLOBE_H + 34
+    SHADOW    = "0 10px 28px rgba(15,23,42,0.20), 0 3px 8px rgba(15,23,42,0.12)"
+
+    st.markdown(f"""
+    <span class="fit-css"></span>
+    <style>
+    /* gói CSS trong 1 khối st.markdown; ẩn container của nó để khỏi tạo khoảng trống */
+    div[data-testid="stElementContainer"]:has(.fit-css), .element-container:has(.fit-css) {{ display:none !important; }}
+
+    /* nhịp dọc gọn hơn để cả Overview vừa 1 màn hình */
+    .block-container {{ padding-bottom:0.3rem !important; }}
+    .kpi-card {{ margin-bottom:4px !important; }}
+    .st-key-topbar {{ padding:6px 16px !important; }}
+    .bar-row {{ margin-bottom:9px; }}
+    .bar-head {{ margin-bottom:3px; }}
+
+    /* card thường: cùng 1 kiểu bóng/viền; card cùng hàng cùng 1 chiều cao cố định */
+    div[class*="st-key-cardblock_"] {{ box-shadow:{SHADOW} !important; }}
+    div[class*="st-key-cardblock_r2"], div[class*="st-key-cardblock_r3"] {{
+        flex:0 0 {ROW_H}px !important; height:{ROW_H}px !important; min-height:{ROW_H}px !important;
+        max-height:{ROW_H}px !important; overflow:hidden !important; }}
+
+    /* legend của Revenue gọn hơn để luôn nằm trong 2 dòng */
+    .rev-legend {{ flex-wrap:wrap; gap:2px 9px !important; }}
+    .rev-legend .legend-item {{ font-size:10px; gap:4px; }}
+
+    /* deadline: 1 dòng + dấu … thay vì xuống dòng (xuống dòng làm tràn card) */
+    .deadline-item {{ display:flex; gap:12px; align-items:center; margin-bottom:12px; }}
+    .deadline-item > div:last-child {{ min-width:0; }}
+    .deadline-title, .deadline-sub {{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }}
+    .date-badge {{ height:38px !important; }}
+
+    /* HERO: 1 card bị khoét tròn; globe nằm trong chỗ khoét. drop-shadow đặt ở wrapper để
+       bóng đi theo đường khoét (mask sẽ cắt mất box-shadow) → khớp bóng với card bên cạnh. */
+    div[class*="st-key-heroblock"], div[class*="st-key-herowrap"], div[class*="st-key-herocard"] {{
+        flex:0 0 {HERO_H}px !important; height:{HERO_H}px !important; min-height:{HERO_H}px !important; max-height:{HERO_H}px !important; }}
+    div[class*="st-key-heroblock"] {{ position:relative; background:transparent !important; border:none !important; padding:0 !important; }}
+    div[class*="st-key-herowrap"] {{ filter:drop-shadow(0 10px 13px rgba(15,23,42,0.17)) drop-shadow(0 3px 4px rgba(15,23,42,0.10)); }}
+    div[class*="st-key-herocard"] {{
+        background:{CARD} !important; border-radius:18px !important; border:1px solid #dbe6ee !important;
+        padding:0.7rem {CX + NOTCH_R + 10}px 0.6rem 0.85rem !important; overflow:hidden;
+        -webkit-mask: radial-gradient(circle {NOTCH_R}px at calc(100% - {CX}px) {CY}px, transparent {NOTCH_R-1}px, #000 {NOTCH_R}px);
+                mask: radial-gradient(circle {NOTCH_R}px at calc(100% - {CX}px) {CY}px, transparent {NOTCH_R-1}px, #000 {NOTCH_R}px); }}
+    div[class*="st-key-heroglobe"] {{ position:absolute; top:{GLOBE_TOP}px; right:{CX - GLOBE_H//2}px; width:{GLOBE_H}px; height:{GLOBE_H}px; z-index:5; text-align:center; }}
+    div[class*="st-key-heroglobe"] .globe-title {{ position:absolute; top:-24px; left:0; right:0; font-size:12.5px; font-weight:700; color:{INK}; white-space:nowrap; }}
+    div[class*="st-key-heroglobe"] .globe-cap {{ margin-top:-4px; font-size:10.5px; color:{MUTED}; white-space:nowrap; text-align:center; }}
+
+    /* Plotly không vẽ hẹp hơn ~150px → căn giữa để sidebar hẹp không cắt biểu đồ polar */
+    section[data-testid="stSidebar"] [data-testid="stPlotlyChart"] {{ overflow:visible !important; }}
+    section[data-testid="stSidebar"] [data-testid="stPlotlyChart"] .js-plotly-plot {{ margin-left:-9px; }}
+    </style>
+    """, unsafe_allow_html=True)
+
+    def named_card(key):
+        return st.container(border=True, key=f"cardblock_{key}")
+
+    # ---------------- KPI ----------------
+    for col, k in zip(st.columns(6), KPIS):
         with col:
             st.markdown(kpi_html(k), unsafe_allow_html=True)
 
-    spacer(2)
-    with card():
-        fc1, fc2 = st.columns([1.6, 1])
-        with fc1:
-            st.markdown('<div class="card-title">Matter Intake Funnel</div>', unsafe_allow_html=True)
-            st.caption("From first inquiry through to an active matter, this month.")
-            funnel_stages = ["Inquiries", "Consultations Booked", "Consultations Held",
-                              "Engagement Letters Sent", "Active Matters"]
-            funnel_values = [420, 340, 290, 210, 142]
-            fig_funnel = go.Figure(go.Funnel(
-                y=funnel_stages, x=funnel_values,
-                textinfo="value+percent initial",
-                textfont=dict(size=11, color="#ffffff", family="Inter, sans-serif"),
-                marker=dict(color=[TEAL, "#2f9aa8", "#5bb4bd", "#86c9d1", "#b1dee3"],
-                            line=dict(color="#ffffff", width=1.5)),
-                connector=dict(line=dict(color="#e2e8f0", width=1)),
-                hovertemplate="%{y}: %{x}<extra></extra>",
-            ))
-            fig_funnel.update_layout(
-                margin=dict(l=8, r=8, t=6, b=6), height=155,
-                paper_bgcolor="rgba(0,0,0,0)",
-                font=dict(family="Inter, sans-serif", color=INK, size=11),
-            )
-            st.plotly_chart(fig_funnel, width="stretch", config={"displayModeBar": False})
-        with fc2:
-            st.markdown('<div class="card-title">Stage Conversion</div>', unsafe_allow_html=True)
-            spacer(4)
-            for i in range(1, len(funnel_stages)):
-                pct = round(funnel_values[i] / funnel_values[i - 1] * 100)
-                st.markdown(
-                    f"""
-                    <div class="bar-row" style="margin-bottom:4px;">
-                      <div class="bar-head">
-                        <span class="lbl">{funnel_stages[i-1]} → {funnel_stages[i]}</span>
-                        <span class="val">{pct}%</span>
-                      </div>
-                      <div class="bar-track"><div class="bar-fill" style="width:{pct}%; background:{TEAL};"></div></div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
-                )
-            overall_pct = round(funnel_values[-1] / funnel_values[0] * 100)
-            st.markdown(
-                f'<div style="font-size:11.5px; color:{MUTED}; margin-top:2px;">'
-                f'Overall conversion: <b style="color:{INK};">{overall_pct}%</b> of inquiries become active matters.</div>',
-                unsafe_allow_html=True,
-            )
+    # ---------------- HERO: funnel + conversion trong card khoét tròn, globe trong chỗ khoét ----------------
+    funnel_stages = ["Inquiries", "Consultations Booked", "Consultations Held", "Engagement Letters Sent", "Active Matters"]
+    funnel_values = [420, 340, 290, 210, 142]
+    with st.container(key="heroblock"):
+        with st.container(key="herowrap"):
+            with st.container(key="herocard"):
+                fc1, fc2 = st.columns([1.35, 1])
+                with fc1:
+                    st.markdown('<div class="card-title">Matter Intake Funnel</div>', unsafe_allow_html=True)
+                    st.caption("From first inquiry through to an active matter, this month.")
+                    ff = go.Figure(go.Funnel(
+                        y=funnel_stages, x=funnel_values, textinfo="value+percent initial",
+                        textfont=dict(size=11, color="#ffffff", family="Inter, sans-serif"),
+                        marker=dict(color=[TEAL, "#2f9aa8", "#5bb4bd", "#86c9d1", "#b1dee3"], line=dict(color="#ffffff", width=1.5)),
+                        connector=dict(line=dict(color="#e2e8f0", width=1)),
+                        hovertemplate="%{y}: %{x}<extra></extra>"))
+                    ff.update_layout(margin=dict(l=8, r=8, t=2, b=2), height=HERO_H - 84, paper_bgcolor="rgba(0,0,0,0)",
+                                     font=dict(family="Inter, sans-serif", color=INK, size=11))
+                    st.plotly_chart(ff, width="stretch", config={"displayModeBar": False})
+                with fc2:
+                    st.markdown('<div class="card-title">Stage Conversion</div>', unsafe_allow_html=True)
+                    spacer(4)
+                    for i in range(1, len(funnel_stages)):
+                        pct = round(funnel_values[i] / funnel_values[i - 1] * 100)
+                        st.markdown(
+                            f"""<div class="bar-row" style="margin-bottom:8px;">
+                              <div class="bar-head"><span class="lbl" style="font-size:11px;">{funnel_stages[i-1]} → {funnel_stages[i]}</span>
+                              <span class="val">{pct}%</span></div>
+                              <div class="bar-track"><div class="bar-fill" style="width:{pct}%; background:{TEAL};"></div></div></div>""",
+                            unsafe_allow_html=True)
+                    ov = round(funnel_values[-1] / funnel_values[0] * 100)
+                    st.markdown(f'<div style="font-size:11.5px; color:{MUTED};">Overall conversion: '
+                                f'<b style="color:{INK};">{ov}%</b> of inquiries become active matters.</div>', unsafe_allow_html=True)
+        with st.container(key="heroglobe"):
+            gfig, g_total, g_n = branch_globe_fig(height=GLOBE_H)
+            st.markdown('<div class="globe-title">Global Matter Footprint</div>', unsafe_allow_html=True)
+            st.plotly_chart(gfig, width="stretch", config={"displayModeBar": False, "scrollZoom": False})
+            st.markdown(f'<div class="globe-cap"><b style="color:{INK};">{g_total}</b> matters · '
+                        f'<b style="color:{INK};">{g_n}</b> countries · drag to rotate</div>', unsafe_allow_html=True)
 
-    spacer(2)
-    col_trend, col_country, col_map, col_donut = st.columns([1.1, 1.25, 1.2, 0.95])
-    with col_trend:
-        with card():
+    # ---------------- HÀNG 2: 3 card cao bằng nhau ----------------
+    COLS = [1.3, 1.15, 1.0]                       # hàng 2 và hàng 3 dùng chung tỉ lệ cột → mép cột thẳng hàng
+    CH2 = ROW_H - 62
+    c1, c2, c3 = st.columns(COLS)
+    with c1:
+        with named_card("r2_trend"):
             st.markdown('<div class="card-title">Matter Activity Trend</div>', unsafe_allow_html=True)
-            st.markdown(
-                f"""
-                <div class="legend-row">
-                  <span class="legend-item"><span class="legend-dot" style="background:{TEAL}"></span>Litigation</span>
-                  <span class="legend-item"><span class="legend-dot" style="background:#67c1cb"></span>Corporate</span>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-            fig = go.Figure()
-            fig.add_trace(go.Bar(x=TREND["month"], y=TREND["Litigation"],
-                                  name="Litigation", marker_color=TEAL,
-                                  hovertemplate="%{x}: %{y} hrs<extra>Litigation</extra>"))
-            fig.add_trace(go.Bar(x=TREND["month"], y=TREND["Corporate"],
-                                  name="Corporate", marker_color="#67c1cb",
-                                  hovertemplate="%{x}: %{y} hrs<extra>Corporate</extra>"))
-            fig.update_layout(**plotly_base(155), hovermode="x unified", barmode="group", bargap=0.3, bargroupgap=0.15)
-            fig.update_xaxes(showgrid=False, tickfont=dict(size=8.5))
-            fig.update_yaxes(showgrid=True, gridcolor="#f1f5f9", tickfont=dict(size=8.5))
-            st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
-
-    with col_country:
-        with card():
-            st.markdown(
-                '<div class="card-title" style="font-size:13.5px; text-align:center; color:#152b4e; white-space:nowrap;">'
-                'Revenue by Practice Area</div>',
-                unsafe_allow_html=True,
-            )
-            legend_items = "".join(
-                f'<span class="legend-item"><span class="legend-dot" style="background:{color}"></span>{method}</span>'
-                for method, color in REVENUE_STREAM_METHODS
-            )
-            st.markdown(
-                f'<div class="legend-row" style="flex-wrap:wrap; row-gap:2px;">'
-                f'<span style="font-size:10.5px; font-weight:700; color:{MUTED};">Payment&nbsp;Method</span>'
-                f'{legend_items}</div>',
-                unsafe_allow_html=True,
-            )
-            st.plotly_chart(revenue_stream_fig(height=145), width="stretch",
-                             config={"displayModeBar": False})
-
-    with col_map:
-        st.markdown('<div class="card-title" style="padding:4px 2px 0 2px; text-align:center;">Global Matter Footprint</div>',
-                    unsafe_allow_html=True)
-        globe_fig, total_matters, num_countries = branch_globe_fig(height=175)
-        st.plotly_chart(globe_fig, width="stretch",
-                         config={"displayModeBar": False, "scrollZoom": False})
-
-    with col_donut:
-        with card():
+            st.markdown(f'<div class="legend-row"><span class="legend-item"><span class="legend-dot" style="background:{TEAL}"></span>Litigation</span>'
+                        f'<span class="legend-item"><span class="legend-dot" style="background:#67c1cb"></span>Corporate</span></div>', unsafe_allow_html=True)
+            f = go.Figure()
+            f.add_trace(go.Bar(x=TREND["month"], y=TREND["Litigation"], marker_color=TEAL, hovertemplate="%{x}: %{y} hrs<extra>Litigation</extra>"))
+            f.add_trace(go.Bar(x=TREND["month"], y=TREND["Corporate"], marker_color="#67c1cb", hovertemplate="%{x}: %{y} hrs<extra>Corporate</extra>"))
+            f.update_layout(**plotly_base(CH2), barmode="group", bargap=0.3, bargroupgap=0.15)
+            f.update_xaxes(showgrid=False, tickfont=dict(size=8.5))
+            f.update_yaxes(showgrid=True, gridcolor="#f1f5f9", tickfont=dict(size=8.5))
+            st.plotly_chart(f, width="stretch", config={"displayModeBar": False})
+    with c2:
+        with named_card("r2_rev"):
+            st.markdown('<div class="card-title">Revenue by Practice Area</div>', unsafe_allow_html=True)
+            lg = "".join(f'<span class="legend-item"><span class="legend-dot" style="background:{c}"></span>{m}</span>' for m, c in REVENUE_STREAM_METHODS)
+            st.markdown(f'<div class="legend-row rev-legend"><span style="font-size:10px; font-weight:700; color:{MUTED};">Payment&nbsp;Method</span>{lg}</div>', unsafe_allow_html=True)
+            fr = revenue_stream_fig(height=CH2 - 4)
+            # nhãn trục 2 dòng, không xoay (tránh tràn/đè), chừa lề để nhãn "$320K" đầu tiên không bị cắt
+            cats = ["Corporate", "Litigation", "IP<br>Portfolio", "Employ-<br>ment", "Advisory", "Real<br>Estate", "Trust &<br>Estates"]
+            fr.update_xaxes(tickmode="array", tickvals=list(REVENUE_STREAM_CATEGORIES), ticktext=cats, tickangle=0,
+                            tickfont=dict(size=8), range=[-0.4, len(cats) - 0.6])
+            fr.update_layout(margin=dict(l=8, r=8, t=2, b=2))
+            for an in fr.layout.annotations:          # nhãn đầu tiên nằm đúng mép dải màu → neo trái để không bị cắt nửa chữ
+                if an.x == REVENUE_STREAM_CATEGORIES[0]:
+                    an.update(xanchor="left", xshift=4)
+            st.plotly_chart(fr, width="stretch", config={"displayModeBar": False})
+    with c3:
+        with named_card("r2_donut"):
             st.markdown('<div class="card-title">Workload By Practice Area</div>', unsafe_allow_html=True)
-            labels = list(WORKLOAD.keys())
-            values = list(WORKLOAD.values())
-            colors = [TEAL, "#3ba7b3", "#7bc4cd", "#b7dee2"]
-            fig2 = go.Figure(data=[go.Pie(
-                labels=labels, values=values, hole=0.68,
-                marker=dict(colors=colors, line=dict(color="#ffffff", width=2)),
-                textinfo="none", sort=False,
-                hovertemplate="%{label}: %{value}%<extra></extra>",
-            )])
-            donut_layout = plotly_base(135)
-            donut_layout["margin"] = dict(l=6, r=6, t=6, b=6)
-            fig2.update_layout(**donut_layout)
-            fig2.add_annotation(
-                text=f"<b style='font-size:18px;'>{TOTAL_ACTIVE}</b><br><span style='font-size:9px; color:{FAINT};'>Total Active</span>",
-                x=0.5, y=0.5, showarrow=False, align="center",
-                font=dict(family="Inter, sans-serif", color=INK),
-            )
-            st.plotly_chart(fig2, width="stretch", config={"displayModeBar": False})
-            for label, color in zip(labels, colors):
-                st.markdown(
-                    f'<div class="donut-legend-item" style="margin-bottom:4px; font-size:10.5px;">'
-                    f'<span class="legend-dot" style="background:{color}"></span>{label} ({WORKLOAD[label]}%)</div>',
-                    unsafe_allow_html=True,
-                )
+            labels = list(WORKLOAD.keys()); vals = list(WORKLOAD.values()); dcols = [TEAL, "#3ba7b3", "#7bc4cd", "#b7dee2"]
+            f2 = go.Figure(go.Pie(labels=labels, values=vals, hole=0.68, marker=dict(colors=dcols, line=dict(color="#ffffff", width=2)),
+                                  textinfo="none", sort=False, hovertemplate="%{label}: %{value}%<extra></extra>"))
+            dl = plotly_base(ROW_H - 96); dl["margin"] = dict(l=2, r=2, t=2, b=2); f2.update_layout(**dl)
+            f2.add_annotation(text=f"<b style='font-size:17px;'>{TOTAL_ACTIVE}</b><br><span style='font-size:9px; color:{FAINT};'>Total Active</span>",
+                              x=0.5, y=0.5, showarrow=False, align="center", font=dict(family="Inter, sans-serif", color=INK))
+            st.plotly_chart(f2, width="stretch", config={"displayModeBar": False})
+            # legend nằm DƯỚI donut (lưới 2×2) → donut không bao giờ lấn sang cột khác
+            leg = "".join(f'<div class="donut-legend-item" style="margin-bottom:0;"><span class="legend-dot" style="background:{c}"></span>{l} ({WORKLOAD[l]}%)</div>'
+                          for l, c in zip(labels, dcols))
+            st.markdown(f'<div style="display:grid; grid-template-columns:1fr 1fr; gap:3px 10px;">{leg}</div>', unsafe_allow_html=True)
 
-    spacer(2)
-    col_matrix, col_right = st.columns([1.6, 1])
-
-    with col_matrix:
-        with card():
-            st.markdown('<div class="card-title">Attorney Utilization — Hours by Practice Area</div>',
-                        unsafe_allow_html=True)
-            practice_cols = ["Corporate", "Litigation", "IP Portfolio", "Advisory"]
-
-            treemap_labels, treemap_parents, treemap_values, treemap_colors = [], [], [], []
+    # ---------------- HÀNG 3: 3 card cao bằng nhau ----------------
+    practice_cols = ["Corporate", "Litigation", "IP Portfolio", "Advisory"]
+    t1, t2, t3 = st.columns(COLS)
+    with t1:
+        with named_card("r3_util"):
+            st.markdown('<div class="card-title">Attorney Utilization — Hours by Practice Area</div>', unsafe_allow_html=True)
+            L, P, V, C = [], [], [], []
             for a in ATTORNEYS:
-                treemap_labels.append(a["short"])
-                treemap_parents.append("")
-                treemap_values.append(a["total"])
-                treemap_colors.append(a["total"])
-                for c in practice_cols:
-                    treemap_labels.append(f'{a["short"]} · {c}')
-                    treemap_parents.append(a["short"])
-                    treemap_values.append(a["hours"][c])
-                    treemap_colors.append(a["hours"][c])
+                L.append(a["short"]); P.append(""); V.append(a["total"]); C.append(a["total"])
+                for pc in practice_cols:
+                    L.append(f'{a["short"]} · {pc}'); P.append(a["short"]); V.append(a["hours"][pc]); C.append(a["hours"][pc])
 
-            fig_matrix = go.Figure(go.Treemap(
-                labels=treemap_labels, parents=treemap_parents, values=treemap_values,
-                branchvalues="total",
-                marker=dict(colors=treemap_colors, colorscale=[[0, "#eaf5f7"], [0.5, "#7fd0d6"], [1, TEAL]],
-                            line=dict(color="#ffffff", width=2)),
-                text=[l.split(" · ")[-1] for l in treemap_labels],
-                texttemplate="<b>%{text}</b><br>%{value} hrs",
-                textfont=dict(size=11, color=INK, family="Inter, sans-serif"),
-                hovertemplate="%{label}: %{value} hrs<extra></extra>",
-                pathbar=dict(visible=True, textfont=dict(size=11, color=MUTED)),
-                tiling=dict(packing="squarify"),
-            ))
-            fig_matrix.update_layout(
-                margin=dict(l=4, r=4, t=20, b=4), height=165,
-                paper_bgcolor="rgba(0,0,0,0)",
-                font=dict(family="Inter, sans-serif", color=MUTED, size=10),
-            )
-            st.plotly_chart(fig_matrix, width="stretch", config={"displayModeBar": False})
-
-    with col_right:
-        with card():
-            st.markdown('<div class="card-title">Billing &amp; Trust Account Status (K$)</div>',
-                         unsafe_allow_html=True)
-            spacer()
-            bars = [("Retainer Deposited (Trust)", 420, 76), ("Work-in-Progress (Unbilled)", 280, 50),
-                    ("Outstanding Invoices", 110, 20)]
-            for i, (label, k_amount, pct) in enumerate(bars):
-                extra = "margin-bottom:14px;" if i == len(bars) - 1 else ""
-                st.markdown(
-                    f"""
-                    <div class="bar-row" style="{extra}">
-                      <div class="bar-head">
-                        <span class="lbl">{label}</span>
-                        <span class="val">${k_amount}K</span>
-                      </div>
-                      <div class="bar-track">
-                        <div class="bar-fill" style="width:{pct}%; background:{BILLING_BAR_COLORS[label]};"></div>
-                      </div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
-                )
-
-        spacer()
-
-        with card():
-            st.markdown('<div class="card-title">Upcoming Court Appearances &amp; Filings</div>',
-                         unsafe_allow_html=True)
-            spacer()
-            for d in DEADLINES[:2]:
-                dt = pd.to_datetime(d["date"])
-                fg, bg = (TEAL, TEAL_TINT) if dt.month == 10 else (GREEN, GREEN_TINT)
-                st.markdown(
-                    f"""
-                    <div class="deadline-item">
-                      <div class="date-badge" style="background:{bg}; color:{fg};">{dt.strftime('%b %d')}</div>
-                      <div>
-                        <div class="deadline-title">{d['title']}</div>
-                        <div class="deadline-sub">{d['court']} · Assigned: {d['attorney']}</div>
-                      </div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
-                )
+            def _mix(t):
+                stops = [(0, (234, 245, 247)), (0.5, (127, 208, 214)), (1, (10, 132, 150))]
+                for (t0, c0), (t1_, c1_) in zip(stops, stops[1:]):
+                    if t <= t1_:
+                        u = (t - t0) / (t1_ - t0)
+                        return "#%02x%02x%02x" % tuple(round(c0[i] + (c1_[i] - c0[i]) * u) for i in range(3))
+                return "#0a8496"
+            cmax = max(C)
+            ft = go.Figure(go.Treemap(
+                labels=L, parents=P, values=V, branchvalues="total", root_color="rgba(0,0,0,0)",
+                marker=dict(colors=[_mix(v / cmax) for v in C], line=dict(color="#ffffff", width=2)),
+                text=[l.split(" · ")[-1] for l in L], texttemplate="<b>%{text}</b><br>%{value} hrs",
+                textfont=dict(size=10, color=INK, family="Inter, sans-serif"),
+                hovertemplate="%{label}: %{value} hrs<extra></extra>", pathbar=dict(visible=False), tiling=dict(packing="squarify")))
+            ft.update_layout(margin=dict(l=2, r=2, t=2, b=2), height=ROW_H - 44, paper_bgcolor="rgba(0,0,0,0)",
+                             font=dict(family="Inter, sans-serif", color=MUTED, size=10))
+            st.plotly_chart(ft, width="stretch", config={"displayModeBar": False})
+    with t2:
+        with named_card("r3_bill"):
+            st.markdown('<div class="card-title">Billing &amp; Trust Account Status (K$)</div>', unsafe_allow_html=True)
+            spacer(6)
+            gap = 20 if ROW_H >= 200 else 12
+            for lab, k, pct in [("Retainer Deposited (Trust)", 420, 76), ("Work-in-Progress (Unbilled)", 280, 50), ("Outstanding Invoices", 110, 20)]:
+                st.markdown(f'<div class="bar-row" style="margin-bottom:{gap}px;"><div class="bar-head"><span class="lbl">{lab}</span><span class="val">${k}K</span></div>'
+                            f'<div class="bar-track"><div class="bar-fill" style="width:{pct}%; background:{BILLING_BAR_COLORS[lab]};"></div></div></div>', unsafe_allow_html=True)
+    with t3:
+        with named_card("r3_dead"):
+            st.markdown('<div class="card-title">Upcoming Court Appearances &amp; Filings</div>', unsafe_allow_html=True)
+            spacer(6)
+            for d in DEADLINES[: (3 if ROW_H >= 200 else 2)]:
+                dt = pd.to_datetime(d["date"]); fg, bg = (TEAL, TEAL_TINT) if dt.month == 10 else (GREEN, GREEN_TINT)
+                st.markdown(f'<div class="deadline-item"><div class="date-badge" style="background:{bg}; color:{fg};">{dt.strftime("%b %d")}</div>'
+                            f'<div><div class="deadline-title">{d["title"]}</div><div class="deadline-sub">{d["court"]} · Assigned: {d["attorney"]}</div></div></div>',
+                            unsafe_allow_html=True)
 
 
 # ----------------------------------------------------------------------
@@ -1259,7 +1247,7 @@ def _matter_types_tab():
 
 
 def _locations_tab():
-    st.markdown('<div class="section-sub">3 AU branches, plus every country with an active matter — drag to rotate the globe, hover a pin or shaded country, or check the cards below.</div>',
+    st.markdown('<div class="section-sub">3 AU branches, plus every country with an active matter — drag to rotate the globe, hover a shaded country, or check the cards below.</div>',
                 unsafe_allow_html=True)
     globe_fig, total_matters, num_countries = branch_globe_fig(height=340)
     st.plotly_chart(globe_fig, width="stretch",
@@ -1928,7 +1916,7 @@ def render_team():
 
 
 # ----------------------------------------------------------------------
-# Simulator — pay-rate uplift, hiring, and branch-takeover what-if
+# Simulator — pay-rate uplift, hiring, branch-takeover, platform switch
 # ----------------------------------------------------------------------
 def render_simulator():
     st.markdown('<div class="section-title">Simulator</div>', unsafe_allow_html=True)
