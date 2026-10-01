@@ -2,6 +2,8 @@
 
 ![Python 3.12](https://img.shields.io/badge/python-3.12-blue) ![Streamlit](https://img.shields.io/badge/built%20with-Streamlit-ff4b4b) ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
+**[▶ Live demo](https://lawfirmoperationsintelliigence-gkymdplvqo2g3smdqcgyxv.streamlit.app)** · [Methodology](docs/METHODOLOGY.md) · [Simulator](docs/SIMULATOR.md) · [Architecture](docs/ARCHITECTURE.md)
+
 An interactive financial-analysis dashboard for a fictional three-office law firm. Pick a reporting period (month-to-date,
 quarter-to-date, financial year or any custom range), compare it with the prior period or the same period last year, and see profit
 against budget, working capital, cash outlook and the return on switching practice-management software.
@@ -103,8 +105,8 @@ Method notes: [docs/METHODOLOGY.md](docs/METHODOLOGY.md) (every KPI and model fo
 ## Run it locally
 
 ```bash
-git clone <repository-url>          # the green "Code" button on this page gives you the URL
-cd dagostino-legal-fa-dashboard
+git clone https://github.com/brianphu2310/Law_Firm_Operations_Intelliigence.git
+cd Law_Firm_Operations_Intelliigence
 python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 streamlit run app.py
