@@ -1,0 +1,41 @@
+matter_id,matter_name,client_name,practice_area,attorney_short,status,estimated_value,progress_pct,billed,wip,billing_gap,billed_vs_expected_pct,billing_flag,wip_rank_in_area,age_percent_rank_in_area,wip_quartile_firm,pct_of_firm_wip
+M-2025-0340,Meridian Pacific Trust — Asset Purchase,Meridian Pacific Trust,Corporate,"Pearson, J.",Open,647000.0,95.0,436439.0,34423.0,178211.0,71.0,Under-billed,1,0.72,1,5.57
+M-2024-0198,Okafor Mining — Mediation,Okafor Mining Co.,Litigation,"Ross, M.",Open,357500.0,95.0,261896.0,16915.0,77729.0,77.0,In line,1,0.97,1,2.74
+M-2025-0364,Global Trust M&A Preliminary Hearing,Global Trust Bank,Corporate,"Specter, H.",Open,610000.0,55.0,287841.0,16798.0,45555.0,86.0,In line,2,0.55,1,2.72
+M-2025-0302,Meridian Series C Financing,Meridian Holdings Ltd.,Corporate,"Sterling, C.",Open,350000.0,95.0,268693.0,16609.0,63807.0,81.0,In line,3,0.9,1,2.69
+M-2024-0209,Global Trust Bank — Lease Review,Global Trust Bank,Corporate,"Specter, H.",Open,296000.0,95.0,212713.0,16530.0,68487.0,76.0,In line,4,1.0,1,2.67
+M-2025-0343,Meridian Pacific Trust — Joint Venture Agreement,Meridian Pacific Trust,Corporate,"Pearson, J.",Open,400500.0,71.0,209437.0,15150.0,74846.0,74.0,Under-billed,5,0.7,1,2.45
+M-2025-0355,Vertex vs. Halcyon IP Infringement,Vertex Industries,IP Portfolio,"Litt, L.",Open,510000.0,48.0,194203.0,13857.0,49127.0,80.0,In line,1,0.6,1,2.24
+M-2025-0305,Blackwood Realty — Asset Purchase,Blackwood Realty,Corporate,"Pearson, J.",Open,285000.0,95.0,230384.0,13612.0,40366.0,85.0,In line,6,0.88,1,2.2
+M-2024-0276,Pacific Rim Traders — Injunction Application,Pacific Rim Traders,Litigation,"Bennett, K.",Open,432000.0,95.0,434053.0,12827.0,-23653.0,106.0,Billed ahead of progress,2,0.73,1,2.07
+M-2024-0244,London Capital Partners — Joint Venture Agreement,London Capital Partners,Corporate,"Specter, H.",Open,262000.0,95.0,231997.0,11852.0,16903.0,93.0,In line,7,0.97,1,1.92
+M-2024-0263,London Capital Partners — Capital Raise,London Capital Partners,Corporate,"Specter, H.",On Hold,247000.0,95.0,226636.0,10970.0,8014.0,97.0,In line,8,0.93,1,1.77
+M-2024-0203,Zenith Labs — Contract Dispute,Zenith Labs,Litigation,"Specter, H.",Open,213000.0,95.0,177198.0,10605.0,25152.0,88.0,In line,3,0.89,1,1.72
+M-2025-0327,Zenith Labs Licensing Countersuit,Zenith Labs,Litigation,"Specter, H.",Open,260000.0,61.0,144016.0,8918.0,15635.0,90.0,In line,4,0.54,1,1.44
+M-2025-0372,Acme Corp — Defence of Statement of Claim,Acme Corp,Litigation,"Zane, R.",Open,382000.0,30.0,103329.0,8745.0,10631.0,91.0,In line,5,0.32,1,1.41
+M-2025-0386,Ganges Textile Exports — Contract Dispute,Ganges Textile Exports,Litigation,"Zane, R.",Open,379500.0,37.0,139815.0,8306.0,797.0,99.0,In line,6,0.24,1,1.34
+M-2025-0365,Okafor Mining — Mediation,Okafor Mining Co.,Litigation,"Ross, M.",Open,367000.0,28.0,85654.0,8289.0,16068.0,84.0,In line,7,0.35,1,1.34
+M-2025-0427,Singapore Trading Group — Due Diligence,Singapore Trading Group,Corporate,"Pearson, J.",On Hold,589000.0,12.0,60027.0,8144.0,9798.0,86.0,In line,9,0.13,1,1.32
+M-2024-0202,Zenith Labs — Defence of Statement of Claim,Zenith Labs,Litigation,"Specter, H.",Open,231000.0,95.0,173449.0,8115.0,46001.0,79.0,In line,8,0.92,1,1.31
+M-2025-0358,Okafor Mining — Contract Dispute,Okafor Mining Co.,Litigation,"Ross, M.",Open,283500.0,44.0,93527.0,8038.0,31515.0,75.0,Under-billed,9,0.38,1,1.3
+M-2025-0312,Okafor Mining — Costs Assessment,Okafor Mining Co.,Litigation,"Ross, M.",Open,389000.0,49.0,169699.0,8031.0,20360.0,89.0,In line,10,0.62,1,1.3
+M-2025-0344,Okafor Mining Environmental Claim,Okafor Mining Co.,Litigation,"Ross, M.",Open,380000.0,67.0,212400.0,7979.0,40898.0,84.0,In line,11,0.49,1,1.29
+M-2024-0277,Halcyon Systems — Opposition Response,Halcyon Systems,IP Portfolio,"Pearson, J.",Open,177000.0,95.0,164117.0,7719.0,4033.0,98.0,In line,2,0.83,1,1.25
+M-2024-0159,Acme Corp — Injunction Application,Acme Corp,Litigation,"Zane, R.",Open,192500.0,95.0,155168.0,7293.0,27707.0,85.0,In line,12,1.0,1,1.18
+M-2025-0336,Acme vs. Zenith Trial Brief Filing,Acme Corp,Litigation,"Zane, R.",Open,420000.0,44.0,169843.0,7234.0,14693.0,92.0,In line,13,0.51,1,1.17
+M-2024-0199,Ganges Textile Exports — Defence of Statement of Claim,Ganges Textile Exports,Litigation,"Zane, R.",Open,188000.0,95.0,125008.0,7204.0,53592.0,70.0,Under-billed,14,0.95,1,1.17
+M-2024-0250,Pacific Rim Traders — Debt Recovery,Pacific Rim Traders,Litigation,"Ross, M.",Open,154500.0,95.0,129398.0,7055.0,17377.0,88.0,In line,15,0.78,1,1.14
+M-2024-0243,Pacific Rim Traders — Costs Assessment,Pacific Rim Traders,Litigation,"Zane, R.",Open,231500.0,95.0,165964.0,6951.0,53961.0,75.0,In line,16,0.81,1,1.12
+M-2025-0415,Ganges Textile Exports — Contract Dispute,Ganges Textile Exports,Litigation,"Zane, R.",Open,416500.0,17.0,67932.0,6866.0,1320.0,98.0,In line,17,0.05,1,1.11
+M-2025-0367,Meridian Holdings — Share Sale Agreement,Meridian Holdings Ltd.,Corporate,"Zane, R.",On Hold,252500.0,68.0,144789.0,6682.0,25732.0,85.0,In line,10,0.5,1,1.08
+M-2025-0407,Halcyon Systems — Infringement Notice,Halcyon Systems,IP Portfolio,"Litt, L.",Open,354500.0,23.0,74109.0,6653.0,7717.0,91.0,In line,3,0.26,1,1.08
+M-2025-0380,Pacific Rim Traders US Distribution Dispute,Pacific Rim Traders,Litigation,"Ross, M.",Open,275000.0,28.0,82127.0,6401.0,-4125.0,105.0,Billed ahead of progress,18,0.3,1,1.04
+M-2025-0328,Blackwood Realty — Capital Raise,Blackwood Realty,Corporate,"Ross, M.",Open,117000.0,95.0,104821.0,6001.0,6329.0,94.0,In line,11,0.8,1,0.97
+M-2024-0247,Global Trust Bank — Share Sale Agreement,Global Trust Bank,Corporate,"Pearson, J.",Open,183500.0,95.0,129985.0,5909.0,44340.0,75.0,Under-billed,12,0.95,1,0.96
+M-2025-0347,Zenith Labs — Debt Recovery,Zenith Labs,Litigation,"Specter, H.",Open,208000.0,41.0,71160.0,5679.0,14905.0,83.0,In line,19,0.46,1,0.92
+M-2025-0369,Nova Materials — Patent Portfolio Review,Nova Materials,IP Portfolio,"Litt, L.",Open,151500.0,55.0,76798.0,5591.0,6672.0,92.0,In line,4,0.49,1,0.9
+M-2025-0432,Global Trust Bank Regulatory Investigation,Global Trust Bank,Litigation,"Specter, H.",Open,520000.0,5.0,23337.0,5429.0,1572.0,94.0,In line,20,0.0,1,0.88
+M-2025-0338,Delacroix & Sons — Lease Review,Delacroix & Sons,Corporate,"Pearson, J.",Open,132500.0,83.0,77736.0,5333.0,32420.0,71.0,Under-billed,13,0.72,2,0.86
+M-2025-0378,Hanwoo Precision — Licensing Agreement,Hanwoo Precision Ltd,IP Portfolio,"Ross, M.",On Hold,209500.0,40.0,70118.0,5295.0,14615.0,83.0,In line,5,0.4,2,0.86
+M-2025-0299,Pacific Rim Traders — Defence of Statement of Claim,Pacific Rim Traders,Litigation,"Ross, M.",Open,200000.0,61.0,106453.0,5253.0,15234.0,87.0,In line,21,0.68,2,0.85
+M-2025-0309,Global Trust Bank — Capital Raise,Global Trust Bank,Corporate,"Specter, H.",On Hold,182500.0,95.0,178226.0,5237.0,-4851.0,103.0,In line,14,0.85,2,0.85

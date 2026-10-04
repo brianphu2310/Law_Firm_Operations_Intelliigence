@@ -1,0 +1,61 @@
+client_name,fy_label,paid_invoices,paid_value,avg_days_to_pay,sd_days,pct_paid_late,change_vs_prior_fy_days,slow_payer_quartile,speed_percent_rank,slowest_rank_in_fy
+Global Trust Bank,FY24,10,422523.0,76.8,32.4,100.0,,1,1.0,1
+Zenith Labs,FY24,11,388635.0,60.9,12.3,100.0,,1,0.95,2
+Okafor Mining Co.,FY24,10,413161.0,59.1,17.2,90.0,,1,0.91,3
+Ganges Textile Exports,FY24,6,124848.0,52.8,13.7,100.0,,1,0.86,4
+Fentonville Council,FY24,7,112406.0,49.4,8.1,100.0,,1,0.82,5
+Singapore Trading Group,FY24,4,135496.0,44.0,11.6,75.0,,1,0.77,6
+Whitmore Textiles,FY24,9,155323.0,43.9,12.3,88.9,,2,0.73,7
+Pacific Rim Traders,FY24,4,100507.0,43.0,2.7,100.0,,2,0.68,8
+Blackwood Realty,FY24,11,324452.0,42.2,26.3,54.5,,2,0.64,9
+Nippon Precision Ltd,FY24,7,126158.0,35.9,8.9,71.4,,2,0.59,10
+London Capital Partners,FY24,5,166475.0,35.8,10.0,60.0,,2,0.55,11
+Auckland Ventures Ltd,FY24,9,230587.0,35.0,11.0,66.7,,2,0.5,12
+Harlow & Co.,FY24,10,139395.0,33.5,9.6,50.0,,3,0.45,13
+Nova Materials,FY24,12,444069.0,32.8,7.0,50.0,,3,0.41,14
+Bright Path Foundation,FY24,8,178767.0,30.6,9.3,50.0,,3,0.36,15
+Delacroix & Sons,FY24,6,215730.0,28.5,5.8,33.3,,3,0.32,16
+Meridian Pacific Trust,FY24,8,166893.0,28.1,8.3,50.0,,3,0.27,17
+Hanwoo Precision Ltd,FY24,2,21166.0,28.0,9.0,50.0,,3,0.18,18
+Vertex Industries,FY24,11,426534.0,28.0,9.4,63.6,,4,0.18,18
+Sunrise Logistics,FY24,9,92868.0,27.7,8.6,44.4,,4,0.14,20
+Acme Corp,FY24,11,713128.0,24.5,7.3,27.3,,4,0.09,21
+Meridian Holdings Ltd.,FY24,11,655846.0,23.2,6.8,9.1,,4,0.05,22
+Halcyon Systems,FY24,7,257799.0,20.9,5.4,0.0,,4,0.0,23
+Okafor Mining Co.,FY25,10,466746.0,66.1,17.2,100.0,7.0,1,1.0,1
+Zenith Labs,FY25,9,428990.0,57.2,20.6,77.8,-3.7,1,0.95,2
+Fentonville Council,FY25,5,105365.0,54.2,11.7,100.0,4.8,1,0.91,3
+Global Trust Bank,FY25,12,880890.0,54.0,15.3,100.0,-22.8,1,0.86,4
+Ganges Textile Exports,FY25,9,184712.0,47.4,11.8,100.0,-5.4,1,0.82,5
+Whitmore Textiles,FY25,9,228454.0,46.0,9.9,88.9,2.1,1,0.77,6
+Blackwood Realty,FY25,8,206229.0,42.5,28.1,62.5,0.3,2,0.73,7
+Meridian Pacific Trust,FY25,6,130481.0,42.0,13.6,83.3,13.9,2,0.68,8
+Pacific Rim Traders,FY25,6,146772.0,41.8,5.2,100.0,-1.2,2,0.64,9
+Singapore Trading Group,FY25,2,48388.0,40.0,2.0,100.0,-4.0,2,0.59,10
+Auckland Ventures Ltd,FY25,8,331065.0,39.9,9.5,87.5,4.9,2,0.55,11
+Harlow & Co.,FY25,9,122377.0,35.8,8.3,66.7,2.3,2,0.5,12
+Hanwoo Precision Ltd,FY25,4,74802.0,35.5,13.4,50.0,7.5,3,0.45,13
+London Capital Partners,FY25,5,186385.0,34.8,8.6,80.0,-1.0,3,0.41,14
+Nova Materials,FY25,10,345118.0,34.1,10.6,50.0,1.4,3,0.36,15
+Acme Corp,FY25,11,827876.0,33.4,4.6,72.7,8.8,3,0.32,16
+Sunrise Logistics,FY25,12,176203.0,31.7,7.0,50.0,4.0,3,0.27,17
+Nippon Precision Ltd,FY25,6,128382.0,30.8,11.0,33.3,-5.0,3,0.23,18
+Bright Path Foundation,FY25,10,432256.0,29.5,9.1,40.0,-1.1,4,0.18,19
+Meridian Holdings Ltd.,FY25,11,837959.0,28.2,28.9,9.1,5.0,4,0.14,20
+Vertex Industries,FY25,12,591436.0,27.4,6.4,33.3,-0.6,4,0.09,21
+Halcyon Systems,FY25,9,455657.0,24.1,4.3,0.0,3.3,4,0.05,22
+Delacroix & Sons,FY25,8,296818.0,21.5,4.3,0.0,-7.0,4,0.0,23
+Blackwood Realty,FY26,1,34496.0,56.0,0.0,100.0,13.5,1,1.0,1
+Okafor Mining Co.,FY26,1,64961.0,54.0,0.0,100.0,-12.1,1,0.92,2
+Zenith Labs,FY26,1,76452.0,45.0,0.0,100.0,-12.2,1,0.85,3
+Global Trust Bank,FY26,1,64311.0,42.0,0.0,100.0,-12.0,1,0.77,4
+Meridian Pacific Trust,FY26,1,26602.0,34.0,0.0,100.0,-8.0,2,0.69,5
+Delacroix & Sons,FY26,2,67706.0,33.0,0.0,100.0,11.5,2,0.62,6
+Nova Materials,FY26,1,43846.0,32.0,0.0,100.0,-2.1,2,0.54,7
+Bright Path Foundation,FY26,1,53739.0,29.0,0.0,0.0,-0.5,2,0.38,8
+Pacific Rim Traders,FY26,1,36949.0,29.0,0.0,0.0,-12.8,3,0.38,8
+Sunrise Logistics,FY26,1,24768.0,26.0,0.0,0.0,-5.7,3,0.31,10
+Vertex Industries,FY26,2,93948.0,25.0,10.0,50.0,-2.4,3,0.23,11
+Meridian Holdings Ltd.,FY26,1,62529.0,22.0,0.0,0.0,-6.2,4,0.15,12
+Halcyon Systems,FY26,2,106560.0,16.5,5.5,0.0,-7.6,4,0.08,13
+London Capital Partners,FY26,1,28531.0,16.0,0.0,0.0,-18.8,4,0.0,14

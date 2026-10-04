@@ -1,0 +1,19 @@
+client_name,open_invoices,ar_incl_gst,not_yet_due,days_1_30,days_31_60,days_61_90,days_90_plus,max_days_past_due,pct_overdue,pct_of_firm_ar,overdue_rank,collections_action
+Zenith Labs,2,69234.0,18136.0,0.0,0.0,51098.0,0.0,70,73.8,6.6,1,Escalate
+Okafor Mining Co.,2,60860.0,23332.0,37527.0,0.0,0.0,0.0,3,61.7,5.8,2,Chase
+Ganges Textile Exports,1,35693.0,0.0,35693.0,0.0,0.0,0.0,4,100.0,3.4,3,Chase
+Global Trust Bank,2,87896.0,52651.0,35245.0,0.0,0.0,0.0,11,40.1,8.3,4,Chase
+Harlow & Co.,2,35906.0,8093.0,27814.0,0.0,0.0,0.0,11,77.5,3.4,5,Chase
+Fentonville Council,2,47596.0,27170.0,20426.0,0.0,0.0,0.0,19,42.9,4.5,6,Chase
+Acme Corp,2,174237.0,174237.0,0.0,0.0,0.0,0.0,-11,0.0,16.5,7,Monitor
+Auckland Ventures Ltd,1,19873.0,19873.0,0.0,0.0,0.0,0.0,-28,0.0,1.9,7,Monitor
+Blackwood Realty,1,36541.0,36541.0,0.0,0.0,0.0,0.0,-4,0.0,3.5,7,Monitor
+Bright Path Foundation,2,81867.0,81867.0,0.0,0.0,0.0,0.0,-1,0.0,7.8,7,Monitor
+Halcyon Systems,1,92827.0,92827.0,0.0,0.0,0.0,0.0,-11,0.0,8.8,7,Monitor
+London Capital Partners,2,73694.0,73694.0,0.0,0.0,0.0,0.0,-9,0.0,7.0,7,Monitor
+Meridian Holdings Ltd.,2,119024.0,119024.0,0.0,0.0,0.0,0.0,-3,0.0,11.3,7,Monitor
+Nova Materials,2,49862.0,49862.0,0.0,0.0,0.0,0.0,-11,0.0,4.7,7,Monitor
+Pacific Rim Traders,1,19058.0,19058.0,0.0,0.0,0.0,0.0,-28,0.0,1.8,7,Monitor
+Sunrise Logistics,1,7556.0,7556.0,0.0,0.0,0.0,0.0,-15,0.0,0.7,7,Monitor
+Vertex Industries,1,26819.0,26819.0,0.0,0.0,0.0,0.0,-14,0.0,2.5,7,Monitor
+Whitmore Textiles,1,15008.0,15008.0,0.0,0.0,0.0,0.0,-29,0.0,1.4,7,Monitor

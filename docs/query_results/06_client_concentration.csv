@@ -1,0 +1,24 @@
+client_rank,client_name,primary_practice_area,country,invoices,fees_12m,pct_of_fees,cumulative_pct,firm_hhi,tier
+1,Global Trust Bank,Corporate,Australia,13,833913.0,11.5,11.5,669.0,Major (7-15%)
+2,Meridian Holdings Ltd.,Corporate,Australia,12,776948.0,10.7,22.1,669.0,Major (7-15%)
+3,Acme Corp,Litigation,Australia,10,767692.0,10.6,32.7,669.0,Major (7-15%)
+4,Vertex Industries,IP Portfolio,Australia,12,530260.0,7.3,40.0,669.0,Major (7-15%)
+5,Bright Path Foundation,Advisory,Australia,12,499956.0,6.9,46.9,669.0,Standard
+6,Halcyon Systems,IP Portfolio,Australia,9,467906.0,6.4,53.3,669.0,Standard
+7,Okafor Mining Co.,Litigation,Australia,10,420017.0,5.8,59.1,669.0,Standard
+8,Zenith Labs,Litigation,Australia,9,416271.0,5.7,64.8,669.0,Standard
+9,Nova Materials,IP Portfolio,Australia,12,371419.0,5.1,69.9,669.0,Standard
+10,Delacroix & Sons,Corporate,Australia,9,307826.0,4.2,74.1,669.0,Standard
+11,Auckland Ventures Ltd,Advisory,New Zealand,7,263934.0,3.6,77.8,669.0,Standard
+12,London Capital Partners,Corporate,United Kingdom,7,227443.0,3.1,80.9,669.0,Standard
+13,Blackwood Realty,Corporate,Australia,7,179717.0,2.5,83.4,669.0,Standard
+14,Whitmore Textiles,IP Portfolio,Australia,8,176594.0,2.4,85.8,669.0,Standard
+15,Pacific Rim Traders,Litigation,United States,7,171992.0,2.4,88.2,669.0,Standard
+16,Sunrise Logistics,Employment,Australia,12,155237.0,2.1,90.3,669.0,Standard
+17,Ganges Textile Exports,Litigation,India,7,153719.0,2.1,92.4,669.0,Standard
+18,Harlow & Co.,Employment,Australia,10,132332.0,1.8,94.2,669.0,Standard
+19,Meridian Pacific Trust,Corporate,Hong Kong,6,126131.0,1.7,96.0,669.0,Standard
+20,Fentonville Council,Advisory,Australia,5,98839.0,1.4,97.3,669.0,Standard
+21,Nippon Precision Ltd,IP Portfolio,Japan,4,83038.0,1.1,98.5,669.0,Standard
+22,Hanwoo Precision Ltd,IP Portfolio,South Korea,4,68002.0,0.9,99.4,669.0,Standard
+23,Singapore Trading Group,Corporate,Singapore,2,43989.0,0.6,100.0,669.0,Standard

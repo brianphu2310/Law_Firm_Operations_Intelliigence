@@ -74,6 +74,30 @@ These come straight from the model, so they match what you see when you run it (
   triConvey has the lowest run-cost ($88K a year against $117K today); PracticeEvolve and MyCase have negative NPV on the base assumptions.
 * **What the Simulator says about it:** each extra point of utilisation is worth about $81K a year, so a 3-point improvement recovers roughly three quarters of the gap to budget.
 
+## Data engineering: warehouse, SQL and data quality
+
+Besides the Streamlit app, the repo includes a small, tested data pipeline over the same **simulated** data. It loads the app's
+fixed-seed model into a SQLite star schema, checks it, and runs SQL analysis on it. Nothing is scraped or fetched; no real client,
+matter or billing data is used.
+
+```bash
+python -m warehouse.build            # simulated data -> warehouse.db (dim_/fact_ tables, surrogate keys, FKs, indexes)
+python -m warehouse.quality          # data-quality suite -> docs/DATA_QUALITY.md
+python sql/run_queries.py            # 10 analytical queries -> docs/query_results/*.csv
+```
+
+| What | Where |
+|---|---|
+| ETL module (extract / transform / load, date dimension, pro-rating, wide-to-long) | [`warehouse/build.py`](warehouse/build.py), DDL in [`warehouse/schema.sql`](warehouse/schema.sql) |
+| Data-quality checks (nulls, duplicates, referential integrity, business rules, reconciliation to the app's metrics) | [`warehouse/quality.py`](warehouse/quality.py) -> [docs/DATA_QUALITY.md](docs/DATA_QUALITY.md) |
+| 10 SQL queries: utilisation, WIP by matter age, realisation, practice-area profitability, matter billing position, client concentration, receivables ageing, payment behaviour, P&L vs budget, trust balances | [`sql/analysis/`](sql/analysis) -> [`docs/query_results/`](docs/query_results) |
+| ER diagram, grain and keys | [docs/DATA_MODEL.md](docs/DATA_MODEL.md) |
+| Data dictionary and source-to-target mapping | [docs/DATA_DICTIONARY.md](docs/DATA_DICTIONARY.md) |
+| Skills mapped to files | [docs/SKILLS_DEMONSTRATED.md](docs/SKILLS_DEMONSTRATED.md) |
+
+Tests for the pipeline are in `tests/test_warehouse.py`, `tests/test_sql_queries.py` and `tests/test_docs.py`; CI builds the warehouse and runs the quality suite and queries on every push.
+The simulation has no per-matter cost or time-entry ledger, so WIP ageing is by matter age and profitability is analysed at practice-area level.
+
 ## More screenshots
 
 | | |
@@ -96,8 +120,9 @@ These come straight from the model, so they match what you see when you run it (
 **Engineering**
 * Python, pandas, NumPy, Plotly and Streamlit; about 4,400 lines organised into a model layer, a metrics layer, a simulation engine and page modules.
 * One deterministic financial model as the single source of truth, so every page reconciles to every other page.
-* **75 automated tests:** reconciliation checks (for example, the invoice ledger equals modelled revenue to the dollar, branch and attorney tables sum to firm totals),
+* **130+ automated tests** (the app's 75 plus the warehouse, SQL and documentation suites): reconciliation checks (for example, the invoice ledger equals modelled revenue to the dollar, branch and attorney tables sum to firm totals),
   simulator maths (goal-seek answers land exactly on the target), and browser-style tests that click buttons and edit controls, including regression tests for past bugs.
+* A SQLite dimensional warehouse with a data-quality suite and SQL analysis layer (see **Data engineering** above).
 * Continuous integration on GitHub Actions.
 
 Method notes: [docs/METHODOLOGY.md](docs/METHODOLOGY.md) (every KPI and model formula) · [docs/SIMULATOR.md](docs/SIMULATOR.md) (the Simulator) · [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) (how the code fits together).

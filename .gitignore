@@ -8,3 +8,7 @@ venv/
 .DS_Store
 Thumbs.db
 .streamlit/secrets.toml
+
+# Local SQLite warehouse (rebuild with: python -m warehouse.build)
+warehouse.db
+*.db-journal
