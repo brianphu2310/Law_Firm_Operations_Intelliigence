@@ -13,6 +13,18 @@ gap to budget, and work out what it would take to close that gap.
 
 ![Decision Simulator](docs/screenshots/01-simulator-decision.png)
 
+## At a glance
+
+[![CI](https://github.com/brianphu2310/Law_Firm_Operations_Intelliigence/actions/workflows/ci.yml/badge.svg)](https://github.com/brianphu2310/Law_Firm_Operations_Intelliigence/actions)
+
+| | |
+|---|---|
+| **Question** | Why is a law firm behind budget even though revenue is growing, and what would it take to close the gap? |
+| **What I built** | Financial operations dashboard (profit vs budget, working capital, 13-week cash forecast, platform-switch NPV) with a Decision Simulator and goal-seek, over a SQL warehouse. |
+| **Key results** | Synthetic quarter: revenue $1.63M, 1.9% below budget; margin 29.0% vs 31.0% target because costs grew 4.8% against revenue 2.9%. A 3-point utilisation gain recovers roughly three quarters of the gap. |
+| **Proof** | CI green; data-quality and query tests in `tests/`. |
+| **Honest limits** | Fictional firm and synthetic data modelled on real bookkeeping work; contains no client information. Forecasts depend on stated assumptions. |
+
 ## ★ Flagship: the Decision Simulator
 
 A Financial Analyst's most useful question is not "what happened?" but **"what should we do about it?"** The Simulator answers that on the
