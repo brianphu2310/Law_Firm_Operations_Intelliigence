@@ -1,0 +1,4 @@
+kind,reference,client_name,finding,amount
+Matter,M-2024-0209,Global Trust Bank,Not migrated,
+Matter,M-2024-0277,Halcyon Systems,Duplicated,
+Trust balance,Global Trust Bank,Global Trust Bank,Trust balance differs,-5799.21

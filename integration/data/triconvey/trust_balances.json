@@ -1,0 +1,51 @@
+[
+ {
+  "id": "9208f192-face-56ce-85dc-ed1046db2dd2",
+  "contactName": "Acme Corp",
+  "balance": 120000.0,
+  "asAt": "2025-09-17T00:00:00",
+  "lastUpdated": "2025-09-17T00:00:00"
+ },
+ {
+  "id": "b0bcf1f8-885d-58e2-8cd9-ddbfb19f2d3f",
+  "contactName": "Meridian Holdings Ltd.",
+  "balance": 110000.0,
+  "asAt": "2025-09-17T00:00:00",
+  "lastUpdated": "2025-09-17T00:00:00"
+ },
+ {
+  "id": "2ff1dc63-6284-5a7a-bd1b-50979bc37008",
+  "contactName": "Global Trust Bank",
+  "balance": 24200.79,
+  "asAt": "2025-09-17T00:00:00",
+  "lastUpdated": "2025-09-17T00:00:00"
+ },
+ {
+  "id": "4017e0d5-a6b7-5de4-bf04-fac6a5b6a0d9",
+  "contactName": "Vertex Industries",
+  "balance": 60000.0,
+  "asAt": "2025-09-17T00:00:00",
+  "lastUpdated": "2025-09-17T00:00:00"
+ },
+ {
+  "id": "e66c1f2e-262f-5fa6-9302-fc06148bc359",
+  "contactName": "Halcyon Systems",
+  "balance": 75000.0,
+  "asAt": "2025-09-17T00:00:00",
+  "lastUpdated": "2025-09-17T00:00:00"
+ },
+ {
+  "id": "fc7f6b6c-61a7-510e-bf98-7170d073a264",
+  "contactName": "Okafor Mining Co.",
+  "balance": 85000.0,
+  "asAt": "2025-09-17T00:00:00",
+  "lastUpdated": "2025-09-17T00:00:00"
+ },
+ {
+  "id": "decfcc20-7c99-5db3-a992-0f7ca7d57d82",
+  "contactName": "Delacroix & Sons",
+  "balance": 55000.0,
+  "asAt": "2025-09-17T00:00:00",
+  "lastUpdated": "2025-09-17T00:00:00"
+ }
+]

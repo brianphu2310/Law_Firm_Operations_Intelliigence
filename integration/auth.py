@@ -31,12 +31,13 @@ from jwt.algorithms import RSAAlgorithm
 
 LEEWAY_S = 30
 JWKS_TTL_S = 3600
-SCOPES = {"GeneralLedger": "read:ledger", "Contact": "read:contacts", "Sale": "read:sales"}
+SCOPES = {"GeneralLedger": "read:ledger", "Contact": "read:contacts", "Sale": "read:sales",          # MYOB resources
+          "leap": "leap:read", "smokeball": "triconvey:read", "infotrack": "infotrack:read", "pexa": "pexa:read"}  # other vendors
 ALL_SCOPES = " ".join(SCOPES.values())
 
 
 def scope_for(resource: str) -> str | None:
-    """Scope required for a MYOB resource path such as 'Sale/Invoice/Service'."""
+    """Scope required for a MYOB resource ('Sale/Invoice/Service') or a vendor route ('leap/v1/matters')."""
     return SCOPES.get(resource.strip("/").split("/")[0])
 
 
@@ -139,7 +140,7 @@ class Verifier:
     def __init__(self, cfg: AuthConfig, jwks: JWKSCache):
         self.cfg, self.jwks = cfg, jwks
 
-    def verify(self, authorization: str | None, api_key: str | None, required_scope: str | None) -> dict:
+    def verify(self, authorization: str | None, api_key: str | None, required_scope: str | None, require_key: bool = True) -> dict:
         if not authorization or not authorization.lower().startswith("bearer "):
             raise AuthError(401, "invalid_request", "Missing bearer token")
         token = authorization.split(" ", 1)[1].strip()
@@ -162,8 +163,8 @@ class Verifier:
         except jwt.PyJWTError:
             raise AuthError(401, "invalid_token", "Invalid token")
         client = claims.get("azp") or claims.get("client_id")
-        if not api_key or api_key != client:
-            raise AuthError(403, "invalid_client", "x-myobapi-key does not match the token's client")
+        if require_key and (not api_key or api_key != client):          # MYOB (x-myobapi-key) and Smokeball (x-api-key) tie keys to clients
+            raise AuthError(403, "invalid_client", "API key header does not match the token's client")
         if required_scope and required_scope not in str(claims.get("scope", "")).split():
             raise AuthError(403, "insufficient_scope", f"Requires scope {required_scope}")
         return claims

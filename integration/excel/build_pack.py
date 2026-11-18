@@ -140,7 +140,15 @@ def build(db: Path = DB, out: Path = OUT) -> Path:
 
     pq = wb.create_sheet("Power Query", 1)
     pq.sheet_view.showGridLines = False
-    steps = ["How the Data_* tabs refresh with Power Query",
+    steps = ["Power Query: cross-system checks that refresh from the source systems",
+             "Paste each script from integration/powerquery/github/ as its own query (4 queries, about 5 minutes, steps below):",
+             "     01_Invoice_Sync_Check.pq      LEAP invoices vs MYOB invoices (expect 472 Matched)",
+             "     02_Migration_Check.pq         LEAP active matters vs triConvey dry run (expect 140 Migrated, 1 Not migrated, 1 Duplicated)",
+             "     03_Trust_Migration_Check.pq   trust balances LEAP vs triConvey (expect 1 difference: Global Trust Bank -5,799.21)",
+             "     04_Disbursements_By_Matter.pq InfoTrack + PEXA fees per LEAP matter (expect 439 matters)",
+             "They read the simulated MYOB / LEAP / triConvey / InfoTrack / PEXA JSON from the public GitHub repo, so Refresh All works anywhere.",
+             "",
+             "How the Data_* tabs refresh with Power Query",
              "1. Data > Get Data > From Other Sources > Blank Query, then Home > Advanced Editor.",
              "2. Paste one script from integration/powerquery/:",
              "     01_marts_from_json_api.pq   reads a mart from the Marts JSON API (uvicorn integration.marts_api:app --port 8001)",

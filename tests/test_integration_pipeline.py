@@ -94,7 +94,7 @@ def test_mock_api_pages_and_filters(api):
 def test_full_load_passes_every_check_and_reconciles_to_the_app(api):
     wh = MemoryWarehouse()
     res = el.run(wh, _client(api), verbose=False)
-    assert [r["status"] for r in res] == ["OK"] * 4
+    assert [r["status"] for r in res] == ["OK"] * len(el.SOURCES)
     assert {r["resource"]: r["loaded_count"] for r in res}["Sale/Invoice/Service"] == 472
     checks, rec = quality.run(wh.con, verbose=False, write=False)
     assert checks["passed"].all(), checks[~checks["passed"]]
@@ -125,7 +125,8 @@ def test_count_mismatch_is_recorded_not_loaded_silently(api):
             return items[:-1], count                                       # simulate a dropped record
     wh = MemoryWarehouse()
     res = el.run(wh, ShortClient(session=api, base_url="http://testserver", token_url="http://testserver/oauth/token"), verbose=False)
-    assert all(r["status"] == "COUNT_MISMATCH" for r in res)
+    myob = [r for r in res if ":" not in r["resource"]]                    # ShortClient only shortens the MYOB resources
+    assert len(myob) == 4 and all(r["status"] == "COUNT_MISMATCH" for r in myob)
     assert el.DuckDBWarehouse.watermark(wh, "Sale/Invoice/Service") is None  # a failed load never advances the watermark
 
 
@@ -143,7 +144,7 @@ def test_n8n_workflows_are_wired_correctly():
     for f in ("myob_to_snowflake_local.json", "myob_to_snowflake_cloud.json"):
         wf = json.loads((N8N / f).read_text(encoding="utf-8"))
         names = {n["name"] for n in wf["nodes"]}
-        assert {"Daily 6am", "Extract from MYOB", "Promote to RAW", "Insert Audit", "Fail If Mismatch"} <= names
+        assert {"Daily 6am", "Extract from Sources", "Promote to RAW", "Insert Audit", "Fail If Mismatch"} <= names
         for src, out in wf["connections"].items():
             assert src in names
             for branch in out["main"]:
@@ -174,3 +175,64 @@ def test_secrets_are_never_committed():
     gi = (ROOT / ".gitignore").read_text()
     assert ".env" in gi and "law_firm.duckdb" in gi
     assert not (ROOT / ".env").exists() or os.environ.get("CI") is None
+
+
+# ------------------------------------------------------------- other systems --
+def test_committed_vendor_exports_match_the_model():
+    """integration/data/{leap,triconvey,infotrack,pexa} must be regenerated when core.model changes (python -m integration.sources_export)."""
+    from integration.sources_export import build_sources
+    for vendor, files in build_sources().items():
+        for name, rows in files.items():
+            assert json.loads((DATA / vendor / f"{name}.json").read_text(encoding="utf-8")) == rows, f"{vendor}/{name}"
+
+
+@pytest.mark.parametrize("path,params,items,next_path", [
+    ("/leap/v1/invoices", {"pageSize": 100}, "data", ("paging", "nextPage")),
+    ("/smokeball/matters", {"Limit": 50}, "value", ("next", "href")),
+    ("/infotrack/v1/orders", {"pageSize": 1000}, "orders", ("nextPageUrl",)),
+    ("/pexa/v1/workspaces", {"limit": 10}, "workspaces", ("links", "next")),
+])
+def test_each_vendor_api_pages_in_its_own_style(api, path, params, items, next_path):
+    h = {"Authorization": f"Bearer {_token(api)}", "x-api-key": CLIENT_ID}
+    body = api.get(path, headers=h, params=params).json()
+    nxt = body
+    for k in next_path:
+        nxt = nxt[k]
+    assert len(body[items]) > 0 and nxt and nxt.startswith("http://testserver/")
+
+
+def test_loader_reads_every_source_and_api_counts_match(api):
+    wh = MemoryWarehouse()
+    res = {r["resource"]: r for r in el.run(wh, _client(api), verbose=False)}
+    expected = {"leap:matters": 445, "leap:invoices": 472, "triconvey:matters": 142, "infotrack:orders": 5528, "pexa:workspaces": 24}
+    for resource, n in expected.items():
+        assert res[resource]["status"] == "OK" and res[resource]["loaded_count"] == n, resource
+
+
+def test_cross_system_reconciliations_find_exactly_the_planted_migration_defects(api):
+    from integration.sources_export import expected_defects
+    wh = MemoryWarehouse()
+    el.run(wh, _client(api), verbose=False)
+    quality.build_layers(wh.con)
+    q = lambda sql: wh.con.execute(sql).fetchall()
+    assert q("select result, count(*) from marts.invoice_sync_recon group by 1") == [("Matched", 472)]
+    outcomes = dict(q("select outcome, count(*) from marts.migration_recon group by 1"))
+    assert outcomes == {"Migrated": 140, "Not migrated": 1, "Duplicated": 1}
+    exp = expected_defects()
+    found = {(k, ref) for k, ref, *_ in q("select kind, reference from marts.migration_exceptions")}
+    assert found == {("Matter", exp["not_migrated"]), ("Matter", exp["duplicated"]), ("Trust balance", exp["trust_short_client"])}
+    orphans = q("""select count(*) from staging.stg_infotrack_orders o left join staging.stg_leap_matters m using (matter_number)
+                   where m.matter_number is null""")[0][0]
+    assert orphans == 0
+
+
+def test_power_query_scripts_read_the_committed_github_files():
+    pq = ROOT / "integration" / "powerquery" / "github"
+    scripts = sorted(pq.glob("*.pq"))
+    assert len(scripts) == 4
+    for f in scripts:
+        text = f.read_text(encoding="utf-8")
+        assert "raw.githubusercontent.com/brianphu2310/Law_Firm_Operations_Intelliigence/main/integration/data/" in text
+        for rel in __import__("re").findall(r'Get\("([\w/]+\.json)"\)', text):
+            assert (DATA / rel).exists(), (f.name, rel)
+        assert text.count("let") >= 1 and text.rstrip().split()[-1] in ("Typed", "Sorted")

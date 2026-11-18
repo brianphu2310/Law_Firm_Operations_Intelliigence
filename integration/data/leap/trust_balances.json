@@ -1,0 +1,51 @@
+[
+ {
+  "ledgerId": "e6e04fb5-62aa-5239-8431-f6c7f28603c7",
+  "clientName": "Acme Corp",
+  "balance": 120000.0,
+  "asAt": "2025-09-17T00:00:00",
+  "lastModified": "2025-09-17T00:00:00"
+ },
+ {
+  "ledgerId": "f79d932a-1ccd-518b-8215-ba4a3b2c9641",
+  "clientName": "Meridian Holdings Ltd.",
+  "balance": 110000.0,
+  "asAt": "2025-09-17T00:00:00",
+  "lastModified": "2025-09-17T00:00:00"
+ },
+ {
+  "ledgerId": "08df7df8-f420-5d9f-8c5c-2171af0aba31",
+  "clientName": "Global Trust Bank",
+  "balance": 30000.0,
+  "asAt": "2025-09-17T00:00:00",
+  "lastModified": "2025-09-17T00:00:00"
+ },
+ {
+  "ledgerId": "53b3c1ef-a484-5bcb-935d-5e8b39bc219e",
+  "clientName": "Vertex Industries",
+  "balance": 60000.0,
+  "asAt": "2025-09-17T00:00:00",
+  "lastModified": "2025-09-17T00:00:00"
+ },
+ {
+  "ledgerId": "6b5b46c0-6e4c-5a93-8318-27885ebc6d45",
+  "clientName": "Halcyon Systems",
+  "balance": 75000.0,
+  "asAt": "2025-09-17T00:00:00",
+  "lastModified": "2025-09-17T00:00:00"
+ },
+ {
+  "ledgerId": "620a23dc-1dbd-502a-b3ce-e35fd95d9bde",
+  "clientName": "Okafor Mining Co.",
+  "balance": 85000.0,
+  "asAt": "2025-09-17T00:00:00",
+  "lastModified": "2025-09-17T00:00:00"
+ },
+ {
+  "ledgerId": "ed0c8e16-a76b-5c81-a248-3b621e8b3233",
+  "clientName": "Delacroix & Sons",
+  "balance": 55000.0,
+  "asAt": "2025-09-17T00:00:00",
+  "lastModified": "2025-09-17T00:00:00"
+ }
+]

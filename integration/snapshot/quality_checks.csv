@@ -7,3 +7,7 @@ Balance due = total - payments applied,0,True
 "Closed invoices have zero balance, open ones a positive balance",0,True
 Every invoice links to a known client,0,True
 No payment dated before its invoice,0,True
+LEAP invoices = MYOB invoices (number and total),0,True
+Every LEAP invoice belongs to a LEAP matter,0,True
+Every InfoTrack order references a LEAP matter,0,True
+Every PEXA workspace references a LEAP matter,0,True

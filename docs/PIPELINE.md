@@ -1,4 +1,4 @@
-# Integration pipeline: MYOB API → n8n → Snowflake → Excel / Power Query, Streamlit, Metabase
+# Integration pipeline: MYOB, LEAP, triConvey, InfoTrack, PEXA → n8n → Snowflake → Excel / Power Query, Streamlit, Metabase
 
 The app's numbers come from a simulated model (`core/model.py`). This layer shows how the same numbers would reach the firm
 if they came from its accounting system: pulled from the **MYOB Business API** on a schedule by **n8n**, landed in **Snowflake**,
@@ -25,6 +25,32 @@ flowchart LR
     api2 --> pq
     stg --> dq{"quality.py<br/>8 checks +<br/>8 reconciliations"}
 ```
+
+## Source systems (all simulated from `core/model.py`)
+
+| System | Role at the firm | Mock API, paging style | Fidelity |
+|---|---|---|---|
+| **MYOB** | Accounting: invoices, payments, chart of accounts | `/accountright/{cf}/…`, OData `$top`/`$skip` + `NextPageLink` | Field names follow MYOB's public API v2 docs |
+| **LEAP** | Current practice management: matters, invoices, trust | `/leap/v1/…`, `page`/`pageSize` + `paging.nextPage` | **Illustrative**: LEAP's API reference sits behind developer registration and app review |
+| **triConvey** | Smokeball-based platform under evaluation: a **migration dry run** of active matters and trust | `/smokeball/…`, `Offset`/`Limit` + `next.href`, `x-api-key` | Shape follows Smokeball's public docs (`value`, `offset`, `limit`, `size`, `next`) |
+| **InfoTrack** | Searches; every order carries the matter number as client reference | `/infotrack/v1/orders`, `pageNumber` + `nextPageUrl` | Illustrative |
+| **PEXA** | Electronic settlement workspaces on property matters | `/pexa/v1/workspaces`, cursor + `links.next` | Illustrative |
+
+Each API pages differently, as real vendor APIs do. The loader handles them all from one table of source definitions
+(`integration/extract_load.py::SOURCES`), and the n8n Config node is generated from that same table.
+
+### Cross-system reconciliations
+
+| Mart | Question | Result on the simulated data |
+|---|---|---|
+| `marts.invoice_sync_recon` | Did every LEAP invoice reach MYOB with the same total? | 472 / 472 matched |
+| `marts.migration_recon` | Did every active LEAP matter arrive in triConvey exactly once? | 140 migrated, **1 not migrated, 1 duplicated** |
+| `marts.trust_migration_recon` | Do trust balances agree between LEAP and triConvey? | **Global Trust Bank short by $5,799.21** (receipt banked after the cut-over snapshot) |
+| `marts.disbursements_by_matter` | What did each matter spend on searches and settlements? | 439 matters, $214,203.29 ex GST; every order links to a LEAP matter |
+
+The three migration findings are planted on purpose (`integration/sources_export.py`) so the rehearsal has something to catch.
+They are the kinds of issue that come up in real practice-management migrations. A test checks that the reconciliation
+finds exactly these three and nothing else.
 
 ## Components
 
