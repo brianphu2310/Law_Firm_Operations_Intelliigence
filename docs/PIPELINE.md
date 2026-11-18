@@ -1,12 +1,12 @@
-# Integration pipeline: MYOB, LEAP, triConvey, InfoTrack, PEXA → n8n → Snowflake → Excel / Power Query, Streamlit, Metabase
+# Integration pipeline: MYOB, LEAP, triConvey, InfoTrack, PEXA → n8n → Snowflake → Excel / Power Query, Streamlit
 
 The app's numbers come from a simulated model (`core/model.py`). This layer shows how the same numbers would reach the firm
 if they came from its accounting system: pulled from the **MYOB Business API** on a schedule by **n8n**, landed in **Snowflake**,
-modelled with SQL, checked, and served to **Excel / Power Query**, the **Streamlit** app and **Metabase**.
+modelled with SQL, checked, and served to **Excel / Power Query** and the **Streamlit** app.
 
 **Real vs simulated.** MYOB is simulated. `integration/myob_export.py` re-shapes this app's own invoice ledger (472 invoices,
 444 payments, 23 clients) into MYOB AccountRight API v2 JSON, and `integration/mock_api.py` serves it the way MYOB does.
-Everything downstream (extract/load, n8n workflow, Snowflake SQL, checks, Power Query, Excel, Metabase questions) is real code
+Everything downstream (extract/load, n8n workflow, Snowflake SQL, checks, Power Query, Excel) is real code
 that would run unchanged against the live API. Live MYOB access needs a MYOB developer key and the OAuth sign-in. Switching
 over is configuration (`MYOB_MODE=live`, `MYOB_BASE_URL`, the client ID and the access token), not code.
 
@@ -20,7 +20,6 @@ flowchart LR
     stg --> marts["MARTS<br/>revenue_monthly<br/>aged_receivables<br/>collection_performance"]
     marts --> pq["Excel + Power Query<br/>Debtors & Revenue Pack"]
     marts --> st["Streamlit<br/>Pipeline page"]
-    marts --> mb["Metabase<br/>partner questions"]
     marts --> api2["marts_api.py<br/>marts as JSON"]
     api2 --> pq
     stg --> dq{"quality.py<br/>8 checks +<br/>8 reconciliations"}
@@ -65,8 +64,8 @@ finds exactly these three and nothing else.
 | Checks | `integration/quality.py` → `docs/PIPELINE_QUALITY.md` | 8 accounting checks (GST, line totals, balance = total − payments, status vs balance, referential integrity, de-duplication, payment dates, API count) and 8 reconciliations to the dashboard (report date, receivables, five ageing buckets, monthly revenue). |
 | Serving | `integration/marts_api.py` | Marts as JSON (`/marts/{name}`), whitelisted names, optional API key, `/health`. |
 | Excel + Power Query | `integration/powerquery/*.pq`, `integration/excel/Debtors_Revenue_Pack.xlsx` | Three M scripts: marts from the JSON API, MYOB API direct with paging, marts from Snowflake. The workbook's Summary tab is formulas only (SUMIFS, COUNTIFS, INDEX/MATCH), plus cells that check it ties to the data tab and to the dashboard. |
+| Power Query reconciliation workbook | `integration/powerquery/github/*.pq`, `integration/excel/Law_Firm_Recon_PowerQuery.xlsx` | Four M queries built and refreshed by hand in Excel, reading the source JSON straight from this repo: LEAP↔MYOB invoice sync (472/472 matched), LEAP→triConvey matter migration (140 migrated, 1 not migrated, 1 duplicated), trust balance migration (Global Trust Bank short $5,799.21) and InfoTrack + PEXA disbursements by matter (439 matters, $214,203.29). The same three defects the Snowflake checks find. |
 | Streamlit | `views/pipeline.py` | The app's **Pipeline** page: flow, load audit, checks, reconciliation, ageing and collections, read from the committed snapshot in `integration/snapshot/`. |
-| Metabase | `integration/metabase/questions.sql`, `docker-compose.yml` | Five saved questions for a partner debtors review on Snowflake. |
 
 ## Run it
 

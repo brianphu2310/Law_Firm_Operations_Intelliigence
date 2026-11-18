@@ -28,7 +28,6 @@ All data is simulated (fixed seed); the skills are real, the dataset is not.
 | **Source-to-warehouse reconciliation** (receivables, ageing buckets and monthly revenue tie back to the app) | `integration/quality.py`, `docs/PIPELINE_QUALITY.md` |
 | **Excel + Power Query** (M scripts for JSON API, paged REST API and Snowflake; SUMIFS / INDEX-MATCH pack with tie-out cells) | `integration/powerquery/01_marts_from_json_api.pq`, `integration/excel/build_pack.py` |
 | **Serving data as an API** (FastAPI, whitelisted marts, optional API key) | `integration/marts_api.py` |
-| **Self-service BI** (Metabase saved questions on Snowflake) | `integration/metabase/questions.sql` |
 | **Documentation** | `README.md`, `docs/ARCHITECTURE.md`, `docs/DATA_MODEL.md` |
 
 ## Not claimed

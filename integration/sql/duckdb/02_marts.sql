@@ -1,4 +1,4 @@
--- MARTS (DuckDB): business-ready tables for the dashboard, Excel / Power Query and Metabase.
+-- MARTS (DuckDB): business-ready tables for the dashboard, Excel / Power Query.
 create schema if not exists marts;
 
 -- Monthly revenue by practice area (ex GST)

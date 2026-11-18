@@ -17,7 +17,7 @@ BUCKETS = ["Not yet due", "1–30 days", "31–60 days", "61–90 days", "90+ da
 BUCKET_COLORS = ["#86c9d1", "#fbbf24", "#f59e0b", "#ef4444", "#991b1b"]
 STAGES = [("5 source APIs", "MYOB · LEAP · triConvey · InfoTrack · PEXA"), ("n8n + OAuth", "daily 6am, incremental, Auth0 JWT"), ("Snowflake RAW", "VARIANT + load audit"),
           ("STAGING", "LATERAL FLATTEN, de-dup"), ("MARTS", "revenue, ageing, collections"),
-          ("Consumers", "Excel + Power Query · Streamlit · Metabase")]
+          ("Consumers", "Excel + Power Query · Streamlit")]
 
 
 @st.cache_data(show_spinner=False)
