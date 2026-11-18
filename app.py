@@ -13,10 +13,11 @@ from core.model import build_model
 from core.period import current_periods, init_state, render_period_control
 from core.ref import AS_OF, NAV_ITEMS, USER_NAME, USER_ROLE
 from core.theme import PLATFORM_COLOR_LIST
-from views import calendar_view, clients, finance, matters, overview, platform_view, simulator, team
+from views import calendar_view, clients, finance, matters, overview, pipeline, platform_view, simulator, team
 
 PAGES = {"Overview": overview.render, "Matters": matters.render, "Clients": clients.render, "Calendar": calendar_view.render,
-         "Finance": finance.render, "Team": team.render, "Simulator": simulator.render}
+         "Finance": finance.render, "Team": team.render,
+         "Pipeline": pipeline.render, "Simulator": simulator.render}
 
 
 @st.cache_resource(show_spinner="Building the financial model…")

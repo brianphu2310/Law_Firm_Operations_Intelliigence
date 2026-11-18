@@ -1,0 +1,9 @@
+check,app,pipeline,difference,passed
+Report date (company file sync),2025-09-17,2025-09-17,0.0,True
+Receivables incl. GST,1053551.5556631533,1053551.51,-0.045663153287023306,True
+Ageing: Not yet due,845749.3664447748,845749.33,-0.03644477482885122,True
+Ageing: 1–30 days,156704.5376176461,156704.53,-0.007617646100698039,True
+Ageing: 31–60 days,0.0,0.0,0.0,True
+Ageing: 61–90 days,51097.65160073239,51097.65,-0.0016007323865778744,True
+Ageing: 90+ days,0.0,0.0,0.0,True
+"Revenue ex GST, all months (difference = worst single month)",15344230.105936743,15344230.069999998,0.027835148794110864,True
