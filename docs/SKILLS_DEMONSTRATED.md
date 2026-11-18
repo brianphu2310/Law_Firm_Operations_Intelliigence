@@ -20,11 +20,18 @@ All data is simulated (fixed seed); the skills are real, the dataset is not.
 | **Python / pandas / NumPy** | `warehouse/build.py`, `core/model.py`, `core/metrics.py` |
 | **Dashboarding / BI** | `app.py`, `core/metrics.py` (Streamlit, Plotly) |
 | **Financial analysis** (P&L vs budget, working capital, cash, FY outlook) | `core/metrics.py`, `docs/METHODOLOGY.md`, `sql/analysis/09_pnl_actual_vs_budget.sql` |
+| **API ingestion** (REST + JSON, OAuth bearer token, vendor headers, OData paging via NextPageLink, incremental LastModified filter, retry/back-off) | `integration/extract_load.py`, `integration/mock_api.py`, `integration/powerquery/02_myob_api_direct.pq` |
+| **Workflow automation / orchestration** (scheduled n8n flow, watermarks, landing-to-RAW promotion, failure alert) | `integration/n8n/build_workflows.py`, `integration/n8n/myob_to_snowflake_cloud.json` |
+| **Cloud data warehouse** (Snowflake stage + COPY INTO, VARIANT, LATERAL FLATTEN, QUALIFY, INSERT ALL) | `integration/sql/snowflake/01_setup_and_load.sql`, `integration/sql/snowflake/02_staging.sql`, `integration/sql/snowflake/03_marts.sql` |
+| **Source-to-warehouse reconciliation** (receivables, ageing buckets and monthly revenue tie back to the app) | `integration/quality.py`, `docs/PIPELINE_QUALITY.md` |
+| **Excel + Power Query** (M scripts for JSON API, paged REST API and Snowflake; SUMIFS / INDEX-MATCH pack with tie-out cells) | `integration/powerquery/01_marts_from_json_api.pq`, `integration/excel/build_pack.py` |
+| **Serving data as an API** (FastAPI, whitelisted marts, optional API key) | `integration/marts_api.py` |
+| **Self-service BI** (Metabase saved questions on Snowflake) | `integration/metabase/questions.sql` |
 | **Documentation** | `README.md`, `docs/ARCHITECTURE.md`, `docs/DATA_MODEL.md` |
 
 ## Not claimed
 
-* No real data, no API or web ingestion, no production database or cloud warehouse: the target is SQLite on simulated data.
-* No orchestration tool (Airflow, dbt, etc.); the pipeline is a plain Python module run from the command line and CI.
+* No real data. The MYOB API is a mock serving a re-shaped copy of the simulated ledger (see `docs/PIPELINE.md`); no live MYOB company file is connected.
+* The Snowflake account is a free trial and the n8n flow is not in production; there is no dbt or Airflow. The SQLite warehouse is a plain Python module run from the command line and CI.
 * No time-entry or per-matter cost data in the simulation, so WIP ageing is by matter age and "matter profitability" is billing performance against estimated value; profitability with cost is at practice-area level using an hours-based salary allocation.
 * Dimensions are type 1 (no history); a type-2 design is described but not faked.

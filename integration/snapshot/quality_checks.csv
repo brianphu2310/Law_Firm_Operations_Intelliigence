@@ -1,0 +1,9 @@
+check,failures,passed
+"API count = rows loaded (last batch, every resource)",0,True
+No duplicate invoices after de-duplication,0,True
+Invoice total = subtotal + GST (10%),0,True
+Invoice subtotal = sum of its lines,0,True
+Balance due = total - payments applied,0,True
+"Closed invoices have zero balance, open ones a positive balance",0,True
+Every invoice links to a known client,0,True
+No payment dated before its invoice,0,True
