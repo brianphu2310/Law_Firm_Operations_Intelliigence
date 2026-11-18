@@ -12,6 +12,13 @@ tested without a MYOB developer account:
   * OData paging $top (max 1000) / $skip and the incremental filter  $filter=LastModified gt datetime'YYYY-MM-DDTHH:MM:SS'
   * response envelope {"Items": [...], "NextPageLink": ..., "Count": n}
   * POST /_simulate/activity: test helper (not MYOB) that settles some open invoices "today" to demo incremental loads
+
+Other systems the firm runs (integration/sources_export.py), each with its own paging style, as real APIs differ:
+  * /leap/v1/{matters|invoices|trust/balances}      page + pageSize, updatedSince  -> {"data", "paging": {..., "nextPage"}}
+  * /smokeball/{matters|trust/balances} (triConvey) Offset + Limit, LastUpdated     -> {"value", "offset", "limit", "size", "next": {"href"}}
+  * /infotrack/v1/orders                            pageNumber + pageSize, modifiedSince -> {"orders", "totalCount", "nextPageUrl"}
+  * /pexa/v1/workspaces                             cursor + limit, updatedSince   -> {"workspaces", "totalCount", "links": {"next"}}
+Scopes: leap:read, triconvey:read (plus x-api-key = client, like Smokeball), infotrack:read, pexa:read.
 """
 from __future__ import annotations
 
@@ -104,6 +111,75 @@ def create_app(auth_config: A.AuthConfig | None = None, jwks_fetch=None) -> Fast
                          "LastModified": sync.isoformat(), "RowVersion": "1"})
             settled.append(inv["Number"])
         return {"settled_invoices": settled, "sync_date": sync.isoformat()}
+
+    # ---------------------------------------------------------------- other vendors (simulated)
+    vdir = DATA_DIR
+    vendor = {k: json.loads((vdir / f"{k}.json").read_text(encoding="utf-8")) for k in
+              ("leap/matters", "leap/invoices", "leap/trust_balances", "triconvey/matters", "triconvey/trust_balances",
+               "infotrack/orders", "pexa/workspaces")}
+
+    def _since(rows, field, since):
+        if not since:
+            return rows
+        try:
+            t = datetime.fromisoformat(since.replace("Z", ""))
+        except ValueError:
+            raise HTTPException(400, f"Invalid timestamp {since!r}")
+        return [r for r in rows if r[field] and datetime.fromisoformat(r[field]) > t]
+
+    def _next(request: Request, **params) -> str:
+        q = {**dict(request.query_params), **{k: str(v) for k, v in params.items()}}
+        return f"{str(request.base_url).rstrip('/')}{request.url.path}?{urlencode(q)}"
+
+    def _auth(authorization, key, route, require_key=False):
+        verifier.verify(authorization, key, A.scope_for(route), require_key=require_key)
+
+    @app.get("/leap/v1/{entity:path}")
+    def leap(entity: str, request: Request, page: int = Query(1, ge=1), pageSize: int = Query(100, ge=1, le=500),
+             updatedSince: str | None = None, authorization: str = Header(None)):
+        _auth(authorization, None, "leap")
+        rows = vendor.get(f"leap/{entity.replace('/', '_')}")
+        if rows is None:
+            raise HTTPException(404, f"Unknown LEAP resource {entity}")
+        rows = _since(rows, "lastModified", updatedSince)
+        start = (page - 1) * pageSize
+        nxt = _next(request, page=page + 1, pageSize=pageSize) if start + pageSize < len(rows) else None
+        return {"data": rows[start:start + pageSize],
+                "paging": {"page": page, "pageSize": pageSize, "totalRecords": len(rows), "nextPage": nxt}}
+
+    @app.get("/smokeball/{entity:path}")
+    def smokeball(entity: str, request: Request, Offset: int = Query(0, ge=0), Limit: int = Query(100, ge=1, le=500),
+                  LastUpdated: str | None = None, authorization: str = Header(None), x_api_key: str = Header(None)):
+        _auth(authorization, x_api_key, "smokeball", require_key=True)
+        rows = vendor.get(f"triconvey/{entity.replace('/', '_')}")
+        if rows is None:
+            raise HTTPException(404, f"Unknown resource {entity}")
+        rows = _since(rows, "lastUpdated", LastUpdated)
+        nxt = {"href": _next(request, Offset=Offset + Limit, Limit=Limit), "method": "GET"} if Offset + Limit < len(rows) else None
+        return {"self": {"href": str(request.url), "method": "GET"}, "value": rows[Offset:Offset + Limit],
+                "offset": Offset, "limit": Limit, "size": len(rows), "next": nxt}
+
+    @app.get("/infotrack/v1/orders")
+    def infotrack(request: Request, pageNumber: int = Query(1, ge=1), pageSize: int = Query(500, ge=1, le=1000),
+                  modifiedSince: str | None = None, authorization: str = Header(None)):
+        _auth(authorization, None, "infotrack")
+        rows = _since(vendor["infotrack/orders"], "lastModified", modifiedSince)
+        start = (pageNumber - 1) * pageSize
+        nxt = _next(request, pageNumber=pageNumber + 1, pageSize=pageSize) if start + pageSize < len(rows) else None
+        return {"orders": rows[start:start + pageSize], "totalCount": len(rows), "nextPageUrl": nxt}
+
+    @app.get("/pexa/v1/workspaces")
+    def pexa(request: Request, cursor: str | None = None, limit: int = Query(50, ge=1, le=100), updatedSince: str | None = None,
+             authorization: str = Header(None)):
+        _auth(authorization, None, "pexa")
+        rows = _since(vendor["pexa/workspaces"], "lastUpdated", updatedSince)
+        try:
+            start = int(base64.urlsafe_b64decode(cursor.encode()).decode()) if cursor else 0
+        except Exception:
+            raise HTTPException(400, "Invalid cursor")
+        nxt_cursor = base64.urlsafe_b64encode(str(start + limit).encode()).decode() if start + limit < len(rows) else None
+        return {"workspaces": rows[start:start + limit], "totalCount": len(rows),
+                "links": {"next": _next(request, cursor=nxt_cursor, limit=limit) if nxt_cursor else None}}
 
     @app.get("/accountright/{cf}/{resource:path}")
     def list_resource(cf: str, resource: str, request: Request, top: int = Query(DEFAULT_TOP, alias="$top"),

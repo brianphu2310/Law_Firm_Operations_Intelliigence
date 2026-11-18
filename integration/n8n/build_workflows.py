@@ -7,94 +7,96 @@ Flow: daily 6am -> config -> clear landing -> read watermarks -> extract every M
 -> fail the execution if any resource's API count != rows loaded (n8n's error workflow then alerts).
 """
 import json
+import sys
+from dataclasses import asdict
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from integration.extract_load import SOURCES  # noqa: E402
 
-CONFIG_JS = r"""// Non-secret settings only. The client SECRET lives in the n8n credential on the "Get Token" node (encrypted by n8n),
-// never in this JSON. clientId is not secret: it is sent as x-myobapi-key and must equal the token's azp claim.
+SOURCES_JS = json.dumps([{**asdict(s), "page_params": dict(s.page_params)} for s in SOURCES])
+
+
+CONFIG_JS_TEMPLATE = r"""// Non-secret settings only. The client SECRET lives in the n8n credential on the "Get Token" node (encrypted by n8n),
+// never in this JSON. clientId is not secret: it is sent as the API-key header and must equal the token's azp claim.
+// `sources` is generated from integration/extract_load.py SOURCES, so n8n and the Python loader share one definition.
 return [{ json: {
   baseUrl: '__BASE_URL__',
   tokenUrl: '__TOKEN_URL__',
   audience: 'https://myob-mock.dagostino-demo',
   clientId: '__CLIENT_ID__',
-  pageSize: 400,
-  resources: [
-    { path: 'GeneralLedger/Account',  table: 'myob_accounts' },
-    { path: 'Contact/Customer',       table: 'myob_customers' },
-    { path: 'Sale/Invoice/Service',   table: 'myob_invoices' },
-    { path: 'Sale/CustomerPayment',   table: 'myob_customer_payments' },
-  ],
+  sources: __SOURCES__,
 }}];"""
 
-EXTRACT_JS = r"""// Pull every resource from MYOB with paging + incremental watermark.
+CONFIG_JS = CONFIG_JS_TEMPLATE.replace('__SOURCES__', SOURCES_JS)
+
+EXTRACT_JS = r"""// Pull every source (MYOB, LEAP, triConvey, InfoTrack, PEXA) with its own paging style + incremental watermark.
 const cfg = $('Config').first().json;
 const wmRows = $('Get Watermarks').all().map(i => i.json).filter(r => r.RESOURCE);
 const watermarks = Object.fromEntries(wmRows.map(r => [r.RESOURCE, r.WATERMARK]));
-
 const asJson = r => (typeof r === 'string' ? JSON.parse(r) : r);
+const dig = (o, path) => path.split('.').reduce((v, k) => (v == null ? v : v[k]), o);
 const tok = $('Get Token').first().json;                // one OAuth token per run (Auth0 free plan meters M2M tokens)
-const headers = {
-  Authorization: `Bearer ${tok.access_token}`,
-  'x-myobapi-key': cfg.clientId,
-  'x-myobapi-version': 'v2',
-  Accept: 'application/json',
+const headersFor = src => {
+  const h = { Authorization: `Bearer ${tok.access_token}`, Accept: 'application/json' };
+  if (src.myob) { h['x-myobapi-key'] = cfg.clientId; h['x-myobapi-version'] = 'v2'; }
+  else if (src.key_header) { h[src.key_header] = cfg.clientId; }
+  return h;
 };
-
-const companyFiles = asJson(await this.helpers.httpRequest({ method: 'GET', url: `${cfg.baseUrl}/accountright/`, headers }));
-const cf = companyFiles[0];
+const myobHeaders = headersFor({ myob: true });
+const cf = asJson(await this.helpers.httpRequest({ method: 'GET', url: `${cfg.baseUrl}/accountright/`, headers: myobHeaders }))[0];
 
 const batchId = $execution.id + '-' + Date.now();
 const loadedAt = new Date().toISOString().slice(0, 19);
 const rows = [], audits = [];
 
-for (const res of cfg.resources) {
-  const since = watermarks[res.path] || null;
-  let url = `${cfg.baseUrl}/accountright/${cf.Id}/${res.path}?$top=${cfg.pageSize}`;
-  if (since) url += `&$filter=${encodeURIComponent(`LastModified gt datetime'${since}'`)}`;
+for (const src of cfg.sources) {
+  const since = watermarks[src.resource] || null;
+  const qs = new URLSearchParams(src.page_params);
+  if (since) qs.set(src.since_param, src.myob ? `LastModified gt datetime'${since}'` : since);
+  let url = `${cfg.baseUrl}${src.path.replace('{cf}', cf.Id)}?${qs.toString()}`;
   let items = [], apiCount = null, status = 'OK';
   try {
     while (url) {
-      const body = asJson(await this.helpers.httpRequest({ method: 'GET', url, headers }));
-      items = items.concat(body.Items);
-      apiCount = body.Count ?? apiCount;
-      url = body.NextPageLink;
+      const body = asJson(await this.helpers.httpRequest({ method: 'GET', url, headers: headersFor(src) }));
+      items = items.concat(body[src.items]);
+      apiCount = dig(body, src.count) ?? apiCount;
+      url = dig(body, src.next);
     }
     if (apiCount !== items.length) status = 'COUNT_MISMATCH';
   } catch (e) {
     status = ('ERROR: ' + e.message).slice(0, 200); apiCount = -1; items = [];
   }
   for (const it of items) {
-    rows.push({ TARGET_TABLE: res.table, RECORD_UID: it.UID, PAYLOAD_TEXT: JSON.stringify(it),
-                LAST_MODIFIED: it.LastModified, BATCH_ID: batchId, LOADED_AT: loadedAt });
+    rows.push({ TARGET_TABLE: src.table, RECORD_UID: String(it[src.id_key]), PAYLOAD_TEXT: JSON.stringify(it),
+                LAST_MODIFIED: it[src.updated], BATCH_ID: batchId, LOADED_AT: loadedAt });
   }
-  const newWm = items.reduce((m, it) => (it.LastModified > (m || '') ? it.LastModified : m), since);
-  audits.push({ BATCH_ID: batchId, RESOURCE: res.path, API_COUNT: apiCount,
+  const newWm = items.reduce((m, it) => (it[src.updated] && it[src.updated] > (m || '') ? it[src.updated] : m), since);
+  audits.push({ BATCH_ID: batchId, RESOURCE: src.resource, API_COUNT: apiCount,
                 LOADED_COUNT: items.length, WATERMARK: newWm, STATUS: status, LOADED_AT: loadedAt });
 }
 const company = { COMPANY_FILE_UID: cf.Id, NAME: cf.Name, LAST_SYNC_DATE: cf.LastSyncDate, BATCH_ID: batchId, LOADED_AT: loadedAt };
 return [{ json: { batchId, rows, audits, company } }];"""
 
-LANDING_JS = r"""const rows = $('Extract from MYOB').first().json.rows;
+LANDING_JS = r"""const rows = $('Extract from Sources').first().json.rows;
 return rows.length ? rows.map(r => ({ json: r })) : [{ json: { EMPTY: true } }];"""
 
-AUDIT_JS = r"""return $('Extract from MYOB').first().json.audits.map(a => ({ json: a }));"""
+AUDIT_JS = r"""return $('Extract from Sources').first().json.audits.map(a => ({ json: a }));"""
 
-COMPANY_JS = r"""return [{ json: $('Extract from MYOB').first().json.company }];"""
+COMPANY_JS = r"""return [{ json: $('Extract from Sources').first().json.company }];"""
 
-CHECK_JS = r"""const bad = $('Extract from MYOB').first().json.audits.filter(a => a.STATUS !== 'OK');
+CHECK_JS = r"""const bad = $('Extract from Sources').first().json.audits.filter(a => a.STATUS !== 'OK');
 if (bad.length) {
-  throw new Error('MYOB load problems: ' + bad.map(b => `${b.RESOURCE}=${b.STATUS}`).join('; '));
+  throw new Error('Load problems: ' + bad.map(b => `${b.RESOURCE}=${b.STATUS}`).join('; '));
 }
-return [{ json: { ok: true, loaded: $('Extract from MYOB').first().json.rows.length } }];"""
+return [{ json: { ok: true, loaded: $('Extract from Sources').first().json.rows.length } }];"""
 
-PROMOTE_SQL = """insert all
-  when target_table = 'myob_accounts'          then into raw.myob_accounts          values (record_uid, payload, last_modified, batch_id, loaded_at)
-  when target_table = 'myob_customers'         then into raw.myob_customers         values (record_uid, payload, last_modified, batch_id, loaded_at)
-  when target_table = 'myob_invoices'          then into raw.myob_invoices          values (record_uid, payload, last_modified, batch_id, loaded_at)
-  when target_table = 'myob_customer_payments' then into raw.myob_customer_payments values (record_uid, payload, last_modified, batch_id, loaded_at)
-select target_table, record_uid, parse_json(payload_text) as payload, last_modified, batch_id, loaded_at
-from raw.myob_landing
-where batch_id = '{{ $('Extract from MYOB').first().json.batchId }}'"""
+PROMOTE_SQL = ("insert all\n" + "".join(
+    f"  when target_table = '{t}' then into raw.{t} values (record_uid, payload, last_modified, batch_id, loaded_at)\n"
+    for t in [src.table for src in SOURCES]) +
+    "select target_table, record_uid, parse_json(payload_text) as payload, last_modified, batch_id, loaded_at\n"
+    "from raw.myob_landing\n"
+    "where batch_id = '{{ $('Extract from Sources').first().json.batchId }}'")
 
 SF_CRED = {"snowflake": {"id": "REPLACE_ME", "name": "Snowflake account"}}
 
@@ -122,7 +124,7 @@ nodes = [
                                           {"name": "audience", "value": "={{ $('Config').first().json.audience }}"}]},
         "options": {}},
          credentials={"httpBasicAuth": {"id": "REPLACE_ME", "name": "MYOB API client (Basic Auth: client id + secret)"}}, executeOnce=True),
-    node("Extract from MYOB", "n8n-nodes-base.code", 2, [880, 300], {"jsCode": EXTRACT_JS}),
+    node("Extract from Sources", "n8n-nodes-base.code", 2, [880, 300], {"jsCode": EXTRACT_JS}),
     node("Landing Rows", "n8n-nodes-base.code", 2, [1100, 300], {"jsCode": LANDING_JS}),
     node("Has New Rows?", "n8n-nodes-base.if", 2, [1320, 300], {
         "conditions": {"options": {"caseSensitive": True, "typeValidation": "loose"},
@@ -154,7 +156,7 @@ def link(a, b, out_idx=0):
     return a, b, out_idx
 
 edges = [("Daily 6am", "Config"), ("Config", "Clear Landing"), ("Clear Landing", "Get Watermarks"),
-         ("Get Watermarks", "Get Token"), ("Get Token", "Extract from MYOB"), ("Extract from MYOB", "Landing Rows"),
+         ("Get Watermarks", "Get Token"), ("Get Token", "Extract from Sources"), ("Extract from Sources", "Landing Rows"),
          ("Landing Rows", "Has New Rows?"), ("Insert Landing", "Promote to RAW"),
          ("Promote to RAW", "Audit Rows"), ("Audit Rows", "Insert Audit"),
          ("Insert Audit", "Company File Row"), ("Company File Row", "Insert Company File"),

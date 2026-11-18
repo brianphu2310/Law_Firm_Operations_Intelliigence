@@ -31,8 +31,8 @@ sequenceDiagram
 | Signature valid against the issuer's JWKS (`kid`) | Forged tokens fail even with a guessed `kid` | `test_token_signed_by_another_key_is_rejected` |
 | `iss` and `aud` exact | A token for another API or from another issuer is useless here | `test_wrong_audience_or_issuer_is_rejected`, `test_auth0_mode_trusts_only_the_auth0_issuer` |
 | `exp` (30 s clock-skew leeway) | Stolen tokens expire; small clock drift is tolerated | `test_expired_token_is_rejected_but_clock_skew_is_tolerated` |
-| Scope per resource: `read:ledger`, `read:contacts`, `read:sales` | Least privilege, so a reporting client can be limited to sales only | `test_each_resource_needs_its_own_scope`, `test_token_endpoint_only_grants_scopes_the_client_is_allowed` |
-| `x-myobapi-key` = token's `azp` | Mirrors MYOB, where the API key belongs to the OAuth client | `test_api_key_header_must_match_the_tokens_client` |
+| Scope per resource: MYOB `read:ledger` / `read:contacts` / `read:sales`; `leap:read`, `triconvey:read`, `infotrack:read`, `pexa:read` | Least privilege, so a reporting client can be limited to sales only | `test_each_resource_needs_its_own_scope`, `test_token_endpoint_only_grants_scopes_the_client_is_allowed` |
+| API-key header = token's `azp` (`x-myobapi-key` for MYOB, `x-api-key` for triConvey/Smokeball) | Mirrors those vendors, where the API key belongs to the OAuth client | `test_api_key_header_must_match_the_tokens_client` |
 | Key rotation | Unknown `kid` → JWKS refetched once, then rejected | `test_jwks_cache_refetches_once_on_unknown_kid` |
 
 Errors follow RFC 6750 (`WWW-Authenticate: Bearer error="invalid_token"` / `"insufficient_scope"`).
@@ -47,7 +47,8 @@ In n8n, the token comes from a separate **Get Token** HTTP node whose client sec
 
 1. **Applications → APIs → Create API.** Name it `MYOB mock API` and set the identifier (the audience) to
    `https://myob-mock.dagostino-demo`. Choose signing algorithm **RS256**.
-2. In that API's **Permissions** tab, add the scopes `read:ledger`, `read:contacts` and `read:sales`.
+2. In that API's **Permissions** tab, add the scopes `read:ledger`, `read:contacts`, `read:sales`, `leap:read`, `triconvey:read`,
+   `infotrack:read` and `pexa:read`.
 3. **Applications → Applications → Create Application → Machine to Machine**, name it `n8n MYOB loader`, and authorise it for
    the API above with all three scopes. For a reporting-only client, create a second M2M app with just `read:sales`.
 4. In the M2M app's **Credentials** tab, set **Authentication Method = Client Secret (Basic)**. That is the method n8n's

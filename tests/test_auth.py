@@ -57,7 +57,8 @@ def test_token_endpoint_issues_rs256_jwt_with_scopes(api):
     tok = r.json()["access_token"]
     assert jwt.get_unverified_header(tok)["alg"] == "RS256"
     claims = jwt.decode(tok, options={"verify_signature": False})
-    assert claims["azp"] == CID and set(claims["scope"].split()) == {"read:ledger", "read:contacts", "read:sales"}
+    assert claims["azp"] == CID and set(claims["scope"].split()) == {"read:ledger", "read:contacts", "read:sales", "leap:read",
+                                                                     "triconvey:read", "infotrack:read", "pexa:read"}
     assert _get(api, tok).status_code == 200
 
 
@@ -205,3 +206,14 @@ def test_n8n_workflows_keep_secrets_in_credentials_not_json():
         assert tok["parameters"]["genericAuthType"] == "httpBasicAuth" and "httpBasicAuth" in tok["credentials"]
     cloud = json.loads((ROOT / "integration" / "n8n" / "myob_to_snowflake_cloud.json").read_text(encoding="utf-8"))
     assert "auth0.com/oauth/token" in json.dumps(cloud)
+
+
+@pytest.mark.parametrize("path,scope,needs_key", [("/leap/v1/matters", "leap:read", False), ("/smokeball/matters", "triconvey:read", True),
+                                                  ("/infotrack/v1/orders", "infotrack:read", False), ("/pexa/v1/workspaces", "pexa:read", False)])
+def test_each_vendor_api_needs_its_own_scope(api, path, scope, needs_key):
+    others = " ".join(s for s in A.ALL_SCOPES.split() if s != scope)
+    h = lambda tok, key=CID: {"Authorization": f"Bearer {tok}", "x-api-key": key}
+    assert api.get(path, headers=h(_issuer(api).issue(CID, others))).status_code == 403
+    assert api.get(path, headers=h(_issuer(api).issue(CID, scope))).status_code == 200
+    wrong_key = api.get(path, headers=h(_issuer(api).issue(CID, scope), "another-client")).status_code
+    assert wrong_key == (403 if needs_key else 200)                       # Smokeball ties x-api-key to the OAuth client

@@ -12,5 +12,14 @@ union all select 'Every invoice links to a known client', count_if(c.customer_ui
 from staging.stg_invoices i left join staging.stg_customers c on c.customer_uid = i.customer_uid
 union all select 'No payment dated before its invoice', count_if(p.payment_date < i.invoice_date)
 from staging.stg_payment_allocations p join staging.stg_invoices i on i.invoice_uid = p.invoice_uid
+union all select 'LEAP invoices = MYOB invoices (number and total)', count_if(result <> 'Matched') from marts.invoice_sync_recon
+union all select 'Every InfoTrack order references a LEAP matter', count_if(m.matter_number is null)
+from staging.stg_infotrack_orders o left join staging.stg_leap_matters m on m.matter_number = o.matter_number
+union all select 'Every PEXA workspace references a LEAP matter', count_if(m.matter_number is null)
+from staging.stg_pexa_workspaces w left join staging.stg_leap_matters m on m.matter_number = w.matter_number
 -- reconciliation targets from the dashboard (docs/PIPELINE_QUALITY.md): receivables at 17 Sep 2025 = $1,053,551.51
 union all select 'Receivables at report date = $1,053,551.51', iff(abs((select sum(balance_due) from marts.aged_receivables) - 1053551.51) > 0.005, 1, 0);
+
+
+-- Migration dry-run findings (expected: M-2024-0209 not migrated, M-2024-0277 duplicated, Global Trust Bank trust -5,799.21)
+select * from marts.migration_exceptions order by kind, reference;

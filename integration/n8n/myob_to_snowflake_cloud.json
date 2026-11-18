@@ -21,7 +21,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Non-secret settings only. The client SECRET lives in the n8n credential on the \"Get Token\" node (encrypted by n8n),\n// never in this JSON. clientId is not secret: it is sent as x-myobapi-key and must equal the token's azp claim.\nreturn [{ json: {\n  baseUrl: 'https://REPLACE-WITH-PUBLIC-MOCK-API-URL',\n  tokenUrl: 'https://dev-z1apvxcaj6hhb84a.us.auth0.com/oauth/token',\n  audience: 'https://myob-mock.dagostino-demo',\n  clientId: 'REPLACE-WITH-AUTH0-M2M-CLIENT-ID',\n  pageSize: 400,\n  resources: [\n    { path: 'GeneralLedger/Account',  table: 'myob_accounts' },\n    { path: 'Contact/Customer',       table: 'myob_customers' },\n    { path: 'Sale/Invoice/Service',   table: 'myob_invoices' },\n    { path: 'Sale/CustomerPayment',   table: 'myob_customer_payments' },\n  ],\n}}];"
+        "jsCode": "// Non-secret settings only. The client SECRET lives in the n8n credential on the \"Get Token\" node (encrypted by n8n),\n// never in this JSON. clientId is not secret: it is sent as the API-key header and must equal the token's azp claim.\n// `sources` is generated from integration/extract_load.py SOURCES, so n8n and the Python loader share one definition.\nreturn [{ json: {\n  baseUrl: 'https://REPLACE-WITH-PUBLIC-MOCK-API-URL',\n  tokenUrl: 'https://dev-z1apvxcaj6hhb84a.us.auth0.com/oauth/token',\n  audience: 'https://myob-mock.dagostino-demo',\n  clientId: 'REPLACE-WITH-AUTH0-M2M-CLIENT-ID',\n  sources: [{\"resource\": \"GeneralLedger/Account\", \"table\": \"myob_accounts\", \"path\": \"/accountright/{cf}/GeneralLedger/Account\", \"items\": \"Items\", \"next\": \"NextPageLink\", \"count\": \"Count\", \"id_key\": \"UID\", \"updated\": \"LastModified\", \"since_param\": \"$filter\", \"page_params\": {\"$top\": 400}, \"key_header\": \"x-myobapi-key\", \"myob\": true}, {\"resource\": \"Contact/Customer\", \"table\": \"myob_customers\", \"path\": \"/accountright/{cf}/Contact/Customer\", \"items\": \"Items\", \"next\": \"NextPageLink\", \"count\": \"Count\", \"id_key\": \"UID\", \"updated\": \"LastModified\", \"since_param\": \"$filter\", \"page_params\": {\"$top\": 400}, \"key_header\": \"x-myobapi-key\", \"myob\": true}, {\"resource\": \"Sale/Invoice/Service\", \"table\": \"myob_invoices\", \"path\": \"/accountright/{cf}/Sale/Invoice/Service\", \"items\": \"Items\", \"next\": \"NextPageLink\", \"count\": \"Count\", \"id_key\": \"UID\", \"updated\": \"LastModified\", \"since_param\": \"$filter\", \"page_params\": {\"$top\": 400}, \"key_header\": \"x-myobapi-key\", \"myob\": true}, {\"resource\": \"Sale/CustomerPayment\", \"table\": \"myob_customer_payments\", \"path\": \"/accountright/{cf}/Sale/CustomerPayment\", \"items\": \"Items\", \"next\": \"NextPageLink\", \"count\": \"Count\", \"id_key\": \"UID\", \"updated\": \"LastModified\", \"since_param\": \"$filter\", \"page_params\": {\"$top\": 400}, \"key_header\": \"x-myobapi-key\", \"myob\": true}, {\"resource\": \"leap:matters\", \"table\": \"leap_matters\", \"path\": \"/leap/v1/matters\", \"items\": \"data\", \"next\": \"paging.nextPage\", \"count\": \"paging.totalRecords\", \"id_key\": \"matterId\", \"updated\": \"lastModified\", \"since_param\": \"updatedSince\", \"page_params\": {\"pageSize\": 200}, \"key_header\": null, \"myob\": false}, {\"resource\": \"leap:invoices\", \"table\": \"leap_invoices\", \"path\": \"/leap/v1/invoices\", \"items\": \"data\", \"next\": \"paging.nextPage\", \"count\": \"paging.totalRecords\", \"id_key\": \"invoiceId\", \"updated\": \"lastModified\", \"since_param\": \"updatedSince\", \"page_params\": {\"pageSize\": 200}, \"key_header\": null, \"myob\": false}, {\"resource\": \"leap:trust/balances\", \"table\": \"leap_trust_balances\", \"path\": \"/leap/v1/trust/balances\", \"items\": \"data\", \"next\": \"paging.nextPage\", \"count\": \"paging.totalRecords\", \"id_key\": \"ledgerId\", \"updated\": \"lastModified\", \"since_param\": \"updatedSince\", \"page_params\": {\"pageSize\": 200}, \"key_header\": null, \"myob\": false}, {\"resource\": \"triconvey:matters\", \"table\": \"triconvey_matters\", \"path\": \"/smokeball/matters\", \"items\": \"value\", \"next\": \"next.href\", \"count\": \"size\", \"id_key\": \"id\", \"updated\": \"lastUpdated\", \"since_param\": \"LastUpdated\", \"page_params\": {\"Limit\": 200}, \"key_header\": \"x-api-key\", \"myob\": false}, {\"resource\": \"triconvey:trust/balances\", \"table\": \"triconvey_trust_balances\", \"path\": \"/smokeball/trust/balances\", \"items\": \"value\", \"next\": \"next.href\", \"count\": \"size\", \"id_key\": \"id\", \"updated\": \"lastUpdated\", \"since_param\": \"LastUpdated\", \"page_params\": {\"Limit\": 200}, \"key_header\": \"x-api-key\", \"myob\": false}, {\"resource\": \"infotrack:orders\", \"table\": \"infotrack_orders\", \"path\": \"/infotrack/v1/orders\", \"items\": \"orders\", \"next\": \"nextPageUrl\", \"count\": \"totalCount\", \"id_key\": \"orderId\", \"updated\": \"lastModified\", \"since_param\": \"modifiedSince\", \"page_params\": {\"pageSize\": 1000}, \"key_header\": null, \"myob\": false}, {\"resource\": \"pexa:workspaces\", \"table\": \"pexa_workspaces\", \"path\": \"/pexa/v1/workspaces\", \"items\": \"workspaces\", \"next\": \"links.next\", \"count\": \"totalCount\", \"id_key\": \"workspaceId\", \"updated\": \"lastUpdated\", \"since_param\": \"updatedSince\", \"page_params\": {\"limit\": 100}, \"key_header\": null, \"myob\": false}],\n}}];"
       },
       "name": "Config",
       "type": "n8n-nodes-base.code",
@@ -111,9 +111,9 @@
     },
     {
       "parameters": {
-        "jsCode": "// Pull every resource from MYOB with paging + incremental watermark.\nconst cfg = $('Config').first().json;\nconst wmRows = $('Get Watermarks').all().map(i => i.json).filter(r => r.RESOURCE);\nconst watermarks = Object.fromEntries(wmRows.map(r => [r.RESOURCE, r.WATERMARK]));\n\nconst asJson = r => (typeof r === 'string' ? JSON.parse(r) : r);\nconst tok = $('Get Token').first().json;                // one OAuth token per run (Auth0 free plan meters M2M tokens)\nconst headers = {\n  Authorization: `Bearer ${tok.access_token}`,\n  'x-myobapi-key': cfg.clientId,\n  'x-myobapi-version': 'v2',\n  Accept: 'application/json',\n};\n\nconst companyFiles = asJson(await this.helpers.httpRequest({ method: 'GET', url: `${cfg.baseUrl}/accountright/`, headers }));\nconst cf = companyFiles[0];\n\nconst batchId = $execution.id + '-' + Date.now();\nconst loadedAt = new Date().toISOString().slice(0, 19);\nconst rows = [], audits = [];\n\nfor (const res of cfg.resources) {\n  const since = watermarks[res.path] || null;\n  let url = `${cfg.baseUrl}/accountright/${cf.Id}/${res.path}?$top=${cfg.pageSize}`;\n  if (since) url += `&$filter=${encodeURIComponent(`LastModified gt datetime'${since}'`)}`;\n  let items = [], apiCount = null, status = 'OK';\n  try {\n    while (url) {\n      const body = asJson(await this.helpers.httpRequest({ method: 'GET', url, headers }));\n      items = items.concat(body.Items);\n      apiCount = body.Count ?? apiCount;\n      url = body.NextPageLink;\n    }\n    if (apiCount !== items.length) status = 'COUNT_MISMATCH';\n  } catch (e) {\n    status = ('ERROR: ' + e.message).slice(0, 200); apiCount = -1; items = [];\n  }\n  for (const it of items) {\n    rows.push({ TARGET_TABLE: res.table, RECORD_UID: it.UID, PAYLOAD_TEXT: JSON.stringify(it),\n                LAST_MODIFIED: it.LastModified, BATCH_ID: batchId, LOADED_AT: loadedAt });\n  }\n  const newWm = items.reduce((m, it) => (it.LastModified > (m || '') ? it.LastModified : m), since);\n  audits.push({ BATCH_ID: batchId, RESOURCE: res.path, API_COUNT: apiCount,\n                LOADED_COUNT: items.length, WATERMARK: newWm, STATUS: status, LOADED_AT: loadedAt });\n}\nconst company = { COMPANY_FILE_UID: cf.Id, NAME: cf.Name, LAST_SYNC_DATE: cf.LastSyncDate, BATCH_ID: batchId, LOADED_AT: loadedAt };\nreturn [{ json: { batchId, rows, audits, company } }];"
+        "jsCode": "// Pull every source (MYOB, LEAP, triConvey, InfoTrack, PEXA) with its own paging style + incremental watermark.\nconst cfg = $('Config').first().json;\nconst wmRows = $('Get Watermarks').all().map(i => i.json).filter(r => r.RESOURCE);\nconst watermarks = Object.fromEntries(wmRows.map(r => [r.RESOURCE, r.WATERMARK]));\nconst asJson = r => (typeof r === 'string' ? JSON.parse(r) : r);\nconst dig = (o, path) => path.split('.').reduce((v, k) => (v == null ? v : v[k]), o);\nconst tok = $('Get Token').first().json;                // one OAuth token per run (Auth0 free plan meters M2M tokens)\nconst headersFor = src => {\n  const h = { Authorization: `Bearer ${tok.access_token}`, Accept: 'application/json' };\n  if (src.myob) { h['x-myobapi-key'] = cfg.clientId; h['x-myobapi-version'] = 'v2'; }\n  else if (src.key_header) { h[src.key_header] = cfg.clientId; }\n  return h;\n};\nconst myobHeaders = headersFor({ myob: true });\nconst cf = asJson(await this.helpers.httpRequest({ method: 'GET', url: `${cfg.baseUrl}/accountright/`, headers: myobHeaders }))[0];\n\nconst batchId = $execution.id + '-' + Date.now();\nconst loadedAt = new Date().toISOString().slice(0, 19);\nconst rows = [], audits = [];\n\nfor (const src of cfg.sources) {\n  const since = watermarks[src.resource] || null;\n  const qs = new URLSearchParams(src.page_params);\n  if (since) qs.set(src.since_param, src.myob ? `LastModified gt datetime'${since}'` : since);\n  let url = `${cfg.baseUrl}${src.path.replace('{cf}', cf.Id)}?${qs.toString()}`;\n  let items = [], apiCount = null, status = 'OK';\n  try {\n    while (url) {\n      const body = asJson(await this.helpers.httpRequest({ method: 'GET', url, headers: headersFor(src) }));\n      items = items.concat(body[src.items]);\n      apiCount = dig(body, src.count) ?? apiCount;\n      url = dig(body, src.next);\n    }\n    if (apiCount !== items.length) status = 'COUNT_MISMATCH';\n  } catch (e) {\n    status = ('ERROR: ' + e.message).slice(0, 200); apiCount = -1; items = [];\n  }\n  for (const it of items) {\n    rows.push({ TARGET_TABLE: src.table, RECORD_UID: String(it[src.id_key]), PAYLOAD_TEXT: JSON.stringify(it),\n                LAST_MODIFIED: it[src.updated], BATCH_ID: batchId, LOADED_AT: loadedAt });\n  }\n  const newWm = items.reduce((m, it) => (it[src.updated] && it[src.updated] > (m || '') ? it[src.updated] : m), since);\n  audits.push({ BATCH_ID: batchId, RESOURCE: src.resource, API_COUNT: apiCount,\n                LOADED_COUNT: items.length, WATERMARK: newWm, STATUS: status, LOADED_AT: loadedAt });\n}\nconst company = { COMPANY_FILE_UID: cf.Id, NAME: cf.Name, LAST_SYNC_DATE: cf.LastSyncDate, BATCH_ID: batchId, LOADED_AT: loadedAt };\nreturn [{ json: { batchId, rows, audits, company } }];"
       },
-      "name": "Extract from MYOB",
+      "name": "Extract from Sources",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
@@ -123,7 +123,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const rows = $('Extract from MYOB').first().json.rows;\nreturn rows.length ? rows.map(r => ({ json: r })) : [{ json: { EMPTY: true } }];"
+        "jsCode": "const rows = $('Extract from Sources').first().json.rows;\nreturn rows.length ? rows.map(r => ({ json: r })) : [{ json: { EMPTY: true } }];"
       },
       "name": "Landing Rows",
       "type": "n8n-nodes-base.code",
@@ -186,7 +186,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "=insert all\n  when target_table = 'myob_accounts'          then into raw.myob_accounts          values (record_uid, payload, last_modified, batch_id, loaded_at)\n  when target_table = 'myob_customers'         then into raw.myob_customers         values (record_uid, payload, last_modified, batch_id, loaded_at)\n  when target_table = 'myob_invoices'          then into raw.myob_invoices          values (record_uid, payload, last_modified, batch_id, loaded_at)\n  when target_table = 'myob_customer_payments' then into raw.myob_customer_payments values (record_uid, payload, last_modified, batch_id, loaded_at)\nselect target_table, record_uid, parse_json(payload_text) as payload, last_modified, batch_id, loaded_at\nfrom raw.myob_landing\nwhere batch_id = '{{ $('Extract from MYOB').first().json.batchId }}'"
+        "query": "=insert all\n  when target_table = 'myob_accounts' then into raw.myob_accounts values (record_uid, payload, last_modified, batch_id, loaded_at)\n  when target_table = 'myob_customers' then into raw.myob_customers values (record_uid, payload, last_modified, batch_id, loaded_at)\n  when target_table = 'myob_invoices' then into raw.myob_invoices values (record_uid, payload, last_modified, batch_id, loaded_at)\n  when target_table = 'myob_customer_payments' then into raw.myob_customer_payments values (record_uid, payload, last_modified, batch_id, loaded_at)\n  when target_table = 'leap_matters' then into raw.leap_matters values (record_uid, payload, last_modified, batch_id, loaded_at)\n  when target_table = 'leap_invoices' then into raw.leap_invoices values (record_uid, payload, last_modified, batch_id, loaded_at)\n  when target_table = 'leap_trust_balances' then into raw.leap_trust_balances values (record_uid, payload, last_modified, batch_id, loaded_at)\n  when target_table = 'triconvey_matters' then into raw.triconvey_matters values (record_uid, payload, last_modified, batch_id, loaded_at)\n  when target_table = 'triconvey_trust_balances' then into raw.triconvey_trust_balances values (record_uid, payload, last_modified, batch_id, loaded_at)\n  when target_table = 'infotrack_orders' then into raw.infotrack_orders values (record_uid, payload, last_modified, batch_id, loaded_at)\n  when target_table = 'pexa_workspaces' then into raw.pexa_workspaces values (record_uid, payload, last_modified, batch_id, loaded_at)\nselect target_table, record_uid, parse_json(payload_text) as payload, last_modified, batch_id, loaded_at\nfrom raw.myob_landing\nwhere batch_id = '{{ $('Extract from Sources').first().json.batchId }}'"
       },
       "name": "Promote to RAW",
       "type": "n8n-nodes-base.snowflake",
@@ -205,7 +205,7 @@
     },
     {
       "parameters": {
-        "jsCode": "return $('Extract from MYOB').first().json.audits.map(a => ({ json: a }));"
+        "jsCode": "return $('Extract from Sources').first().json.audits.map(a => ({ json: a }));"
       },
       "name": "Audit Rows",
       "type": "n8n-nodes-base.code",
@@ -237,7 +237,7 @@
     },
     {
       "parameters": {
-        "jsCode": "return [{ json: $('Extract from MYOB').first().json.company }];"
+        "jsCode": "return [{ json: $('Extract from Sources').first().json.company }];"
       },
       "name": "Company File Row",
       "type": "n8n-nodes-base.code",
@@ -269,7 +269,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const bad = $('Extract from MYOB').first().json.audits.filter(a => a.STATUS !== 'OK');\nif (bad.length) {\n  throw new Error('MYOB load problems: ' + bad.map(b => `${b.RESOURCE}=${b.STATUS}`).join('; '));\n}\nreturn [{ json: { ok: true, loaded: $('Extract from MYOB').first().json.rows.length } }];"
+        "jsCode": "const bad = $('Extract from Sources').first().json.audits.filter(a => a.STATUS !== 'OK');\nif (bad.length) {\n  throw new Error('Load problems: ' + bad.map(b => `${b.RESOURCE}=${b.STATUS}`).join('; '));\n}\nreturn [{ json: { ok: true, loaded: $('Extract from Sources').first().json.rows.length } }];"
       },
       "name": "Fail If Mismatch",
       "type": "n8n-nodes-base.code",
@@ -329,14 +329,14 @@
       "main": [
         [
           {
-            "node": "Extract from MYOB",
+            "node": "Extract from Sources",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Extract from MYOB": {
+    "Extract from Sources": {
       "main": [
         [
           {

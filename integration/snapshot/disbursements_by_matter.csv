@@ -1,0 +1,440 @@
+matter_number,client_name,practice_area,status,searches,search_fees,pexa_workspaces,pexa_fees,total_disbursements
+M-2022-0001,Vertex Industries,IP Portfolio,Closed,54,2174.9,0,0.0,2174.9
+M-2022-0002,Acme Corp,Litigation,Closed,9,449.33,0,0.0,449.33
+M-2022-0003,Vertex Industries,IP Portfolio,Closed,12,563.56,0,0.0,563.56
+M-2022-0004,Acme Corp,Litigation,Closed,11,455.85,0,0.0,455.85
+M-2022-0005,Nova Materials,IP Portfolio,Closed,15,442.11,0,0.0,442.11
+M-2022-0006,Okafor Mining Co.,Litigation,Closed,44,1585.12,0,0.0,1585.12
+M-2022-0007,Auckland Ventures Ltd,Advisory,Closed,3,103.33,0,0.0,103.33
+M-2022-0008,Acme Corp,Litigation,Closed,17,628.12,0,0.0,628.12
+M-2022-0009,Singapore Trading Group,Corporate,Closed,11,363.03,0,0.0,363.03
+M-2022-0010,Okafor Mining Co.,Litigation,Closed,15,610.0,0,0.0,610.0
+M-2022-0011,Vertex Industries,IP Portfolio,Closed,12,500.19,0,0.0,500.19
+M-2022-0012,Acme Corp,Litigation,Closed,23,822.79,0,0.0,822.79
+M-2022-0013,Meridian Holdings Ltd.,Corporate,Closed,10,309.47,1,183.37,492.84
+M-2022-0014,Meridian Holdings Ltd.,Corporate,Closed,5,202.59,0,0.0,202.59
+M-2022-0015,Zenith Labs,Litigation,Closed,3,94.39,0,0.0,94.39
+M-2022-0016,Okafor Mining Co.,Litigation,Closed,11,496.67,0,0.0,496.67
+M-2022-0017,Singapore Trading Group,Corporate,Closed,2,95.3,0,0.0,95.3
+M-2022-0018,Acme Corp,Litigation,Closed,15,593.62,0,0.0,593.62
+M-2022-0019,Acme Corp,Litigation,Closed,2,136.14,0,0.0,136.14
+M-2022-0020,Acme Corp,Litigation,Closed,21,730.05,0,0.0,730.05
+M-2022-0021,Nippon Precision Ltd,IP Portfolio,Closed,11,613.98,0,0.0,613.98
+M-2023-0023,Okafor Mining Co.,Litigation,Closed,31,1073.6,0,0.0,1073.6
+M-2023-0024,Acme Corp,Litigation,Closed,51,2033.68,0,0.0,2033.68
+M-2023-0025,Acme Corp,Litigation,Closed,3,78.78,0,0.0,78.78
+M-2023-0026,Acme Corp,Litigation,Closed,28,1109.64,0,0.0,1109.64
+M-2023-0027,Singapore Trading Group,Corporate,Closed,2,51.05,0,0.0,51.05
+M-2023-0028,Zenith Labs,Litigation,Closed,19,820.17,0,0.0,820.17
+M-2023-0029,Harlow & Co.,Employment,Closed,14,475.35,0,0.0,475.35
+M-2023-0030,Harlow & Co.,Employment,Closed,17,730.96,0,0.0,730.96
+M-2023-0031,Okafor Mining Co.,Litigation,Closed,9,284.11,0,0.0,284.11
+M-2023-0032,Zenith Labs,Litigation,Closed,32,1347.37,0,0.0,1347.37
+M-2023-0033,Fentonville Council,Advisory,Closed,3,144.64,0,0.0,144.64
+M-2023-0034,Meridian Holdings Ltd.,Corporate,Closed,9,342.04,0,0.0,342.04
+M-2023-0035,London Capital Partners,Corporate,Closed,3,99.96,0,0.0,99.96
+M-2023-0036,Acme Corp,Litigation,Closed,39,1445.53,0,0.0,1445.53
+M-2023-0037,Halcyon Systems,IP Portfolio,Closed,6,159.07,0,0.0,159.07
+M-2023-0038,Zenith Labs,Litigation,Closed,23,832.07,0,0.0,832.07
+M-2023-0039,Acme Corp,Litigation,Closed,36,1285.68,0,0.0,1285.68
+M-2023-0040,Okafor Mining Co.,Litigation,Closed,17,838.79,0,0.0,838.79
+M-2023-0041,Nova Materials,IP Portfolio,Closed,21,727.65,0,0.0,727.65
+M-2023-0042,Meridian Holdings Ltd.,Corporate,Closed,5,164.59,0,0.0,164.59
+M-2023-0043,Sunrise Logistics,Employment,Closed,4,205.9,0,0.0,205.9
+M-2023-0044,Singapore Trading Group,Corporate,Closed,27,921.02,0,0.0,921.02
+M-2023-0045,Meridian Holdings Ltd.,Corporate,Closed,14,627.85,1,183.37,811.22
+M-2023-0046,Zenith Labs,Litigation,Closed,20,1006.98,0,0.0,1006.98
+M-2023-0047,Meridian Holdings Ltd.,Corporate,Closed,24,821.99,0,0.0,821.99
+M-2023-0048,Blackwood Realty,Corporate,Closed,21,804.27,0,0.0,804.27
+M-2023-0049,Meridian Holdings Ltd.,Corporate,Closed,22,807.16,1,183.37,990.53
+M-2023-0050,Harlow & Co.,Employment,Closed,6,323.97,0,0.0,323.97
+M-2023-0051,Nova Materials,IP Portfolio,Closed,12,366.5,0,0.0,366.5
+M-2023-0052,Auckland Ventures Ltd,Advisory,Closed,13,567.21,0,0.0,567.21
+M-2023-0053,Halcyon Systems,IP Portfolio,Closed,6,186.07,0,0.0,186.07
+M-2023-0054,London Capital Partners,Corporate,Closed,29,955.74,0,0.0,955.74
+M-2023-0055,Nova Materials,IP Portfolio,Closed,24,793.51,0,0.0,793.51
+M-2023-0056,Delacroix & Sons,Corporate,Closed,20,801.43,0,0.0,801.43
+M-2023-0057,Okafor Mining Co.,Litigation,Closed,14,461.6,0,0.0,461.6
+M-2023-0058,Sunrise Logistics,Employment,Closed,21,695.98,0,0.0,695.98
+M-2023-0059,Acme Corp,Litigation,Closed,22,951.29,0,0.0,951.29
+M-2023-0060,Global Trust Bank,Corporate,Closed,18,704.4,1,183.37,887.77
+M-2023-0061,Harlow & Co.,Employment,Closed,3,72.23,0,0.0,72.23
+M-2023-0062,Ganges Textile Exports,Litigation,Closed,42,1446.99,0,0.0,1446.99
+M-2023-0063,Singapore Trading Group,Corporate,Closed,12,493.93,0,0.0,493.93
+M-2023-0064,Bright Path Foundation,Advisory,Closed,7,207.35,0,0.0,207.35
+M-2023-0065,Halcyon Systems,IP Portfolio,Closed,33,1371.65,0,0.0,1371.65
+M-2023-0066,Meridian Pacific Trust,Corporate,Closed,11,306.58,0,0.0,306.58
+M-2023-0067,Fentonville Council,Advisory,Closed,12,439.64,0,0.0,439.64
+M-2023-0068,Harlow & Co.,Employment,Closed,11,391.53,0,0.0,391.53
+M-2023-0069,Halcyon Systems,IP Portfolio,Closed,9,287.24,0,0.0,287.24
+M-2023-0070,Singapore Trading Group,Corporate,Closed,11,412.16,0,0.0,412.16
+M-2023-0071,Bright Path Foundation,Advisory,Closed,14,546.05,0,0.0,546.05
+M-2023-0072,Sunrise Logistics,Employment,Closed,10,366.19,0,0.0,366.19
+M-2023-0073,Global Trust Bank,Corporate,Closed,12,364.15,1,126.94,491.09
+M-2023-0074,Meridian Pacific Trust,Corporate,Closed,15,538.08,0,0.0,538.08
+M-2023-0075,Acme Corp,Litigation,Closed,17,774.14,0,0.0,774.14
+M-2023-0076,Halcyon Systems,IP Portfolio,Closed,8,264.33,0,0.0,264.33
+M-2023-0077,Meridian Holdings Ltd.,Corporate,Closed,7,206.63,0,0.0,206.63
+M-2023-0078,Meridian Pacific Trust,Corporate,Closed,10,501.91,0,0.0,501.91
+M-2023-0079,Meridian Pacific Trust,Corporate,Closed,14,429.03,0,0.0,429.03
+M-2023-0080,Zenith Labs,Litigation,Closed,23,870.5,0,0.0,870.5
+M-2023-0081,Global Trust Bank,Corporate,Closed,13,572.78,1,183.37,756.15
+M-2023-0082,Zenith Labs,Litigation,Closed,15,655.63,0,0.0,655.63
+M-2023-0083,Acme Corp,Litigation,Closed,25,1163.38,0,0.0,1163.38
+M-2023-0084,Auckland Ventures Ltd,Advisory,Closed,19,595.55,0,0.0,595.55
+M-2023-0085,Halcyon Systems,IP Portfolio,Closed,17,673.64,0,0.0,673.64
+M-2023-0086,Sunrise Logistics,Employment,Closed,13,401.14,0,0.0,401.14
+M-2023-0087,Bright Path Foundation,Advisory,Closed,13,538.24,0,0.0,538.24
+M-2023-0088,Okafor Mining Co.,Litigation,Closed,8,251.18,0,0.0,251.18
+M-2023-0089,Zenith Labs,Litigation,Closed,21,934.93,0,0.0,934.93
+M-2023-0090,Nippon Precision Ltd,IP Portfolio,Closed,18,695.8,0,0.0,695.8
+M-2023-0091,Okafor Mining Co.,Litigation,Closed,34,1265.11,0,0.0,1265.11
+M-2023-0092,Nova Materials,IP Portfolio,Closed,16,505.56,0,0.0,505.56
+M-2023-0093,Whitmore Textiles,IP Portfolio,Closed,14,486.4,0,0.0,486.4
+M-2023-0094,Delacroix & Sons,Corporate,Closed,18,648.87,1,183.37,832.24
+M-2023-0095,Delacroix & Sons,Corporate,Closed,11,484.51,0,0.0,484.51
+M-2023-0096,Meridian Pacific Trust,Corporate,Closed,6,326.99,0,0.0,326.99
+M-2023-0097,Harlow & Co.,Employment,Closed,9,297.94,0,0.0,297.94
+M-2023-0098,Okafor Mining Co.,Litigation,Closed,23,810.14,0,0.0,810.14
+M-2023-0099,Halcyon Systems,IP Portfolio,Closed,4,257.98,0,0.0,257.98
+M-2023-0100,Meridian Holdings Ltd.,Corporate,Closed,13,469.62,0,0.0,469.62
+M-2023-0101,Sunrise Logistics,Employment,Closed,11,374.4,0,0.0,374.4
+M-2023-0102,Delacroix & Sons,Corporate,Closed,15,541.79,0,0.0,541.79
+M-2023-0103,Auckland Ventures Ltd,Advisory,Closed,22,650.79,0,0.0,650.79
+M-2023-0104,Blackwood Realty,Corporate,Closed,12,460.5,0,0.0,460.5
+M-2023-0105,Zenith Labs,Litigation,Closed,28,1037.69,0,0.0,1037.69
+M-2023-0106,Meridian Holdings Ltd.,Corporate,Closed,13,487.56,1,183.37,670.93
+M-2023-0107,Bright Path Foundation,Advisory,Closed,9,293.18,0,0.0,293.18
+M-2023-0108,Blackwood Realty,Corporate,Closed,12,422.9,0,0.0,422.9
+M-2023-0109,Auckland Ventures Ltd,Advisory,Closed,14,509.24,0,0.0,509.24
+M-2023-0110,Harlow & Co.,Employment,Closed,16,563.84,0,0.0,563.84
+M-2023-0111,Nippon Precision Ltd,IP Portfolio,Closed,14,562.7,0,0.0,562.7
+M-2023-0112,London Capital Partners,Corporate,Closed,3,89.96,0,0.0,89.96
+M-2023-0113,Delacroix & Sons,Corporate,Closed,17,512.96,0,0.0,512.96
+M-2023-0114,Global Trust Bank,Corporate,Closed,16,561.82,1,183.37,745.19
+M-2023-0115,Harlow & Co.,Employment,Closed,6,193.84,0,0.0,193.84
+M-2023-0116,Auckland Ventures Ltd,Advisory,Closed,3,110.38,0,0.0,110.38
+M-2023-0117,Harlow & Co.,Employment,Closed,12,539.33,0,0.0,539.33
+M-2023-0118,Global Trust Bank,Corporate,Closed,10,278.14,0,0.0,278.14
+M-2023-0119,Fentonville Council,Advisory,Closed,3,116.04,0,0.0,116.04
+M-2023-0120,Fentonville Council,Advisory,Closed,8,218.39,0,0.0,218.39
+M-2023-0121,Global Trust Bank,Corporate,Closed,12,540.62,0,0.0,540.62
+M-2023-0122,Delacroix & Sons,Corporate,Closed,12,439.72,0,0.0,439.72
+M-2023-0123,Global Trust Bank,Corporate,Closed,33,1455.92,0,0.0,1455.92
+M-2023-0124,Harlow & Co.,Employment,Closed,8,313.92,0,0.0,313.92
+M-2023-0125,Zenith Labs,Litigation,Closed,18,547.15,0,0.0,547.15
+M-2023-0126,Bright Path Foundation,Advisory,Closed,7,279.19,0,0.0,279.19
+M-2023-0127,Nippon Precision Ltd,IP Portfolio,Closed,12,410.24,0,0.0,410.24
+M-2023-0128,Halcyon Systems,IP Portfolio,Closed,22,899.71,0,0.0,899.71
+M-2023-0129,Meridian Holdings Ltd.,Corporate,Closed,11,307.47,0,0.0,307.47
+M-2023-0130,Okafor Mining Co.,Litigation,Closed,16,573.74,0,0.0,573.74
+M-2023-0131,Fentonville Council,Advisory,Closed,6,220.24,0,0.0,220.24
+M-2023-0132,Nippon Precision Ltd,IP Portfolio,Closed,28,1061.27,0,0.0,1061.27
+M-2023-0133,Delacroix & Sons,Corporate,Closed,26,1023.7,0,0.0,1023.7
+M-2023-0134,Delacroix & Sons,Corporate,Closed,16,506.7,1,183.37,690.07
+M-2023-0135,Meridian Holdings Ltd.,Corporate,Closed,32,1136.02,0,0.0,1136.02
+M-2023-0136,Auckland Ventures Ltd,Advisory,Closed,5,220.64,0,0.0,220.64
+M-2023-0137,Vertex Industries,IP Portfolio,Closed,25,1115.14,0,0.0,1115.14
+M-2024-0138,Okafor Mining Co.,Litigation,Closed,25,1041.24,0,0.0,1041.24
+M-2024-0139,Nova Materials,IP Portfolio,Closed,20,735.14,0,0.0,735.14
+M-2024-0140,Harlow & Co.,Employment,Closed,17,806.03,0,0.0,806.03
+M-2024-0141,London Capital Partners,Corporate,Closed,11,433.64,0,0.0,433.64
+M-2024-0142,Pacific Rim Traders,Litigation,Closed,12,372.89,0,0.0,372.89
+M-2024-0143,Okafor Mining Co.,Litigation,Closed,26,1226.89,0,0.0,1226.89
+M-2024-0144,Pacific Rim Traders,Litigation,Closed,7,207.81,0,0.0,207.81
+M-2024-0145,Auckland Ventures Ltd,Advisory,Closed,4,129.34,0,0.0,129.34
+M-2024-0146,Nova Materials,IP Portfolio,Closed,26,1141.11,0,0.0,1141.11
+M-2024-0147,Bright Path Foundation,Advisory,Closed,7,234.76,0,0.0,234.76
+M-2024-0148,London Capital Partners,Corporate,Closed,17,641.6,0,0.0,641.6
+M-2024-0149,Sunrise Logistics,Employment,Closed,10,647.45,0,0.0,647.45
+M-2024-0150,Zenith Labs,Litigation,Closed,20,829.47,0,0.0,829.47
+M-2024-0151,Vertex Industries,IP Portfolio,Closed,20,903.14,0,0.0,903.14
+M-2024-0152,Okafor Mining Co.,Litigation,Closed,29,1280.7,0,0.0,1280.7
+M-2024-0153,Halcyon Systems,IP Portfolio,Open,32,1147.7,0,0.0,1147.7
+M-2024-0154,Bright Path Foundation,Advisory,Closed,25,879.18,0,0.0,879.18
+M-2024-0155,Acme Corp,Litigation,Closed,18,702.08,0,0.0,702.08
+M-2024-0156,Auckland Ventures Ltd,Advisory,Closed,12,496.63,0,0.0,496.63
+M-2024-0157,Acme Corp,Litigation,Closed,8,241.02,0,0.0,241.02
+M-2024-0158,Halcyon Systems,IP Portfolio,Closed,20,812.67,0,0.0,812.67
+M-2024-0159,Acme Corp,Litigation,Open,29,1139.25,0,0.0,1139.25
+M-2024-0160,Whitmore Textiles,IP Portfolio,Closed,21,697.42,0,0.0,697.42
+M-2024-0161,Singapore Trading Group,Corporate,Closed,12,561.97,0,0.0,561.97
+M-2024-0162,Ganges Textile Exports,Litigation,Closed,19,659.67,0,0.0,659.67
+M-2024-0163,Global Trust Bank,Corporate,Closed,9,320.98,1,126.94,447.92
+M-2024-0164,London Capital Partners,Corporate,Closed,15,544.93,0,0.0,544.93
+M-2024-0165,Halcyon Systems,IP Portfolio,Closed,19,793.11,0,0.0,793.11
+M-2024-0166,Whitmore Textiles,IP Portfolio,Closed,12,455.72,0,0.0,455.72
+M-2024-0167,Auckland Ventures Ltd,Advisory,Closed,11,409.92,0,0.0,409.92
+M-2024-0168,Halcyon Systems,IP Portfolio,Open,27,1002.5,0,0.0,1002.5
+M-2024-0169,Bright Path Foundation,Advisory,Closed,11,439.75,0,0.0,439.75
+M-2024-0170,Meridian Pacific Trust,Corporate,Closed,9,299.21,0,0.0,299.21
+M-2024-0171,Meridian Pacific Trust,Corporate,Closed,8,257.96,0,0.0,257.96
+M-2024-0172,Acme Corp,Litigation,Closed,27,892.39,0,0.0,892.39
+M-2024-0173,Bright Path Foundation,Advisory,Closed,13,398.47,0,0.0,398.47
+M-2024-0174,London Capital Partners,Corporate,Closed,20,821.92,0,0.0,821.92
+M-2024-0175,Vertex Industries,IP Portfolio,Closed,9,437.02,0,0.0,437.02
+M-2024-0176,Halcyon Systems,IP Portfolio,Closed,19,669.13,0,0.0,669.13
+M-2024-0177,London Capital Partners,Corporate,Closed,20,700.43,0,0.0,700.43
+M-2024-0178,Zenith Labs,Litigation,Closed,29,958.01,0,0.0,958.01
+M-2024-0179,Auckland Ventures Ltd,Advisory,Closed,12,448.89,0,0.0,448.89
+M-2024-0180,Harlow & Co.,Employment,Closed,15,555.54,0,0.0,555.54
+M-2024-0181,Harlow & Co.,Employment,Closed,18,789.12,0,0.0,789.12
+M-2024-0182,Ganges Textile Exports,Litigation,Closed,28,1061.7,0,0.0,1061.7
+M-2024-0183,Delacroix & Sons,Corporate,Closed,16,616.5,0,0.0,616.5
+M-2024-0184,Nippon Precision Ltd,IP Portfolio,Closed,8,304.78,0,0.0,304.78
+M-2024-0185,Blackwood Realty,Corporate,Closed,14,431.06,0,0.0,431.06
+M-2024-0186,Nippon Precision Ltd,IP Portfolio,Closed,12,428.19,0,0.0,428.19
+M-2024-0187,Fentonville Council,Advisory,Closed,10,406.61,0,0.0,406.61
+M-2024-0188,Okafor Mining Co.,Litigation,Closed,21,818.26,0,0.0,818.26
+M-2024-0189,Zenith Labs,Litigation,Closed,12,431.55,0,0.0,431.55
+M-2024-0190,Bright Path Foundation,Advisory,Closed,4,133.37,0,0.0,133.37
+M-2024-0191,Auckland Ventures Ltd,Advisory,Closed,12,506.12,0,0.0,506.12
+M-2024-0192,Nippon Precision Ltd,IP Portfolio,Closed,28,1262.57,0,0.0,1262.57
+M-2024-0193,Zenith Labs,Litigation,Closed,26,1030.8,0,0.0,1030.8
+M-2024-0194,Fentonville Council,Advisory,Closed,2,63.58,0,0.0,63.58
+M-2024-0195,Halcyon Systems,IP Portfolio,Closed,25,920.49,0,0.0,920.49
+M-2024-0196,Harlow & Co.,Employment,Closed,12,410.15,0,0.0,410.15
+M-2024-0197,Okafor Mining Co.,Litigation,Closed,13,388.08,0,0.0,388.08
+M-2024-0198,Okafor Mining Co.,Litigation,Open,37,1344.29,0,0.0,1344.29
+M-2024-0199,Ganges Textile Exports,Litigation,Open,24,1058.9,0,0.0,1058.9
+M-2024-0200,Harlow & Co.,Employment,Closed,3,85.58,0,0.0,85.58
+M-2024-0201,London Capital Partners,Corporate,Closed,12,560.87,0,0.0,560.87
+M-2024-0202,Zenith Labs,Litigation,Open,32,1003.1,0,0.0,1003.1
+M-2024-0203,Zenith Labs,Litigation,Open,29,1029.72,0,0.0,1029.72
+M-2024-0204,Vertex Industries,IP Portfolio,Closed,19,666.4,0,0.0,666.4
+M-2024-0205,Fentonville Council,Advisory,Closed,6,331.1,0,0.0,331.1
+M-2024-0206,Harlow & Co.,Employment,Closed,14,548.73,0,0.0,548.73
+M-2024-0207,Okafor Mining Co.,Litigation,Closed,23,763.03,0,0.0,763.03
+M-2024-0208,Auckland Ventures Ltd,Advisory,Closed,8,301.71,0,0.0,301.71
+M-2024-0209,Global Trust Bank,Corporate,Open,29,1057.3,1,183.37,1240.67
+M-2024-0210,Pacific Rim Traders,Litigation,Closed,20,622.64,0,0.0,622.64
+M-2024-0211,Meridian Holdings Ltd.,Corporate,Closed,15,512.82,0,0.0,512.82
+M-2024-0212,Nova Materials,IP Portfolio,Closed,12,477.57,0,0.0,477.57
+M-2024-0213,Nova Materials,IP Portfolio,Closed,15,556.2,0,0.0,556.2
+M-2024-0214,Global Trust Bank,Corporate,Closed,14,618.18,1,183.37,801.55
+M-2024-0215,Meridian Holdings Ltd.,Corporate,Closed,10,296.0,0,0.0,296.0
+M-2024-0216,Global Trust Bank,Corporate,Closed,15,553.1,0,0.0,553.1
+M-2024-0217,Acme Corp,Litigation,Open,25,952.02,0,0.0,952.02
+M-2024-0218,Meridian Holdings Ltd.,Corporate,Closed,12,622.03,0,0.0,622.03
+M-2024-0219,Global Trust Bank,Corporate,Closed,13,468.92,1,183.37,652.29
+M-2024-0220,Zenith Labs,Litigation,Closed,25,1030.12,0,0.0,1030.12
+M-2024-0221,Global Trust Bank,Corporate,Closed,13,539.32,0,0.0,539.32
+M-2024-0222,Nova Materials,IP Portfolio,Open,16,481.76,0,0.0,481.76
+M-2024-0223,Zenith Labs,Litigation,Closed,27,803.97,0,0.0,803.97
+M-2024-0224,Pacific Rim Traders,Litigation,Open,31,1019.9,0,0.0,1019.9
+M-2024-0225,Fentonville Council,Advisory,Closed,15,541.84,0,0.0,541.84
+M-2024-0226,Sunrise Logistics,Employment,Closed,9,395.48,0,0.0,395.48
+M-2024-0227,Auckland Ventures Ltd,Advisory,Closed,9,378.97,0,0.0,378.97
+M-2024-0228,Meridian Holdings Ltd.,Corporate,Closed,12,476.85,1,183.37,660.22
+M-2024-0229,Bright Path Foundation,Advisory,Closed,8,346.47,0,0.0,346.47
+M-2024-0230,Blackwood Realty,Corporate,Closed,15,567.17,0,0.0,567.17
+M-2024-0231,Nova Materials,IP Portfolio,Closed,13,473.0,0,0.0,473.0
+M-2024-0232,Fentonville Council,Advisory,Closed,8,288.53,0,0.0,288.53
+M-2024-0233,Vertex Industries,IP Portfolio,Closed,8,315.85,0,0.0,315.85
+M-2024-0234,Global Trust Bank,Corporate,Closed,10,390.82,0,0.0,390.82
+M-2024-0235,Bright Path Foundation,Advisory,Closed,15,566.06,0,0.0,566.06
+M-2024-0236,Blackwood Realty,Corporate,Closed,14,545.58,0,0.0,545.58
+M-2024-0237,Acme Corp,Litigation,Closed,8,262.04,0,0.0,262.04
+M-2024-0238,Acme Corp,Corporate,Closed,13,441.11,0,0.0,441.11
+M-2024-0239,Zenith Labs,Litigation,Closed,15,547.19,0,0.0,547.19
+M-2024-0240,Halcyon Systems,IP Portfolio,Closed,13,534.16,0,0.0,534.16
+M-2024-0241,Fentonville Council,Advisory,Closed,6,233.23,0,0.0,233.23
+M-2024-0242,Fentonville Council,Advisory,Closed,13,427.6,0,0.0,427.6
+M-2024-0243,Pacific Rim Traders,Litigation,Open,31,1190.35,0,0.0,1190.35
+M-2024-0244,London Capital Partners,Corporate,Open,22,824.33,0,0.0,824.33
+M-2024-0245,Auckland Ventures Ltd,Advisory,Closed,13,445.98,0,0.0,445.98
+M-2024-0246,Auckland Ventures Ltd,Advisory,Closed,10,354.68,0,0.0,354.68
+M-2024-0247,Global Trust Bank,Corporate,Open,25,891.38,0,0.0,891.38
+M-2024-0248,Nippon Precision Ltd,IP Portfolio,Open,21,640.7,0,0.0,640.7
+M-2024-0249,Pacific Rim Traders,Litigation,Closed,16,579.06,0,0.0,579.06
+M-2024-0250,Pacific Rim Traders,Litigation,Open,15,593.81,0,0.0,593.81
+M-2024-0251,Sunrise Logistics,Employment,On Hold,14,522.06,0,0.0,522.06
+M-2024-0252,Zenith Labs,Litigation,Closed,6,211.84,0,0.0,211.84
+M-2024-0253,Whitmore Textiles,IP Portfolio,Closed,14,476.48,0,0.0,476.48
+M-2024-0254,Meridian Holdings Ltd.,Corporate,Closed,10,358.08,0,0.0,358.08
+M-2024-0255,Acme Corp,Litigation,Open,24,927.56,0,0.0,927.56
+M-2024-0256,Bright Path Foundation,Advisory,Closed,7,285.15,0,0.0,285.15
+M-2024-0257,Blackwood Realty,Corporate,Closed,16,471.95,0,0.0,471.95
+M-2024-0258,London Capital Partners,Corporate,Closed,18,587.1,0,0.0,587.1
+M-2024-0259,Bright Path Foundation,Advisory,Closed,17,636.48,0,0.0,636.48
+M-2024-0260,London Capital Partners,Corporate,Closed,11,508.55,0,0.0,508.55
+M-2024-0261,Halcyon Systems,IP Portfolio,Open,20,650.06,0,0.0,650.06
+M-2024-0262,Global Trust Bank,Corporate,Closed,12,437.04,0,0.0,437.04
+M-2024-0263,London Capital Partners,Corporate,On Hold,19,668.03,0,0.0,668.03
+M-2024-0264,Sunrise Logistics,Employment,Closed,12,372.34,0,0.0,372.34
+M-2024-0265,Nova Materials,IP Portfolio,Closed,16,692.74,0,0.0,692.74
+M-2024-0266,Sunrise Logistics,Employment,Closed,7,226.88,0,0.0,226.88
+M-2024-0267,Auckland Ventures Ltd,Advisory,Closed,11,488.3,0,0.0,488.3
+M-2024-0268,Delacroix & Sons,Corporate,Closed,9,280.95,0,0.0,280.95
+M-2024-0269,Halcyon Systems,IP Portfolio,Closed,11,451.74,0,0.0,451.74
+M-2024-0270,Harlow & Co.,Employment,On Hold,13,491.61,0,0.0,491.61
+M-2024-0271,Harlow & Co.,Employment,Closed,7,229.18,0,0.0,229.18
+M-2024-0272,Ganges Textile Exports,Litigation,Closed,15,552.65,0,0.0,552.65
+M-2024-0273,Bright Path Foundation,Advisory,Closed,4,259.7,0,0.0,259.7
+M-2024-0274,Nova Materials,IP Portfolio,On Hold,19,687.79,0,0.0,687.79
+M-2024-0275,Halcyon Systems,IP Portfolio,Closed,9,439.25,0,0.0,439.25
+M-2024-0276,Pacific Rim Traders,Litigation,Open,11,408.41,0,0.0,408.41
+M-2024-0277,Halcyon Systems,IP Portfolio,Open,16,601.51,0,0.0,601.51
+M-2024-0278,Bright Path Foundation,Advisory,Closed,12,436.71,0,0.0,436.71
+M-2024-0279,Blackwood Realty,Corporate,Closed,9,296.3,1,126.94,423.24
+M-2024-0280,Bright Path Foundation,Advisory,Closed,8,348.26,0,0.0,348.26
+M-2024-0281,Fentonville Council,Advisory,Closed,4,315.4,0,0.0,315.4
+M-2024-0282,Halcyon Systems,IP Portfolio,Closed,14,447.06,0,0.0,447.06
+M-2024-0283,Whitmore Textiles,IP Portfolio,Open,16,597.36,0,0.0,597.36
+M-2024-0284,Meridian Holdings Ltd.,Corporate,Closed,3,107.73,0,0.0,107.73
+M-2024-0285,Harlow & Co.,Employment,Closed,16,636.21,0,0.0,636.21
+M-2024-0286,Whitmore Textiles,IP Portfolio,Closed,16,846.2,0,0.0,846.2
+M-2024-0287,Pacific Rim Traders,Litigation,Closed,10,392.32,0,0.0,392.32
+M-2024-0288,Meridian Holdings Ltd.,Corporate,Closed,10,346.18,0,0.0,346.18
+M-2024-0289,Meridian Pacific Trust,Corporate,Closed,15,613.97,0,0.0,613.97
+M-2024-0290,Bright Path Foundation,Advisory,Closed,6,268.28,0,0.0,268.28
+M-2024-0291,Sunrise Logistics,Employment,Open,8,226.43,0,0.0,226.43
+M-2024-0292,Whitmore Textiles,IP Portfolio,Closed,15,527.88,0,0.0,527.88
+M-2024-0293,Fentonville Council,Advisory,Closed,22,712.84,0,0.0,712.84
+M-2025-0294,Vertex Industries,IP Portfolio,Closed,7,271.01,0,0.0,271.01
+M-2025-0295,London Capital Partners,Corporate,Closed,6,261.82,0,0.0,261.82
+M-2025-0296,Auckland Ventures Ltd,Advisory,Closed,7,325.75,0,0.0,325.75
+M-2025-0297,Pacific Rim Traders,Litigation,Open,10,435.98,0,0.0,435.98
+M-2025-0298,Bright Path Foundation,Advisory,Open,14,515.44,0,0.0,515.44
+M-2025-0299,Pacific Rim Traders,Litigation,Open,8,367.86,0,0.0,367.86
+M-2025-0300,Harlow & Co.,Employment,Open,4,172.08,0,0.0,172.08
+M-2025-0301,Auckland Ventures Ltd,IP Portfolio,Closed,12,454.46,0,0.0,454.46
+M-2025-0302,Meridian Holdings Ltd.,Corporate,Open,10,356.1,0,0.0,356.1
+M-2025-0303,Nippon Precision Ltd,IP Portfolio,Closed,7,237.06,0,0.0,237.06
+M-2025-0304,Pacific Rim Traders,Litigation,Open,19,751.07,0,0.0,751.07
+M-2025-0305,Blackwood Realty,Corporate,Open,10,329.78,1,183.37,513.15
+M-2025-0306,Auckland Ventures Ltd,Advisory,Closed,14,512.1,0,0.0,512.1
+M-2025-0307,Whitmore Textiles,IP Portfolio,Closed,11,474.27,0,0.0,474.27
+M-2025-0308,Nova Materials,IP Portfolio,Closed,13,560.41,0,0.0,560.41
+M-2025-0309,Global Trust Bank,Corporate,On Hold,6,211.53,0,0.0,211.53
+M-2025-0310,Vertex Industries,IP Portfolio,Closed,9,279.73,0,0.0,279.73
+M-2025-0311,Meridian Holdings Ltd.,Corporate,Closed,8,402.67,0,0.0,402.67
+M-2025-0312,Okafor Mining Co.,Litigation,Open,11,350.93,0,0.0,350.93
+M-2025-0313,Halcyon Systems,IP Portfolio,Open,13,536.33,0,0.0,536.33
+M-2025-0314,Fentonville Council,Advisory,Closed,7,362.28,0,0.0,362.28
+M-2025-0315,Auckland Ventures Ltd,Advisory,Closed,6,263.81,0,0.0,263.81
+M-2025-0316,Auckland Ventures Ltd,Advisory,Closed,13,440.72,0,0.0,440.72
+M-2025-0317,Vertex Industries,IP Portfolio,Open,11,454.32,0,0.0,454.32
+M-2025-0318,Singapore Trading Group,Corporate,Open,9,375.84,0,0.0,375.84
+M-2025-0319,Auckland Ventures Ltd,Advisory,Closed,4,186.43,0,0.0,186.43
+M-2025-0320,Delacroix & Sons,Corporate,Closed,12,385.49,1,183.37,568.86
+M-2025-0321,Singapore Trading Group,Corporate,Closed,16,603.31,0,0.0,603.31
+M-2025-0322,Ganges Textile Exports,Litigation,Closed,8,338.7,0,0.0,338.7
+M-2025-0323,Acme Corp,Litigation,On Hold,13,557.12,0,0.0,557.12
+M-2025-0324,Nova Materials,IP Portfolio,Open,13,499.84,0,0.0,499.84
+M-2025-0325,Okafor Mining Co.,Litigation,Open,11,408.85,0,0.0,408.85
+M-2025-0326,Vertex Industries,IP Portfolio,Closed,5,213.62,0,0.0,213.62
+M-2025-0327,Zenith Labs,Litigation,Open,18,607.46,0,0.0,607.46
+M-2025-0328,Blackwood Realty,Corporate,Open,12,490.57,0,0.0,490.57
+M-2025-0329,Delacroix & Sons,Corporate,Closed,12,422.96,0,0.0,422.96
+M-2025-0330,Bright Path Foundation,Advisory,Closed,4,202.82,0,0.0,202.82
+M-2025-0331,London Capital Partners,Corporate,Open,9,292.24,0,0.0,292.24
+M-2025-0332,Vertex Industries,IP Portfolio,Open,10,342.02,0,0.0,342.02
+M-2025-0333,Vertex Industries,IP Portfolio,Closed,7,232.16,0,0.0,232.16
+M-2025-0334,Vertex Industries,IP Portfolio,Open,16,648.59,0,0.0,648.59
+M-2025-0335,Bright Path Foundation,Advisory,Closed,6,177.95,0,0.0,177.95
+M-2025-0336,Acme Corp,Litigation,Open,10,281.46,0,0.0,281.46
+M-2025-0337,Fentonville Council,Advisory,Closed,4,178.13,0,0.0,178.13
+M-2025-0338,Delacroix & Sons,Corporate,Open,8,402.71,1,183.37,586.08
+M-2025-0339,Meridian Holdings Ltd.,Corporate,Closed,2,60.08,0,0.0,60.08
+M-2025-0340,Meridian Pacific Trust,Corporate,Open,11,300.73,0,0.0,300.73
+M-2025-0341,Harlow & Co.,Employment,Closed,18,735.95,0,0.0,735.95
+M-2025-0342,Sunrise Logistics,Employment,Closed,10,401.64,0,0.0,401.64
+M-2025-0343,Meridian Pacific Trust,Corporate,Open,7,272.38,0,0.0,272.38
+M-2025-0344,Okafor Mining Co.,Litigation,Open,10,465.88,0,0.0,465.88
+M-2025-0345,Meridian Holdings Ltd.,Corporate,Open,8,278.12,1,126.94,405.06
+M-2025-0346,London Capital Partners,Corporate,On Hold,9,246.55,0,0.0,246.55
+M-2025-0347,Zenith Labs,Litigation,Open,6,335.16,0,0.0,335.16
+M-2025-0348,Delacroix & Sons,Corporate,Closed,13,394.85,1,183.37,578.22
+M-2025-0349,Delacroix & Sons,Corporate,Open,7,344.03,1,126.94,470.97
+M-2025-0350,Acme Corp,Litigation,Open,6,197.87,0,0.0,197.87
+M-2025-0351,Nippon Precision Ltd,IP Portfolio,Closed,9,292.69,0,0.0,292.69
+M-2025-0352,Meridian Holdings Ltd.,Corporate,On Hold,12,728.65,0,0.0,728.65
+M-2025-0353,Fentonville Council,Advisory,Closed,7,221.83,0,0.0,221.83
+M-2025-0354,Zenith Labs,Litigation,Open,11,528.9,0,0.0,528.9
+M-2025-0355,Vertex Industries,IP Portfolio,Open,9,345.72,0,0.0,345.72
+M-2025-0356,Vertex Industries,IP Portfolio,Open,11,387.43,0,0.0,387.43
+M-2025-0357,Nippon Precision Ltd,IP Portfolio,On Hold,10,380.56,0,0.0,380.56
+M-2025-0358,Okafor Mining Co.,Litigation,Open,7,269.96,0,0.0,269.96
+M-2025-0359,Harlow & Co.,Employment,Open,7,280.63,0,0.0,280.63
+M-2025-0360,Nippon Precision Ltd,IP Portfolio,Closed,7,235.21,0,0.0,235.21
+M-2025-0361,Auckland Ventures Ltd,Advisory,Closed,8,385.18,0,0.0,385.18
+M-2025-0362,Nippon Precision Ltd,IP Portfolio,Open,11,500.7,0,0.0,500.7
+M-2025-0363,Global Trust Bank,Corporate,Open,7,317.07,1,183.37,500.44
+M-2025-0364,Global Trust Bank,Corporate,Open,6,259.64,0,0.0,259.64
+M-2025-0365,Okafor Mining Co.,Litigation,Open,7,222.88,0,0.0,222.88
+M-2025-0366,Hanwoo Precision Ltd,IP Portfolio,Open,7,416.96,0,0.0,416.96
+M-2025-0367,Meridian Holdings Ltd.,Corporate,On Hold,9,353.75,0,0.0,353.75
+M-2025-0368,Meridian Holdings Ltd.,Corporate,Open,6,278.42,0,0.0,278.42
+M-2025-0369,Nova Materials,IP Portfolio,Open,4,117.51,0,0.0,117.51
+M-2025-0370,Whitmore Textiles,IP Portfolio,Open,9,392.45,0,0.0,392.45
+M-2025-0371,Nova Materials,IP Portfolio,Open,8,330.11,0,0.0,330.11
+M-2025-0372,Acme Corp,Litigation,Open,6,223.05,0,0.0,223.05
+M-2025-0373,London Capital Partners,Corporate,Open,5,140.19,0,0.0,140.19
+M-2025-0374,Singapore Trading Group,Corporate,Closed,12,371.62,0,0.0,371.62
+M-2025-0375,Blackwood Realty,Corporate,Open,6,278.46,0,0.0,278.46
+M-2025-0376,Bright Path Foundation,Advisory,Closed,4,206.12,0,0.0,206.12
+M-2025-0377,Auckland Ventures Ltd,Advisory,Open,6,273.78,0,0.0,273.78
+M-2025-0378,Hanwoo Precision Ltd,IP Portfolio,On Hold,4,116.7,0,0.0,116.7
+M-2025-0379,Fentonville Council,Advisory,On Hold,6,263.01,0,0.0,263.01
+M-2025-0380,Pacific Rim Traders,Litigation,Open,7,261.85,0,0.0,261.85
+M-2025-0381,Harlow & Co.,Employment,Open,5,211.29,0,0.0,211.29
+M-2025-0382,Nippon Precision Ltd,IP Portfolio,Open,3,105.36,0,0.0,105.36
+M-2025-0383,Sunrise Logistics,Employment,Open,7,265.57,0,0.0,265.57
+M-2025-0384,Acme Corp,Litigation,Open,2,50.13,0,0.0,50.13
+M-2025-0385,Vertex Industries,IP Portfolio,Open,10,359.5,0,0.0,359.5
+M-2025-0386,Ganges Textile Exports,Litigation,Open,6,218.21,0,0.0,218.21
+M-2025-0387,Auckland Ventures Ltd,Advisory,Open,10,424.11,0,0.0,424.11
+M-2025-0388,Meridian Pacific Trust,Corporate,Open,7,259.97,0,0.0,259.97
+M-2025-0389,Bright Path Foundation,Advisory,Closed,10,360.63,0,0.0,360.63
+M-2025-0390,Acme Corp,Litigation,Open,7,235.52,0,0.0,235.52
+M-2025-0391,Vertex Industries,IP Portfolio,Open,6,231.77,0,0.0,231.77
+M-2025-0392,Singapore Trading Group,Corporate,Open,4,123.4,0,0.0,123.4
+M-2025-0393,Singapore Trading Group,Corporate,Open,5,226.73,0,0.0,226.73
+M-2025-0394,Ganges Textile Exports,Litigation,Open,8,307.93,0,0.0,307.93
+M-2025-0395,Meridian Holdings Ltd.,Corporate,Open,5,210.04,0,0.0,210.04
+M-2025-0396,Nova Materials,IP Portfolio,Open,4,123.29,0,0.0,123.29
+M-2025-0397,Ganges Textile Exports,Litigation,On Hold,8,272.2,0,0.0,272.2
+M-2025-0398,Zenith Labs,Litigation,Open,10,410.08,0,0.0,410.08
+M-2025-0399,Auckland Ventures Ltd,Advisory,Closed,6,305.22,0,0.0,305.22
+M-2025-0400,Bright Path Foundation,Advisory,Open,4,119.24,0,0.0,119.24
+M-2025-0401,Auckland Ventures Ltd,Advisory,Open,2,66.51,0,0.0,66.51
+M-2025-0402,Pacific Rim Traders,Litigation,Open,4,235.01,0,0.0,235.01
+M-2025-0403,Meridian Holdings Ltd.,Corporate,Open,4,136.12,1,183.37,319.49
+M-2025-0404,Singapore Trading Group,Corporate,Open,5,163.74,0,0.0,163.74
+M-2025-0405,Fentonville Council,Advisory,Open,4,221.91,0,0.0,221.91
+M-2025-0406,Global Trust Bank,Corporate,Open,8,260.86,0,0.0,260.86
+M-2025-0407,Halcyon Systems,IP Portfolio,Open,3,100.65,0,0.0,100.65
+M-2025-0408,Harlow & Co.,Employment,Open,6,265.53,0,0.0,265.53
+M-2025-0409,Pacific Rim Traders,Litigation,Open,3,147.46,0,0.0,147.46
+M-2025-0410,Auckland Ventures Ltd,Advisory,Open,2,52.73,0,0.0,52.73
+M-2025-0411,Sunrise Logistics,Employment,On Hold,10,332.46,0,0.0,332.46
+M-2025-0412,Auckland Ventures Ltd,Advisory,Closed,2,60.32,0,0.0,60.32
+M-2025-0413,Nova Materials,Corporate,Open,5,148.05,0,0.0,148.05
+M-2025-0414,Nova Materials,IP Portfolio,Open,4,135.88,0,0.0,135.88
+M-2025-0415,Ganges Textile Exports,Litigation,Open,3,159.28,0,0.0,159.28
+M-2025-0416,Hanwoo Precision Ltd,IP Portfolio,On Hold,5,214.26,0,0.0,214.26
+M-2025-0417,Bright Path Foundation,Advisory,Open,2,61.8,0,0.0,61.8
+M-2025-0418,Delacroix & Sons,Corporate,Open,3,209.42,0,0.0,209.42
+M-2025-0419,Harlow & Co.,Employment,Open,4,143.89,0,0.0,143.89
+M-2025-0420,Halcyon Systems,IP Portfolio,Open,4,128.62,0,0.0,128.62
+M-2025-0421,Meridian Holdings Ltd.,Corporate,Open,1,20.1,0,0.0,20.1
+M-2025-0422,London Capital Partners,Corporate,Open,6,248.95,0,0.0,248.95
+M-2025-0423,London Capital Partners,Corporate,Open,1,20.1,0,0.0,20.1
+M-2025-0424,Bright Path Foundation,Advisory,Open,2,67.07,0,0.0,67.07
+M-2025-0425,Harlow & Co.,Employment,Open,2,77.07,0,0.0,77.07
+M-2025-0426,Acme Corp,Litigation,Open,5,188.63,0,0.0,188.63
+M-2025-0427,Singapore Trading Group,Corporate,On Hold,5,149.9,0,0.0,149.9
+M-2025-0428,Meridian Pacific Trust,Corporate,Open,2,50.26,0,0.0,50.26
+M-2025-0429,Harlow & Co.,Employment,Open,2,122.3,0,0.0,122.3
+M-2025-0431,Blackwood Realty,Corporate,Open,1,31.64,0,0.0,31.64
+M-2025-0432,Global Trust Bank,Litigation,Open,1,21.09,0,0.0,21.09
+M-2025-0433,Global Trust Bank,Corporate,Open,3,89.64,0,0.0,89.64
+M-2025-0434,Nippon Precision Ltd,IP Portfolio,Open,2,42.18,0,0.0,42.18
+M-2025-0437,Hanwoo Precision Ltd,IP Portfolio,Open,1,49.22,0,0.0,49.22
+M-2025-0438,Bright Path Foundation,Advisory,Open,1,36.91,0,0.0,36.91
+M-2025-0439,Fentonville Council,Advisory,Open,1,49.22,0,0.0,49.22
+M-2025-0440,Nippon Precision Ltd,IP Portfolio,On Hold,2,80.86,0,0.0,80.86
+M-2025-0442,Auckland Ventures Ltd,Advisory,Open,3,86.12,0,0.0,86.12
+M-2025-0444,Blackwood Realty,Corporate,Open,1,31.64,0,0.0,31.64
+M-2025-0445,Fentonville Council,Advisory,Open,2,68.55,0,0.0,68.55

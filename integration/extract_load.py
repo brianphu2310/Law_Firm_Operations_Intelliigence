@@ -22,6 +22,7 @@ import os
 import sys
 import time
 import uuid
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -42,8 +43,50 @@ CLIENT_ID = os.getenv("MYOB_CLIENT_ID", "mock-client-id")
 CLIENT_SECRET = os.getenv("MYOB_CLIENT_SECRET", "mock-client-secret")
 PAGE_SIZE = 400
 
-RESOURCES = {"myob_accounts": "GeneralLedger/Account", "myob_customers": "Contact/Customer",
-             "myob_invoices": "Sale/Invoice/Service", "myob_customer_payments": "Sale/CustomerPayment"}
+@dataclass(frozen=True)
+class Source:
+    """One API resource: where it lives, how it pages, how it filters incrementally, and where it lands in RAW.
+    Real vendor APIs all page differently; describing that as data keeps one loader (and one n8n Code node) for all of them."""
+    resource: str                       # audit / watermark key
+    table: str                          # raw.<table>
+    path: str                           # may contain {cf} (MYOB company file)
+    items: str                          # key holding the records
+    next: str                           # dotted path to the next-page URL
+    count: str                          # dotted path to the total count
+    id_key: str
+    updated: str                        # record field holding last-modified time
+    since_param: str                    # incremental filter query parameter
+    page_params: tuple = ()
+    key_header: str | None = None       # API-key header tied to the OAuth client (MYOB, Smokeball)
+    myob: bool = False
+
+
+MYOB = dict(items="Items", next="NextPageLink", count="Count", id_key="UID", updated="LastModified", since_param="$filter",
+            page_params=(("$top", PAGE_SIZE),), key_header="x-myobapi-key", myob=True)
+SOURCES = [
+    Source("GeneralLedger/Account", "myob_accounts", "/accountright/{cf}/GeneralLedger/Account", **MYOB),
+    Source("Contact/Customer", "myob_customers", "/accountright/{cf}/Contact/Customer", **MYOB),
+    Source("Sale/Invoice/Service", "myob_invoices", "/accountright/{cf}/Sale/Invoice/Service", **MYOB),
+    Source("Sale/CustomerPayment", "myob_customer_payments", "/accountright/{cf}/Sale/CustomerPayment", **MYOB),
+    *[Source(f"leap:{e}", f"leap_{e.replace('/', '_')}", f"/leap/v1/{e}", items="data", next="paging.nextPage",
+             count="paging.totalRecords", id_key=k, updated="lastModified", since_param="updatedSince", page_params=(("pageSize", 200),))
+      for e, k in (("matters", "matterId"), ("invoices", "invoiceId"), ("trust/balances", "ledgerId"))],
+    *[Source(f"triconvey:{e}", f"triconvey_{e.replace('/', '_')}", f"/smokeball/{e}", items="value", next="next.href", count="size",
+             id_key="id", updated="lastUpdated", since_param="LastUpdated", page_params=(("Limit", 200),), key_header="x-api-key")
+      for e in ("matters", "trust/balances")],
+    Source("infotrack:orders", "infotrack_orders", "/infotrack/v1/orders", items="orders", next="nextPageUrl", count="totalCount",
+           id_key="orderId", updated="lastModified", since_param="modifiedSince", page_params=(("pageSize", 1000),)),
+    Source("pexa:workspaces", "pexa_workspaces", "/pexa/v1/workspaces", items="workspaces", next="links.next", count="totalCount",
+           id_key="workspaceId", updated="lastUpdated", since_param="updatedSince", page_params=(("limit", 100),)),
+]
+RESOURCES = {s.table: s.resource for s in SOURCES if s.myob}       # kept for backwards compatibility
+BY_RESOURCE = {s.resource: s for s in SOURCES}
+
+
+def _dig(d: dict, path: str):
+    for part in path.split("."):
+        d = d.get(part) if isinstance(d, dict) else None
+    return d
 
 
 _TOKEN_CACHE: dict[tuple[str, str, str], tuple[str, float]] = {}      # (token_url, client_id, audience) -> (token, expires_at)
@@ -81,11 +124,15 @@ class MyobClient:
         self.token = body["access_token"]
         _TOKEN_CACHE[key] = (self.token, time.time() + int(body.get("expires_in", 300)))
 
-    def _get(self, url, params=None) -> dict:
+    def _get(self, url, params=None, src: Source | None = None) -> dict:
         refreshed = False
         attempt = 0
         while True:
-            headers = {"Authorization": f"Bearer {self.token}", "x-myobapi-key": CLIENT_ID, "x-myobapi-version": "v2", "Accept": "application/json"}
+            headers = {"Authorization": f"Bearer {self.token}", "Accept": "application/json"}
+            if src is None or src.myob:
+                headers.update({"x-myobapi-key": CLIENT_ID, "x-myobapi-version": "v2"})
+            elif src.key_header:
+                headers[src.key_header] = CLIENT_ID
             r = self.s.get(url, headers=headers, params=params)
             if r.status_code == 401 and not refreshed:                # expired / revoked: one fresh token, then retry once
                 self.authenticate(force=True)
@@ -102,18 +149,22 @@ class MyobClient:
     def company_file(self) -> dict:
         return self._get(f"{self.base}/accountright/")[0]
 
-    def get_all(self, cf_uid: str, resource: str, since: str | None) -> tuple[list[dict], int]:
-        url = f"{self.base}/accountright/{cf_uid}/{resource}"
-        params = {"$top": PAGE_SIZE}
+    def fetch(self, src: Source, since: str | None, cf_uid: str = "") -> tuple[list[dict], int]:
+        """Follow the source's next-page links until the end; returns (records, total reported by the API)."""
+        url = f"{self.base}{src.path.format(cf=cf_uid)}"
+        params = dict(src.page_params)
         if since:
-            params["$filter"] = f"LastModified gt datetime'{since}'"
+            params[src.since_param] = f"LastModified gt datetime'{since}'" if src.myob else since
         items, count = [], None
         while url:
-            body = self._get(url, params)
-            items += body["Items"]
-            count = body.get("Count", count)
-            url, params = body.get("NextPageLink"), None              # the next link carries its own query string
+            body = self._get(url, params, src)
+            items += body[src.items]
+            count = _dig(body, src.count) if _dig(body, src.count) is not None else count
+            url, params = _dig(body, src.next), None                  # next links carry their own query string
         return items, (count if count is not None else len(items))
+
+    def get_all(self, cf_uid: str, resource: str, since: str | None) -> tuple[list[dict], int]:
+        return self.fetch(BY_RESOURCE[resource], since, cf_uid)
 
 
 class DuckDBWarehouse:
@@ -126,10 +177,10 @@ class DuckDBWarehouse:
         row = self.con.execute("select max(watermark) from raw.load_audit where resource = ? and status = 'OK'", [resource]).fetchone()
         return row[0] if row and row[0] else None
 
-    def load(self, table, rows, batch_id, loaded_at):
+    def load(self, table, rows, batch_id, loaded_at, id_key="UID", updated="LastModified"):
         if rows:
             self.con.executemany(f"insert into raw.{table} values (?, ?, ?, ?, ?)",
-                                 [(r["UID"], json.dumps(r), r["LastModified"], batch_id, loaded_at) for r in rows])
+                                 [(str(r[id_key]), json.dumps(r), r[updated], batch_id, loaded_at) for r in rows])
 
     def load_company(self, cf, batch_id, loaded_at):
         self.con.execute("insert into raw.myob_company_file values (?, ?, ?, ?, ?)",
@@ -181,20 +232,21 @@ def run(warehouse=None, client: MyobClient | None = None, full_refresh: bool = F
     cf = client.company_file()
     wh.load_company(cf, batch_id, loaded_at)
     results = []
-    for table, resource in RESOURCES.items():
-        since = None if full_refresh else wh.watermark(resource)
+    for src in SOURCES:
+        since = None if full_refresh else wh.watermark(src.resource)
         try:
-            rows, api_count = client.get_all(cf["Id"], resource, since)
-            wh.load(table, rows, batch_id, loaded_at)
+            rows, api_count = (client.get_all(cf["Id"], src.resource, since) if src.myob else client.fetch(src, since))
+            wh.load(src.table, rows, batch_id, loaded_at, src.id_key, src.updated)
             status = "OK" if api_count == len(rows) else "COUNT_MISMATCH"
-            wm = max((r["LastModified"] for r in rows), default=since)
+            wm = max((r[src.updated] for r in rows if r[src.updated]), default=since)
         except Exception as exc:                                     # one failing resource must not hide the others
             rows, api_count, status, wm = [], -1, f"ERROR: {exc}"[:200], since
-        rec = dict(batch_id=batch_id, resource=resource, api_count=api_count, loaded_count=len(rows), watermark=wm, status=status, loaded_at=loaded_at)
+        rec = dict(batch_id=batch_id, resource=src.resource, api_count=api_count, loaded_count=len(rows), watermark=wm,
+                   status=status, loaded_at=loaded_at)
         wh.audit(**rec)
         results.append(rec)
         if verbose:
-            print(f"  {resource:<24} since={since or '-':<20} api={api_count:>5} loaded={len(rows):>5} {status}")
+            print(f"  {src.resource:<24} since={since or '-':<20} api={api_count:>5} loaded={len(rows):>5} {status}")
     return results
 
 

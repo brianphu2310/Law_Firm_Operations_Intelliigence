@@ -34,3 +34,58 @@ select i.practice_area,
        sum(i.balance_due)                                              as outstanding
 from staging.stg_invoices i left join lp using (invoice_uid)
 group by 1;
+
+-- ------------------------------------------------------------------------------------------------------------------
+-- Cross-system reconciliations
+-- ------------------------------------------------------------------------------------------------------------------
+-- Every invoice raised in LEAP must reach MYOB with the same total (the practice-management -> accounting sync)
+create or replace view marts.invoice_sync_recon as
+select coalesce(l.invoice_number, m.invoice_number) as invoice_number, l.matter_number, coalesce(l.client_name, c.customer_name) as client_name,
+       l.total as leap_total, m.total_amount as myob_total,
+       case when m.invoice_uid is null then 'Missing in MYOB'
+            when l.invoice_number is null then 'Missing in LEAP'
+            when l.total <> m.total_amount then 'Amount differs'
+            else 'Matched' end as result
+from staging.stg_leap_invoices l
+full outer join staging.stg_invoices m on m.invoice_number = l.invoice_number
+left join staging.stg_customers c on c.customer_uid = m.customer_uid;
+
+-- Migration dry run: every active LEAP matter should appear exactly once in triConvey
+create or replace view marts.migration_recon as
+with leap_active as (select * from staging.stg_leap_matters where status in ('Open', 'On Hold')),
+     tc as (select matter_number, count(*) as copies from staging.stg_tc_matters group by 1)
+select coalesce(l.matter_number, tc.matter_number) as matter_number, l.client_name, l.practice_area, l.status as leap_status,
+       coalesce(tc.copies, 0) as triconvey_copies,
+       case when l.matter_number is null then 'Unexpected in triConvey'
+            when tc.copies is null then 'Not migrated'
+            when tc.copies > 1 then 'Duplicated'
+            else 'Migrated' end as outcome
+from leap_active l full outer join tc on tc.matter_number = l.matter_number;
+
+-- Migration dry run: trust balances per client, LEAP vs triConvey
+create or replace view marts.trust_migration_recon as
+select coalesce(l.client_name, t.client_name) as client_name, l.balance as leap_balance, t.balance as triconvey_balance,
+       coalesce(t.balance, 0) - coalesce(l.balance, 0) as difference,
+       case when abs(coalesce(t.balance, 0) - coalesce(l.balance, 0)) < 0.005 then 'Matched' else 'Difference' end as result
+from staging.stg_leap_trust l full outer join staging.stg_tc_trust t on t.client_name = l.client_name;
+
+-- Disbursements by matter: InfoTrack searches + PEXA workspace fees, against the LEAP matter
+create or replace view marts.disbursements_by_matter as
+with it as (select matter_number, count(*) as searches, sum(fee_ex_gst) as search_fees from staging.stg_infotrack_orders group by 1),
+     px as (select matter_number, count(*) as workspaces, sum(pexa_fee) as pexa_fees from staging.stg_pexa_workspaces group by 1)
+select m.matter_number, m.client_name, m.practice_area, m.status,
+       coalesce(it.searches, 0) as searches, coalesce(it.search_fees, 0) as search_fees,
+       coalesce(px.workspaces, 0) as pexa_workspaces, coalesce(px.pexa_fees, 0) as pexa_fees,
+       coalesce(it.search_fees, 0) + coalesce(px.pexa_fees, 0) as total_disbursements
+from staging.stg_leap_matters m
+left join it on it.matter_number = m.matter_number
+left join px on px.matter_number = m.matter_number
+where it.matter_number is not null or px.matter_number is not null;
+
+-- One row per migration finding, for the dry-run exceptions report
+create or replace view marts.migration_exceptions as
+select 'Matter' as kind, matter_number as reference, client_name, outcome as finding, null::decimal(14,2) as amount
+from marts.migration_recon where outcome <> 'Migrated'
+union all
+select 'Trust balance', client_name, client_name, 'Trust balance differs', difference
+from marts.trust_migration_recon where result <> 'Matched';
