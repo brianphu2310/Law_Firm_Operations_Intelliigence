@@ -22,7 +22,7 @@ gap to budget, and work out what it would take to close that gap.
 | **Question** | Why is a law firm behind budget even though revenue is growing, and what would it take to close the gap? |
 | **What I built** | Financial operations dashboard (profit vs budget, working capital, 13-week cash forecast, platform-switch NPV) with a Decision Simulator and goal-seek, over a SQL warehouse, fed by a MYOB API → n8n → Snowflake pipeline that reconciles to the dashboard to the cent. |
 | **Key results** | Synthetic quarter: revenue $1.63M, 1.9% below budget; margin 29.0% vs 31.0% target because costs grew 4.8% against revenue 2.9%. A 3-point utilisation gain recovers roughly three quarters of the gap. |
-| **Tech stack** | Python, pandas, Streamlit, Plotly · SQL (SQLite, DuckDB, Snowflake) · REST API + JSON · OAuth 2.0 / JWT (Auth0) · n8n · Excel + Power Query · FastAPI · Metabase · GitHub Actions |
+| **Tech stack** | Python, pandas, Streamlit, Plotly · SQL (SQLite, DuckDB, Snowflake) · REST API + JSON · OAuth 2.0 / JWT (Auth0) · n8n · Excel + Power Query · FastAPI · GitHub Actions |
 | **Proof** | CI green; data-quality, query and pipeline tests in `tests/`; pipeline checks in [docs/PIPELINE_QUALITY.md](docs/PIPELINE_QUALITY.md). |
 | **Honest limits** | Fictional firm and synthetic data modelled on real bookkeeping work; contains no client information. Forecasts depend on stated assumptions. |
 
@@ -111,7 +111,7 @@ python sql/run_queries.py            # 10 analytical queries -> docs/query_resul
 Tests for the pipeline are in `tests/test_warehouse.py`, `tests/test_sql_queries.py` and `tests/test_docs.py`; CI builds the warehouse and runs the quality suite and queries on every push.
 The simulation has no per-matter cost or time-entry ledger, so WIP ageing is by matter age and profitability is analysed at practice-area level.
 
-## Integration pipeline: MYOB, LEAP, triConvey, InfoTrack, PEXA → n8n → Snowflake → Excel / Power Query, Streamlit, Metabase
+## Integration pipeline: MYOB, LEAP, triConvey, InfoTrack, PEXA → n8n → Snowflake → Excel / Power Query, Streamlit
 
 How the dashboard's numbers would arrive from the firm's accounting system, built end to end. Details: [docs/PIPELINE.md](docs/PIPELINE.md).
 
@@ -125,8 +125,8 @@ How the dashboard's numbers would arrive from the firm's accounting system, buil
 | Orchestration | **n8n**: daily 6am, incremental watermarks, landing → RAW with `INSERT ALL … PARSE_JSON`, load audit, fails on count mismatch | [`integration/n8n/`](integration/n8n) |
 | Warehouse | **Snowflake**: stage + `COPY INTO`, `VARIANT`, `LATERAL FLATTEN`, `QUALIFY` de-duplication, marts (DuckDB twin for local runs and CI) | [`integration/sql/`](integration/sql) |
 | Quality | 8 accounting checks + 8 reconciliations to the dashboard (receivables, every ageing bucket, monthly revenue) | [`integration/quality.py`](integration/quality.py) → [docs/PIPELINE_QUALITY.md](docs/PIPELINE_QUALITY.md) |
-| Excel + Power Query | 4 refreshable cross-system checks that read the source JSON straight from this repo, plus M scripts for the marts API, the MYOB API (paged) and Snowflake, and a formula-driven Debtors & Revenue Pack | [`integration/powerquery/`](integration/powerquery), [`integration/excel/`](integration/excel) |
-| Serving and BI | Marts JSON API (FastAPI), the app's **Pipeline** page (Streamlit), **Metabase** partner questions | [`integration/marts_api.py`](integration/marts_api.py), [`views/pipeline.py`](views/pipeline.py), [`integration/metabase/`](integration/metabase) |
+| Excel + Power Query | 4 refreshable cross-system checks that read the source JSON straight from this repo, plus M scripts for the marts API, the MYOB API (paged) and Snowflake, and a formula-driven Debtors & Revenue Pack. The 4 checks were built and refreshed in Excel: [`Law_Firm_Recon_PowerQuery.xlsx`](integration/excel/Law_Firm_Recon_PowerQuery.xlsx) finds the same 3 migration defects as Snowflake | [`integration/powerquery/`](integration/powerquery), [`integration/excel/`](integration/excel) |
+| Serving and BI | Marts JSON API (FastAPI), the app's **Pipeline** page (Streamlit) | [`integration/marts_api.py`](integration/marts_api.py), [`views/pipeline.py`](views/pipeline.py) |
 
 **Evidence** (screenshots from the real runs):
 
@@ -177,7 +177,7 @@ python -m integration.excel.build_pack                 # Excel Debtors & Revenue
 * **130+ automated tests** (the app's 75 plus the warehouse, SQL and documentation suites): reconciliation checks (for example, the invoice ledger equals modelled revenue to the dollar, branch and attorney tables sum to firm totals),
   simulator maths (goal-seek answers land exactly on the target), and browser-style tests that click buttons and edit controls, including regression tests for past bugs.
 * A SQLite dimensional warehouse with a data-quality suite and SQL analysis layer (see **Data engineering** above).
-* An API-to-warehouse integration layer (MYOB API, n8n, Snowflake, Power Query, Metabase) reconciled to the app (see **Integration pipeline** above).
+* An API-to-warehouse integration layer (MYOB API, n8n, Snowflake, Power Query) reconciled to the app (see **Integration pipeline** above).
 * Continuous integration on GitHub Actions.
 
 Method notes: [docs/METHODOLOGY.md](docs/METHODOLOGY.md) (every KPI and model formula) · [docs/SIMULATOR.md](docs/SIMULATOR.md) (the Simulator) · [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) (how the code fits together).

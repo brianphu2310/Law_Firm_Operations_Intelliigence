@@ -50,14 +50,14 @@ In n8n, the token comes from a separate **Get Token** HTTP node whose client sec
 2. In that API's **Permissions** tab, add the scopes `read:ledger`, `read:contacts`, `read:sales`, `leap:read`, `triconvey:read`,
    `infotrack:read` and `pexa:read`.
 3. **Applications → Applications → Create Application → Machine to Machine**, name it `n8n MYOB loader`, and authorise it for
-   the API above with all three scopes. For a reporting-only client, create a second M2M app with just `read:sales`.
+   the API above with all seven scopes. For a reporting-only client, create a second M2M app with just `read:sales`.
 4. In the M2M app's **Credentials** tab, set **Authentication Method = Client Secret (Basic)**. That is the method n8n's
    Basic Auth credential uses.
 5. **n8n:** import `integration/n8n/myob_to_snowflake_cloud.json`. On **Get Token**, create a Basic Auth credential
    (user = client ID, password = client secret) and put the client ID in the **Config** node. Never paste the secret into a
    Code node.
-6. **API host:** run the mock API with `AUTH_MODE=auth0`, `AUTH0_DOMAIN=dev-z1apvxcaj6hhb84a.us.auth0.com` and
-   `AUTH_AUDIENCE=https://myob-mock.dagostino-demo`. In this mode its own `/oauth/token` and `/.well-known/jwks.json` return 404.
+6. **API host:** deploy the mock API on Render's free plan: render.com → **New → Blueprint** → this repo. [`render.yaml`](../render.yaml)
+   sets `AUTH_MODE=auth0`, `AUTH0_DOMAIN` and `AUTH_AUDIENCE`. Put the service URL into the n8n workflow's Config node.
 7. **Python loader:** in `.env` set `AUTH_MODE=auth0`, `AUTH0_DOMAIN`, `AUTH_AUDIENCE`, `MYOB_CLIENT_ID` and
    `MYOB_CLIENT_SECRET`. `.env` is gitignored.
 

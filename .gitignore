@@ -17,5 +17,4 @@ warehouse.db
 integration/law_firm.duckdb
 integration/law_firm.duckdb.wal
 .n8n_data/
-.metabase_data/
 .env
