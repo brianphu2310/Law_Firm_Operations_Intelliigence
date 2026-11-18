@@ -134,6 +134,7 @@ How the dashboard's numbers would arrive from the firm's accounting system, buil
 |---|---|
 | ![Snowflake checks](docs/screenshots/10-snowflake-quality-checks.png) **Snowflake:** 8 quality checks on the loaded data, all 0 failures | ![Snowflake ageing](docs/screenshots/11-snowflake-receivables-ageing.png) **Snowflake:** receivables by age, total $1,053,551.51, same as the dashboard |
 | ![Migration dry run](docs/screenshots/14-migration-dry-run.png) **Pipeline page, migration dry run:** LEAP → triConvey rehearsal, 3 findings for the cut-over log | ![Pipeline page](docs/screenshots/09-pipeline.png) **Pipeline page:** 11 sources, 12/12 checks, 11/11 reconciliations to the app |
+| ![Snowflake cross-system checks](docs/screenshots/15-snowflake-cross-system-checks.png) **Snowflake:** cross-system checks on LEAP, MYOB, InfoTrack and PEXA data, all 0 | ![Snowflake migration findings](docs/screenshots/16-snowflake-migration-findings.png) **Snowflake:** the same 3 migration findings as the local run |
 | ![n8n workflow](docs/screenshots/12-n8n-workflow.png) **n8n Cloud:** the 15-node workflow imported, with an OAuth "Get Token" step for Auth0 (credentials still to be added, hence the warning icons) | ![Excel pack](docs/screenshots/13-excel-debtors-pack.png) **Excel:** Debtors & Revenue Pack, formulas only, tie-out cells read OK |
 
 **Result:** 11 resources from 5 systems (7,572 records) load with every check at 0 failures. Receivables at the 17 Sep 2025
