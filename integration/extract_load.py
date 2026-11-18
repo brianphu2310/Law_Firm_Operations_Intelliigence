@@ -4,6 +4,8 @@
 
     MYOB_MODE=mock (default) -> mock API at MYOB_BASE_URL (default http://127.0.0.1:8000)
     MYOB_MODE=live           -> https://api.myob.com with MYOB_CLIENT_ID / MYOB_ACCESS_TOKEN from the environment
+    AUTH_MODE=auth0          -> client-credentials token from https://{AUTH0_DOMAIN}/oauth/token for AUTH_AUDIENCE
+                                (MYOB_CLIENT_ID / MYOB_CLIENT_SECRET = the Auth0 M2M application; keep them in .env, never in git)
     WAREHOUSE=duckdb (default) -> integration/law_firm.duckdb     WAREHOUSE=snowflake -> SNOWFLAKE_* env vars
 
 Design
@@ -27,7 +29,15 @@ ROOT = Path(__file__).resolve().parent
 DEFAULT_DB = ROOT / "law_firm.duckdb"
 MODE = os.getenv("MYOB_MODE", "mock")
 BASE_URL = os.getenv("MYOB_BASE_URL", "http://127.0.0.1:8000" if MODE == "mock" else "https://api.myob.com")
-TOKEN_URL = os.getenv("MYOB_TOKEN_URL", f"{BASE_URL}/oauth/token" if MODE == "mock" else "https://secure.myob.com/oauth2/v1/authorize")
+AUTH_MODE = os.getenv("AUTH_MODE", "local").lower()
+AUDIENCE = os.getenv("AUTH_AUDIENCE", "https://myob-mock.dagostino-demo")
+if AUTH_MODE == "auth0":
+    _default_token_url = f"https://{os.getenv('AUTH0_DOMAIN', '').removeprefix('https://').strip('/')}/oauth/token"
+elif MODE == "mock":
+    _default_token_url = f"{BASE_URL}/oauth/token"
+else:
+    _default_token_url = "https://secure.myob.com/oauth2/v1/authorize"
+TOKEN_URL = os.getenv("MYOB_TOKEN_URL", _default_token_url)
 CLIENT_ID = os.getenv("MYOB_CLIENT_ID", "mock-client-id")
 CLIENT_SECRET = os.getenv("MYOB_CLIENT_SECRET", "mock-client-secret")
 PAGE_SIZE = 400
@@ -36,30 +46,56 @@ RESOURCES = {"myob_accounts": "GeneralLedger/Account", "myob_customers": "Contac
              "myob_invoices": "Sale/Invoice/Service", "myob_customer_payments": "Sale/CustomerPayment"}
 
 
-class MyobClient:
-    """Minimal MYOB API client. `session` can be a requests.Session or FastAPI's TestClient (used by the tests)."""
+_TOKEN_CACHE: dict[tuple[str, str, str], tuple[str, float]] = {}      # (token_url, client_id, audience) -> (token, expires_at)
 
-    def __init__(self, session=None, base_url: str = BASE_URL, token_url: str = TOKEN_URL):
+
+class MyobClient:
+    """Minimal MYOB API client. `session` can be a requests.Session or FastAPI's TestClient (used by the tests).
+
+    Tokens are cached per (token URL, client, audience) until 60 s before expiry and shared across clients in the process, so
+    a run asks the issuer for one token, not one per request (Auth0's free plan meters client-credentials tokens monthly).
+    A 401 mid-run (token revoked or expired) triggers exactly one fresh token and retry.
+    """
+
+    def __init__(self, session=None, base_url: str = BASE_URL, token_url: str = TOKEN_URL, audience: str = AUDIENCE):
         if session is None:
             import requests
             session = requests.Session()
-        self.s, self.base, self.token_url, self.token = session, base_url.rstrip("/"), token_url, None
+        self.s, self.base, self.token_url, self.audience, self.token = session, base_url.rstrip("/"), token_url, audience, None
+        self.token_requests = 0
 
-    def authenticate(self) -> None:
+    def authenticate(self, force: bool = False) -> None:
         if MODE == "live" and os.getenv("MYOB_ACCESS_TOKEN"):        # live MYOB: authorization-code flow, token supplied via env
             self.token = os.environ["MYOB_ACCESS_TOKEN"]
             return
-        r = self.s.post(self.token_url, data={"grant_type": "client_credentials", "client_id": CLIENT_ID, "client_secret": CLIENT_SECRET})
+        key = (self.token_url, CLIENT_ID, self.audience)
+        cached = _TOKEN_CACHE.get(key)
+        if cached and not force and cached[1] - 60 > time.time():
+            self.token = cached[0]
+            return
+        r = self.s.post(self.token_url, data={"grant_type": "client_credentials", "client_id": CLIENT_ID,
+                                              "client_secret": CLIENT_SECRET, "audience": self.audience})
         r.raise_for_status()
-        self.token = r.json()["access_token"]
+        body = r.json()
+        self.token_requests += 1
+        self.token = body["access_token"]
+        _TOKEN_CACHE[key] = (self.token, time.time() + int(body.get("expires_in", 300)))
 
     def _get(self, url, params=None) -> dict:
-        headers = {"Authorization": f"Bearer {self.token}", "x-myobapi-key": CLIENT_ID, "x-myobapi-version": "v2", "Accept": "application/json"}
-        for attempt in range(4):                                     # back off on 429 / 5xx
+        refreshed = False
+        attempt = 0
+        while True:
+            headers = {"Authorization": f"Bearer {self.token}", "x-myobapi-key": CLIENT_ID, "x-myobapi-version": "v2", "Accept": "application/json"}
             r = self.s.get(url, headers=headers, params=params)
-            if r.status_code not in (429, 500, 502, 503, 504):
-                break
-            time.sleep(2 ** attempt)
+            if r.status_code == 401 and not refreshed:                # expired / revoked: one fresh token, then retry once
+                self.authenticate(force=True)
+                refreshed = True
+                continue
+            if r.status_code in (429, 500, 502, 503, 504) and attempt < 3:     # back off on rate limits / server errors
+                time.sleep(2 ** attempt)
+                attempt += 1
+                continue
+            break
         r.raise_for_status()
         return r.json()
 

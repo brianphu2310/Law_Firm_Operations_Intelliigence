@@ -21,6 +21,7 @@ All data is simulated (fixed seed); the skills are real, the dataset is not.
 | **Dashboarding / BI** | `app.py`, `core/metrics.py` (Streamlit, Plotly) |
 | **Financial analysis** (P&L vs budget, working capital, cash, FY outlook) | `core/metrics.py`, `docs/METHODOLOGY.md`, `sql/analysis/09_pnl_actual_vs_budget.sql` |
 | **API ingestion** (REST + JSON, OAuth bearer token, vendor headers, OData paging via NextPageLink, incremental LastModified filter, retry/back-off) | `integration/extract_load.py`, `integration/mock_api.py`, `integration/powerquery/02_myob_api_direct.pq` |
+| **API security** (OAuth 2.0 client credentials, RS256 JWT + JWKS, audience/issuer/scope checks, key rotation, attack tests, Auth0) | `integration/auth.py`, `tests/test_auth.py`, `docs/AUTH.md` |
 | **Workflow automation / orchestration** (scheduled n8n flow, watermarks, landing-to-RAW promotion, failure alert) | `integration/n8n/build_workflows.py`, `integration/n8n/myob_to_snowflake_cloud.json` |
 | **Cloud data warehouse** (Snowflake stage + COPY INTO, VARIANT, LATERAL FLATTEN, QUALIFY, INSERT ALL) | `integration/sql/snowflake/01_setup_and_load.sql`, `integration/sql/snowflake/02_staging.sql`, `integration/sql/snowflake/03_marts.sql` |
 | **Source-to-warehouse reconciliation** (receivables, ageing buckets and monthly revenue tie back to the app) | `integration/quality.py`, `docs/PIPELINE_QUALITY.md` |

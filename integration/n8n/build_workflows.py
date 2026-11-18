@@ -10,14 +10,13 @@ import json
 from pathlib import Path
 
 
-CONFIG_JS = r"""// MODE: 'mock' = local mock API, 'live' = api.myob.com
-// For live mode, move the secret into an n8n credential, never hard-code it.
+CONFIG_JS = r"""// Non-secret settings only. The client SECRET lives in the n8n credential on the "Get Token" node (encrypted by n8n),
+// never in this JSON. clientId is not secret: it is sent as x-myobapi-key and must equal the token's azp claim.
 return [{ json: {
-  mode: 'mock',
   baseUrl: '__BASE_URL__',
-  tokenUrl: '__BASE_URL__/oauth/token',
-  clientId: 'mock-client-id',
-  clientSecret: 'mock-client-secret',
+  tokenUrl: '__TOKEN_URL__',
+  audience: 'https://myob-mock.dagostino-demo',
+  clientId: '__CLIENT_ID__',
   pageSize: 400,
   resources: [
     { path: 'GeneralLedger/Account',  table: 'myob_accounts' },
@@ -33,11 +32,7 @@ const wmRows = $('Get Watermarks').all().map(i => i.json).filter(r => r.RESOURCE
 const watermarks = Object.fromEntries(wmRows.map(r => [r.RESOURCE, r.WATERMARK]));
 
 const asJson = r => (typeof r === 'string' ? JSON.parse(r) : r);
-const tok = asJson(await this.helpers.httpRequest({
-  method: 'POST', url: cfg.tokenUrl,
-  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-  body: `grant_type=client_credentials&client_id=${encodeURIComponent(cfg.clientId)}&client_secret=${encodeURIComponent(cfg.clientSecret)}`,
-}));
+const tok = $('Get Token').first().json;                // one OAuth token per run (Auth0 free plan meters M2M tokens)
 const headers = {
   Authorization: `Bearer ${tok.access_token}`,
   'x-myobapi-key': cfg.clientId,
@@ -119,6 +114,14 @@ nodes = [
          {"operation": "executeQuery",
           "query": "select resource, max(watermark) as watermark from raw.load_audit where status = 'OK' group by resource"},
          credentials=SF_CRED, executeOnce=True, alwaysOutputData=True),
+    node("Get Token", "n8n-nodes-base.httpRequest", 4.2, [880, 300], {
+        "method": "POST", "url": "={{ $('Config').first().json.tokenUrl }}",
+        "authentication": "genericCredentialType", "genericAuthType": "httpBasicAuth",
+        "sendBody": True, "contentType": "form-urlencoded",
+        "bodyParameters": {"parameters": [{"name": "grant_type", "value": "client_credentials"},
+                                          {"name": "audience", "value": "={{ $('Config').first().json.audience }}"}]},
+        "options": {}},
+         credentials={"httpBasicAuth": {"id": "REPLACE_ME", "name": "MYOB API client (Basic Auth: client id + secret)"}}, executeOnce=True),
     node("Extract from MYOB", "n8n-nodes-base.code", 2, [880, 300], {"jsCode": EXTRACT_JS}),
     node("Landing Rows", "n8n-nodes-base.code", 2, [1100, 300], {"jsCode": LANDING_JS}),
     node("Has New Rows?", "n8n-nodes-base.if", 2, [1320, 300], {
@@ -151,7 +154,7 @@ def link(a, b, out_idx=0):
     return a, b, out_idx
 
 edges = [("Daily 6am", "Config"), ("Config", "Clear Landing"), ("Clear Landing", "Get Watermarks"),
-         ("Get Watermarks", "Extract from MYOB"), ("Extract from MYOB", "Landing Rows"),
+         ("Get Watermarks", "Get Token"), ("Get Token", "Extract from MYOB"), ("Extract from MYOB", "Landing Rows"),
          ("Landing Rows", "Has New Rows?"), ("Insert Landing", "Promote to RAW"),
          ("Promote to RAW", "Audit Rows"), ("Audit Rows", "Insert Audit"),
          ("Insert Audit", "Company File Row"), ("Company File Row", "Insert Company File"),
@@ -163,11 +166,19 @@ conns["Has New Rows?"] = {"main": [
     [{"node": "Insert Landing", "type": "main", "index": 0}],
     [{"node": "Audit Rows", "type": "main", "index": 0}]]}
 
-VARIANTS = {"myob_to_snowflake_local.json": ("MYOB → Snowflake (daily incremental) [local Docker]", "http://host.docker.internal:8000"),
-            "myob_to_snowflake_cloud.json": ("MYOB → Snowflake (daily incremental) [n8n Cloud]", "https://REPLACE-WITH-PUBLIC-MOCK-API-URL")}
+for n in nodes:                                        # make room for "Get Token" between watermarks and extract
+    if n["name"] != "Get Token" and n["position"][0] >= 880:
+        n["position"] = [n["position"][0] + 220, n["position"][1]]
+
+# (title, API base URL, token URL, client id). Cloud: tokens from Auth0 (free plan), API hosted on a public URL.
+VARIANTS = {"myob_to_snowflake_local.json": ("MYOB → Snowflake (daily incremental) [local Docker]", "http://host.docker.internal:8000",
+                                             "http://host.docker.internal:8000/oauth/token", "mock-client-id"),
+            "myob_to_snowflake_cloud.json": ("MYOB → Snowflake (daily incremental) [n8n Cloud + Auth0]", "https://REPLACE-WITH-PUBLIC-MOCK-API-URL",
+                                             "https://dev-z1apvxcaj6hhb84a.us.auth0.com/oauth/token", "REPLACE-WITH-AUTH0-M2M-CLIENT-ID")}
 HERE = Path(__file__).resolve().parent
-for fname, (title, base) in VARIANTS.items():
-    wf = {"name": title, "nodes": json.loads(json.dumps(nodes).replace("__BASE_URL__", base)), "connections": conns,
+for fname, (title, base, token_url, client_id) in VARIANTS.items():
+    js = json.dumps(nodes).replace("__BASE_URL__", base).replace("__TOKEN_URL__", token_url).replace("__CLIENT_ID__", client_id)
+    wf = {"name": title, "nodes": json.loads(js), "connections": conns,
           "settings": {"executionOrder": "v1", "timezone": "Australia/Sydney"}, "active": False, "pinData": {}}
     (HERE / fname).write_text(json.dumps(wf, indent=2, ensure_ascii=False), encoding="utf-8")
     print(fname, len(nodes), "nodes")

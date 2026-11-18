@@ -22,7 +22,7 @@ gap to budget, and work out what it would take to close that gap.
 | **Question** | Why is a law firm behind budget even though revenue is growing, and what would it take to close the gap? |
 | **What I built** | Financial operations dashboard (profit vs budget, working capital, 13-week cash forecast, platform-switch NPV) with a Decision Simulator and goal-seek, over a SQL warehouse, fed by a MYOB API → n8n → Snowflake pipeline that reconciles to the dashboard to the cent. |
 | **Key results** | Synthetic quarter: revenue $1.63M, 1.9% below budget; margin 29.0% vs 31.0% target because costs grew 4.8% against revenue 2.9%. A 3-point utilisation gain recovers roughly three quarters of the gap. |
-| **Tech stack** | Python, pandas, Streamlit, Plotly · SQL (SQLite, DuckDB, Snowflake) · REST API + JSON · n8n · Excel + Power Query · FastAPI · Metabase · GitHub Actions |
+| **Tech stack** | Python, pandas, Streamlit, Plotly · SQL (SQLite, DuckDB, Snowflake) · REST API + JSON · OAuth 2.0 / JWT (Auth0) · n8n · Excel + Power Query · FastAPI · Metabase · GitHub Actions |
 | **Proof** | CI green; data-quality, query and pipeline tests in `tests/`; pipeline checks in [docs/PIPELINE_QUALITY.md](docs/PIPELINE_QUALITY.md). |
 | **Honest limits** | Fictional firm and synthetic data modelled on real bookkeeping work; contains no client information. Forecasts depend on stated assumptions. |
 
@@ -120,6 +120,7 @@ How the dashboard's numbers would arrive from the firm's accounting system, buil
 | Stage | Tool | Where |
 |---|---|---|
 | Source | **MYOB Business API** (AccountRight v2 JSON, simulated): OAuth, `x-myobapi-*` headers, `$top`/`$skip` paging, `LastModified` incremental filter | [`integration/mock_api.py`](integration/mock_api.py), [`integration/myob_export.py`](integration/myob_export.py) |
+| Security | **OAuth 2.0 client credentials** with RS256 JWTs: **Auth0** (free) or a local issuer for CI; signature via JWKS, issuer, audience, expiry, per-resource scopes; RFC 6750 errors. 20 tests incl. forged, alg-none, HS256-confusion, expired and wrong-scope tokens | [`integration/auth.py`](integration/auth.py), [docs/AUTH.md](docs/AUTH.md) |
 | Orchestration | **n8n**: daily 6am, incremental watermarks, landing → RAW with `INSERT ALL … PARSE_JSON`, load audit, fails on count mismatch | [`integration/n8n/`](integration/n8n) |
 | Warehouse | **Snowflake**: stage + `COPY INTO`, `VARIANT`, `LATERAL FLATTEN`, `QUALIFY` de-duplication, marts (DuckDB twin for local runs and CI) | [`integration/sql/`](integration/sql) |
 | Quality | 8 accounting checks + 8 reconciliations to the dashboard (receivables, every ageing bucket, monthly revenue) | [`integration/quality.py`](integration/quality.py) → [docs/PIPELINE_QUALITY.md](docs/PIPELINE_QUALITY.md) |
@@ -131,7 +132,7 @@ How the dashboard's numbers would arrive from the firm's accounting system, buil
 | | |
 |---|---|
 | ![Snowflake checks](docs/screenshots/10-snowflake-quality-checks.png) **Snowflake:** 8 quality checks on the loaded data, all 0 failures | ![Snowflake ageing](docs/screenshots/11-snowflake-receivables-ageing.png) **Snowflake:** receivables by age, total $1,053,551.51, same as the dashboard |
-| ![n8n workflow](docs/screenshots/12-n8n-workflow.png) **n8n Cloud:** the 14-node workflow imported (Snowflake credentials still to be added, hence the warning icons) | ![Excel pack](docs/screenshots/13-excel-debtors-pack.png) **Excel:** Debtors & Revenue Pack, formulas only, tie-out cells read OK |
+| ![n8n workflow](docs/screenshots/12-n8n-workflow.png) **n8n Cloud:** the 15-node workflow imported, with an OAuth "Get Token" step for Auth0 (credentials still to be added, hence the warning icons) | ![Excel pack](docs/screenshots/13-excel-debtors-pack.png) **Excel:** Debtors & Revenue Pack, formulas only, tie-out cells read OK |
 
 **Result:** 472 invoices, 444 payments and 23 clients load with every check at 0 failures. Receivables at the 17 Sep 2025
 report date are **$1,053,551.51** in the pipeline against $1,053,551.56 in the app, a 5-cent gap from per-invoice cent rounding.

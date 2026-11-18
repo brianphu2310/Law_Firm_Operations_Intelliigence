@@ -4,8 +4,10 @@
 
 SIMULATED: not MYOB. It reproduces only what the pipeline relies on, so the extractor and the n8n workflow can be built and
 tested without a MYOB developer account:
-  * POST /oauth/token (form: grant_type, client_id, client_secret) -> bearer token, 20-minute life like MYOB
-  * every data call needs Authorization: Bearer, x-myobapi-key and x-myobapi-version: v2
+  * OAuth 2.0 client credentials with RS256 JWTs (integration/auth.py): a built-in issuer for offline runs and CI
+    (POST /oauth/token, GET /.well-known/jwks.json), or Auth0 with AUTH_MODE=auth0
+  * every data call needs a valid Bearer JWT with the resource's scope, x-myobapi-key equal to the token's client,
+    and x-myobapi-version: v2
   * company-file scoped URLs  /accountright/{cf_uid}/{resource}
   * OData paging $top (max 1000) / $skip and the incremental filter  $filter=LastModified gt datetime'YYYY-MM-DDTHH:MM:SS'
   * response envelope {"Items": [...], "NextPageLink": ..., "Count": n}
@@ -13,15 +15,18 @@ tested without a MYOB developer account:
 """
 from __future__ import annotations
 
+import base64
 import copy
 import json
 import re
-import secrets
 from datetime import datetime, timedelta
 from pathlib import Path
 from urllib.parse import urlencode
 
-from fastapi import Depends, FastAPI, Form, Header, HTTPException, Query, Request
+from fastapi import FastAPI, Form, Header, HTTPException, Query, Request
+from fastapi.responses import JSONResponse
+
+from integration import auth as A
 
 DATA_DIR = Path(__file__).resolve().parent / "data"
 CLIENT_ID, CLIENT_SECRET = "mock-client-id", "mock-client-secret"
@@ -33,38 +38,53 @@ def _load(name: str) -> list[dict]:
     return json.loads((DATA_DIR / f"{name}.json").read_text(encoding="utf-8"))
 
 
-def create_app() -> FastAPI:
-    """App factory: each instance has its own copy of the data, so tests can mutate it safely."""
+def create_app(auth_config: A.AuthConfig | None = None, jwks_fetch=None) -> FastAPI:
+    """App factory: each instance has its own copy of the data and its own auth wiring, so tests can mutate either safely."""
     app = FastAPI(title="Mock MYOB AccountRight API v2 (simulated)")
+    cfg, verifier, issuer = A.build(auth_config, jwks_fetch)
+    app.state.auth_config, app.state.issuer = cfg, issuer
+
+    @app.exception_handler(A.AuthError)
+    def _auth_error(_, exc: A.AuthError):
+        return JSONResponse({"error": exc.error, "error_description": exc.description}, status_code=exc.status,
+                            headers={"WWW-Authenticate": exc.www_authenticate})
+
     company = _load("company_file")
     cf_uid = company[0]["Id"]
     datasets = {"GeneralLedger/Account": _load("accounts"), "Contact/Customer": _load("customers"),
                 "Sale/Invoice/Service": _load("invoices"), "Sale/CustomerPayment": _load("customer_payments")}
-    tokens: dict[str, datetime] = {}
-
     @app.post("/oauth/token")
-    def token(grant_type: str = Form(...), client_id: str = Form(...), client_secret: str = Form(...)):
-        if client_id != CLIENT_ID or client_secret != CLIENT_SECRET:
-            raise HTTPException(401, "invalid_client")
-        if grant_type not in {"client_credentials", "refresh_token", "authorization_code"}:
-            raise HTTPException(400, "unsupported_grant_type")
-        tok = secrets.token_urlsafe(24)
-        tokens[tok] = datetime.utcnow() + timedelta(minutes=20)
-        return {"access_token": tok, "token_type": "bearer", "expires_in": 1200, "refresh_token": secrets.token_urlsafe(24)}
+    def token(grant_type: str = Form(...), client_id: str | None = Form(None), client_secret: str | None = Form(None),
+              audience: str | None = Form(None), scope: str | None = Form(None), authorization: str | None = Header(None)):
+        """client_credentials with client_secret_post (form fields) or client_secret_basic (HTTP Basic), like Auth0."""
+        if issuer is None:
+            raise HTTPException(404, "AUTH_MODE=auth0: request tokens from Auth0, not from this API")
+        if grant_type != "client_credentials":
+            raise A.AuthError(400, "unsupported_grant_type", "Only client_credentials is supported")
+        if authorization and authorization.lower().startswith("basic "):
+            try:
+                client_id, client_secret = base64.b64decode(authorization.split(" ", 1)[1]).decode().split(":", 1)
+            except Exception:
+                raise A.AuthError(401, "invalid_client", "Malformed Basic credentials")
+        if not client_id or not client_secret:
+            raise A.AuthError(401, "invalid_client", "Client authentication required")
+        return issuer.token_response(client_id, client_secret, audience, scope)
 
-    def auth(authorization: str = Header(None), x_myobapi_key: str = Header(None), x_myobapi_version: str = Header(None)):
-        if not authorization or not authorization.lower().startswith("bearer "):
-            raise HTTPException(401, "Missing bearer token")
-        exp = tokens.get(authorization.split(" ", 1)[1])
-        if exp is None or exp < datetime.utcnow():
-            raise HTTPException(401, "Token invalid or expired")
-        if x_myobapi_key != CLIENT_ID:
-            raise HTTPException(403, "Invalid x-myobapi-key")
+    @app.get("/.well-known/jwks.json")
+    def jwks():
+        if issuer is None:
+            raise HTTPException(404, "AUTH_MODE=auth0: keys are published by Auth0")
+        return issuer.jwks()
+
+    def check(authorization, x_myobapi_key, x_myobapi_version, resource=""):
+        claims = verifier.verify(authorization, x_myobapi_key, A.scope_for(resource))    # authenticate first: 401 before 400
         if x_myobapi_version != "v2":
             raise HTTPException(400, "x-myobapi-version must be v2")
+        return claims
 
     @app.get("/accountright/")
-    def company_files(_=Depends(auth)):
+    def company_files(authorization: str = Header(None), x_myobapi_key: str = Header(None), x_myobapi_version: str = Header(None)):
+        check(authorization, x_myobapi_key, x_myobapi_version)
         return company
 
     @app.post("/_simulate/activity")
@@ -87,7 +107,9 @@ def create_app() -> FastAPI:
 
     @app.get("/accountright/{cf}/{resource:path}")
     def list_resource(cf: str, resource: str, request: Request, top: int = Query(DEFAULT_TOP, alias="$top"),
-                      skip: int = Query(0, alias="$skip"), odata_filter: str | None = Query(None, alias="$filter"), _=Depends(auth)):
+                      skip: int = Query(0, alias="$skip"), odata_filter: str | None = Query(None, alias="$filter"),
+                      authorization: str = Header(None), x_myobapi_key: str = Header(None), x_myobapi_version: str = Header(None)):
+        check(authorization, x_myobapi_key, x_myobapi_version, resource)
         if cf != cf_uid:
             raise HTTPException(404, "Company file not found")
         rows = datasets.get(resource.strip("/"))
