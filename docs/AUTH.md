@@ -57,7 +57,8 @@ In n8n, the token comes from a separate **Get Token** HTTP node whose client sec
    (user = client ID, password = client secret) and put the client ID in the **Config** node. Never paste the secret into a
    Code node.
 6. **API host:** deploy the mock API on Render's free plan: render.com → **New → Blueprint** → this repo. [`render.yaml`](../render.yaml)
-   sets `AUTH_MODE=auth0`, `AUTH0_DOMAIN` and `AUTH_AUDIENCE`. Put the service URL into the n8n workflow's Config node.
+   sets `AUTH_MODE=auth0`, `AUTH0_DOMAIN` and `AUTH_AUDIENCE`. Live demo host: `https://law-firm-mock-api.onrender.com` (free plan; sleeps when idle, so the first call takes about a minute).
+   In production this API would sit on the firm's own cloud (for example Azure App Service).
 7. **Python loader:** in `.env` set `AUTH_MODE=auth0`, `AUTH0_DOMAIN`, `AUTH_AUDIENCE`, `MYOB_CLIENT_ID` and
    `MYOB_CLIENT_SECRET`. `.env` is gitignored.
 

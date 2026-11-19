@@ -175,8 +175,8 @@ for n in nodes:                                        # make room for "Get Toke
 # (title, API base URL, token URL, client id). Cloud: tokens from Auth0 (free plan), API hosted on a public URL.
 VARIANTS = {"myob_to_snowflake_local.json": ("MYOB → Snowflake (daily incremental) [local Docker]", "http://host.docker.internal:8000",
                                              "http://host.docker.internal:8000/oauth/token", "mock-client-id"),
-            "myob_to_snowflake_cloud.json": ("MYOB → Snowflake (daily incremental) [n8n Cloud + Auth0]", "https://REPLACE-WITH-PUBLIC-MOCK-API-URL",
-                                             "https://dev-z1apvxcaj6hhb84a.us.auth0.com/oauth/token", "REPLACE-WITH-AUTH0-M2M-CLIENT-ID")}
+            "myob_to_snowflake_cloud.json": ("MYOB → Snowflake (daily incremental) [n8n Cloud + Auth0]", "https://law-firm-mock-api.onrender.com",
+                                             "https://dev-z1apvxcaj6hhb84a.us.auth0.com/oauth/token", "MjnrZgi6bRgIO4lbMUmhjYsrS3htKpv9")}
 HERE = Path(__file__).resolve().parent
 for fname, (title, base, token_url, client_id) in VARIANTS.items():
     js = json.dumps(nodes).replace("__BASE_URL__", base).replace("__TOKEN_URL__", token_url).replace("__CLIENT_ID__", client_id)
