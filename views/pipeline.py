@@ -15,7 +15,7 @@ from core.theme import AMBER, GREEN, MUTED, RED, TEAL
 SNAP = Path(__file__).resolve().parent.parent / "integration" / "snapshot"
 BUCKETS = ["Not yet due", "1–30 days", "31–60 days", "61–90 days", "90+ days"]
 BUCKET_COLORS = ["#86c9d1", "#fbbf24", "#f59e0b", "#ef4444", "#991b1b"]
-STAGES = [("5 source APIs", "MYOB · LEAP · triConvey · InfoTrack · PEXA"), ("n8n + OAuth", "daily 6am, incremental, Auth0 JWT"), ("Snowflake RAW", "VARIANT + load audit"),
+STAGES = [("6 source APIs", "MYOB · LEAP · triConvey · InfoTrack · TriSearch · PEXA"), ("n8n + OAuth", "daily 6am, incremental, Auth0 JWT"), ("Snowflake RAW", "VARIANT + load audit"),
           ("STAGING", "LATERAL FLATTEN, de-dup"), ("MARTS", "revenue, ageing, collections"),
           ("Consumers", "Excel + Power Query · Streamlit")]
 
@@ -77,11 +77,12 @@ def render(M, cur, cmp):
         ui.card_title("How the data flows", right="every stage is in integration/")
         st.markdown(_flow_html(), unsafe_allow_html=True)
         ui.spacer(6)
-        ui.note("All five systems are <b>simulated</b> from this app's own model, each served by a mock API with its own paging style "
-                "(MYOB OData, LEAP pages, Smokeball offset/limit, InfoTrack page numbers, PEXA cursors) behind OAuth 2.0. "
+        ui.note("All six systems are <b>simulated</b> from this app's own model, each served by a mock API with its own paging style "
+                "(MYOB OData, LEAP pages, Smokeball offset/limit, InfoTrack page numbers, TriSearch skip/take, PEXA cursors) behind OAuth 2.0. "
+                "LEAP and InfoTrack stop at the cut-over; triConvey and TriSearch start there (see the Transition page). "
                 "Switching a source to its live API changes configuration, not code.", "")
 
-    tabs = st.tabs(["Reconciliation", "Cross-system", "Migration dry run", "Data quality", "Load audit", "Receivables by age",
+    tabs = st.tabs(["Reconciliation", "Cross-system", "Cut-over findings", "Data quality", "Load audit", "Receivables by age",
                     "Collections by practice area"])
     with tabs[0]:
         t = rec.copy()
@@ -97,27 +98,27 @@ def render(M, cur, cmp):
         if sync is not None:
             res = sync["result"].value_counts()
             ui.kpi_row([
-                dict(label="LEAP → MYOB invoices matched", value=f"{int(res.get('Matched', 0))}/{len(sync)}", label_cmp=None,
+                dict(label="LEAP + triConvey → MYOB invoices matched", value=f"{int(res.get('Matched', 0))}/{len(sync)}", label_cmp=None,
                      accent=GREEN if res.get("Matched", 0) == len(sync) else RED, sub="number and total incl. GST"),
-                dict(label="InfoTrack + PEXA disbursements", value=ui.fmt_money(float(disb["total_disbursements"].sum())) if disb is not None else "—",
-                     label_cmp=None, accent=TEAL, sub=f"{len(disb)} matters, every order linked to a LEAP matter" if disb is not None else None),
+                dict(label="Search + PEXA disbursements", value=ui.fmt_money(float(disb["total_disbursements"].sum())) if disb is not None else "—",
+                     label_cmp=None, accent=TEAL, sub=f"{len(disb)} matters, InfoTrack and TriSearch orders, one normalised matter key" if disb is not None else None),
             ], spacer_after=6)
         if disb is not None:
             st.dataframe(disb.sort_values("total_disbursements", ascending=False).head(25), hide_index=True, width="stretch",
-                         column_config={"search_fees": ui.money_col("InfoTrack fees", "$%,.2f"), "pexa_fees": ui.money_col("PEXA fees", "$%,.2f"),
+                         column_config={"search_fees": ui.money_col("Search fees (both suppliers)", "$%,.2f"), "pexa_fees": ui.money_col("PEXA fees", "$%,.2f"),
                                         "total_disbursements": ui.money_col("Total", "$%,.2f")})
-            st.caption("Top 25 matters by search and settlement disbursements, ex GST.")
+            st.caption("Top 25 matters by search and settlement disbursements, ex GST, across both search suppliers.")
     with tabs[2]:
         mig, exc = d.get("migration_recon"), d.get("migration_exceptions")
         if mig is not None:
             out = mig["outcome"].value_counts()
             ui.kpi_row([
-                dict(label="Active LEAP matters", value=f"{int((mig['outcome'] != 'Unexpected in triConvey').sum())}", label_cmp=None, accent=TEAL),
+                dict(label="Active LEAP matters at the freeze", value=f"{int((mig['outcome'] != 'Unexpected in triConvey').sum())}", label_cmp=None, accent=TEAL),
                 dict(label="Migrated once", value=f"{int(out.get('Migrated', 0))}", label_cmp=None, accent=GREEN),
                 dict(label="Findings for cut-over log", value=f"{len(exc) if exc is not None else 0}", label_cmp=None, accent=AMBER, color=AMBER),
             ], spacer_after=6)
-        ui.note("LEAP is the source of truth; triConvey is a migration rehearsal. These findings are what the reconciliation caught "
-                "and would go on the cut-over issues log before go-live.", "warn")
+        ui.note("LEAP is the source of truth up to the Friday freeze; triConvey is the system of record after go-live. These are the findings the "
+                "reconciliation raised across the cut-over. The Transition page groups them by who has to fix what and by when.", "warn")
         if exc is not None:
             e = exc.copy()
             e["amount"] = e["amount"].map(lambda v: "" if pd.isna(v) else _money_or_text(v))
@@ -128,7 +129,7 @@ def render(M, cur, cmp):
             t2 = tm.copy()
             for c in ("leap_balance", "triconvey_balance", "difference"):
                 t2[c] = t2[c].map(_money_or_text)
-            st.dataframe(t2.rename(columns={"client_name": "Client", "leap_balance": "LEAP balance", "triconvey_balance": "triConvey balance",
+            st.dataframe(t2.rename(columns={"client_name": "Client", "leap_balance": "LEAP at the freeze", "triconvey_balance": "triConvey opening balance",
                                             "difference": "Difference", "result": "Result"}), hide_index=True, width="stretch")
     with tabs[3]:
         t = checks.copy()

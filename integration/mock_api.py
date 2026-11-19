@@ -14,11 +14,12 @@ tested without a MYOB developer account:
   * POST /_simulate/activity: test helper (not MYOB) that settles some open invoices "today" to demo incremental loads
 
 Other systems the firm runs (integration/sources_export.py), each with its own paging style, as real APIs differ:
-  * /leap/v1/{matters|invoices|trust/balances}      page + pageSize, updatedSince  -> {"data", "paging": {..., "nextPage"}}
-  * /smokeball/{matters|trust/balances} (triConvey) Offset + Limit, LastUpdated     -> {"value", "offset", "limit", "size", "next": {"href"}}
+  * /leap/v1/{matters|invoices|trust/balances|disbursements}      page + pageSize, updatedSince  -> {"data", "paging": {..., "nextPage"}}
+  * /smokeball/{matters|invoices|trust/balances|trust/reconciliation|disbursements} (triConvey) Offset + Limit, LastUpdated     -> {"value", "offset", "limit", "size", "next": {"href"}}
   * /infotrack/v1/orders                            pageNumber + pageSize, modifiedSince -> {"orders", "totalCount", "nextPageUrl"}
+  * /trisearch/v1/orders                            skip + take, updatedAfter      -> {"results", "total", "continuation"}  (shape illustrative)
   * /pexa/v1/workspaces                             cursor + limit, updatedSince   -> {"workspaces", "totalCount", "links": {"next"}}
-Scopes: leap:read, triconvey:read (plus x-api-key = client, like Smokeball), infotrack:read, pexa:read.
+Scopes: leap:read, triconvey:read (plus x-api-key = client, like Smokeball), infotrack:read, trisearch:read, pexa:read.
 """
 from __future__ import annotations
 
@@ -115,8 +116,9 @@ def create_app(auth_config: A.AuthConfig | None = None, jwks_fetch=None) -> Fast
     # ---------------------------------------------------------------- other vendors (simulated)
     vdir = DATA_DIR
     vendor = {k: json.loads((vdir / f"{k}.json").read_text(encoding="utf-8")) for k in
-              ("leap/matters", "leap/invoices", "leap/trust_balances", "triconvey/matters", "triconvey/trust_balances",
-               "infotrack/orders", "pexa/workspaces")}
+              ("leap/matters", "leap/invoices", "leap/trust_balances", "leap/disbursements", "triconvey/matters",
+               "triconvey/invoices", "triconvey/trust_balances", "triconvey/trust_reconciliation", "triconvey/disbursements",
+               "infotrack/orders", "trisearch/orders", "pexa/workspaces")}
 
     def _since(rows, field, since):
         if not since:
@@ -167,6 +169,15 @@ def create_app(auth_config: A.AuthConfig | None = None, jwks_fetch=None) -> Fast
         start = (pageNumber - 1) * pageSize
         nxt = _next(request, pageNumber=pageNumber + 1, pageSize=pageSize) if start + pageSize < len(rows) else None
         return {"orders": rows[start:start + pageSize], "totalCount": len(rows), "nextPageUrl": nxt}
+
+    @app.get("/trisearch/v1/orders")
+    def trisearch(request: Request, skip: int = Query(0, ge=0), take: int = Query(100, ge=1, le=1000), updatedAfter: str | None = None,
+                  authorization: str = Header(None)):
+        """TriSearch publishes no API documentation we could find: this shape (skip/take + continuation URL) is illustrative."""
+        _auth(authorization, None, "trisearch")
+        rows = _since(vendor["trisearch/orders"], "updatedAt", updatedAfter)
+        nxt = _next(request, skip=skip + take, take=take) if skip + take < len(rows) else None
+        return {"results": rows[skip:skip + take], "total": len(rows), "continuation": nxt}
 
     @app.get("/pexa/v1/workspaces")
     def pexa(request: Request, cursor: str | None = None, limit: int = Query(50, ge=1, le=100), updatedSince: str | None = None,

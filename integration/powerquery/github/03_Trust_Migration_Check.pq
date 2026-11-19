@@ -1,5 +1,5 @@
 // Query name: Trust_Migration_Check
-// Trust balance per client, LEAP vs triConvey. Expected: one difference (Global Trust Bank, -5,799.21).
+// Opening trust balance per client: LEAP at the final collection vs what the firm keyed into triConvey. Expected: one difference (Global Trust Bank, -5,799.21).
 let
     Base     = "https://raw.githubusercontent.com/brianphu2310/Law_Firm_Operations_Intelliigence/main/integration/data/",
     Get      = (path as text) => Json.Document(Web.Contents(Base, [RelativePath = path])),

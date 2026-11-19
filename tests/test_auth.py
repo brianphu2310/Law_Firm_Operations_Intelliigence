@@ -58,7 +58,7 @@ def test_token_endpoint_issues_rs256_jwt_with_scopes(api):
     assert jwt.get_unverified_header(tok)["alg"] == "RS256"
     claims = jwt.decode(tok, options={"verify_signature": False})
     assert claims["azp"] == CID and set(claims["scope"].split()) == {"read:ledger", "read:contacts", "read:sales", "leap:read",
-                                                                     "triconvey:read", "infotrack:read", "pexa:read"}
+                                                                     "triconvey:read", "infotrack:read", "trisearch:read", "pexa:read"}
     assert _get(api, tok).status_code == 200
 
 
@@ -209,7 +209,8 @@ def test_n8n_workflows_keep_secrets_in_credentials_not_json():
 
 
 @pytest.mark.parametrize("path,scope,needs_key", [("/leap/v1/matters", "leap:read", False), ("/smokeball/matters", "triconvey:read", True),
-                                                  ("/infotrack/v1/orders", "infotrack:read", False), ("/pexa/v1/workspaces", "pexa:read", False)])
+                                                  ("/infotrack/v1/orders", "infotrack:read", False), ("/trisearch/v1/orders", "trisearch:read", False),
+                                                  ("/pexa/v1/workspaces", "pexa:read", False)])
 def test_each_vendor_api_needs_its_own_scope(api, path, scope, needs_key):
     others = " ".join(s for s in A.ALL_SCOPES.split() if s != scope)
     h = lambda tok, key=CID: {"Authorization": f"Bearer {tok}", "x-api-key": key}

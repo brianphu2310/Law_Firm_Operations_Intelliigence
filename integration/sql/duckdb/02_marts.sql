@@ -38,22 +38,22 @@ group by 1;
 -- ------------------------------------------------------------------------------------------------------------------
 -- Cross-system reconciliations
 -- ------------------------------------------------------------------------------------------------------------------
--- Every invoice raised in LEAP must reach MYOB with the same total (the practice-management -> accounting sync)
+-- Every invoice raised in LEAP (until the final collection) or in triConvey (after go-live) must reach MYOB with the same total
 create or replace view marts.invoice_sync_recon as
 select coalesce(l.invoice_number, m.invoice_number) as invoice_number, l.matter_number, coalesce(l.client_name, c.customer_name) as client_name,
-       l.total as leap_total, m.total_amount as myob_total,
+       l.system as pms_system, l.total as leap_total, m.total_amount as myob_total,
        case when m.invoice_uid is null then 'Missing in MYOB'
-            when l.invoice_number is null then 'Missing in LEAP'
+            when l.invoice_number is null then 'Missing in practice management'
             when l.total <> m.total_amount then 'Amount differs'
             else 'Matched' end as result
-from staging.stg_leap_invoices l
+from staging.stg_pms_invoices l
 full outer join staging.stg_invoices m on m.invoice_number = l.invoice_number
 left join staging.stg_customers c on c.customer_uid = m.customer_uid;
 
--- Migration dry run: every active LEAP matter should appear exactly once in triConvey
+-- Cut-over: every matter active in LEAP at the final collection should appear exactly once in triConvey
 create or replace view marts.migration_recon as
 with leap_active as (select * from staging.stg_leap_matters where status in ('Open', 'On Hold')),
-     tc as (select matter_number, count(*) as copies from staging.stg_tc_matters group by 1)
+     tc as (select matter_number, count(*) as copies from staging.stg_tc_matters where origin = 'Migrated' group by 1)
 select coalesce(l.matter_number, tc.matter_number) as matter_number, l.client_name, l.practice_area, l.status as leap_status,
        coalesce(tc.copies, 0) as triconvey_copies,
        case when l.matter_number is null then 'Unexpected in triConvey'
@@ -62,30 +62,110 @@ select coalesce(l.matter_number, tc.matter_number) as matter_number, l.client_na
             else 'Migrated' end as outcome
 from leap_active l full outer join tc on tc.matter_number = l.matter_number;
 
--- Migration dry run: trust balances per client, LEAP vs triConvey
+-- Matter types: an unmapped type silently becomes 'General'. One row per LEAP practice area, active matters only
+create or replace view marts.matter_type_mapping_recon as
+with m as (select distinct l.matter_number, l.practice_area, t.matter_type
+           from staging.stg_leap_matters l join staging.stg_tc_matters t on t.matter_number = l.matter_number and t.origin = 'Migrated'
+           where l.status in ('Open', 'On Hold'))
+select practice_area, count(*) as matters, sum(case when matter_type = practice_area then 1 else 0 end) as same_type,
+       sum(case when matter_type = 'General' and practice_area <> 'General' then 1 else 0 end) as fell_to_general,
+       case when sum(case when matter_type = 'General' and practice_area <> 'General' then 1 else 0 end) > 0 then 'No matter-type mapping' else 'Mapped' end as result
+from m group by 1;
+
+-- Receivables: every invoice outstanding in LEAP at the final collection should arrive in triConvey with the same total
+create or replace view marts.ar_migration_recon as
+select l.invoice_number, l.matter_number, l.client_name, l.total as leap_total, t.total as triconvey_total,
+       coalesce(t.total, 0) - l.total as difference,
+       case when t.invoice_number is null then 'Not migrated'
+            when abs(t.total - l.total) < 0.005 then 'Matched' else 'Amount differs' end as result
+from staging.stg_leap_invoices l
+left join staging.stg_tc_invoices t on t.invoice_number = l.invoice_number and t.origin = 'Migrated'
+where l.status = 'Outstanding';
+
+-- Trust: opening balances per client, LEAP at the final collection vs what the firm keyed into triConvey
 create or replace view marts.trust_migration_recon as
 select coalesce(l.client_name, t.client_name) as client_name, l.balance as leap_balance, t.balance as triconvey_balance,
        coalesce(t.balance, 0) - coalesce(l.balance, 0) as difference,
        case when abs(coalesce(t.balance, 0) - coalesce(l.balance, 0)) < 0.005 then 'Matched' else 'Difference' end as result
 from staging.stg_leap_trust l full outer join staging.stg_tc_trust t on t.client_name = l.client_name;
 
--- Disbursements by matter: InfoTrack searches + PEXA workspace fees, against the LEAP matter
+-- Trust: the month-end reconciliation that straddles both systems (Uniform General Rules r48): two statements, one deadline
+create or replace view marts.trust_r48_status as
+select r.period_end, r.due_date, (select as_at from staging.stg_report_date) as as_at, r.status,
+       r.bank_balance, r.unpresented_cheques, r.deposits_not_banked, r.cash_book_balance, r.ledger_total, r.ledgers_listed,
+       r.bank_balance - r.unpresented_cheques + r.deposits_not_banked - r.cash_book_balance as bank_vs_cash_book,
+       r.ledger_total - r.cash_book_balance as ledgers_vs_cash_book,
+       case when abs(r.bank_balance - r.unpresented_cheques + r.deposits_not_banked - r.cash_book_balance) < 0.005 then 'Balances' else 'Does not balance' end as statement_1_bank,
+       case when abs(r.ledger_total - r.cash_book_balance) < 0.005 then 'Balances' else 'Does not balance' end as statement_2_ledgers
+from staging.stg_tc_trust_recon r;
+
+-- Search suppliers: one row per supplier order in the cut-over window, matched to the disbursement the practice-management system holds
+create or replace view marts.supplier_disbursement_recon as
+with window_start as (select min(disb_date) as d from staging.stg_leap_disbursements),
+     sup as (select s.*, regexp_replace(upper(s.matter_ref), '[^A-Z0-9]', '', 'g') as ref_key
+             from staging.stg_supplier_orders s, window_start w where s.ordered_date >= w.d),
+     matters as (select distinct matter_number, regexp_replace(upper(matter_number), '[^A-Z0-9]', '', 'g') as ref_key from
+                 (select matter_number from staging.stg_leap_matters union select matter_number from staging.stg_tc_matters)),
+     pms as (select supplier_order_ref, count(*) as pms_lines, sum(amount_ex_gst) as pms_amount, min(matter_number) as pms_matter,
+                    min(system) as pms_system, min(posted_by) as posted_by
+             from staging.stg_pms_disbursements group by 1)
+select s.supplier, s.order_id, s.ordered_date, m.matter_number, s.matter_ref as supplier_reference, s.service, s.fee_ex_gst, s.status as supplier_status,
+       p.pms_system, p.posted_by, coalesce(p.pms_lines, 0) as pms_lines, p.pms_amount,
+       case when p.pms_lines is null and s.supplier = 'InfoTrack' and s.status <> 'Complete' then 'Timing: order not yet complete'
+            when p.pms_lines is null then 'On supplier feed, not in ledger'
+            when p.pms_lines > 1 then 'Duplicate in ledger'
+            when abs(p.pms_amount - s.fee_ex_gst) > 0.005 then 'Amount differs'
+            when p.pms_matter is distinct from m.matter_number then 'Matter differs'
+            else 'Matched' end as result,
+       case when p.pms_lines is null and s.supplier = 'TriSearch' then 'TriSearch charges at order: check the auto-disbursement setting'
+            when p.pms_lines is null and s.supplier = 'InfoTrack' and s.ordered_date > (select final_collection from staging.stg_cutover) then 'Ordered after LEAP froze: needs re-keying'
+            when s.matter_ref <> m.matter_number then 'Supplier reference typed differently'
+            when p.posted_by = 'Manual entry' and abs(p.pms_amount - s.fee_ex_gst) > 0.005 then 'Manual entry'
+            else null end as likely_cause
+from sup s
+left join matters m on m.ref_key = s.ref_key
+left join pms p on p.supplier_order_ref = s.order_id;
+
+-- Supplier switch in one table: orders and cost per search by month and supplier
+create or replace view marts.supplier_switch_summary as
+select date_trunc('month', ordered_date)::date as month, supplier, count(*) as orders, sum(fee_ex_gst) as fees_ex_gst,
+       round(avg(fee_ex_gst) filter (where service = 'Land Title Search'), 2) as avg_land_title_fee,
+       round(avg(service_fee_ex_gst) filter (where service = 'Land Title Search'), 2) as avg_land_title_service_fee
+from staging.stg_supplier_orders
+where ordered_date >= (select min(disb_date) from staging.stg_leap_disbursements) - interval 3 month
+group by 1, 2;
+
+-- Disbursements by matter: search orders from BOTH suppliers + PEXA workspace fees, against the matter (LEAP or triConvey)
 create or replace view marts.disbursements_by_matter as
-with it as (select matter_number, count(*) as searches, sum(fee_ex_gst) as search_fees from staging.stg_infotrack_orders group by 1),
-     px as (select matter_number, count(*) as workspaces, sum(pexa_fee) as pexa_fees from staging.stg_pexa_workspaces group by 1)
-select m.matter_number, m.client_name, m.practice_area, m.status,
+with it as (select regexp_replace(upper(matter_ref), '[^A-Z0-9]', '', 'g') as ref_key, count(*) as searches, sum(fee_ex_gst) as search_fees
+            from staging.stg_supplier_orders group by 1),
+     px as (select matter_number, count(*) as workspaces, sum(pexa_fee) as pexa_fees from staging.stg_pexa_workspaces group by 1),
+     m as (select matter_number, any_value(client_name) as client_name from staging.stg_pms_matters group by 1)
+select m.matter_number, m.client_name, l.practice_area, l.status,
        coalesce(it.searches, 0) as searches, coalesce(it.search_fees, 0) as search_fees,
        coalesce(px.workspaces, 0) as pexa_workspaces, coalesce(px.pexa_fees, 0) as pexa_fees,
        coalesce(it.search_fees, 0) + coalesce(px.pexa_fees, 0) as total_disbursements
-from staging.stg_leap_matters m
-left join it on it.matter_number = m.matter_number
+from m
+left join staging.stg_leap_matters l on l.matter_number = m.matter_number
+left join it on it.ref_key = regexp_replace(upper(m.matter_number), '[^A-Z0-9]', '', 'g')
 left join px on px.matter_number = m.matter_number
-where it.matter_number is not null or px.matter_number is not null;
+where it.ref_key is not null or px.matter_number is not null;
 
--- One row per migration finding, for the dry-run exceptions report
+-- One row per cut-over finding, for the exceptions log
 create or replace view marts.migration_exceptions as
 select 'Matter' as kind, matter_number as reference, client_name, outcome as finding, null::decimal(14,2) as amount
 from marts.migration_recon where outcome <> 'Migrated'
 union all
-select 'Trust balance', client_name, client_name, 'Trust balance differs', difference
-from marts.trust_migration_recon where result <> 'Matched';
+select 'Matter type', practice_area, practice_area, fell_to_general || ' matter(s) defaulted to General', null
+from marts.matter_type_mapping_recon where result <> 'Mapped'
+union all
+select 'Invoice', invoice_number, client_name, result, difference from marts.ar_migration_recon where result <> 'Matched'
+union all
+select 'Trust balance', client_name, client_name, 'Opening balance differs from LEAP', difference
+from marts.trust_migration_recon where result <> 'Matched'
+union all
+select 'Trust reconciliation', 'r48 ' || strftime(period_end, '%b %Y'), null, 'Ledgers do not balance to the cash book', ledgers_vs_cash_book
+from marts.trust_r48_status where statement_2_ledgers <> 'Balances'
+union all
+select 'Disbursement', supplier || ' ' || order_id, matter_number, result, fee_ex_gst
+from marts.supplier_disbursement_recon where result not in ('Matched');

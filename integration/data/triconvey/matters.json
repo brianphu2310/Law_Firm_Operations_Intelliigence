@@ -2,7 +2,7 @@
  {
   "id": "aa3b803a-6553-5f86-b8f0-9017e3b6028c",
   "number": "M-2024-0153",
-  "title": 0,
+  "title": "Halcyon Systems \u2014 Opposition Response",
   "status": 0,
   "clientName": "Halcyon Systems",
   "matterType": {
@@ -12,13 +12,14 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "3696e271-0ec8-5661-93e0-20fc4834df0a",
+  "origin": "Migrated",
   "openedDate": "2024-02-11T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "4c07974a-c89b-5020-95ed-5935a1a2de0e",
   "number": "M-2024-0159",
-  "title": 1,
+  "title": "Acme Corp \u2014 Injunction Application",
   "status": 0,
   "clientName": "Acme Corp",
   "matterType": {
@@ -28,13 +29,14 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "6a993165-8415-59e8-bf6d-8e84381e1489",
+  "origin": "Migrated",
   "openedDate": "2024-02-19T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "b2a774ab-6687-5ca2-a865-6fb0edd2180f",
   "number": "M-2024-0168",
-  "title": 2,
+  "title": "Halcyon Systems \u2014 Infringement Notice",
   "status": 0,
   "clientName": "Halcyon Systems",
   "matterType": {
@@ -44,13 +46,31 @@
    "name": "Jessica Pearson"
   },
   "externalSystemId": "c203527b-eef9-5d9d-b72c-a604bf57f90e",
+  "origin": "Migrated",
   "openedDate": "2024-03-21T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
+ },
+ {
+  "id": "747940d4-efa1-5a39-b069-269dfef50ed3",
+  "number": "M-2024-0178",
+  "title": "Zenith Labs \u2014 Defence of Statement of Claim",
+  "status": 2,
+  "clientName": "Zenith Labs",
+  "matterType": {
+   "category": "Litigation"
+  },
+  "personResponsible": {
+   "name": "Harvey Specter"
+  },
+  "externalSystemId": "e0703d0a-36fd-5a16-9793-41dcd2a5a5d2",
+  "origin": "Migrated",
+  "openedDate": "2024-04-06T00:00:00",
+  "lastUpdated": "2025-09-10T00:00:00"
  },
  {
   "id": "8fef6713-09dc-5a07-a309-a510dda6c52a",
   "number": "M-2024-0198",
-  "title": 3,
+  "title": "Okafor Mining \u2014 Mediation",
   "status": 0,
   "clientName": "Okafor Mining Co.",
   "matterType": {
@@ -60,13 +80,14 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "11b00af1-5d63-5191-9ca9-d32bb482a9af",
+  "origin": "Migrated",
   "openedDate": "2024-05-15T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "76ca6067-f985-54df-bf05-84a4cc761933",
   "number": "M-2024-0199",
-  "title": 4,
+  "title": "Ganges Textile Exports \u2014 Defence of Statement of Claim",
   "status": 0,
   "clientName": "Ganges Textile Exports",
   "matterType": {
@@ -76,13 +97,14 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "7277b679-9096-5110-bb98-b5fd0f2cdc3a",
+  "origin": "Migrated",
   "openedDate": "2024-05-20T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "bc804d30-d42c-5e50-b892-6f6c1aec1f18",
   "number": "M-2024-0202",
-  "title": 5,
+  "title": "Zenith Labs \u2014 Defence of Statement of Claim",
   "status": 0,
   "clientName": "Zenith Labs",
   "matterType": {
@@ -92,13 +114,14 @@
    "name": "Harvey Specter"
   },
   "externalSystemId": "d7f9bfee-18d0-59f1-b00a-d7d2203b0156",
+  "origin": "Migrated",
   "openedDate": "2024-05-23T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "86622c0a-7302-5441-9409-d82411561fcd",
   "number": "M-2024-0203",
-  "title": 6,
+  "title": "Zenith Labs \u2014 Contract Dispute",
   "status": 0,
   "clientName": "Zenith Labs",
   "matterType": {
@@ -108,13 +131,14 @@
    "name": "Harvey Specter"
   },
   "externalSystemId": "3547c710-91a3-5b31-924a-f9fa24b788d4",
+  "origin": "Migrated",
   "openedDate": "2024-05-24T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "89cdf8ae-330f-5a75-9535-37d836527f8a",
   "number": "M-2024-0217",
-  "title": 8,
+  "title": "Acme Corp \u2014 Costs Assessment",
   "status": 0,
   "clientName": "Acme Corp",
   "matterType": {
@@ -124,13 +148,14 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "543ac6c1-ebc3-5510-ac59-e00a185ae031",
+  "origin": "Migrated",
   "openedDate": "2024-07-03T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "e3716b90-c1cf-5c3e-9b18-636ae09b0a1b",
   "number": "M-2024-0222",
-  "title": 9,
+  "title": "Nova Materials \u2014 Patent Portfolio Review",
   "status": 0,
   "clientName": "Nova Materials",
   "matterType": {
@@ -140,13 +165,14 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "4adce104-82e9-53d8-a619-d864cf789b33",
+  "origin": "Migrated",
   "openedDate": "2024-07-21T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "8d3f0370-e891-587e-8f23-1447021bf359",
   "number": "M-2024-0224",
-  "title": 10,
+  "title": "Pacific Rim Traders \u2014 Injunction Application",
   "status": 0,
   "clientName": "Pacific Rim Traders",
   "matterType": {
@@ -156,13 +182,14 @@
    "name": "Harvey Specter"
   },
   "externalSystemId": "62d5b02f-782a-5fdd-a2b3-9d76a0a84784",
+  "origin": "Migrated",
   "openedDate": "2024-08-04T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "0fb24131-5b20-526b-b7a1-458f93932162",
   "number": "M-2024-0243",
-  "title": 11,
+  "title": "Pacific Rim Traders \u2014 Costs Assessment",
   "status": 0,
   "clientName": "Pacific Rim Traders",
   "matterType": {
@@ -172,13 +199,14 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "aac70ef6-6e94-5b73-bf28-d58dd30d4784",
+  "origin": "Migrated",
   "openedDate": "2024-09-13T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "de6b3750-d0c7-5ab2-bd72-f496328e2623",
   "number": "M-2024-0244",
-  "title": 12,
+  "title": "London Capital Partners \u2014 Joint Venture Agreement",
   "status": 0,
   "clientName": "London Capital Partners",
   "matterType": {
@@ -188,13 +216,14 @@
    "name": "Harvey Specter"
   },
   "externalSystemId": "50cc292a-485e-5f79-914c-e33901e2257b",
+  "origin": "Migrated",
   "openedDate": "2024-09-14T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "497458ce-647e-5db8-be48-b71d3aa252be",
   "number": "M-2024-0247",
-  "title": 13,
+  "title": "Global Trust Bank \u2014 Share Sale Agreement",
   "status": 0,
   "clientName": "Global Trust Bank",
   "matterType": {
@@ -204,13 +233,14 @@
    "name": "Jessica Pearson"
   },
   "externalSystemId": "d3077350-4321-5991-9418-7c99f30495f9",
+  "origin": "Migrated",
   "openedDate": "2024-09-20T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "67d221bf-3240-5d10-8ca1-42145766a6cd",
   "number": "M-2024-0248",
-  "title": 14,
+  "title": "Nippon Precision \u2014 Licensing Agreement",
   "status": 0,
   "clientName": "Nippon Precision Ltd",
   "matterType": {
@@ -220,13 +250,14 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "d4d10ea5-2917-5a25-8841-807eedaf297b",
+  "origin": "Migrated",
   "openedDate": "2024-09-21T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "987454cc-6723-517e-b89d-89113a50d148",
   "number": "M-2024-0250",
-  "title": 15,
+  "title": "Pacific Rim Traders \u2014 Debt Recovery",
   "status": 0,
   "clientName": "Pacific Rim Traders",
   "matterType": {
@@ -236,13 +267,14 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "47a3b045-0f75-5718-b302-4af91e24fadd",
+  "origin": "Migrated",
   "openedDate": "2024-09-30T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "26e2363e-76ca-509c-bc18-ab88fd8f1121",
   "number": "M-2024-0251",
-  "title": 16,
+  "title": "Sunrise Logistics \u2014 Unfair Dismissal Defence",
   "status": 1,
   "clientName": "Sunrise Logistics",
   "matterType": {
@@ -252,13 +284,14 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "185ccafb-9d58-5e0f-8776-0f0e7a69f3cc",
+  "origin": "Migrated",
   "openedDate": "2024-10-05T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "8c567571-f9a3-5b3f-810e-fb4bf96d1087",
   "number": "M-2024-0255",
-  "title": 17,
+  "title": "Acme Corp \u2014 Mediation",
   "status": 0,
   "clientName": "Acme Corp",
   "matterType": {
@@ -268,13 +301,14 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "b04b5c1b-d860-5616-9eab-b3b76e9c546e",
+  "origin": "Migrated",
   "openedDate": "2024-10-15T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "94e07017-502b-542a-9055-bbb913035214",
   "number": "M-2024-0261",
-  "title": 18,
+  "title": "Halcyon Systems \u2014 Licensing Agreement",
   "status": 0,
   "clientName": "Halcyon Systems",
   "matterType": {
@@ -284,13 +318,14 @@
    "name": "Clara Sterling"
   },
   "externalSystemId": "eda25d75-4e0c-5807-bc25-a13392efd1e9",
+  "origin": "Migrated",
   "openedDate": "2024-10-30T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "526f5301-925c-5037-8dc7-cd55fbb7b482",
   "number": "M-2024-0263",
-  "title": 19,
+  "title": "London Capital Partners \u2014 Capital Raise",
   "status": 1,
   "clientName": "London Capital Partners",
   "matterType": {
@@ -300,13 +335,14 @@
    "name": "Harvey Specter"
   },
   "externalSystemId": "fbbb0b7f-0419-547c-9e8c-182b33eebd16",
+  "origin": "Migrated",
   "openedDate": "2024-10-31T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "e6ff5a90-f55b-5787-bf75-d5ef1ec14f53",
   "number": "M-2024-0270",
-  "title": 20,
+  "title": "Harlow Wrongful Termination Defense",
   "status": 1,
   "clientName": "Harlow & Co.",
   "matterType": {
@@ -316,13 +352,14 @@
    "name": "Clara Sterling"
   },
   "externalSystemId": "8ad334ff-bb58-539e-b4bc-1b700b8da51d",
+  "origin": "Migrated",
   "openedDate": "2024-11-08T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "3f9b1355-c6fe-558f-bc7c-d7df4a545694",
   "number": "M-2024-0274",
-  "title": 21,
+  "title": "Nova Materials \u2014 Licensing Agreement",
   "status": 1,
   "clientName": "Nova Materials",
   "matterType": {
@@ -332,13 +369,14 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "a968dd79-f0e8-51f8-9d50-eee66991609e",
+  "origin": "Migrated",
   "openedDate": "2024-11-13T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "21350645-6c8e-5970-8d24-a7b55c11092d",
   "number": "M-2024-0276",
-  "title": 22,
+  "title": "Pacific Rim Traders \u2014 Injunction Application",
   "status": 0,
   "clientName": "Pacific Rim Traders",
   "matterType": {
@@ -348,13 +386,14 @@
    "name": "Katrina Bennett"
   },
   "externalSystemId": "e1a68b6e-b80f-5c1d-9712-2ee8deabd7a3",
+  "origin": "Migrated",
   "openedDate": "2024-11-15T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "1c3b6ed6-5743-5e79-8179-35d30ad7065e",
   "number": "M-2024-0277",
-  "title": 23,
+  "title": "Halcyon Systems \u2014 Opposition Response",
   "status": 0,
   "clientName": "Halcyon Systems",
   "matterType": {
@@ -364,13 +403,14 @@
    "name": "Jessica Pearson"
   },
   "externalSystemId": "29fda780-5476-50c9-8c5a-150bdf1350ed",
+  "origin": "Migrated",
   "openedDate": "2024-11-16T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "6674d55e-88f1-5acf-9b86-b6a4ff6f893b",
   "number": "M-2024-0277",
-  "title": 23,
+  "title": "Halcyon Systems \u2014 Opposition Response",
   "status": 0,
   "clientName": "Halcyon Systems",
   "matterType": {
@@ -380,13 +420,14 @@
    "name": "Jessica Pearson"
   },
   "externalSystemId": "29fda780-5476-50c9-8c5a-150bdf1350ed",
+  "origin": "Migrated",
   "openedDate": "2024-11-16T00:00:00",
-  "lastUpdated": "2025-09-17T00:05:00"
+  "lastUpdated": "2025-09-02T00:05:00"
  },
  {
   "id": "1fd4087c-0951-5982-b1e9-d243e00f3f1f",
   "number": "M-2024-0283",
-  "title": 24,
+  "title": "Whitmore Textiles \u2014 Trademark Registration",
   "status": 0,
   "clientName": "Whitmore Textiles",
   "matterType": {
@@ -396,13 +437,31 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "1958e4e2-bf91-51b3-b3fb-4c6f5afd4230",
+  "origin": "Migrated",
   "openedDate": "2024-12-02T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
+ },
+ {
+  "id": "2fe7036b-6f4d-5962-893b-e878b2dc6f2c",
+  "number": "M-2024-0289",
+  "title": "Meridian Pacific Trust \u2014 Asset Purchase",
+  "status": 2,
+  "clientName": "Meridian Pacific Trust",
+  "matterType": {
+   "category": "Corporate"
+  },
+  "personResponsible": {
+   "name": "Jessica Pearson"
+  },
+  "externalSystemId": "f436d2e1-b21e-54a4-8634-f5a7303ea2d8",
+  "origin": "Migrated",
+  "openedDate": "2024-12-12T00:00:00",
+  "lastUpdated": "2025-09-08T00:00:00"
  },
  {
   "id": "dba034c1-2707-5948-827b-d8f9d99cabeb",
   "number": "M-2024-0291",
-  "title": 25,
+  "title": "Sunrise Logistics \u2014 Workplace Investigation",
   "status": 0,
   "clientName": "Sunrise Logistics",
   "matterType": {
@@ -412,13 +471,14 @@
    "name": "Katrina Bennett"
   },
   "externalSystemId": "0f23d548-b993-548d-b0d0-8bbfe126234f",
+  "origin": "Migrated",
   "openedDate": "2024-12-20T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "759f6faa-de4d-58a3-aafd-07e699147fe8",
   "number": "M-2025-0297",
-  "title": 26,
+  "title": "Pacific Rim Traders \u2014 Defence of Statement of Claim",
   "status": 0,
   "clientName": "Pacific Rim Traders",
   "matterType": {
@@ -428,29 +488,31 @@
    "name": "Donna Paulsen"
   },
   "externalSystemId": "f2a0a515-056a-54a1-9014-af0d1d661eb1",
+  "origin": "Migrated",
   "openedDate": "2025-01-08T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "a5ea93b1-e8d7-5f83-a349-b625a8799e51",
   "number": "M-2025-0298",
-  "title": 27,
+  "title": "Bright Path Foundation \u2014 Board Advisory",
   "status": 0,
   "clientName": "Bright Path Foundation",
   "matterType": {
-   "category": "Advisory"
+   "category": "General"
   },
   "personResponsible": {
    "name": "Clara Sterling"
   },
   "externalSystemId": "2b45d1f1-0fd0-5916-ba34-fc9bee8fe947",
+  "origin": "Migrated",
   "openedDate": "2025-01-09T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "6430680c-aed7-5092-a452-4890d99c6cff",
   "number": "M-2025-0299",
-  "title": 28,
+  "title": "Pacific Rim Traders \u2014 Defence of Statement of Claim",
   "status": 0,
   "clientName": "Pacific Rim Traders",
   "matterType": {
@@ -460,13 +522,14 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "d8630a76-ebd8-5559-8a4c-d5565f1287fb",
+  "origin": "Migrated",
   "openedDate": "2025-01-09T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "defb35b5-e9eb-5cff-ba23-e707164b85f2",
   "number": "M-2025-0300",
-  "title": 29,
+  "title": "Harlow & \u2014 Redundancy Advisory",
   "status": 0,
   "clientName": "Harlow & Co.",
   "matterType": {
@@ -476,13 +539,31 @@
    "name": "Clara Sterling"
   },
   "externalSystemId": "917b11d8-8975-5cdf-905d-b7282e321866",
+  "origin": "Migrated",
   "openedDate": "2025-01-11T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
+ },
+ {
+  "id": "6e52e1d5-07ac-511e-9e6c-7db1c2a4447d",
+  "number": "M-2025-0301",
+  "title": "Auckland Ventures NZ Trademark Filing",
+  "status": 2,
+  "clientName": "Auckland Ventures Ltd",
+  "matterType": {
+   "category": "IP Portfolio"
+  },
+  "personResponsible": {
+   "name": "Katrina Bennett"
+  },
+  "externalSystemId": "74caedab-121b-5ccc-a09b-7fcc19476030",
+  "origin": "Migrated",
+  "openedDate": "2025-01-18T00:00:00",
+  "lastUpdated": "2025-09-03T00:00:00"
  },
  {
   "id": "1f596bff-1f4d-533e-b2a0-cfed5b59b7bf",
   "number": "M-2025-0302",
-  "title": 30,
+  "title": "Meridian Series C Financing",
   "status": 0,
   "clientName": "Meridian Holdings Ltd.",
   "matterType": {
@@ -492,13 +573,14 @@
    "name": "Clara Sterling"
   },
   "externalSystemId": "329c8d59-82b8-5b7e-a488-db48ed85b43b",
+  "origin": "Migrated",
   "openedDate": "2025-01-20T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "0f5e4cfc-0ab2-53ce-ad7d-19dbe82209d6",
   "number": "M-2025-0304",
-  "title": 31,
+  "title": "Pacific Rim Traders \u2014 Debt Recovery",
   "status": 0,
   "clientName": "Pacific Rim Traders",
   "matterType": {
@@ -508,13 +590,14 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "ecb07c7b-e565-520b-b6f4-fbc0692aaf0a",
+  "origin": "Migrated",
   "openedDate": "2025-01-21T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "73387e88-bb80-5e4b-be4b-c1d36b9525d6",
   "number": "M-2025-0305",
-  "title": 32,
+  "title": "Blackwood Realty \u2014 Asset Purchase",
   "status": 0,
   "clientName": "Blackwood Realty",
   "matterType": {
@@ -524,13 +607,14 @@
    "name": "Jessica Pearson"
   },
   "externalSystemId": "ee13bc59-4dc5-5553-a51a-3c7ff0a6f3ee",
+  "origin": "Migrated",
   "openedDate": "2025-01-22T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "410f96b3-2a8d-5ed0-899e-af5ee1ce9561",
   "number": "M-2025-0309",
-  "title": 33,
+  "title": "Global Trust Bank \u2014 Capital Raise",
   "status": 1,
   "clientName": "Global Trust Bank",
   "matterType": {
@@ -540,13 +624,14 @@
    "name": "Harvey Specter"
   },
   "externalSystemId": "c61ee33d-8e27-5820-b76e-a8332cbcaffa",
+  "origin": "Migrated",
   "openedDate": "2025-01-30T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "3105d217-b4c5-5b89-9f42-2c30c0d8a187",
   "number": "M-2025-0312",
-  "title": 34,
+  "title": "Okafor Mining \u2014 Costs Assessment",
   "status": 0,
   "clientName": "Okafor Mining Co.",
   "matterType": {
@@ -556,13 +641,14 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "c07c5386-2fe3-5d01-a69f-45303c23261c",
+  "origin": "Migrated",
   "openedDate": "2025-02-09T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "6e2063a9-adcb-50be-ab09-41ff6d1342d8",
   "number": "M-2025-0313",
-  "title": 35,
+  "title": "Halcyon Trademark Portfolio Audit",
   "status": 0,
   "clientName": "Halcyon Systems",
   "matterType": {
@@ -572,13 +658,14 @@
    "name": "Jessica Pearson"
   },
   "externalSystemId": "02c59e39-bbcd-5a4b-ad42-60901dcbfcd4",
+  "origin": "Migrated",
   "openedDate": "2025-02-10T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "95d00e95-907e-5317-a30b-0668865731eb",
   "number": "M-2025-0317",
-  "title": 36,
+  "title": "Vertex Industries \u2014 Patent Portfolio Review",
   "status": 0,
   "clientName": "Vertex Industries",
   "matterType": {
@@ -588,13 +675,14 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "5ccffa58-f280-56e4-81e9-c78bf13ef176",
+  "origin": "Migrated",
   "openedDate": "2025-02-14T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "0015398c-95d3-5898-8d50-7478fc8a689e",
   "number": "M-2025-0318",
-  "title": 37,
+  "title": "Singapore Trading Group \u2014 Joint Venture Agreement",
   "status": 0,
   "clientName": "Singapore Trading Group",
   "matterType": {
@@ -604,13 +692,31 @@
    "name": "Jessica Pearson"
   },
   "externalSystemId": "a0d2b864-39de-532e-b748-5455a61f8afc",
+  "origin": "Migrated",
   "openedDate": "2025-02-16T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
+ },
+ {
+  "id": "c736e12e-2db8-5886-81f7-20f9229daff2",
+  "number": "M-2025-0322",
+  "title": "Ganges Textile Exports \u2014 Defence of Statement of Claim",
+  "status": 2,
+  "clientName": "Ganges Textile Exports",
+  "matterType": {
+   "category": "Litigation"
+  },
+  "personResponsible": {
+   "name": "Rachel Zane"
+  },
+  "externalSystemId": "2d867c94-98f9-5151-9f3f-00b22bb807d9",
+  "origin": "Migrated",
+  "openedDate": "2025-02-19T00:00:00",
+  "lastUpdated": "2025-09-05T00:00:00"
  },
  {
   "id": "5fa249a0-c25b-5cd5-a235-354a1c506a9c",
   "number": "M-2025-0323",
-  "title": 38,
+  "title": "Acme Corp \u2014 Contract Dispute",
   "status": 1,
   "clientName": "Acme Corp",
   "matterType": {
@@ -620,13 +726,14 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "27ef8b11-1e4f-5a89-97f1-73d9d9ba3f8f",
+  "origin": "Migrated",
   "openedDate": "2025-02-19T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "6eded528-b2b1-58b1-b2aa-74aa61047a4e",
   "number": "M-2025-0324",
-  "title": 39,
+  "title": "Nova Materials \u2014 Infringement Notice",
   "status": 0,
   "clientName": "Nova Materials",
   "matterType": {
@@ -636,13 +743,14 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "ce1405f6-95e9-5752-9db3-c0271ef70f8f",
+  "origin": "Migrated",
   "openedDate": "2025-02-23T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "6f81d3fc-fbac-5a6a-adaf-64d36bc3fabc",
   "number": "M-2025-0325",
-  "title": 40,
+  "title": "Okafor Mining \u2014 Contract Dispute",
   "status": 0,
   "clientName": "Okafor Mining Co.",
   "matterType": {
@@ -652,13 +760,14 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "9862c1c5-7c08-5b9d-afb1-791c2c678a1c",
+  "origin": "Migrated",
   "openedDate": "2025-02-23T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "a09bfe38-6432-5251-92d4-1604afea8294",
   "number": "M-2025-0327",
-  "title": 41,
+  "title": "Zenith Labs Licensing Countersuit",
   "status": 0,
   "clientName": "Zenith Labs",
   "matterType": {
@@ -668,13 +777,14 @@
    "name": "Harvey Specter"
   },
   "externalSystemId": "8f5811c4-3131-556c-b1e7-0620b8298571",
+  "origin": "Migrated",
   "openedDate": "2025-02-27T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "34d7367f-93a9-509d-94f5-21339261b445",
   "number": "M-2025-0328",
-  "title": 42,
+  "title": "Blackwood Realty \u2014 Capital Raise",
   "status": 0,
   "clientName": "Blackwood Realty",
   "matterType": {
@@ -684,13 +794,14 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "7117420b-dcac-5a9f-b768-e4a61bfdde32",
+  "origin": "Migrated",
   "openedDate": "2025-02-28T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "9da8a77f-cc87-5bb2-96ac-8ce29321acaf",
   "number": "M-2025-0331",
-  "title": 43,
+  "title": "London Capital Partners \u2014 Lease Review",
   "status": 0,
   "clientName": "London Capital Partners",
   "matterType": {
@@ -700,13 +811,14 @@
    "name": "Harvey Specter"
   },
   "externalSystemId": "13e99467-e0b8-5b05-8bc0-cc48bc0736a4",
+  "origin": "Migrated",
   "openedDate": "2025-03-04T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "8e3dc6c2-c08b-5429-a459-c3dc9224cea6",
   "number": "M-2025-0332",
-  "title": 44,
+  "title": "Vertex Industries \u2014 Patent Portfolio Review",
   "status": 0,
   "clientName": "Vertex Industries",
   "matterType": {
@@ -716,13 +828,14 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "60dd40cb-5e33-513c-aac2-ddac1e20bec5",
+  "origin": "Migrated",
   "openedDate": "2025-03-06T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "7f606bc4-488a-5a7f-8124-a58d83ee987c",
   "number": "M-2025-0334",
-  "title": 45,
+  "title": "Vertex Industries \u2014 Trademark Registration",
   "status": 0,
   "clientName": "Vertex Industries",
   "matterType": {
@@ -732,13 +845,14 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "77dc7d51-eaed-56ed-8812-6af9c3f92abe",
+  "origin": "Migrated",
   "openedDate": "2025-03-12T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "45ed2a69-0078-5e9a-866e-6fbb49587d3c",
   "number": "M-2025-0336",
-  "title": 46,
+  "title": "Acme vs. Zenith Trial Brief Filing",
   "status": 0,
   "clientName": "Acme Corp",
   "matterType": {
@@ -748,13 +862,14 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "b0810833-8985-5c54-9683-16d070c77449",
+  "origin": "Migrated",
   "openedDate": "2025-03-14T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "58de4dc5-ad28-516b-a3cc-d588c0a200e7",
   "number": "M-2025-0338",
-  "title": 47,
+  "title": "Delacroix & Sons \u2014 Lease Review",
   "status": 0,
   "clientName": "Delacroix & Sons",
   "matterType": {
@@ -764,13 +879,14 @@
    "name": "Jessica Pearson"
   },
   "externalSystemId": "4c71ae34-2957-5f96-9c47-2cded046ad87",
+  "origin": "Migrated",
   "openedDate": "2025-03-16T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "9e0b5ae8-1a9d-5c42-8912-402eb8a17db9",
   "number": "M-2025-0340",
-  "title": 48,
+  "title": "Meridian Pacific Trust \u2014 Asset Purchase",
   "status": 0,
   "clientName": "Meridian Pacific Trust",
   "matterType": {
@@ -780,13 +896,14 @@
    "name": "Jessica Pearson"
   },
   "externalSystemId": "11ebd67d-73b7-59bd-9e91-696340e24567",
+  "origin": "Migrated",
   "openedDate": "2025-03-16T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "c75ed33c-a425-5a7c-9b22-d07c2f6bc849",
   "number": "M-2025-0343",
-  "title": 49,
+  "title": "Meridian Pacific Trust \u2014 Joint Venture Agreement",
   "status": 0,
   "clientName": "Meridian Pacific Trust",
   "matterType": {
@@ -796,13 +913,14 @@
    "name": "Jessica Pearson"
   },
   "externalSystemId": "aadb8d25-75a2-5a6d-8b64-b7434ae11cdf",
+  "origin": "Migrated",
   "openedDate": "2025-03-20T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "0b54d7db-956f-58e6-8579-4e604e4ac2e8",
   "number": "M-2025-0344",
-  "title": 50,
+  "title": "Okafor Mining Environmental Claim",
   "status": 0,
   "clientName": "Okafor Mining Co.",
   "matterType": {
@@ -812,13 +930,14 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "21b4949a-f90a-5695-b053-9b7b30f0383d",
+  "origin": "Migrated",
   "openedDate": "2025-03-28T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "ccb1684f-2a55-5742-90b7-b3fab65e2724",
   "number": "M-2025-0345",
-  "title": 51,
+  "title": "Meridian Holdings \u2014 Asset Purchase",
   "status": 0,
   "clientName": "Meridian Holdings Ltd.",
   "matterType": {
@@ -828,13 +947,14 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "75dcd2d7-feb9-578d-9393-822a64d22c54",
+  "origin": "Migrated",
   "openedDate": "2025-03-28T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "4e71d415-0229-5233-a983-d49e1a3e4e56",
   "number": "M-2025-0346",
-  "title": 52,
+  "title": "London Capital Partners \u2014 Asset Purchase",
   "status": 1,
   "clientName": "London Capital Partners",
   "matterType": {
@@ -844,13 +964,14 @@
    "name": "Donna Paulsen"
   },
   "externalSystemId": "36eea4ec-2bf5-5f7c-bae4-eff5cd2ce794",
+  "origin": "Migrated",
   "openedDate": "2025-03-28T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "22bb57f3-8a39-56fd-a48d-1581ec1500fe",
   "number": "M-2025-0347",
-  "title": 53,
+  "title": "Zenith Labs \u2014 Debt Recovery",
   "status": 0,
   "clientName": "Zenith Labs",
   "matterType": {
@@ -860,13 +981,14 @@
    "name": "Harvey Specter"
   },
   "externalSystemId": "9716435c-58ee-5ffb-8907-2479e368fd10",
+  "origin": "Migrated",
   "openedDate": "2025-03-29T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "d38ca9de-5b1c-503c-abed-e429efaa936a",
   "number": "M-2025-0349",
-  "title": 54,
+  "title": "Delacroix & Sons \u2014 Lease Review",
   "status": 0,
   "clientName": "Delacroix & Sons",
   "matterType": {
@@ -876,13 +998,14 @@
    "name": "Jessica Pearson"
   },
   "externalSystemId": "5955db9a-66e1-5500-944c-6763d1170d76",
+  "origin": "Migrated",
   "openedDate": "2025-04-02T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "cdcd24d3-7605-56f3-a760-7348d43d48d0",
   "number": "M-2025-0350",
-  "title": 55,
+  "title": "Acme Corp \u2014 Contract Dispute",
   "status": 0,
   "clientName": "Acme Corp",
   "matterType": {
@@ -892,13 +1015,14 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "d9c6d925-8869-52a0-8f14-33d16bed98bd",
+  "origin": "Migrated",
   "openedDate": "2025-04-06T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "3716ef6f-3367-538d-ba89-6a5d06d9fbda",
   "number": "M-2025-0352",
-  "title": 56,
+  "title": "Meridian Holdings Employee Share Scheme",
   "status": 1,
   "clientName": "Meridian Holdings Ltd.",
   "matterType": {
@@ -908,13 +1032,14 @@
    "name": "Clara Sterling"
   },
   "externalSystemId": "e6f02a70-30fc-5876-976f-99c5b896fbf2",
+  "origin": "Migrated",
   "openedDate": "2025-04-11T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "6bf85f55-fc50-50c0-9ad5-d52b4d55a062",
   "number": "M-2025-0354",
-  "title": 57,
+  "title": "Zenith Labs \u2014 Mediation",
   "status": 0,
   "clientName": "Zenith Labs",
   "matterType": {
@@ -924,13 +1049,14 @@
    "name": "Harvey Specter"
   },
   "externalSystemId": "6a2d584c-9cf8-541e-bc47-b5af0ebcd3f1",
+  "origin": "Migrated",
   "openedDate": "2025-04-15T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "67b41c58-ccf6-5ac3-b968-4473efb25da4",
   "number": "M-2025-0355",
-  "title": 58,
+  "title": "Vertex vs. Halcyon IP Infringement",
   "status": 0,
   "clientName": "Vertex Industries",
   "matterType": {
@@ -940,13 +1066,14 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "4ea40470-5dc4-5589-9a28-21c9781f1d2d",
+  "origin": "Migrated",
   "openedDate": "2025-04-16T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "706ba405-2200-510d-b637-6c6ce2152fcf",
   "number": "M-2025-0356",
-  "title": 59,
+  "title": "Vertex Industries \u2014 IP Assignment",
   "status": 0,
   "clientName": "Vertex Industries",
   "matterType": {
@@ -956,13 +1083,14 @@
    "name": "Clara Sterling"
   },
   "externalSystemId": "8bf8db21-f4f3-5e4d-a389-492a4a9f362e",
+  "origin": "Migrated",
   "openedDate": "2025-04-16T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "568d484a-c4cf-5e0c-9798-0309ef74eb44",
   "number": "M-2025-0357",
-  "title": 60,
+  "title": "Nippon Precision \u2014 Patent Portfolio Review",
   "status": 1,
   "clientName": "Nippon Precision Ltd",
   "matterType": {
@@ -972,13 +1100,14 @@
    "name": "Clara Sterling"
   },
   "externalSystemId": "d18758b7-6678-53aa-a0cf-2a44f066d3b0",
+  "origin": "Migrated",
   "openedDate": "2025-04-17T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "a7029c3c-e4e9-56b6-8d12-056187683dea",
   "number": "M-2025-0358",
-  "title": 61,
+  "title": "Okafor Mining \u2014 Contract Dispute",
   "status": 0,
   "clientName": "Okafor Mining Co.",
   "matterType": {
@@ -988,13 +1117,14 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "9c8e0be7-c90b-5c8f-b873-c328cba9a23d",
+  "origin": "Migrated",
   "openedDate": "2025-04-18T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "db05cb6b-92d5-5023-b692-65ec3e21c560",
   "number": "M-2025-0359",
-  "title": 62,
+  "title": "Harlow & \u2014 Unfair Dismissal Defence",
   "status": 0,
   "clientName": "Harlow & Co.",
   "matterType": {
@@ -1004,13 +1134,14 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "1c49eb31-1ebd-5dca-b927-03565da17ed3",
+  "origin": "Migrated",
   "openedDate": "2025-04-21T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "063cf889-10fc-5114-a75e-d0cb707f367e",
   "number": "M-2025-0362",
-  "title": 63,
+  "title": "Nippon Precision \u2014 Licensing Agreement",
   "status": 0,
   "clientName": "Nippon Precision Ltd",
   "matterType": {
@@ -1020,13 +1151,14 @@
    "name": "Donna Paulsen"
   },
   "externalSystemId": "7b1f592b-b1a5-5be6-aab0-0391beecdcdf",
+  "origin": "Migrated",
   "openedDate": "2025-04-27T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "61918ab2-65d7-51aa-b407-cd4091930274",
   "number": "M-2025-0363",
-  "title": 64,
+  "title": "Global Trust Bank \u2014 Asset Purchase",
   "status": 0,
   "clientName": "Global Trust Bank",
   "matterType": {
@@ -1036,13 +1168,14 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "5946c9b9-e00a-56be-a004-ec6c7a2365a1",
+  "origin": "Migrated",
   "openedDate": "2025-04-30T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "b02ae49d-44fa-5561-bfd4-821b35af3fad",
   "number": "M-2025-0364",
-  "title": 65,
+  "title": "Global Trust M&A Preliminary Hearing",
   "status": 0,
   "clientName": "Global Trust Bank",
   "matterType": {
@@ -1052,13 +1185,14 @@
    "name": "Harvey Specter"
   },
   "externalSystemId": "49b9f55c-1d54-5264-9f1f-64dbcf00c716",
+  "origin": "Migrated",
   "openedDate": "2025-05-02T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "418d9f5d-7408-575c-94b4-4598a037a08d",
   "number": "M-2025-0365",
-  "title": 66,
+  "title": "Okafor Mining \u2014 Mediation",
   "status": 0,
   "clientName": "Okafor Mining Co.",
   "matterType": {
@@ -1068,13 +1202,14 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "2ccf089b-ef20-55d3-b0dd-cade571615f0",
+  "origin": "Migrated",
   "openedDate": "2025-05-04T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "85033bde-4f82-5577-b10a-69b8cfe7c5d0",
   "number": "M-2025-0366",
-  "title": 67,
+  "title": "Hanwoo Precision \u2014 Patent Portfolio Review",
   "status": 0,
   "clientName": "Hanwoo Precision Ltd",
   "matterType": {
@@ -1084,13 +1219,14 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "8b57e952-91b4-5242-8095-f07d8cb93b9d",
+  "origin": "Migrated",
   "openedDate": "2025-05-08T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "b59112d8-38ad-5823-b5c5-2399f93e0f0d",
   "number": "M-2025-0367",
-  "title": 68,
+  "title": "Meridian Holdings \u2014 Share Sale Agreement",
   "status": 1,
   "clientName": "Meridian Holdings Ltd.",
   "matterType": {
@@ -1100,13 +1236,14 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "5282a58d-1bf2-530f-81cf-22ab9a7c42a3",
+  "origin": "Migrated",
   "openedDate": "2025-05-09T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "ae30b7cc-68a5-5548-b9b7-61e0f52130d3",
   "number": "M-2025-0368",
-  "title": 69,
+  "title": "Meridian Holdings \u2014 Share Sale Agreement",
   "status": 0,
   "clientName": "Meridian Holdings Ltd.",
   "matterType": {
@@ -1116,13 +1253,14 @@
    "name": "Clara Sterling"
   },
   "externalSystemId": "738fab59-c639-52fc-8e38-1ea0477beac1",
+  "origin": "Migrated",
   "openedDate": "2025-05-09T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "6e98af5c-4a71-57f7-a2c7-eb621abaa33f",
   "number": "M-2025-0369",
-  "title": 70,
+  "title": "Nova Materials \u2014 Patent Portfolio Review",
   "status": 0,
   "clientName": "Nova Materials",
   "matterType": {
@@ -1132,13 +1270,14 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "97935572-e8a2-55cf-b67d-8930d03bc756",
+  "origin": "Migrated",
   "openedDate": "2025-05-10T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "1de23563-c427-53c4-bf1e-ae6ffc3e9d5d",
   "number": "M-2025-0370",
-  "title": 71,
+  "title": "Whitmore Textiles \u2014 Infringement Notice",
   "status": 0,
   "clientName": "Whitmore Textiles",
   "matterType": {
@@ -1148,13 +1287,14 @@
    "name": "Katrina Bennett"
   },
   "externalSystemId": "6217c035-c2a1-5056-b1da-7f3743767dc6",
+  "origin": "Migrated",
   "openedDate": "2025-05-12T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "5e10da5e-775d-585d-925d-aafdcad027f1",
   "number": "M-2025-0371",
-  "title": 72,
+  "title": "Nova Materials \u2014 Trademark Registration",
   "status": 0,
   "clientName": "Nova Materials",
   "matterType": {
@@ -1164,13 +1304,14 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "0a6b7ad7-581b-5b0f-b7b4-0f016eba1287",
+  "origin": "Migrated",
   "openedDate": "2025-05-13T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "f2f0b3ca-0f5c-5e8e-bb35-f77e0bd1ee1c",
   "number": "M-2025-0372",
-  "title": 73,
+  "title": "Acme Corp \u2014 Defence of Statement of Claim",
   "status": 0,
   "clientName": "Acme Corp",
   "matterType": {
@@ -1180,13 +1321,14 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "4b39a75e-f1ec-5dce-a3d2-acd7b8def64c",
+  "origin": "Migrated",
   "openedDate": "2025-05-16T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "828de9c9-8bfe-5e24-b567-de7b8e6b13c1",
   "number": "M-2025-0373",
-  "title": 74,
+  "title": "London Capital Partners \u2014 Asset Purchase",
   "status": 0,
   "clientName": "London Capital Partners",
   "matterType": {
@@ -1196,13 +1338,31 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "29cda105-c5f9-5f66-87b6-31640d8167c9",
+  "origin": "Migrated",
   "openedDate": "2025-05-16T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
+ },
+ {
+  "id": "83b5daaa-50ad-5237-917e-b5f67fcd1d73",
+  "number": "M-2025-0374",
+  "title": "Singapore Trading Group \u2014 Lease Review",
+  "status": 2,
+  "clientName": "Singapore Trading Group",
+  "matterType": {
+   "category": "Corporate"
+  },
+  "personResponsible": {
+   "name": "Jessica Pearson"
+  },
+  "externalSystemId": "a85c3129-3566-5842-8ffb-11f43d5f56cc",
+  "origin": "Migrated",
+  "openedDate": "2025-05-16T00:00:00",
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "a818d808-e9cd-515c-bf73-7bc1893d2b35",
   "number": "M-2025-0375",
-  "title": 75,
+  "title": "Blackwood Realty Lease Restructure",
   "status": 0,
   "clientName": "Blackwood Realty",
   "matterType": {
@@ -1212,29 +1372,48 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "c766efcf-82a9-5f6c-bd42-690920359223",
+  "origin": "Migrated",
   "openedDate": "2025-05-19T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
+ },
+ {
+  "id": "e1bcd1d4-ad25-5202-bf6f-0cf63e113576",
+  "number": "M-2025-0376",
+  "title": "Bright Path Foundation \u2014 Structuring Advice",
+  "status": 2,
+  "clientName": "Bright Path Foundation",
+  "matterType": {
+   "category": "General"
+  },
+  "personResponsible": {
+   "name": "Clara Sterling"
+  },
+  "externalSystemId": "42daa6d1-2577-5f7e-b8d0-a0db05a3d7c2",
+  "origin": "Migrated",
+  "openedDate": "2025-05-22T00:00:00",
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "4923e787-8cc5-5084-bd4b-4dba9b3c0fec",
   "number": "M-2025-0377",
-  "title": 76,
+  "title": "Auckland Ventures \u2014 Regulatory Advice",
   "status": 0,
   "clientName": "Auckland Ventures Ltd",
   "matterType": {
-   "category": "Advisory"
+   "category": "General"
   },
   "personResponsible": {
    "name": "Clara Sterling"
   },
   "externalSystemId": "a8814f44-f147-5069-b45e-688d6f05b4e6",
+  "origin": "Migrated",
   "openedDate": "2025-05-22T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "6f4fee22-6098-52e4-8a7d-3fa871e21127",
   "number": "M-2025-0378",
-  "title": 77,
+  "title": "Hanwoo Precision \u2014 Licensing Agreement",
   "status": 1,
   "clientName": "Hanwoo Precision Ltd",
   "matterType": {
@@ -1244,29 +1423,31 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "0a6cb266-d3f4-5745-a512-d313306214ba",
+  "origin": "Migrated",
   "openedDate": "2025-05-25T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "edd0a922-dfed-54b3-814d-ec3a7e7bbbeb",
   "number": "M-2025-0379",
-  "title": 78,
+  "title": "Fentonville Council \u2014 Compliance Review",
   "status": 1,
   "clientName": "Fentonville Council",
   "matterType": {
-   "category": "Advisory"
+   "category": "General"
   },
   "personResponsible": {
    "name": "Donna Paulsen"
   },
   "externalSystemId": "3093b546-2f2d-5606-801a-3cf1f6fd56ec",
+  "origin": "Migrated",
   "openedDate": "2025-05-25T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "9acd071c-39bd-5741-98d2-14386fa40ff7",
   "number": "M-2025-0380",
-  "title": 79,
+  "title": "Pacific Rim Traders US Distribution Dispute",
   "status": 0,
   "clientName": "Pacific Rim Traders",
   "matterType": {
@@ -1276,13 +1457,14 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "3c0c764d-4f0b-5592-8407-7d84e291544a",
+  "origin": "Migrated",
   "openedDate": "2025-05-30T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "5bd1d2b8-8acd-5fe1-8f27-a435514d4ca4",
   "number": "M-2025-0381",
-  "title": 80,
+  "title": "Harlow & \u2014 Workplace Investigation",
   "status": 0,
   "clientName": "Harlow & Co.",
   "matterType": {
@@ -1292,13 +1474,14 @@
    "name": "Clara Sterling"
   },
   "externalSystemId": "70685ec0-bb7e-52fa-afa3-a01ec13426df",
+  "origin": "Migrated",
   "openedDate": "2025-05-31T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "db4bac4e-e68d-5e16-ad8c-852893a8aac9",
   "number": "M-2025-0382",
-  "title": 81,
+  "title": "Nippon Precision \u2014 Trademark Registration",
   "status": 0,
   "clientName": "Nippon Precision Ltd",
   "matterType": {
@@ -1308,13 +1491,14 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "5a1f6585-8f97-5d8c-a5d4-fc6216ef9a11",
+  "origin": "Migrated",
   "openedDate": "2025-06-01T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "eb2444ce-1e4e-59bb-89df-18740ef7979c",
   "number": "M-2025-0383",
-  "title": 82,
+  "title": "Sunrise Logistics Award Compliance Review",
   "status": 0,
   "clientName": "Sunrise Logistics",
   "matterType": {
@@ -1324,13 +1508,14 @@
    "name": "Katrina Bennett"
   },
   "externalSystemId": "0e37227c-68c7-599c-bbeb-147847840664",
+  "origin": "Migrated",
   "openedDate": "2025-06-02T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "9fcba071-a7a5-5b71-b2b3-a25eed16848d",
   "number": "M-2025-0384",
-  "title": 83,
+  "title": "Acme Corp \u2014 Injunction Application",
   "status": 0,
   "clientName": "Acme Corp",
   "matterType": {
@@ -1340,13 +1525,14 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "8955a454-353a-5bf3-8f5c-8b51dec7f705",
+  "origin": "Migrated",
   "openedDate": "2025-06-02T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "f685cec9-83d2-5ff7-a43e-044147143c6b",
   "number": "M-2025-0385",
-  "title": 84,
+  "title": "Vertex Industries \u2014 Patent Portfolio Review",
   "status": 0,
   "clientName": "Vertex Industries",
   "matterType": {
@@ -1356,13 +1542,14 @@
    "name": "Donna Paulsen"
   },
   "externalSystemId": "c9a7c6e3-ce9a-51be-bb64-5d25dfeb7551",
+  "origin": "Migrated",
   "openedDate": "2025-06-02T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "9b4a503e-1022-5814-a397-b7bf85cb05d6",
   "number": "M-2025-0386",
-  "title": 85,
+  "title": "Ganges Textile Exports \u2014 Contract Dispute",
   "status": 0,
   "clientName": "Ganges Textile Exports",
   "matterType": {
@@ -1372,29 +1559,31 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "b0f24d7b-6c6b-511e-9ca4-83882d4edbe7",
+  "origin": "Migrated",
   "openedDate": "2025-06-05T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "d23485dc-1d52-5d0a-a134-72a03434adf2",
   "number": "M-2025-0387",
-  "title": 86,
+  "title": "Auckland Ventures \u2014 Compliance Review",
   "status": 0,
   "clientName": "Auckland Ventures Ltd",
   "matterType": {
-   "category": "Advisory"
+   "category": "General"
   },
   "personResponsible": {
    "name": "Clara Sterling"
   },
   "externalSystemId": "931f34b9-fb1f-5017-a5ee-2bdc21cbea70",
+  "origin": "Migrated",
   "openedDate": "2025-06-08T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "b8efecd9-201a-5e15-88e1-eb896e84a531",
   "number": "M-2025-0388",
-  "title": 87,
+  "title": "Meridian Pacific Trust \u2014 Share Sale Agreement",
   "status": 0,
   "clientName": "Meridian Pacific Trust",
   "matterType": {
@@ -1404,13 +1593,31 @@
    "name": "Jessica Pearson"
   },
   "externalSystemId": "4bbf028c-fe24-558e-aa6c-1a3594c215d3",
+  "origin": "Migrated",
   "openedDate": "2025-06-09T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
+ },
+ {
+  "id": "ea718970-2343-5737-8dfd-1b6cc9caace2",
+  "number": "M-2025-0389",
+  "title": "Bright Path Foundation \u2014 Compliance Review",
+  "status": 2,
+  "clientName": "Bright Path Foundation",
+  "matterType": {
+   "category": "General"
+  },
+  "personResponsible": {
+   "name": "Katrina Bennett"
+  },
+  "externalSystemId": "b4e81062-220a-5e1f-8c38-6f84137652f1",
+  "origin": "Migrated",
+  "openedDate": "2025-06-09T00:00:00",
+  "lastUpdated": "2025-09-14T00:00:00"
  },
  {
   "id": "a93c18d7-94a0-551c-a0a2-92048b524f60",
   "number": "M-2025-0390",
-  "title": 88,
+  "title": "Acme Corp \u2014 Injunction Application",
   "status": 0,
   "clientName": "Acme Corp",
   "matterType": {
@@ -1420,13 +1627,14 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "0b7d08c0-825a-531d-8db1-a82e310809b1",
+  "origin": "Migrated",
   "openedDate": "2025-06-09T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "d489adae-4798-5678-90bc-25841a6b9f51",
   "number": "M-2025-0391",
-  "title": 89,
+  "title": "Vertex Patent Portfolio Review",
   "status": 0,
   "clientName": "Vertex Industries",
   "matterType": {
@@ -1436,13 +1644,14 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "c985beac-34eb-5baf-ad62-193c73c1b383",
+  "origin": "Migrated",
   "openedDate": "2025-06-11T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "ddeffd09-54f7-5111-8db6-2026f340fb76",
   "number": "M-2025-0392",
-  "title": 90,
+  "title": "Singapore Trading Group \u2014 Joint Venture Agreement",
   "status": 0,
   "clientName": "Singapore Trading Group",
   "matterType": {
@@ -1452,13 +1661,14 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "c0507bf4-cd14-5b58-9271-2b51f2b61266",
+  "origin": "Migrated",
   "openedDate": "2025-06-11T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "259f4189-74f2-5f1e-8fbe-7f1bfd4fdc16",
   "number": "M-2025-0393",
-  "title": 91,
+  "title": "Singapore Trading Group Cross-Border Supply Agreement",
   "status": 0,
   "clientName": "Singapore Trading Group",
   "matterType": {
@@ -1468,13 +1678,14 @@
    "name": "Jessica Pearson"
   },
   "externalSystemId": "9f1bd236-cff7-5711-a925-ec2e10cfe1f7",
+  "origin": "Migrated",
   "openedDate": "2025-06-15T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "46165fc5-095c-5c9d-8a5c-426379773bd4",
   "number": "M-2025-0394",
-  "title": 92,
+  "title": "Ganges Textile Exports Contract Dispute",
   "status": 0,
   "clientName": "Ganges Textile Exports",
   "matterType": {
@@ -1484,13 +1695,14 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "6b65e369-c97b-50d6-9db6-f62f1ddcc8dc",
+  "origin": "Migrated",
   "openedDate": "2025-06-20T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "a4e9e8e9-4e92-5950-8c2d-8ce2e31b4318",
   "number": "M-2025-0395",
-  "title": 93,
+  "title": "Meridian Holdings \u2014 Shareholders' Agreement Review",
   "status": 0,
   "clientName": "Meridian Holdings Ltd.",
   "matterType": {
@@ -1500,13 +1712,14 @@
    "name": "Clara Sterling"
   },
   "externalSystemId": "f9046203-3f11-5d24-8762-79608198fe4e",
+  "origin": "Migrated",
   "openedDate": "2025-06-22T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "819ec93a-d467-5e60-ab50-4199a7dfc9f3",
   "number": "M-2025-0396",
-  "title": 94,
+  "title": "Nova Materials \u2014 Opposition Response",
   "status": 0,
   "clientName": "Nova Materials",
   "matterType": {
@@ -1516,13 +1729,14 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "bd1e8dbf-56a8-587a-9f7e-66f73bea0633",
+  "origin": "Migrated",
   "openedDate": "2025-06-27T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "91e84fc9-b18d-5b28-8215-923f2e183b0b",
   "number": "M-2025-0397",
-  "title": 95,
+  "title": "Ganges Textile Exports \u2014 Injunction Application",
   "status": 1,
   "clientName": "Ganges Textile Exports",
   "matterType": {
@@ -1532,13 +1746,14 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "185c2cad-a210-5776-ab29-3479eddbd605",
+  "origin": "Migrated",
   "openedDate": "2025-06-28T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "0b004169-c946-5ac2-8685-e00f4ac428cf",
   "number": "M-2025-0398",
-  "title": 96,
+  "title": "Zenith Labs \u2014 Contract Dispute",
   "status": 0,
   "clientName": "Zenith Labs",
   "matterType": {
@@ -1548,45 +1763,48 @@
    "name": "Harvey Specter"
   },
   "externalSystemId": "851452d7-359c-5de6-8ce2-c55ea12b6a1b",
+  "origin": "Migrated",
   "openedDate": "2025-06-29T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "884531b2-7cb4-5029-a854-bcce3b99df51",
   "number": "M-2025-0400",
-  "title": 97,
+  "title": "Bright Path Governance Advisory",
   "status": 0,
   "clientName": "Bright Path Foundation",
   "matterType": {
-   "category": "Advisory"
+   "category": "General"
   },
   "personResponsible": {
    "name": "Clara Sterling"
   },
   "externalSystemId": "7393a4b4-6cac-5233-8240-fb5a2e180438",
+  "origin": "Migrated",
   "openedDate": "2025-07-01T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "1a8175bf-3116-50a1-89d5-dc88ac92fa68",
   "number": "M-2025-0401",
-  "title": 98,
+  "title": "Auckland Ventures NZ Market Entry Advisory",
   "status": 0,
   "clientName": "Auckland Ventures Ltd",
   "matterType": {
-   "category": "Advisory"
+   "category": "General"
   },
   "personResponsible": {
    "name": "Clara Sterling"
   },
   "externalSystemId": "59bfbdc3-ff17-516d-8bca-9cbdac356cb7",
+  "origin": "Migrated",
   "openedDate": "2025-07-08T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "01685bbe-491d-5034-9222-2cdd71544616",
   "number": "M-2025-0402",
-  "title": 99,
+  "title": "Pacific Rim Traders \u2014 Injunction Application",
   "status": 0,
   "clientName": "Pacific Rim Traders",
   "matterType": {
@@ -1596,13 +1814,14 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "f9930d27-c4ee-56f9-8394-c516c15c8d36",
+  "origin": "Migrated",
   "openedDate": "2025-07-11T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "f38bc4ea-75bc-5ffd-966d-81833b28c91e",
   "number": "M-2025-0403",
-  "title": 100,
+  "title": "Meridian Holdings \u2014 Asset Purchase",
   "status": 0,
   "clientName": "Meridian Holdings Ltd.",
   "matterType": {
@@ -1612,13 +1831,14 @@
    "name": "Clara Sterling"
   },
   "externalSystemId": "affc68d8-bc20-5ea5-a210-3ebd4ed7aa7d",
+  "origin": "Migrated",
   "openedDate": "2025-07-14T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "2b936f1e-c8a6-5dd0-916e-da1df620b618",
   "number": "M-2025-0404",
-  "title": 101,
+  "title": "Singapore Trading Group \u2014 Capital Raise",
   "status": 0,
   "clientName": "Singapore Trading Group",
   "matterType": {
@@ -1628,29 +1848,31 @@
    "name": "Jessica Pearson"
   },
   "externalSystemId": "ee4f2d29-d305-50e8-84ea-d8dd8b713efd",
+  "origin": "Migrated",
   "openedDate": "2025-07-14T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "2c8d1386-8071-5730-8a1d-992a6be64294",
   "number": "M-2025-0405",
-  "title": 102,
+  "title": "Fentonville Council Planning Advisory",
   "status": 0,
   "clientName": "Fentonville Council",
   "matterType": {
-   "category": "Advisory"
+   "category": "General"
   },
   "personResponsible": {
    "name": "Donna Paulsen"
   },
   "externalSystemId": "b83a5753-da2d-52d9-afc3-bc6d28309519",
+  "origin": "Migrated",
   "openedDate": "2025-07-15T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "495b4ed9-272f-5892-897f-30f0aa5403e6",
   "number": "M-2025-0406",
-  "title": 103,
+  "title": "Global Trust Bank \u2014 Joint Venture Agreement",
   "status": 0,
   "clientName": "Global Trust Bank",
   "matterType": {
@@ -1660,13 +1882,14 @@
    "name": "Harvey Specter"
   },
   "externalSystemId": "503047c4-0cf6-5a6a-aad3-3667c4ca04b8",
+  "origin": "Migrated",
   "openedDate": "2025-07-16T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "2623d2c0-b038-5602-8032-e0251cbed4ec",
   "number": "M-2025-0407",
-  "title": 104,
+  "title": "Halcyon Systems \u2014 Infringement Notice",
   "status": 0,
   "clientName": "Halcyon Systems",
   "matterType": {
@@ -1676,13 +1899,14 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "8fd3fa44-3208-5cc3-9435-98a73b8265f6",
+  "origin": "Migrated",
   "openedDate": "2025-07-16T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "420efe3f-6ad6-5c28-a4b8-7b3228176ad3",
   "number": "M-2025-0408",
-  "title": 105,
+  "title": "Harlow & \u2014 Award Compliance Review",
   "status": 0,
   "clientName": "Harlow & Co.",
   "matterType": {
@@ -1692,13 +1916,14 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "0fe95abb-77b0-5860-829a-d3cbd9bf47c2",
+  "origin": "Migrated",
   "openedDate": "2025-07-17T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "dcd244a8-819e-53f7-be80-d78241d09a9e",
   "number": "M-2025-0409",
-  "title": 106,
+  "title": "Pacific Rim Traders \u2014 Injunction Application",
   "status": 0,
   "clientName": "Pacific Rim Traders",
   "matterType": {
@@ -1708,29 +1933,31 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "f9c07828-d496-5922-9c83-57715105a770",
+  "origin": "Migrated",
   "openedDate": "2025-07-18T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "f18a8db0-4c53-590e-aa99-20af47eb3b8c",
   "number": "M-2025-0410",
-  "title": 107,
+  "title": "Auckland Ventures \u2014 Board Advisory",
   "status": 0,
   "clientName": "Auckland Ventures Ltd",
   "matterType": {
-   "category": "Advisory"
+   "category": "General"
   },
   "personResponsible": {
    "name": "Katrina Bennett"
   },
   "externalSystemId": "bfcdeec9-d7b4-5521-a576-536ce535ddaa",
+  "origin": "Migrated",
   "openedDate": "2025-07-18T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "7ff4d041-214c-5e7b-af66-0e32468416a9",
   "number": "M-2025-0411",
-  "title": 108,
+  "title": "Sunrise Logistics \u2014 Unfair Dismissal Defence",
   "status": 1,
   "clientName": "Sunrise Logistics",
   "matterType": {
@@ -1740,13 +1967,14 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "aaacd7b6-cdbc-5683-84d7-06ed4266cc7b",
+  "origin": "Migrated",
   "openedDate": "2025-07-19T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "03166b9c-3c2c-5998-85db-8307e87e071b",
   "number": "M-2025-0413",
-  "title": 109,
+  "title": "Nova Materials Supply Contract Review",
   "status": 0,
   "clientName": "Nova Materials",
   "matterType": {
@@ -1756,13 +1984,14 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "b3f172ae-b943-5942-9b28-92057d79365b",
+  "origin": "Migrated",
   "openedDate": "2025-07-22T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "a3b1a4b1-d476-5016-8ee5-fb1cb2b88f26",
   "number": "M-2025-0414",
-  "title": 110,
+  "title": "Nova Materials \u2014 Patent Portfolio Review",
   "status": 0,
   "clientName": "Nova Materials",
   "matterType": {
@@ -1772,13 +2001,14 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "85d746b8-5f50-53df-b304-b68124daa1dd",
+  "origin": "Migrated",
   "openedDate": "2025-07-22T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "1e60ebf0-875b-550b-bfe2-52887f4b6b8b",
   "number": "M-2025-0415",
-  "title": 111,
+  "title": "Ganges Textile Exports \u2014 Contract Dispute",
   "status": 0,
   "clientName": "Ganges Textile Exports",
   "matterType": {
@@ -1788,13 +2018,14 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "12e051eb-7f4e-50a0-a6c5-8c9222f6dd95",
+  "origin": "Migrated",
   "openedDate": "2025-07-22T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "b121b7b6-6e48-582b-95de-50e011ae409d",
   "number": "M-2025-0416",
-  "title": 112,
+  "title": "Hanwoo Precision Trademark Registration",
   "status": 1,
   "clientName": "Hanwoo Precision Ltd",
   "matterType": {
@@ -1804,29 +2035,31 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "8f532f2c-6950-52ac-a8ec-9a73dd8a957a",
+  "origin": "Migrated",
   "openedDate": "2025-07-30T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "df19331b-3b45-5df3-80f9-f86318ca4f70",
   "number": "M-2025-0417",
-  "title": 113,
+  "title": "Bright Path Foundation \u2014 Board Advisory",
   "status": 0,
   "clientName": "Bright Path Foundation",
   "matterType": {
-   "category": "Advisory"
+   "category": "General"
   },
   "personResponsible": {
    "name": "Clara Sterling"
   },
   "externalSystemId": "95eaaa36-7ef4-556d-bb78-e975bc4e0e9f",
+  "origin": "Migrated",
   "openedDate": "2025-08-02T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "07371c00-a7a8-5b36-ba5e-aa14524a7808",
   "number": "M-2025-0418",
-  "title": 114,
+  "title": "Delacroix Group Acquisition",
   "status": 0,
   "clientName": "Delacroix & Sons",
   "matterType": {
@@ -1836,13 +2069,14 @@
    "name": "Jessica Pearson"
   },
   "externalSystemId": "37f0779c-8adb-5a47-a41d-f12786e1ece7",
+  "origin": "Migrated",
   "openedDate": "2025-08-04T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "75e16159-a6ce-5830-9d89-d644fd558ce7",
   "number": "M-2025-0419",
-  "title": 115,
+  "title": "Harlow & \u2014 Employment Contracts",
   "status": 0,
   "clientName": "Harlow & Co.",
   "matterType": {
@@ -1852,13 +2086,14 @@
    "name": "Clara Sterling"
   },
   "externalSystemId": "28db46db-7df5-5b57-b921-b956fd1e9c69",
+  "origin": "Migrated",
   "openedDate": "2025-08-04T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "da68a21a-b034-5429-89b3-3236acaf6296",
   "number": "M-2025-0420",
-  "title": 116,
+  "title": "Halcyon Systems \u2014 Infringement Notice",
   "status": 0,
   "clientName": "Halcyon Systems",
   "matterType": {
@@ -1868,13 +2103,14 @@
    "name": "Louis Litt"
   },
   "externalSystemId": "9d4db924-5be8-5688-8076-6e495160f142",
+  "origin": "Migrated",
   "openedDate": "2025-08-06T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "fa097e46-2a10-56ab-b278-1b3ad49e71f3",
   "number": "M-2025-0421",
-  "title": 117,
+  "title": "Meridian Holdings \u2014 Due Diligence",
   "status": 0,
   "clientName": "Meridian Holdings Ltd.",
   "matterType": {
@@ -1884,13 +2120,14 @@
    "name": "Clara Sterling"
   },
   "externalSystemId": "d2b222ee-334e-55f2-bb1a-81f0b37f91b8",
+  "origin": "Migrated",
   "openedDate": "2025-08-08T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "02d1b819-0c9b-5438-97f6-e50eadd01852",
   "number": "M-2025-0422",
-  "title": 118,
+  "title": "London Capital Partners Fund Structuring",
   "status": 0,
   "clientName": "London Capital Partners",
   "matterType": {
@@ -1900,13 +2137,14 @@
    "name": "Harvey Specter"
   },
   "externalSystemId": "1d9640b9-0673-530e-b2ec-0bf746fd9a9e",
+  "origin": "Migrated",
   "openedDate": "2025-08-12T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "51e26cb4-5f56-5a80-b9ea-35c2707ad8cd",
   "number": "M-2025-0423",
-  "title": 119,
+  "title": "London Capital Partners \u2014 Capital Raise",
   "status": 0,
   "clientName": "London Capital Partners",
   "matterType": {
@@ -1916,29 +2154,31 @@
    "name": "Harvey Specter"
   },
   "externalSystemId": "2cf681bc-7fdc-5824-bef4-f4bde7228635",
+  "origin": "Migrated",
   "openedDate": "2025-08-13T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "d28c021e-eb17-5b15-9a8e-7326e26b930b",
   "number": "M-2025-0424",
-  "title": 120,
+  "title": "Bright Path Foundation \u2014 Board Advisory",
   "status": 0,
   "clientName": "Bright Path Foundation",
   "matterType": {
-   "category": "Advisory"
+   "category": "General"
   },
   "personResponsible": {
    "name": "Clara Sterling"
   },
   "externalSystemId": "7df3b31f-f4c9-5680-a318-afcbb43f6f3a",
+  "origin": "Migrated",
   "openedDate": "2025-08-17T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "e88f74fa-1dd8-574a-afa6-a075ce70fc10",
   "number": "M-2025-0425",
-  "title": 121,
+  "title": "Harlow & \u2014 Workplace Investigation",
   "status": 0,
   "clientName": "Harlow & Co.",
   "matterType": {
@@ -1948,13 +2188,14 @@
    "name": "Mike Ross"
   },
   "externalSystemId": "73195775-379f-51ef-b296-52d41828e1c1",
+  "origin": "Migrated",
   "openedDate": "2025-08-19T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "83125748-51f4-535e-85b1-b19cf7724133",
   "number": "M-2025-0426",
-  "title": 122,
+  "title": "Acme Corp Data Breach Response",
   "status": 0,
   "clientName": "Acme Corp",
   "matterType": {
@@ -1964,13 +2205,14 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "57eb0fee-a8dd-5a03-9a2b-13221eea21bc",
+  "origin": "Migrated",
   "openedDate": "2025-08-20T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "260780d6-63f3-57a4-b013-162469fb1eca",
   "number": "M-2025-0427",
-  "title": 123,
+  "title": "Singapore Trading Group \u2014 Due Diligence",
   "status": 1,
   "clientName": "Singapore Trading Group",
   "matterType": {
@@ -1980,13 +2222,14 @@
    "name": "Jessica Pearson"
   },
   "externalSystemId": "1517d1b0-68f8-5d68-a21d-c6b8c925f804",
+  "origin": "Migrated",
   "openedDate": "2025-08-23T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "2415c337-7b23-599a-b48f-1dcf474f100e",
   "number": "M-2025-0428",
-  "title": 124,
+  "title": "Meridian Pacific Trust Structuring",
   "status": 0,
   "clientName": "Meridian Pacific Trust",
   "matterType": {
@@ -1996,13 +2239,14 @@
    "name": "Jessica Pearson"
   },
   "externalSystemId": "391f1a3a-91d5-577c-b64a-c7df3a5a2c6c",
+  "origin": "Migrated",
   "openedDate": "2025-08-25T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "351b7614-c14c-5ed4-8908-2d8445604ec7",
   "number": "M-2025-0429",
-  "title": 125,
+  "title": "Harlow & \u2014 Award Compliance Review",
   "status": 0,
   "clientName": "Harlow & Co.",
   "matterType": {
@@ -2012,13 +2256,14 @@
    "name": "Rachel Zane"
   },
   "externalSystemId": "4a8dba87-a89f-5af8-8d93-208fd306df93",
+  "origin": "Migrated",
   "openedDate": "2025-08-28T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
   "id": "0cd24403-9741-5723-bc42-b0806ee5b49e",
   "number": "M-2025-0430",
-  "title": 126,
+  "title": "Hanwoo Precision \u2014 IP Assignment",
   "status": 0,
   "clientName": "Hanwoo Precision Ltd",
   "matterType": {
@@ -2028,13 +2273,14 @@
    "name": "Clara Sterling"
   },
   "externalSystemId": "b0f5f9bd-2a02-5fce-994f-cb8b024c18f7",
+  "origin": "Migrated",
   "openedDate": "2025-08-28T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
-  "id": "eb79de8c-68bd-551a-8c0f-aeedc9a75497",
+  "id": "f39de4fc-895c-580f-95c4-2a308ab48c0a",
   "number": "M-2025-0431",
-  "title": 127,
+  "title": "Blackwood Realty \u2014 Joint Venture Agreement",
   "status": 0,
   "clientName": "Blackwood Realty",
   "matterType": {
@@ -2043,14 +2289,15 @@
   "personResponsible": {
    "name": "Jessica Pearson"
   },
-  "externalSystemId": "cbf772a8-f155-50cf-8ba4-2f179eb6cf63",
+  "externalSystemId": null,
+  "origin": "Created in triConvey",
   "openedDate": "2025-08-30T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
-  "id": "1988903e-2aa2-5f4a-9c70-42fdda6a2fd9",
+  "id": "5040e793-79c0-5c8b-9cad-db7558010197",
   "number": "M-2025-0432",
-  "title": 128,
+  "title": "Global Trust Bank Regulatory Investigation",
   "status": 0,
   "clientName": "Global Trust Bank",
   "matterType": {
@@ -2059,14 +2306,15 @@
   "personResponsible": {
    "name": "Harvey Specter"
   },
-  "externalSystemId": "3b8b4b4e-6936-5f9c-bade-fb138b5be2c4",
+  "externalSystemId": null,
+  "origin": "Created in triConvey",
   "openedDate": "2025-09-01T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
-  "id": "84a76f28-8352-56a1-a1ab-cc7a2ae5a0dd",
+  "id": "de41387c-d7db-5b1a-9ad3-f0ce2b9be6cd",
   "number": "M-2025-0433",
-  "title": 129,
+  "title": "Global Trust Bank \u2014 Joint Venture Agreement",
   "status": 0,
   "clientName": "Global Trust Bank",
   "matterType": {
@@ -2075,14 +2323,15 @@
   "personResponsible": {
    "name": "Harvey Specter"
   },
-  "externalSystemId": "b0a080d3-211d-5c32-9f41-cfaefc71de4f",
+  "externalSystemId": null,
+  "origin": "Created in triConvey",
   "openedDate": "2025-09-01T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
-  "id": "b213ce1c-06dc-58d3-809f-4d2577dee00b",
+  "id": "5b1cbf86-cf72-53a5-b57f-ed3bc053bff4",
   "number": "M-2025-0434",
-  "title": 130,
+  "title": "Nippon Precision IP Licensing",
   "status": 0,
   "clientName": "Nippon Precision Ltd",
   "matterType": {
@@ -2091,14 +2340,15 @@
   "personResponsible": {
    "name": "Louis Litt"
   },
-  "externalSystemId": "8fbc19ce-6686-51a9-8f6a-c2a71866be48",
+  "externalSystemId": null,
+  "origin": "Created in triConvey",
   "openedDate": "2025-09-02T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-02T00:00:00"
  },
  {
-  "id": "4886f02d-6db8-5fd3-8579-e6c051f86006",
+  "id": "066e760b-40d5-57bc-a52b-6dcca81a7ec8",
   "number": "M-2025-0435",
-  "title": 131,
+  "title": "Halcyon Systems \u2014 Infringement Notice",
   "status": 0,
   "clientName": "Halcyon Systems",
   "matterType": {
@@ -2107,14 +2357,15 @@
   "personResponsible": {
    "name": "Louis Litt"
   },
-  "externalSystemId": "87169beb-a264-590b-91fe-a5b5adab3313",
+  "externalSystemId": null,
+  "origin": "Created in triConvey",
   "openedDate": "2025-09-03T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-03T00:00:00"
  },
  {
-  "id": "7e31c640-08d2-5977-af93-fabd3089ea83",
+  "id": "70b42b78-4af6-55fa-84b4-546951dbcad5",
   "number": "M-2025-0436",
-  "title": 132,
+  "title": "Bright Path Foundation \u2014 Regulatory Advice",
   "status": 0,
   "clientName": "Bright Path Foundation",
   "matterType": {
@@ -2123,14 +2374,15 @@
   "personResponsible": {
    "name": "Clara Sterling"
   },
-  "externalSystemId": "7c2dd45a-68d6-57f4-80e3-5659b80ea883",
+  "externalSystemId": null,
+  "origin": "Created in triConvey",
   "openedDate": "2025-09-04T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-04T00:00:00"
  },
  {
-  "id": "93cc2df4-aed1-5299-b311-31584573fa08",
+  "id": "e109950f-dcd7-5d3d-89fb-1385c23b449b",
   "number": "M-2025-0437",
-  "title": 133,
+  "title": "Hanwoo Precision \u2014 Patent Portfolio Review",
   "status": 0,
   "clientName": "Hanwoo Precision Ltd",
   "matterType": {
@@ -2139,14 +2391,15 @@
   "personResponsible": {
    "name": "Clara Sterling"
   },
-  "externalSystemId": "ed8260bc-dd68-5aac-af03-186698f4a149",
+  "externalSystemId": null,
+  "origin": "Created in triConvey",
   "openedDate": "2025-09-08T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-08T00:00:00"
  },
  {
-  "id": "603c88fd-1967-51f6-9fb8-608ae129cfd7",
+  "id": "9d3e4baf-2122-5e8f-808f-c5a197242a1e",
   "number": "M-2025-0438",
-  "title": 134,
+  "title": "Bright Path Foundation Charity Structuring",
   "status": 0,
   "clientName": "Bright Path Foundation",
   "matterType": {
@@ -2155,14 +2408,15 @@
   "personResponsible": {
    "name": "Clara Sterling"
   },
-  "externalSystemId": "c76908b6-3b07-5c1e-a056-3608f73c9a57",
+  "externalSystemId": null,
+  "origin": "Created in triConvey",
   "openedDate": "2025-09-10T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-10T00:00:00"
  },
  {
-  "id": "3feb6648-4329-5dd0-8654-8b2cafd524bd",
+  "id": "07778153-ec53-5368-b1fc-093825550123",
   "number": "M-2025-0439",
-  "title": 135,
+  "title": "Fentonville Council \u2014 Governance Advisory",
   "status": 0,
   "clientName": "Fentonville Council",
   "matterType": {
@@ -2171,14 +2425,15 @@
   "personResponsible": {
    "name": "Harvey Specter"
   },
-  "externalSystemId": "6526a5f5-10a5-5341-85f2-82b496762dcb",
+  "externalSystemId": null,
+  "origin": "Created in triConvey",
   "openedDate": "2025-09-11T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-11T00:00:00"
  },
  {
-  "id": "a3f0e103-a187-5d03-adcc-aa034e6f1f1e",
+  "id": "2956c501-1927-5e5c-9d74-d6cdea35854a",
   "number": "M-2025-0440",
-  "title": 136,
+  "title": "Nippon Precision \u2014 Opposition Response",
   "status": 1,
   "clientName": "Nippon Precision Ltd",
   "matterType": {
@@ -2187,14 +2442,15 @@
   "personResponsible": {
    "name": "Louis Litt"
   },
-  "externalSystemId": "ab0a8f7e-3007-57d3-921d-5470a60865b6",
+  "externalSystemId": null,
+  "origin": "Created in triConvey",
   "openedDate": "2025-09-12T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-12T00:00:00"
  },
  {
-  "id": "78d355e4-d43a-518d-9713-2def7da158ec",
+  "id": "a9231f13-afba-5897-be82-0639d3a06afa",
   "number": "M-2025-0441",
-  "title": 137,
+  "title": "Delacroix & Sons \u2014 Due Diligence",
   "status": 0,
   "clientName": "Delacroix & Sons",
   "matterType": {
@@ -2203,14 +2459,15 @@
   "personResponsible": {
    "name": "Jessica Pearson"
   },
-  "externalSystemId": "6b1fa7a1-e992-597b-bc9b-d91155f2fd5c",
+  "externalSystemId": null,
+  "origin": "Created in triConvey",
   "openedDate": "2025-09-12T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-12T00:00:00"
  },
  {
-  "id": "3f412827-d476-5c37-982d-0cad4fa3b9d1",
+  "id": "148c0861-2061-5bae-b639-e812e9028859",
   "number": "M-2025-0442",
-  "title": 138,
+  "title": "Auckland Ventures \u2014 Structuring Advice",
   "status": 0,
   "clientName": "Auckland Ventures Ltd",
   "matterType": {
@@ -2219,14 +2476,15 @@
   "personResponsible": {
    "name": "Clara Sterling"
   },
-  "externalSystemId": "1eca5b33-92cf-5297-8353-36e0395b3dd6",
+  "externalSystemId": null,
+  "origin": "Created in triConvey",
   "openedDate": "2025-09-12T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-12T00:00:00"
  },
  {
-  "id": "af058f0f-9580-58d1-963b-78c8e3590495",
+  "id": "0d464774-1e73-5cd5-9290-28312dd17ca0",
   "number": "M-2025-0443",
-  "title": 139,
+  "title": "Nova Materials \u2014 Patent Portfolio Review",
   "status": 0,
   "clientName": "Nova Materials",
   "matterType": {
@@ -2235,14 +2493,15 @@
   "personResponsible": {
    "name": "Louis Litt"
   },
-  "externalSystemId": "aefeaa6f-f5ce-548a-85f4-f51d8711247a",
+  "externalSystemId": null,
+  "origin": "Created in triConvey",
   "openedDate": "2025-09-13T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-13T00:00:00"
  },
  {
-  "id": "f0c2841a-6e89-5dd1-9d3b-e9aa6b1fbd45",
+  "id": "62aba81a-4e83-58c8-8615-88e329e9de15",
   "number": "M-2025-0444",
-  "title": 140,
+  "title": "Blackwood Realty \u2014 Share Sale Agreement",
   "status": 0,
   "clientName": "Blackwood Realty",
   "matterType": {
@@ -2251,14 +2510,15 @@
   "personResponsible": {
    "name": "Mike Ross"
   },
-  "externalSystemId": "6d7686ec-4ac5-5da9-b8e8-a8f6756aae47",
+  "externalSystemId": null,
+  "origin": "Created in triConvey",
   "openedDate": "2025-09-15T00:00:00",
-  "lastUpdated": "2025-09-17T00:00:00"
+  "lastUpdated": "2025-09-15T00:00:00"
  },
  {
-  "id": "91536253-4a07-5e8a-ab2f-98ed5f6a6759",
+  "id": "41ba2786-3f8f-5089-9b2d-f93d25e64821",
   "number": "M-2025-0445",
-  "title": 141,
+  "title": "Fentonville Council \u2014 Board Advisory",
   "status": 0,
   "clientName": "Fentonville Council",
   "matterType": {
@@ -2267,7 +2527,8 @@
   "personResponsible": {
    "name": "Donna Paulsen"
   },
-  "externalSystemId": "53d59a0a-24ae-5825-8770-c9a4224efaab",
+  "externalSystemId": null,
+  "origin": "Created in triConvey",
   "openedDate": "2025-09-17T00:00:00",
   "lastUpdated": "2025-09-17T00:00:00"
  }
