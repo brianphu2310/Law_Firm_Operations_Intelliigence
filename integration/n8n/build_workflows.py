@@ -52,9 +52,10 @@ const rows = [], audits = [];
 
 for (const src of cfg.sources) {
   const since = watermarks[src.resource] || null;
-  const qs = new URLSearchParams(src.page_params);
-  if (since) qs.set(src.since_param, src.myob ? `LastModified gt datetime'${since}'` : since);
-  let url = `${cfg.baseUrl}${src.path.replace('{cf}', cf.Id)}?${qs.toString()}`;
+  const params = { ...src.page_params };                 // n8n Cloud's Code sandbox has no URLSearchParams
+  if (since) params[src.since_param] = src.myob ? `LastModified gt datetime'${since}'` : since;
+  const qs = Object.entries(params).map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join('&');
+  let url = `${cfg.baseUrl}${src.path.replace('{cf}', cf.Id)}?${qs}`;
   let items = [], apiCount = null, status = 'OK';
   try {
     while (url) {
