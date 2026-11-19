@@ -26,6 +26,16 @@ gap to budget, and work out what it would take to close that gap.
 | **Proof** | CI green; data-quality, query and pipeline tests in `tests/`; pipeline checks in [docs/PIPELINE_QUALITY.md](docs/PIPELINE_QUALITY.md). |
 | **Honest limits** | Fictional firm and synthetic data modelled on real bookkeeping work; contains no client information. Forecasts depend on stated assumptions. |
 
+## Demo clips
+
+**The cut-over, in the app** (LEAP → triConvey, InfoTrack → TriSearch): the August trust reconciliation that does not balance with 2 working days left, matters and invoices that did not migrate cleanly, the supplier switch, and the exceptions log. [MP4](docs/media/01_transition_page.mp4)
+
+![Transition page](docs/media/01_transition_page.gif)
+
+**The pipeline, end to end:** 16 resources from 6 mock vendor APIs into the warehouse, 15 quality checks and 12 reconciliations to the app all PASS, 28 cut-over findings for the exceptions log, then 193 tests pass. Real output from one run, replayed with the waits shortened (the test suite takes about 2 minutes). [MP4](docs/media/02_pipeline_run.mp4)
+
+![Pipeline run](docs/media/02_pipeline_run.gif)
+
 ## ★ Flagship: the Decision Simulator
 
 A Financial Analyst's most useful question is not "what happened?" but **"what should we do about it?"** The Simulator answers that on the

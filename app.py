@@ -80,9 +80,9 @@ with st.sidebar:
 
 # ----------------------------------------------------------------- top bar ----
 with st.container(key="topbar"):
-    nav_wrap, period_col, user_col = st.columns([5.4, 1.9, 1.5], vertical_alignment="center")
+    nav_wrap, period_col, user_col = st.columns([6.0, 1.7, 1.4], vertical_alignment="center")
     with nav_wrap:
-        for col, item in zip(st.columns([1.0 if i != "Simulator" else 1.45 for i in NAV_ITEMS]), NAV_ITEMS):      # the highlighted tab gets extra room
+        for col, item in zip(st.columns([{"Simulator": 1.45, "Transition": 1.3, "Overview": 1.2, "Calendar": 1.15}.get(i, 1.0) for i in NAV_ITEMS]), NAV_ITEMS):      # the highlighted tab gets extra room
             with col:
                 if st.button("★ Simulator" if item == "Simulator" else item, key=f"nav_{item}", type="primary" if (ss.view_kind == "page" and ss.view_name == item) else "secondary", width="stretch"):
                     ss.view_kind, ss.view_name = "page", item
