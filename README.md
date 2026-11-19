@@ -36,6 +36,10 @@ gap to budget, and work out what it would take to close that gap.
 
 ![Pipeline run](docs/media/02_pipeline_run.gif)
 
+**The same load, live in the cloud:** n8n Cloud gets an Auth0 token, pulls 16 resources from the mock vendor APIs on Render and writes 7,927 records into Snowflake; every node green and the count check passes. Frames captured from the run on 20 Nov 2026, about 1 minute end to end.
+
+![n8n Cloud run](docs/media/03_n8n_cloud_run.gif)
+
 ## ★ Flagship: the Decision Simulator
 
 A Financial Analyst's most useful question is not "what happened?" but **"what should we do about it?"** The Simulator answers that on the
@@ -140,6 +144,15 @@ How the dashboard's numbers would arrive from the firm's accounting system, buil
 
 **Evidence** (screenshots from the real runs):
 
+**Cut-over run, 20 Nov 2026** (n8n Cloud → Snowflake, staging and marts built in Snowflake straight from this repo with a Git repository stage and `EXECUTE IMMEDIATE FROM`):
+
+| | |
+|---|---|
+| ![n8n Cloud cut-over run](docs/screenshots/19-n8n-cloud-run-cutover.png) **n8n Cloud:** 16 resources, 7,927 records, all nodes green, API count = loaded count | ![Snowflake load audit](docs/screenshots/22-snowflake-load-audit-cutover.png) **Snowflake:** the load audit for that run, 16/16 resources OK |
+| ![Snowflake findings by kind](docs/screenshots/20-snowflake-cutover-findings-by-kind.png) **Snowflake:** 28 cut-over findings (22 disbursement, 2 matter, 1 matter type, 1 invoice, 1 trust balance, 1 trust reconciliation), the same as the local DuckDB run | ![Snowflake exceptions](docs/screenshots/21-snowflake-cutover-exceptions.png) **Snowflake:** the exceptions log, led by the August r48 reconciliation $5,799.21 off |
+
+**Earlier single-system run** (before the cut-over was modelled):
+
 | | |
 |---|---|
 | ![Snowflake checks](docs/screenshots/10-snowflake-quality-checks.png) **Snowflake:** 8 quality checks on the loaded data, all 0 failures | ![Snowflake ageing](docs/screenshots/11-snowflake-receivables-ageing.png) **Snowflake:** receivables by age, total $1,053,551.51, same as the dashboard |
@@ -151,7 +164,7 @@ How the dashboard's numbers would arrive from the firm's accounting system, buil
 **Result:** 11 resources from 5 systems (7,572 records) load with every check at 0 failures. Receivables at the 17 Sep 2025
 report date are **$1,053,551.51** in the pipeline against $1,053,551.56 in the app, a 5-cent gap from per-invoice cent rounding.
 The ageing buckets and monthly revenue also tie out.
-**Evidence note:** the screenshots above were taken on the earlier version of the data (before the cut-over was modelled). The Snowflake views for the transition were syntax-checked but not yet run on Snowflake, and the live n8n workflow and Render service have not been updated, so those screenshots should be retaken after redeploying.
+**Evidence note:** the cut-over SQL has now run on Snowflake and finds the same 28 findings as DuckDB. The Excel Power Query workbook has not been refreshed on the cut-over data yet.
 **Honest limit:** every source system is a mock serving a re-shaped copy of the app's simulated data. No real firm or client
 data is used. The LEAP, InfoTrack, TriSearch and PEXA API shapes are illustrative because those vendors gate or do not publish their API references. Supplier service fees are assumptions, not published prices. Live
 connections need vendor developer access, and switching to them is configuration, not code.
