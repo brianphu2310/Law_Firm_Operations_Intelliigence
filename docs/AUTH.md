@@ -69,5 +69,8 @@ In n8n, the token comes from a separate **Get Token** HTTP node whose client sec
 
 * Nothing here is MYOB's own OAuth. Live MYOB uses the authorization-code flow with a MYOB developer key (`MYOB_MODE=live`).
   Auth0 only stands in as the authorisation server for the mock.
-* The end-to-end Auth0 run (real Auth0 token → hosted API) has not been executed from CI: CI has no network access to Auth0.
+* The end-to-end Auth0 run (real Auth0 token → hosted API → Snowflake) was executed from n8n Cloud on 19 Nov 2026
+  (see `docs/screenshots/17-…` and `18-…`). CI does not repeat it: CI has no network access to Auth0.
+* n8n writes to Snowflake as a dedicated service user (`N8N_SERVICE`, role `N8N_LOADER`, usage on `COMPUTE_WH` and `LAW_FIRM`,
+  rights on `LAW_FIRM.RAW` only), not as a personal login.
   The Auth0 code path is tested with a local issuer posing as Auth0 (same RS256/JWKS mechanics, Auth0-style issuer URL).
