@@ -1,4 +1,29 @@
 kind,reference,client_name,finding,amount
+Disbursement,InfoTrack 905385,M-2025-0298,"On supplier feed, not in ledger",35.18
+Disbursement,InfoTrack 905388,M-2025-0401,Duplicate in ledger,35.18
+Disbursement,InfoTrack 905390,M-2025-0395,Amount differs,35.18
+Disbursement,InfoTrack 905392,M-2025-0340,"On supplier feed, not in ledger",35.18
+Disbursement,TriSearch TS-100047,M-2025-0355,"On supplier feed, not in ledger",33.02
+Disbursement,TriSearch TS-100048,M-2024-0283,"On supplier feed, not in ledger",28.31
+Disbursement,TriSearch TS-100049,M-2025-0304,"On supplier feed, not in ledger",81.78
+Disbursement,TriSearch TS-100050,M-2025-0440,"On supplier feed, not in ledger",28.31
+Disbursement,TriSearch TS-100051,M-2025-0419,"On supplier feed, not in ledger",28.31
+Disbursement,TriSearch TS-100052,M-2025-0413,"On supplier feed, not in ledger",18.87
+Disbursement,TriSearch TS-100053,M-2025-0352,"On supplier feed, not in ledger",28.31
+Disbursement,TriSearch TS-100054,M-2025-0400,"On supplier feed, not in ledger",28.31
+Disbursement,TriSearch TS-100055,M-2025-0357,"On supplier feed, not in ledger",18.87
+Disbursement,TriSearch TS-100056,M-2025-0442,"On supplier feed, not in ledger",18.87
+Disbursement,TriSearch TS-100057,M-2025-0424,"On supplier feed, not in ledger",33.02
+Disbursement,TriSearch TS-100058,M-2025-0354,"On supplier feed, not in ledger",28.31
+Disbursement,TriSearch TS-100059,M-2025-0387,"On supplier feed, not in ledger",33.02
+Disbursement,TriSearch TS-100060,M-2025-0325,"On supplier feed, not in ledger",28.31
+Disbursement,TriSearch TS-100061,M-2025-0404,"On supplier feed, not in ledger",33.02
+Disbursement,TriSearch TS-100062,M-2025-0354,"On supplier feed, not in ledger",28.31
+Disbursement,TriSearch TS-100063,M-2025-0413,"On supplier feed, not in ledger",44.04
+Disbursement,TriSearch TS-100064,M-2025-0427,"On supplier feed, not in ledger",18.87
+Invoice,INV-1021,Blackwood Realty,Amount differs,-3135.99
 Matter,M-2024-0209,Global Trust Bank,Not migrated,
 Matter,M-2024-0277,Halcyon Systems,Duplicated,
-Trust balance,Global Trust Bank,Global Trust Bank,Trust balance differs,-5799.21
+Matter type,Advisory,Advisory,12 matter(s) defaulted to General,
+Trust balance,Global Trust Bank,Global Trust Bank,Opening balance differs from LEAP,-5799.21
+Trust reconciliation,r48 Aug 2025,,Ledgers do not balance to the cash book,-5799.21

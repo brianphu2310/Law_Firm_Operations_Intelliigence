@@ -1,0 +1,15 @@
+[
+ {
+  "id": "1ab37333-81ff-58dd-b8b1-a3671cdd230f",
+  "periodEnd": "2025-08-31T00:00:00",
+  "dueDate": "2025-09-19T00:00:00",
+  "bankBalance": 511417.72,
+  "depositsNotBanked": 0.0,
+  "unpresentedCheques": 6129.0,
+  "cashBookBalance": 505288.72,
+  "ledgerTotal": 499489.51,
+  "ledgersListed": 7,
+  "status": "Not yet prepared",
+  "lastUpdated": "2025-09-17T00:00:00"
+ }
+]

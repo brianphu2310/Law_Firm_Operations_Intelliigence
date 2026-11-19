@@ -190,6 +190,7 @@ def test_committed_vendor_exports_match_the_model():
     ("/leap/v1/invoices", {"pageSize": 100}, "data", ("paging", "nextPage")),
     ("/smokeball/matters", {"Limit": 50}, "value", ("next", "href")),
     ("/infotrack/v1/orders", {"pageSize": 1000}, "orders", ("nextPageUrl",)),
+    ("/trisearch/v1/orders", {"take": 50}, "results", ("continuation",)),
     ("/pexa/v1/workspaces", {"limit": 10}, "workspaces", ("links", "next")),
 ])
 def test_each_vendor_api_pages_in_its_own_style(api, path, params, items, next_path):
@@ -204,26 +205,57 @@ def test_each_vendor_api_pages_in_its_own_style(api, path, params, items, next_p
 def test_loader_reads_every_source_and_api_counts_match(api):
     wh = MemoryWarehouse()
     res = {r["resource"]: r for r in el.run(wh, _client(api), verbose=False)}
-    expected = {"leap:matters": 445, "leap:invoices": 472, "triconvey:matters": 142, "infotrack:orders": 5528, "pexa:workspaces": 24}
+    expected = {"leap:matters": 430, "leap:invoices": 457, "leap:disbursements": 215, "triconvey:matters": 149, "triconvey:invoices": 36,
+                "triconvey:trust/balances": 7, "triconvey:trust/reconciliation": 1, "triconvey:disbursements": 126,
+                "infotrack:orders": 5413, "trisearch:orders": 115, "pexa:workspaces": 24}
     for resource, n in expected.items():
         assert res[resource]["status"] == "OK" and res[resource]["loaded_count"] == n, resource
 
 
-def test_cross_system_reconciliations_find_exactly_the_planted_migration_defects(api):
-    from integration.sources_export import expected_defects
+def _loaded(api):
     wh = MemoryWarehouse()
     el.run(wh, _client(api), verbose=False)
     quality.build_layers(wh.con)
-    q = lambda sql: wh.con.execute(sql).fetchall()
-    assert q("select result, count(*) from marts.invoice_sync_recon group by 1") == [("Matched", 472)]
-    outcomes = dict(q("select outcome, count(*) from marts.migration_recon group by 1"))
-    assert outcomes == {"Migrated": 140, "Not migrated": 1, "Duplicated": 1}
-    exp = expected_defects()
-    found = {(k, ref) for k, ref, *_ in q("select kind, reference from marts.migration_exceptions")}
-    assert found == {("Matter", exp["not_migrated"]), ("Matter", exp["duplicated"]), ("Trust balance", exp["trust_short_client"])}
-    orphans = q("""select count(*) from staging.stg_infotrack_orders o left join staging.stg_leap_matters m using (matter_number)
-                   where m.matter_number is null""")[0][0]
-    assert orphans == 0
+    return lambda sql: wh.con.execute(sql).fetchall()
+
+
+def test_cross_system_reconciliations_find_exactly_the_planted_cutover_defects(api):
+    from integration.sources_export import expected_defects
+    q, exp = _loaded(api), expected_defects()
+    assert q("select result, count(*) from marts.invoice_sync_recon group by 1") == [("Matched", 472)]       # LEAP 457 + triConvey 15
+    assert dict(q("select outcome, count(*) from marts.migration_recon group by 1")) == {"Migrated": 132, "Not migrated": 1, "Duplicated": 1}
+    found = {(k, ref) for k, ref, *_ in q("select kind, reference from marts.migration_exceptions where kind <> 'Disbursement'")}
+    assert found == {("Matter", exp["not_migrated"]), ("Matter", exp["duplicated"]), ("Matter type", exp["unmapped_type"]),
+                     ("Invoice", "INV-1021"), ("Trust balance", exp["trust_short_client"]), ("Trust reconciliation", "r48 Aug 2025")}
+    assert q("select fell_to_general from marts.matter_type_mapping_recon where practice_area = 'Advisory'") == [(12,)]
+    assert [round(float(d), 2) for (d,) in q("select difference from marts.trust_migration_recon where result <> 'Matched'")] == [-exp["trust_short_by"]]
+
+
+def test_august_trust_reconciliation_straddles_both_systems_and_has_a_deadline(api):
+    q = _loaded(api)
+    (due, as_at, s1, s2, d2), = q("select due_date, as_at, statement_1_bank, statement_2_ledgers, ledgers_vs_cash_book from marts.trust_r48_status")
+    assert str(due) == "2025-09-19" and str(as_at) == "2025-09-17"       # 15 working days after 31 Aug; two working days left
+    assert (s1, s2) == ("Balances", "Does not balance") and round(float(d2), 2) == -5799.21     # the bank agrees with the books; the keyed ledgers do not
+
+
+def test_supplier_switch_findings_are_classified_by_cause(api):
+    q = _loaded(api)
+    got = {(r, c, s): n for r, c, s, n in q("""select result, coalesce(likely_cause, ''), supplier, count(*) from marts.supplier_disbursement_recon
+                                               where result <> 'Matched' group by all""")}
+    assert got == {("On supplier feed, not in ledger", "TriSearch charges at order: check the auto-disbursement setting", "TriSearch"): 18,
+                   ("On supplier feed, not in ledger", "Ordered after LEAP froze: needs re-keying", "InfoTrack"): 2,
+                   ("Duplicate in ledger", "Manual entry", "InfoTrack"): 1, ("Amount differs", "Manual entry", "InfoTrack"): 1}
+    # a re-typed reference still matches the right matter, and the cut-over month shows both suppliers
+    assert q("select count(*) from marts.supplier_disbursement_recon where likely_cause = 'Supplier reference typed differently' and result = 'Matched'")[0][0] == 2
+    assert dict(q("select supplier, count(*) from marts.supplier_switch_summary where month = date '2025-09-01' group by 1")) == {"InfoTrack": 1, "TriSearch": 1}
+    assert q("select go_live, final_collection from staging.stg_cutover") == [(__import__("datetime").date(2025, 9, 2), __import__("datetime").date(2025, 8, 29))]
+
+
+def test_nothing_is_dated_across_the_freeze_in_the_wrong_system(api):
+    q = _loaded(api)
+    assert q("select count(*) from staging.stg_leap_matters where opened_date > date '2025-08-29'")[0][0] == 0
+    assert q("select count(*) from staging.stg_trisearch_orders where ordered_date < date '2025-09-02'")[0][0] == 0
+    assert q("select count(*) from staging.stg_leap_disbursements where disb_date > date '2025-08-29'")[0][0] == 0
 
 
 def test_power_query_scripts_read_the_committed_github_files():

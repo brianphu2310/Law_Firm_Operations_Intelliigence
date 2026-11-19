@@ -5209,8 +5209,8 @@
   "amountExTax": 67496.57,
   "tax": 6749.66,
   "total": 74246.23,
-  "status": "Paid",
-  "lastModified": "2025-09-10T00:00:00"
+  "status": "Outstanding",
+  "lastModified": "2025-05-15T00:00:00"
  },
  {
   "invoiceId": "5ca9df9b-12e8-5998-8948-2684356ea01c",
@@ -5599,8 +5599,8 @@
   "amountExTax": 59055.9,
   "tax": 5905.59,
   "total": 64961.49,
-  "status": "Paid",
-  "lastModified": "2025-09-03T00:00:00"
+  "status": "Outstanding",
+  "lastModified": "2025-07-11T00:00:00"
  },
  {
   "invoiceId": "3cfed86a-cc82-5683-97c5-9c3ea25cf937",
@@ -5664,8 +5664,8 @@
   "amountExTax": 31359.91,
   "tax": 3135.99,
   "total": 34495.9,
-  "status": "Paid",
-  "lastModified": "2025-09-17T00:00:00"
+  "status": "Outstanding",
+  "lastModified": "2025-07-23T00:00:00"
  },
  {
   "invoiceId": "1e365d2b-fb75-5737-82c3-0ebf503624ad",
@@ -5677,8 +5677,8 @@
   "amountExTax": 58464.27,
   "tax": 5846.43,
   "total": 64310.7,
-  "status": "Paid",
-  "lastModified": "2025-09-04T00:00:00"
+  "status": "Outstanding",
+  "lastModified": "2025-07-24T00:00:00"
  },
  {
   "invoiceId": "0a1500ad-9084-5383-97e9-a895354f6fdf",
@@ -5716,8 +5716,8 @@
   "amountExTax": 41835.15,
   "tax": 4183.52,
   "total": 46018.67,
-  "status": "Paid",
-  "lastModified": "2025-09-03T00:00:00"
+  "status": "Outstanding",
+  "lastModified": "2025-07-30T00:00:00"
  },
  {
   "invoiceId": "618c7d5c-4188-58de-801b-f973a0e58276",
@@ -5781,8 +5781,8 @@
   "amountExTax": 33976.45,
   "tax": 3397.65,
   "total": 37374.1,
-  "status": "Paid",
-  "lastModified": "2025-09-10T00:00:00"
+  "status": "Outstanding",
+  "lastModified": "2025-08-08T00:00:00"
  },
  {
   "invoiceId": "d136be0e-c4ac-523f-8f3b-9fdcf66a543e",
@@ -5794,8 +5794,8 @@
   "amountExTax": 24183.68,
   "tax": 2418.37,
   "total": 26602.05,
-  "status": "Paid",
-  "lastModified": "2025-09-11T00:00:00"
+  "status": "Outstanding",
+  "lastModified": "2025-08-08T00:00:00"
  },
  {
   "invoiceId": "01b26fcb-caca-532c-8c0e-f959104aa72a",
@@ -5939,200 +5939,5 @@
   "total": 92827.42,
   "status": "Outstanding",
   "lastModified": "2025-08-29T00:00:00"
- },
- {
-  "invoiceId": "52065500-e4f6-567a-8b5a-75f12c010035",
-  "invoiceNumber": "INV-1043",
-  "matterNumber": "M-2025-0385",
-  "clientName": "Vertex Industries",
-  "issueDate": "2025-09-01T00:00:00",
-  "dueDate": "2025-10-01T00:00:00",
-  "amountExTax": 24380.86,
-  "tax": 2438.09,
-  "total": 26818.95,
-  "status": "Outstanding",
-  "lastModified": "2025-09-01T00:00:00"
- },
- {
-  "invoiceId": "7b537127-faa2-5205-90f8-a31a69b53339",
-  "invoiceNumber": "INV-1044",
-  "matterNumber": "M-2024-0282",
-  "clientName": "Halcyon Systems",
-  "issueDate": "2025-09-01T00:00:00",
-  "dueDate": "2025-10-01T00:00:00",
-  "amountExTax": 36393.75,
-  "tax": 3639.38,
-  "total": 40033.13,
-  "status": "Paid",
-  "lastModified": "2025-09-12T00:00:00"
- },
- {
-  "invoiceId": "4816ead7-ad85-5c2c-99ac-2fa2ed769392",
-  "invoiceNumber": "INV-1045",
-  "matterNumber": "M-2024-0291",
-  "clientName": "Sunrise Logistics",
-  "issueDate": "2025-09-02T00:00:00",
-  "dueDate": "2025-10-02T00:00:00",
-  "amountExTax": 6868.94,
-  "tax": 686.89,
-  "total": 7555.83,
-  "status": "Outstanding",
-  "lastModified": "2025-09-02T00:00:00"
- },
- {
-  "invoiceId": "f497965a-a9e8-50eb-8e61-673beb457909",
-  "invoiceNumber": "INV-1046",
-  "matterNumber": "M-2025-0363",
-  "clientName": "Global Trust Bank",
-  "issueDate": "2025-09-03T00:00:00",
-  "dueDate": "2025-10-03T00:00:00",
-  "amountExTax": 47864.74,
-  "tax": 4786.47,
-  "total": 52651.21,
-  "status": "Outstanding",
-  "lastModified": "2025-09-03T00:00:00"
- },
- {
-  "invoiceId": "057f6f37-c6b7-5c59-8177-04454cb34a33",
-  "invoiceNumber": "INV-1047",
-  "matterNumber": "M-2025-0398",
-  "clientName": "Zenith Labs",
-  "issueDate": "2025-09-03T00:00:00",
-  "dueDate": "2025-10-03T00:00:00",
-  "amountExTax": 16487.53,
-  "tax": 1648.75,
-  "total": 18136.28,
-  "status": "Outstanding",
-  "lastModified": "2025-09-03T00:00:00"
- },
- {
-  "invoiceId": "c923de4d-6edb-5027-890b-4167a469ee27",
-  "invoiceNumber": "INV-1048",
-  "matterNumber": "M-2024-0222",
-  "clientName": "Nova Materials",
-  "issueDate": "2025-09-04T00:00:00",
-  "dueDate": "2025-10-04T00:00:00",
-  "amountExTax": 12352.53,
-  "tax": 1235.25,
-  "total": 13587.78,
-  "status": "Outstanding",
-  "lastModified": "2025-09-04T00:00:00"
- },
- {
-  "invoiceId": "5f0eaf97-570b-5abf-ac2b-dbfafe26c550",
-  "invoiceNumber": "INV-1049",
-  "matterNumber": "M-2024-0258",
-  "clientName": "London Capital Partners",
-  "issueDate": "2025-09-05T00:00:00",
-  "dueDate": "2025-10-05T00:00:00",
-  "amountExTax": 31012.04,
-  "tax": 3101.2,
-  "total": 34113.24,
-  "status": "Outstanding",
-  "lastModified": "2025-09-05T00:00:00"
- },
- {
-  "invoiceId": "14d9b7cb-6d0f-57b4-9d58-7a701688e4da",
-  "invoiceNumber": "INV-1050",
-  "matterNumber": "M-2024-0198",
-  "clientName": "Okafor Mining Co.",
-  "issueDate": "2025-09-08T00:00:00",
-  "dueDate": "2025-10-08T00:00:00",
-  "amountExTax": 21211.11,
-  "tax": 2121.11,
-  "total": 23332.22,
-  "status": "Outstanding",
-  "lastModified": "2025-09-08T00:00:00"
- },
- {
-  "invoiceId": "2e77f800-4e29-5d28-9133-f978b2c9f1b0",
-  "invoiceNumber": "INV-1051",
-  "matterNumber": "M-2024-0217",
-  "clientName": "Acme Corp",
-  "issueDate": "2025-09-10T00:00:00",
-  "dueDate": "2025-10-10T00:00:00",
-  "amountExTax": 44078.52,
-  "tax": 4407.85,
-  "total": 48486.37,
-  "status": "Outstanding",
-  "lastModified": "2025-09-10T00:00:00"
- },
- {
-  "invoiceId": "92894ddc-b3a7-5cbe-9144-68b2b07df868",
-  "invoiceNumber": "INV-1052",
-  "matterNumber": "M-2025-0417",
-  "clientName": "Bright Path Foundation",
-  "issueDate": "2025-09-10T00:00:00",
-  "dueDate": "2025-10-10T00:00:00",
-  "amountExTax": 24509.7,
-  "tax": 2450.97,
-  "total": 26960.67,
-  "status": "Outstanding",
-  "lastModified": "2025-09-10T00:00:00"
- },
- {
-  "invoiceId": "0ee2eb6f-eb29-5ba6-956e-945a20f47017",
-  "invoiceNumber": "INV-1053",
-  "matterNumber": "M-2024-0288",
-  "clientName": "Meridian Holdings Ltd.",
-  "issueDate": "2025-09-12T00:00:00",
-  "dueDate": "2025-10-12T00:00:00",
-  "amountExTax": 47487.73,
-  "tax": 4748.77,
-  "total": 52236.5,
-  "status": "Outstanding",
-  "lastModified": "2025-09-12T00:00:00"
- },
- {
-  "invoiceId": "050b3cea-f1cf-55db-ac90-3790d2502be6",
-  "invoiceNumber": "INV-1054",
-  "matterNumber": "M-2025-0402",
-  "clientName": "Pacific Rim Traders",
-  "issueDate": "2025-09-15T00:00:00",
-  "dueDate": "2025-10-15T00:00:00",
-  "amountExTax": 17325.42,
-  "tax": 1732.54,
-  "total": 19057.96,
-  "status": "Outstanding",
-  "lastModified": "2025-09-15T00:00:00"
- },
- {
-  "invoiceId": "bccb291a-c722-556a-b390-3ffc8fb0855d",
-  "invoiceNumber": "INV-1055",
-  "matterNumber": "M-2025-0377",
-  "clientName": "Auckland Ventures Ltd",
-  "issueDate": "2025-09-15T00:00:00",
-  "dueDate": "2025-10-15T00:00:00",
-  "amountExTax": 18066.18,
-  "tax": 1806.62,
-  "total": 19872.8,
-  "status": "Outstanding",
-  "lastModified": "2025-09-15T00:00:00"
- },
- {
-  "invoiceId": "61b6bfb1-1e65-5bbf-a86f-24e642e9abc3",
-  "invoiceNumber": "INV-1056",
-  "matterNumber": "M-2024-0286",
-  "clientName": "Whitmore Textiles",
-  "issueDate": "2025-09-16T00:00:00",
-  "dueDate": "2025-10-16T00:00:00",
-  "amountExTax": 13643.83,
-  "tax": 1364.38,
-  "total": 15008.21,
-  "status": "Outstanding",
-  "lastModified": "2025-09-16T00:00:00"
- },
- {
-  "invoiceId": "661fd8fb-64ef-5978-8204-c71bc4d6359b",
-  "invoiceNumber": "INV-1057",
-  "matterNumber": "M-2025-0419",
-  "clientName": "Harlow & Co.",
-  "issueDate": "2025-09-17T00:00:00",
-  "dueDate": "2025-10-17T00:00:00",
-  "amountExTax": 7356.9,
-  "tax": 735.69,
-  "total": 8092.59,
-  "status": "Outstanding",
-  "lastModified": "2025-09-17T00:00:00"
  }
 ]

@@ -32,7 +32,7 @@ from jwt.algorithms import RSAAlgorithm
 LEEWAY_S = 30
 JWKS_TTL_S = 3600
 SCOPES = {"GeneralLedger": "read:ledger", "Contact": "read:contacts", "Sale": "read:sales",          # MYOB resources
-          "leap": "leap:read", "smokeball": "triconvey:read", "infotrack": "infotrack:read", "pexa": "pexa:read"}  # other vendors
+          "leap": "leap:read", "smokeball": "triconvey:read", "infotrack": "infotrack:read", "trisearch": "trisearch:read", "pexa": "pexa:read"}  # other vendors
 ALL_SCOPES = " ".join(SCOPES.values())
 
 

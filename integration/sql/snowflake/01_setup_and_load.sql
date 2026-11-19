@@ -24,6 +24,11 @@ create table if not exists raw.leap_trust_balances        (record_uid varchar, p
 create table if not exists raw.triconvey_matters          (record_uid varchar, payload variant, last_modified timestamp_ntz, batch_id varchar, loaded_at timestamp_ntz);
 create table if not exists raw.triconvey_trust_balances   (record_uid varchar, payload variant, last_modified timestamp_ntz, batch_id varchar, loaded_at timestamp_ntz);
 create table if not exists raw.infotrack_orders           (record_uid varchar, payload variant, last_modified timestamp_ntz, batch_id varchar, loaded_at timestamp_ntz);
+create table if not exists raw.leap_disbursements             (record_uid varchar, payload variant, last_modified timestamp_ntz, batch_id varchar, loaded_at timestamp_ntz);
+create table if not exists raw.triconvey_invoices             (record_uid varchar, payload variant, last_modified timestamp_ntz, batch_id varchar, loaded_at timestamp_ntz);
+create table if not exists raw.triconvey_trust_reconciliation (record_uid varchar, payload variant, last_modified timestamp_ntz, batch_id varchar, loaded_at timestamp_ntz);
+create table if not exists raw.triconvey_disbursements        (record_uid varchar, payload variant, last_modified timestamp_ntz, batch_id varchar, loaded_at timestamp_ntz);
+create table if not exists raw.trisearch_orders               (record_uid varchar, payload variant, last_modified timestamp_ntz, batch_id varchar, loaded_at timestamp_ntz);
 create table if not exists raw.pexa_workspaces            (record_uid varchar, payload variant, last_modified timestamp_ntz, batch_id varchar, loaded_at timestamp_ntz);
 create table if not exists raw.myob_company_file      (company_file_uid varchar, name varchar, last_sync_date timestamp_ntz, batch_id varchar, loaded_at timestamp_ntz);
 create table if not exists raw.load_audit (batch_id varchar, resource varchar, api_count integer, loaded_count integer,
@@ -41,13 +46,18 @@ copy into raw.myob_customers from (select $1:UID::varchar, $1, $1:LastModified::
 copy into raw.myob_invoices from (select $1:UID::varchar, $1, $1:LastModified::timestamp_ntz, 'manual-upload', current_timestamp()::timestamp_ntz from @raw.myob_files/invoices.json);
 copy into raw.myob_customer_payments from (select $1:UID::varchar, $1, $1:LastModified::timestamp_ntz, 'manual-upload', current_timestamp()::timestamp_ntz from @raw.myob_files/customer_payments.json);
 copy into raw.myob_company_file from (select $1:Id::varchar, $1:Name::varchar, $1:LastSyncDate::timestamp_ntz, 'manual-upload', current_timestamp()::timestamp_ntz from @raw.myob_files/company_file.json);
--- other systems: upload integration/data/{leap,triconvey,infotrack,pexa}/*.json into folders of the same name on the stage
+-- other systems: upload integration/data/{leap,triconvey,infotrack,trisearch,pexa}/*.json into folders of the same name on the stage
 copy into raw.leap_matters from (select $1:matterId::varchar, $1, $1:lastModified::timestamp_ntz, 'manual-upload', current_timestamp()::timestamp_ntz from @raw.myob_files/leap/matters.json);
 copy into raw.leap_invoices from (select $1:invoiceId::varchar, $1, $1:lastModified::timestamp_ntz, 'manual-upload', current_timestamp()::timestamp_ntz from @raw.myob_files/leap/invoices.json);
 copy into raw.leap_trust_balances from (select $1:ledgerId::varchar, $1, $1:lastModified::timestamp_ntz, 'manual-upload', current_timestamp()::timestamp_ntz from @raw.myob_files/leap/trust_balances.json);
 copy into raw.triconvey_matters from (select $1:id::varchar, $1, $1:lastUpdated::timestamp_ntz, 'manual-upload', current_timestamp()::timestamp_ntz from @raw.myob_files/triconvey/matters.json);
 copy into raw.triconvey_trust_balances from (select $1:id::varchar, $1, $1:lastUpdated::timestamp_ntz, 'manual-upload', current_timestamp()::timestamp_ntz from @raw.myob_files/triconvey/trust_balances.json);
 copy into raw.infotrack_orders from (select $1:orderId::varchar, $1, $1:lastModified::timestamp_ntz, 'manual-upload', current_timestamp()::timestamp_ntz from @raw.myob_files/infotrack/orders.json);
+copy into raw.leap_disbursements from (select $1:disbursementId::varchar, $1, $1:lastModified::timestamp_ntz, 'manual-upload', current_timestamp()::timestamp_ntz from @raw.myob_files/leap/disbursements.json);
+copy into raw.triconvey_invoices from (select $1:id::varchar, $1, $1:lastUpdated::timestamp_ntz, 'manual-upload', current_timestamp()::timestamp_ntz from @raw.myob_files/triconvey/invoices.json);
+copy into raw.triconvey_trust_reconciliation from (select $1:id::varchar, $1, $1:lastUpdated::timestamp_ntz, 'manual-upload', current_timestamp()::timestamp_ntz from @raw.myob_files/triconvey/trust_reconciliation.json);
+copy into raw.triconvey_disbursements from (select $1:id::varchar, $1, $1:lastUpdated::timestamp_ntz, 'manual-upload', current_timestamp()::timestamp_ntz from @raw.myob_files/triconvey/disbursements.json);
+copy into raw.trisearch_orders from (select $1:orderNumber::varchar, $1, $1:updatedAt::timestamp_ntz, 'manual-upload', current_timestamp()::timestamp_ntz from @raw.myob_files/trisearch/orders.json);
 copy into raw.pexa_workspaces from (select $1:workspaceId::varchar, $1, $1:lastUpdated::timestamp_ntz, 'manual-upload', current_timestamp()::timestamp_ntz from @raw.myob_files/pexa/workspaces.json);
 
 select 'invoices' as t, count(*) as n from raw.myob_invoices

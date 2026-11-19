@@ -70,12 +70,14 @@ SOURCES = [
     Source("Sale/CustomerPayment", "myob_customer_payments", "/accountright/{cf}/Sale/CustomerPayment", **MYOB),
     *[Source(f"leap:{e}", f"leap_{e.replace('/', '_')}", f"/leap/v1/{e}", items="data", next="paging.nextPage",
              count="paging.totalRecords", id_key=k, updated="lastModified", since_param="updatedSince", page_params=(("pageSize", 200),))
-      for e, k in (("matters", "matterId"), ("invoices", "invoiceId"), ("trust/balances", "ledgerId"))],
+      for e, k in (("matters", "matterId"), ("invoices", "invoiceId"), ("trust/balances", "ledgerId"), ("disbursements", "disbursementId"))],
     *[Source(f"triconvey:{e}", f"triconvey_{e.replace('/', '_')}", f"/smokeball/{e}", items="value", next="next.href", count="size",
              id_key="id", updated="lastUpdated", since_param="LastUpdated", page_params=(("Limit", 200),), key_header="x-api-key")
-      for e in ("matters", "trust/balances")],
+      for e in ("matters", "invoices", "trust/balances", "trust/reconciliation", "disbursements")],
     Source("infotrack:orders", "infotrack_orders", "/infotrack/v1/orders", items="orders", next="nextPageUrl", count="totalCount",
            id_key="orderId", updated="lastModified", since_param="modifiedSince", page_params=(("pageSize", 1000),)),
+    Source("trisearch:orders", "trisearch_orders", "/trisearch/v1/orders", items="results", next="continuation", count="total",
+           id_key="orderNumber", updated="updatedAt", since_param="updatedAfter", page_params=(("take", 500),)),
     Source("pexa:workspaces", "pexa_workspaces", "/pexa/v1/workspaces", items="workspaces", next="links.next", count="totalCount",
            id_key="workspaceId", updated="lastUpdated", since_param="updatedSince", page_params=(("limit", 100),)),
 ]

@@ -1,0 +1,22 @@
+invoice_number,matter_number,client_name,leap_total,triconvey_total,difference,result
+INV-0986,M-2025-0311,Meridian Holdings Ltd.,74246.23,74246.23,0.0,Matched
+INV-1004,M-2024-0220,Zenith Labs,51097.65,51097.65,0.0,Matched
+INV-1016,M-2022-0006,Okafor Mining Co.,64961.49,64961.49,0.0,Matched
+INV-1021,M-2025-0328,Blackwood Realty,34495.9,31359.91,-3135.99,Amount differs
+INV-1022,M-2025-0309,Global Trust Bank,64310.7,64310.7,0.0,Matched
+INV-1025,M-2025-0385,Vertex Industries,46018.67,46018.67,0.0,Matched
+INV-1026,M-2025-0314,Fentonville Council,20425.65,20425.65,0.0,Matched
+INV-1028,M-2025-0309,Global Trust Bank,35245.13,35245.13,0.0,Matched
+INV-1029,M-2025-0381,Harlow & Co.,27813.64,27813.64,0.0,Matched
+INV-1030,M-2025-0349,Delacroix & Sons,37374.1,37374.1,0.0,Matched
+INV-1031,M-2025-0388,Meridian Pacific Trust,26602.05,26602.05,0.0,Matched
+INV-1033,M-2025-0394,Ganges Textile Exports,35692.83,35692.83,0.0,Matched
+INV-1034,M-2024-0207,Okafor Mining Co.,37527.28,37527.28,0.0,Matched
+INV-1035,M-2025-0400,Bright Path Foundation,54905.96,54905.96,0.0,Matched
+INV-1036,M-2025-0368,Meridian Holdings Ltd.,66787.56,66787.56,0.0,Matched
+INV-1037,M-2025-0375,Blackwood Realty,36541.47,36541.47,0.0,Matched
+INV-1038,M-2025-0422,London Capital Partners,39581.23,39581.23,0.0,Matched
+INV-1039,M-2025-0405,Fentonville Council,27170.02,27170.02,0.0,Matched
+INV-1040,M-2024-0159,Acme Corp,125750.37,125750.37,0.0,Matched
+INV-1041,M-2024-0231,Nova Materials,36274.69,36274.69,0.0,Matched
+INV-1042,M-2024-0261,Halcyon Systems,92827.42,92827.42,0.0,Matched
