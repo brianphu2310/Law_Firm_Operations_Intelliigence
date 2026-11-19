@@ -6,7 +6,7 @@ Ageing: 1–30 days,156704.5376176461,156704.53,-0.007617646100698039,True
 Ageing: 31–60 days,0.0,0.0,0.0,True
 Ageing: 61–90 days,51097.65160073239,51097.65,-0.0016007323865778744,True
 Ageing: 90+ days,0.0,0.0,0.0,True
-"Revenue ex GST, all months (difference = worst single month)",15344230.105936743,15344230.07,0.027835148794110864,True
+"Revenue ex GST, all months (difference = worst single month)",15344230.105936743,15344230.069999997,0.027835148794110864,True
 LEAP (to the freeze) + triConvey (after go-live) invoices ex GST = app revenue ledger,15344230.10593674,15344230.07,-0.035936739295721054,True
 LEAP trust at the freeze + movements since = app trust ledger,535000.0,535000.0,0.0,True
 LEAP active matters at the freeze = app matters open on that day,134.0,134.0,0.0,True
