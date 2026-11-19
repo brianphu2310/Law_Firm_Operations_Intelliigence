@@ -139,7 +139,7 @@ How the dashboard's numbers would arrive from the firm's accounting system, buil
 | Orchestration | **n8n**: daily 6am, incremental watermarks, landing → RAW with `INSERT ALL … PARSE_JSON`, load audit, fails on count mismatch | [`integration/n8n/`](integration/n8n) |
 | Warehouse | **Snowflake**: stage + `COPY INTO`, `VARIANT`, `LATERAL FLATTEN`, `QUALIFY` de-duplication, marts (DuckDB twin for local runs and CI) | [`integration/sql/`](integration/sql) |
 | Quality | 15 checks + 12 reconciliations to the dashboard (receivables, every ageing bucket, monthly revenue, trust and matters across the freeze) | [`integration/quality.py`](integration/quality.py) → [docs/PIPELINE_QUALITY.md](docs/PIPELINE_QUALITY.md) |
-| Excel + Power Query | 4 cross-system checks that read the source JSON straight from this repo, plus M scripts for the marts API, the MYOB API (paged) and Snowflake, and a formula-driven Debtors & Revenue Pack. [`Law_Firm_Recon_PowerQuery.xlsx`](integration/excel/Law_Firm_Recon_PowerQuery.xlsx) was built and refreshed on the earlier single-system data; the M scripts are updated for the cut-over but the workbook has not been refreshed since | [`integration/powerquery/`](integration/powerquery), [`integration/excel/`](integration/excel) |
+| Excel + Power Query | 4 cross-system checks that read the source JSON straight from this repo, plus M scripts for the marts API, the MYOB API (paged) and Snowflake, and a formula-driven Debtors & Revenue Pack. [`Law_Firm_Recon_PowerQuery.xlsx`](integration/excel/Law_Firm_Recon_PowerQuery.xlsx) was refreshed in Excel on the cut-over data (20 Nov 2026): 472/472 invoices matched; 132 matters migrated, M-2024-0209 not migrated, M-2024-0277 duplicated; Global Trust Bank −$5,799.21; 439 matters, $213,752.16 of disbursements. The same results as DuckDB and Snowflake | [`integration/powerquery/`](integration/powerquery), [`integration/excel/`](integration/excel) |
 | Serving and BI | Marts JSON API (FastAPI), the app's **Transition** page (r48 clock, matters, trust, AR, supplier switch, exceptions log) and **Pipeline** page (Streamlit) | [`integration/marts_api.py`](integration/marts_api.py), [`views/pipeline.py`](views/pipeline.py) |
 
 **Evidence** (screenshots from the real runs):
@@ -164,7 +164,7 @@ How the dashboard's numbers would arrive from the firm's accounting system, buil
 **Result:** 11 resources from 5 systems (7,572 records) load with every check at 0 failures. Receivables at the 17 Sep 2025
 report date are **$1,053,551.51** in the pipeline against $1,053,551.56 in the app, a 5-cent gap from per-invoice cent rounding.
 The ageing buckets and monthly revenue also tie out.
-**Evidence note:** the cut-over SQL has now run on Snowflake and finds the same 28 findings as DuckDB. The Excel Power Query workbook has not been refreshed on the cut-over data yet.
+**Evidence note:** the cut-over SQL has now run on Snowflake and finds the same 28 findings as DuckDB. The Excel Power Query workbook was refreshed on the same data and agrees.
 **Honest limit:** every source system is a mock serving a re-shaped copy of the app's simulated data. No real firm or client
 data is used. The LEAP, InfoTrack, TriSearch and PEXA API shapes are illustrative because those vendors gate or do not publish their API references. Supplier service fees are assumptions, not published prices. Live
 connections need vendor developer access, and switching to them is configuration, not code.

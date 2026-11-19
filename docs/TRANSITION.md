@@ -93,7 +93,7 @@ The research report with the full scenario list is kept alongside the repo owner
 - A simulated cut-over. It shows the **method** (what to reconcile, in what order, with what deadline), not what happened at any real firm.
 - Not simulated: GST variance on supplier invoices (D8), supplier refunds (D7), document load, staff time and cost of the cut-over.
 - Snowflake SQL for the new views has been run on a Snowflake trial account (20 Nov 2026) and returns the same 28 findings as DuckDB.
-- The Power Query scripts in `integration/powerquery/github/` have been updated for the new data but not refreshed in Excel yet.
+- The Power Query workbook was refreshed in Excel on the cut-over data and agrees with DuckDB and Snowflake.
 - The n8n Cloud workflow, the Render mock API and the Auth0 `trisearch:read` scope are live; one end-to-end run loaded 7,927 records from 16 resources.
 
 ## Where to look
