@@ -111,22 +111,22 @@ python sql/run_queries.py            # 10 analytical queries -> docs/query_resul
 Tests for the pipeline are in `tests/test_warehouse.py`, `tests/test_sql_queries.py` and `tests/test_docs.py`; CI builds the warehouse and runs the quality suite and queries on every push.
 The simulation has no per-matter cost or time-entry ledger, so WIP ageing is by matter age and profitability is analysed at practice-area level.
 
-## Integration pipeline: MYOB, LEAP, triConvey, InfoTrack, PEXA → n8n → Snowflake → Excel / Power Query, Streamlit
+## Integration pipeline: MYOB, LEAP, triConvey, InfoTrack, TriSearch, PEXA → n8n → Snowflake → Excel / Power Query, Streamlit
 
-How the dashboard's numbers would arrive from the firm's accounting system, built end to end. Details: [docs/PIPELINE.md](docs/PIPELINE.md).
+How the dashboard's numbers would arrive from the firm's accounting system, built end to end, across **one cut-over**: the practice management system changes from LEAP to triConvey (Smokeball) and the search supplier from InfoTrack to TriSearch. The pipeline's job is to show what the cut-over left behind and who has to fix it by when. Details: [docs/PIPELINE.md](docs/PIPELINE.md) and [docs/TRANSITION.md](docs/TRANSITION.md) (timeline, what is sourced vs assumed, the planted defects).
 
 ![Pipeline page](docs/screenshots/09-pipeline.png)
 
 | Stage | Tool | Where |
 |---|---|---|
-| Sources | Five simulated systems, each with its own API and paging style: **MYOB** (accounting), **LEAP** (practice management), **triConvey** (Smokeball-shaped migration dry run), **InfoTrack** (searches), **PEXA** (settlements) | [`integration/mock_api.py`](integration/mock_api.py), [`integration/sources_export.py`](integration/sources_export.py), [`integration/myob_export.py`](integration/myob_export.py) |
-| Cross-system checks | LEAP invoices = MYOB (472/472); LEAP → triConvey migration rehearsal finds **1 unmigrated matter, 1 duplicate and a $5,799.21 trust gap**; InfoTrack and PEXA fees tied to LEAP matters | [`integration/sql/`](integration/sql), [docs/PIPELINE.md](docs/PIPELINE.md) |
+| Sources | Six simulated systems, each with its own API and paging style: **MYOB** (accounting), **LEAP** (practice management, frozen at the final collection), **triConvey** (Smokeball-shaped, live from go-live), **InfoTrack** (searches until go-live), **TriSearch** (searches after go-live), **PEXA** (settlements) | [`integration/mock_api.py`](integration/mock_api.py), [`integration/sources_export.py`](integration/sources_export.py), [`integration/myob_export.py`](integration/myob_export.py) |
+| Cross-system checks | LEAP + triConvey invoices = MYOB (472/472); the cut-over reconciliation finds **28 planted findings**: 1 unmigrated matter, 1 duplicate, 12 Advisory matters that fell to "General", 1 invoice missing GST, a **$5,799.21 trust gap** that leaves the August r48 ledger statement unbalanced with 2 working days left, and 22 supplier-switch disbursement exceptions (18 TriSearch orders never reached the ledger) | [`integration/sql/`](integration/sql), [docs/PIPELINE.md](docs/PIPELINE.md) |
 | Security | **OAuth 2.0 client credentials** with RS256 JWTs: **Auth0** (free) or a local issuer for CI; signature via JWKS, issuer, audience, expiry, per-resource scopes; RFC 6750 errors. 20 tests incl. forged, alg-none, HS256-confusion, expired and wrong-scope tokens | [`integration/auth.py`](integration/auth.py), [docs/AUTH.md](docs/AUTH.md) |
 | Orchestration | **n8n**: daily 6am, incremental watermarks, landing → RAW with `INSERT ALL … PARSE_JSON`, load audit, fails on count mismatch | [`integration/n8n/`](integration/n8n) |
 | Warehouse | **Snowflake**: stage + `COPY INTO`, `VARIANT`, `LATERAL FLATTEN`, `QUALIFY` de-duplication, marts (DuckDB twin for local runs and CI) | [`integration/sql/`](integration/sql) |
-| Quality | 8 accounting checks + 8 reconciliations to the dashboard (receivables, every ageing bucket, monthly revenue) | [`integration/quality.py`](integration/quality.py) → [docs/PIPELINE_QUALITY.md](docs/PIPELINE_QUALITY.md) |
-| Excel + Power Query | 4 refreshable cross-system checks that read the source JSON straight from this repo, plus M scripts for the marts API, the MYOB API (paged) and Snowflake, and a formula-driven Debtors & Revenue Pack. The 4 checks were built and refreshed in Excel: [`Law_Firm_Recon_PowerQuery.xlsx`](integration/excel/Law_Firm_Recon_PowerQuery.xlsx) finds the same 3 migration defects as Snowflake | [`integration/powerquery/`](integration/powerquery), [`integration/excel/`](integration/excel) |
-| Serving and BI | Marts JSON API (FastAPI), the app's **Pipeline** page (Streamlit) | [`integration/marts_api.py`](integration/marts_api.py), [`views/pipeline.py`](views/pipeline.py) |
+| Quality | 15 checks + 12 reconciliations to the dashboard (receivables, every ageing bucket, monthly revenue, trust and matters across the freeze) | [`integration/quality.py`](integration/quality.py) → [docs/PIPELINE_QUALITY.md](docs/PIPELINE_QUALITY.md) |
+| Excel + Power Query | 4 cross-system checks that read the source JSON straight from this repo, plus M scripts for the marts API, the MYOB API (paged) and Snowflake, and a formula-driven Debtors & Revenue Pack. [`Law_Firm_Recon_PowerQuery.xlsx`](integration/excel/Law_Firm_Recon_PowerQuery.xlsx) was built and refreshed on the earlier single-system data; the M scripts are updated for the cut-over but the workbook has not been refreshed since | [`integration/powerquery/`](integration/powerquery), [`integration/excel/`](integration/excel) |
+| Serving and BI | Marts JSON API (FastAPI), the app's **Transition** page (r48 clock, matters, trust, AR, supplier switch, exceptions log) and **Pipeline** page (Streamlit) | [`integration/marts_api.py`](integration/marts_api.py), [`views/pipeline.py`](views/pipeline.py) |
 
 **Evidence** (screenshots from the real runs):
 
@@ -141,8 +141,9 @@ How the dashboard's numbers would arrive from the firm's accounting system, buil
 **Result:** 11 resources from 5 systems (7,572 records) load with every check at 0 failures. Receivables at the 17 Sep 2025
 report date are **$1,053,551.51** in the pipeline against $1,053,551.56 in the app, a 5-cent gap from per-invoice cent rounding.
 The ageing buckets and monthly revenue also tie out.
+**Evidence note:** the screenshots above were taken on the earlier version of the data (before the cut-over was modelled). The Snowflake views for the transition were syntax-checked but not yet run on Snowflake, and the live n8n workflow and Render service have not been updated, so those screenshots should be retaken after redeploying.
 **Honest limit:** every source system is a mock serving a re-shaped copy of the app's simulated data. No real firm or client
-data is used. The LEAP, InfoTrack and PEXA API shapes are illustrative because those vendors gate their API references. Live
+data is used. The LEAP, InfoTrack, TriSearch and PEXA API shapes are illustrative because those vendors gate or do not publish their API references. Supplier service fees are assumptions, not published prices. Live
 connections need vendor developer access, and switching to them is configuration, not code.
 
 ```bash
