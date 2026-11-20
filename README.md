@@ -2,7 +2,7 @@
 
 ![Python 3.12](https://img.shields.io/badge/python-3.12-blue) ![Streamlit](https://img.shields.io/badge/built%20with-Streamlit-ff4b4b) ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
-**[▶ Live demo](https://lawfirmoperationsintelliigence-gkymdplvqo2g3smdqcgyxv.streamlit.app)** · [Methodology](docs/METHODOLOGY.md) · [Simulator](docs/SIMULATOR.md) · [Architecture](docs/ARCHITECTURE.md)
+**[▶ Live demo](https://lawfirmoperationsintelliigence-gkymdplvqo2g3smdqcgyxv.streamlit.app)** · [Methodology](docs/METHODOLOGY.md) · [Simulator](docs/SIMULATOR.md) · [Architecture](docs/ARCHITECTURE.md) · [Business analysis pack](docs/ba/README.md)
 
 An interactive financial-analysis dashboard for a fictional three-office law firm. Pick a reporting period (month-to-date,
 quarter-to-date, financial year or any custom range), compare it with the prior period or the same period last year, and see profit
@@ -25,6 +25,10 @@ gap to budget, and work out what it would take to close that gap.
 | **Tech stack** | Python, pandas, Streamlit, Plotly · SQL (SQLite, DuckDB, Snowflake) · REST API + JSON · OAuth 2.0 / JWT (Auth0) · n8n · Excel + Power Query · FastAPI · GitHub Actions |
 | **Proof** | CI green; data-quality, query and pipeline tests in `tests/`; pipeline checks in [docs/PIPELINE_QUALITY.md](docs/PIPELINE_QUALITY.md). |
 | **Honest limits** | Fictional firm and synthetic data modelled on real bookkeeping work; contains no client information. Forecasts depend on stated assumptions. |
+
+## Business analysis pack
+
+The cut-over is also documented the way a Business Analyst would run it: a [BRD](docs/ba/BRD.md) with 13 requirements traced to the marts and tests that deliver them, a [stakeholder map and RACI](docs/ba/STAKEHOLDERS.md), [as-is / to-be process maps](docs/ba/PROCESS_MAPS.md) with 10 gaps and their controls, [16 UAT cases](docs/ba/UAT.md) (8 pass, 8 fail on the planted defects and are logged), and a [cut-over runbook](docs/ba/CUTOVER_RUNBOOK.md) with go / no-go criteria and rollback.
 
 ## Demo clips
 
