@@ -1,4 +1,4 @@
-# D'Agostino Legal — Financial Operations Dashboard
+# Legal Practice — Financial Operations Dashboard
 
 ![Python 3.12](https://img.shields.io/badge/python-3.12-blue) ![Streamlit](https://img.shields.io/badge/built%20with-Streamlit-ff4b4b) ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 

@@ -1,11 +1,11 @@
-"""D'Agostino Legal — Financial Operations Dashboard (entry point).
+"""Legal Practice — Financial Operations Dashboard (entry point).
 
 Run:  streamlit run app.py
 """
 import plotly.graph_objects as go
 import streamlit as st
 
-st.set_page_config(page_title="D'Agostino Legal — Operations", page_icon="⚖️", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="Legal Practice — Operations", page_icon="⚖️", layout="wide", initial_sidebar_state="expanded")
 
 from core import platforms as P
 from core import theme, ui
@@ -47,7 +47,7 @@ def go_platform(name):
 
 # ----------------------------------------------------------------- sidebar ----
 with st.sidebar:
-    st.markdown('<div class="sidebar-brand"><div class="sidebar-brand-badge">D</div><div class="sidebar-brand-name">D\'Agostino Legal</div></div>', unsafe_allow_html=True)
+    st.markdown('<div class="sidebar-brand"><div class="sidebar-brand-badge">LP</div><div class="sidebar-brand-name">Legal Practice</div></div>', unsafe_allow_html=True)
     inp = P.base_inputs(M)
     names = P.NAMES
     costs = [P.run_rate(n, inp) for n in names]

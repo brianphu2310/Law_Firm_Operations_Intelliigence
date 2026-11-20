@@ -71,7 +71,7 @@ def build(db: Path = DB, out: Path = OUT) -> Path:
     ws = wb.active
     ws.title = "Summary"
     ws.sheet_view.showGridLines = False
-    ws["A1"] = "D'Agostino Legal: Debtors & Revenue Pack"
+    ws["A1"] = "Legal Practice: Debtors & Revenue Pack"
     ws["A1"].font = Font(name=F, bold=True, size=14)
     ws["A2"] = f"Simulated data. Source: MYOB API -> Snowflake marts via Power Query. Receivables as at {as_at:%d %b %Y}. Refresh: Data > Refresh All."
     ws["A2"].font = Font(name=F, italic=True, size=9, color="666666")
