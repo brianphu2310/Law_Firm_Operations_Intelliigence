@@ -97,7 +97,7 @@ def build_export(model: dict | None = None) -> dict[str, list[dict]]:
                 "Invoices": [{"UID": inv_uid, "Number": r.invoice, "AmountApplied": total, "Type": "Invoice"}],
                 "LastModified": _iso(r.paid), "RowVersion": "1"})
 
-    company = [{"Id": COMPANY_FILE_UID, "Name": "D'Agostino Legal (Simulated)", "Country": "AU",
+    company = [{"Id": COMPANY_FILE_UID, "Name": "Sample Legal Practice (Simulated)", "Country": "AU",
                 "ProductVersion": "2025.9", "LastSyncDate": _iso(AS_OF)}]
     return {"accounts": accounts, "customers": customers, "invoices": invoices,
             "customer_payments": payments, "company_file": company}

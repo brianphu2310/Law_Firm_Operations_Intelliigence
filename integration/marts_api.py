@@ -18,7 +18,7 @@ from fastapi import FastAPI, Header, HTTPException, Query
 
 DB = Path(os.getenv("MARTS_DB", Path(__file__).resolve().parent / "law_firm.duckdb"))
 MARTS = ["revenue_monthly", "aged_receivables", "collection_performance"]
-app = FastAPI(title="D'Agostino Legal finance marts (simulated data)")
+app = FastAPI(title="Legal practice finance marts (simulated data)")
 
 
 def _q(sql, params=None):
