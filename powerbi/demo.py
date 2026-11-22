@@ -293,6 +293,10 @@ def measures(E: Engine):
     m["Fees per Dollar"] = lambda c: float(mk["fees"].sum() / mk["spend"].sum())
     m["Platform Cumulative"] = lambda c: float(E.filt("Platform Cashflow", c)["Cumulative"].sum())
     m["Platform Criterion Score"] = lambda c: float(E.filt("Platform Scores", c)["Score"].sum())
+    m["Answer"] = lambda c: (lambda d: d["Answer"].iloc[0] if len(d) == 1 else None)(E.filt("Answers", c))
+    m["Answer Evidence"] = lambda c: (lambda d: d["Evidence"].iloc[0] if len(d) == 1 else None)(E.filt("Answers", c))
+    m["Profit vs Budget Caption"] = lambda c: (lambda d: ("▲ +" if d > 0 else "▼ -") + f"${abs(d):,.0f} vs budget")(m["Profit vs Budget"](c))
+    m["Cash Caption"] = lambda c: f"minimum balance $60,000 · today ${E.bal('Cash', c):,.0f}"
     m["Platform Verdict"] = lambda c: (lambda d: d["Verdict"].iloc[0] if len(d) == 1 else None)(E.filt("Platforms", c))
     m["Platform Grid NPV"] = lambda c: float(E.filt("Platform NPV Grid", c)["NPV"].sum())
     sim_measures(E, m)
@@ -708,7 +712,7 @@ def build():
     from core import platforms as PL
     inp = PL.base_inputs(M)
     top = PL.ranking(inp).sort_values("rank").iloc[0]
-    facts = dict(run_rate=f"${PL.run_rate(PL.BASELINE, inp):,.0f}", best=top["name"], npv=f"+${top['npv']:,.0f}")
+    facts = dict(run_rate=f"${PL.run_rate(PL.BASELINE, inp):,.0f}", best=top["name"], npv=f"+${top['npv']:,.0f}", answers=B.load_answers())
     RP.ALL_FIELDS.clear()
     pages = RP.build_pages(facts, levers)
     periods = list(W["Period"].sort_values("Order")["Period"])
@@ -720,7 +724,8 @@ def build():
         for fl in flist or []:
             col = fl["field"]["Column"]
             vals = fl["filter"]["Where"][0]["Condition"]["In"]["Values"]
-            c[(col["Expression"]["SourceRef"]["Entity"], col["Property"])] = vals[0][0]["Literal"]["Value"].strip("'")
+            raw = vals[0][0]["Literal"]["Value"]
+            c[(col["Expression"]["SourceRef"]["Entity"], col["Property"])] = int(raw[:-1]) if raw.endswith("L") else raw.strip("'")
         return c
 
     out_pages = []
@@ -760,7 +765,7 @@ def build():
                 vis["data"] = visual_data(E, meas, fmts, v, Ctx({("Period", "Period"): MD.DEFAULT_PERIOD, **vctx}))
             else:
                 vis["by"] = "period"
-                vis["data"] = {pe: visual_data(E, meas, fmts, v, Ctx({("Period", "Period"): pe})) for pe in periods}
+                vis["data"] = {pe: visual_data(E, meas, fmts, v, Ctx({("Period", "Period"): pe, **vctx})) for pe in periods}
             pv.append(vis)
         out_pages.append(dict(name=p.name, display=p.display, section=p.section, hidden=p.hidden, visuals=pv))
     payload = dict(pages=out_pages, periods=periods, defaultPeriod=MD.DEFAULT_PERIOD, presets=presets, platforms=platforms,
@@ -782,7 +787,7 @@ def period_dependent(tables_used, v):
                        "Deadlines Next 30 Days", "Deadlines Caption", "Deadline Count", "Matter Count", "Open Matters", "Matter WIP",
                        "Matter Billed", "Matter Estimated Value", "Supplier Spend", "Card Spend", "Cash Inflow", "Cash Outflow",
                        "Cash Closing", "Cash Minimum", "Cash Low Point", "FY Forecast Profit", "FY Profit Gap", "FY Path Actual Profit",
-                       "FY Path Forecast Profit", "FY Path Budget Profit", "Headcount"}
+                       "FY Path Forecast Profit", "FY Path Budget Profit", "Headcount", "Answer", "Answer Evidence"}
     if meas_names:
         return any(n not in static_measures for n in meas_names)
     return bool(tables_used - STATIC)

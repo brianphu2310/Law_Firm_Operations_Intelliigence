@@ -26,7 +26,7 @@ def built(inp):
     M, f, ctx, consts, tables, levers = inp
     tbls, rels, expr = MD.build_model(consts, tables, levers, ctx)
     RP.ALL_FIELDS.clear()
-    pages = RP.build_pages(dict(run_rate="$1", best="x", npv="+$1"), levers)
+    pages = RP.build_pages(dict(run_rate="$1", best="x", npv="+$1", answers=B.load_answers()), levers)
     return tbls, rels, pages
 
 

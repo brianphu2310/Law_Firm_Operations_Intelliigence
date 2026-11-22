@@ -357,7 +357,10 @@ def build_pages(ctx_facts, levers):
     cli_tabs = [("Clients", P["clients"].name), ("Marketing", P["clients_mkt"].name)]
     sim_tabs = [("Decide", P["sim_decide"].name), ("Test the plan", P["sim_test"].name)]
 
-    overview(P["overview"], nav, ctx_facts)
+    best = next(pg for pg in plat_pages if pg.platform == ctx_facts["answers"][0]["Answer"].split(": ", 1)[-1]) if ctx_facts.get("answers") else plat_pages[0]
+    targets = {"Platform": ("Platform", best.name), "Simulator": ("Simulator", P["sim_decide"].name), "People": ("People", P["people_hire"].name),
+               "Clients": ("Marketing", P["clients_mkt"].name)}
+    overview(P["overview"], nav, ctx_facts, targets)
     finance_pl(P["finance_pl"], nav, fin_tabs)
     finance_cash(P["finance_cash"], nav, fin_tabs)
     finance_trust(P["finance_trust"], nav, fin_tabs)
@@ -378,38 +381,51 @@ def build_pages(ctx_facts, levers):
 
 
 # ---- Overview
-def overview(p, nav, facts):
-    frame(p, "Overview", "Where the firm stands this period, and the decisions waiting for the Principal", nav)
-    text(p, 14, 100, 1252, 34, [[("HOW THIS STARTED   ", 8, TEAL, True),
-                                 (f"Which software saves the most? ({facts['run_rate']} a year on LEAP + InfoTrack today; best: {facts['best']}, NPV {facts['npv']}). "
-                                  "The same model now answers hiring, staffing, pay, marketing and branches.", 9, INK, False)]],
-         background=True, border=True, key="story")
-    xs = [14 + i * 210 for i in range(6)]
-    kpi(p, xs[0], 142, 202, 82, F.m(M, "Active Matters"), "Active matters", F.m(M, "Active Matters Δ"))
-    kpi(p, xs[1], 142, 202, 82, F.m(M, "Billable Hours"), "Billable hours", F.m(M, "Hours Δ"))
-    kpi(p, xs[2], 142, 202, 82, F.m(M, "Collections ex GST"), "Collected revenue (ex GST)", F.m(M, "Collections Δ"))
-    kpi(p, xs[3], 142, 202, 82, F.m(M, "Utilisation"), "Utilisation", F.m(M, "Utilisation Δ"))
-    kpi(p, xs[4], 142, 202, 82, F.m(M, "Deadlines Next 30 Days"), "Deadlines · next 30 days", F.m(M, "Deadlines Caption"))
-    kpi(p, xs[5], 142, 202, 82, F.m(M, "Top Biller Fees"), "Top biller fees", F.m(M, "Top Biller"))
-    p.add("funnel", 14, 232, 400, 236, roles={"Category": [F.c("Funnel Stage", "Stage")], "Y": [F.m(M, "Funnel Value", "Count")]},
-          objects={"labels": [{"properties": {"show": lit(True), "fontSize": lit(8.0)}}]}, title="Matter intake funnel", subtitle="From first inquiry to a new matter")
-    table(p, 420, 232, 250, 236, [F.c("Funnel Stage", "Stage"), F.m(M, "Funnel Step Conversion", "Conversion")], "Stage conversion",
-          "Share that moves to the next stage")
-    chart(p, "clusteredColumnChart", 676, 232, 590, 236, F.c("Date", "month_start_date", "Month"), [F.m(M, "Trend Area Hours", "Hours")],
-          "Billable hours trend", F.c("Practice Area", "practice_area"), "12 months to the period end, by practice area")
-    chart(p, "clusteredBarChart", 14, 476, 300, 236, F.c("Practice Area", "practice_area"), [F.m(M, "Area Fees", "Fees")], "Revenue by practice area",
-          sort=(F.m(M, "Area Fees"), "Descending"), labels=True, legend=False)
-    p.add("donutChart", 320, 476, 236, 236, roles={"Category": [F.c("Practice Area", "practice_area")], "Y": [F.m(M, "Open Matters", "Open matters")]},
-          objects={"legend": [{"properties": {"show": lit(True), "position": lit("Bottom"), "fontSize": lit(8.0)}}],
-                   "labels": [{"properties": {"show": lit(True), "fontSize": lit(8.0), "labelStyle": lit("Percent of total")}}]},
-          title="Workload by practice area", subtitle="Open matters")
-    p.add("multiRowCard", 562, 476, 260, 236, roles={"Values": [F.m(M, "Trust Funds", "Trust funds held"), F.m(M, "WIP", "Work in progress (unbilled)"),
-                                                                F.m(M, "Receivables", "Receivables (billed, unpaid)"), F.m(M, "Funds Employed", "Total")]},
-          objects={"dataLabels": [{"properties": {"fontSize": lit(14.0)}}], "categoryLabels": [{"properties": {"fontSize": lit(8.0)}}],
-                   "card": [{"properties": {"barShow": lit(True), "barColor": colour(TEAL)}}]},
-          title="Trust, WIP & receivables", subtitle="At the period end")
-    table(p, 828, 476, 438, 236, [F.c("Decisions", "Title", "Decision"), F.c("Decisions", "Detail", "Evidence and where to look")], "Decisions to make",
-          sort=(F.c("Decisions", "Order"), "Ascending"))
+def overview(p, nav, facts, targets):
+    """The whole project on one screen: firm health, then the Principal's six questions with the answer the model gives."""
+    frame(p, "Overview", "Six decisions for the Principal of a three-office law firm, answered from one model · sample data, as of 17 Sep 2025", nav)
+    x = [14 + i * 314 for i in range(4)]
+    kpi(p, x[0], 68, 306, 78, F.m(M, "Revenue"), "Revenue this period", F.m(M, "Revenue Δ"))
+    kpi(p, x[1], 68, 306, 78, F.m(M, "Operating Profit"), "Operating profit this period", F.m(M, "Profit vs Budget Caption"))
+    kpi(p, x[2], 68, 306, 78, F.m(M, "Utilisation"), "Fee-earner utilisation", F.m(M, "Utilisation Δ"))
+    kpi(p, x[3], 68, 306, 78, F.m(M, "Cash Low Point"), "Cash low point, next 13 weeks", F.m(M, "Cash Caption"))
+    for i, row in enumerate(facts["answers"]):
+        cx, cy = 14 + (i % 3) * 421, 154 + (i // 3) * 178
+        p.add("shape", cx, cy, 413, 170, objects={"shape": [{"properties": {"tileShape": lit("rectangleRounded")}}],
+                                                  "fill": [{"properties": {"fillColor": colour("#FFFFFF"), "transparency": lit(0.0)}}],
+                                                  "outline": [{"properties": {"show": lit(True), "lineColor": colour(LINE), "weight": lit(1.0)}}]},
+              background=False, border=False, key=f"tile{i}")
+        p.add("shape", cx, cy + 14, 5, 26, objects={"shape": [{"properties": {"tileShape": lit("rectangle")}}],
+                                                    "fill": [{"properties": {"fillColor": colour(TEAL), "transparency": lit(0.0)}}],
+                                                    "outline": [{"properties": {"show": lit(False)}}]}, background=False, border=False, key=f"accent{i}")
+        text(p, cx + 12, cy + 8, 395, 26, [[(f"{i + 1}  ", 10, TEAL, True), (row["Question"].upper(), 8.5, MUTED, True)]], key=f"q{i}")
+        flt = [cat_filter(F.c("Answers", "Order"), int(row["Order"]), _id(p.name, "ans", i))]
+        p.add("card", cx + 8, cy + 36, 397, 40, roles={"Values": [F.m(M, "Answer", " ")]},
+              objects={"labels": [{"properties": {"fontSize": lit(15.0), "color": colour(INK)}}], "categoryLabels": [{"properties": {"show": lit(False)}}]},
+              background=False, border=False, filters=flt, key=f"a{i}")
+        p.add("card", cx + 8, cy + 78, 397, 56, roles={"Values": [F.m(M, "Answer Evidence", " ")]},
+              objects={"labels": [{"properties": {"fontSize": lit(9.0), "color": colour("#334155")}}], "categoryLabels": [{"properties": {"show": lit(False)}}],
+                       "wordWrap": [{"properties": {"show": lit(True)}}]},
+              background=False, border=False, filters=[cat_filter(F.c("Answers", "Order"), int(row["Order"]), _id(p.name, "ev", i))], key=f"e{i}")
+        label, target = targets[row["Page"]]
+        p.add("actionButton", cx + 263, cy + 138, 140, 24, objects={
+            "icon": [{"properties": {"show": lit(False)}, "selector": {"id": "default"}}],
+            "text": [{"properties": {"show": lit(True)}}, {"properties": {"text": lit(f"{label} →"), "fontSize": lit(9.0), "fontColor": colour(TEAL), "bold": lit(True)},
+                                                          "selector": {"id": "default"}}],
+            "fill": [{"properties": {"show": lit(True), "fillColor": colour("#e0f2f4"), "transparency": lit(0.0)}, "selector": {"id": "default"}}],
+            "outline": [{"properties": {"show": lit(False)}, "selector": {"id": "default"}}]},
+            background=False, border=False, vco_extra={"visualLink": [{"properties": {"show": lit(True), "type": lit("PageNavigation"), "navigationSection": lit(target)}}]},
+            key=f"go{i}")
+    chart(p, "lineClusteredColumnComboChart", 14, 510, 760, 202, F.c("Date", "month_start_date", "Month"), [F.m(M, "Trend Operating Profit", "Operating profit")],
+          "Profit against budget, month by month", y2=[F.m(M, "Trend Budget Operating Profit", "Budget")], subtitle="12 months to the period end")
+    text(p, 780, 510, 486, 202, [
+        [("HOW IT WORKS", 8, TEAL, True)],
+        [("One Python model of the firm feeds a SQL star schema (SQLite and Snowflake), an Excel pack refreshed by Power Query, and this "
+          "Power BI report.", 9, INK, False)],
+        [("The Simulator tests each decision before it is made: profit, the gap to budget, cash needed up front, and what happens if only "
+          "half of it is delivered.", 9, INK, False)],
+        [("Every number is checked: the SQL answers and the DAX measures are reconciled with the Python engine in automated tests.", 9, INK, False)],
+    ], background=True, border=True, key="how")
 
 
 # ---- Finance

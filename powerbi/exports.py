@@ -290,6 +290,64 @@ def sim_expected(M):
     return rows
 
 
+def answers(M):
+    """The Principal's six questions, each answered from the engine (Overview page). Nothing here is typed in by hand."""
+    from core import platforms as PL
+    from core.ref import NEW_AREAS
+    p, f = S.base_actuals(M)
+    ctx = S.context(M)
+    base = S.project(f, S.DEFAULTS, ctx=ctx)
+    low0 = float(X.cash_forecast(M)["closing"].min())
+    run = lambda **kw: S.project(f, {**S.DEFAULTS, **kw}, ctx=ctx)
+    k = lambda v: _money(v)
+    out = []
+    # 1 software
+    inp = PL.base_inputs(M)
+    rk = PL.ranking(inp).sort_values("rank")
+    top = rk.iloc[0]
+    out.append(("Should we switch software?", f"Yes: {top['name']}",
+                f"NPV +{k(top['npv'])} over 3 years, payback {int(top['payback'])} months. Today: {k(PL.run_rate(PL.BASELINE, inp))} a year on LEAP + InfoTrack.",
+                "Platform"))
+    # 2 branch
+    r = run(**S.PRESETS["Open a branch"])
+    low = low0 + r["cash_effect"]
+    verdict = "Not yet: fund it first" if low < MIN_CASH else ("Yes" if r["branch_net_full"] > 0 else "No")
+    out.append(("Should we open a branch?", verdict,
+                f"{k(r['branch_net_full'])} a year at full speed, fit-out back in {r['branch_payback']} months, but cash dips to {k(low)} (minimum {k(MIN_CASH)}).",
+                "Simulator"))
+    # 3 hiring
+    pa = X.practice_area_table(M)
+    hire = S.PRESETS["Hire an associate"]                         # one associate, 60% productive in year one
+    gain = lambda a: run(**hire, sim_hire_area=a)["op1"] - base["op1"]
+    a_top = pa.index[0]
+    a_low = min(pa.index, key=gain)
+    out.append(("Which matters need another lawyer?", f"{a_top} first",
+                f"Lawyers at {pa.iloc[0]['util']:.0%} utilisation. One associate adds {k(gain(a_top))} in year one, against {k(gain(a_low))} in {a_low}.",
+                "People"))
+    # 4 support teams
+    dt = X.department_table(M)
+    over = dt[dt["status"] == "Over-staffed"].sort_values("gap", ascending=False).iloc[0]
+    cut = run(**S.PRESETS["Cut 2 support roles"])
+    out.append(("Are support teams the right size?", f"{over['branch']} {over['department'].split()[0].lower()}: overstaffed",
+                f"{over['headcount']} {over['department'].lower()} staff for {over['needed']:.1f} roles of work. Cutting 2 saves {k(cut['support_saving'])} a year, {k(cut['one_off'])} once (NES).",
+                "People"))
+    # 5 pay
+    pay = run(**S.PRESETS["Pay rise 3%"])
+    rtf = S.rate_to_fund(f, {**S.DEFAULTS, **S.PRESETS["Pay rise 3%"]}, ctx)
+    out.append(("Should pay go up?", f"3% is affordable with +{rtf:.1f}% rates",
+                f"A 3% rise costs {k(pay['pay_cost'])} a year. Market wage growth is {MARKET_WAGE_GROWTH:.1%} (ABS WPI), so less risks losing people.",
+                "Simulator"))
+    # 6 marketing and new services
+    mk = X.marketing_table(M)
+    best, worst = mk["cost_per_matter"].idxmin(), mk["cost_per_matter"].idxmax()
+    nas = {n: run(sim_new_area=True, sim_new_area_type=n) for n in NEW_AREAS}
+    na = max(nas, key=lambda n: nas[n]["area_net_full"])
+    out.append(("Where should growth come from?", f"{best}, {na}",
+                f"{k(mk.loc[best, 'cost_per_matter'])} per new matter vs {k(mk.loc[worst, 'cost_per_matter'])} on {worst}. {na}: {k(nas[na]['area_net_full'])} a year at full speed.",
+                "Clients"))
+    return [dict(Order=i + 1, Question=q, Answer=a, Evidence=e, Page=pg) for i, (q, a, e, pg) in enumerate(out)]
+
+
 def export_all(out=OUT):
     M = build_model()
     export_periods(M, out)
@@ -300,6 +358,8 @@ def export_all(out=OUT):
     export_detail_tables(M, out)
     top = export_platforms(M, out)
     export_decisions(M, out, top)
+    ans = answers(M)
+    write("answers", ans, list(ans[0]), out)
     rows = sim_expected(M)
     write("sim_expected", rows, ["Preset", "Metric", "Expected"], out)
     write("about", [dict(AsOf=AS_OF, MarketWageGrowth=MARKET_WAGE_GROWTH, MinCash=MIN_CASH)], ["AsOf", "MarketWageGrowth", "MinCash"], out)

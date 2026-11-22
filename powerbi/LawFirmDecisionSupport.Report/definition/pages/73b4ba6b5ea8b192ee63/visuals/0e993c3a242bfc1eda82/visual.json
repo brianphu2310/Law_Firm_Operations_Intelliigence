@@ -3,10 +3,10 @@
   "name": "0e993c3a242bfc1eda82",
   "position": {
     "x": 203.35625,
-    "y": 144.0,
+    "y": 118.0,
     "z": 25000,
-    "width": 165.50625,
-    "height": 56.0,
+    "width": 254.23125000000002,
+    "height": 24.0,
     "tabOrder": 25000
   },
   "visual": {
@@ -23,12 +23,12 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "Active Matters"
+                  "Property": "Revenue Δ"
                 }
               },
-              "queryRef": "Measures.Active Matters",
-              "nativeQueryRef": "Active matters",
-              "displayName": "Active matters"
+              "queryRef": "Measures.Revenue Δ",
+              "nativeQueryRef": " ",
+              "displayName": " "
             }
           ]
         }
@@ -41,7 +41,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "18.0D"
+                  "Value": "8.0D"
                 }
               }
             },
@@ -50,7 +50,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0f172a'"
+                      "Value": "'#64748b'"
                     }
                   }
                 }
@@ -65,25 +65,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "9.0D"
-                }
-              }
-            },
-            "color": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#64748b'"
-                    }
-                  }
+                  "Value": "false"
                 }
               }
             }

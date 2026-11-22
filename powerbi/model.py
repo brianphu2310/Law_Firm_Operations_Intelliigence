@@ -30,7 +30,7 @@ ANALYSIS = [("Period", "period"), ("Period Month", "period_month"), ("Period Bal
             ("FY Outlook", "fy_outlook"), ("FY Summary", "fy_summary"), ("Deadlines", "deadlines"), ("Cards", "cards"), ("RapidPay", "rapidpay"),
             ("Commissions", "commissions"), ("Platforms", "platforms"), ("Platform Cashflow", "platform_cashflow"),
             ("Platform Scores", "platform_scores"), ("Platform Risks", "platform_risks"), ("Platform Gantt", "platform_gantt"),
-            ("Platform NPV Grid", "platform_npv_grid"), ("Sim Expected", "sim_expected")]
+            ("Platform NPV Grid", "platform_npv_grid"), ("Sim Expected", "sim_expected"), ("Answers", "answers")]
 DATE_COLS = {"full_date", "month_start_date", "Start", "End", "PriorStart", "PriorEnd", "week_start", "month", "date"}
 INT_SUFFIX = ("_key", "Key", "Order", "order")
 HIDE = {"Period Month", "Period Balance", "Sim Expected"}
@@ -241,6 +241,7 @@ def descriptive_measures():
     add("Operating Profit", "[Actual Operating profit]", MONEY, "KPIs")
     add("Budget Operating Profit", "[Budget Operating profit]", MONEY, "KPIs")
     add("Profit vs Budget", "[Operating Profit] - [Budget Operating Profit]", MONEY, "KPIs")
+    add("Profit vs Budget Caption", 'VAR d = [Profit vs Budget]\nRETURN IF( ISBLANK( d ), "no budget", FORMAT( d, "▲ +$#,0;▼ -$#,0;$0" ) & " vs budget" )', None, "KPIs")
     add("Operating Margin", "DIVIDE( [Operating Profit], [Revenue] )", PCT, "KPIs")
     add("Fees", "[Actual Fees]", MONEY, "KPIs")
     add("Billable Hours", psum(f"SUM( 'PnL'[billable_hours] ), {ACTUAL}"), NUM, "KPIs")
@@ -337,6 +338,7 @@ def descriptive_measures():
     add("Cash Closing", "SUM( 'Cash Forecast'[closing] )", MONEY, "Finance")
     add("Cash Minimum", "MAX( 'Cash Forecast'[min_cash] )", MONEY, "Finance")
     add("Cash Low Point", "MINX( ALL( 'Cash Forecast' ), 'Cash Forecast'[closing] )", MONEY, "Finance")
+    add("Cash Caption", '"minimum balance $60,000 · today " & FORMAT( [Office Cash], "$#,0" )', None, "Finance")
     add("FY Forecast Profit", "MAX( 'FY Summary'[fc_op] )", MONEY, "Finance")
     add("FY Budget Profit", "MAX( 'FY Summary'[budget_op] )", MONEY, "Finance")
     add("FY Forecast Revenue", "MAX( 'FY Summary'[fc_rev] )", MONEY, "Finance")
@@ -384,6 +386,8 @@ def descriptive_measures():
     add("Platform Verdict", "SELECTEDVALUE( 'Platforms'[Verdict] )", None, "Platform")
     add("Platform Grid NPV", "SUM( 'Platform NPV Grid'[NPV] )", MONEY, "Platform")
     add("Best Platform", "VAR t = TOPN( 1, ALL( 'Platforms'[Platform] ), CALCULATE( MAX( 'Platforms'[Decision] ) ), DESC )\nRETURN MAXX( t, 'Platforms'[Platform] )", None, "Platform")
+    add("Answer", "SELECTEDVALUE( 'Answers'[Answer] )", None, "Overview", desc="Use with a visual filter on Answers[Order].")
+    add("Answer Evidence", "SELECTEDVALUE( 'Answers'[Evidence] )", None, "Overview")
     add("Story", '"HOW THIS STARTED  The Principal asked which software saves the firm the most ("'
         ' & FORMAT( CALCULATE( MAX( \'Platforms\'[RunRate] ), \'Platforms\'[IsCurrent] = 1 ), "$#,0" ) & " a year on LEAP + InfoTrack today; best: " & [Best Platform]'
         ' & ", NPV " & FORMAT( CALCULATE( MAX( \'Platforms\'[NPV] ), \'Platforms\'[Platform] = [Best Platform] ), "+$#,0" ) & "). The same model now answers hiring, staffing, pay, marketing, new services and branches."',

@@ -116,6 +116,11 @@ def write_pbip():
                                             "version": "1.0", "artifacts": [{"report": {"path": f"{NAME}.Report"}}], "settings": {"enableAutoRecovery": True}})
 
 
+def load_answers():
+    import csv
+    return list(csv.DictReader((ROOT.parent / "data" / "powerbi" / "answers.csv").open(encoding="utf-8")))
+
+
 def inputs(M=None):
     M = M or build_firm()
     p, f = S.base_actuals(M)
@@ -133,7 +138,7 @@ def main(export=True):
     inp = P.base_inputs(M)
     rk = P.ranking(inp).sort_values("rank")
     top = rk.iloc[0]
-    facts = dict(run_rate=f"${P.run_rate(P.BASELINE, inp):,.0f}", best=top["name"], npv=f"+${top['npv']:,.0f}")
+    facts = dict(run_rate=f"${P.run_rate(P.BASELINE, inp):,.0f}", best=top["name"], npv=f"+${top['npv']:,.0f}", answers=load_answers())
     tbls = write_model(consts, tables, levers, ctx)
     pages = write_report(levers, facts)
     write_pbip()

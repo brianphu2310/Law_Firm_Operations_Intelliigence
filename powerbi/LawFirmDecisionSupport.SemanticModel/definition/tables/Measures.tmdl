@@ -509,6 +509,11 @@ table Measures
 		formatString: \$#,0;-\$#,0;\$0
 		displayFolder: KPIs
 
+	measure 'Profit vs Budget Caption' =
+			VAR d = [Profit vs Budget]
+			RETURN IF( ISBLANK( d ), "no budget", FORMAT( d, "▲ +$#,0;▼ -$#,0;$0" ) & " vs budget" )
+		displayFolder: KPIs
+
 	measure 'Operating Margin' = DIVIDE( [Operating Profit], [Revenue] )
 		formatString: 0.0%;-0.0%;0.0%
 		displayFolder: KPIs
@@ -1143,6 +1148,9 @@ table Measures
 		formatString: \$#,0;-\$#,0;\$0
 		displayFolder: Finance
 
+	measure 'Cash Caption' = "minimum balance $60,000 · today " & FORMAT( [Office Cash], "$#,0" )
+		displayFolder: Finance
+
 	measure 'FY Forecast Profit' = MAX( 'FY Summary'[fc_op] )
 		formatString: \$#,0;-\$#,0;\$0
 		displayFolder: Finance
@@ -1315,6 +1323,13 @@ table Measures
 			VAR t = TOPN( 1, ALL( 'Platforms'[Platform] ), CALCULATE( MAX( 'Platforms'[Decision] ) ), DESC )
 			RETURN MAXX( t, 'Platforms'[Platform] )
 		displayFolder: Platform
+
+	/// Use with a visual filter on Answers[Order].
+	measure Answer = SELECTEDVALUE( 'Answers'[Answer] )
+		displayFolder: Overview
+
+	measure 'Answer Evidence' = SELECTEDVALUE( 'Answers'[Evidence] )
+		displayFolder: Overview
 
 	measure Story = "HOW THIS STARTED  The Principal asked which software saves the firm the most (" & FORMAT( CALCULATE( MAX( 'Platforms'[RunRate] ), 'Platforms'[IsCurrent] = 1 ), "$#,0" ) & " a year on LEAP + InfoTrack today; best: " & [Best Platform] & ", NPV " & FORMAT( CALCULATE( MAX( 'Platforms'[NPV] ), 'Platforms'[Platform] = [Best Platform] ), "+$#,0" ) & "). The same model now answers hiring, staffing, pay, marketing, new services and branches."
 		displayFolder: Overview

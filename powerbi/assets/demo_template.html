@@ -184,10 +184,11 @@ function card(v, body, W, H, ob){
   const proj = v.visual.query.queryState.Values.projections[0];
   const label = proj.displayName && proj.displayName.trim() ? proj.displayName : "";
   const c = document.createElement("div"); c.className = "card";
-  const isText = typeof val === "string" && (val.length > 34 || size < 10);
+  const isText = typeof val === "string" && (val.length > 60 || size < 10);
   if (isText) c.classList.add("text");
   const vv = document.createElement("div"); vv.className = "val"; vv.textContent = fmt(val, d.kind);
   vv.style.fontSize = (isText ? Math.max(size, 8) : size) + "pt";
+  if (!isText && typeof val === "string" && size >= 12) { c.style.alignItems = "flex-start"; vv.style.textAlign = "left"; vv.style.paddingLeft = "4px"; }
   let col = colorOf(prop(ob,"labels","color"));
   const cm = prop(ob,"labels","color"); try { const mname = cm.solid.color.expr.Measure.Property;
     if (mname === "Sim Gap Colour") col = val >= 0 ? "#047857" : "#b91c1c";
