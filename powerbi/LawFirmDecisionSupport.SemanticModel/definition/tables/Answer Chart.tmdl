@@ -1,0 +1,47 @@
+table 'Answer Chart'
+
+	column Order
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Order
+
+	column Item
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Item
+		sortByColumn: ItemOrder
+
+	column ItemOrder
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: ItemOrder
+
+	column Value
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: Value
+
+	column Highlight
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: Highlight
+
+	column Unit
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Unit
+
+	partition 'Answer Chart' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(BaseUrl, [RelativePath = "data/powerbi/answer_chart.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, {"Order", "ItemOrder", "Value", "Highlight"}),
+				    Typed = Table.TransformColumnTypes(Blanks, {{"Order", Int64.Type}, {"Item", type text}, {"ItemOrder", Int64.Type}, {"Value", type number}, {"Highlight", type number}, {"Unit", type text}}, "en-US")
+				in
+				    Typed

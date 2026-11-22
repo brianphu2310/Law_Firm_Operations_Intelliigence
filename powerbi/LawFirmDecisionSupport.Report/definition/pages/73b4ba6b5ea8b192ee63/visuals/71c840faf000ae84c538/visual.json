@@ -3,10 +3,10 @@
   "name": "71c840faf000ae84c538",
   "position": {
     "x": 928.5125,
-    "y": 162.0,
+    "y": 160.0,
     "z": 49000,
-    "width": 336.984375,
-    "height": 26.0,
+    "width": 238.875,
+    "height": 24.0,
     "tabOrder": 49000
   },
   "visual": {
@@ -28,9 +28,9 @@
                     }
                   },
                   {
-                    "value": "WHICH MATTERS NEED ANOTHER LAWYER?",
+                    "value": "WHERE SHOULD WE HIRE LAWYERS?",
                     "textStyle": {
-                      "fontSize": "8.5pt",
+                      "fontSize": "8pt",
                       "color": "#64748b",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"

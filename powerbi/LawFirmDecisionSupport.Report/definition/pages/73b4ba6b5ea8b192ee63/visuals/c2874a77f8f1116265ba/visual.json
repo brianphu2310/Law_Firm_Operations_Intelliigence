@@ -1,19 +1,37 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
-  "name": "a0abd51ab0cdbd8f9efe",
+  "name": "c2874a77f8f1116265ba",
   "position": {
-    "x": 925.1,
-    "y": 410.0,
-    "z": 69000,
+    "x": 206.76875,
+    "y": 214.0,
+    "z": 39000,
     "width": 338.690625,
-    "height": 56.0,
-    "tabOrder": 69000
+    "height": 106.0,
+    "tabOrder": 39000
   },
   "visual": {
-    "visualType": "card",
+    "visualType": "clusteredBarChart",
     "query": {
       "queryState": {
-        "Values": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Answer Chart"
+                    }
+                  },
+                  "Property": "Item"
+                }
+              },
+              "queryRef": "Answer Chart.Item",
+              "nativeQueryRef": "Item"
+            }
+          ]
+        },
+        "Y": {
           "projections": [
             {
               "field": {
@@ -23,25 +41,52 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "Answer Evidence"
+                  "Property": "Answer Chart $"
                 }
               },
-              "queryRef": "Measures.Answer Evidence",
-              "nativeQueryRef": " ",
-              "displayName": " "
+              "queryRef": "Measures.Answer Chart $",
+              "nativeQueryRef": "Value",
+              "displayName": "Value"
             }
           ]
         }
       }
     },
     "objects": {
-      "labels": [
+      "legend": [
         {
           "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "9.0D"
+                  "Value": "8.0D"
+                }
+              }
+            },
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             },
@@ -59,7 +104,7 @@
           }
         }
       ],
-      "categoryLabels": [
+      "valueAxis": [
         {
           "properties": {
             "show": {
@@ -72,7 +117,7 @@
           }
         }
       ],
-      "wordWrap": [
+      "labels": [
         {
           "properties": {
             "show": {
@@ -81,7 +126,56 @@
                   "Value": "true"
                 }
               }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "8.0D"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#334155'"
+                    }
+                  }
+                }
+              }
             }
+          }
+        }
+      ],
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Measures"
+                        }
+                      },
+                      "Property": "Answer Chart Colour"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ]
           }
         }
       ]
@@ -188,12 +282,12 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "c78806699e54ddd53091",
+        "name": "66943034265de5e890a6",
         "field": {
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Answers"
+                "Entity": "Answer Chart"
               }
             },
             "Property": "Order"
@@ -205,7 +299,7 @@
           "From": [
             {
               "Name": "t",
-              "Entity": "Answers",
+              "Entity": "Answer Chart",
               "Type": 0
             }
           ],
@@ -229,7 +323,7 @@
                     [
                       {
                         "Literal": {
-                          "Value": "6L"
+                          "Value": "1L"
                         }
                       }
                     ]

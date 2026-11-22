@@ -3,10 +3,10 @@
   "name": "d70cbb30653a0e10bc1c",
   "position": {
     "x": 569.346875,
-    "y": 162.0,
+    "y": 160.0,
     "z": 43000,
-    "width": 336.984375,
-    "height": 26.0,
+    "width": 238.875,
+    "height": 24.0,
     "tabOrder": 43000
   },
   "visual": {
@@ -30,7 +30,7 @@
                   {
                     "value": "SHOULD WE OPEN A BRANCH?",
                     "textStyle": {
-                      "fontSize": "8.5pt",
+                      "fontSize": "8pt",
                       "color": "#64748b",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"

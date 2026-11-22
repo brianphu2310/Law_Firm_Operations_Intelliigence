@@ -30,7 +30,7 @@ ANALYSIS = [("Period", "period"), ("Period Month", "period_month"), ("Period Bal
             ("FY Outlook", "fy_outlook"), ("FY Summary", "fy_summary"), ("Deadlines", "deadlines"), ("Cards", "cards"), ("RapidPay", "rapidpay"),
             ("Commissions", "commissions"), ("Platforms", "platforms"), ("Platform Cashflow", "platform_cashflow"),
             ("Platform Scores", "platform_scores"), ("Platform Risks", "platform_risks"), ("Platform Gantt", "platform_gantt"),
-            ("Platform NPV Grid", "platform_npv_grid"), ("Sim Expected", "sim_expected"), ("Answers", "answers")]
+            ("Platform NPV Grid", "platform_npv_grid"), ("Sim Expected", "sim_expected"), ("Answers", "answers"), ("Answer Chart", "answer_chart")]
 DATE_COLS = {"full_date", "month_start_date", "Start", "End", "PriorStart", "PriorEnd", "week_start", "month", "date"}
 INT_SUFFIX = ("_key", "Key", "Order", "order")
 HIDE = {"Period Month", "Period Balance", "Sim Expected"}
@@ -148,7 +148,7 @@ def import_table(name, folder, file):
         for c in tcols:
             if c.name == "Period":
                 c.sort_by = "Order"
-    sort_by = {"AR Ageing": ("Bucket", "Order"), "Platform Gantt": ("Phase", "Order"), "Platform NPV Grid": ("Volume", "VolumeOrder")}
+    sort_by = {"Answer Chart": ("Item", "ItemOrder"), "AR Ageing": ("Bucket", "Order"), "Platform Gantt": ("Phase", "Order"), "Platform NPV Grid": ("Volume", "VolumeOrder")}
     if name in sort_by:
         a, b = sort_by[name]
         for c in tcols:
@@ -388,6 +388,9 @@ def descriptive_measures():
     add("Best Platform", "VAR t = TOPN( 1, ALL( 'Platforms'[Platform] ), CALCULATE( MAX( 'Platforms'[Decision] ) ), DESC )\nRETURN MAXX( t, 'Platforms'[Platform] )", None, "Platform")
     add("Answer", "SELECTEDVALUE( 'Answers'[Answer] )", None, "Overview", desc="Use with a visual filter on Answers[Order].")
     add("Answer Evidence", "SELECTEDVALUE( 'Answers'[Evidence] )", None, "Overview")
+    add("Answer Chart $", "SUM( 'Answer Chart'[Value] )", MONEY, "Overview")
+    add("Answer Chart Roles", "SUM( 'Answer Chart'[Value] )", "+0.0;-0.0;0.0", "Overview")
+    add("Answer Chart Colour", "IF( MAX( 'Answer Chart'[Highlight] ) = 1, \"#0a8496\", \"#c7d2dc\" )", None, "Overview", hidden=True)
     add("Story", '"HOW THIS STARTED  The Principal asked which software saves the firm the most ("'
         ' & FORMAT( CALCULATE( MAX( \'Platforms\'[RunRate] ), \'Platforms\'[IsCurrent] = 1 ), "$#,0" ) & " a year on LEAP + InfoTrack today; best: " & [Best Platform]'
         ' & ", NPV " & FORMAT( CALCULATE( MAX( \'Platforms\'[NPV] ), \'Platforms\'[Platform] = [Best Platform] ), "+$#,0" ) & "). The same model now answers hiring, staffing, pay, marketing, new services and branches."',

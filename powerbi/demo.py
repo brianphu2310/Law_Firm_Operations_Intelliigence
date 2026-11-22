@@ -294,6 +294,9 @@ def measures(E: Engine):
     m["Platform Cumulative"] = lambda c: float(E.filt("Platform Cashflow", c)["Cumulative"].sum())
     m["Platform Criterion Score"] = lambda c: float(E.filt("Platform Scores", c)["Score"].sum())
     m["Answer"] = lambda c: (lambda d: d["Answer"].iloc[0] if len(d) == 1 else None)(E.filt("Answers", c))
+    m["Answer Chart $"] = lambda c: float(E.filt("Answer Chart", c)["Value"].sum())
+    m["Answer Chart Roles"] = m["Answer Chart $"]
+    m["Answer Chart Colour"] = lambda c: "#0a8496" if E.filt("Answer Chart", c)["Highlight"].max() == 1 else "#c7d2dc"
     m["Answer Evidence"] = lambda c: (lambda d: d["Evidence"].iloc[0] if len(d) == 1 else None)(E.filt("Answers", c))
     m["Profit vs Budget Caption"] = lambda c: (lambda d: ("▲ +" if d > 0 else "▼ -") + f"${abs(d):,.0f} vs budget")(m["Profit vs Budget"](c))
     m["Cash Caption"] = lambda c: f"minimum balance $60,000 · today ${E.bal('Cash', c):,.0f}"
@@ -474,6 +477,8 @@ def kind_of(fmt):
         return "pct1" if "0.0" in fmt else "pct0"
     if "$" in fmt:
         return "money"
+    if fmt.startswith("+0.0"):
+        return "num1s"
     if fmt in ("#,0.0", "0.0"):
         return "num1"
     if fmt in ("dd mmm yyyy",):
@@ -613,7 +618,13 @@ def visual_data(E, meas, fmts, v, ctx):
             data.sort(key=lambda d: (d["vals"][0][i] is None, d["vals"][0][i] or 0), reverse=sort[0]["direction"] == "Descending")
     if crefs and crefs[0][2] in ("month_start_date", "week_start", "month", "date"):
         data.sort(key=lambda d: str(d["cat"]))
-    return {"cats": [d["cat"] for d in data], "series": [clean(s) for s in svals] if srefs else [label(p) for p in vals],
+    pcol = None
+    try:
+        dp = vv["objects"]["dataPoint"][0]["properties"]["fill"]["solid"]["color"]["expr"]["Measure"]["Property"]
+        pcol = [meas[dp](ctx.plus((crefs[0][1], crefs[0][2]), d["cat"])) for d in data]
+    except (KeyError, IndexError, TypeError):
+        pass
+    return {"pointColors": pcol, "cats": [d["cat"] for d in data], "series": [clean(s) for s in svals] if srefs else [label(p) for p in vals],
             "multi": bool(srefs), "values": [d["vals"] for d in data], "y2": [d["y2"] for d in data],
             "y2names": [label(p) for p in y2], "vnames": [label(p) for p in vals], "kind": fk(vrefs[0]) if vrefs else "num",
             "catkind": "month" if crefs and crefs[0][2] in ("month_start_date", "month") else ("date" if crefs and crefs[0][2] in ("week_start", "date") else "text")}
@@ -787,7 +798,8 @@ def period_dependent(tables_used, v):
                        "Deadlines Next 30 Days", "Deadlines Caption", "Deadline Count", "Matter Count", "Open Matters", "Matter WIP",
                        "Matter Billed", "Matter Estimated Value", "Supplier Spend", "Card Spend", "Cash Inflow", "Cash Outflow",
                        "Cash Closing", "Cash Minimum", "Cash Low Point", "FY Forecast Profit", "FY Profit Gap", "FY Path Actual Profit",
-                       "FY Path Forecast Profit", "FY Path Budget Profit", "Headcount", "Answer", "Answer Evidence"}
+                       "FY Path Forecast Profit", "FY Path Budget Profit", "Headcount", "Answer", "Answer Evidence", "Answer Chart $", "Answer Chart Roles",
+                       "Sim Compare vs Today"}
     if meas_names:
         return any(n not in static_measures for n in meas_names)
     return bool(tables_used - STATIC)

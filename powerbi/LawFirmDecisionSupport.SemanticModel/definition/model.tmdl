@@ -54,6 +54,7 @@ ref table 'Platform Gantt'
 ref table 'Platform NPV Grid'
 ref table 'Sim Expected'
 ref table Answers
+ref table 'Answer Chart'
 ref table 'P&L Line'
 ref table 'Funnel Stage'
 ref table Measures

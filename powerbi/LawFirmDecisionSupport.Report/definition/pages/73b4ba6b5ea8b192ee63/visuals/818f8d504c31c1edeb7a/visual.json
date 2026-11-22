@@ -3,10 +3,10 @@
   "name": "818f8d504c31c1edeb7a",
   "position": {
     "x": 569.346875,
-    "y": 340.0,
+    "y": 338.0,
     "z": 61000,
-    "width": 336.984375,
-    "height": 26.0,
+    "width": 238.875,
+    "height": 24.0,
     "tabOrder": 61000
   },
   "visual": {
@@ -30,7 +30,7 @@
                   {
                     "value": "SHOULD PAY GO UP?",
                     "textStyle": {
-                      "fontSize": "8.5pt",
+                      "fontSize": "8pt",
                       "color": "#64748b",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"

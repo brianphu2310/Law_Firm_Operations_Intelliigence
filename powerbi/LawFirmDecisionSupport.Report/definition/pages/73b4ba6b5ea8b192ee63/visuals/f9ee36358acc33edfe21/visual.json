@@ -3,10 +3,10 @@
   "name": "f9ee36358acc33edfe21",
   "position": {
     "x": 206.76875,
-    "y": 368.0,
+    "y": 360.0,
     "z": 56000,
     "width": 338.690625,
-    "height": 40.0,
+    "height": 30.0,
     "tabOrder": 56000
   },
   "visual": {
@@ -41,7 +41,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "15.0D"
+                  "Value": "13.0D"
                 }
               }
             },

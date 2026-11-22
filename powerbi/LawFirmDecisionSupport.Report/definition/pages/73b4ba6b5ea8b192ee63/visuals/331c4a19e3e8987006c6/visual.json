@@ -3,10 +3,10 @@
   "name": "331c4a19e3e8987006c6",
   "position": {
     "x": 928.5125,
-    "y": 340.0,
+    "y": 338.0,
     "z": 67000,
-    "width": 336.984375,
-    "height": 26.0,
+    "width": 238.875,
+    "height": 24.0,
     "tabOrder": 67000
   },
   "visual": {
@@ -30,7 +30,7 @@
                   {
                     "value": "WHERE SHOULD GROWTH COME FROM?",
                     "textStyle": {
-                      "fontSize": "8.5pt",
+                      "fontSize": "8pt",
                       "color": "#64748b",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"

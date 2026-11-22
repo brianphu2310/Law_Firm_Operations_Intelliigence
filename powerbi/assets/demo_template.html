@@ -92,6 +92,7 @@ function fmt(v, k, compact){
       return s + "$" + Math.round(a).toLocaleString("en-AU");
     case "pct1": return (v*100).toFixed(1) + "%";
     case "pct0": return (v*100).toFixed(0) + "%";
+    case "num1s": return (v > 0 ? "+" : "") + v.toFixed(1);
     case "num1": return v.toLocaleString("en-AU",{minimumFractionDigits:1,maximumFractionDigits:1});
     case "num2": return v.toFixed(2);
     case "num4": return v.toLocaleString("en-AU",{minimumFractionDigits:2,maximumFractionDigits:4});
@@ -290,15 +291,17 @@ function bars(v, body, W, H, ob){
   const sc = niceScale(Math.min(0, ...vals), Math.max(0, ...vals));
   const n = d.cats.length;
   if (horiz) {
-    const left = Math.min(150, Math.max(60, Math.max(...d.cats.map(c => String(catLabel(c,d)).length)) * 5.6)), right = labelsOn ? 54 : 14, top = 4, bottom = 16;
+    const left = Math.min(150, Math.max(60, Math.max(...d.cats.map(c => String(catLabel(c,d)).length)) * 5.6)), right = labelsOn ? 54 : 14, top = 4, bottom = lit(prop(ob,"valueAxis","show")) === "false" ? 2 : 16;
     const pw = W - left - right, ph = H - top - bottom; const band = ph / n; const bw = band * 0.7 / (stacked ? 1 : series.length);
     const X = x => left + (x - sc.lo) / (sc.hi - sc.lo) * pw;
-    sc.ticks.forEach(t => { add(s,"line",{x1:X(t),x2:X(t),y1:top,y2:top+ph,stroke:"#eef2f6"}); add(s,"text",{x:X(t),y:H-3,"font-size":8,fill:"#64748b","text-anchor":"middle"}, fmt(t, d.kind, true)); });
+    const vaxis = lit(prop(ob,"valueAxis","show")) !== "false";
+    if (vaxis) sc.ticks.forEach(t => { add(s,"line",{x1:X(t),x2:X(t),y1:top,y2:top+ph,stroke:"#eef2f6"}); add(s,"text",{x:X(t),y:H-3,"font-size":8,fill:"#64748b","text-anchor":"middle"}, fmt(t, d.kind, true)); });
     d.cats.forEach((c, i) => { const y0 = top + i * band + band * 0.15;
       add(s,"text",{x:left-6,y:top+i*band+band/2+3,"font-size":8,fill:"#334155","text-anchor":"end"}, String(catLabel(c,d)).slice(0,28));
-      series.forEach((se, j) => { const x = se[i]; if (x === null) return; const r = add(s,"rect",{x:Math.min(X(0),X(x)),y:y0+j*bw,width:Math.abs(X(x)-X(0)),height:Math.max(1,bw-1),fill:colors[j],rx:2});
+      series.forEach((se, j) => { const x = se[i]; if (x === null) return; const fillc = d.pointColors ? d.pointColors[i] : colors[j];
+        const r = add(s,"rect",{x:Math.min(X(0),X(x)),y:y0+j*bw,width:Math.abs(X(x)-X(0)),height:Math.max(1,bw-1),fill:fillc,rx:2});
         hover(r, `${catLabel(c,d)} · ${names[j]}: ${fmt(x, d.kind)}`);
-        if (labelsOn) add(s,"text",{x:x>=0?X(x)+4:X(0)+4,y:y0+j*bw+bw/2+3,"font-size":8,fill:"#334155","text-anchor":"start"}, fmt(x, d.kind, true)); }); });
+        if (labelsOn) add(s,"text",{x:x>=0?X(x)+4:X(0)+4,y:y0+j*bw+bw/2+3,"font-size":8,fill:"#334155","text-anchor":"start"}, d.kind === "num1" && x > 0 ? "+" + fmt(x, d.kind) : fmt(x, d.kind, true)); }); });
     return;
   }
   const left = 46, right = combo ? 8 : 8, top = 6, bottom = 22; const pw = W - left - right, ph = H - top - bottom; const band = pw / n;

@@ -398,19 +398,25 @@ def overview(p, nav, facts, targets):
         p.add("shape", cx, cy + 14, 5, 26, objects={"shape": [{"properties": {"tileShape": lit("rectangle")}}],
                                                     "fill": [{"properties": {"fillColor": colour(TEAL), "transparency": lit(0.0)}}],
                                                     "outline": [{"properties": {"show": lit(False)}}]}, background=False, border=False, key=f"accent{i}")
-        text(p, cx + 12, cy + 8, 395, 26, [[(f"{i + 1}  ", 10, TEAL, True), (row["Question"].upper(), 8.5, MUTED, True)]], key=f"q{i}")
-        flt = [cat_filter(F.c("Answers", "Order"), int(row["Order"]), _id(p.name, "ans", i))]
-        p.add("card", cx + 8, cy + 36, 397, 40, roles={"Values": [F.m(M, "Answer", " ")]},
-              objects={"labels": [{"properties": {"fontSize": lit(15.0), "color": colour(INK)}}], "categoryLabels": [{"properties": {"show": lit(False)}}]},
-              background=False, border=False, filters=flt, key=f"a{i}")
-        p.add("card", cx + 8, cy + 78, 397, 56, roles={"Values": [F.m(M, "Answer Evidence", " ")]},
-              objects={"labels": [{"properties": {"fontSize": lit(9.0), "color": colour("#334155")}}], "categoryLabels": [{"properties": {"show": lit(False)}}],
-                       "wordWrap": [{"properties": {"show": lit(True)}}]},
-              background=False, border=False, filters=[cat_filter(F.c("Answers", "Order"), int(row["Order"]), _id(p.name, "ev", i))], key=f"e{i}")
+        text(p, cx + 12, cy + 6, 280, 24, [[(f"{i + 1}  ", 10, TEAL, True), (row["Question"].upper(), 8, MUTED, True)]], key=f"q{i}")
+        flt = lambda tag: [cat_filter(F.c("Answers", "Order"), int(row["Order"]), _id(p.name, tag, i))]
+        p.add("card", cx + 8, cy + 28, 397, 30, roles={"Values": [F.m(M, "Answer", " ")]},
+              objects={"labels": [{"properties": {"fontSize": lit(13.0), "color": colour(INK)}}], "categoryLabels": [{"properties": {"show": lit(False)}}]},
+              background=False, border=False, filters=flt("ans"), key=f"a{i}")
+        unit = "Answer Chart Roles" if i == 3 else "Answer Chart $"
+        p.add("clusteredBarChart", cx + 8, cy + 60, 397, 106,
+              roles={"Category": [F.c("Answer Chart", "Item")], "Y": [F.m(M, unit, "Value")]},
+              objects={"legend": [{"properties": {"show": lit(False)}}],
+                       "categoryAxis": [{"properties": {"show": lit(True), "fontSize": lit(8.0), "showAxisTitle": lit(False), "color": colour("#334155")}}],
+                       "valueAxis": [{"properties": {"show": lit(False)}}],
+                       "labels": [{"properties": {"show": lit(True), "fontSize": lit(8.0), "color": colour("#334155")}}],
+                       "dataPoint": [{"properties": {"fill": colour_measure(M, "Answer Chart Colour")},
+                                      "selector": {"data": [{"dataViewWildcard": {"matchingOption": 1}}]}}]},
+              background=False, border=False, filters=[cat_filter(F.c("Answer Chart", "Order"), int(row["Order"]), _id(p.name, "ch", i))], key=f"c{i}")
         label, target = targets[row["Page"]]
-        p.add("actionButton", cx + 263, cy + 138, 140, 24, objects={
+        p.add("actionButton", cx + 297, cy + 7, 108, 22, objects={
             "icon": [{"properties": {"show": lit(False)}, "selector": {"id": "default"}}],
-            "text": [{"properties": {"show": lit(True)}}, {"properties": {"text": lit(f"{label} →"), "fontSize": lit(9.0), "fontColor": colour(TEAL), "bold": lit(True)},
+            "text": [{"properties": {"show": lit(True)}}, {"properties": {"text": lit(f"{label} →"), "fontSize": lit(8.5), "fontColor": colour(TEAL), "bold": lit(True)},
                                                           "selector": {"id": "default"}}],
             "fill": [{"properties": {"show": lit(True), "fillColor": colour("#e0f2f4"), "transparency": lit(0.0)}, "selector": {"id": "default"}}],
             "outline": [{"properties": {"show": lit(False)}, "selector": {"id": "default"}}]},
@@ -418,14 +424,9 @@ def overview(p, nav, facts, targets):
             key=f"go{i}")
     chart(p, "lineClusteredColumnComboChart", 14, 510, 760, 202, F.c("Date", "month_start_date", "Month"), [F.m(M, "Trend Operating Profit", "Operating profit")],
           "Profit against budget, month by month", y2=[F.m(M, "Trend Budget Operating Profit", "Budget")], subtitle="12 months to the period end")
-    text(p, 780, 510, 486, 202, [
-        [("HOW IT WORKS", 8, TEAL, True)],
-        [("One Python model of the firm feeds a SQL star schema (SQLite and Snowflake), an Excel pack refreshed by Power Query, and this "
-          "Power BI report.", 9, INK, False)],
-        [("The Simulator tests each decision before it is made: profit, the gap to budget, cash needed up front, and what happens if only "
-          "half of it is delivered.", 9, INK, False)],
-        [("Every number is checked: the SQL answers and the DAX measures are reconciled with the Python engine in automated tests.", 9, INK, False)],
-    ], background=True, border=True, key="how")
+    chart(p, "clusteredBarChart", 780, 510, 486, 202, F.c("Sim Compare", "Short"), [F.m(SIM, "Sim Compare vs Today", "Profit a year vs today")],
+          "Simulator: every decision vs today", sort=(F.m(SIM, "Sim Compare vs Today"), "Descending"), labels=True, legend=False,
+          subtitle="Annual operating profit, from the last 12 months")
 
 
 # ---- Finance

@@ -3,10 +3,10 @@
   "name": "30a5fba057de0959745d",
   "position": {
     "x": 210.18125,
-    "y": 162.0,
+    "y": 160.0,
     "z": 37000,
-    "width": 336.984375,
-    "height": 26.0,
+    "width": 238.875,
+    "height": 24.0,
     "tabOrder": 37000
   },
   "visual": {
@@ -30,7 +30,7 @@
                   {
                     "value": "SHOULD WE SWITCH SOFTWARE?",
                     "textStyle": {
-                      "fontSize": "8.5pt",
+                      "fontSize": "8pt",
                       "color": "#64748b",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"

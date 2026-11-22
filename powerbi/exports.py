@@ -309,7 +309,7 @@ def answers(M):
                 f"NPV +{k(top['npv'])} over 3 years, payback {int(top['payback'])} months. Today: {k(PL.run_rate(PL.BASELINE, inp))} a year on LEAP + InfoTrack.",
                 "Platform"))
     # 2 branch
-    r = run(**S.PRESETS["Open a branch"])
+    r = r_branch = run(**S.PRESETS["Open a branch"])
     low = low0 + r["cash_effect"]
     verdict = "Not yet: fund it first" if low < MIN_CASH else ("Yes" if r["branch_net_full"] > 0 else "No")
     out.append(("Should we open a branch?", verdict,
@@ -321,7 +321,7 @@ def answers(M):
     gain = lambda a: run(**hire, sim_hire_area=a)["op1"] - base["op1"]
     a_top = pa.index[0]
     a_low = min(pa.index, key=gain)
-    out.append(("Which matters need another lawyer?", f"{a_top} first",
+    out.append(("Where should we hire lawyers?", f"{a_top} first",
                 f"Lawyers at {pa.iloc[0]['util']:.0%} utilisation. One associate adds {k(gain(a_top))} in year one, against {k(gain(a_low))} in {a_low}.",
                 "People"))
     # 4 support teams
@@ -345,7 +345,25 @@ def answers(M):
     out.append(("Where should growth come from?", f"{best}, {na}",
                 f"{k(mk.loc[best, 'cost_per_matter'])} per new matter vs {k(mk.loc[worst, 'cost_per_matter'])} on {worst}. {na}: {k(nas[na]['area_net_full'])} a year at full speed.",
                 "Clients"))
-    return [dict(Order=i + 1, Question=q, Answer=a, Evidence=e, Page=pg) for i, (q, a, e, pg) in enumerate(out)]
+    rows = [dict(Order=i + 1, Question=q, Answer=a, Evidence=e, Page=pg) for i, (q, a, e, pg) in enumerate(out)]
+    # the small chart in each tile (Overview): what proves the answer
+    ch = []
+    add = lambda o, item, v, hi, unit="$": ch.append(dict(Order=o, Item=item, ItemOrder=len(ch) + 1, Value=float(v), Highlight=int(hi), Unit=unit))
+    for _, r in rk.sort_values("npv", ascending=False).iterrows():
+        add(1, PL.PLATFORMS[r["name"]]["short"], r["npv"], r["name"] == top["name"])
+    add(2, "Profit, year one", r_branch["branch_net"], False)
+    add(2, "Profit at full speed", r_branch["branch_net_full"], False)
+    add(2, "Cash low point after", low, True)
+    add(2, "Minimum cash balance", MIN_CASH, False)
+    for a in sorted(pa.index, key=gain, reverse=True):
+        add(3, a, gain(a), a == a_top)
+    for _, d in dt.sort_values("gap", ascending=False).iterrows():
+        add(4, f"{d['branch']} {d['department'].split()[0].lower()}", d["gap"], d is not None and d["branch"] == over["branch"] and d["department"] == over["department"], "roles")
+    for pct in (1, 2, 3, 4, 5):
+        add(5, f"Pay +{pct}%", run(sim_pay_fe=float(pct), sim_pay_support=float(pct))["pay_cost"], pct == 3)
+    for c in mk.sort_values("cost_per_matter").index:
+        add(6, c, mk.loc[c, "cost_per_matter"], c == best)
+    return rows, ch
 
 
 def export_all(out=OUT):
@@ -358,8 +376,9 @@ def export_all(out=OUT):
     export_detail_tables(M, out)
     top = export_platforms(M, out)
     export_decisions(M, out, top)
-    ans = answers(M)
+    ans, chart = answers(M)
     write("answers", ans, list(ans[0]), out)
+    write("answer_chart", chart, list(chart[0]), out)
     rows = sim_expected(M)
     write("sim_expected", rows, ["Preset", "Metric", "Expected"], out)
     write("about", [dict(AsOf=AS_OF, MarketWageGrowth=MARKET_WAGE_GROWTH, MinCash=MIN_CASH)], ["AsOf", "MarketWageGrowth", "MinCash"], out)

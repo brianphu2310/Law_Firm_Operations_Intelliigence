@@ -1331,6 +1331,18 @@ table Measures
 	measure 'Answer Evidence' = SELECTEDVALUE( 'Answers'[Evidence] )
 		displayFolder: Overview
 
+	measure 'Answer Chart $' = SUM( 'Answer Chart'[Value] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Overview
+
+	measure 'Answer Chart Roles' = SUM( 'Answer Chart'[Value] )
+		formatString: +0.0;-0.0;0.0
+		displayFolder: Overview
+
+	measure 'Answer Chart Colour' = IF( MAX( 'Answer Chart'[Highlight] ) = 1, "#0a8496", "#c7d2dc" )
+		isHidden
+		displayFolder: Overview
+
 	measure Story = "HOW THIS STARTED  The Principal asked which software saves the firm the most (" & FORMAT( CALCULATE( MAX( 'Platforms'[RunRate] ), 'Platforms'[IsCurrent] = 1 ), "$#,0" ) & " a year on LEAP + InfoTrack today; best: " & [Best Platform] & ", NPV " & FORMAT( CALCULATE( MAX( 'Platforms'[NPV] ), 'Platforms'[Platform] = [Best Platform] ), "+$#,0" ) & "). The same model now answers hiring, staffing, pay, marketing, new services and branches."
 		displayFolder: Overview
 
