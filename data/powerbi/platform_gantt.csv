@@ -1,0 +1,43 @@
+Platform,Order,Phase,StartWeek,EndWeek,Weeks
+LEAP + InfoTrack (current),1,Planning & contract,0,0,0
+LEAP + InfoTrack (current),2,Data migration,0,0,0
+LEAP + InfoTrack (current),3,Configuration & integrations,0,0,0
+LEAP + InfoTrack (current),4,Training,0,0,0
+LEAP + InfoTrack (current),5,Parallel run,0,0,0
+LEAP + InfoTrack (current),6,Cut-over & hypercare,0,0,0
+triConvey + triSearch,1,Planning & contract,0,1.12,1.12
+triConvey + triSearch,2,Data migration,0.8,3.04,2.24
+triConvey + triSearch,3,Configuration & integrations,1.92,4.96,3.04
+triConvey + triSearch,4,Training,4.4,6.4,2
+triConvey + triSearch,5,Parallel run,5.76,7.36,1.6
+triConvey + triSearch,6,Cut-over & hypercare,7.04,8,0.96
+Smokeball + GlobalX,1,Planning & contract,0,1.68,1.68
+Smokeball + GlobalX,2,Data migration,1.2,4.56,3.36
+Smokeball + GlobalX,3,Configuration & integrations,2.88,7.44,4.56
+Smokeball + GlobalX,4,Training,6.6,9.6,3
+Smokeball + GlobalX,5,Parallel run,8.64,11.04,2.4
+Smokeball + GlobalX,6,Cut-over & hypercare,10.56,12,1.44
+Actionstep + GlobalX,1,Planning & contract,0,1.96,1.96
+Actionstep + GlobalX,2,Data migration,1.4,5.32,3.92
+Actionstep + GlobalX,3,Configuration & integrations,3.36,8.68,5.32
+Actionstep + GlobalX,4,Training,7.7,11.2,3.5
+Actionstep + GlobalX,5,Parallel run,10.08,12.88,2.8
+Actionstep + GlobalX,6,Cut-over & hypercare,12.32,14,1.68
+PracticeEvolve + PEXA,1,Planning & contract,0,1.4,1.4
+PracticeEvolve + PEXA,2,Data migration,1,3.8,2.8
+PracticeEvolve + PEXA,3,Configuration & integrations,2.4,6.2,3.8
+PracticeEvolve + PEXA,4,Training,5.5,8,2.5
+PracticeEvolve + PEXA,5,Parallel run,7.2,9.2,2
+PracticeEvolve + PEXA,6,Cut-over & hypercare,8.8,10,1.2
+Clio + GlobalX,1,Planning & contract,0,1.4,1.4
+Clio + GlobalX,2,Data migration,1,3.8,2.8
+Clio + GlobalX,3,Configuration & integrations,2.4,6.2,3.8
+Clio + GlobalX,4,Training,5.5,8,2.5
+Clio + GlobalX,5,Parallel run,7.2,9.2,2
+Clio + GlobalX,6,Cut-over & hypercare,8.8,10,1.2
+MyCase + SAI Global,1,Planning & contract,0,1.12,1.12
+MyCase + SAI Global,2,Data migration,0.8,3.04,2.24
+MyCase + SAI Global,3,Configuration & integrations,1.92,4.96,3.04
+MyCase + SAI Global,4,Training,4.4,6.4,2
+MyCase + SAI Global,5,Parallel run,5.76,7.36,1.6
+MyCase + SAI Global,6,Cut-over & hypercare,7.04,8,0.96

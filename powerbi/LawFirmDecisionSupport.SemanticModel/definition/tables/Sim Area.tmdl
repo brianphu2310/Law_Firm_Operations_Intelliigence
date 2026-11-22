@@ -1,0 +1,29 @@
+table 'Sim Area'
+	isHidden
+
+	column Area
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Area]
+
+	column Factor
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Factor]
+
+	partition 'Sim Area' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Area", STRING, "Factor", DOUBLE,
+				    {
+				    { "Firm mix", 1 },
+				    { "Litigation", 1.022491090411578 },
+				    { "Advisory", 0.9050794085877523 },
+				    { "IP Portfolio", 1.0184943636784238 },
+				    { "Corporate", 1.0099622508527808 },
+				    { "Employment", 0.9472080847752498 }
+				    }
+				)

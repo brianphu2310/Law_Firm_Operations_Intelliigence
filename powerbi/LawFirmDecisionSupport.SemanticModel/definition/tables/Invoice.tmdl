@@ -1,0 +1,100 @@
+table Invoice
+
+	column invoice_key
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: invoice_key
+
+	column invoice_number
+		dataType: string
+		summarizeBy: none
+		sourceColumn: invoice_number
+
+	column client_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: client_key
+
+	column practice_area_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: practice_area_key
+
+	column attorney_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: attorney_key
+
+	column branch_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: branch_key
+
+	column issue_date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: issue_date_key
+
+	column due_date_key
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: due_date_key
+
+	column paid_date_key
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: paid_date_key
+
+	column amount_ex_gst
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: amount_ex_gst
+
+	column gst_amount
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: gst_amount
+
+	column amount_total
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: amount_total
+
+	column days_to_pay
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: days_to_pay
+
+	column is_paid
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: is_paid
+
+	partition Invoice = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(BaseUrl, [RelativePath = "data/warehouse/fact_invoice.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, {"invoice_key", "client_key", "practice_area_key", "attorney_key", "branch_key", "issue_date_key", "due_date_key", "paid_date_key", "amount_ex_gst", "gst_amount", "amount_total", "days_to_pay", "is_paid"}),
+				    Typed = Table.TransformColumnTypes(Blanks, {{"invoice_key", Int64.Type}, {"invoice_number", type text}, {"client_key", Int64.Type}, {"practice_area_key", Int64.Type}, {"attorney_key", Int64.Type}, {"branch_key", Int64.Type}, {"issue_date_key", Int64.Type}, {"due_date_key", Int64.Type}, {"paid_date_key", Int64.Type}, {"amount_ex_gst", type number}, {"gst_amount", type number}, {"amount_total", type number}, {"days_to_pay", type number}, {"is_paid", type number}}, "en-US")
+				in
+				    Typed

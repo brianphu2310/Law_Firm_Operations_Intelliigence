@@ -1,0 +1,89 @@
+Period,Role,MonthKey,Weight
+Sep 2025 MTD,Current,20250901,1
+Sep 2025 MTD,Prior,20250801,0.548387
+Aug 2025,Current,20250801,1
+Aug 2025,Prior,20250701,1
+FY26 Q1 QTD,Current,20250701,1
+FY26 Q1 QTD,Current,20250801,1
+FY26 Q1 QTD,Current,20250901,1
+FY26 Q1 QTD,Prior,20250401,1
+FY26 Q1 QTD,Prior,20250501,1
+FY26 Q1 QTD,Prior,20250601,0.566667
+FY25 Q4,Current,20250401,1
+FY25 Q4,Current,20250501,1
+FY25 Q4,Current,20250601,1
+FY25 Q4,Prior,20250101,1
+FY25 Q4,Prior,20250201,1
+FY25 Q4,Prior,20250301,1
+Last 6 months,Current,20250401,1
+Last 6 months,Current,20250501,1
+Last 6 months,Current,20250601,1
+Last 6 months,Current,20250701,1
+Last 6 months,Current,20250801,1
+Last 6 months,Current,20250901,1
+Last 6 months,Prior,20241001,1
+Last 6 months,Prior,20241101,1
+Last 6 months,Prior,20241201,1
+Last 6 months,Prior,20250101,1
+Last 6 months,Prior,20250201,1
+Last 6 months,Prior,20250301,0.548387
+Last 12 months,Current,20241001,1
+Last 12 months,Current,20241101,1
+Last 12 months,Current,20241201,1
+Last 12 months,Current,20250101,1
+Last 12 months,Current,20250201,1
+Last 12 months,Current,20250301,1
+Last 12 months,Current,20250401,1
+Last 12 months,Current,20250501,1
+Last 12 months,Current,20250601,1
+Last 12 months,Current,20250701,1
+Last 12 months,Current,20250801,1
+Last 12 months,Current,20250901,1
+Last 12 months,Prior,20231001,1
+Last 12 months,Prior,20231101,1
+Last 12 months,Prior,20231201,1
+Last 12 months,Prior,20240101,1
+Last 12 months,Prior,20240201,1
+Last 12 months,Prior,20240301,1
+Last 12 months,Prior,20240401,1
+Last 12 months,Prior,20240501,1
+Last 12 months,Prior,20240601,1
+Last 12 months,Prior,20240701,1
+Last 12 months,Prior,20240801,1
+Last 12 months,Prior,20240901,0.566667
+FY25,Current,20240701,1
+FY25,Current,20240801,1
+FY25,Current,20240901,1
+FY25,Current,20241001,1
+FY25,Current,20241101,1
+FY25,Current,20241201,1
+FY25,Current,20250101,1
+FY25,Current,20250201,1
+FY25,Current,20250301,1
+FY25,Current,20250401,1
+FY25,Current,20250501,1
+FY25,Current,20250601,1
+FY25,Prior,20230701,1
+FY25,Prior,20230801,1
+FY25,Prior,20230901,1
+FY25,Prior,20231001,1
+FY25,Prior,20231101,1
+FY25,Prior,20231201,1
+FY25,Prior,20240101,1
+FY25,Prior,20240201,1
+FY25,Prior,20240301,1
+FY25,Prior,20240401,1
+FY25,Prior,20240501,1
+FY25,Prior,20240601,1
+FY24,Current,20230701,1
+FY24,Current,20230801,1
+FY24,Current,20230901,1
+FY24,Current,20231001,1
+FY24,Current,20231101,1
+FY24,Current,20231201,1
+FY24,Current,20240101,1
+FY24,Current,20240201,1
+FY24,Current,20240301,1
+FY24,Current,20240401,1
+FY24,Current,20240501,1
+FY24,Current,20240601,1

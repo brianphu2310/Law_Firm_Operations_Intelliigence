@@ -1,0 +1,27 @@
+table 'L Department'
+
+	column Department
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Department]
+		sortByColumn: Order
+
+	column Order
+		dataType: int64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Order]
+
+	partition 'L Department' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Department", STRING, "Order", INTEGER,
+				    {
+				    { "Reception & admin", 1 },
+				    { "Paralegals & clerks", 2 },
+				    { "Accounts & trust", 3 },
+				    { "Marketing", 4 }
+				    }
+				)

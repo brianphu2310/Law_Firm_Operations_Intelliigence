@@ -1,0 +1,65 @@
+table 'Platform Cashflow'
+
+	column Platform
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Platform
+
+	column Month
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Month
+
+	column Current
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: Current
+
+	column Alternative
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: Alternative
+
+	column OneOff
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: OneOff
+
+	column Benefit
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: Benefit
+
+	column Net
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: Net
+
+	column Cumulative
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: Cumulative
+
+	column PV
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: PV
+
+	partition 'Platform Cashflow' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(BaseUrl, [RelativePath = "data/powerbi/platform_cashflow.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, {"Month", "Current", "Alternative", "OneOff", "Benefit", "Net", "Cumulative", "PV"}),
+				    Typed = Table.TransformColumnTypes(Blanks, {{"Platform", type text}, {"Month", Int64.Type}, {"Current", type number}, {"Alternative", type number}, {"OneOff", type number}, {"Benefit", type number}, {"Net", type number}, {"Cumulative", type number}, {"PV", type number}}, "en-US")
+				in
+				    Typed

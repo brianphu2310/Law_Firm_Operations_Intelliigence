@@ -1,0 +1,36 @@
+Platform,Criterion,Score,Weight
+LEAP + InfoTrack (current),Speed,75,10
+LEAP + InfoTrack (current),Cost,55,30
+LEAP + InfoTrack (current),Reliability,90,20
+LEAP + InfoTrack (current),Support,85,15
+LEAP + InfoTrack (current),Integration,90,25
+triConvey + triSearch,Speed,80,10
+triConvey + triSearch,Cost,85,30
+triConvey + triSearch,Reliability,82,20
+triConvey + triSearch,Support,75,15
+triConvey + triSearch,Integration,78,25
+Smokeball + GlobalX,Speed,85,10
+Smokeball + GlobalX,Cost,65,30
+Smokeball + GlobalX,Reliability,88,20
+Smokeball + GlobalX,Support,80,15
+Smokeball + GlobalX,Integration,82,25
+Actionstep + GlobalX,Speed,78,10
+Actionstep + GlobalX,Cost,68,30
+Actionstep + GlobalX,Reliability,84,20
+Actionstep + GlobalX,Support,78,15
+Actionstep + GlobalX,Integration,80,25
+PracticeEvolve + PEXA,Speed,72,10
+PracticeEvolve + PEXA,Cost,60,30
+PracticeEvolve + PEXA,Reliability,86,20
+PracticeEvolve + PEXA,Support,82,15
+PracticeEvolve + PEXA,Integration,85,25
+Clio + GlobalX,Speed,88,10
+Clio + GlobalX,Cost,72,30
+Clio + GlobalX,Reliability,80,20
+Clio + GlobalX,Support,88,15
+Clio + GlobalX,Integration,75,25
+MyCase + SAI Global,Speed,82,10
+MyCase + SAI Global,Cost,78,30
+MyCase + SAI Global,Reliability,79,20
+MyCase + SAI Global,Support,76,15
+MyCase + SAI Global,Integration,70,25

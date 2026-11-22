@@ -1,0 +1,24 @@
+table 'L New branch on'
+
+	column 'New branch'
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [New branch]
+
+	column Value
+		dataType: int64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value]
+
+	partition 'L New branch on' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "New branch", STRING, "Value", INTEGER,
+				    {
+				    { "No", 0 },
+				    { "Yes", 1 }
+				    }
+				)

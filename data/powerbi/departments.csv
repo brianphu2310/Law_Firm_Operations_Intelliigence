@@ -1,0 +1,9 @@
+branch,department,headcount,driver,volume,needed,gap,status,pay_month,cost_of_gap,order
+Richmond,Reception & admin,1,Inquiries a year,247.763821,1.41294,-0.41294,Stretched,4650,-23042.035353,1
+Camden,Reception & admin,3,Inquiries a year,109.134064,1.18189,1.81811,Over-staffed,4650,101450.532047,2
+Liverpool,Reception & admin,1,Inquiries a year,233.015975,1.38836,-0.38836,Stretched,4650,-21670.48563,3
+Richmond,Paralegals & clerks,2,Active matters,53,2.409091,-0.409091,Stretched,5600,-27490.909091,4
+Camden,Paralegals & clerks,2,Active matters,25,1.136364,0.863636,Over-staffed,5600,58036.363636,5
+Liverpool,Paralegals & clerks,3,Active matters,64,2.909091,0.090909,About right,5600,6109.090909,6
+All offices,Accounts & trust,4,"Invoices, receipts and supplier orders a year",3401,3.401,0.599,About right,5900,42409.2,7
+All offices,Marketing,1,Marketing and referral spend a year,217915.025918,1.452767,-0.452767,Stretched,5900,-32055.892233,8

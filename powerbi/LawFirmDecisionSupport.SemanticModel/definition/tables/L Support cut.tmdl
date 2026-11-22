@@ -1,0 +1,22 @@
+table 'L Support cut'
+
+	column 'Support roles cut'
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Support roles cut]
+
+	partition 'L Support cut' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Support roles cut", INTEGER,
+				    {
+				    { 0 },
+				    { 1 },
+				    { 2 },
+				    { 3 },
+				    { 4 }
+				    }
+				)

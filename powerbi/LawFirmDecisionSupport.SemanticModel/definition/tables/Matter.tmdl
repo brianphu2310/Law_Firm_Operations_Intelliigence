@@ -1,0 +1,85 @@
+table Matter
+
+	column matter_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: matter_key
+
+	column matter_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: matter_id
+
+	column matter_name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: matter_name
+
+	column client_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: client_key
+
+	column practice_area_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: practice_area_key
+
+	column attorney_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: attorney_key
+
+	column branch_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: branch_key
+
+	column country
+		dataType: string
+		summarizeBy: none
+		sourceColumn: country
+
+	column status
+		dataType: string
+		summarizeBy: none
+		sourceColumn: status
+
+	column opened_date_key
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: opened_date_key
+
+	column closed_date_key
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: closed_date_key
+
+	column is_named_matter
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: is_named_matter
+
+	partition Matter = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(BaseUrl, [RelativePath = "data/warehouse/dim_matter.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, {"matter_key", "client_key", "practice_area_key", "attorney_key", "branch_key", "opened_date_key", "closed_date_key", "is_named_matter"}),
+				    Typed = Table.TransformColumnTypes(Blanks, {{"matter_key", Int64.Type}, {"matter_id", type text}, {"matter_name", type text}, {"client_key", Int64.Type}, {"practice_area_key", Int64.Type}, {"attorney_key", Int64.Type}, {"branch_key", Int64.Type}, {"country", type text}, {"status", type text}, {"opened_date_key", Int64.Type}, {"closed_date_key", Int64.Type}, {"is_named_matter", type number}}, "en-US")
+				in
+				    Typed

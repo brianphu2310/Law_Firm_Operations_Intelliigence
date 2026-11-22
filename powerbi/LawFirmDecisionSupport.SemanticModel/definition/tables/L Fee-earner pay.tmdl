@@ -1,0 +1,48 @@
+table 'L Fee-earner pay'
+
+	column 'Fee-earner pay change (%)'
+		dataType: double
+		formatString: 0.0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Fee-earner pay change (%)]
+
+	partition 'L Fee-earner pay' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Fee-earner pay change (%)", DOUBLE,
+				    {
+				    { -5 },
+				    { -4.5 },
+				    { -4 },
+				    { -3.5 },
+				    { -3 },
+				    { -2.5 },
+				    { -2 },
+				    { -1.5 },
+				    { -1 },
+				    { -0.5 },
+				    { 0 },
+				    { 0.5 },
+				    { 1 },
+				    { 1.5 },
+				    { 2 },
+				    { 2.5 },
+				    { 3 },
+				    { 3.5 },
+				    { 4 },
+				    { 4.5 },
+				    { 5 },
+				    { 5.5 },
+				    { 6 },
+				    { 6.5 },
+				    { 7 },
+				    { 7.5 },
+				    { 8 },
+				    { 8.5 },
+				    { 9 },
+				    { 9.5 },
+				    { 10 }
+				    }
+				)

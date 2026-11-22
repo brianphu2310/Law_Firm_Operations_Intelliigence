@@ -1,0 +1,650 @@
+"""Builds the Power BI report (PBIR: one JSON file per page and per visual) on top of the semantic model.
+
+Every visual is declared in a few lines with the helpers below; the JSON is validated against Microsoft's published
+PBIR schemas in tests/test_powerbi.py. Canvas 1280 x 720 (16:9).
+"""
+from __future__ import annotations
+
+import hashlib
+
+from core import simulate as S
+
+SCHEMA = "https://developer.microsoft.com/json-schemas/fabric/item/report/definition"
+V_CONTAINER = f"{SCHEMA}/visualContainer/2.0.0/schema.json"
+V_PAGE = f"{SCHEMA}/page/1.4.0/schema.json"
+W, H = 1280, 720
+TEAL, INK, MUTED, LINE, BG = "#0a8496", "#0f172a", "#64748b", "#dbe6ee", "#f3f6fa"
+GREEN, RED, AMBER = "#047857", "#b91c1c", "#b45309"
+
+
+def _id(*parts):
+    return hashlib.sha1("/".join(map(str, parts)).encode()).hexdigest()[:20]
+
+
+def lit(v):
+    if isinstance(v, bool):
+        return {"expr": {"Literal": {"Value": "true" if v else "false"}}}
+    if isinstance(v, int):
+        return {"expr": {"Literal": {"Value": f"{v}L"}}}
+    if isinstance(v, float):
+        return {"expr": {"Literal": {"Value": f"{v}D"}}}
+    return {"expr": {"Literal": {"Value": "'" + str(v).replace("'", "''") + "'"}}}
+
+
+def colour(c):
+    return {"solid": {"color": lit(c)}}
+
+
+def colour_measure(table, measure):
+    return {"solid": {"color": {"expr": {"Measure": {"Expression": {"SourceRef": {"Entity": table}}, "Property": measure}}}}}
+
+
+# --------------------------------------------------------------------------------------------------------- fields ---
+class F:
+    """A field reference: F.m('Measures', 'Revenue'), F.c('Branch', 'branch_name'), F.s('Where to Hire', 'priority') (sum)."""
+
+    def __init__(self, kind, table, name, label=None):
+        self.kind, self.table, self.name, self.label = kind, table, name, label
+
+    @classmethod
+    def m(cls, table, name, label=None):
+        return cls("m", table, name, label)
+
+    @classmethod
+    def c(cls, table, name, label=None):
+        return cls("c", table, name, label)
+
+    @classmethod
+    def s(cls, table, name, label=None):
+        return cls("s", table, name, label)
+
+    def expr(self, source=None):
+        ref = {"Source": source} if source else {"Entity": self.table}
+        if self.kind == "m":
+            return {"Measure": {"Expression": {"SourceRef": ref}, "Property": self.name}}
+        col = {"Column": {"Expression": {"SourceRef": ref}, "Property": self.name}}
+        if self.kind == "s":
+            return {"Aggregation": {"Expression": col, "Function": 0}}
+        return col
+
+    @property
+    def query_ref(self):
+        base = f"{self.table}.{self.name}"
+        return f"Sum({base})" if self.kind == "s" else base
+
+    def projection(self):
+        p = {"field": self.expr(), "queryRef": self.query_ref, "nativeQueryRef": self.label or self.name}
+        if self.label:
+            p["displayName"] = self.label
+        return p
+
+
+ALL_FIELDS: list[F] = []      # every field used, checked against the model in tests
+
+
+def container_objects(title=None, subtitle=None, background=True, border=True, padding=None):
+    o = {}
+    if title:
+        o["title"] = [{"properties": {"show": lit(True), "text": lit(title), "fontSize": lit(11.0), "bold": lit(True), "fontColor": colour(INK)}}]
+    else:
+        o["title"] = [{"properties": {"show": lit(False)}}]
+    if subtitle:
+        o["subTitle"] = [{"properties": {"show": lit(True), "text": lit(subtitle), "fontSize": lit(9.0), "fontColor": colour(MUTED)}}]
+    o["background"] = [{"properties": {"show": lit(background), "color": colour("#FFFFFF"), "transparency": lit(0.0)}}]
+    o["border"] = [{"properties": {"show": lit(border), "color": colour(LINE), "radius": lit(12.0), "width": lit(1.0)}}]
+    o["dropShadow"] = [{"properties": {"show": lit(False)}}]
+    if padding is not None:
+        o["padding"] = [{"properties": {"top": lit(float(padding)), "bottom": lit(float(padding)), "left": lit(float(padding)), "right": lit(float(padding))}}]
+    return o
+
+
+class Page:
+    def __init__(self, name, display, section, order):
+        self.name, self.display, self.section, self.order = name, display, section, order
+        self.visuals = []
+        self.z = 0
+
+    def add(self, vtype, x, y, w, h, roles=None, objects=None, title=None, subtitle=None, sort=None, filters=None, sync=None,
+            background=True, border=True, vco_extra=None, padding=None, key=None):
+        self.z += 1
+        vid = _id(self.name, key or f"{vtype}{self.z}")
+        visual = {"visualType": vtype}
+        if roles:
+            qs = {}
+            for role, fields in roles.items():
+                qs[role] = {"projections": [f.projection() for f in fields]}
+                ALL_FIELDS.extend(fields)
+            visual["query"] = {"queryState": qs}
+            refs = {pf.query_ref for fl in roles.values() for pf in fl}
+            if sort and sort[0].query_ref in refs:     # Power BI sorts only by fields the visual shows
+                f, direction = sort
+                ALL_FIELDS.append(f)
+                visual["query"]["sortDefinition"] = {"sort": [{"field": f.expr(), "direction": direction}], "isDefaultSort": False}
+        if objects:
+            visual["objects"] = objects
+        vco = container_objects(title, subtitle, background, border, padding)
+        if vco_extra:
+            vco.update(vco_extra)
+        visual["visualContainerObjects"] = vco
+        if sync:
+            visual["syncGroup"] = {"groupName": sync, "fieldChanges": True, "filterChanges": True}
+        visual["drillFilterOtherVisuals"] = True
+        v = {"$schema": V_CONTAINER, "name": vid, "position": {"x": float(x), "y": float(y), "z": self.z * 1000, "width": float(w), "height": float(h),
+                                                                 "tabOrder": self.z * 1000}, "visual": visual}
+        if filters:
+            v["filterConfig"] = {"filters": filters}
+        self.visuals.append(v)
+        return v
+
+    def json(self):
+        return {"$schema": V_PAGE, "name": self.name, "displayName": self.display, "displayOption": "FitToPage", "height": H, "width": W,
+                "objects": {"background": [{"properties": {"color": colour(BG), "transparency": lit(0.0)}}],
+                            "outspace": [{"properties": {"color": colour("#e9eef4"), "transparency": lit(0.0)}}]}}
+
+
+# ------------------------------------------------------------------------------------------------- visual helpers ---
+def text(page, x, y, w, h, runs, align="left", background=False, border=False, key=None):
+    """runs: list of paragraphs; each paragraph a list of (text, size, colour, bold)."""
+    paras = []
+    for para in runs:
+        tr = []
+        for t, size, col, bold in para:
+            style = {"fontSize": f"{size}pt", "color": col, "fontFamily": "Segoe UI"}
+            if bold:
+                style["fontWeight"] = "bold"
+            tr.append({"value": t, "textStyle": style})
+        paras.append({"textRuns": tr, "horizontalTextAlignment": align})
+    return page.add("textbox", x, y, w, h, objects={"general": [{"properties": {"paragraphs": paras}}]}, background=background, border=border, key=key)
+
+
+def card(page, x, y, w, h, field, label=None, size=20.0, colour_field=None, key=None):
+    lab = {"show": lit(True), "fontSize": lit(9.0), "color": colour(MUTED)}
+    labels = {"fontSize": lit(size), "color": colour_field or colour(INK)}
+    objs = {"labels": [{"properties": labels}], "categoryLabels": [{"properties": lab if label is not False else {"show": lit(False)}}]}
+    if label:
+        field = F(field.kind, field.table, field.name, label)
+    return page.add("card", x, y, w, h, roles={"Values": [field]}, objects=objs, border=False, background=False, key=key)
+
+
+def kpi(page, x, y, w, h, value, label, caption=None, colour_field=None, caption_colour=None):
+    """A KPI tile: white box, label + big value, a caption line underneath."""
+    page.add("shape", x, y, w, h, objects={"shape": [{"properties": {"tileShape": lit("rectangleRounded")}}],
+                                            "fill": [{"properties": {"fillColor": colour("#FFFFFF"), "transparency": lit(0.0)}}],
+                                            "outline": [{"properties": {"show": lit(True), "lineColor": colour(LINE), "weight": lit(1.0)}}]},
+             background=False, border=False)
+    card(page, x + 4, y + 2, w - 8, h - (26 if caption else 6), value, label, 18.0, colour_field)
+    if caption:
+        c = F(caption.kind, caption.table, caption.name, " ")
+        page.add("card", x + 4, y + h - 28, w - 8, 24, roles={"Values": [c]},
+                 objects={"labels": [{"properties": {"fontSize": lit(8.0), "color": caption_colour or colour(MUTED)}}],
+                          "categoryLabels": [{"properties": {"show": lit(False)}}]}, background=False, border=False)
+
+
+def slicer(page, x, y, w, h, field, mode="Dropdown", title=None, sync=None, default=None, horizontal=False, single=True, key=None, force=False):
+    """force=True keeps exactly one item selected (period, preset); lever slicers start empty so the preset's value applies."""
+    objs = {"data": [{"properties": {"mode": lit(mode)}}],
+            "selection": [{"properties": {"strictSingleSelect": lit(force), "singleSelect": lit(single), "selectAllCheckboxEnabled": lit(False)}}],
+            "header": [{"properties": {"show": lit(bool(title)), "text": lit(title or ""), "fontSize": lit(9.0), "fontColor": colour(MUTED)}}],
+            "items": [{"properties": {"fontSize": lit(9.0)}}]}
+    if horizontal:
+        objs["general"] = [{"properties": {"orientation": lit(1.0)}}]
+    if default is not None:
+        objs.setdefault("general", [{"properties": {}}])
+        objs["general"][0]["properties"]["filter"] = {"filter": in_filter(field, [default])}
+    return page.add("slicer", x, y, w, h, roles={"Values": [field]}, objects=objs, sync=sync, key=key, padding=2)
+
+
+def in_filter(field, values):
+    def lv(v):
+        return {"Literal": {"Value": f"{v}L" if isinstance(v, int) else ("'" + str(v).replace("'", "''") + "'")}}
+    return {"Version": 2, "From": [{"Name": "t", "Entity": field.table, "Type": 0}],
+            "Where": [{"Condition": {"In": {"Expressions": [field.expr("t")], "Values": [[lv(v)] for v in values]}}}]}
+
+
+def range_filter(field, lo, hi, name):
+    def cmp(kind, v):
+        return {"Comparison": {"ComparisonKind": kind, "Left": field.expr("t"), "Right": {"Literal": {"Value": f"{v}L"}}}}
+    ALL_FIELDS.append(field)
+    return {"name": name, "field": field.expr(), "type": "Advanced",
+            "filter": {"Version": 2, "From": [{"Name": "t", "Entity": field.table, "Type": 0}],
+                       "Where": [{"Condition": {"And": {"Left": cmp(2, lo), "Right": cmp(4, hi)}}}]}}
+
+
+def chart(page, vtype, x, y, w, h, category, values, title=None, series=None, subtitle=None, sort=None, y2=None, labels=False, legend=True, colours=None):
+    roles = {"Category": category if isinstance(category, list) else [category], "Y": values}
+    if series:
+        roles["Series"] = [series]
+    if y2:
+        roles["Y2"] = y2
+    objs = {"legend": [{"properties": {"show": lit(legend), "position": lit("Top"), "fontSize": lit(8.0)}}],
+            "categoryAxis": [{"properties": {"fontSize": lit(8.0), "showAxisTitle": lit(False)}}],
+            "valueAxis": [{"properties": {"fontSize": lit(8.0), "showAxisTitle": lit(False)}}],
+            "labels": [{"properties": {"show": lit(labels), "fontSize": lit(8.0)}}]}
+    if colours:
+        objs["dataPoint"] = [{"properties": {"fill": colour(c)}, "selector": {"metadata": f.query_ref}} for f, c in colours]
+    return page.add(vtype, x, y, w, h, roles=roles, objects=objs, title=title, subtitle=subtitle, sort=sort)
+
+
+def table(page, x, y, w, h, fields, title=None, subtitle=None, sort=None, filters=None, matrix_rows=None, matrix_cols=None, font=8.0):
+    objs = {"columnHeaders": [{"properties": {"fontSize": lit(font), "fontColor": colour(MUTED), "bold": lit(True)}}],
+            "values": [{"properties": {"fontSize": lit(font)}}], "total": [{"properties": {"show": lit(False)}}],
+            "grid": [{"properties": {"gridHorizontal": lit(True), "rowPadding": lit(2.0)}}]}
+    if matrix_rows:
+        roles = {"Rows": matrix_rows, "Values": fields}
+        if matrix_cols:
+            roles["Columns"] = matrix_cols
+        objs["rowHeaders"] = [{"properties": {"fontSize": lit(font)}}]
+        objs["subTotals"] = [{"properties": {"rowSubtotals": lit(False), "columnSubtotals": lit(False)}}]
+        return page.add("pivotTable", x, y, w, h, roles=roles, objects=objs, title=title, subtitle=subtitle, sort=sort, filters=filters)
+    return page.add("tableEx", x, y, w, h, roles={"Values": fields}, objects=objs, title=title, subtitle=subtitle, sort=sort, filters=filters)
+
+
+def nav_button(page, x, y, w, h, label, target, active):
+    objs = {"icon": [{"properties": {"show": lit(False)}, "selector": {"id": "default"}}],
+            "text": [{"properties": {"show": lit(True)}},
+                     {"properties": {"text": lit(label), "fontSize": lit(10.0), "fontColor": colour("#FFFFFF" if active else "#e6f6f8"),
+                                     "bold": lit(active)}, "selector": {"id": "default"}}],
+            "fill": [{"properties": {"show": lit(True), "fillColor": colour("#066a79" if active else TEAL), "transparency": lit(0.0)}, "selector": {"id": "default"}}],
+            "outline": [{"properties": {"show": lit(False)}, "selector": {"id": "default"}}]}
+    link = {"visualLink": [{"properties": {"show": lit(True), "type": lit("PageNavigation"), "navigationSection": lit(target)}}]}
+    return page.add("actionButton", x, y, w, h, objects=objs, background=False, border=False, vco_extra=link, key=f"nav-{label}")
+
+
+# ------------------------------------------------------------------------------------------------------------ pages --
+M = "Measures"
+SIM = "Simulator"
+
+
+def frame(page, title, subtitle, sections, sub_tabs=None):
+    """Header band, period slicer and navigation common to every page."""
+    page.add("shape", 0, 0, W, 92, objects={"shape": [{"properties": {"tileShape": lit("rectangle")}}],
+                                            "fill": [{"properties": {"fillColor": colour(TEAL), "transparency": lit(0.0)}}],
+                                            "outline": [{"properties": {"show": lit(False)}}]}, background=False, border=False, key="band")
+    text(page, 14, 4, 620, 50, [[(title, 17, "#FFFFFF", True)], [(subtitle, 9, "#d9f2f5", False)]], key="title")
+    if page.section != "Simulator" and page.section != "Platform" and page.section != "Check":
+        slicer(page, 1030, 8, 236, 44, F.c("Period", "Period"), "Dropdown", None, sync="period", default="FY26 Q1 QTD", key="period", force=True)
+    x = 14
+    for label, target, wbtn in sections:
+        nav_button(page, x, 58, wbtn, 28, label, target, active=label == page.section)
+        x += wbtn + 6
+    if sub_tabs:
+        x = 14
+        for label, target in sub_tabs:
+            active = target == page.name
+            page.add("actionButton", x, 98, 150, 24, objects={
+                "icon": [{"properties": {"show": lit(False)}, "selector": {"id": "default"}}],
+                "text": [{"properties": {"show": lit(True)}}, {"properties": {"text": lit(label), "fontSize": lit(9.0), "fontColor": colour(TEAL if active else MUTED),
+                                                                              "bold": lit(active)}, "selector": {"id": "default"}}],
+                "fill": [{"properties": {"show": lit(True), "fillColor": colour("#e0f2f4" if active else "#FFFFFF"), "transparency": lit(0.0)}, "selector": {"id": "default"}}],
+                "outline": [{"properties": {"show": lit(True), "lineColor": colour(TEAL if active else LINE), "weight": lit(1.0)}, "selector": {"id": "default"}}]},
+                background=False, border=False, vco_extra={"visualLink": [{"properties": {"show": lit(True), "type": lit("PageNavigation"), "navigationSection": lit(target)}}]},
+                key=f"tab-{label}")
+            x += 156
+
+
+def build_pages(ctx_facts, levers):
+    P = {}
+    specs = [("overview", "Overview", "Overview"), ("finance_pl", "Finance · P&L", "Finance"), ("finance_cash", "Finance · Cash & billing", "Finance"),
+             ("finance_trust", "Finance · Trust & costs", "Finance"), ("people_perf", "People · Performance", "People"),
+             ("people_hire", "People · Hiring & departments", "People"), ("people_branch", "People · Branches & pay", "People"),
+             ("matters", "Matters", "Matters"), ("clients", "Clients", "Clients"), ("clients_mkt", "Clients · Marketing", "Clients"),
+             ("calendar", "Calendar", "Calendar"), ("platform", "Platform choice", "Platform"), ("sim_decide", "Simulator · Decide", "Simulator"),
+             ("sim_test", "Simulator · Test", "Simulator"), ("check", "Method & check", "Check")]
+    for i, (n, d, s) in enumerate(specs):
+        P[n] = Page(_id("page", n), d, s, i)
+    nav = [("Overview", P["overview"].name, 92), ("Finance", P["finance_pl"].name, 92), ("People", P["people_perf"].name, 92),
+           ("Matters", P["matters"].name, 92), ("Clients", P["clients"].name, 92), ("Calendar", P["calendar"].name, 92),
+           ("Platform", P["platform"].name, 92), ("Simulator", P["sim_decide"].name, 104), ("Check", P["check"].name, 92)]
+    fin_tabs = [("P&L & outlook", P["finance_pl"].name), ("Cash & billing", P["finance_cash"].name), ("Trust & costs", P["finance_trust"].name)]
+    ppl_tabs = [("Performance", P["people_perf"].name), ("Hiring & departments", P["people_hire"].name), ("Branches & pay", P["people_branch"].name)]
+    cli_tabs = [("Clients", P["clients"].name), ("Marketing", P["clients_mkt"].name)]
+    sim_tabs = [("Decide", P["sim_decide"].name), ("Test the plan", P["sim_test"].name)]
+
+    overview(P["overview"], nav, ctx_facts)
+    finance_pl(P["finance_pl"], nav, fin_tabs)
+    finance_cash(P["finance_cash"], nav, fin_tabs)
+    finance_trust(P["finance_trust"], nav, fin_tabs)
+    people_perf(P["people_perf"], nav, ppl_tabs)
+    people_hire(P["people_hire"], nav, ppl_tabs)
+    people_branch(P["people_branch"], nav, ppl_tabs)
+    matters(P["matters"], nav)
+    clients(P["clients"], nav, cli_tabs)
+    clients_mkt(P["clients_mkt"], nav, cli_tabs)
+    calendar(P["calendar"], nav)
+    platform(P["platform"], nav)
+    sim_decide(P["sim_decide"], nav, sim_tabs, levers)
+    sim_test(P["sim_test"], nav, sim_tabs, levers)
+    check(P["check"], nav)
+    return list(P.values())
+
+
+# ---- Overview
+def overview(p, nav, facts):
+    frame(p, "Overview", "Where the firm stands this period, and the decisions waiting for the Principal", nav)
+    text(p, 14, 100, 1252, 34, [[("HOW THIS STARTED   ", 8, TEAL, True),
+                                 (f"The Principal asked which software saves the firm the most ({facts['run_rate']} a year on LEAP + InfoTrack today; best: "
+                                  f"{facts['best']}, NPV {facts['npv']}). The same model now answers hiring, staffing, pay, marketing, new services and branches.", 9, INK, False)]],
+         background=True, border=True, key="story")
+    xs = [14 + i * 210 for i in range(6)]
+    kpi(p, xs[0], 142, 202, 82, F.m(M, "Active Matters"), "Active matters", F.m(M, "Active Matters Δ"))
+    kpi(p, xs[1], 142, 202, 82, F.m(M, "Billable Hours"), "Billable hours", F.m(M, "Hours Δ"))
+    kpi(p, xs[2], 142, 202, 82, F.m(M, "Collections ex GST"), "Collected revenue (ex GST)", F.m(M, "Collections Δ"))
+    kpi(p, xs[3], 142, 202, 82, F.m(M, "Utilisation"), "Utilisation", F.m(M, "Utilisation Δ"))
+    kpi(p, xs[4], 142, 202, 82, F.m(M, "Deadlines Next 30 Days"), "Deadlines · next 30 days", F.m(M, "Deadlines Caption"))
+    kpi(p, xs[5], 142, 202, 82, F.m(M, "Top Biller Fees"), "Top biller fees", F.m(M, "Top Biller"))
+    p.add("funnel", 14, 232, 400, 236, roles={"Category": [F.c("Funnel Stage", "Stage")], "Y": [F.m(M, "Funnel Value", "Count")]},
+          objects={"labels": [{"properties": {"show": lit(True), "fontSize": lit(8.0)}}]}, title="Matter intake funnel", subtitle="From first inquiry to a new matter")
+    table(p, 420, 232, 250, 236, [F.c("Funnel Stage", "Stage"), F.m(M, "Funnel Step Conversion", "Conversion")], "Stage conversion",
+          "Share that moves to the next stage")
+    chart(p, "clusteredColumnChart", 676, 232, 590, 236, F.c("Date", "month_start_date", "Month"), [F.m(M, "Trend Area Hours", "Hours")],
+          "Billable hours trend", F.c("Practice Area", "practice_area"), "12 months to the period end, by practice area")
+    chart(p, "clusteredBarChart", 14, 476, 300, 236, F.c("Practice Area", "practice_area"), [F.m(M, "Area Fees", "Fees")], "Revenue by practice area",
+          sort=(F.m(M, "Area Fees"), "Descending"), labels=True, legend=False)
+    p.add("donutChart", 320, 476, 236, 236, roles={"Category": [F.c("Practice Area", "practice_area")], "Y": [F.m(M, "Open Matters", "Open matters")]},
+          objects={"legend": [{"properties": {"show": lit(True), "position": lit("Bottom"), "fontSize": lit(8.0)}}],
+                   "labels": [{"properties": {"show": lit(True), "fontSize": lit(8.0), "labelStyle": lit("Percent of total")}}]},
+          title="Workload by practice area", subtitle="Open matters")
+    p.add("multiRowCard", 562, 476, 260, 236, roles={"Values": [F.m(M, "Trust Funds", "Trust funds held"), F.m(M, "WIP", "Work in progress (unbilled)"),
+                                                                F.m(M, "Receivables", "Receivables (billed, unpaid)"), F.m(M, "Funds Employed", "Total")]},
+          objects={"dataLabels": [{"properties": {"fontSize": lit(14.0)}}], "categoryLabels": [{"properties": {"fontSize": lit(8.0)}}],
+                   "card": [{"properties": {"barShow": lit(True), "barColor": colour(TEAL)}}]},
+          title="Trust, WIP & receivables", subtitle="At the period end")
+    table(p, 828, 476, 438, 236, [F.c("Decisions", "Title", "Decision"), F.c("Decisions", "Detail", "Evidence and where to look")], "Decisions to make",
+          sort=(F.c("Decisions", "Order"), "Ascending"))
+
+
+# ---- Finance
+def finance_pl(p, nav, tabs):
+    frame(p, "Finance · P&L and outlook", "Profit and loss against budget for the period, and where the financial year is heading", nav, tabs)
+    kpi(p, 14, 130, 202, 78, F.m(M, "Revenue"), "Revenue", F.m(M, "Revenue Δ"))
+    kpi(p, 222, 130, 202, 78, F.m(M, "Operating Profit"), "Operating profit")
+    kpi(p, 430, 130, 202, 78, F.m(M, "Profit vs Budget"), "Profit vs budget")
+    kpi(p, 638, 130, 202, 78, F.m(M, "Operating Margin"), "Operating margin")
+    kpi(p, 846, 130, 202, 78, F.m(M, "FY Forecast Profit"), "FY26 forecast profit")
+    kpi(p, 1054, 130, 212, 78, F.m(M, "FY Profit Gap"), "FY26 forecast vs budget")
+    table(p, 14, 216, 560, 496, [F.m(M, "P&L Actual", "Actual"), F.m(M, "P&L Budget", "Budget"), F.m(M, "P&L Variance", "Variance"),
+                                 F.m(M, "P&L Variance %", "Var %")], "P&L vs budget", "Favourable variance is positive",
+          matrix_rows=[F.c("P&L Line", "Line")], sort=(F.c("P&L Line", "Order"), "Ascending"))
+    chart(p, "lineClusteredColumnComboChart", 580, 216, 686, 246, F.c("Date", "month_start_date", "Month"), [F.m(M, "Trend Operating Profit", "Profit")],
+          "Operating profit vs budget by month", y2=[F.m(M, "Trend Budget Operating Profit", "Budget")], subtitle="12 months to the period end")
+    chart(p, "lineClusteredColumnComboChart", 580, 468, 686, 244, F.c("FY Outlook", "month", "Month"),
+          [F.m(M, "FY Path Actual Profit", "Actual"), F.m(M, "FY Path Forecast Profit", "Forecast")], "FY26 outlook: profit by month",
+          y2=[F.m(M, "FY Path Budget Profit", "Budget")], subtitle="Year to date actual, rest of year = budget × year-to-date performance")
+
+
+def finance_cash(p, nav, tabs):
+    frame(p, "Finance · Cash & billing", "13-week cash forecast, receivables ageing, work in progress and collection speed", nav, tabs)
+    kpi(p, 14, 130, 202, 78, F.m(M, "Office Cash"), "Office account")
+    kpi(p, 222, 130, 202, 78, F.m(M, "Cash Low Point"), "13-week low point")
+    kpi(p, 430, 130, 202, 78, F.m(M, "Receivables"), "Receivables (incl GST)")
+    kpi(p, 638, 130, 202, 78, F.m(M, "WIP"), "Work in progress")
+    kpi(p, 846, 130, 202, 78, F.m(M, "DSO"), "Days to collect (DSO)")
+    kpi(p, 1054, 130, 212, 78, F.m(M, "Lockup Days"), "Lock-up days")
+    chart(p, "lineClusteredColumnComboChart", 14, 216, 760, 248, F.c("Cash Forecast", "week_start", "Week starting"),
+          [F.m(M, "Cash Inflow", "Money in"), F.m(M, "Cash Outflow", "Money out")], "13-week cash forecast",
+          y2=[F.m(M, "Cash Closing", "Closing balance"), F.m(M, "Cash Minimum", "Minimum balance")],
+          subtitle="Collections from open invoices and run-rate billing; payroll, rent, BAS and drawings")
+    chart(p, "clusteredColumnChart", 780, 216, 486, 248, F.c("AR Ageing", "Bucket"), [F.m(M, "AR Amount", "Receivables")], "Receivables ageing",
+          sort=(F.c("AR Ageing", "Order"), "Ascending"), labels=True, legend=False, subtitle="Days past due at the period end")
+    chart(p, "lineChart", 14, 470, 620, 242, F.c("Date", "month_start_date", "Month"), [F.m(M, "Trend WIP", "WIP"), F.m(M, "Trend Receivables", "Receivables")],
+          "WIP and receivables by month", subtitle="Month-end balances")
+    table(p, 640, 470, 626, 242, [F.c("Client Period", "client", "Client"), F.c("Client Period", "ar", "Receivables"), F.c("Client Period", "overdue", "Overdue"),
+                                  F.c("Client Period", "days_to_pay", "Avg days to pay")], "Who owes the firm", sort=(F.c("Client Period", "ar"), "Descending"))
+
+
+def finance_trust(p, nav, tabs):
+    frame(p, "Finance · Trust account & costs", "Client money held in trust, and where supplier and card spend goes", nav, tabs)
+    kpi(p, 14, 130, 300, 78, F.m(M, "Trust Funds"), "Trust funds held (period end)")
+    kpi(p, 320, 130, 300, 78, F.m(M, "Supplier Spend"), "Search & council spend (all time)")
+    kpi(p, 626, 130, 300, 78, F.m(M, "Card Spend"), "Card expenses (all time)")
+    kpi(p, 932, 130, 334, 78, F.m(M, "Disbursement Recovery"), "Disbursement recovery (period)")
+    chart(p, "areaChart", 14, 216, 620, 240, F.c("Date", "month_start_date", "Month"), [F.m(M, "Trend Trust", "Trust balance")], "Trust account balance",
+          subtitle="Month-end, all clients", legend=False)
+    table(p, 640, 216, 626, 240, [F.c("Trust Txn", "txn_date_key", "Date key"), F.c("Client", "client_name", "Client"), F.c("Trust Txn", "txn_type", "Type"),
+                                  F.c("Trust Txn", "amount", "Amount")], "Latest trust transactions", sort=(F.c("Trust Txn", "txn_date_key"), "Descending"))
+    chart(p, "columnChart", 14, 462, 620, 250, F.c("Date", "fy_label", "Financial year"), [F.m(M, "Supplier Spend", "Spend")], "Search and council spend",
+          F.c("Supplier Order", "supplier"), "By financial year and supplier")
+    chart(p, "clusteredBarChart", 640, 462, 300, 250, F.c("Cards", "category"), [F.m(M, "Card Spend", "Spend")], "Card expenses by category",
+          sort=(F.m(M, "Card Spend"), "Descending"), legend=False)
+    table(p, 946, 462, 320, 250, [F.c("Commissions", "referrer", "Referrer"), F.c("Commissions", "matter", "Matter"), F.c("Commissions", "amount", "Amount"),
+                                  F.c("Commissions", "status", "Status")], "Referral commissions")
+
+
+# ---- People
+def people_perf(p, nav, tabs):
+    frame(p, "People · Performance", "How busy and how profitable each fee earner is this period", nav, tabs)
+    kpi(p, 14, 130, 248, 78, F.m(M, "Utilisation"), "Firm utilisation", F.m(M, "Utilisation Δ"))
+    kpi(p, 268, 130, 248, 78, F.m(M, "Realisation"), "Realisation")
+    kpi(p, 522, 130, 248, 78, F.m(M, "Effective Rate"), "Effective rate per hour")
+    kpi(p, 776, 130, 248, 78, F.m(M, "Billable Hours"), "Billable hours", F.m(M, "Hours Δ"))
+    kpi(p, 1030, 130, 236, 78, F.m(M, "Top Biller Fees"), "Top biller fees", F.m(M, "Top Biller"))
+    table(p, 14, 216, 760, 260, [F.c("Attorney", "attorney_name", "Fee earner"), F.c("Attorney", "role", "Role"), F.m(M, "Attorney Hours", "Hours"),
+                                 F.m(M, "Attorney Utilisation", "Utilisation"), F.m(M, "Attorney Realisation", "Realisation"),
+                                 F.m(M, "Attorney Effective Rate", "Eff. rate"), F.m(M, "Attorney Fees", "Fees"), F.m(M, "Attorney Cost", "Pay"),
+                                 F.m(M, "Attorney Contribution", "Contribution")], "Fee-earner performance", sort=(F.m(M, "Attorney Fees"), "Descending"))
+    chart(p, "clusteredBarChart", 780, 216, 486, 260, F.c("Attorney", "attorney_short"), [F.m(M, "Attorney Utilisation", "Utilisation")],
+          "Utilisation by fee earner", sort=(F.m(M, "Attorney Utilisation"), "Descending"), labels=True, legend=False)
+    chart(p, "lineChart", 14, 482, 620, 230, F.c("Date", "month_start_date", "Month"), [F.m(M, "Trend Attorney Utilisation", "Utilisation")], "Utilisation by month",
+          F.c("Attorney", "attorney_short"), "12 months to the period end")
+    chart(p, "columnChart", 640, 482, 626, 230, F.c("Attorney", "attorney_short"), [F.m(M, "Area Hours", "Hours")], "Hours by practice area",
+          F.c("Practice Area", "practice_area"), "Who does which work")
+
+
+def people_hire(p, nav, tabs):
+    frame(p, "People · Where to hire and departments", "Which practice area needs the next lawyer, and which support teams are over or under the workload", nav, tabs)
+    card(p, 14, 128, 420, 40, F.m(M, "Hire First"), False, 15.0)
+    chart(p, "clusteredBarChart", 14, 172, 420, 230, F.c("Where to Hire", "area"), [F.s("Where to Hire", "priority", "Priority (0–100)")], "Hiring priority",
+          sort=(F.s("Where to Hire", "priority"), "Descending"), labels=True, legend=False,
+          subtitle="40% how busy the lawyers are, 35% growth in new matters, 25% margin")
+    p.add("scatterChart", 440, 128, 400, 274, roles={"Category": [F.c("Where to Hire", "area")], "X": [F.s("Where to Hire", "util", "Lawyers' utilisation")],
+                                                    "Y": [F.s("Where to Hire", "matters_growth", "Growth in new matters")], "Size": [F.s("Where to Hire", "fees", "Fees")]},
+          objects={"categoryLabels": [{"properties": {"show": lit(True), "fontSize": lit(8.0)}}]}, title="Pressure vs demand", subtitle="Top right = hire here")
+    table(p, 846, 128, 420, 274, [F.c("Where to Hire", "area", "Area"), F.c("Where to Hire", "util", "Utilisation"), F.c("Where to Hire", "matters_growth", "New matters"),
+                                  F.c("Where to Hire", "margin", "Margin"), F.c("Where to Hire", "verdict", "Verdict")], "Practice areas",
+          sort=(F.c("Where to Hire", "rank"), "Ascending"))
+    chart(p, "clusteredBarChart", 14, 408, 560, 304, F.c("Dept Workload", "department"), [F.s("Dept Workload", "headcount", "Staff"), F.s("Dept Workload", "needed", "Needed for the workload")],
+          "Support staff vs workload", subtitle="Headcount against benchmarks (all branches)")
+    table(p, 580, 408, 686, 304, [F.c("Dept Workload", "branch", "Office"), F.c("Dept Workload", "department", "Department"), F.c("Dept Workload", "headcount", "Staff"),
+                                  F.c("Dept Workload", "needed", "Needed"), F.c("Dept Workload", "gap", "Gap"), F.c("Dept Workload", "status", "Status"),
+                                  F.c("Dept Workload", "cost_of_gap", "Cost of the gap a year")], "Department by office", sort=(F.c("Dept Workload", "gap"), "Descending"))
+
+
+def people_branch(p, nav, tabs):
+    frame(p, "People · Branches, staffing and pay", "Office profitability and headcount, and what a pay review costs", nav, tabs)
+    table(p, 14, 128, 760, 190, [F.c("Branch Period", "branch", "Office"), F.c("Branch Period", "fee_earners", "Fee earners"), F.c("Branch Period", "support", "Support"),
+                                 F.c("Branch Period", "util", "Utilisation"), F.c("Branch Period", "revenue", "Revenue"), F.c("Branch Period", "cost", "Cost"),
+                                 F.c("Branch Period", "op_profit", "Profit"), F.c("Branch Period", "margin", "Margin"), F.c("Branch Period", "active_matters", "Active matters")],
+          "Branches this period")
+    table(p, 780, 128, 486, 190, [F.m(M, "Headcount", "Staff")], "Support staff by office and department", matrix_rows=[F.c("Department", "department")],
+          matrix_cols=[F.c("Branch", "branch_name")])
+    chart(p, "clusteredColumnChart", 14, 324, 620, 260, F.c("Branch Period", "branch"), [F.s("Branch Period", "revenue", "Revenue"), F.s("Branch Period", "cost", "Cost")],
+          "Revenue and cost by office")
+    table(p, 640, 324, 626, 260, [F.c("Attorney", "attorney_name", "Fee earner"), F.c("Attorney", "role", "Role"), F.c("Attorney", "bill_rate", "Bill rate"),
+                                  F.c("Attorney", "pay_rate", "Pay rate"), F.m(M, "Attorney Break-even Hours", "Break-even hours"), F.m(M, "Attorney Contribution", "Contribution")],
+          "Pay and economics", sort=(F.m(M, "Attorney Contribution"), "Descending"), subtitle="Hourly rates; break-even = hours needed to cover pay")
+    kpi(p, 14, 590, 300, 122, F.m(M, "Market Wage Growth"), "Market wage growth (ABS WPI, private)")
+    kpi(p, 320, 590, 300, 122, F.m(SIM, "Sim Pay Rise Cost"), "Cost of a 3% pay rise, a year")
+    kpi(p, 626, 590, 300, 122, F.m(SIM, "Sim Pay Rise Rate"), "Rate rise that pays for it (%)")
+    text(p, 932, 590, 334, 122, [[("Pay below market wage growth risks losing people. Pay cuts generally need the employee's agreement and cannot go "
+                                   "below award minimums. Test a pay review in the Simulator.", 9, MUTED, False)]], background=True, border=True)
+
+
+# ---- Matters
+def matters(p, nav):
+    frame(p, "Matters", "Every matter on the ledger: status, value, billing and work in progress", nav)
+    kpi(p, 14, 100, 248, 78, F.m(M, "Active Matters"), "Active matters (period end)", F.m(M, "Active Matters Δ"))
+    kpi(p, 268, 100, 248, 78, F.m(M, "Matters Opened"), "New matters this period")
+    kpi(p, 522, 100, 248, 78, F.m(M, "Matter Estimated Value"), "Estimated value (all matters)")
+    kpi(p, 776, 100, 248, 78, F.m(M, "Matter Billed"), "Billed to date")
+    kpi(p, 1030, 100, 236, 78, F.m(M, "Matter WIP"), "Work in progress")
+    slicer(p, 14, 186, 300, 40, F.c("Matter", "status"), "Dropdown", "Status", single=False)
+    slicer(p, 320, 186, 300, 40, F.c("Practice Area", "practice_area"), "Dropdown", "Practice area", single=False)
+    slicer(p, 626, 186, 300, 40, F.c("Branch", "branch_name"), "Dropdown", "Office", single=False)
+    table(p, 14, 232, 912, 480, [F.c("Matter", "matter_id", "Matter"), F.c("Matter", "matter_name", "Name"), F.c("Matter", "status", "Status"),
+                                 F.c("Attorney", "attorney_short", "Lawyer"), F.c("Matter Position", "estimated_value", "Est. value"),
+                                 F.c("Matter Position", "billed_to_date", "Billed"), F.c("Matter Position", "wip_balance", "WIP"),
+                                 F.c("Matter Position", "progress_ratio", "Progress"), F.c("Matter Position", "days_open", "Days open")], "Matter ledger",
+          sort=(F.c("Matter Position", "wip_balance"), "Descending"))
+    chart(p, "clusteredColumnChart", 932, 186, 334, 170, F.c("Date", "month_start_date", "Month"), [F.m(M, "Trend Matters Opened", "Opened"), F.m(M, "Trend Matters Closed", "Closed")],
+          "Matters opened and closed")
+    chart(p, "clusteredBarChart", 932, 362, 334, 170, F.c("Matter Position", "Age bucket"), [F.m(M, "Matter WIP", "WIP")], "WIP by matter age", legend=False, labels=True)
+    p.add("donutChart", 932, 538, 334, 174, roles={"Category": [F.c("Matter", "country")], "Y": [F.m(M, "Matter Count", "Matters")]},
+          objects={"legend": [{"properties": {"show": lit(True), "position": lit("Right"), "fontSize": lit(8.0)}}]}, title="Matters by country")
+
+
+# ---- Clients
+def clients(p, nav, tabs):
+    frame(p, "Clients", "Revenue, concentration, receivables and how quickly each client pays", nav, tabs)
+    kpi(p, 14, 128, 300, 78, F.m(M, "Client Revenue"), "Billed this period (ex GST)")
+    kpi(p, 320, 128, 300, 78, F.m(M, "Top 5 Client Share"), "Top 5 clients' share")
+    kpi(p, 626, 128, 300, 78, F.m(M, "Client Receivables"), "Receivables")
+    kpi(p, 932, 128, 334, 78, F.m(M, "Client Overdue"), "Overdue")
+    table(p, 14, 214, 760, 498, [F.c("Client Period", "client", "Client"), F.c("Client Period", "practice", "Practice"), F.c("Client Period", "attorney", "Partner"),
+                                 F.c("Client Period", "revenue", "Revenue"), F.c("Client Period", "prev", "Prior period"), F.c("Client Period", "share", "Share"),
+                                 F.c("Client Period", "ar", "Receivables"), F.c("Client Period", "days_to_pay", "Days to pay"),
+                                 F.c("Client Period", "active_matters", "Active matters")], "Client league", sort=(F.c("Client Period", "revenue"), "Descending"))
+    chart(p, "clusteredBarChart", 780, 214, 486, 250, F.c("Client Period", "client"), [F.s("Client Period", "revenue", "Revenue")], "Concentration: revenue by client",
+          sort=(F.s("Client Period", "revenue"), "Descending"), legend=False)
+    p.add("scatterChart", 780, 470, 486, 242, roles={"Category": [F.c("Client Period", "client")], "X": [F.s("Client Period", "days_to_pay", "Average days to pay")],
+                                                    "Y": [F.s("Client Period", "ar", "Receivables")], "Size": [F.s("Client Period", "revenue", "Revenue")]},
+          title="Payment behaviour", subtitle="Slow payers with big balances are top right")
+
+
+def clients_mkt(p, nav, tabs):
+    frame(p, "Clients · Marketing", "Where new clients come from and what each channel costs per new matter (last 12 months)", nav, tabs)
+    kpi(p, 14, 128, 300, 78, F.m(M, "Marketing Spend"), "Marketing spend (last 12 months)")
+    kpi(p, 320, 128, 300, 78, F.m(M, "Marketing Matters"), "New matters from marketing")
+    kpi(p, 626, 128, 300, 78, F.m(M, "Cost per Matter"), "Average cost per new matter")
+    kpi(p, 932, 128, 334, 78, F.m(M, "Fees per Dollar"), "Fees per marketing dollar")
+    chart(p, "clusteredBarChart", 14, 214, 620, 250, F.c("Marketing", "channel"), [F.s("Marketing", "cost_per_matter", "Cost per new matter")], "Cost per new matter by channel",
+          sort=(F.s("Marketing", "cost_per_matter"), "Ascending"), labels=True, legend=False, subtitle="Lower is better")
+    table(p, 640, 214, 626, 250, [F.c("Marketing", "channel", "Channel"), F.c("Marketing", "spend", "Spend"), F.c("Marketing", "inquiries", "Inquiries"),
+                                  F.c("Marketing", "matters", "New matters"), F.c("Marketing", "conversion", "Conversion"), F.c("Marketing", "fees", "Fees"),
+                                  F.c("Marketing", "fees_per_dollar", "Fees per $")], "Channels")
+    chart(p, "lineChart", 14, 470, 620, 242, F.c("Date", "month_start_date", "Month"), [F.m(M, "Trend Inquiries", "Inquiries"), F.m(M, "Trend Matters Opened", "New matters")],
+          "Inquiries and new matters by month")
+    text(p, 640, 470, 626, 242, [[("How to use this", 11, INK, True)],
+                                 [("Spend splits the firm's actual marketing cost by channel mix; referrals are paid by commission. New-matter fees use the average fees "
+                                   "billed per matter in the year, weighted by each channel's typical matter value. Test extra spend on a channel in the Simulator: "
+                                   "it buys inquiries at 40% of today's cost per inquiry, with diminishing returns, and the team only takes new work up to 95% utilisation.",
+                                   9, MUTED, False)]], background=True, border=True)
+
+
+# ---- Calendar
+def calendar(p, nav):
+    frame(p, "Calendar", "Court appearances, filings and completions across all matters (as of 17 Sep 2025)", nav)
+    kpi(p, 14, 100, 300, 78, F.m(M, "Deadlines Next 30 Days"), "Deadlines · next 30 days", F.m(M, "Deadlines Caption"))
+    kpi(p, 320, 100, 300, 78, F.m(M, "Deadline Count"), "Deadlines on the calendar")
+    table(p, 14, 186, 760, 526, [F.c("Deadlines", "date", "Date"), F.c("Deadlines", "title", "Event"), F.c("Deadlines", "type", "Type"), F.c("Deadlines", "court", "Court"),
+                                 F.c("Deadlines", "attorney", "Lawyer"), F.c("Deadlines", "matter_id", "Matter")], "Agenda",
+          sort=(F.c("Deadlines", "date"), "Ascending"))
+    chart(p, "columnChart", 780, 100, 486, 300, F.c("Deadlines", "date", "Date"), [F.m(M, "Deadline Count", "Events")], "Events by date", F.c("Deadlines", "type"))
+    chart(p, "clusteredBarChart", 780, 406, 486, 306, F.c("Deadlines", "attorney"), [F.m(M, "Deadline Count", "Events")], "Workload by lawyer",
+          sort=(F.m(M, "Deadline Count"), "Descending"), labels=True, legend=False)
+
+
+# ---- Platform
+def platform(p, nav):
+    frame(p, "Platform choice", "Which practice-management platform saves the firm the most: 3-year cash flows, NPV, scorecard and risk", nav)
+    slicer(p, 1030, 8, 236, 44, F.c("Platforms", "Platform"), "Dropdown", None, default="Smokeball + GlobalX", key="platform", force=True)
+    table(p, 14, 100, 760, 232, [F.c("Platforms", "Platform", "Platform"), F.c("Platforms", "Verdict", "Verdict"), F.c("Platforms", "NPV", "NPV (3 years)"),
+                                 F.c("Platforms", "Payback", "Payback (months)"), F.c("Platforms", "RunRate", "Run cost a year"), F.c("Platforms", "OneOff", "One-off"),
+                                 F.c("Platforms", "Score", "Score"), F.c("Platforms", "Rank", "Rank")], "Ranking (50% score, 50% NPV)",
+          sort=(F.c("Platforms", "Rank"), "Ascending"))
+    chart(p, "clusteredBarChart", 780, 100, 486, 232, F.c("Platforms", "Short"), [F.s("Platforms", "NPV", "NPV")], "NPV against staying on LEAP + InfoTrack",
+          sort=(F.s("Platforms", "NPV"), "Descending"), labels=True, legend=False)
+    chart(p, "lineChart", 14, 338, 620, 220, F.c("Platform Cashflow", "Month"), [F.m(M, "Platform Cumulative", "Cumulative net benefit")], "Cumulative cash flow",
+          F.c("Platform Cashflow", "Platform"), "Month 1 = contract signed. Crosses zero at payback")
+    table(p, 640, 338, 626, 220, [F.m(M, "Platform Criterion Score", "Score")], "Scorecard (weights: cost 30, integration 25, reliability 20, support 15, speed 10)",
+          matrix_rows=[F.c("Platform Scores", "Criterion")], matrix_cols=[F.c("Platforms", "Short")])
+    table(p, 14, 564, 620, 148, [F.c("Platform Risks", "risk", "Risk"), F.c("Platform Risks", "score", "Score"), F.c("Platform Risks", "mitigation", "Mitigation")],
+          "Risks of the selected platform", sort=(F.c("Platform Risks", "score"), "Descending"))
+    table(p, 640, 564, 310, 148, [F.c("Platform Gantt", "Phase", "Phase"), F.c("Platform Gantt", "StartWeek", "From week"), F.c("Platform Gantt", "EndWeek", "To week")],
+          "Implementation plan", sort=(F.c("Platform Gantt", "Order"), "Ascending"))
+    table(p, 956, 564, 310, 148, [F.m(M, "Platform Grid NPV", "NPV")], "NPV sensitivity", matrix_rows=[F.c("Platform NPV Grid", "Volume")],
+          matrix_cols=[F.c("Platform NPV Grid", "Realisation")])
+
+
+# ---- Simulator
+LEVER_LAYOUT = [  # three columns of slicers on the left of both Simulator pages
+    ("Pricing & growth", ["sim_util", "sim_rate", "sim_real", "sim_recov", "sim_infl", "sim_dso", "sim_mkt_channel", "sim_mkt_extra",
+                          "sim_new_area", "sim_new_area_type", "sim_platform"]),
+    ("Hiring, cuts & pay", ["sim_hires", "sim_role", "sim_ramp", "sim_hire_area", "sim_cut_fe", "sim_cut_role", "sim_keep_work", "sim_cut_years",
+                            "sim_pay_fe", "sim_pay_support"]),
+    ("Support & branch", ["sim_cut_support", "sim_support_dept", "sim_add_support", "sim_branch", "sim_branch_fe", "sim_branch_support",
+                          "sim_branch_rent", "sim_branch_fitout", "sim_branch_ramp"]),
+]
+
+
+def lever_slicers(p, levers):
+    by = {lv.key: lv for lv in levers}
+    col_w, x0, y0 = 128, 14, 162
+    p.add("shape", 10, 158, 402, 556, objects={"shape": [{"properties": {"tileShape": lit("rectangleRounded")}}],
+                                                "fill": [{"properties": {"fillColor": colour("#FFFFFF"), "transparency": lit(0.0)}}],
+                                                "outline": [{"properties": {"show": lit(True), "lineColor": colour(LINE), "weight": lit(1.0)}}]},
+          background=False, border=False, key="leverpanel")
+    for gi, (title, keys) in enumerate(LEVER_LAYOUT):
+        x = x0 + 4 + gi * (col_w + 4)
+        text(p, x, y0, col_w, 22, [[(title, 9, TEAL, True)]], key=f"grp{gi}")
+        for i, k in enumerate(keys):
+            lv = by[k]
+            slicer(p, x, y0 + 24 + i * 48, col_w, 46, F.c(lv.table, lv.label), "Dropdown", lv.label, sync=f"lever-{k}", key=f"lv-{k}")
+
+
+def sim_decide(p, nav, tabs, levers):
+    frame(p, "Decision Simulator", "Test a decision before you make it: pricing, hiring and staffing, pay, marketing, a new matter type, a branch or a platform switch", nav, tabs)
+    slicer(p, 14, 124, 1252, 32, F.c("Sim Preset", "Short"), "Basic", None, sync="preset", horizontal=True, key="preset", force=True, default="Today")
+    lever_slicers(p, levers)
+    k = [("Sim Operating Profit", "Operating profit (a year)", "Sim Profit Caption", None), ("Sim Margin", "Operating margin", "Sim Margin Caption", None),
+         ("Sim Gap to Budget", "Gap to FY26 budget", "Sim Gap Caption", "Sim Gap Colour"), ("Sim One-off Cash", "Cash needed up front", None, None),
+         ("Sim Low Point", "13-week cash low point", "Sim Low Caption", "Sim Low Colour")]
+    x = 420
+    for name, label, cap, colr in k:
+        kpi(p, x, 160, 166, 80, F.m(SIM, name), label, F.m(SIM, cap) if cap else None, colour_measure(SIM, colr) if colr else None)
+        x += 170
+    p.add("waterfallChart", 420, 246, 500, 270, roles={"Category": [F.c("Sim Bridge Step", "Step")], "Y": [F.m(SIM, "Sim Bridge Value", "Profit")]},
+          objects={"labels": [{"properties": {"show": lit(True), "fontSize": lit(8.0)}}],
+                   "sentimentColors": [{"properties": {"increaseFill": colour(GREEN), "decreaseFill": colour(RED), "totalFill": colour(TEAL)}}]},
+          title="Profit bridge: today → scenario", subtitle="Annual, run-rate. One-off costs are cash, not profit", sort=(F.c("Sim Bridge Step", "Order"), "Ascending"))
+    chart(p, "clusteredBarChart", 926, 246, 340, 270, F.c("Sim Lever Test", "Test"), [F.m(SIM, "Sim Lever Effect", "Profit a year")], "What moves profit most",
+          sort=(F.m(SIM, "Sim Lever Effect"), "Ascending"), labels=True, legend=False, subtitle="One unit of each lever, from today")
+    table(p, 420, 522, 600, 190, [F.c("Sim Effect Line", "Line", "Effect"), F.m(SIM, "Sim Effect", "Value")], "Effects & cash",
+          sort=(F.c("Sim Effect Line", "Order"), "Ascending"))
+    card(p, 1026, 522, 240, 92, F.m(SIM, "Sim Scenario Summary"), "Levers in this scenario", 8.0)
+    card(p, 1026, 620, 240, 92, F.m(SIM, "Sim Warning"), "Warnings", 8.0)
+
+
+def sim_test(p, nav, tabs, levers):
+    frame(p, "Decision Simulator · Test the plan", "What it would take to hit a target, how sure we are, and every preset side by side", nav, tabs)
+    slicer(p, 14, 124, 1252, 32, F.c("Sim Preset", "Short"), "Basic", None, sync="preset", horizontal=True, key="preset", force=True, default="Today")
+    lever_slicers(p, levers)
+    slicer(p, 420, 160, 260, 40, F.c("Sim Goal Target", "Target"), "Dropdown", "Target", key="target")
+    slicer(p, 686, 160, 200, 40, F.c("Sim Goal Uplift", "Extra profit a year"), "Dropdown", "Extra profit a year (for 'plus extra')", key="uplift")
+    card(p, 892, 160, 374, 40, F.m(SIM, "Sim Goal Caption"), False, 8.0)
+    table(p, 420, 206, 846, 160, [F.c("Sim Goal Row", "Lever", "Lever"), F.m(SIM, "Sim Goal Need", "What it would take"), F.m(SIM, "Sim Goal Difficulty", "Difficulty")],
+          "What would it take?", "Each lever on its own, rounded to the slider step", sort=(F.c("Sim Goal Row", "Order"), "Ascending"))
+    chart(p, "clusteredColumnChart", 420, 372, 420, 340, F.c("Sim Delivery", "Label"), [F.m(SIM, "Sim Profit at Delivery", "Operating profit")], "How sure are we?",
+          sort=(F.c("Sim Delivery", "Delivery"), "Descending"), labels=True, legend=False,
+          subtitle="Profit if only part of the improvement is delivered. Pay, rent and setbacks are never softened")
+    table(p, 846, 372, 420, 340, [F.c("Sim Compare", "Short", "Scenario"), F.m(SIM, "Sim Compare Profit", "Op. profit"), F.m(SIM, "Sim Compare vs Today", "vs today"),
+                                  F.m(SIM, "Sim Margin", "Margin"), F.m(SIM, "Sim One-off Cash", "One-off cash")], "Every preset side by side",
+          sort=(F.c("Sim Compare", "Order"), "Ascending"))
+
+
+# ---- Method & check
+def check(p, nav):
+    frame(p, "Method & check", "How the Simulator works, its assumptions, and a live check of every DAX result against the Python engine", nav)
+    card(p, 14, 100, 620, 44, F.m(SIM, "Check Passed"), False, 13.0)
+    table(p, 14, 150, 620, 562, [F.c("Sim Expected", "Preset", "Preset"), F.c("Sim Expected", "Metric", "Metric"), F.m(SIM, "Check Python", "Python"),
+                                 F.m(SIM, "Check DAX", "DAX"), F.m(SIM, "Check Difference", "Difference"), F.m(SIM, "Check Result", "Result")],
+          "DAX vs Python, every preset", "Python = core/simulate.py (tested in CI); DAX = this report's measures")
+    table(p, 640, 100, 626, 330, [F.c("Sim Assumption", "Assumption", "Assumption"), F.c("Sim Assumption", "Value", "Value")], "Assumptions",
+          sort=(F.c("Sim Assumption", "Order"), "Ascending"))
+    text(p, 640, 436, 626, 276, [
+        [("Method", 11, INK, True)],
+        [("Base: the last 12 months of actuals, scaled to a full year. Utilisation scales the team's hours; rates and realisation scale the fee on each hour. "
+          "Hires bill at the firm's utilisation × year-one productivity (or the chosen area's rate and workload). People leaving: pay saved, fees lost except "
+          "the share the team keeps; NES redundancy (s 119) and notice (s 117) are paid once. A branch ramps up in a straight line; fit-out is cash, not profit. "
+          "Marketing buys inquiries at 40% of the channel's current cost with diminishing returns, billing 35% of a typical matter in year one, up to 95% "
+          "utilisation. A new matter type ramps to its mature volume; the launch campaign is one-off cash. Cash: one-off costs are paid in week one of the "
+          "13-week forecast. Sample data. A decision aid, not legal or financial advice.", 8, MUTED, False)]], background=True, border=True)

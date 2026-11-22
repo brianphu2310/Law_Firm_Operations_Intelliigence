@@ -1,0 +1,26 @@
+table 'L Work kept'
+
+	column 'Work kept by the team (%)'
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Work kept by the team (%)]
+
+	partition 'L Work kept' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Work kept by the team (%)", INTEGER,
+				    {
+				    { 0 },
+				    { 10 },
+				    { 20 },
+				    { 30 },
+				    { 40 },
+				    { 50 },
+				    { 60 },
+				    { 70 },
+				    { 80 }
+				    }
+				)

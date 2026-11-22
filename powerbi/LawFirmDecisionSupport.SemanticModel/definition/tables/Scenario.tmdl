@@ -1,0 +1,24 @@
+table Scenario
+
+	column scenario_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: scenario_key
+
+	column scenario_name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: scenario_name
+
+	partition Scenario = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(BaseUrl, [RelativePath = "data/warehouse/dim_scenario.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, {"scenario_key"}),
+				    Typed = Table.TransformColumnTypes(Blanks, {{"scenario_key", Int64.Type}, {"scenario_name", type text}}, "en-US")
+				in
+				    Typed

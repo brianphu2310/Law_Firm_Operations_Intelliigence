@@ -1,0 +1,45 @@
+table 'Platform Risks'
+
+	column Platform
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Platform
+
+	column risk
+		dataType: string
+		summarizeBy: none
+		sourceColumn: risk
+
+	column probability
+		dataType: double
+		formatString: #,0
+		summarizeBy: none
+		sourceColumn: probability
+
+	column impact
+		dataType: double
+		formatString: #,0
+		summarizeBy: none
+		sourceColumn: impact
+
+	column score
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: score
+
+	column mitigation
+		dataType: string
+		summarizeBy: none
+		sourceColumn: mitigation
+
+	partition 'Platform Risks' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(BaseUrl, [RelativePath = "data/powerbi/platform_risks.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, {"probability", "impact", "score"}),
+				    Typed = Table.TransformColumnTypes(Blanks, {{"Platform", type text}, {"risk", type text}, {"probability", type number}, {"impact", type number}, {"score", type number}, {"mitigation", type text}}, "en-US")
+				in
+				    Typed

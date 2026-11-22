@@ -1,0 +1,47 @@
+table Channel
+
+	column channel_key
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: channel_key
+
+	column channel
+		dataType: string
+		summarizeBy: none
+		sourceColumn: channel
+
+	column spend_share
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: spend_share
+
+	column inquiry_share
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: inquiry_share
+
+	column conversion_factor
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: conversion_factor
+
+	column value_factor
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: value_factor
+
+	partition Channel = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(BaseUrl, [RelativePath = "data/warehouse/dim_marketing_channel.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, {"channel_key", "spend_share", "inquiry_share", "conversion_factor", "value_factor"}),
+				    Typed = Table.TransformColumnTypes(Blanks, {{"channel_key", Int64.Type}, {"channel", type text}, {"spend_share", type number}, {"inquiry_share", type number}, {"conversion_factor", type number}, {"value_factor", type number}}, "en-US")
+				in
+				    Typed

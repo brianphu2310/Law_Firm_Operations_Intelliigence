@@ -1,0 +1,27 @@
+table 'L Matter type'
+
+	column 'Matter type'
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Matter type]
+		sortByColumn: Order
+
+	column Order
+		dataType: int64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Order]
+
+	partition 'L Matter type' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Matter type", STRING, "Order", INTEGER,
+				    {
+				    { "Wills & Estates", 1 },
+				    { "Family Law", 2 },
+				    { "Property & Conveyancing", 3 },
+				    { "Commercial Leasing", 4 }
+				    }
+				)

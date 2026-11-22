@@ -1,0 +1,40 @@
+table 'L Branch rent'
+
+	column 'Branch rent / month'
+		dataType: int64
+		formatString: $#,0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Branch rent / month]
+
+	partition 'L Branch rent' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Branch rent / month", INTEGER,
+				    {
+				    { 4000 },
+				    { 4500 },
+				    { 5000 },
+				    { 5500 },
+				    { 6000 },
+				    { 6500 },
+				    { 7000 },
+				    { 7500 },
+				    { 8000 },
+				    { 8500 },
+				    { 9000 },
+				    { 9500 },
+				    { 10000 },
+				    { 10500 },
+				    { 11000 },
+				    { 11500 },
+				    { 12000 },
+				    { 12500 },
+				    { 13000 },
+				    { 13500 },
+				    { 14000 },
+				    { 14500 },
+				    { 15000 }
+				    }
+				)
