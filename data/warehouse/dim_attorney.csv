@@ -1,0 +1,9 @@
+attorney_key,attorney_short,attorney_name,role,home_branch_key,start_date_key,target_hours_per_month,bill_rate,pay_rate,realisation_factor
+1,"Sterling, C.",Clara Sterling,Senior Managing Partner,1,20160101,190,650,210,1.03
+2,"Specter, H.",Harvey Specter,Senior Associate,2,20180101,190,520,170,1.02
+3,"Zane, R.",Rachel Zane,Associate,3,20200101,190,380,120,0.97
+4,"Litt, L.",Louis Litt,Senior Partner,3,20150101,190,560,175,0.99
+5,"Bennett, K.",Katrina Bennett,Associate,2,20240201,190,400,130,0.96
+6,"Ross, M.",Mike Ross,Senior Associate,1,20190101,190,500,160,1
+7,"Pearson, J.",Jessica Pearson,Senior Partner,3,20120101,190,700,230,1.04
+8,"Paulsen, D.",Donna Paulsen,Associate,1,20240801,190,360,115,0.95

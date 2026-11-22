@@ -8,7 +8,7 @@ from core import metrics as X
 from core import ui
 from core.period import delta, has_data
 from core import simulate as SIM
-from core.ref import AS_OF, AREAS, ATTORNEYS, BRANCHES
+from core.ref import AS_OF, AREAS, ATTORNEYS, BRANCHES, DEPT_DRIVERS
 from core.theme import AREA_COLORS, TEAL, INDIGO, AMBER, RED, GREEN, INK, MUTED, BLUE
 
 TARGET_UTIL = 0.85
@@ -34,7 +34,7 @@ def render(M, cur, cmp):
         dict(label="Contribution after pay", value=ui.fmt_money(tot["contribution"]), d=delta(tot["contribution"], tp["contribution"]) if ap is not None else None, label_cmp=lab, accent=TEAL, sub="fees − fee-earner payroll"),
     ])
 
-    tabs = st.tabs(["Performance", "Capacity & hours", "Pay & economics", "Branches & staffing"])
+    tabs = st.tabs(["Performance", "Where to hire", "Departments", "Branches & staffing", "Capacity & hours", "Pay & economics"])
 
     # ------------------------------------------------------------ performance
     with tabs[0]:
@@ -78,7 +78,7 @@ def render(M, cur, cmp):
                 ui.show(ui.style_axes(fig, "$,.0s"), key="t_fc")
 
     # ------------------------------------------------------------ capacity
-    with tabs[1]:
+    with tabs[4]:
         c1, c2 = st.columns([1.2, 1])
         with c1:
             with ui.card("t5"):
@@ -101,7 +101,7 @@ def render(M, cur, cmp):
                 ui.note(f"Spare capacity up to 95% utilisation: about <b>{spare:,.0f} hours</b> in the period. That is the room the team has to absorb more work before hiring.")
 
     # -------------------------------------------------------------- pay
-    with tabs[2]:
+    with tabs[5]:
         f = X.fin_sum(M, cur)
         ptot = f["payroll_fee"] + f["payroll_support"]
         k = st.columns(4)
@@ -170,3 +170,80 @@ def render(M, cur, cmp):
         weak = bt["margin"].idxmin()
         ui.sim_cta(f"<b>{weak}</b> has {bt.loc[weak, 'ratio']:.1f} support staff per lawyer and the lowest margin ({bt.loc[weak, 'margin']:.0%}). "
                    "Test cutting two support roles, with NES redundancy pay, before hiring.", preset="Cut 2 support roles", key="people")
+
+    # -------------------------------------------------------------- where to hire
+    with tabs[1]:
+        pa = X.practice_area_table(M)
+        top = pa.index[0]
+        c1, c2 = st.columns([1.55, 1])
+        with c1:
+            with ui.card("t14"):
+                ui.card_title("Where to hire: demand, pressure and margin by practice area", "last 12 months · priority = 40% pressure, 35% demand growth, 25% margin")
+                out = pa.reset_index()[["area", "verdict", "matters_opened", "matters_growth", "util", "eff_rate", "margin", "priority"]].copy()
+                out[["eff_rate", "priority"]] = out[["eff_rate", "priority"]].round(0)
+                out["matters_growth"] = out["matters_growth"] * 100; out["margin"] = out["margin"] * 100
+                st.dataframe(out, hide_index=True, width="stretch", height=212, column_config={
+                    "area": "Practice area", "verdict": "Verdict", "matters_opened": st.column_config.NumberColumn("New matters", format="%d"),
+                    "matters_growth": st.column_config.NumberColumn("Growth", format="%+.0f%%"),
+                    "util": st.column_config.ProgressColumn("Lawyers' utilisation", format="percent", min_value=0.7, max_value=1.0, width=130),
+                    "eff_rate": ui.money_col("Rate /hr"), "margin": st.column_config.NumberColumn("Margin", format="%.0f%%"),
+                    "priority": st.column_config.ProgressColumn("Priority", format="%d", min_value=0, max_value=100, width=90)})
+                ui.note("Pressure = utilisation of the lawyers already doing the area's work. Margin = fees less those lawyers' pay, allocated by hours.")
+            with ui.card("t15"):
+                ui.card_title("One associate hire: year-one profit by practice area", "60% as busy as the area's lawyers in year one")
+                _, ltm = SIM.base_actuals(M)
+                ctx = SIM.context(M)
+                base = SIM.project(ltm, SIM.DEFAULTS, ctx=ctx)["op1"]
+                gains = {a: SIM.project(ltm, {**SIM.preset_state("Hire an associate"), "sim_hire_area": a}, ctx=ctx)["op1"] - base for a in pa.index}
+                fig = go.Figure(go.Bar(x=list(gains), y=list(gains.values()), marker_color=[TEAL if a == top else "#94a3b8" for a in gains],
+                                       text=[ui.fmt_money(v, sign=True) for v in gains.values()], textposition="outside", hovertemplate="%{x}: %{y:+,.0f}<extra></extra>"))
+                fig.update_layout(**ui.base_layout(150, margin=dict(l=8, r=8, t=16, b=4)))
+                fig.update_yaxes(range=[0, max(gains.values()) * 1.25])
+                ui.show(ui.style_axes(fig, "$,.0s"), key="t_hire_area")
+        with c2:
+            with ui.card("t16"):
+                ui.card_title("Pressure vs demand", "bubble = fees")
+                colors = {"Hire here first": TEAL, "Next in line": AMBER, "Hold": "#94a3b8"}
+                fig = go.Figure(go.Scatter(x=pa["util"], y=pa["matters_growth"], mode="markers+text", text=pa.index, textposition="top center", textfont=dict(size=9),
+                                           marker=dict(size=np.clip(pa["fees"] / 60000, 12, 46), color=[colors[v] for v in pa["verdict"]], opacity=0.75, line=dict(color="#fff", width=1)),
+                                           hovertemplate="%{text}<br>utilisation %{x:.0%} · new matters %{y:+.0%}<extra></extra>"))
+                fig.update_layout(**ui.base_layout(300))
+                fig.update_xaxes(tickformat=".0%", title=dict(text="lawyers' utilisation", font=dict(size=10)))
+                ui.style_axes(fig, "+.0%")
+                fig.update_yaxes(title=dict(text="growth in new matters", font=dict(size=10)))
+                ui.show(fig, key="t_pressure")
+            r0 = pa.iloc[0]
+            ui.sim_cta(f"<b>{top}</b>: lawyers at {r0['util']:.0%} and new matters {r0['matters_growth']:+.0%}. Test hiring an associate there.",
+                       key="hire_area", state={**SIM.PRESETS["Hire an associate"], "sim_hire_area": top})
+
+    # -------------------------------------------------------------- departments
+    with tabs[2]:
+        dt = X.department_table(M)
+        c1, c2 = st.columns([1.55, 1])
+        with c1:
+            with ui.card("t17"):
+                ui.card_title("Support staff against workload", "last 12 months · benchmarks are assumptions, listed below")
+                out = dt[["branch", "department", "headcount", "volume", "needed", "gap", "status", "cost_of_gap"]].copy()
+                out[["volume", "cost_of_gap"]] = out[["volume", "cost_of_gap"]].round(0)
+                st.dataframe(out, hide_index=True, width="stretch", height=300, row_height=33, column_config={
+                    "branch": "Office", "department": "Department", "headcount": st.column_config.NumberColumn("Staff", format="%d"),
+                    "volume": st.column_config.NumberColumn("Workload", format="%,d", help="Inquiries, active matters, transactions or dollars, by department"),
+                    "needed": st.column_config.NumberColumn("Needed", format="%.1f"), "gap": st.column_config.NumberColumn("Gap", format="%+.1f"),
+                    "status": "Status", "cost_of_gap": ui.signed_money_col("Gap × pay, a year")})
+                bench = " · ".join(f"<b>{d}</b>: {v['note']}" for d, v in DEPT_DRIVERS.items())
+                st.markdown(f'<div class="tbl-note" style="line-height:1.4">{bench}</div>', unsafe_allow_html=True)
+        with c2:
+            with ui.card("t18"):
+                ui.card_title("Staff vs needed")
+                lab = [f"{b[:4]} · {d.split(' ')[0]}" for b, d in zip(dt["branch"], dt["department"])]
+                fig = go.Figure()
+                fig.add_trace(go.Bar(y=lab, x=dt["needed"], orientation="h", name="Needed", marker_color="#cbd5e1"))
+                fig.add_trace(go.Bar(y=lab, x=dt["headcount"], orientation="h", name="Staff",
+                                     marker_color=[RED if s_ == "Over-staffed" else (AMBER if s_ in ("Stretched", "Under-staffed") else TEAL) for s_ in dt["status"]]))
+                fig.update_layout(**ui.base_layout(300, legend=True), barmode="group"); fig.update_yaxes(tickfont=dict(size=9), autorange="reversed")
+                ui.show(ui.style_axes(fig, ",.0f"), key="t_dept")
+            over = dt[dt["status"] == "Over-staffed"].sort_values("gap", ascending=False)
+            if len(over):
+                o = over.iloc[0]
+                ui.sim_cta(f"<b>{o['branch']} {o['department'].lower()}</b>: {o['headcount']} staff for {o['needed']:.1f} roles of work. Test a restructure.",
+                           key="dept", state={"sim_cut_support": int(o["gap"]), "sim_support_dept": o["department"], "sim_cut_years": 3})

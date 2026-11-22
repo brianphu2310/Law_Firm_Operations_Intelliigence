@@ -1,90 +1,89 @@
-# Business requirements: cut-over reconciliation and exceptions control
+# Business requirements document
 
-| | |
-|---|---|
-| **Change** | Practice management LEAP → triConvey (Smokeball); search supplier InfoTrack → TriSearch |
-| **Cut-over** | LEAP frozen Fri 29 Aug 2025 · buffer Mon 1 Sep · go-live Tue 2 Sep 2025 (hard cut-over, no dual running) |
-| **Hard deadline** | August trust reconciliation (r48) due **Fri 19 Sep 2025**, 15 working days after month end |
-| **Sponsor** | Principal / Managing Partner (see [STAKEHOLDERS.md](STAKEHOLDERS.md)) |
-| **Status** | Simulated project; requirements delivered and tested in this repository |
+## 1. Business need
 
-## 1. Problem statement
+The Principal of a three-office law firm (Richmond, Camden, Liverpool; 8 fee earners, 17 support staff) has to make several
+decisions this year and today has to piece the numbers together from the practice-management system, MYOB, payroll and
+spreadsheets. Each decision is made on a different, partial view, and none shows the cash impact.
 
-The vendor migrates active matters, unpaid invoices and **hand-keyed** trust opening balances. It does not migrate paid
-invoices, the general ledger or trust history, and it does not check the firm's month-end obligations. August straddles
-both systems (LEAP holds 1–29 Aug, triConvey holds 2–31 Aug), so the August r48 statements **cannot come from one
-system**, and nobody's standard migration test covers them.
+The first request was narrow: **which practice-management software would save the firm the most?** (the firm pays about $117K a
+year for LEAP + InfoTrack). Answering it needed the firm's cost base, utilisation and cash, and the same model can answer the
+Principal's other questions. The business need is one place that brings the firm's information together and tests each decision
+before it is made.
 
-At the same time, the new search supplier charges matters at a different point (when an order is *placed*, and only if
-an auto-disbursement setting is ticked) from the old one (when an order *completes*). Disbursements can therefore go
-missing or double up across the switch without anyone noticing until a client is under-billed.
+## 2. Objectives
 
-**Business impact if unmanaged:** an unbalanced trust reconciliation is a regulatory breach that must be reported; a
-client ledger in debit is a breach from the first dollar (r40(2)); missed disbursements are revenue the firm pays for and
-never recovers.
-
-## 2. Objectives and success measures
-
-| # | Objective | Measure | Target |
-|---|---|---|---|
-| O1 | Prove the migration is complete | Active matters in LEAP at freeze vs matters in triConvey | 100% matched, 0 duplicates |
-| O2 | Keep revenue and receivables intact | LEAP + triConvey invoices vs MYOB; open AR before vs after | 472 / 472 matched; AR difference $0.00 |
-| O3 | Lodge a balanced August r48 reconciliation on time | Statement 1 (bank) and statement 2 (ledgers) both reconcile to the cash book | $0.00 difference by 19 Sep 2025 |
-| O4 | Bill every search to the right matter | Supplier orders vs ledger disbursements | Every order matched or explained |
-| O5 | Give the team one list of what to fix | Findings in the exceptions log with owner and due date | 100% of findings logged and assigned |
+| # | Objective | Measure of success |
+|---|---|---|
+| O1 | Answer the six decisions below from one source of truth | Every number on every page reconciles to the same model (tested) |
+| O2 | Show the effect of a decision before it is made | Profit, gap to budget, one-off cash and 13-week cash low point for every decision |
+| O3 | Make the assumptions visible and challengeable | Every benchmark and assumption is listed in one file and on the Simulator's Method tab |
+| O4 | Work for a busy Principal | Every page and tab fits one laptop screen; a recommendation is visible without scrolling |
+| O5 | Let finance refresh the numbers in the tools they use | SQL answers and an Excel pack refreshed by Power Query |
 
 ## 3. Scope
 
-**In scope:** matters, matter-type mapping, open invoices and AR, trust opening balances and the August r48 statements,
-search-supplier disbursements for August and September 2025, the exceptions log, the cut-over checks in the pipeline and
-the app's Transition page.
+**In scope:** the six decisions; P&L against budget, FY outlook, cash and 13-week forecast; people, matters, clients, marketing;
+the Simulator; the SQL warehouse, Snowflake scripts and Excel pack.
+**Out of scope:** live connections to the firm's systems (sample data only); payroll processing; legal advice on employment
+decisions; individual performance management.
 
-**Out of scope:** document migration, staff training, data conversion of closed matters and paid invoices (they stay in
-LEAP as the record, retained for seven years under s147), supplier refunds and GST variances on supplier invoices
-(listed as not simulated in [TRANSITION.md](../TRANSITION.md)).
+## 4. The decisions
 
-## 4. Assumptions and constraints
+| ID | Decision | Question the Principal asks | Answer on the sample data |
+|---|---|---|---|
+| D1 | Software | Should we switch practice-management software, and to which? | Smokeball + GlobalX: best 3-year NPV (+$106K); payback 17 months |
+| D2 | Branch | Should we open another branch? | Profitable at full speed (+$539K a year) but the $120K fit-out breaks the minimum cash balance: fund it first |
+| D3 | Hiring | Should we hire lawyers, and for which type of matter? | Litigation first (lawyers at 89% utilisation, 60% margin) |
+| D4 | Staffing | Are support teams the right size? Add or cut? | Camden reception/admin over-staffed by 1.8 roles; Richmond stretched |
+| D5 | Pay | Should pay go up or down, and what can we afford? | 3% costs $119K a year; rates +1.7% would pay for it |
+| D6 | Growth | Where is marketing working? Should we open a new type of matter? | Website & SEO cheapest per new matter ($646); Wills & Estates the best new service |
 
-| Type | Item |
-|---|---|
-| Constraint | No dual running: once LEAP is frozen, anything entered after the final collection is not migrated |
-| Constraint | Trust records must stay computerised, auditable and backed up (r38–41) |
-| Assumption | TriSearch's service fee is 34/38 of InfoTrack's; vendors do not publish it (`TRISEARCH_FEE_RATIO` in `core/transition.py`) |
-| Assumption | Neither LEAP nor TriSearch publishes an open API; the API shapes in the mock are illustrative |
-| Dependency | MYOB stays the general ledger before and after the change; its invoice list is the control total |
+## 5. Business requirements
 
-## 5. Business requirements and traceability
-
-| ID | Requirement | Priority | Delivered by | Verified by |
+| ID | Requirement | Decision | Priority | Delivered by |
 |---|---|---|---|---|
-| BR-01 | Every active LEAP matter at the freeze must exist exactly once in triConvey | Must | `marts.migration_recon` | UAT-01, UAT-02 |
-| BR-02 | Every matter type must map to a triConvey type; unmapped types defaulting to "General" must be flagged | Must | `marts.matter_type_mapping_recon` | UAT-03 |
-| BR-03 | Every open invoice must carry over with the same amount including GST | Must | `marts.ar_migration_recon` | UAT-04 |
-| BR-04 | LEAP + triConvey invoices must equal MYOB invoices | Must | `marts.invoice_sync_recon` | UAT-05 |
-| BR-05 | Each client's trust opening balance in triConvey must equal the LEAP closing balance | Must | `marts.trust_migration_recon` | UAT-06 |
-| BR-06 | Both August r48 statements must reconcile, and the app must show working days left to the deadline | Must | `marts.trust_r48_status`, Transition page → Trust (r48) | UAT-07, UAT-08 |
-| BR-07 | No client trust ledger may go into debit at any point | Must | `test_trust_ledgers_never_negative_and_match_transactions` | UAT-09 |
-| BR-08 | Every search order (InfoTrack and TriSearch) must match a ledger disbursement, or be classified by cause | Must | `marts.supplier_disbursement_recon` | UAT-10, UAT-11 |
-| BR-09 | Supplier references re-typed with different spacing or case must still match | Should | Reference normalisation in `core/transition.py` | UAT-12 |
-| BR-10 | Nothing may be dated after the freeze in LEAP, or before go-live in triConvey | Must | `test_nothing_is_dated_across_the_freeze_in_the_wrong_system` | UAT-13 |
-| BR-11 | All findings must land in one exceptions log with kind, reference and amount | Must | `marts.migration_exceptions`, Transition page → Exceptions log | UAT-14 |
-| BR-12 | The daily load must stop, not load silently, when API counts and loaded counts differ | Must | n8n workflow, `test_count_mismatch_is_recorded_not_loaded_silently` | UAT-15 |
-| BR-13 | Partners must be able to see the cut-over status without opening SQL | Should | Transition page (r48 clock, four tabs) | UAT-16 |
+| BR1 | Compare each platform's 3-year cost, NPV, payback, scorecard and risks against the current system | D1 | Must | Platform pages; `core/platforms.py` |
+| BR2 | Show a new branch's year-one result, full-speed result, payback and cash impact | D2 | Must | Simulator → Growth |
+| BR3 | Rank practice areas by pressure on their lawyers, demand growth and margin, and recommend where to hire | D3 | Must | People → Where to hire; `sql/analysis/11_where_to_hire.sql` |
+| BR4 | Model a hire in a chosen practice area, with year-one productivity and break-even | D3 | Must | Simulator → People & pay |
+| BR5 | Compare each support department's headcount with its workload, by office | D4 | Must | People → Departments; `sql/analysis/12_support_staffing.sql` |
+| BR6 | Model adding or cutting support roles by department, with NES redundancy and notice pay and the small-business exemption | D4 | Must | Simulator → People & pay |
+| BR7 | Model a pay change for fee earners and support staff, compare it with market wage growth, and show the rate rise that would fund it | D5 | Must | Simulator → People & pay |
+| BR8 | Show spend, inquiries, new matters and cost per new matter by marketing channel | D6 | Must | Clients → Marketing; `sql/analysis/13_marketing_channels.sql` |
+| BR9 | Model extra marketing spend by channel with diminishing returns and the team's capacity | D6 | Should | Simulator → Growth |
+| BR10 | Model opening a new matter type: launch cost, ramp-up, year-one and full-speed result, payback | D6 | Should | Simulator → Growth |
+| BR11 | For every decision, show the one-off cash and the 13-week cash low point after it | All | Must | Simulator KPI row and Effects & cash |
+| BR12 | Show what it would take to close the gap to budget, lever by lever | All | Should | Simulator → What would it take? |
+| BR13 | Show the result if only part of a decision is delivered | All | Should | Simulator → How sure are we? |
+| BR14 | Provide the hiring, staffing, marketing and P&L answers in SQL and in Excel, refreshable by Power Query | All | Must | `sql/`, `snowflake/`, `excel/` |
+| BR15 | Every page and tab fits a 1440 × 810 browser window | All | Must | Checked for all pages and tabs |
 
-## 6. Non-functional requirements
+## 6. Data needed
 
-| ID | Requirement | How it is met |
+| Data | Source in a real firm | In this project |
 |---|---|---|
-| NFR-01 | Vendor APIs are reached with least privilege | OAuth 2.0 client credentials, per-resource scopes ([AUTH.md](../AUTH.md)) |
-| NFR-02 | No secrets in the repository | `test_secrets_are_never_committed` |
-| NFR-03 | The same checks give the same answer on every platform | DuckDB, Snowflake and Excel Power Query all return the same 28 findings |
-| NFR-04 | Re-running the load is safe | Incremental watermarks and de-duplication in staging (`test_incremental_load_only_pulls_changes_and_staging_deduplicates`) |
+| Fees, hours, rates, realisation by fee earner and practice area | Practice management (LEAP, Smokeball…) | `fact_time_by_area`, `fact_attorney_month` |
+| P&L, budget | MYOB / Xero, budget spreadsheet | `fact_monthly_pnl` (Actual and Budget) |
+| Matters opened, active, closed | Practice management | `dim_matter` |
+| Inquiries and intake funnel | CRM / reception log | `fact_monthly_funnel` |
+| Support headcount and pay by department | Payroll | `fact_staffing`, `dim_department` |
+| Marketing spend by channel, referral commissions | MYOB, marketing reports | `fact_monthly_pnl`, `dim_marketing_channel` |
+| Supplier orders (searches) | InfoTrack / council invoices | `fact_supplier_order` |
+| Cash, receivables, trust | MYOB, bank, trust ledger | `fact_monthly_snapshot`, `fact_invoice`, `fact_trust_*` |
 
-## 7. Sign-off
+## 7. Assumptions and constraints
 
-| Role | Signs off on |
-|---|---|
-| Principal / Managing Partner | Scope, go / no-go, acceptance of residual risk |
-| Trust Account Manager | BR-05 to BR-07 (trust) |
-| Finance / Accounts Officer | BR-03, BR-04, BR-08 (revenue, AR, disbursements) |
-| Practice Manager | BR-01, BR-02, BR-13 (matters, reporting) |
+* Department workload benchmarks, marketing channel mix and new-service economics are assumptions, stated in `core/ref.py`.
+* Redundancy and notice pay are NES minimums (Fair Work Act s 117, s 119). Awards, agreements and contracts can give more.
+* Market wage growth of 3.4% is the ABS Wage Price Index, private sector, year to the September quarter 2026.
+* Results are annual what-ifs on the last 12 months, not forecasts; client behaviour and mix are held constant.
+
+## 8. Risks
+
+| Risk | Effect | Mitigation |
+|---|---|---|
+| Benchmarks do not fit this firm | Wrong staffing call | Benchmarks shown next to the result; replace with the firm's own timesheets or task logs before acting |
+| Decision taken on profit alone | Cash shortfall (branch, new service) | Cash needed and 13-week low point shown for every decision |
+| Optimism in ramp-up or marketing returns | Over-investment | "How sure are we?" shows 75% and 50% delivery; marketing has diminishing returns and a capacity cap |
+| Employment decisions made from a model | Unfair dismissal or underpayment risk | NES rules applied and flagged as minimums; legal advice before any redundancy |

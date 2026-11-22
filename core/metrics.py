@@ -275,3 +275,113 @@ def cash_forecast(M, weeks=13):
     wk["closing"] = float(M["stock"]["cash"].iloc[M["T_act"] - 1]) + wk["net"].cumsum()
     wk["opening"] = wk["closing"] - wk["net"]
     return wk
+
+
+# ================================================================= decision tables =====
+def ltm_periods(end=AS_OF):
+    """The last 12 months to `end` and the 12 months before that (for growth)."""
+    end = pd.Timestamp(end)
+    cur = Period(end - pd.DateOffset(years=1) + pd.Timedelta(days=1), end, "Last 12 months")
+    prv = Period(cur.start - pd.DateOffset(years=1), cur.start - pd.Timedelta(days=1), "Prior 12 months")
+    return cur, prv
+
+
+def practice_area_table(M, end=AS_OF):
+    """Where to hire: demand, pressure on the lawyers doing the work, and how profitable each practice area is.
+
+    utilisation = utilisation of the fee earners doing the area's work, weighted by their hours in it (how stretched they are);
+    contribution = fees − fee-earner pay allocated by each person's share of hours in the area (overheads not allocated);
+    priority = 40% pressure (utilisation), 35% demand growth (matters opened), 25% margin, each scaled 0–100 across areas.
+    """
+    cur, prv = ltm_periods(end)
+    at, ap = att_table(M, cur), att_table(M, prv)
+    mt = M["matters"]
+    rows = []
+    for k in AREAS:
+        h, f = at[f"h_{k}"], at[f"f_{k}"]
+        share = h / at["hours"].replace(0, np.nan)
+        cost = float((at["cost"] * share.fillna(0)).sum())
+        hrs, fees = float(h.sum()), float(f.sum())
+        value = float((at["value"] * share.fillna(0)).sum())
+        util = float((at["util"] * h).sum() / hrs) if hrs else np.nan
+        opened = int(((mt["area"] == k) & (mt["opened"] >= cur.start) & (mt["opened"] <= cur.end)).sum())
+        opened_p = int(((mt["area"] == k) & (mt["opened"] >= prv.start) & (mt["opened"] <= prv.end)).sum())
+        active = int(((mt["area"] == k) & (mt["opened"] <= cur.end) & (mt["closed"].isna() | (mt["closed"] > cur.end))).sum())
+        rows.append(dict(area=k, matters_opened=opened, matters_growth=(opened - opened_p) / opened_p if opened_p else np.nan,
+                         active=active, hours=hrs, hours_growth=(hrs - float(ap[f"h_{k}"].sum())) / float(ap[f"h_{k}"].sum()) if float(ap[f"h_{k}"].sum()) else np.nan,
+                         util=util, eff_rate=fees / hrs if hrs else np.nan, realisation=fees / value if value else np.nan,
+                         fees=fees, contribution=fees - cost, margin=(fees - cost) / fees if fees else np.nan,
+                         lawyers=int((h > 0.1 * at["hours"]).sum())))
+    df = pd.DataFrame(rows).set_index("area")
+
+    def scale(s):
+        lo, hi = s.min(), s.max()
+        return (s - lo) / (hi - lo) * 100 if hi > lo else s * 0 + 50
+    df["priority"] = 0.40 * scale(df["util"]) + 0.35 * scale(df["matters_growth"].fillna(0)) + 0.25 * scale(df["margin"])
+    df["rank"] = df["priority"].rank(ascending=False, method="first").astype(int)
+    df["verdict"] = np.where(df["rank"] == 1, "Hire here first", np.where(df["rank"] == 2, "Next in line", "Hold"))
+    return df.sort_values("rank")
+
+
+def department_table(M, end=AS_OF):
+    """Support staffing: headcount against the workload each department carries (benchmarks in core/ref.py)."""
+    from .ref import DEPARTMENTS, DEPT_PAY, DEPT_DRIVERS
+    cur, _ = ltm_periods(end)
+    f = fin_sum(M, cur)
+    mt, inv = M["matters"], M["inv"]
+    d = pd.Timestamp(end)
+    act = mt[(mt["opened"] <= d) & (mt["closed"].isna() | (mt["closed"] > d))]
+    active_by = act.groupby("branch").size()
+    opened_by = mt[(mt["opened"] >= cur.start) & (mt["opened"] <= cur.end)].groupby("branch").size()
+    in_ltm = lambda df_, col="date": df_[(df_[col] >= cur.start) & (df_[col] <= cur.end)]
+    transactions = len(in_ltm(inv, "issue")) + len(in_ltm(M["trust_txns"])) + len(in_ltm(M["infotrack"])) + len(in_ltm(M["council"]))
+    volume_firm = {"Accounts & trust": float(transactions), "Marketing": float(f["marketing"] + f["commission"])}
+    rows = []
+    for dept, drv in DEPT_DRIVERS.items():
+        branches = ["All offices"] if drv.get("firm_wide") else [b["name"] for b in BRANCHES]
+        for br in branches:
+            hc = sum(v.get(dept, 0) for v in DEPARTMENTS.values()) if br == "All offices" else DEPARTMENTS[br].get(dept, 0)
+            if dept == "Reception & admin":
+                vol = float(f["inquiries"]) * float(opened_by.get(br, 0)) / float(opened_by.sum())
+            elif dept == "Paralegals & clerks":
+                vol = float(active_by.get(br, 0))
+            else:
+                vol = volume_firm[dept]
+            need = drv["base_per_branch"] + vol / drv["per_fte"]
+            gap = hc - need
+            status = "Over-staffed" if gap >= 0.75 else ("Under-staffed" if gap <= -0.75 else ("Stretched" if gap <= -0.25 else "About right"))
+            rows.append(dict(branch=br, department=dept, headcount=hc, driver=drv["driver"], volume=vol, needed=need, gap=gap, status=status,
+                             pay_month=DEPT_PAY[dept], cost_of_gap=gap * DEPT_PAY[dept] * 12))
+    return pd.DataFrame(rows)
+
+
+def marketing_table(M, end=AS_OF):
+    """Where new clients come from, last 12 months: spend, inquiries, new matters and their fees by channel.
+
+    Channel mix (core/ref.py MARKETING_CHANNELS) splits the model's actual totals: marketing cost (referrals are paid by
+    commission instead), inquiries and matters opened. Fees from new matters = new matters × the average fees billed per matter
+    worked in the year, weighted by each channel's typical matter value.
+    """
+    from .ref import MARKETING_CHANNELS as CH
+    cur, _ = ltm_periods(end)
+    f = fin_sum(M, cur)
+    mt = M["matters"]
+    new = mt[(mt["opened"] >= cur.start) & (mt["opened"] <= cur.end)]
+    worked = mt[(mt["opened"] <= cur.end) & (mt["closed"].isna() | (mt["closed"] >= cur.start))]
+    fee_per_matter = float(f["fees"]) / len(worked)                 # average fees billed per matter worked in the year
+    n_new = len(new)
+    fees_new = n_new * fee_per_matter
+    w_m = {c: v["inquiries"] * v["conv"] for c, v in CH.items()}
+    w_f = {c: w_m[c] * CH[c]["value"] for c in CH}
+    rows = []
+    for c, v in CH.items():
+        spend = float(f["marketing"]) * v["spend"] if c != "Referrals" else float(f["commission"])
+        inq = float(f["inquiries"]) * v["inquiries"]
+        matters = n_new * w_m[c] / sum(w_m.values())
+        fees = fees_new * w_f[c] / sum(w_f.values())
+        rows.append(dict(channel=c, spend=spend, inquiries=inq, matters=matters, conversion=matters / inq if inq else np.nan,
+                         fees=fees, cost_per_inquiry=spend / inq if inq else np.nan, cost_per_matter=spend / matters if matters else np.nan,
+                         fees_per_dollar=fees / spend if spend else np.nan))
+    out = pd.DataFrame(rows).set_index("channel")
+    out.attrs["fee_per_matter"] = fee_per_matter
+    return out

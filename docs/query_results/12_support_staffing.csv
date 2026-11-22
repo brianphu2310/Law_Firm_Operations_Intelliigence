@@ -1,0 +1,9 @@
+office,department,headcount,workload_12m,roles_needed,gap,status,gap_cost_a_year,pct_of_support_staff
+Camden,Reception & admin,3,109.0,1.2,1.8,Over-staffed,101451.0,17.6
+Liverpool,Reception & admin,1,233.0,1.4,-0.4,Stretched,-21670.0,5.9
+Richmond,Reception & admin,1,248.0,1.4,-0.4,Stretched,-23042.0,5.9
+Camden,Paralegals & clerks,2,25.0,1.1,0.9,Over-staffed,58036.0,11.8
+Liverpool,Paralegals & clerks,3,64.0,2.9,0.1,About right,6109.0,17.6
+Richmond,Paralegals & clerks,2,53.0,2.4,-0.4,Stretched,-27491.0,11.8
+All offices,Accounts & trust,4,3401.0,3.4,0.6,About right,42409.0,23.5
+All offices,Marketing,1,217915.0,1.5,-0.5,Stretched,-32056.0,5.9

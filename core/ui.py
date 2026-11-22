@@ -228,7 +228,7 @@ def keep_state(keys, prefix="_keep_"):
             st.session_state[prefix + k] = st.session_state[k]
 
 
-def sim_cta(text, target_kind=None, preset=None, key="cta"):
+def sim_cta(text, target_kind=None, preset=None, key="cta", state=None):
     """A call-to-action line that opens the Decision Simulator (optionally pre-loaded with a goal or a preset decision)."""
     from . import simulate as S
 
@@ -239,6 +239,9 @@ def sim_cta(text, target_kind=None, preset=None, key="cta"):
             ss["sim_target_kind"] = target_kind
         if preset:
             for k, v in S.preset_state(preset).items():
+                ss[k] = v
+        if state:
+            for k, v in {**S.DEFAULTS, **state}.items():
                 ss[k] = v
     c1, c2 = st.columns([4, 1.3], vertical_alignment="center")
     c1.markdown(f'<div class="sim-cta"><span class="sim-cta-star">★</span> {text}</div>', unsafe_allow_html=True)

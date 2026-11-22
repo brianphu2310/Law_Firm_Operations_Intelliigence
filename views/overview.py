@@ -121,9 +121,9 @@ div[class*="st-key-cardblock_r"] .card-title { overflow:hidden; text-overflow:el
     inp = P.base_inputs(M)
     rk = P.ranking(inp).sort_values("rank")
     top = rk.iloc[0]
-    st.markdown(f'<div class="story"><span class="k">HOW THIS STARTED</span><span>The firm pays <b>{ui.fmt_money(P.run_rate(P.BASELINE, inp))} a year</b> for LEAP + InfoTrack, '
-                f'so the first question was which platform saves the most: <b>{top["name"]}</b> (3-year NPV {ui.fmt_money(top["npv"], sign=True)}). '
-                f'The same model now tests hiring, redundancies and new branches.</span></div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="story"><span class="k">HOW THIS STARTED</span><span>The Principal asked which software saves the firm the most '
+                f'({ui.fmt_money(P.run_rate(P.BASELINE, inp))} a year on LEAP + InfoTrack today; best: <b>{top["name"]}</b>, NPV {ui.fmt_money(top["npv"], sign=True)}). '
+                f'The same model now answers hiring, staffing, pay, marketing, new services and branches.</span></div>', unsafe_allow_html=True)
 
     # ---------------- KPIs ----------------
     top_short = H["top"].split(",")[0]
@@ -260,24 +260,24 @@ div[class*="st-key-cardblock_r"] .card-title { overflow:hidden; text-overflow:el
 
 
 def _decisions(M, cur, top):
-    """The four questions the model exists to answer, each with today's evidence."""
-    from core import simulate as S
+    """The Principal's open questions, each with today's evidence and where to look."""
     a, b = X.fin_sum(M, cur), X.plan_sum(M, cur)
     gap = a["op_profit"] - b["op_profit"]
-    bt = X.branch_table(M, cur)
-    weak = bt["margin"].idxmin(); wb = bt.loc[weak]
-    cash = stock_at(M["stock"], "cash", cur.end)
-    burn = a["total_costs"] / cur.days * 30.4
-    _, f = S.base_actuals(M)
-    ctx = S.context(M)
-    br = S.project(f, S.preset_state("Open a branch"), ctx=ctx)
-    return [
+    pa = X.practice_area_table(M)
+    dt = X.department_table(M)
+    over = dt[dt["status"] == "Over-staffed"].sort_values("gap", ascending=False)
+    mk = X.marketing_table(M)
+    best, worst = mk["cost_per_matter"].idxmin(), mk["cost_per_matter"].idxmax()
+    items = [
         ("$", "#b91c1c" if gap < 0 else "#047857", "#fef2f2" if gap < 0 else "#f0fdf4", f"Profit {ui.fmt_money(abs(gap))} {'behind' if gap < 0 else 'ahead of'} budget",
-         f"{cur.label}: rates, utilisation or overheads? Test each in the Simulator."),
-        ("P", "#b45309", "#fffbeb", f"{weak}: {int(wb['support'])} support for {int(wb['fee_earners'])} lawyers",
-         f"Lowest branch margin ({wb['margin']:.0%}). Restructure before hiring."),
-        ("B", "#1d4ed8", "#eff6ff", f"New branch: {ui.fmt_money(br['branch_net'], sign=True)} in year one",
-         f"Pays back in {br['branch_payback']} months, but cash cover is {cash / burn:.1f} months."),
-        ("S", "#0a8496", "#ecfeff", f"Switch to {top['short']}: {ui.fmt_money(top['npv'], sign=True)} NPV",
-         f"Payback {top['payback']:.0f} months. Open it in the sidebar."),
+         f"{cur.label}: rates, utilisation, pay or overheads? Test each in the Simulator."),
+        ("H", "#0a8496", "#ecfeff", f"Hire next in {pa.index[0]}",
+         f"Lawyers at {pa.iloc[0]['util']:.0%}, new matters {pa.iloc[0]['matters_growth']:+.0%}. People → Where to hire."),
     ]
+    if len(over):
+        o = over.iloc[0]
+        items.append(("P", "#b45309", "#fffbeb", f"{o['branch']} {o['department'].lower()}: {o['headcount']} staff, {o['needed']:.1f} needed",
+                      f"{ui.fmt_money(o['cost_of_gap'])} a year over the workload. People → Departments."))
+    items.append(("M", "#1d4ed8", "#eff6ff", f"Marketing: {best} beats {worst}",
+                  f"{ui.fmt_money(mk.loc[best, 'cost_per_matter'])} vs {ui.fmt_money(mk.loc[worst, 'cost_per_matter'])} per new matter. Clients → Marketing."))
+    return items[:4]

@@ -36,7 +36,7 @@ def render(M, cur, cmp):
         dict(label="DSO (90-day)", value=f"{dso:.0f} days", d=delta(dso, dso_p) if has_c else None, up_good=False, label_cmp=lab, accent=TEAL),
     ])
 
-    tabs = st.tabs(["Client league", "Concentration", "Receivables & payment", "Client profile"])
+    tabs = st.tabs(["Client league", "Concentration", "Receivables & payment", "Client profile", "Marketing"])
 
     # ------------------------------------------------------------- league
     with tabs[0]:
@@ -155,3 +155,44 @@ def render(M, cur, cmp):
             out = mm[["id", "name", "attorney", "status", "opened", "est_value", "wip"]].copy(); out[["est_value", "wip"]] = out[["est_value", "wip"]].round(0)
             st.dataframe(out, hide_index=True, width="stretch", height=min(176, 40 + 35 * max(len(out), 1)), column_config={
                 "id": "ID", "name": "Active matter", "attorney": "Attorney", "status": "Status", "opened": st.column_config.DateColumn("Opened", format="DD MMM YY"), "est_value": ui.money_col("Est. value"), "wip": ui.money_col("WIP")})
+
+    # ---------------------------------------------------------- marketing
+    with tabs[4]:
+        from core import simulate as SIM
+        mk = X.marketing_table(M)
+        best = mk["cost_per_matter"].idxmin(); worst = mk["cost_per_matter"].idxmax()
+        c1, c2 = st.columns([1.55, 1])
+        with c1:
+            with ui.card("c9"):
+                ui.card_title("Where new clients come from", "last 12 months · referrals are paid by commission, not marketing spend")
+                out = mk.reset_index()[["channel", "spend", "inquiries", "matters", "conversion", "cost_per_matter", "fees"]].copy()
+                out["conversion"] = out["conversion"] * 100
+                out[["spend", "inquiries", "matters", "cost_per_matter", "fees"]] = out[["spend", "inquiries", "matters", "cost_per_matter", "fees"]].round(0)
+                st.dataframe(out, hide_index=True, width="stretch", height=212, column_config={
+                    "channel": "Channel", "spend": ui.money_col("Spend"), "inquiries": st.column_config.NumberColumn("Inquiries", format="%d"),
+                    "matters": st.column_config.NumberColumn("New matters", format="%d"), "conversion": st.column_config.NumberColumn("Conversion", format="%.0f%%"),
+                    "cost_per_matter": ui.money_col("Cost per matter"), "fees": ui.money_col("Fees in a year")})
+                ui.note(f"New matters bill about {ui.fmt_money(mk.attrs['fee_per_matter'])} each in a year. The channel split is an assumption applied to the firm's real totals.")
+            with ui.card("c10"):
+                ui.card_title("Extra $3,000 a month: year-one profit by channel", "diminishing returns and the team's capacity included")
+                _, ltm = SIM.base_actuals(M)
+                ctx = SIM.context(M)
+                base = SIM.project(ltm, SIM.DEFAULTS, ctx=ctx)["op1"]
+                gains = {c: SIM.project(ltm, {"sim_mkt_extra": 3000, "sim_mkt_channel": c}, ctx=ctx)["op1"] - base for c in mk.index}
+                fig = go.Figure(go.Bar(x=list(gains), y=list(gains.values()), marker_color=[GREEN if v > 0 else RED for v in gains.values()],
+                                       text=[ui.fmt_money(v, sign=True) for v in gains.values()], textposition="outside", hovertemplate="%{x}: %{y:+,.0f}<extra></extra>"))
+                fig.update_layout(**ui.base_layout(150, margin=dict(l=8, r=8, t=16, b=4)))
+                lo, hi = min(gains.values()), max(gains.values())
+                fig.update_yaxes(range=[min(0, lo) * 1.4, hi * 1.3])
+                ui.show(ui.style_axes(fig, "$,.0s"), key="c_mkt_gain")
+        with c2:
+            with ui.card("c11"):
+                ui.card_title("Cost per new matter", "lower is better")
+                g = mk["cost_per_matter"].sort_values()
+                fig = go.Figure(go.Bar(y=g.index, x=g.values, orientation="h", marker_color=[GREEN if c == best else (RED if c == worst else TEAL) for c in g.index],
+                                       text=[ui.fmt_money(v) for v in g.values], textposition="outside", hovertemplate="%{y}: $%{x:,.0f}<extra></extra>"))
+                fig.update_layout(**ui.base_layout(300)); fig.update_xaxes(range=[0, g.max() * 1.3])
+                ui.show(ui.style_axes(fig, None, grid=False), key="c_cpm")
+            top_c = max(gains, key=gains.get)
+            ui.sim_cta(f"Extra spend earns most through <b>{top_c}</b> ({ui.fmt_money(gains[top_c], sign=True)} a year); <b>{worst}</b> costs "
+                       f"{ui.fmt_money(mk.loc[worst, 'cost_per_matter'])} a matter. Test it.", key="mkt", state={"sim_mkt_channel": top_c, "sim_mkt_extra": 3000})

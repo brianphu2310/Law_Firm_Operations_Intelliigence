@@ -100,6 +100,24 @@ standard rate per hour, and a lever value be written with its unit (pp = percent
 * New branch: fees = associates × 190 × 12 × utilisation × average year-one productivity (linear ramp to 100% at the chosen month) × associate rate;
   costs = pay + overhead + support × $5,400 × 12 + rent × 12 + $24K running costs. Fit-out is one-off cash; payback = first month the cumulative contribution covers it.
 * Platform: first-year benefit less extra running cost and the one-off migration, from the platform evaluation's monthly cash flow.
+* Hire by practice area: hire fees × (area effective rate ÷ firm effective rate) × (area lawyers' utilisation ÷ firm utilisation).
+* Support added: pay + $3,000 a year each; a paralegal adds 200 billable hours a year at the firm's standard rate × realisation.
+* Pay review: fee-earner payroll × change + support payroll × change (today's team); "rate to fund" solves the rate rise that restores profit.
+* Marketing: extra inquiries = spend × 0.4 × 1 / (1 + spend ÷ channel's current spend) ÷ channel cost per inquiry; matters = inquiries × channel conversion;
+  year-one fees = matters × fees per matter × channel value × 0.35; new hours stop at 95% team utilisation.
+* New matter type: year-one fees = Σ over 12 months of min(1, month ÷ ramp) × matters a month × fee; costs = lawyer pay and overhead, support, ongoing marketing;
+  the launch campaign is one-off cash; payback = first month the cumulative contribution covers it.
+
+## 6b. Decision tables (People, Clients)
+
+* **Where to hire** (`metrics.practice_area_table`, SQL query 11): last 12 months by practice area. Pressure = utilisation of the lawyers doing the area's work,
+  weighted by their hours in it; demand = growth in matters opened vs the prior 12 months; margin = fees less fee-earner pay allocated by hours share.
+  Priority = 40% pressure + 35% demand + 25% margin, each min-max scaled 0–100 across areas.
+* **Departments** (`metrics.department_table`, SQL query 12): roles needed = base roles per office + workload ÷ workload per role. Workloads: reception = inquiries
+  shared by each office's share of new matters; paralegals = active matters; accounts = invoices + trust transactions + supplier orders; marketing = marketing and
+  referral spend. Over-staffed if staff − needed ≥ 0.75, stretched if ≤ −0.25, under-staffed if ≤ −0.75.
+* **Marketing** (`metrics.marketing_table`, SQL query 13): an assumed channel mix splits the real totals of marketing cost (referrals: commission), inquiries and
+  new matters; fees = new matters × average fees per matter worked in the year × channel value.
 * Cash: 13-week low point after the decision = today's low point − one-off costs + any DSO release (all one-offs assumed paid in week one).
 * **Break-even productivity of a hire** = (pay + overhead) ÷ fees at 100% of firm utilisation.
 * **Gap to budget** = scenario operating profit − FY budget operating profit.

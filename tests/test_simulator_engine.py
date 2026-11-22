@@ -7,6 +7,7 @@ import pandas as pd
 import pytest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from core import metrics as X
 from core import simulate as S
 from core.model import build_model
 from core.period import delta
@@ -122,12 +123,14 @@ def test_nes_redundancy_table_and_small_business_exemption():
 
 
 def test_cutting_support_saves_pay_every_year_and_costs_redundancy_once():
+    from core.ref import DEPT_PAY
     _, f = S.base_actuals(M)
     ctx = S.context(M)
     base = S.project(f, S.DEFAULTS, ctx=ctx)
-    r = S.project(f, {"sim_cut_support": 2, "sim_cut_years": 3}, ctx=ctx)
-    assert r["op1"] - base["op1"] == pytest.approx(2 * S.SUPPORT_PAY_MONTH * 12)
-    weekly = S.SUPPORT_PAY_MONTH * 12 / 52
+    r = S.project(f, {"sim_cut_support": 2, "sim_cut_years": 3, "sim_support_dept": "Paralegals & clerks"}, ctx=ctx)
+    pay = DEPT_PAY["Paralegals & clerks"]
+    assert r["op1"] - base["op1"] == pytest.approx(2 * pay * 12)
+    weekly = pay * 12 / 52
     assert r["redundancy"] == pytest.approx(2 * weekly * 7) and r["notice_pay"] == pytest.approx(2 * weekly * 2)
     assert r["one_off"] == pytest.approx(r["redundancy"] + r["notice_pay"])
 
@@ -162,3 +165,57 @@ def test_platform_switch_uses_the_platform_evaluation():
     assert r["op1"] - base["op1"] == pytest.approx(plat["annual"]) and r["one_off"] == pytest.approx(plat["one_off"])
     # without a context the switch has no effect (pure engine, no model)
     assert S.project(f, S.preset_state("Switch platform"))["op1"] == pytest.approx(S.project(f, S.DEFAULTS)["op1"])
+
+
+# ------------------------------------------------- hiring by area, staffing, pay, marketing, new matter type
+CTX = S.context(M)
+_, F = S.base_actuals(M)
+BASE = S.project(F, S.DEFAULTS, ctx=CTX)
+
+
+def test_hire_in_the_top_area_beats_the_weakest():
+    gains = {a: S.project(F, {**S.preset_state("Hire an associate"), "sim_hire_area": a}, ctx=CTX)["op1"] for a in CTX["areas"]}
+    assert max(gains, key=gains.get) in (CTX["top_area"], "IP Portfolio", "Corporate")      # top area is among the best earners
+    assert gains[CTX["top_area"]] > gains[min(gains, key=gains.get)]
+
+
+def test_department_cut_uses_that_department_pay():
+    from core.ref import DEPT_PAY
+    r = S.project(F, {"sim_cut_support": 2, "sim_support_dept": "Reception & admin"}, ctx=CTX)
+    assert r["op1"] - BASE["op1"] == pytest.approx(2 * DEPT_PAY["Reception & admin"] * 12)
+    assert r["redundancy"] == pytest.approx(2 * DEPT_PAY["Reception & admin"] * 12 / 52 * 7)
+
+
+def test_adding_a_paralegal_pays_for_itself_but_reception_does_not():
+    para = S.project(F, {"sim_add_support": 1, "sim_support_dept": "Paralegals & clerks"}, ctx=CTX)
+    rec = S.project(F, {"sim_add_support": 1, "sim_support_dept": "Reception & admin"}, ctx=CTX)
+    assert para["op1"] > BASE["op1"] > rec["op1"]
+
+
+def test_pay_rise_costs_payroll_and_rate_to_fund_it_restores_profit():
+    s = S.preset_state("Pay rise 3%")
+    r = S.project(F, s, ctx=CTX)
+    assert BASE["op1"] - r["op1"] == pytest.approx(0.03 * (F["payroll_fee"] + F["payroll_support"]) * 365 / S.LTM_DAYS)
+    x = S.rate_to_fund(F, s, CTX)
+    assert 0 < x < 3
+    funded = S.project(F, {**s, "sim_rate": x}, ctx=CTX)
+    assert funded["op1"] == pytest.approx(BASE["op1"], abs=50)
+
+
+def test_marketing_has_diminishing_returns_and_channels_differ():
+    g = [S.project(F, {"sim_mkt_extra": x}, ctx=CTX)["op1"] - BASE["op1"] for x in (1000, 3000, 10000)]
+    assert g[1] > g[0] and g[2] < g[1]                       # more spend stops paying
+    li = S.project(F, {"sim_mkt_extra": 3000, "sim_mkt_channel": "LinkedIn & social"}, ctx=CTX)["op1"] - BASE["op1"]
+    assert li < 0 < g[1]
+
+
+def test_new_matter_type_launch_is_one_off_cash_and_ramp_matters():
+    r = S.project(F, S.preset_state("Open a new matter type"), ctx=CTX)
+    assert r["area_launch"] == 25000 and r["one_off"] == pytest.approx(25000)
+    assert r["area_net"] < r["area_net_full"] and r["area_payback"] is not None
+    half = S.delivery_range(F, S.preset_state("Open a new matter type"), ctx=CTX)
+    assert half["op"].iloc[2] < half["op"].iloc[0]
+
+
+def test_sql_and_engine_agree_on_where_to_hire():
+    assert CTX["top_area"] == X.practice_area_table(M).index[0]

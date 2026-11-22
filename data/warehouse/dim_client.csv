@@ -1,0 +1,24 @@
+client_key,client_name,primary_practice_area_key,relationship_attorney_key,client_since_year,country,has_trust_account
+1,Acme Corp,2,3,2019,Australia,1
+2,Auckland Ventures Ltd,5,1,2021,New Zealand,0
+3,Blackwood Realty,1,6,2021,Australia,0
+4,Bright Path Foundation,5,1,2023,Australia,0
+5,Delacroix & Sons,1,7,2018,Australia,1
+6,Fentonville Council,5,8,2023,Australia,0
+7,Ganges Textile Exports,2,3,2023,India,0
+8,Global Trust Bank,1,2,2020,Australia,1
+9,Halcyon Systems,3,7,2016,Australia,1
+10,Hanwoo Precision Ltd,3,4,2024,South Korea,0
+11,Harlow & Co.,4,1,2022,Australia,0
+12,London Capital Partners,1,2,2023,United Kingdom,0
+13,Meridian Holdings Ltd.,1,1,2017,Australia,1
+14,Meridian Pacific Trust,1,7,2023,Hong Kong,0
+15,Nippon Precision Ltd,3,4,2022,Japan,0
+16,Nova Materials,3,4,2020,Australia,0
+17,Okafor Mining Co.,2,6,2019,Australia,1
+18,Pacific Rim Traders,2,6,2024,United States,0
+19,Singapore Trading Group,1,7,2022,Singapore,0
+20,Sunrise Logistics,4,5,2022,Australia,0
+21,Vertex Industries,3,4,2018,Australia,1
+22,Whitmore Textiles,3,5,2020,Australia,0
+23,Zenith Labs,2,2,2021,Australia,0

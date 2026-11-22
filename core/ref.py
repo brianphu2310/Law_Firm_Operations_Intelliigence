@@ -156,3 +156,47 @@ CARD_CATEGORIES = {  # (share of card spend, typical merchants)
     "Equipment": (0.10, ["JB Hi-Fi", "Harvey Norman", "Apple"]),
     "Office Maintenance": (0.08, ["Bunnings", "Coles", "Cleanaway"]),
 }
+
+# ------------------------------------------------------------------ decision inputs (assumptions, shown in the app) ----
+# Support staff by department and branch (sums to each branch's "support" count above). Monthly all-in cost per role is
+# illustrative and averages close to the $5,400 the P&L model uses for support payroll.
+DEPT_PAY = {"Reception & admin": 4650, "Paralegals & clerks": 5600, "Accounts & trust": 5900, "Marketing": 5900}
+DEPARTMENTS = {
+    "Richmond": {"Reception & admin": 1, "Paralegals & clerks": 2, "Accounts & trust": 1},
+    "Camden": {"Reception & admin": 3, "Paralegals & clerks": 2, "Accounts & trust": 1},
+    "Liverpool": {"Reception & admin": 1, "Paralegals & clerks": 3, "Accounts & trust": 2, "Marketing": 1},
+}
+# Workload each role can carry in a year (benchmarks are assumptions for the method, not industry standards)
+DEPT_DRIVERS = {
+    "Reception & admin": dict(driver="Inquiries a year", per_fte=600, base_per_branch=1.0,
+                              note="one front desk per office, plus one more for every 600 inquiries a year"),
+    "Paralegals & clerks": dict(driver="Active matters", per_fte=22, base_per_branch=0.0, note="one for every 22 active matters"),
+    "Accounts & trust": dict(driver="Invoices, receipts and supplier orders a year", per_fte=1000, base_per_branch=0.0, firm_wide=True,
+                             note="one for every 1,000 invoices, trust receipts and supplier orders a year, plus payroll, BAS and reconciliations (firm-wide team)"),
+    "Marketing": dict(driver="Marketing and referral spend a year", per_fte=150000, base_per_branch=0.0, firm_wide=True,
+                      note="one for every $150K of marketing and referral spend a year"),
+}
+PARALEGAL_LEVERAGE_HOURS = 200     # billable hours a year a new paralegal frees up for fee earners (assumption)
+# Australian private-sector wages rose 3.4% in the year to the September quarter 2026 (ABS Wage Price Index, released 18 Nov 2026)
+MARKET_WAGE_GROWTH = 0.034
+
+# Where new clients come from. spend = share of the marketing budget (referrals are paid by commission instead);
+# inquiries = share of inquiries; conv = inquiry-to-matter conversion relative to the firm average; value = fee per matter relative to average.
+MARKETING_CHANNELS = {
+    "Google Ads": dict(spend=0.40, inquiries=0.30, conv=0.70, value=0.80),
+    "Website & SEO": dict(spend=0.20, inquiries=0.20, conv=1.00, value=1.00),
+    "Referrals": dict(spend=0.00, inquiries=0.30, conv=1.50, value=1.40),
+    "LinkedIn & social": dict(spend=0.25, inquiries=0.12, conv=0.60, value=0.90),
+    "Events & community": dict(spend=0.15, inquiries=0.08, conv=1.10, value=1.00),
+}
+MARKETING_EFFICIENCY = 0.4         # extra spend buys inquiries at 40% of the channel's current rate (diminishing returns)
+FIRST_YEAR_BILLING = 0.35          # share of a new matter's typical fees billed in the year it arrives (matters arrive through the year)
+
+# New matter types the firm could open. fee = average fee per matter; mature = matters a month at full speed;
+# ramp = months to reach it; staff = who it needs; launch = one-off launch campaign; monthly = ongoing marketing a month.
+NEW_AREAS = {
+    "Wills & Estates": dict(fee=2800, mature=18, ramp=12, role="Associate", support=0, launch=25000, monthly=3000),
+    "Family Law": dict(fee=14000, mature=4, ramp=9, role="Senior Associate", support=0, launch=30000, monthly=4000),
+    "Property & Conveyancing": dict(fee=1900, mature=20, ramp=6, role="Associate", support=1, launch=20000, monthly=3000),
+    "Commercial Leasing": dict(fee=6500, mature=6, ramp=9, role="Associate", support=0, launch=10000, monthly=1500),
+}

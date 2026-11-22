@@ -28,8 +28,10 @@ flowchart LR
 | Simulation | `core/simulate.py` | The Decision Simulator's engine: annual what-if, goal-seek, delivery-risk range, lever ranking. Pure functions, unit-tested. |
 | Presentation | `core/ui.py`, `core/charts.py`, `core/theme.py` | Formatters, KPI cards, reusable charts, CSS. |
 | Pages | `views/` | One module per page (Overview, Finance, People, Matters, Clients, Calendar, Simulator); `platform_view.py` serves all seven platforms. Every page and tab is sized to fit a 1440 × 810 window. |
-| Integration | `integration/` | MYOB API (mocked) → n8n → Snowflake → marts, checks and reconciliation to the app; Excel / Power Query, marts API. See [PIPELINE.md](PIPELINE.md). |
 | Entry point | `app.py` | Builds the model once (cached), draws the sidebar and top bar, and routes to a page. |
+| SQL | `warehouse/`, `sql/` | Star schema (20 tables) built from the model, data-quality suite, 13 analysis queries; queries 11–13 are tested against `metrics.py`. |
+| Snowflake | `snowflake/` | Setup/load and decision-query scripts generated from the local schema and queries (`generate_*.py`), loading `data/warehouse/*.csv`. |
+| Excel | `excel/` | Principal's Decision Pack built from the SQL answers; Power Query scripts refresh it from the repository's CSV files. |
 
 ## Design decisions
 

@@ -9,7 +9,7 @@ the gap to the FY26 budget and the cash needed up front. It fits one laptop scre
 ## Use it in two minutes
 
 1. Open **★ Simulator** in the top bar (or follow a link from the Finance or People pages).
-2. Click a decision in the row of buttons, or move the sliders yourself (tabs: **Pricing & time**, **People**, **Branch & system**).
+2. Click a decision in the row of buttons, or move the sliders yourself (tabs: **Pricing**, **People & pay**, **Growth**).
 3. Read the five cards: operating profit, margin, **gap to FY26 budget**, **cash needed up front** and the **13-week cash low point**.
 4. Open **Effects & cash** for the detail of each decision: hire break-even, pay saved and fees lost, redundancy and notice pay, branch payback.
 5. Open **What would it take?**, choose a target and click **Apply** on the lever you would rather pull.
@@ -28,8 +28,14 @@ the gap to the FY26 budget and the cash needed up front. It fits one laptop scre
 | New fee earners | 0 to 3 | Adds pay plus about $9,000 a year overhead each; bills at the role's rate × firm utilisation × year-one productivity |
 | Year-one productivity | 40 to 100% | How busy a new hire is relative to the firm average |
 | Change in days to collect | −15 to +15 days | One-off cash effect only; profit is unchanged |
+| Hire for (practice area) | Firm mix or one of five areas | A hire earns the area's effective rate and is as busy as the lawyers already doing that work (People → Where to hire) |
+| Support department | Reception & admin, Paralegals & clerks, Accounts & trust, Marketing | Sets the pay of roles added or cut |
+| Support added | 0 to 3 | Pay plus $3,000 a year each; an added paralegal frees about 200 billable hours a year for fee earners |
+| Fee-earner pay / support pay | −5% to +10% | Pay review on today's team; compared with market wage growth (3.4%, ABS Wage Price Index, private sector) |
+| Extra marketing a month, channel | $0 to $10,000 | Inquiries at 40% of the channel's current cost, falling as spend grows; new matters bill 35% of a typical matter in year one; capped at 95% team utilisation |
+| New matter type | Wills & Estates, Family Law, Property & Conveyancing, Commercial Leasing | Fee, volume, ramp-up, staff, launch campaign (one-off cash) and ongoing marketing |
 | Fee earners leaving | 0 to 2 | Saves their pay and $9,000 overhead each; loses their fees, except the share of their work the team keeps (0–80%) |
-| Support roles cut | 0 to 4 | Saves $5,400 a month each |
+| Support roles cut | 0 to 4 | Saves the department's monthly pay each |
 | Years of service of those leaving | 0 to 15 | Sets NES redundancy pay (s 119) and notice (s 117); see below |
 | New branch | on / off | Associates (1–3) and support staff (1–4), rent, fit-out, months to full productivity |
 | Platform | 7 options | First-year saving and one-off migration cost, taken from the platform evaluation pages |
@@ -78,6 +84,12 @@ $2.09M / $1.99M, and at 50% delivery it ends **below** the $2.07M base run-rate.
 * **Open a branch** (2 associates, 2 support, $8,000 a month rent, $120K fit-out, full speed after 12 months): −$87K in year one,
   +$539K a year at full speed, fit-out earned back after 17 months. The $120K takes the 13-week cash low point from $160K to about $40K,
   below the $60K minimum, so it needs funding first (lower drawings, a loan or a staged fit-out).
+
+## Worked example: pay, marketing and a new service
+
+* **Pay rise 3% for everyone:** costs about $119K a year; **What it would take** in rates: +1.7%. Below market wage growth (3.4%) the page warns about retention risk.
+* **Extra $3,000 a month on Website & SEO:** about 9 more new matters and +$40K profit in year one. The same money on LinkedIn & social loses about $14K; $10,000 a month on Website earns less than $3,000 does (diminishing returns).
+* **Open Wills & Estates:** one associate, $25K launch campaign, full speed after 12 months: about break-even in year one, +$286K a year at full speed, launch earned back in 13 months. Property & Conveyancing is the weakest: −$25K in year one, 20 months to pay back.
 
 ## How the numbers are built
 

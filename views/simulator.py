@@ -10,7 +10,7 @@ from core import metrics as X
 from core import simulate as S
 from core import ui
 from core.period import stock_at
-from core.ref import AS_OF
+from core.ref import AS_OF, DEPT_PAY, MARKET_WAGE_GROWTH, NEW_AREAS
 from core.theme import TEAL, AMBER, RED, GREEN, INK, MUTED, FAINT
 
 TARGET_KINDS = ["Match the FY26 budget operating profit", "Reach the FY26 budget margin", "Add a custom profit uplift"]
@@ -72,7 +72,7 @@ def render(M, cur, cmp):
     base = S.project(f, S.DEFAULTS, ctx=ctx)
 
     st.markdown(f'<style>div[class*="st-key-cardblock_s2_"] {{ min-height:{PANEL_H + 28}px; }}</style>', unsafe_allow_html=True)
-    ui.page_header("★ Decision Simulator", "Test a decision before you make it: pricing, hiring, redundancies, a new branch or a platform switch",
+    ui.page_header("★ Decision Simulator", "Test a decision before you make it: pricing, hiring and staffing, pay, marketing, a new matter type, a branch or a platform switch",
                    f"Base: last 12 months · {p.start:%b %y} – {p.end:%b %y}")
 
     # ---------------------------------------------------------------- presets
@@ -87,44 +87,61 @@ def render(M, cur, cmp):
     left, right = st.columns([1, 2.55], gap="small")
     with left:
         with ui.card("s1"):
-            lt = st.tabs(["Pricing & time", "People", "Branch & system"])
-            if True:
-                with lt[0], st.container(height=PANEL_H + 50, border=False):
-                    _slider("sim_util", "Utilisation change (pp)", "%+.1f")
-                    _slider("sim_rate", "Rate increase (%)", "%.1f")
-                    _slider("sim_real", "Realisation change (pp)", "%+.1f")
-                    _slider("sim_recov", "Disbursement recovery (pp)", "%+.0f")
-                    _slider("sim_infl", "Overhead change (%)", "%+.1f")
-                    _slider("sim_dso", "Change in days to collect", None, "Negative = clients pay faster. Changes cash once, not profit.")
-                with lt[1], st.container(height=PANEL_H + 50, border=False):
-                    st.slider("New fee earners", 0, 3, key="sim_hires")
-                    if ss["sim_hires"]:
-                        c1, c2 = st.columns(2)
-                        c1.selectbox("Role", list(S.ROLES), key="sim_role")
-                        with c2:
-                            _slider("sim_ramp", "Year-one productivity", "%d%%", "Share of the firm's utilisation a new hire bills in year one.")
-                    st.slider("Fee earners leaving", 0, 2, key="sim_cut_fe")
-                    if ss["sim_cut_fe"]:
-                        c1, c2 = st.columns(2)
-                        c1.selectbox("Role leaving", list(S.ROLES), key="sim_cut_role")
-                        with c2:
-                            _slider("sim_keep_work", "Work kept (%)", "%d%%", "Share of the leaver's billable work the rest of the team picks up.")
+            lt = st.tabs(["Pricing", "People & pay", "Growth"])
+            with lt[0], st.container(height=PANEL_H + 50, border=False):
+                _slider("sim_util", "Utilisation change (pp)", "%+.1f")
+                _slider("sim_rate", "Rate increase (%)", "%.1f")
+                _slider("sim_real", "Realisation change (pp)", "%+.1f")
+                _slider("sim_recov", "Disbursement recovery (pp)", "%+.0f")
+                _slider("sim_infl", "Overhead change (%)", "%+.1f")
+                _slider("sim_dso", "Change in days to collect", None, "Negative = clients pay faster. Changes cash once, not profit.")
+            with lt[1], st.container(height=PANEL_H + 50, border=False):
+                st.slider("New fee earners", 0, 3, key="sim_hires")
+                if ss["sim_hires"]:
+                    c1, c2 = st.columns(2)
+                    c1.selectbox("Hire for", ["Firm mix"] + list(ctx["areas"]), key="sim_hire_area",
+                                 help="The practice area sets the rate they earn and how busy they will be (People → Where to hire).")
+                    c2.selectbox("Role", list(S.ROLES), key="sim_role")
+                    _slider("sim_ramp", "Year-one productivity", "%d%%", "Share of the firm's utilisation a new hire bills in year one.")
+                st.slider("Fee earners leaving", 0, 2, key="sim_cut_fe")
+                if ss["sim_cut_fe"]:
+                    c1, c2 = st.columns(2)
+                    c1.selectbox("Role leaving", list(S.ROLES), key="sim_cut_role")
+                    with c2:
+                        _slider("sim_keep_work", "Work kept (%)", "%d%%", "Share of the leaver's billable work the rest of the team picks up.")
+                st.selectbox("Support department", list(DEPT_PAY), key="sim_support_dept", help="People → Departments shows which teams are over- or under-staffed.")
+                c1, c2 = st.columns(2)
+                with c1:
+                    _slider("sim_add_support", "Support added")
+                with c2:
                     _slider("sim_cut_support", "Support roles cut")
-                    if ss["sim_cut_fe"] or ss["sim_cut_support"]:
-                        _slider("sim_cut_years", "Years of service of those leaving", "%d yrs", "Sets NES redundancy and notice pay.")
-                with lt[2], st.container(height=PANEL_H + 50, border=False):
-                    st.toggle("Open a new branch", key="sim_branch")
-                    if ss["sim_branch"]:
-                        c1, c2 = st.columns(2)
-                        with c1:
-                            _slider("sim_branch_fe", "Associates")
-                            _slider("sim_branch_rent", "Rent / month", "$%d")
-                            _slider("sim_branch_ramp", "Months to full speed", "%d")
-                        with c2:
-                            _slider("sim_branch_support", "Support staff")
-                            _slider("sim_branch_fitout", "Fit-out (one-off)", "$%d")
-                    st.selectbox("Practice-management platform", list(ctx["platforms"]), key="sim_platform",
-                                 help="First-year saving and migration cost come from the platform evaluation pages (sidebar).")
+                if ss["sim_cut_fe"] or ss["sim_cut_support"]:
+                    _slider("sim_cut_years", "Years of service of those leaving", "%d yrs", "Sets NES redundancy and notice pay.")
+                c1, c2 = st.columns(2)
+                with c1:
+                    _slider("sim_pay_fe", "Fee-earner pay (%)", "%+.1f")
+                with c2:
+                    _slider("sim_pay_support", "Support pay (%)", "%+.1f")
+            with lt[2], st.container(height=PANEL_H + 50, border=False):
+                c1, c2 = st.columns([1.2, 1])
+                c1.selectbox("Marketing channel", list(ctx["marketing"]), key="sim_mkt_channel", help="Clients → Marketing compares the channels.")
+                with c2:
+                    _slider("sim_mkt_extra", "Extra a month", "$%d")
+                st.toggle("Open a new matter type", key="sim_new_area")
+                if ss["sim_new_area"]:
+                    st.selectbox("Matter type", list(NEW_AREAS), key="sim_new_area_type", help="Fee, volume, ramp-up and launch cost are assumptions (Method tab).")
+                st.toggle("Open a new branch", key="sim_branch")
+                if ss["sim_branch"]:
+                    c1, c2 = st.columns(2)
+                    with c1:
+                        _slider("sim_branch_fe", "Associates")
+                        _slider("sim_branch_rent", "Rent / month", "$%d")
+                        _slider("sim_branch_ramp", "Months to full speed", "%d")
+                    with c2:
+                        _slider("sim_branch_support", "Support staff")
+                        _slider("sim_branch_fitout", "Fit-out (one-off)", "$%d")
+                st.selectbox("Practice-management platform", list(ctx["platforms"]), key="sim_platform",
+                             help="First-year saving and migration cost come from the platform evaluation pages (sidebar).")
 
     s = {k: ss[k] for k in LEVER_KEYS}
     r = S.project(f, s, ctx=ctx)
@@ -154,7 +171,7 @@ def render(M, cur, cmp):
             with rt[0]:
                 _bridge(r, bt, f, ctx)
             with rt[1]:
-                _effects(r, s, cash_now, low0, low1, monthly_cost)
+                _effects(r, s, cash_now, low0, low1, monthly_cost, f, ctx)
             with rt[2]:
                 _goal(f, s, r, base, bt, ctx)
             with rt[3]:
@@ -198,11 +215,28 @@ def _bridge(r, bt, f, ctx):
         ui.show(ui.style_axes(fig, "$.2s"), key="sim_tor")
 
 
-def _effects(r, s, cash_now, low0, low1, monthly_cost):
-    c1, c2 = st.columns(2, gap="medium")
+def _effects(r, s, cash_now, low0, low1, monthly_cost, f=None, ctx=None):
+    box = st.container(height=PANEL_H - 70, border=False)
+    c1, c2 = box.columns(2, gap="medium")
     rows = [("Billable hours a year", f"{r['hours0']:,.0f} → {r['hours1']:,.0f}"), ("Utilisation", f"{r['util0']:.1%} → {r['util1']:.1%}")]
     if s["sim_hires"]:
-        rows += [("New hire(s): fees − cost, year one", _signed(r["hire_net"])), ("Productivity a hire needs to break even", f"{r['hire_breakeven_ramp']:.0%}")]
+        where = s["sim_hire_area"] if s["sim_hire_area"] != "Firm mix" else "the firm's mix"
+        rows += [(f"New hire(s) in {where}: fees − cost, year one", _signed(r["hire_net"])), ("Productivity a hire needs to break even", f"{r['hire_breakeven_ramp']:.0%}")]
+    if s["sim_add_support"]:
+        extra = f", frees {r['paralegal_fees'] / max(r['support_added_cost'], 1):.1f}× their cost in fees" if r["paralegal_fees"] else ""
+        rows += [(f"{s['sim_support_dept']} added: cost a year{extra}", _signed(-r["support_added_cost"] + r["paralegal_fees"]))]
+    if s["sim_pay_fe"] or s["sim_pay_support"]:
+        fund = S.rate_to_fund(f, s, ctx) if f is not None else None
+        rows += [("Pay review: cost a year", _signed(-r["pay_cost"])),
+                 ("Rate increase that would pay for it", f"{fund:+.1f}%" if fund is not None else "not reachable")]
+    if s["sim_mkt_extra"]:
+        rows += [(f"{s['sim_mkt_channel']}: extra spend a year", _signed(-r["mkt_spend"])),
+                 ("Extra inquiries → new matters", f"{r['mkt_inquiries']:.0f} → {r['mkt_matters']:.0f}"),
+                 ("Fees from them in year one", _signed(r["mkt_fees"]))]
+    if s["sim_new_area"]:
+        pb = f"{r['area_payback']} months" if r["area_payback"] else "not within 5 years"
+        rows += [(f"{s['sim_new_area_type']}: fees − costs, year one", _signed(r["area_net"])), ("At full speed, a year", _signed(r["area_net_full"])),
+                 ("Launch campaign earned back after", pb)]
     if s["sim_cut_fe"]:
         rows += [("Fee earners leaving: pay saved", _signed(r["cut_saving"])), ("Fees lost (after work kept)", _signed(-r["cut_fees_lost"]))]
     if s["sim_cut_support"]:
@@ -216,8 +250,13 @@ def _effects(r, s, cash_now, low0, low1, monthly_cost):
     with c1:
         st.markdown('<div class="mini-title">Profit effects (a year)</div>', unsafe_allow_html=True)
         _rows(rows)
-        if r["util1"] > 0.95:
+        if r["util1"] > 0.95 or r["team_util"] > 0.95:
             ui.note("Utilisation above about 95% is rarely sustainable: check burnout and quality risk.", "warn")
+        if r.get("mkt_capped"):
+            ui.note("The team cannot take all the new work: the extra fees stop at 95% utilisation. Pair the campaign with a hire.", "warn")
+        if (s["sim_pay_fe"] or s["sim_pay_support"]) and min(s["sim_pay_fe"], s["sim_pay_support"]) < MARKET_WAGE_GROWTH * 100:
+            ui.note(f"Below market wage growth ({MARKET_WAGE_GROWTH:.1%} a year, ABS Wage Price Index, private sector): expect retention risk. "
+                    "Pay cuts generally need the employee's agreement and cannot go below award minimums.", "warn")
         if s["sim_cut_fe"] and r["cut_fees_lost"] > r["cut_saving"]:
             ui.note("The fee earner(s) leaving bill more than they cost: this cut lowers profit.", "warn")
         if s["sim_hires"] and s["sim_ramp"] < (r["hire_breakeven_ramp"] or 0) * 100:
@@ -232,6 +271,8 @@ def _effects(r, s, cash_now, low0, low1, monthly_cost):
             crow += [("Branch fit-out", ui.fmt_money(r["branch_fitout"]))]
         if r["platform_one_off"]:
             crow += [("Platform migration and go-live dip", ui.fmt_money(r["platform_one_off"]))]
+        if r["area_launch"]:
+            crow += [(f"{s['sim_new_area_type']} launch campaign", ui.fmt_money(r["area_launch"]))]
         if r["dso_cash"]:
             crow += [("Cash released by collecting faster" if r["dso_cash"] > 0 else "Cash tied up by collecting slower", _signed(r["dso_cash"]))]
         crow += [("Office account today", ui.fmt_money(cash_now)), ("13-week low point: today → after", f"{ui.fmt_money(low0)} → <b>{ui.fmt_money(low1)}</b>"),
@@ -318,4 +359,9 @@ employers with fewer than {S.SMALL_BUSINESS} employees are generally exempt from
 <b>New branch:</b> associates ramp up in a straight line to full speed; costs are pay, support staff at ${S.SUPPORT_PAY_MONTH:,}/month, rent and ${S.BRANCH_RUNNING:,} a year running costs.
 Fit-out is capital: cash, not operating profit.<br>
 <b>Platform:</b> first-year saving and migration cost come from the platform evaluation (sidebar).<br>
+<b>Hiring by area:</b> a hire earns the area's effective rate and is as busy as the lawyers already doing that work (People → Where to hire).<br>
+<b>Support and pay:</b> department pay is illustrative; an added paralegal frees about 200 billable hours a year for fee earners. Pay changes apply to today's team.
+Market wage growth is {MARKET_WAGE_GROWTH:.1%} (ABS Wage Price Index, private sector, year to September quarter 2026).<br>
+<b>Marketing:</b> extra spend buys inquiries at 40% of the channel's current cost, falling further as spend grows; new matters bill 35% of a typical matter in year one; the team takes new work only up to 95% utilisation.<br>
+<b>New matter type:</b> fee, monthly volume, ramp-up, staff and launch campaign are assumptions; the launch campaign is shown as one-off cash.<br>
 <b>Cash:</b> every one-off cost is paid in week one of the 13-week forecast. It is a decision aid, not a forecast, and not legal or financial advice.</div>""", unsafe_allow_html=True)
