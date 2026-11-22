@@ -863,8 +863,9 @@ def build():
             pv.append(vis)
         out_pages.append(dict(name=p.name, display=p.display, section=p.section, hidden=p.hidden, visuals=pv))
     basemaps = json.loads((Path(__file__).resolve().parent / "assets" / "basemaps.json").read_text())
-    from .geo import SYDNEY_CBD
+    from .geo import SYDNEY_CBD, SYDNEY_REF
     basemaps["sydney"]["cbd"] = SYDNEY_CBD
+    basemaps["sydney"]["ref"] = SYDNEY_REF
     payload = dict(sim=sim_payload(E, W), basemaps=basemaps, pages=out_pages, periods=periods, defaultPeriod=MD.DEFAULT_PERIOD, presets=presets, platforms=platforms,
                    defaultPlatform="Smokeball + GlobalX")
     html = TEMPLATE.replace("/*DATA*/", json.dumps(payload, ensure_ascii=False, separators=(",", ":")))

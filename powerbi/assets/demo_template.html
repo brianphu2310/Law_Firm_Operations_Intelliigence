@@ -544,18 +544,46 @@ function scatter(v, body, W, H){
 
 function geomap(v, body, W, H){
   const d = dataFor(v); if (!d) return; const bm = D.basemaps[d.basemap]; const [lon0, lat0, lon1, lat1] = bm.box;
-  const s = svgEl(W, H); s.setAttribute("viewBox", `0 0 ${bm.w} ${bm.h}`); s.setAttribute("preserveAspectRatio", "xMidYMid meet"); body.appendChild(s); body.style.background = "#d9e9f1"; body.style.borderRadius = "0 0 12px 12px";
-  add(s, "rect", {x:0, y:0, width:bm.w, height:bm.h, fill:"#d9e9f1"});
-  add(s, "path", {d:bm.path, fill:"#f8fafc", stroke:"#b6c7d3", "stroke-width": d.basemap === "world" ? 0.6 : 1.2});
   const P = (la, lo) => [(lo - lon0) / (lon1 - lon0) * bm.w, (lat1 - la) / (lat1 - lat0) * bm.h];
-  const k = Math.max(bm.w / W, bm.h / H);
-  if (bm.cbd) { const [x, y] = P(bm.cbd[0], bm.cbd[1]); add(s,"circle",{cx:x,cy:y,r:4*k,fill:"#64748b"}); add(s,"text",{x:x,y:y+16*k,"font-size":10*k,fill:"#64748b","text-anchor":"middle"}, "Sydney CBD"); }
+  const local = d.basemap === "sydney";
+  // view: the whole world, or a frame fitted around the offices and the CBD at the panel's own aspect ratio
+  let vx = 0, vy = 0, vw = bm.w, vh = bm.h;
+  if (local) {
+    const xy = d.points.map(p => P(p.lat, p.lon)); if (bm.cbd) xy.push(P(bm.cbd[0], bm.cbd[1]));
+    const xs = xy.map(q => q[0]), ys = xy.map(q => q[1]);
+    let x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+    const pad = 0.22 * Math.max(x1 - x0, y1 - y0); x0 -= pad * 2.2; x1 += pad; y0 -= pad; y1 += pad * 1.5;
+    vw = x1 - x0; vh = y1 - y0; const a = W / H;
+    if (vw / vh < a) { const n = vh * a; x0 -= (n - vw) / 2; vw = n; } else { const n = vw / a; y0 -= (n - vh) / 2; vh = n; }
+    vx = x0; vy = y0;
+  }
+  const s = svgEl(W, H); s.setAttribute("viewBox", `${vx} ${vy} ${vw} ${vh}`); s.setAttribute("preserveAspectRatio", "xMidYMid meet");
+  body.appendChild(s); body.style.background = "#dbeaf2"; body.style.borderRadius = "0 0 12px 12px";
+  const k = Math.max(vw / W, vh / H);                       // view units per screen pixel
+  add(s, "rect", {x: vx - vw, y: vy - vh, width: vw * 3, height: vh * 3, fill: "#dbeaf2"});
+  add(s, "path", {d: bm.path, fill: "#f7f9fb", stroke: "#a9bfcd", "stroke-width": (local ? 1 : 0.6) * k});
+  const txt = (x, y, t, o) => { const e = add(s, "text", Object.assign({x, y, "font-size": 10 * k, fill: "#0f172a", "text-anchor": "middle",
+      stroke: "#f7f9fb", "stroke-width": 3 * k, "paint-order": "stroke", "stroke-linejoin": "round"}, o || {}), t); return e; };
+  if (local && bm.ref && W > 500) Object.entries(bm.ref).forEach(([n, [la, lo]]) => { const [x, y] = P(la, lo);
+    if (x < vx || x > vx + vw || y < vy || y > vy + vh) return;
+    add(s, "circle", {cx: x, cy: y, r: 2 * k, fill: "#b6c4cf"}); txt(x, y - 5 * k, n, {"font-size": 8.5 * k, fill: "#94a3b8", "font-style": "italic"}); });
+  if (bm.cbd) { const [x, y] = P(bm.cbd[0], bm.cbd[1]);
+    add(s, "rect", {x: x - 3.5 * k, y: y - 3.5 * k, width: 7 * k, height: 7 * k, fill: "#475569", transform: `rotate(45 ${x} ${y})`});
+    txt(x, y + 15 * k, "Sydney CBD", {"font-size": 9 * k, fill: "#475569"}); }
   const mx = Math.max(...d.points.map(p => p.size));
-  const col = d.basemap === "world" ? "#0a8496" : "#2f7fd8";
-  d.points.sort((a,b) => b.size - a.size).forEach(p => { const [x, y] = P(p.lat, p.lon); const r = (4 + Math.min(22, 0.08 * Math.min(W, H)) * Math.sqrt(p.size / mx)) * k;
-    const c = add(s,"circle",{cx:x,cy:y,r,fill:col,"fill-opacity":.55,stroke:col,"stroke-width":1.2*k}); hover(c, `${p.label}: ${p.size} ${d.sizeLabel.toLowerCase()}`);
-    if (p.size >= mx * 0.04 && p.size >= 8) add(s,"text",{x:x,y:y-r-4*k,"font-size":10*k,fill:"#0f172a","text-anchor":"middle","font-weight":600}, `${p.label} ${p.size}`); });
-  add(s,"text",{x:bm.w-6*k,y:bm.h-6*k,"font-size":8*k,fill:"#94a3b8","text-anchor":"end"}, D.basemaps.attribution);
+  const col = local ? "#2f7fd8" : "#0a8496";
+  const rmax = Math.min(local ? 26 : 22, (local ? 0.085 : 0.08) * Math.min(W, H));
+  d.points.sort((a, b) => b.size - a.size).forEach(p => { const [x, y] = P(p.lat, p.lon); const r = (5 + rmax * Math.sqrt(p.size / mx)) * k;
+    add(s, "circle", {cx: x, cy: y, r: r + 3 * k, fill: col, "fill-opacity": .12});
+    const c = add(s, "circle", {cx: x, cy: y, r, fill: col, "fill-opacity": .85, stroke: "#fff", "stroke-width": 1.5 * k}); hover(c, `${p.label}: ${p.size} ${d.sizeLabel.toLowerCase()}`);
+    const big = p.size >= mx * 0.04 && p.size >= 8;
+    if (local) {
+      add(s, "text", {x, y: y + 4 * k, "font-size": 11 * k, fill: "#fff", "text-anchor": "middle", "font-weight": 700}, String(p.size));
+      txt(x - r - 6 * k, y + 4 * k, p.label, {"font-weight": 600, "text-anchor": "end"});
+    } else if (big) txt(x, y - r - 4 * k, `${p.label} ${p.size}`, {"font-weight": 600});
+  });
+  const ax = vx + vw - 6 * k, ay = vy + vh - 6 * k;
+  add(s, "text", {x: ax, y: ay, "font-size": 7.5 * k, fill: "#94a3b8", "text-anchor": "end"}, D.basemaps.attribution);
 }
 
 render();

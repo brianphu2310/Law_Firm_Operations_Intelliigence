@@ -430,7 +430,8 @@ def overview(p, nav, facts, targets):
           "Simulator: every decision vs today", sort=(F.m(SIM, "Sim Compare vs Today"), "Descending"), labels=True, legend=False,
           subtitle="Annual operating profit, from the last 12 months")
     p.add("map", 912, 510, 354, 202, roles={"Category": [F.c("Branch", "Place")], "Size": [F.m(M, "Open Matters", "Open matters")]},
-          objects={"bubbles": [{"properties": {"bubbleSize": lit(12.0)}}], "dataPoint": [{"properties": {"defaultColor": colour("#2f7fd8")}}]},
+          objects={"bubbles": [{"properties": {"bubbleSize": lit(8.0)}}], "dataPoint": [{"properties": {"defaultColor": colour("#2f7fd8")}}],
+                   "categoryLabels": [{"properties": {"show": lit(True), "fontSize": lit(9.0)}}], "mapStyles": [{"properties": {"mapTheme": lit("grayscale")}}]},
           title="Open matters by office", subtitle="Western Sydney · full map: Matters → Map", key="ovmap")
 
 
@@ -561,10 +562,12 @@ def matters_map(p, nav, tabs):
     frame(p, "Matters · Map", "Where the work comes from: matters by client country, and by office", nav, tabs)
     matter_slicers(p, 100)
     p.add("map", 14, 146, 830, 330, roles={"Category": [F.c("Country Geo", "Country")], "Size": [F.m(M, "Matter Count", "Matters")]},
-          objects={"bubbles": [{"properties": {"bubbleSize": lit(10.0)}}], "dataPoint": [{"properties": {"defaultColor": colour(TEAL)}}]},
+          objects={"bubbles": [{"properties": {"bubbleSize": lit(10.0)}}], "dataPoint": [{"properties": {"defaultColor": colour(TEAL)}}],
+                   "categoryLabels": [{"properties": {"show": lit(True)}}], "mapStyles": [{"properties": {"mapTheme": lit("grayscale")}}]},
           title="Matters by client country", subtitle="Bubble size = number of matters")
     p.add("map", 850, 146, 416, 330, roles={"Category": [F.c("Branch", "Place")], "Size": [F.m(M, "Open Matters", "Open matters")]},
-          objects={"bubbles": [{"properties": {"bubbleSize": lit(14.0)}}], "dataPoint": [{"properties": {"defaultColor": colour("#2f7fd8")}}]},
+          objects={"bubbles": [{"properties": {"bubbleSize": lit(14.0)}}], "dataPoint": [{"properties": {"defaultColor": colour("#2f7fd8")}}],
+                   "categoryLabels": [{"properties": {"show": lit(True)}}], "mapStyles": [{"properties": {"mapTheme": lit("grayscale")}}]},
           title="Open matters by office", subtitle="Richmond, Camden and Liverpool (Western Sydney)")
     table(p, 14, 482, 620, 230, [F.c("Country Geo", "Country", "Country"), F.m(M, "Matter Count", "Matters"), F.m(M, "Open Matters", "Open"),
                                  F.m(M, "Matter Estimated Value", "Est. value"), F.m(M, "Matter WIP", "WIP")], "By country",

@@ -59,7 +59,7 @@
             "bubbleSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12.0D"
+                  "Value": "8.0D"
                 }
               }
             }
@@ -77,6 +77,39 @@
                       "Value": "'#2f7fd8'"
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9.0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "mapStyles": [
+        {
+          "properties": {
+            "mapTheme": {
+              "expr": {
+                "Literal": {
+                  "Value": "'grayscale'"
                 }
               }
             }

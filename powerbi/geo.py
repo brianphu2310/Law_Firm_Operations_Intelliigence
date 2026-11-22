@@ -15,6 +15,8 @@ COUNTRY_LATLON = {
 }
 OFFICE_LATLON = {"Richmond": (-33.600, 150.752), "Camden": (-34.054, 150.696), "Liverpool": (-33.920, 150.923)}
 SYDNEY_CBD = (-33.8688, 151.2093)
+# faint reference places on the office map, for orientation only
+SYDNEY_REF = {"Parramatta": (-33.8150, 151.0011), "Penrith": (-33.7507, 150.6877), "Campbelltown": (-34.0650, 150.8142)}
 
 WORLD_BOX = (-170.0, -50.0, 180.0, 72.0)          # lon_min, lat_min, lon_max, lat_max
 SYDNEY_BOX = (150.35, -34.30, 151.45, -33.40)
