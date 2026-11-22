@@ -14,13 +14,16 @@
   .top .logo i { background:#f2c811; display:block; border-radius:1px; }
   .top .name { font-weight:600; }
   .top .note { margin-left:auto; color:#c8c6c4; font-size:12px; }
+  .rotate { display:none; position:absolute; top:14px; left:0; right:0; text-align:center; font-size:13px; color:#475569; }
+  @media (max-width: 700px) and (orientation: portrait) { .rotate { display:block; } }
+  @media (max-width: 900px) { .top .note, .top .name + span { display:none; } }
   .pages { background:#faf9f8; border-right:1px solid #e1dfdd; overflow:auto; padding:8px 0; }
   .pages h4 { margin:4px 14px 8px; font-size:12px; color:#605e5c; font-weight:600; }
   .pages a { display:block; padding:7px 14px; font-size:12.5px; color:#323130; cursor:pointer; border-left:3px solid transparent; text-decoration:none; }
   .pages a:hover { background:#f3f2f1; }
   .pages a.on { background:#edebe9; border-left-color:var(--teal); font-weight:600; }
   .stage { overflow:hidden; display:flex; align-items:center; justify-content:center; background:#e9eef4; position:relative; }
-  .canvas { width:1280px; height:720px; position:relative; background:var(--bg); transform-origin: center center; box-shadow:0 2px 12px rgba(0,0,0,.12); }
+  .canvas { width:1280px; height:720px; position:relative; background:var(--bg); transform-origin: 0 0; position:absolute; box-shadow:0 2px 12px rgba(0,0,0,.12); }
   .tabs { grid-column: 1 / -1; background:#faf9f8; border-top:1px solid #e1dfdd; display:flex; gap:2px; overflow-x:auto; padding:0 6px; align-items:stretch; }
   .tabs a { font-size:11.5px; padding:6px 12px; color:#323130; cursor:pointer; white-space:nowrap; border-top:3px solid transparent; }
   .tabs a.on { border-top-color:#f2c811; background:#fff; font-weight:600; }
@@ -61,7 +64,7 @@
   <div class="top"><div class="logo"><i style="height:8px"></i><i style="height:13px"></i><i style="height:18px"></i></div>
     <span class="name">LawFirmDecisionSupport</span><span style="color:#c8c6c4">· Report preview</span>
     <span class="note">Preview of the Power BI report built from its own page files · sample data · numbers computed in Python</span></div>
-  <div class="stage" id="stage"><div class="canvas" id="canvas"></div></div>
+  <div class="stage" id="stage"><div class="rotate">↻ Turn your phone sideways for a bigger view</div><div class="canvas" id="canvas"></div></div>
   <div class="tabs" id="tabs"></div>
 </div>
 <div class="tip" id="tip"></div>
@@ -118,7 +121,8 @@ function render(){
 function go(name){ state.page = name; render(); }
 function fit(){
   const st = $("#stage"); const s = Math.min((st.clientWidth-12)/1280, (st.clientHeight-12)/720);
-  $("#canvas").style.transform = `scale(${s})`;
+  const c = $("#canvas"); c.style.transform = `scale(${s})`;
+  c.style.left = Math.max(0, (st.clientWidth - 1280 * s) / 2) + "px"; c.style.top = Math.max(0, (st.clientHeight - 720 * s) / 2) + "px";
 }
 window.addEventListener("resize", fit);
 D.pages.forEach(p => {
