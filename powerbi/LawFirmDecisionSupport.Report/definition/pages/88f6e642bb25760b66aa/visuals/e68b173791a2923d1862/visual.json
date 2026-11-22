@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "e68b173791a2923d1862",
   "position": {
-    "x": 1070.13125,
+    "x": 853.4375,
     "y": 102.0,
     "z": 33000,
-    "width": 194.51250000000002,
+    "width": 204.75,
     "height": 72.0,
     "tabOrder": 33000
   },
@@ -23,12 +23,12 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "Matter WIP"
+                  "Property": "Matter Billed"
                 }
               },
-              "queryRef": "Measures.Matter WIP",
-              "nativeQueryRef": "Work in progress",
-              "displayName": "Work in progress"
+              "queryRef": "Measures.Matter Billed",
+              "nativeQueryRef": "Billed to date",
+              "displayName": "Billed to date"
             }
           ]
         }

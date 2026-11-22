@@ -339,7 +339,7 @@ def build_pages(ctx_facts, levers):
     specs = [("overview", "Overview", "Overview"), ("finance_pl", "Finance · P&L", "Finance"), ("finance_cash", "Finance · Cash & billing", "Finance"),
              ("finance_trust", "Finance · Trust & costs", "Finance"), ("people_perf", "People · Performance", "People"),
              ("people_hire", "People · Hiring & departments", "People"), ("people_branch", "People · Branches & pay", "People"),
-             ("matters", "Matters", "Matters"), ("clients", "Clients", "Clients"), ("clients_mkt", "Clients · Marketing", "Clients"),
+             ("matters", "Matters", "Matters"), ("matters_map", "Matters · Map", "Matters"), ("clients", "Clients", "Clients"), ("clients_mkt", "Clients · Marketing", "Clients"),
              ("calendar", "Calendar", "Calendar"), ("sim_decide", "Simulator · Decide", "Simulator"),
              ("sim_test", "Simulator · Test", "Simulator"), ("check", "Method & check", "Check")]
     for i, (n, d, s) in enumerate(specs):
@@ -367,7 +367,9 @@ def build_pages(ctx_facts, levers):
     people_perf(P["people_perf"], nav, ppl_tabs)
     people_hire(P["people_hire"], nav, ppl_tabs)
     people_branch(P["people_branch"], nav, ppl_tabs)
-    matters(P["matters"], nav)
+    mat_tabs = [("Ledger", P["matters"].name), ("Map", P["matters_map"].name)]
+    matters(P["matters"], nav, mat_tabs)
+    matters_map(P["matters_map"], nav, mat_tabs)
     clients(P["clients"], nav, cli_tabs)
     clients_mkt(P["clients_mkt"], nav, cli_tabs)
     calendar(P["calendar"], nav)
@@ -377,7 +379,7 @@ def build_pages(ctx_facts, levers):
     sim_test(P["sim_test"], nav, sim_tabs, levers)
     check(P["check"], nav)
     pages = list(P.values())
-    return pages[:11] + plat_pages + pages[11:]
+    return pages[:12] + plat_pages + pages[12:]
 
 
 # ---- Overview
@@ -546,16 +548,36 @@ def people_branch(p, nav, tabs):
 
 
 # ---- Matters
-def matters(p, nav):
-    frame(p, "Matters", "Every matter on the ledger: status, value, billing and work in progress", nav)
+def matter_slicers(p, y):
+    slicer(p, 14, y, 300, 40, F.c("Matter", "status"), "Dropdown", "Status", single=False, sync="m-status", key="s-status")
+    slicer(p, 320, y, 300, 40, F.c("Practice Area", "practice_area"), "Dropdown", "Practice area", single=False, sync="m-area", key="s-area")
+    slicer(p, 626, y, 300, 40, F.c("Branch", "branch_name"), "Dropdown", "Office", single=False, sync="m-office", key="s-office")
+
+
+def matters_map(p, nav, tabs):
+    frame(p, "Matters · Map", "Where the work comes from: matters by client country, and by office", nav, tabs)
+    matter_slicers(p, 100)
+    p.add("map", 14, 146, 830, 330, roles={"Category": [F.c("Country Geo", "Country")], "Size": [F.m(M, "Matter Count", "Matters")]},
+          objects={"bubbles": [{"properties": {"bubbleSize": lit(10.0)}}], "dataPoint": [{"properties": {"defaultColor": colour(TEAL)}}]},
+          title="Matters by client country", subtitle="Bubble size = number of matters")
+    p.add("map", 850, 146, 416, 330, roles={"Category": [F.c("Branch", "Place")], "Size": [F.m(M, "Open Matters", "Open matters")]},
+          objects={"bubbles": [{"properties": {"bubbleSize": lit(14.0)}}], "dataPoint": [{"properties": {"defaultColor": colour("#2f7fd8")}}]},
+          title="Open matters by office", subtitle="Richmond, Camden and Liverpool (Western Sydney)")
+    table(p, 14, 482, 620, 230, [F.c("Country Geo", "Country", "Country"), F.m(M, "Matter Count", "Matters"), F.m(M, "Open Matters", "Open"),
+                                 F.m(M, "Matter Estimated Value", "Est. value"), F.m(M, "Matter WIP", "WIP")], "By country",
+          sort=(F.m(M, "Matter Count"), "Descending"))
+    chart(p, "clusteredBarChart", 640, 482, 626, 230, F.c("Branch", "branch_name"), [F.m(M, "Matter Count", "All matters"), F.m(M, "Open Matters", "Open")],
+          "Matters by office", labels=True)
+
+
+def matters(p, nav, tabs):
+    frame(p, "Matters", "Every matter on the ledger: status, value, billing and work in progress", nav, tabs)
     kpi(p, 14, 100, 248, 78, F.m(M, "Active Matters"), "Active matters (period end)", F.m(M, "Active Matters Δ"))
     kpi(p, 268, 100, 248, 78, F.m(M, "Matters Opened"), "New matters this period")
     kpi(p, 522, 100, 248, 78, F.m(M, "Matter Estimated Value"), "Estimated value (all matters)")
     kpi(p, 776, 100, 248, 78, F.m(M, "Matter Billed"), "Billed to date")
     kpi(p, 1030, 100, 236, 78, F.m(M, "Matter WIP"), "Work in progress")
-    slicer(p, 14, 186, 300, 40, F.c("Matter", "status"), "Dropdown", "Status", single=False)
-    slicer(p, 320, 186, 300, 40, F.c("Practice Area", "practice_area"), "Dropdown", "Practice area", single=False)
-    slicer(p, 626, 186, 300, 40, F.c("Branch", "branch_name"), "Dropdown", "Office", single=False)
+    matter_slicers(p, 186)
     table(p, 14, 232, 912, 480, [F.c("Matter", "matter_id", "Matter"), F.c("Matter", "matter_name", "Name"), F.c("Matter", "status", "Status"),
                                  F.c("Attorney", "attorney_short", "Lawyer"), F.c("Matter Position", "estimated_value", "Est. value"),
                                  F.c("Matter Position", "billed_to_date", "Billed"), F.c("Matter Position", "wip_balance", "WIP"),

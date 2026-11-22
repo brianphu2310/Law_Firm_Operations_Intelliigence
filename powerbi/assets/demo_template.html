@@ -150,7 +150,7 @@ function visual(v){
   const W = p.width, H = p.height - top;
   const R = { shape, textbox, actionButton, card, multiRowCard, slicer, tableEx: table, pivotTable: matrix,
               clusteredBarChart: bars, clusteredColumnChart: bars, columnChart: bars, lineChart: lines, areaChart: lines,
-              lineClusteredColumnComboChart: bars, donutChart: donut, funnel, waterfallChart: waterfall, scatterChart: scatter }[v.type];
+              lineClusteredColumnComboChart: bars, donutChart: donut, funnel, waterfallChart: waterfall, scatterChart: scatter, map: geomap }[v.type];
   if (R) R(v, body, W, H, ob, el);
   return el;
 }
@@ -385,6 +385,22 @@ function scatter(v, body, W, H){
   pts.forEach((p, i) => { const r = 4 + 12 * Math.sqrt((p.size || mx) / mx);
     const c = add(s,"circle",{cx:X(p.x),cy:Y(p.y),r,fill:PAL[i%PAL.length],opacity:.75}); hover(c, `${p.label}: ${d.xlabel} ${fmt(p.x, d.xkind)}, ${d.ylabel} ${fmt(p.y, d.ykind)}`);
     if (pts.length <= 12) add(s,"text",{x:X(p.x),y:Y(p.y)-r-2,"font-size":7.5,fill:"#334155","text-anchor":"middle"}, String(p.label).slice(0,18)); });
+}
+
+function geomap(v, body, W, H){
+  const d = dataFor(v); if (!d) return; const bm = D.basemaps[d.basemap]; const [lon0, lat0, lon1, lat1] = bm.box;
+  const s = svgEl(W, H); s.setAttribute("viewBox", `0 0 ${bm.w} ${bm.h}`); s.setAttribute("preserveAspectRatio", "xMidYMid meet"); body.appendChild(s); body.style.background = "#d9e9f1"; body.style.borderRadius = "0 0 12px 12px";
+  add(s, "rect", {x:0, y:0, width:bm.w, height:bm.h, fill:"#d9e9f1"});
+  add(s, "path", {d:bm.path, fill:"#f8fafc", stroke:"#b6c7d3", "stroke-width": d.basemap === "world" ? 0.6 : 1.2});
+  const P = (la, lo) => [(lo - lon0) / (lon1 - lon0) * bm.w, (lat1 - la) / (lat1 - lat0) * bm.h];
+  const k = Math.max(bm.w / W, bm.h / H);
+  if (bm.cbd) { const [x, y] = P(bm.cbd[0], bm.cbd[1]); add(s,"circle",{cx:x,cy:y,r:4*k,fill:"#64748b"}); add(s,"text",{x:x-8*k,y:y-8*k,"font-size":10*k,fill:"#64748b","text-anchor":"end"}, "Sydney CBD"); }
+  const mx = Math.max(...d.points.map(p => p.size));
+  const col = d.basemap === "world" ? "#0a8496" : "#2f7fd8";
+  d.points.sort((a,b) => b.size - a.size).forEach(p => { const [x, y] = P(p.lat, p.lon); const r = (5 + 22 * Math.sqrt(p.size / mx)) * k;
+    const c = add(s,"circle",{cx:x,cy:y,r,fill:col,"fill-opacity":.55,stroke:col,"stroke-width":1.2*k}); hover(c, `${p.label}: ${p.size} ${d.sizeLabel.toLowerCase()}`);
+    if (p.size >= mx * 0.04 && p.size >= 8) add(s,"text",{x:x,y:y-r-4*k,"font-size":10*k,fill:"#0f172a","text-anchor":"middle","font-weight":600}, `${p.label} ${p.size}`); });
+  add(s,"text",{x:bm.w-6*k,y:bm.h-6*k,"font-size":8*k,fill:"#94a3b8","text-anchor":"end"}, D.basemaps.attribution);
 }
 
 render();

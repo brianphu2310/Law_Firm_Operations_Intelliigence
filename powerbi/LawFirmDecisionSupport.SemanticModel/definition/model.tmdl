@@ -57,6 +57,7 @@ ref table Answers
 ref table 'Answer Chart'
 ref table 'P&L Line'
 ref table 'Funnel Stage'
+ref table 'Country Geo'
 ref table Measures
 ref table 'L Utilisation'
 ref table 'L Rates'

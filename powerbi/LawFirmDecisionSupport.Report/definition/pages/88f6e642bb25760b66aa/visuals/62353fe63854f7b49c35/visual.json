@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "62353fe63854f7b49c35",
   "position": {
-    "x": 853.4375,
+    "x": 636.7437500000001,
     "y": 102.0,
     "z": 31000,
     "width": 204.75,
@@ -23,12 +23,12 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "Matter Billed"
+                  "Property": "Matter Estimated Value"
                 }
               },
-              "queryRef": "Measures.Matter Billed",
-              "nativeQueryRef": "Billed to date",
-              "displayName": "Billed to date"
+              "queryRef": "Measures.Matter Estimated Value",
+              "nativeQueryRef": "Estimated value (all matters)",
+              "displayName": "Estimated value (all matters)"
             }
           ]
         }

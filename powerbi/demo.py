@@ -552,6 +552,17 @@ def visual_data(E, meas, fmts, v, ctx):
         r = ref(projs["Values"][0])
         opts = list(E.W[r[1]][r[2]].dropna().astype(str).unique()) if r[1] in E.W else []
         return {"options": opts}
+    if t == "map":
+        from .geo import COUNTRY_LATLON, OFFICE_LATLON
+        cr = ref(projs["Category"][0])
+        sr = ref(projs["Size"][0])
+        pts = []
+        for (cv,) in combos(E, [cr], ctx):
+            val = ev(sr, ctx.plus((cr[1], cr[2]), cv))
+            ll = COUNTRY_LATLON.get(cv) or OFFICE_LATLON.get(str(cv).split(" NSW")[0])
+            if val and ll:
+                pts.append({"label": str(cv).split(" NSW")[0], "lat": ll[0], "lon": ll[1], "size": val})
+        return {"points": pts, "basemap": "world" if cr[1] == "Country Geo" else "sydney", "sizeLabel": projs["Size"][0].get("displayName", "")}
     cats = (projs.get("Category") or projs.get("Rows") or [])
     series = (projs.get("Series") or projs.get("Columns") or [])
     vals = (projs.get("Y") or []) + (projs.get("Values") if t in ("pivotTable",) else [])
@@ -676,6 +687,11 @@ def combos(E, refs, ctx):
 def sim_tables(E):
     """Small DAX-calculated tables of the model, as data frames the preview can filter."""
     W = E.W
+    from .geo import COUNTRY_LATLON, OFFICE_LATLON
+    W["Country Geo"] = pd.DataFrame([dict(Country=c, Latitude=a, Longitude=b) for c, (a, b) in COUNTRY_LATLON.items()])
+    W["Branch"]["Place"] = W["Branch"]["branch_name"] + " NSW, Australia"
+    W["Branch"]["Latitude"] = W["Branch"]["branch_name"].map(lambda b: OFFICE_LATLON[b][0])
+    W["Branch"]["Longitude"] = W["Branch"]["branch_name"].map(lambda b: OFFICE_LATLON[b][1])
     W["P&L Line"] = pd.DataFrame([dict(Line=l, Order=o) for l, _, _, _, o in MD.PNL_LINES])
     W["Funnel Stage"] = pd.DataFrame(dict(Stage=["Inquiries", "Consultations booked", "Consultations held", "Engagement letters sent", "New matters opened"],
                                           Order=[1, 2, 3, 4, 5]))
@@ -779,7 +795,10 @@ def build():
                 vis["data"] = {pe: visual_data(E, meas, fmts, v, Ctx({("Period", "Period"): pe, **vctx})) for pe in periods}
             pv.append(vis)
         out_pages.append(dict(name=p.name, display=p.display, section=p.section, hidden=p.hidden, visuals=pv))
-    payload = dict(pages=out_pages, periods=periods, defaultPeriod=MD.DEFAULT_PERIOD, presets=presets, platforms=platforms,
+    basemaps = json.loads((Path(__file__).resolve().parent / "assets" / "basemaps.json").read_text())
+    from .geo import SYDNEY_CBD
+    basemaps["sydney"]["cbd"] = SYDNEY_CBD
+    payload = dict(basemaps=basemaps, pages=out_pages, periods=periods, defaultPeriod=MD.DEFAULT_PERIOD, presets=presets, platforms=platforms,
                    defaultPlatform="Smokeball + GlobalX")
     html = TEMPLATE.replace("/*DATA*/", json.dumps(payload, ensure_ascii=False, separators=(",", ":")))
     OUT.parent.mkdir(parents=True, exist_ok=True)

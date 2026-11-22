@@ -1,12 +1,12 @@
 # Power BI report
 
-The project's front end: the whole dashboard and the Decision Simulator as a Power BI project, 21 pages (14 report pages plus one per platform), about 290 DAX measures,
+The project's front end: the whole dashboard and the Decision Simulator as a Power BI project, 22 pages (15 report pages plus one per platform), about 290 DAX measures,
 one semantic model over the warehouse. It lives in `powerbi/` as a **Power BI Project (.pbip)**: plain text files
 (TMDL for the model, PBIR JSON for the report) that Git can diff and CI can test.
 
 ## Preview without Power BI
 
-`powerbi/demo/index.html` is a browser preview of the same 21 pages: positions, titles and fields come from the report's own
+`powerbi/demo/index.html` is a browser preview of the same 22 pages: positions, titles and fields come from the report's own
 PBIR files, and every number is computed in Python the way the DAX measures compute it (`python -m powerbi.demo`). Page
 navigation, the Period slicer, the Simulator presets and the Platform slicer work; levers and filters work only in Power BI.
 
@@ -70,3 +70,9 @@ python -m powerbi.build        # data/powerbi/*.csv, then the .pbip project
 * Saved scenarios are not available (report viewers cannot save state); use the presets side by side instead.
 * Not yet opened in Power BI Desktop by the author of this build: the files are validated against the schemas, not
   against a running Power BI. Report any error with the page and visual name.
+
+## Matters map
+
+`Matters · Map` (a sub-tab of Matters) shows matters by client country and open matters by office (Richmond, Camden, Liverpool), with the same status, area and office slicers as the ledger. The Power BI `map` visual geocodes names through Bing/Azure Maps, so it has to be allowed in Power BI Desktop (File → Options → Security → "Use Map and Filled Map visuals"); the country and office tables also carry latitude and longitude in case geocoding is off.
+
+The browser preview draws its own basemaps from Natural Earth (public domain) via the `world-atlas` package; `python -m powerbi.geo <world-atlas dir>` rebuilds `powerbi/assets/basemaps.json`.

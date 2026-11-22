@@ -45,7 +45,7 @@ RELATIONSHIPS = [
     ("Invoice", "issue_date_key", "Date", "date_key"),
     ("Matter", "client_key", "Client", "client_key"), ("Matter", "practice_area_key", "Practice Area", "practice_area_key"),
     ("Matter", "attorney_key", "Attorney", "attorney_key"), ("Matter", "branch_key", "Branch", "branch_key"),
-    ("Matter Position", "matter_key", "Matter", "matter_key"),
+    ("Matter Position", "matter_key", "Matter", "matter_key"), ("Matter", "country", "Country Geo", "Country"),
     ("Funnel", "month_start_date_key", "Date", "date_key"), ("Snapshot", "month_start_date_key", "Date", "date_key"),
     ("Monthly Extra", "MonthKey", "Date", "date_key"),
     ("Staffing", "branch_key", "Branch", "branch_key"), ("Staffing", "department_key", "Department", "department_key"),
@@ -144,6 +144,12 @@ def import_table(name, folder, file):
         for c in tcols:
             if c.name == "month_start_date":
                 c.fmt = "mmm yy"
+    if name == "Branch":
+        from .geo import OFFICE_LATLON
+        sw = lambda i: "SWITCH( [branch_name], " + ", ".join(f'"{b}", {v[i]}' for b, v in OFFICE_LATLON.items()) + ", BLANK() )"
+        tcols.append(Column("Place", "string", expression='[branch_name] & " NSW, Australia"', category="Place"))
+        tcols.append(Column("Latitude", "double", expression=sw(0), category="Latitude", summarize="none"))
+        tcols.append(Column("Longitude", "double", expression=sw(1), category="Longitude", summarize="none"))
     if name == "Period":
         for c in tcols:
             if c.name == "Period":
@@ -429,6 +435,12 @@ def helper_tables():
     t.append(datatable("Funnel Stage", [("Stage", "STRING"), ("Order", "INTEGER")],
                        [["Inquiries", 1], ["Consultations booked", 2], ["Consultations held", 3], ["Engagement letters sent", 4], ["New matters opened", 5]],
                        sort={"Stage": "Order"}))
+    from .geo import COUNTRY_LATLON
+    geo = datatable("Country Geo", [("Country", "STRING"), ("Latitude", "DOUBLE"), ("Longitude", "DOUBLE")],
+                    [[c, la, lo] for c, (la, lo) in COUNTRY_LATLON.items()])
+    for c in geo.columns:
+        c.category = {"Country": "Country", "Latitude": "Latitude", "Longitude": "Longitude"}[c.name]
+    t.append(geo)
     meas = Table("Measures", [Column("Note", "string", calc_source="Note", hidden=True)], "calculated", 'ROW( "Note", "Measures live here" )')
     meas.measures = descriptive_measures()
     t.append(meas)

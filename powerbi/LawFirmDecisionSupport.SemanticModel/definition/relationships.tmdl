@@ -66,6 +66,10 @@ relationship c8ff8c08-73a1-5694-b782-8056db78a6f1
 	fromColumn: 'Matter Position'.matter_key
 	toColumn: Matter.matter_key
 
+relationship 33dbee9c-030d-5cee-8241-b3e54e7ac10d
+	fromColumn: Matter.country
+	toColumn: 'Country Geo'.Country
+
 relationship 840e13d5-7338-599a-aa48-8e877878d231
 	fromColumn: Funnel.month_start_date_key
 	toColumn: Date.date_key

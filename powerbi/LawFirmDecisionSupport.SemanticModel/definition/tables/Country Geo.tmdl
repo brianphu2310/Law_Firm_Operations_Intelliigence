@@ -1,0 +1,40 @@
+table 'Country Geo'
+
+	column Country
+		dataType: string
+		dataCategory: Country
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Country]
+
+	column Latitude
+		dataType: double
+		dataCategory: Latitude
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Latitude]
+
+	column Longitude
+		dataType: double
+		dataCategory: Longitude
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Longitude]
+
+	partition 'Country Geo' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Country", STRING, "Latitude", DOUBLE, "Longitude", DOUBLE,
+				    {
+				    { "Australia", -25.3, 134.5 },
+				    { "New Zealand", -41.5, 172.8 },
+				    { "United Kingdom", 54, -2.5 },
+				    { "Japan", 36.2, 138.3 },
+				    { "United States", 39.8, -98.6 },
+				    { "Singapore", 1.35, 103.82 },
+				    { "Hong Kong", 22.32, 114.17 },
+				    { "India", 21, 78.9 },
+				    { "South Korea", 36.5, 127.9 }
+				    }
+				)
