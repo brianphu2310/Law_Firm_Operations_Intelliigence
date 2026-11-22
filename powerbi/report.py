@@ -424,11 +424,14 @@ def overview(p, nav, facts, targets):
             "outline": [{"properties": {"show": lit(False)}, "selector": {"id": "default"}}]},
             background=False, border=False, vco_extra={"visualLink": [{"properties": {"show": lit(True), "type": lit("PageNavigation"), "navigationSection": lit(target)}}]},
             key=f"go{i}")
-    chart(p, "lineClusteredColumnComboChart", 14, 510, 760, 202, F.c("Date", "month_start_date", "Month"), [F.m(M, "Trend Operating Profit", "Operating profit")],
+    chart(p, "lineClusteredColumnComboChart", 14, 510, 500, 202, F.c("Date", "month_start_date", "Month"), [F.m(M, "Trend Operating Profit", "Operating profit")],
           "Profit against budget, month by month", y2=[F.m(M, "Trend Budget Operating Profit", "Budget")], subtitle="12 months to the period end")
-    chart(p, "clusteredBarChart", 780, 510, 486, 202, F.c("Sim Compare", "Short"), [F.m(SIM, "Sim Compare vs Today", "Profit a year vs today")],
+    chart(p, "clusteredBarChart", 520, 510, 386, 202, F.c("Sim Compare", "Short"), [F.m(SIM, "Sim Compare vs Today", "Profit a year vs today")],
           "Simulator: every decision vs today", sort=(F.m(SIM, "Sim Compare vs Today"), "Descending"), labels=True, legend=False,
           subtitle="Annual operating profit, from the last 12 months")
+    p.add("map", 912, 510, 354, 202, roles={"Category": [F.c("Branch", "Place")], "Size": [F.m(M, "Open Matters", "Open matters")]},
+          objects={"bubbles": [{"properties": {"bubbleSize": lit(12.0)}}], "dataPoint": [{"properties": {"defaultColor": colour("#2f7fd8")}}]},
+          title="Open matters by office", subtitle="Western Sydney · full map: Matters → Map", key="ovmap")
 
 
 # ---- Finance

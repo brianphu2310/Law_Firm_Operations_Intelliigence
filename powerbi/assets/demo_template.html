@@ -394,10 +394,10 @@ function geomap(v, body, W, H){
   add(s, "path", {d:bm.path, fill:"#f8fafc", stroke:"#b6c7d3", "stroke-width": d.basemap === "world" ? 0.6 : 1.2});
   const P = (la, lo) => [(lo - lon0) / (lon1 - lon0) * bm.w, (lat1 - la) / (lat1 - lat0) * bm.h];
   const k = Math.max(bm.w / W, bm.h / H);
-  if (bm.cbd) { const [x, y] = P(bm.cbd[0], bm.cbd[1]); add(s,"circle",{cx:x,cy:y,r:4*k,fill:"#64748b"}); add(s,"text",{x:x-8*k,y:y-8*k,"font-size":10*k,fill:"#64748b","text-anchor":"end"}, "Sydney CBD"); }
+  if (bm.cbd) { const [x, y] = P(bm.cbd[0], bm.cbd[1]); add(s,"circle",{cx:x,cy:y,r:4*k,fill:"#64748b"}); add(s,"text",{x:x,y:y+16*k,"font-size":10*k,fill:"#64748b","text-anchor":"middle"}, "Sydney CBD"); }
   const mx = Math.max(...d.points.map(p => p.size));
   const col = d.basemap === "world" ? "#0a8496" : "#2f7fd8";
-  d.points.sort((a,b) => b.size - a.size).forEach(p => { const [x, y] = P(p.lat, p.lon); const r = (5 + 22 * Math.sqrt(p.size / mx)) * k;
+  d.points.sort((a,b) => b.size - a.size).forEach(p => { const [x, y] = P(p.lat, p.lon); const r = (4 + Math.min(22, 0.08 * Math.min(W, H)) * Math.sqrt(p.size / mx)) * k;
     const c = add(s,"circle",{cx:x,cy:y,r,fill:col,"fill-opacity":.55,stroke:col,"stroke-width":1.2*k}); hover(c, `${p.label}: ${p.size} ${d.sizeLabel.toLowerCase()}`);
     if (p.size >= mx * 0.04 && p.size >= 8) add(s,"text",{x:x,y:y-r-4*k,"font-size":10*k,fill:"#0f172a","text-anchor":"middle","font-weight":600}, `${p.label} ${p.size}`); });
   add(s,"text",{x:bm.w-6*k,y:bm.h-6*k,"font-size":8*k,fill:"#94a3b8","text-anchor":"end"}, D.basemaps.attribution);
