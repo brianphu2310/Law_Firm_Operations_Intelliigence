@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "ca18ecdfce24910e9cb5",
   "position": {
-    "x": 1026.0,
-    "y": 620.0,
+    "x": 839.7875,
+    "y": 212.0,
     "z": 67000,
-    "width": 240.0,
-    "height": 92.0,
+    "width": 134.79375000000002,
+    "height": 24.0,
     "tabOrder": 67000
   },
   "visual": {
@@ -23,12 +23,12 @@
                       "Entity": "Simulator"
                     }
                   },
-                  "Property": "Sim Warning"
+                  "Property": "Sim Gap Caption"
                 }
               },
-              "queryRef": "Simulator.Sim Warning",
-              "nativeQueryRef": "Warnings",
-              "displayName": "Warnings"
+              "queryRef": "Simulator.Sim Gap Caption",
+              "nativeQueryRef": " ",
+              "displayName": " "
             }
           ]
         }
@@ -50,7 +50,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0f172a'"
+                      "Value": "'#64748b'"
                     }
                   }
                 }
@@ -65,25 +65,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "9.0D"
-                }
-              }
-            },
-            "color": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#64748b'"
-                    }
-                  }
+                  "Value": "false"
                 }
               }
             }

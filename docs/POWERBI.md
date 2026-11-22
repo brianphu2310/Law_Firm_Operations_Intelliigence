@@ -1,12 +1,12 @@
 # Power BI report
 
-The project's front end: the whole dashboard and the Decision Simulator as a Power BI project, 15 pages, about 290 DAX measures,
+The project's front end: the whole dashboard and the Decision Simulator as a Power BI project, 21 pages (14 report pages plus one per platform), about 290 DAX measures,
 one semantic model over the warehouse. It lives in `powerbi/` as a **Power BI Project (.pbip)**: plain text files
 (TMDL for the model, PBIR JSON for the report) that Git can diff and CI can test.
 
 ## Preview without Power BI
 
-`powerbi/demo/index.html` is a browser preview of the same 15 pages: positions, titles and fields come from the report's own
+`powerbi/demo/index.html` is a browser preview of the same 21 pages: positions, titles and fields come from the report's own
 PBIR files, and every number is computed in Python the way the DAX measures compute it (`python -m powerbi.demo`). Page
 navigation, the Period slicer, the Simulator presets and the Platform slicer work; levers and filters work only in Power BI.
 
@@ -30,11 +30,11 @@ To load from a fork or another branch: *Transform data → Edit parameters → B
 | Matters | 1 | Matter ledger with filters, opened vs closed, WIP by age |
 | Clients | Clients · Marketing | Client league, concentration, payment behaviour, cost per new matter by channel |
 | Calendar | 1 | Agenda and workload by lawyer |
-| Platform | 1 | Ranking, NPV, cumulative cash flow, scorecard, risks, implementation plan, NPV sensitivity |
+| Platform | 7 (one per platform, in the sidebar) | Verdict, NPV, payback and cost of the platform; ranking, NPV, cumulative cash flow, scorecard, risks, implementation plan, NPV sensitivity |
 | Simulator | Decide · Test the plan | 12 presets + 30 levers; profit bridge, effects and cash, what moves profit most, what it would take, delivery range, presets side by side |
 | Check | 1 | Assumptions, and every Simulator result in DAX compared with the Python engine |
 
-The **Period** slicer (top right, synced across pages) picks the reporting period, with the same periods and day weights as the Python model.
+A dark **sidebar** on every page lists the pages and the seven platforms (one page each, like the Streamlit app had). The **Period** slicer (top right, synced across pages) picks the reporting period, with the same periods and day weights as the Python model.
 
 ## How it is built
 

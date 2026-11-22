@@ -1304,6 +1304,9 @@ table Measures
 		formatString: 0
 		displayFolder: Platform
 
+	measure 'Platform Verdict' = SELECTEDVALUE( 'Platforms'[Verdict] )
+		displayFolder: Platform
+
 	measure 'Platform Grid NPV' = SUM( 'Platform NPV Grid'[NPV] )
 		formatString: \$#,0;-\$#,0;\$0
 		displayFolder: Platform

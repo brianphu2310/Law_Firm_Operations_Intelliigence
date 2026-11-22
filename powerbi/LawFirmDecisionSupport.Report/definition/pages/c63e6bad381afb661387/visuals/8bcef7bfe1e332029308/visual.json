@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "8bcef7bfe1e332029308",
   "position": {
-    "x": 1034.0,
+    "x": 203.35625,
     "y": 180.0,
     "z": 28000,
-    "width": 228.0,
+    "width": 204.75,
     "height": 24.0,
     "tabOrder": 28000
   },
@@ -23,10 +23,10 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "Top Biller"
+                  "Property": "Utilisation Δ"
                 }
               },
-              "queryRef": "Measures.Top Biller",
+              "queryRef": "Measures.Utilisation Δ",
               "nativeQueryRef": " ",
               "displayName": " "
             }

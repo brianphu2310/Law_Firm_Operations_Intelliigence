@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "37757bf2eda1ee9bc724",
   "position": {
-    "x": 1104.0,
-    "y": 162.0,
+    "x": 549.725,
+    "y": 212.0,
     "z": 61000,
-    "width": 158.0,
-    "height": 54.0,
+    "width": 134.79375000000002,
+    "height": 24.0,
     "tabOrder": 61000
   },
   "visual": {
@@ -23,12 +23,12 @@
                       "Entity": "Simulator"
                     }
                   },
-                  "Property": "Sim Low Point"
+                  "Property": "Sim Profit Caption"
                 }
               },
-              "queryRef": "Simulator.Sim Low Point",
-              "nativeQueryRef": "13-week cash low point",
-              "displayName": "13-week cash low point"
+              "queryRef": "Simulator.Sim Profit Caption",
+              "nativeQueryRef": " ",
+              "displayName": " "
             }
           ]
         }
@@ -41,7 +41,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "18.0D"
+                  "Value": "8.0D"
                 }
               }
             },
@@ -49,13 +49,8 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "Simulator"
-                        }
-                      },
-                      "Property": "Sim Low Colour"
+                    "Literal": {
+                      "Value": "'#64748b'"
                     }
                   }
                 }
@@ -70,25 +65,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "9.0D"
-                }
-              }
-            },
-            "color": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#64748b'"
-                    }
-                  }
+                  "Value": "false"
                 }
               }
             }

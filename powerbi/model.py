@@ -116,7 +116,7 @@ def import_table(name, folder, file):
             counts = ("fee_earners", "support", "headcount", "lawyers", "active", "matters", "inquiries", "hours", "volume", "searches",
                       "count", "week", "payback", "impact", "probability", "council", "fte")
             money = ("cost", "fee", "revenue", "profit", "amount", "spend", "npv", "ar", "overdue", "prev", "contribution", "cash", "wip",
-                     "balance", "value", "rev", "op", "pay", "benefit", "billed", "tco", "rate", "saving", "net", "pv", "closing", "in_", "out_", "budget")
+                     "balance", "value", "rev", "op", "pay", "benefit", "billed", "oneoff", "runrate", "tco", "year1", "tco", "rate", "saving", "net", "pv", "closing", "in_", "out_", "budget")
             if any(x in lc for x in ("util", "margin", "share", "realisation", "conversion", "growth", "irr", "weight", "fraction", "r_rev", "r_cost", "progress")):
                 fmt = PCT
             elif lc == "days_open":
@@ -381,6 +381,7 @@ def descriptive_measures():
     add("Platform Cumulative", "SUM( 'Platform Cashflow'[Cumulative] )", MONEY, "Platform")
     add("Platform Weighted Score", "DIVIDE( SUMX( 'Platform Scores', 'Platform Scores'[Score] * 'Platform Scores'[Weight] ), SUM( 'Platform Scores'[Weight] ) )", NUM1, "Platform")
     add("Platform Criterion Score", "SUM( 'Platform Scores'[Score] )", "0", "Platform")
+    add("Platform Verdict", "SELECTEDVALUE( 'Platforms'[Verdict] )", None, "Platform")
     add("Platform Grid NPV", "SUM( 'Platform NPV Grid'[NPV] )", MONEY, "Platform")
     add("Best Platform", "VAR t = TOPN( 1, ALL( 'Platforms'[Platform] ), CALCULATE( MAX( 'Platforms'[Decision] ) ), DESC )\nRETURN MAXX( t, 'Platforms'[Platform] )", None, "Platform")
     add("Story", '"HOW THIS STARTED  The Principal asked which software saves the firm the most ("'

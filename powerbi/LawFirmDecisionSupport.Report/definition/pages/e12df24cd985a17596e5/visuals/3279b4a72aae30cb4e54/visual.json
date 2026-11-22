@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "3279b4a72aae30cb4e54",
   "position": {
-    "x": 1058.0,
+    "x": 203.35625,
     "y": 132.0,
     "z": 27000,
-    "width": 204.0,
+    "width": 165.50625,
     "height": 72.0,
     "tabOrder": 27000
   },
@@ -23,12 +23,12 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "Lockup Days"
+                  "Property": "Office Cash"
                 }
               },
-              "queryRef": "Measures.Lockup Days",
-              "nativeQueryRef": "Lock-up days",
-              "displayName": "Lock-up days"
+              "queryRef": "Measures.Office Cash",
+              "nativeQueryRef": "Office account",
+              "displayName": "Office account"
             }
           ]
         }

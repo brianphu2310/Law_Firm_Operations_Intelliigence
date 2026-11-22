@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "94402859519aa1432dcb",
   "position": {
-    "x": 1034.0,
+    "x": 203.35625,
     "y": 132.0,
     "z": 27000,
-    "width": 228.0,
+    "width": 204.75,
     "height": 52.0,
     "tabOrder": 27000
   },
@@ -23,12 +23,12 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "Top Biller Fees"
+                  "Property": "Utilisation"
                 }
               },
-              "queryRef": "Measures.Top Biller Fees",
-              "nativeQueryRef": "Top biller fees",
-              "displayName": "Top biller fees"
+              "queryRef": "Measures.Utilisation",
+              "nativeQueryRef": "Firm utilisation",
+              "displayName": "Firm utilisation"
             }
           ]
         }

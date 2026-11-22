@@ -293,6 +293,7 @@ def measures(E: Engine):
     m["Fees per Dollar"] = lambda c: float(mk["fees"].sum() / mk["spend"].sum())
     m["Platform Cumulative"] = lambda c: float(E.filt("Platform Cashflow", c)["Cumulative"].sum())
     m["Platform Criterion Score"] = lambda c: float(E.filt("Platform Scores", c)["Score"].sum())
+    m["Platform Verdict"] = lambda c: (lambda d: d["Verdict"].iloc[0] if len(d) == 1 else None)(E.filt("Platforms", c))
     m["Platform Grid NPV"] = lambda c: float(E.filt("Platform NPV Grid", c)["NPV"].sum())
     sim_measures(E, m)
     return m
@@ -627,7 +628,7 @@ def combos(E, refs, ctx):
         if r[1] not in tabs:
             tabs.append(r[1])
     base = next((t for t in tabs if all(o == t or o in E._reach(t) for o in tabs)), tabs[0])
-    df = E.filt(base, Ctx({k: v for k, v in ctx.items() if k[0] != base})).copy()
+    df = E.filt(base, ctx).copy()
     df.columns = [f"{base}|{c}" for c in df.columns]
     joined = {base}
 
@@ -714,9 +715,18 @@ def build():
     presets = list(W["Sim Preset"]["Short"])
     platforms = list(W["Platforms"]["Platform"])
     lever_tables = {lv.table: lv for lv in levers}
+    def filters_ctx(flist):
+        c = {}
+        for fl in flist or []:
+            col = fl["field"]["Column"]
+            vals = fl["filter"]["Where"][0]["Condition"]["In"]["Values"]
+            c[(col["Expression"]["SourceRef"]["Entity"], col["Property"])] = vals[0][0]["Literal"]["Value"].strip("'")
+        return c
+
     out_pages = []
     for p in pages:
         pv = []
+        pctx = filters_ctx(p.filters)
         for v in p.visuals:
             vis = dict(id=v["name"], type=v["visual"]["visualType"], pos=v["position"], visual=v["visual"])
             q = v["visual"].get("query", {}).get("queryState", {})
@@ -742,21 +752,17 @@ def build():
                 pv.append(vis)
                 continue
             sim_dep = any(t.startswith("Sim") or t == "Simulator" for t in tables_used) and p.section == "Simulator"
-            plat_dep = any(t.startswith("Platform") for t in tables_used) and not any(t == "Platforms" for t in tables_used if False) and p.section == "Platform" \
-                and tables_used & {"Platform Risks", "Platform Gantt", "Platform NPV Grid"}
+            vctx = {**pctx, **filters_ctx(v.get("filterConfig", {}).get("filters"))}
             if sim_dep:
                 vis["by"] = "preset"
                 vis["data"] = {ps: visual_data(E, meas, fmts, v, Ctx({("Sim Preset", "Short"): ps})) for ps in presets}
-            elif plat_dep:
-                vis["by"] = "platform"
-                vis["data"] = {pl: visual_data(E, meas, fmts, v, Ctx({("Platforms", "Platform"): pl})) for pl in platforms}
             elif p.section in ("Platform", "Check", "Simulator") or not period_dependent(tables_used, v):
-                vis["data"] = visual_data(E, meas, fmts, v, Ctx({("Period", "Period"): MD.DEFAULT_PERIOD}))
+                vis["data"] = visual_data(E, meas, fmts, v, Ctx({("Period", "Period"): MD.DEFAULT_PERIOD, **vctx}))
             else:
                 vis["by"] = "period"
                 vis["data"] = {pe: visual_data(E, meas, fmts, v, Ctx({("Period", "Period"): pe})) for pe in periods}
             pv.append(vis)
-        out_pages.append(dict(name=p.name, display=p.display, section=p.section, visuals=pv))
+        out_pages.append(dict(name=p.name, display=p.display, section=p.section, hidden=p.hidden, visuals=pv))
     payload = dict(pages=out_pages, periods=periods, defaultPeriod=MD.DEFAULT_PERIOD, presets=presets, platforms=platforms,
                    defaultPlatform="Smokeball + GlobalX")
     html = TEMPLATE.replace("/*DATA*/", json.dumps(payload, ensure_ascii=False, separators=(",", ":")))

@@ -7,12 +7,15 @@ from __future__ import annotations
 
 import hashlib
 
-from core import simulate as S
+from core import platforms as PL, simulate as S
 
 SCHEMA = "https://developer.microsoft.com/json-schemas/fabric/item/report/definition"
 V_CONTAINER = f"{SCHEMA}/visualContainer/2.0.0/schema.json"
 V_PAGE = f"{SCHEMA}/page/1.4.0/schema.json"
 W, H = 1280, 720
+SB = 188                      # dark sidebar width; page content is laid out on 1280 and scaled into the rest
+KX = (W - SB) / W
+SIDEBAR, SIDEBAR_ON, SIDEBAR_TEXT, SIDEBAR_MUTED = "#151b2c", "#0a8496", "#e2e8f0", "#8b95a7"
 TEAL, INK, MUTED, LINE, BG = "#0a8496", "#0f172a", "#64748b", "#dbe6ee", "#f3f6fa"
 GREEN, RED, AMBER = "#047857", "#b91c1c", "#b45309"
 
@@ -99,13 +102,17 @@ def container_objects(title=None, subtitle=None, background=True, border=True, p
 
 
 class Page:
-    def __init__(self, name, display, section, order):
+    def __init__(self, name, display, section, order, hidden=False, platform=None):
         self.name, self.display, self.section, self.order = name, display, section, order
         self.visuals = []
         self.z = 0
+        self.hidden, self.platform = hidden, platform
+        self.filters = []
 
     def add(self, vtype, x, y, w, h, roles=None, objects=None, title=None, subtitle=None, sort=None, filters=None, sync=None,
-            background=True, border=True, vco_extra=None, padding=None, key=None):
+            background=True, border=True, vco_extra=None, padding=None, key=None, raw=False):
+        if not raw:                       # content area: right of the sidebar
+            x, w = SB + x * KX, w * KX
         self.z += 1
         vid = _id(self.name, key or f"{vtype}{self.z}")
         visual = {"visualType": vtype}
@@ -137,7 +144,12 @@ class Page:
         return v
 
     def json(self):
-        return {"$schema": V_PAGE, "name": self.name, "displayName": self.display, "displayOption": "FitToPage", "height": H, "width": W,
+        extra = {}
+        if self.filters:
+            extra["filterConfig"] = {"filters": self.filters}
+        if self.hidden:
+            extra["visibility"] = "HiddenInViewMode"
+        return {"$schema": V_PAGE, "name": self.name, "displayName": self.display, "displayOption": "FitToPage", "height": H, "width": W, **extra,
                 "objects": {"background": [{"properties": {"color": colour(BG), "transparency": lit(0.0)}}],
                             "outspace": [{"properties": {"color": colour("#e9eef4"), "transparency": lit(0.0)}}]}}
 
@@ -166,13 +178,13 @@ def card(page, x, y, w, h, field, label=None, size=20.0, colour_field=None, key=
     return page.add("card", x, y, w, h, roles={"Values": [field]}, objects=objs, border=False, background=False, key=key)
 
 
-def kpi(page, x, y, w, h, value, label, caption=None, colour_field=None, caption_colour=None):
+def kpi(page, x, y, w, h, value, label, caption=None, colour_field=None, caption_colour=None, size=18.0):
     """A KPI tile: white box, label + big value, a caption line underneath."""
     page.add("shape", x, y, w, h, objects={"shape": [{"properties": {"tileShape": lit("rectangleRounded")}}],
                                             "fill": [{"properties": {"fillColor": colour("#FFFFFF"), "transparency": lit(0.0)}}],
                                             "outline": [{"properties": {"show": lit(True), "lineColor": colour(LINE), "weight": lit(1.0)}}]},
              background=False, border=False)
-    card(page, x + 4, y + 2, w - 8, h - (26 if caption else 6), value, label, 18.0, colour_field)
+    card(page, x + 4, y + 2, w - 8, h - (26 if caption else 6), value, label, size, colour_field)
     if caption:
         c = F(caption.kind, caption.table, caption.name, " ")
         page.add("card", x + 4, y + h - 28, w - 8, 24, roles={"Values": [c]},
@@ -199,6 +211,11 @@ def in_filter(field, values):
         return {"Literal": {"Value": f"{v}L" if isinstance(v, int) else ("'" + str(v).replace("'", "''") + "'")}}
     return {"Version": 2, "From": [{"Name": "t", "Entity": field.table, "Type": 0}],
             "Where": [{"Condition": {"In": {"Expressions": [field.expr("t")], "Values": [[lv(v)] for v in values]}}}]}
+
+
+def cat_filter(field, value, name):
+    ALL_FIELDS.append(field)
+    return {"name": name, "field": field.expr(), "type": "Categorical", "filter": in_filter(field, [value])}
 
 
 def range_filter(field, lo, hi, name):
@@ -255,23 +272,58 @@ M = "Measures"
 SIM = "Simulator"
 
 
-def frame(page, title, subtitle, sections, sub_tabs=None):
-    """Header band, period slicer and navigation common to every page."""
-    page.add("shape", 0, 0, W, 92, objects={"shape": [{"properties": {"tileShape": lit("rectangle")}}],
+def side_button(page, y, label, target, active, size=10.0, key=None, h=26):
+    objs = {"icon": [{"properties": {"show": lit(False)}, "selector": {"id": "default"}}],
+            "text": [{"properties": {"show": lit(True)}},
+                     {"properties": {"text": lit(label), "fontSize": lit(size), "fontColor": colour("#FFFFFF" if active else SIDEBAR_TEXT),
+                                     "bold": lit(active), "horizontalAlignment": lit("left"), "leftMargin": lit(12.0)}, "selector": {"id": "default"}}],
+            "fill": [{"properties": {"show": lit(True), "fillColor": colour(SIDEBAR_ON if active else SIDEBAR), "transparency": lit(0.0)}, "selector": {"id": "default"}}],
+            "outline": [{"properties": {"show": lit(False)}, "selector": {"id": "default"}}]}
+    link = {"visualLink": [{"properties": {"show": lit(True), "type": lit("PageNavigation"), "navigationSection": lit(target)}}]}
+    return page.add("actionButton", 10, y, SB - 20, h, objects=objs, background=False, border=False, vco_extra=link, key=key or f"side-{label}", raw=True)
+
+
+def sidebar(page, sections, platforms):
+    """Dark sidebar on every page: app name, the pages, and one entry per platform (like the Streamlit app)."""
+    page.add("shape", 0, 0, SB, H, objects={"shape": [{"properties": {"tileShape": lit("rectangle")}}],
+                                            "fill": [{"properties": {"fillColor": colour(SIDEBAR), "transparency": lit(0.0)}}],
+                                            "outline": [{"properties": {"show": lit(False)}}]}, background=False, border=False, key="sidebar", raw=True)
+    page.add("textbox", 8, 12, SB - 12, 46, objects={"general": [{"properties": {"paragraphs": [
+        {"textRuns": [{"value": "⚖ Decision Support", "textStyle": {"fontSize": "11.5pt", "color": "#FFFFFF", "fontWeight": "bold", "fontFamily": "Segoe UI"}}]},
+        {"textRuns": [{"value": "Law firm · sample data", "textStyle": {"fontSize": "8pt", "color": SIDEBAR_MUTED, "fontFamily": "Segoe UI"}}]}]}}]},
+        background=False, border=False, key="brand", raw=True)
+    y = 66
+    page.add("textbox", 12, y, SB - 20, 24, objects={"general": [{"properties": {"paragraphs": [
+        {"textRuns": [{"value": "PAGES", "textStyle": {"fontSize": "7.5pt", "color": SIDEBAR_MUTED, "fontWeight": "bold", "fontFamily": "Segoe UI"}}]}]}}]},
+        background=False, border=False, key="lbl-pages", raw=True)
+    y += 24
+    for label, target in sections:
+        side_button(page, y, label, target, active=label.replace("★ ", "") == page.section)
+        y += 29
+    y += 8
+    page.add("textbox", 12, y, SB - 20, 24, objects={"general": [{"properties": {"paragraphs": [
+        {"textRuns": [{"value": "PLATFORMS", "textStyle": {"fontSize": "7.5pt", "color": SIDEBAR_MUTED, "fontWeight": "bold", "fontFamily": "Segoe UI"}}]}]}}]},
+        background=False, border=False, key="lbl-platforms", raw=True)
+    y += 24
+    for name, target in platforms:
+        side_button(page, y, name, target, active=page.platform == name, size=9.0, key=f"plat-{name}", h=24)
+        y += 27
+
+
+def frame(page, title, subtitle, nav, sub_tabs=None):
+    """Sidebar, header band and period slicer common to every page."""
+    sidebar(page, *nav)
+    page.add("shape", 0, 0, W, 60, objects={"shape": [{"properties": {"tileShape": lit("rectangle")}}],
                                             "fill": [{"properties": {"fillColor": colour(TEAL), "transparency": lit(0.0)}}],
                                             "outline": [{"properties": {"show": lit(False)}}]}, background=False, border=False, key="band")
-    text(page, 14, 4, 620, 50, [[(title, 17, "#FFFFFF", True)], [(subtitle, 9, "#d9f2f5", False)]], key="title")
-    if page.section != "Simulator" and page.section != "Platform" and page.section != "Check":
+    text(page, 14, 4, 900, 54, [[(title, 17, "#FFFFFF", True)], [(subtitle, 9, "#d9f2f5", False)]], key="title")
+    if page.section not in ("Simulator", "Platform", "Check"):
         slicer(page, 1030, 8, 236, 44, F.c("Period", "Period"), "Dropdown", None, sync="period", default="FY26 Q1 QTD", key="period", force=True)
-    x = 14
-    for label, target, wbtn in sections:
-        nav_button(page, x, 58, wbtn, 28, label, target, active=label == page.section)
-        x += wbtn + 6
     if sub_tabs:
         x = 14
         for label, target in sub_tabs:
             active = target == page.name
-            page.add("actionButton", x, 98, 150, 24, objects={
+            page.add("actionButton", x, 66, 170, 26, objects={
                 "icon": [{"properties": {"show": lit(False)}, "selector": {"id": "default"}}],
                 "text": [{"properties": {"show": lit(True)}}, {"properties": {"text": lit(label), "fontSize": lit(9.0), "fontColor": colour(TEAL if active else MUTED),
                                                                               "bold": lit(active)}, "selector": {"id": "default"}}],
@@ -279,7 +331,7 @@ def frame(page, title, subtitle, sections, sub_tabs=None):
                 "outline": [{"properties": {"show": lit(True), "lineColor": colour(TEAL if active else LINE), "weight": lit(1.0)}, "selector": {"id": "default"}}]},
                 background=False, border=False, vco_extra={"visualLink": [{"properties": {"show": lit(True), "type": lit("PageNavigation"), "navigationSection": lit(target)}}]},
                 key=f"tab-{label}")
-            x += 156
+            x += 176
 
 
 def build_pages(ctx_facts, levers):
@@ -288,13 +340,18 @@ def build_pages(ctx_facts, levers):
              ("finance_trust", "Finance · Trust & costs", "Finance"), ("people_perf", "People · Performance", "People"),
              ("people_hire", "People · Hiring & departments", "People"), ("people_branch", "People · Branches & pay", "People"),
              ("matters", "Matters", "Matters"), ("clients", "Clients", "Clients"), ("clients_mkt", "Clients · Marketing", "Clients"),
-             ("calendar", "Calendar", "Calendar"), ("platform", "Platform choice", "Platform"), ("sim_decide", "Simulator · Decide", "Simulator"),
+             ("calendar", "Calendar", "Calendar"), ("sim_decide", "Simulator · Decide", "Simulator"),
              ("sim_test", "Simulator · Test", "Simulator"), ("check", "Method & check", "Check")]
     for i, (n, d, s) in enumerate(specs):
         P[n] = Page(_id("page", n), d, s, i)
-    nav = [("Overview", P["overview"].name, 92), ("Finance", P["finance_pl"].name, 92), ("People", P["people_perf"].name, 92),
-           ("Matters", P["matters"].name, 92), ("Clients", P["clients"].name, 92), ("Calendar", P["calendar"].name, 92),
-           ("Platform", P["platform"].name, 92), ("Simulator", P["sim_decide"].name, 104), ("Check", P["check"].name, 92)]
+    plat_pages = []
+    for j, name in enumerate(PL.NAMES):
+        pg = Page(_id("page", "platform", name), f"Platform · {PL.PLATFORMS[name]['short']}", "Platform", 100 + j, hidden=j > 0, platform=name)
+        plat_pages.append(pg)
+    sections = [("Overview", P["overview"].name), ("Finance", P["finance_pl"].name), ("People", P["people_perf"].name),
+                ("Matters", P["matters"].name), ("Clients", P["clients"].name), ("Calendar", P["calendar"].name),
+                ("★ Simulator", P["sim_decide"].name), ("Check", P["check"].name)]
+    nav = (sections, [(pg.platform, pg.name) for pg in plat_pages])
     fin_tabs = [("P&L & outlook", P["finance_pl"].name), ("Cash & billing", P["finance_cash"].name), ("Trust & costs", P["finance_trust"].name)]
     ppl_tabs = [("Performance", P["people_perf"].name), ("Hiring & departments", P["people_hire"].name), ("Branches & pay", P["people_branch"].name)]
     cli_tabs = [("Clients", P["clients"].name), ("Marketing", P["clients_mkt"].name)]
@@ -311,11 +368,13 @@ def build_pages(ctx_facts, levers):
     clients(P["clients"], nav, cli_tabs)
     clients_mkt(P["clients_mkt"], nav, cli_tabs)
     calendar(P["calendar"], nav)
-    platform(P["platform"], nav)
+    for pg in plat_pages:
+        platform(pg, nav)
     sim_decide(P["sim_decide"], nav, sim_tabs, levers)
     sim_test(P["sim_test"], nav, sim_tabs, levers)
     check(P["check"], nav)
-    return list(P.values())
+    pages = list(P.values())
+    return pages[:11] + plat_pages + pages[11:]
 
 
 # ---- Overview
@@ -545,20 +604,39 @@ def calendar(p, nav):
 
 # ---- Platform
 def platform(p, nav):
-    frame(p, "Platform choice", "Which practice-management platform saves the firm the most: 3-year cash flows, NPV, scorecard and risk", nav)
-    slicer(p, 1030, 8, 236, 44, F.c("Platforms", "Platform"), "Dropdown", None, default="Smokeball + GlobalX", key="platform", force=True)
-    table(p, 14, 100, 760, 232, [F.c("Platforms", "Platform", "Platform"), F.c("Platforms", "Verdict", "Verdict"), F.c("Platforms", "NPV", "NPV (3 years)"),
+    name = p.platform
+    pl = PL.PLATFORMS[name]
+    frame(p, f"Platform · {name}", f"{pl['tagline']}. 3-year cash flows, NPV, scorecard and risk against staying on LEAP + InfoTrack", nav)
+    for t in ("Platform Risks", "Platform Gantt", "Platform NPV Grid"):
+        p.filters.append({"name": _id(p.name, t), "field": F.c(t, "Platform").expr(), "type": "Categorical",
+                          "filter": in_filter(F.c(t, "Platform"), [name])})
+        ALL_FIELDS.append(F.c(t, "Platform"))
+    me = F.c("Platforms", "Platform")
+    tiles = [(F.m(M, "Platform Verdict"), "Verdict"), (F.s("Platforms", "NPV"), "NPV, 3 years"), (F.s("Platforms", "Payback"), "Payback (months)"),
+             (F.s("Platforms", "RunRate"), "Run cost a year"), (F.s("Platforms", "OneOff"), "One-off cost"), (F.s("Platforms", "Score"), "Weighted score")]
+    for i, (fld, lab) in enumerate(tiles):
+        x = 14 + i * 210
+        p.add("shape", x, 68, 202, 70, objects={"shape": [{"properties": {"tileShape": lit("rectangleRounded")}}],
+                                                "fill": [{"properties": {"fillColor": colour("#FFFFFF"), "transparency": lit(0.0)}}],
+                                                "outline": [{"properties": {"show": lit(True), "lineColor": colour(LINE), "weight": lit(1.0)}}]},
+              background=False, border=False)
+        f2 = F(fld.kind, fld.table, fld.name, lab)
+        p.add("card", x + 4, 70, 194, 66, roles={"Values": [f2]},
+              objects={"labels": [{"properties": {"fontSize": lit(16.0 if i else 13.0), "color": colour(INK)}}],
+                       "categoryLabels": [{"properties": {"show": lit(True), "fontSize": lit(9.0), "color": colour(MUTED)}}]},
+              background=False, border=False, filters=[cat_filter(me, name, _id(p.name, "f", i))], key=f"kpi{i}")
+    table(p, 14, 146, 760, 196, [F.c("Platforms", "Platform", "Platform"), F.c("Platforms", "Verdict", "Verdict"), F.c("Platforms", "NPV", "NPV (3 years)"),
                                  F.c("Platforms", "Payback", "Payback (months)"), F.c("Platforms", "RunRate", "Run cost a year"), F.c("Platforms", "OneOff", "One-off"),
                                  F.c("Platforms", "Score", "Score"), F.c("Platforms", "Rank", "Rank")], "Ranking (50% score, 50% NPV)",
           sort=(F.c("Platforms", "Rank"), "Ascending"))
-    chart(p, "clusteredBarChart", 780, 100, 486, 232, F.c("Platforms", "Short"), [F.s("Platforms", "NPV", "NPV")], "NPV against staying on LEAP + InfoTrack",
+    chart(p, "clusteredBarChart", 780, 146, 486, 196, F.c("Platforms", "Short"), [F.s("Platforms", "NPV", "NPV")], "NPV against staying on LEAP + InfoTrack",
           sort=(F.s("Platforms", "NPV"), "Descending"), labels=True, legend=False)
-    chart(p, "lineChart", 14, 338, 620, 220, F.c("Platform Cashflow", "Month"), [F.m(M, "Platform Cumulative", "Cumulative net benefit")], "Cumulative cash flow",
+    chart(p, "lineChart", 14, 348, 620, 210, F.c("Platform Cashflow", "Month"), [F.m(M, "Platform Cumulative", "Cumulative net benefit")], "Cumulative cash flow",
           F.c("Platform Cashflow", "Platform"), "Month 1 = contract signed. Crosses zero at payback")
-    table(p, 640, 338, 626, 220, [F.m(M, "Platform Criterion Score", "Score")], "Scorecard (weights: cost 30, integration 25, reliability 20, support 15, speed 10)",
+    table(p, 640, 348, 626, 210, [F.m(M, "Platform Criterion Score", "Score")], "Scorecard (weights: cost 30, integration 25, reliability 20, support 15, speed 10)",
           matrix_rows=[F.c("Platform Scores", "Criterion")], matrix_cols=[F.c("Platforms", "Short")])
     table(p, 14, 564, 620, 148, [F.c("Platform Risks", "risk", "Risk"), F.c("Platform Risks", "score", "Score"), F.c("Platform Risks", "mitigation", "Mitigation")],
-          "Risks of the selected platform", sort=(F.c("Platform Risks", "score"), "Descending"))
+          f"Risks: {pl['short']}", sort=(F.c("Platform Risks", "score"), "Descending"))
     table(p, 640, 564, 310, 148, [F.c("Platform Gantt", "Phase", "Phase"), F.c("Platform Gantt", "StartWeek", "From week"), F.c("Platform Gantt", "EndWeek", "To week")],
           "Implementation plan", sort=(F.c("Platform Gantt", "Order"), "Ascending"))
     table(p, 956, 564, 310, 148, [F.m(M, "Platform Grid NPV", "NPV")], "NPV sensitivity", matrix_rows=[F.c("Platform NPV Grid", "Volume")],
@@ -593,14 +671,14 @@ def lever_slicers(p, levers):
 
 def sim_decide(p, nav, tabs, levers):
     frame(p, "Decision Simulator", "Test a decision before you make it: pricing, hiring and staffing, pay, marketing, a new matter type, a branch or a platform switch", nav, tabs)
-    slicer(p, 14, 124, 1252, 32, F.c("Sim Preset", "Short"), "Basic", None, sync="preset", horizontal=True, key="preset", force=True, default="Today")
+    slicer(p, 14, 104, 1252, 40, F.c("Sim Preset", "Short"), "Basic", None, sync="preset", horizontal=True, key="preset", force=True, default="Today")
     lever_slicers(p, levers)
     k = [("Sim Operating Profit", "Operating profit (a year)", "Sim Profit Caption", None), ("Sim Margin", "Operating margin", "Sim Margin Caption", None),
          ("Sim Gap to Budget", "Gap to FY26 budget", "Sim Gap Caption", "Sim Gap Colour"), ("Sim One-off Cash", "Cash needed up front", None, None),
          ("Sim Low Point", "13-week cash low point", "Sim Low Caption", "Sim Low Colour")]
     x = 420
     for name, label, cap, colr in k:
-        kpi(p, x, 160, 166, 80, F.m(SIM, name), label, F.m(SIM, cap) if cap else None, colour_measure(SIM, colr) if colr else None)
+        kpi(p, x, 160, 166, 80, F.m(SIM, name), label, F.m(SIM, cap) if cap else None, colour_measure(SIM, colr) if colr else None, size=14.0)
         x += 170
     p.add("waterfallChart", 420, 246, 500, 270, roles={"Category": [F.c("Sim Bridge Step", "Step")], "Y": [F.m(SIM, "Sim Bridge Value", "Profit")]},
           objects={"labels": [{"properties": {"show": lit(True), "fontSize": lit(8.0)}}],
@@ -616,7 +694,7 @@ def sim_decide(p, nav, tabs, levers):
 
 def sim_test(p, nav, tabs, levers):
     frame(p, "Decision Simulator · Test the plan", "What it would take to hit a target, how sure we are, and every preset side by side", nav, tabs)
-    slicer(p, 14, 124, 1252, 32, F.c("Sim Preset", "Short"), "Basic", None, sync="preset", horizontal=True, key="preset", force=True, default="Today")
+    slicer(p, 14, 104, 1252, 40, F.c("Sim Preset", "Short"), "Basic", None, sync="preset", horizontal=True, key="preset", force=True, default="Today")
     lever_slicers(p, levers)
     slicer(p, 420, 160, 260, 40, F.c("Sim Goal Target", "Target"), "Dropdown", "Target", key="target")
     slicer(p, 686, 160, 200, 40, F.c("Sim Goal Uplift", "Extra profit a year"), "Dropdown", "Extra profit a year (for 'plus extra')", key="uplift")

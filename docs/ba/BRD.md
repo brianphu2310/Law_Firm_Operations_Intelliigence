@@ -57,7 +57,7 @@ decisions; individual performance management.
 | BR12 | Show what it would take to close the gap to budget, lever by lever | All | Should | Simulator → What would it take? |
 | BR13 | Show the result if only part of a decision is delivered | All | Should | Simulator → How sure are we? |
 | BR14 | Provide the hiring, staffing, marketing and P&L answers in SQL and in Excel, refreshable by Power Query | All | Must | `sql/`, `snowflake/`, `excel/` |
-| BR15 | Every report page fits one 16:9 screen (1280 × 720 canvas) | All | Must | All 15 Power BI pages use a fixed 1280 × 720 canvas |
+| BR15 | Every report page fits one 16:9 screen (1280 × 720 canvas) | All | Must | All 21 Power BI pages use a fixed 1280 × 720 canvas |
 
 ## 6. Data needed
 

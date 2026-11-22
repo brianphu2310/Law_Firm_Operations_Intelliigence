@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "0e993c3a242bfc1eda82",
   "position": {
-    "x": 648.0,
-    "y": 196.0,
+    "x": 203.35625,
+    "y": 144.0,
     "z": 25000,
-    "width": 194.0,
-    "height": 24.0,
+    "width": 165.50625,
+    "height": 56.0,
     "tabOrder": 25000
   },
   "visual": {
@@ -23,12 +23,12 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "Utilisation Δ"
+                  "Property": "Active Matters"
                 }
               },
-              "queryRef": "Measures.Utilisation Δ",
-              "nativeQueryRef": " ",
-              "displayName": " "
+              "queryRef": "Measures.Active Matters",
+              "nativeQueryRef": "Active matters",
+              "displayName": "Active matters"
             }
           ]
         }
@@ -41,7 +41,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "8.0D"
+                  "Value": "18.0D"
                 }
               }
             },
@@ -50,7 +50,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#64748b'"
+                      "Value": "'#0f172a'"
                     }
                   }
                 }
@@ -65,7 +65,25 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9.0D"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#64748b'"
+                    }
+                  }
                 }
               }
             }

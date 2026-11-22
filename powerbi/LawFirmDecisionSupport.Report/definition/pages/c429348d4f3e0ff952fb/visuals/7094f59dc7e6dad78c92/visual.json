@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "7094f59dc7e6dad78c92",
   "position": {
-    "x": 1026.0,
-    "y": 522.0,
+    "x": 839.7875,
+    "y": 162.0,
     "z": 66000,
-    "width": 240.0,
-    "height": 92.0,
+    "width": 134.79375000000002,
+    "height": 54.0,
     "tabOrder": 66000
   },
   "visual": {
@@ -23,12 +23,12 @@
                       "Entity": "Simulator"
                     }
                   },
-                  "Property": "Sim Scenario Summary"
+                  "Property": "Sim Gap to Budget"
                 }
               },
-              "queryRef": "Simulator.Sim Scenario Summary",
-              "nativeQueryRef": "Levers in this scenario",
-              "displayName": "Levers in this scenario"
+              "queryRef": "Simulator.Sim Gap to Budget",
+              "nativeQueryRef": "Gap to FY26 budget",
+              "displayName": "Gap to FY26 budget"
             }
           ]
         }
@@ -41,7 +41,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "8.0D"
+                  "Value": "14.0D"
                 }
               }
             },
@@ -49,8 +49,13 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "Literal": {
-                      "Value": "'#0f172a'"
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Simulator"
+                        }
+                      },
+                      "Property": "Sim Gap Colour"
                     }
                   }
                 }

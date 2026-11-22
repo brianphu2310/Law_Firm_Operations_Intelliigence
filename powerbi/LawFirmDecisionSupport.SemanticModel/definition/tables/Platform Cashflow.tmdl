@@ -25,7 +25,7 @@ table 'Platform Cashflow'
 
 	column OneOff
 		dataType: double
-		formatString: #,0.0
+		formatString: \$#,0;-\$#,0;\$0
 		summarizeBy: none
 		sourceColumn: OneOff
 

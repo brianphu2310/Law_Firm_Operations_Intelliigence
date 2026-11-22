@@ -48,7 +48,7 @@
   .tiles { display:flex; gap:4px; height:100%; align-items:center; flex-wrap:nowrap; overflow:hidden; }
   .tiles button { flex:1 1 auto; font:inherit; font-size:8.5pt; border:1px solid #c8d3dc; background:#fff; color:var(--ink); border-radius:5px; height:26px; padding:0 6px; cursor:pointer; white-space:nowrap; }
   .tiles button.on { background:var(--teal); color:#fff; border-color:var(--teal); }
-  .btn { display:flex; align-items:center; justify-content:center; height:100%; border-radius:6px; cursor:pointer; font-size:10pt; user-select:none; }
+  .btn { display:flex; align-items:center; justify-content:center; height:100%; border-radius:6px; cursor:pointer; font-size:10pt; user-select:none; white-space:nowrap; overflow:hidden; }
   .legend { display:flex; flex-wrap:wrap; gap:4px 10px; font-size:7.5pt; color:#334155; padding:2px 10px 0; }
   .legend i { display:inline-block; width:8px; height:8px; border-radius:2px; margin-right:4px; vertical-align:middle; }
   svg text { font-family:"Segoe UI", system-ui, sans-serif; }
@@ -108,7 +108,9 @@ function guessKind(name, v){ return typeof v === "number" ? "num" : "text"; }
 // ---------------------------------------------------------------------------------------------- navigation ---
 function render(){
   const page = D.pages.find(p => p.name === state.page);
-  document.querySelectorAll(".pages a, .tabs a").forEach(a => a.classList.toggle("on", a.dataset.p === state.page));
+  const sec = page.section;
+  document.querySelectorAll(".pages a, .tabs a").forEach(a => { const pg = D.pages.find(x => x.name === a.dataset.p);
+    a.classList.toggle("on", a.dataset.p === state.page || (page.hidden && pg && pg.section === sec)); });
   const cv = $("#canvas"); cv.innerHTML = "";
   page.visuals.forEach(v => cv.appendChild(visual(v)));
   fit();
@@ -120,6 +122,7 @@ function fit(){
 }
 window.addEventListener("resize", fit);
 D.pages.forEach(p => {
+  if (p.hidden) return;
   const a = document.createElement("a"); a.textContent = p.display; a.dataset.p = p.name; a.onclick = () => go(p.name); $("#pages").appendChild(a);
   const b = document.createElement("a"); b.textContent = p.display; b.dataset.p = p.name; b.onclick = () => go(p.name); $("#tabs").appendChild(b);
 });
@@ -168,6 +171,7 @@ function actionButton(v, body, W, H, ob, el){
   const tp = (ob.text||[]).find(t => t.selector) ; const p = tp ? tp.properties : {};
   const fill = colorOf(prop(ob,"fill","fillColor")); const oc = (ob.outline||[])[0]; const line = oc && lit(oc.properties.show)==="true" ? colorOf(oc.properties.lineColor) : null;
   const b = document.createElement("div"); b.className = "btn"; b.textContent = lit(p.text) || "";
+  if (lit(p.horizontalAlignment) === "left") { b.style.justifyContent = "flex-start"; b.style.paddingLeft = (num(p.leftMargin) || 10) + "px"; }
   Object.assign(b.style, { background: fill, color: colorOf(p.fontColor), fontSize: (num(p.fontSize)||10)+"pt", fontWeight: lit(p.bold)==="true" ? 700 : 400, border: line ? `1px solid ${line}` : "none" });
   const target = lit(prop(v.visual.visualContainerObjects,"visualLink","navigationSection"));
   if (target) b.onclick = () => go(target);

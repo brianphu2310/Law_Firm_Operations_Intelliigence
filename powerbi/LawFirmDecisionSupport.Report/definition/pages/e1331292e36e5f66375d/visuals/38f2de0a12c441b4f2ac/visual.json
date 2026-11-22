@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "38f2de0a12c441b4f2ac",
   "position": {
-    "x": 1058.0,
-    "y": 132.0,
+    "x": 203.35625,
+    "y": 180.0,
     "z": 28000,
-    "width": 204.0,
-    "height": 72.0,
+    "width": 165.50625,
+    "height": 24.0,
     "tabOrder": 28000
   },
   "visual": {
@@ -23,12 +23,12 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "FY Profit Gap"
+                  "Property": "Revenue Δ"
                 }
               },
-              "queryRef": "Measures.FY Profit Gap",
-              "nativeQueryRef": "FY26 forecast vs budget",
-              "displayName": "FY26 forecast vs budget"
+              "queryRef": "Measures.Revenue Δ",
+              "nativeQueryRef": " ",
+              "displayName": " "
             }
           ]
         }
@@ -41,7 +41,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "18.0D"
+                  "Value": "8.0D"
                 }
               }
             },
@@ -50,7 +50,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0f172a'"
+                      "Value": "'#64748b'"
                     }
                   }
                 }
@@ -65,25 +65,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "9.0D"
-                }
-              }
-            },
-            "color": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#64748b'"
-                    }
-                  }
+                  "Value": "false"
                 }
               }
             }
