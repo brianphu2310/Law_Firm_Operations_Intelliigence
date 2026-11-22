@@ -31,13 +31,13 @@ table Department
 
 	column base_per_office
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: base_per_office
 
 	column is_firm_wide
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: is_firm_wide
 

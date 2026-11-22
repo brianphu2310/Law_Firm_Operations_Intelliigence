@@ -27,7 +27,7 @@ table Snapshot
 
 	column receivables_incl_gst
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: receivables_incl_gst
 

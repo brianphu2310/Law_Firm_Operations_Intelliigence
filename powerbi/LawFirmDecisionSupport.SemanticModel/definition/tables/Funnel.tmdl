@@ -21,19 +21,19 @@ table Funnel
 
 	column consultations_booked
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: consultations_booked
 
 	column consultations_held
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: consultations_held
 
 	column letters_sent
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: letters_sent
 

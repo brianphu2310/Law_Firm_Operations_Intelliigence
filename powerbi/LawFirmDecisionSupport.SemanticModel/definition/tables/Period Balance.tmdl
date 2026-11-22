@@ -37,13 +37,13 @@ table 'Period Balance'
 
 	column Receivables
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: Receivables
 
 	column Trust
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: Trust
 

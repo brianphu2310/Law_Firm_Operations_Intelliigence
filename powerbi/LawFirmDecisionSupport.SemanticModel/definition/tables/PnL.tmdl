@@ -40,7 +40,7 @@ table PnL
 
 	column writeoff
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: writeoff
 
@@ -64,7 +64,7 @@ table PnL
 
 	column payroll_fee_earners
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0
 		summarizeBy: none
 		sourceColumn: payroll_fee_earners
 
@@ -76,13 +76,13 @@ table PnL
 
 	column payroll_support
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0
 		summarizeBy: none
 		sourceColumn: payroll_support
 
 	column rent
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: rent
 
@@ -94,7 +94,7 @@ table PnL
 
 	column insurance
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: insurance
 
@@ -124,7 +124,7 @@ table PnL
 
 	column commission
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: commission
 

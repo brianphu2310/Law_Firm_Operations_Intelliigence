@@ -19,7 +19,7 @@ table 'Where to Hire'
 
 	column active
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0
 		summarizeBy: none
 		sourceColumn: active
 
@@ -73,7 +73,7 @@ table 'Where to Hire'
 
 	column lawyers
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0
 		summarizeBy: none
 		sourceColumn: lawyers
 

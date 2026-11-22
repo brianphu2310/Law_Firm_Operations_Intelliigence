@@ -2204,10 +2204,10 @@ table Simulator
 		formatString: 0.0%;-0.0%;0.0%
 		displayFolder: Simulator
 
-	measure 'Sim Profit Caption' = FORMAT( [Sim vs Today %], "▲ +0.0%;▼ -0.0%;0.0%" ) & " vs base · " & FORMAT( [Sim vs Today], "+$#,0;-$#,0;$0" ) & " vs today"
+	measure 'Sim Profit Caption' = FORMAT( ROUND( [Sim vs Today %], 4 ), "▲ +0.0%;▼ -0.0%;0.0%" ) & " vs base · " & FORMAT( ROUND( [Sim vs Today], 0 ), "+$#,0;-$#,0;$0" ) & " vs today"
 		displayFolder: Simulator
 
-	measure 'Sim Margin Caption' = FORMAT( ( [Sim Margin] - [Sim Base Margin] ) * 100, "▲ +0.0 ""pp"";▼ -0.0 ""pp"";0.0 ""pp""" ) & " vs base · base " & FORMAT( [Sim Base Margin], "0.0%" )
+	measure 'Sim Margin Caption' = FORMAT( ROUND( ( [Sim Margin] - [Sim Base Margin] ) * 100, 2 ), "▲ +0.0 ""pp"";▼ -0.0 ""pp"";0.0 ""pp""" ) & " vs base · base " & FORMAT( [Sim Base Margin], "0.0%" )
 		displayFolder: Simulator
 
 	measure 'Sim Gap Caption' = "budget profit " & FORMAT( [Sim Budget Profit], "$#,0" )

@@ -84,7 +84,7 @@ table Invoice
 
 	column is_paid
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: is_paid
 

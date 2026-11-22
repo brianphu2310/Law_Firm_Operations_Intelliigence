@@ -113,13 +113,22 @@ def import_table(name, folder, file):
             fmt = "dd mmm yyyy"
         elif t == "double":
             lc = c.lower()
-            if any(x in lc for x in ("util", "margin", "share", "realisation", "conversion", "growth", "irr", "weight", "fraction", "r_rev", "r_cost")):
+            counts = ("fee_earners", "support", "headcount", "lawyers", "active", "matters", "inquiries", "hours", "volume", "searches",
+                      "count", "week", "payback", "impact", "probability", "council", "fte")
+            money = ("cost", "fee", "revenue", "profit", "amount", "spend", "npv", "ar", "overdue", "prev", "contribution", "cash", "wip",
+                     "balance", "value", "rev", "op", "pay", "benefit", "billed", "tco", "rate", "saving", "net", "pv", "closing", "in_", "out_", "budget")
+            if any(x in lc for x in ("util", "margin", "share", "realisation", "conversion", "growth", "irr", "weight", "fraction", "r_rev", "r_cost", "progress")):
                 fmt = PCT
-            elif any(x in lc for x in ("hours", "inquiries", "matters", "volume", "needed", "gap", "score", "priority", "days", "dso", "lockup",
-                                       "probability", "impact", "week", "payback", "decision", "searches", "count", "ramp", "fte", "uplift")):
-                fmt = NUM1 if any(x in lc for x in ("needed", "gap", "days", "dso", "lockup", "score", "priority", "decision")) else NUM
-            else:
+            elif lc == "days_open":
+                fmt = NUM
+            elif lc in ("needed", "gap", "score", "priority", "decision", "days_to_pay", "dso", "lockup", "days") or lc.startswith(("days", "dso")):
+                fmt = NUM1
+            elif any(x in lc for x in counts) and not any(lc.startswith(x) for x in ("cost", "fees")):
+                fmt = NUM
+            elif any(x in lc for x in money) or lc in ("expected",):
                 fmt = MONEY
+            else:
+                fmt = NUM1
         elif t == "int64":
             fmt = "0"
         hidden = c in keys and c.endswith(("_key", "Key")) and name != "Date"
@@ -612,8 +621,8 @@ def simulator_measures(consts, levers):
     out.append(Measure("Sim vs Today", "[Sim Operating Profit] - [Sim Today Profit]", MONEY, folder))
     out.append(Measure("Sim vs Today %", "DIVIDE( [Sim Operating Profit] - [Sim Today Profit], ABS( [Sim Today Profit] ) )", PCT, folder))
     # KPI captions
-    out.append(Measure("Sim Profit Caption", 'FORMAT( [Sim vs Today %], "▲ +0.0%;▼ -0.0%;0.0%" ) & " vs base · " & FORMAT( [Sim vs Today], "+$#,0;-$#,0;$0" ) & " vs today"', None, folder))
-    out.append(Measure("Sim Margin Caption", 'FORMAT( ( [Sim Margin] - [Sim Base Margin] ) * 100, "▲ +0.0 ""pp"";▼ -0.0 ""pp"";0.0 ""pp""" ) & " vs base · base " & FORMAT( [Sim Base Margin], "0.0%" )', None, folder))
+    out.append(Measure("Sim Profit Caption", 'FORMAT( ROUND( [Sim vs Today %], 4 ), "▲ +0.0%;▼ -0.0%;0.0%" ) & " vs base · " & FORMAT( ROUND( [Sim vs Today], 0 ), "+$#,0;-$#,0;$0" ) & " vs today"', None, folder))
+    out.append(Measure("Sim Margin Caption", 'FORMAT( ROUND( ( [Sim Margin] - [Sim Base Margin] ) * 100, 2 ), "▲ +0.0 ""pp"";▼ -0.0 ""pp"";0.0 ""pp""" ) & " vs base · base " & FORMAT( [Sim Base Margin], "0.0%" )', None, folder))
     out.append(Measure("Sim Gap Caption", '"budget profit " & FORMAT( [Sim Budget Profit], "$#,0" )', None, folder))
     out.append(Measure("Sim Low Caption", '"today " & FORMAT( [Sim Low Point Today], "$#,0" ) & " · minimum " & FORMAT( [Sim Minimum Cash], "$#,0" )', None, folder))
     out.append(Measure("Sim Gap Colour", 'IF( [Sim Gap to Budget] >= 0, "#047857", "#b91c1c" )', None, folder + "\\Format", hidden=True))

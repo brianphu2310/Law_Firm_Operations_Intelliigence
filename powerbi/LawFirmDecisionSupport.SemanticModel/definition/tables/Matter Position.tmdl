@@ -33,13 +33,13 @@ table 'Matter Position'
 
 	column progress_ratio
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: 0.0%;-0.0%;0.0%
 		summarizeBy: none
 		sourceColumn: progress_ratio
 
 	column days_open
 		dataType: double
-		formatString: #,0.0
+		formatString: #,0
 		summarizeBy: none
 		sourceColumn: days_open
 

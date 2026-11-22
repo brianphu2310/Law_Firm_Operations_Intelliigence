@@ -15,7 +15,7 @@ table 'Monthly Extra'
 
 	column CollectionsExGST
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: CollectionsExGST
 
@@ -45,7 +45,7 @@ table 'Monthly Extra'
 
 	column Drawings
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: Drawings
 

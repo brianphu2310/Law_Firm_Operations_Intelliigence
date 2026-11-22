@@ -13,19 +13,19 @@ table 'Platform Cashflow'
 
 	column Current
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: Current
 
 	column Alternative
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: Alternative
 
 	column OneOff
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: OneOff
 
@@ -43,7 +43,7 @@ table 'Platform Cashflow'
 
 	column Cumulative
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: Cumulative
 

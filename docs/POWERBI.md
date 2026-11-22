@@ -4,6 +4,12 @@ The project's front end: the whole dashboard and the Decision Simulator as a Pow
 one semantic model over the warehouse. It lives in `powerbi/` as a **Power BI Project (.pbip)**: plain text files
 (TMDL for the model, PBIR JSON for the report) that Git can diff and CI can test.
 
+## Preview without Power BI
+
+`powerbi/demo/index.html` is a browser preview of the same 15 pages: positions, titles and fields come from the report's own
+PBIR files, and every number is computed in Python the way the DAX measures compute it (`python -m powerbi.demo`). Page
+navigation, the Period slicer, the Simulator presets and the Platform slicer work; levers and filters work only in Power BI.
+
 ## Open it
 
 1. Install **Power BI Desktop** (Windows, free, latest version).

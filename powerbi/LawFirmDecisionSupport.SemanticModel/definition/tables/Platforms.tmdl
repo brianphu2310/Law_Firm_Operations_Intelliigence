@@ -70,7 +70,7 @@ table Platforms
 
 	column OneOff
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: OneOff
 
@@ -123,7 +123,7 @@ table Platforms
 
 	column Subscription
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: Subscription
 
@@ -135,7 +135,7 @@ table Platforms
 
 	column Migration
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: Migration
 
@@ -147,7 +147,7 @@ table Platforms
 
 	column Uplift
 		dataType: double
-		formatString: #,0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: Uplift
 

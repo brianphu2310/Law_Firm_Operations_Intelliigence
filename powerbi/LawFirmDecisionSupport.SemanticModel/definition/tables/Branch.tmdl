@@ -19,13 +19,13 @@ table Branch
 
 	column latitude
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: latitude
 
 	column longitude
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: longitude
 
@@ -37,7 +37,7 @@ table Branch
 
 	column base_monthly_rent
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: base_monthly_rent
 

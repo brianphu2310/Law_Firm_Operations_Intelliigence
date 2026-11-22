@@ -17,13 +17,13 @@ table 'Branch Period'
 
 	column fee_earners
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0
 		summarizeBy: none
 		sourceColumn: fee_earners
 
 	column support
 		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		formatString: #,0
 		summarizeBy: none
 		sourceColumn: support
 

@@ -322,8 +322,8 @@ def build_pages(ctx_facts, levers):
 def overview(p, nav, facts):
     frame(p, "Overview", "Where the firm stands this period, and the decisions waiting for the Principal", nav)
     text(p, 14, 100, 1252, 34, [[("HOW THIS STARTED   ", 8, TEAL, True),
-                                 (f"The Principal asked which software saves the firm the most ({facts['run_rate']} a year on LEAP + InfoTrack today; best: "
-                                  f"{facts['best']}, NPV {facts['npv']}). The same model now answers hiring, staffing, pay, marketing, new services and branches.", 9, INK, False)]],
+                                 (f"Which software saves the most? ({facts['run_rate']} a year on LEAP + InfoTrack today; best: {facts['best']}, NPV {facts['npv']}). "
+                                  "The same model now answers hiring, staffing, pay, marketing and branches.", 9, INK, False)]],
          background=True, border=True, key="story")
     xs = [14 + i * 210 for i in range(6)]
     kpi(p, xs[0], 142, 202, 82, F.m(M, "Active Matters"), "Active matters", F.m(M, "Active Matters Δ"))

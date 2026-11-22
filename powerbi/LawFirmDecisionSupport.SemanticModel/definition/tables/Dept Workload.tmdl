@@ -52,7 +52,7 @@ table 'Dept Workload'
 
 	column cost_of_gap
 		dataType: double
-		formatString: #,0.0
+		formatString: \$#,0;-\$#,0;\$0
 		summarizeBy: none
 		sourceColumn: cost_of_gap
 
