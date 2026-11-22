@@ -74,7 +74,7 @@ opening balances. The r48 statements therefore cannot come from a single system,
 | Service fee on top of the registry fee | Not published | Not published | **Assumption:** TriSearch charges 34/38 of InfoTrack's service fee ([`core/transition.py`](../core/transition.py), `TRISEARCH_FEE_RATIO`) |
 | API | Illustrative | **No public API documentation.** Response shape (`skip`/`take`/`continuation`) is illustrative | Honest limit |
 
-Reconciliation classes on the Transition page: Matched · Timing · On supplier feed, not in ledger · Duplicate in ledger ·
+Reconciliation classes used by the cut-over checks: Matched · Timing · On supplier feed, not in ledger · Duplicate in ledger ·
 Amount differs · Matter differs. A timing class exists in SQL for InfoTrack orders not yet complete; no planted case exercises it.
 
 ## Sourced, inferred, placeholder
@@ -105,5 +105,5 @@ The research report with the full scenario list is kept alongside the repo owner
 | Mock TriSearch route | [`integration/mock_api.py`](../integration/mock_api.py) |
 | Staging and marts (DuckDB) | [`integration/sql/duckdb/`](../integration/sql/duckdb) |
 | Checks and reconciliations | [`integration/quality.py`](../integration/quality.py), [PIPELINE_QUALITY.md](PIPELINE_QUALITY.md) |
-| App page | [`views/transition.py`](../views/transition.py) |
+| App page | Removed from the dashboard (Nov 2026): the cut-over is now told as the reason the platform evaluation exists; the checks still run in the pipeline |
 | Tests | [`tests/test_transition.py`](../tests/test_transition.py), [`tests/test_integration_pipeline.py`](../tests/test_integration_pipeline.py) |

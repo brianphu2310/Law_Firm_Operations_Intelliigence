@@ -148,7 +148,7 @@ Reconciliation checks compare warehouse SQL totals with the Streamlit app's own 
 | PASS | Actual capacity_hours: warehouse SUM = app fin_sum()['capacity'] | `36,581.33` | `36,581.33` |
 | PASS | Budget fees to as-of date = app plan_sum()['fees'] | `13,556,668.46` | `13,556,668.46` |
 | PASS | Budget revenue to as-of date = app plan_sum()['revenue'] | `14,116,078.18` | `14,116,078.18` |
-| PASS | Budget operating profit to as-of date = app plan_sum()['op_profit'] | `3,483,892.17` | `3,483,892.17` |
+| PASS | Budget operating profit to as-of date = app plan_sum()['op_profit'] | `3,425,649.16` | `3,425,649.16` |
 | PASS | attorney 'Sterling, C.': hours / value / fees / salary cost / capacity = app att_table() | `(4037.71, 2492434.5, 2296459.86, 1011986.36, 5047.67)` | `(4037.71, 2492434.5, 2296459.86, 1011986.36, 5047.67)` |
 | PASS | attorney 'Specter, H.': hours / value / fees / salary cost / capacity = app att_table() | `(4549.12, 2245812.91, 2049856.1, 819227.05, 5047.67)` | `(4549.12, 2245812.91, 2049856.1, 819227.05, 5047.67)` |
 | PASS | attorney 'Zane, R.': hours / value / fees / salary cost / capacity = app att_table() | `(4091.91, 1475978.38, 1279979.29, 578277.92, 5047.67)` | `(4091.91, 1475978.38, 1279979.29, 578277.92, 5047.67)` |

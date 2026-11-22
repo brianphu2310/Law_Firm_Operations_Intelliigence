@@ -109,3 +109,56 @@ def test_budget_targets_match_the_plan():
 @pytest.mark.parametrize("cur,prev,expected", [(5, 0, None), (0, 0, None), (5, 10, -0.5), (3, 2.0, 0.5), (None, 3, None), (3, None, None), (float("nan"), 3, None), (np.int64(4), np.int64(0), None)])
 def test_delta_never_divides_by_zero(cur, prev, expected):
     assert delta(cur, prev) == expected
+
+
+# ------------------------------------------------- people, branch and platform decisions
+def test_nes_redundancy_table_and_small_business_exemption():
+    # Fair Work Act s 119: 4 weeks after 1 year, 16 after 9, back to 12 from 10 years; none under 1 year
+    assert [S.redundancy_weeks(y, 25) for y in (0, 1, 2, 3, 9, 10, 20)] == [0, 4, 6, 7, 16, 12, 12]
+    # fewer than 15 employees: generally no NES redundancy pay
+    assert S.redundancy_weeks(5, 14) == 0 and S.redundancy_weeks(5, 15) == 10
+    # s 117 notice: 1 week up to 1 year, 2 up to 3, 3 up to 5, then 4
+    assert [S.notice_weeks(y) for y in (1, 2, 3, 4, 6)] == [1, 2, 2, 3, 4]
+
+
+def test_cutting_support_saves_pay_every_year_and_costs_redundancy_once():
+    _, f = S.base_actuals(M)
+    ctx = S.context(M)
+    base = S.project(f, S.DEFAULTS, ctx=ctx)
+    r = S.project(f, {"sim_cut_support": 2, "sim_cut_years": 3}, ctx=ctx)
+    assert r["op1"] - base["op1"] == pytest.approx(2 * S.SUPPORT_PAY_MONTH * 12)
+    weekly = S.SUPPORT_PAY_MONTH * 12 / 52
+    assert r["redundancy"] == pytest.approx(2 * weekly * 7) and r["notice_pay"] == pytest.approx(2 * weekly * 2)
+    assert r["one_off"] == pytest.approx(r["redundancy"] + r["notice_pay"])
+
+
+def test_losing_a_busy_fee_earner_costs_more_fees_than_pay():
+    _, f = S.base_actuals(M)
+    ctx = S.context(M)
+    base = S.project(f, S.DEFAULTS, ctx=ctx)
+    r = S.project(f, {"sim_cut_fe": 1, "sim_keep_work": 0}, ctx=ctx)
+    assert r["op1"] < base["op1"]
+    kept = S.project(f, {"sim_cut_fe": 1, "sim_keep_work": 80}, ctx=ctx)
+    assert kept["op1"] > r["op1"]                      # the more work the team keeps, the smaller the loss
+
+
+def test_branch_fit_out_is_cash_not_profit_and_pays_back():
+    _, f = S.base_actuals(M)
+    ctx = S.context(M)
+    r = S.project(f, S.preset_state("Open a branch"), ctx=ctx)
+    assert r["branch_fitout"] == 120000 and r["one_off"] == pytest.approx(120000)
+    assert r["branch_net"] < r["branch_net_full"]       # year one carries the ramp-up
+    assert r["branch_payback"] is not None and 12 < r["branch_payback"] < 60
+    slower = S.project(f, {**S.preset_state("Open a branch"), "sim_branch_ramp": 24}, ctx=ctx)
+    assert slower["branch_net"] < r["branch_net"]
+
+
+def test_platform_switch_uses_the_platform_evaluation():
+    _, f = S.base_actuals(M)
+    ctx = S.context(M)
+    base = S.project(f, S.DEFAULTS, ctx=ctx)
+    r = S.project(f, S.preset_state("Switch platform"), ctx=ctx)
+    plat = ctx["platforms"]["Smokeball + GlobalX"]
+    assert r["op1"] - base["op1"] == pytest.approx(plat["annual"]) and r["one_off"] == pytest.approx(plat["one_off"])
+    # without a context the switch has no effect (pure engine, no model)
+    assert S.project(f, S.preset_state("Switch platform"))["op1"] == pytest.approx(S.project(f, S.DEFAULTS)["op1"])

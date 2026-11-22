@@ -42,7 +42,8 @@ comparisons that would fall earlier show "n/a".
 ## 3. Budget and outlook
 
 * **Budget** uses the same cost model as actuals but with smooth, noise-free drivers (seasonality, rate reviews, wage inflation).
-  Payroll, rent, software and insurance therefore equal budget exactly. In the actuals, marketing, professional fees, cards, merchant
+  Its fixed lines carry the assumptions made before the year: fee-earner pay +1.2% (a rise not yet given), support payroll −1.5%
+  (a vacancy), rent +3% (a review not yet triggered), software −4% (last year's prices) and insurance +6%. In the actuals, marketing, professional fees, cards, merchant
   fees, commissions, bank fees and other overheads carry random variation around their budget values, which is where cost variances come from.
 * **Variance sign convention:** favourable is positive. For revenue, variance = actual − budget; for costs, variance = budget − actual.
 * **FY outlook** = year-to-date actuals + remaining budget (including the rest of the current month), where remaining revenue is
@@ -93,13 +94,20 @@ standard rate per hour, and a lever value be written with its unit (pp = percent
 * Disbursement cost scales with total hours; disbursements billed = cost × (today's recovery ratio + Δrecovery).
 * Costs: fee-earner payroll + new-hire pay + disbursement cost + overheads × (1 + overhead change) + about $9K a year overhead per new hire.
 * Days to collect: one-off cash effect = −Δdays × scenario revenue × 1.10 ÷ 365 (profit is unchanged).
+* Fee earners leaving: hours lost = n × 190 × 12 × utilisation; fees lost = hours × role rate − kept hours × r₀ (both × rates × realisation); pay and $9K overhead saved.
+* Support roles cut: $5,400 a month each saved. Redundancy pay = weekly pay × NES weeks for the years of service (s 119; zero below 15 employees);
+  notice pay = weekly pay × s 117 weeks. Both are one-off cash.
+* New branch: fees = associates × 190 × 12 × utilisation × average year-one productivity (linear ramp to 100% at the chosen month) × associate rate;
+  costs = pay + overhead + support × $5,400 × 12 + rent × 12 + $24K running costs. Fit-out is one-off cash; payback = first month the cumulative contribution covers it.
+* Platform: first-year benefit less extra running cost and the one-off migration, from the platform evaluation's monthly cash flow.
+* Cash: 13-week low point after the decision = today's low point − one-off costs + any DSO release (all one-offs assumed paid in week one).
 * **Break-even productivity of a hire** = (pay + overhead) ÷ fees at 100% of firm utilisation.
 * **Gap to budget** = scenario operating profit − FY budget operating profit.
 * **Goal-seek:** for each lever separately, on top of the levers already set, bisection finds the smallest value that reaches the target operating
   profit (or margin); the answer is rounded up to the slider step so applying it still meets the target. Utilisation and realisation are capped at 100%. A lever
   that cannot reach the target on its own is reported as such.
 * **Delivery range:** re-runs the scenario with only 100% / 75% / 50% of the improvements (better utilisation, rates, realisation, recovery, overhead cuts and a hire's
-  productivity). Setbacks and a hire's pay are not softened.
+  productivity, a new branch's productivity and the work kept after someone leaves). Setbacks, pay and rent are not softened.
 
 With every lever at zero the scenario equals the base exactly (this is tested). Details and worked examples: [SIMULATOR.md](SIMULATOR.md).
 

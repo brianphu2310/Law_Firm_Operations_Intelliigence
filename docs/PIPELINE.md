@@ -19,7 +19,7 @@ flowchart LR
     raw --> stg["STAGING<br/>LATERAL FLATTEN<br/>latest version only"]
     stg --> marts["MARTS<br/>revenue_monthly<br/>aged_receivables<br/>collection_performance"]
     marts --> pq["Excel + Power Query<br/>Debtors & Revenue Pack"]
-    marts --> st["Streamlit<br/>Pipeline page"]
+    marts --> st["Marts API<br/>Excel + Power Query"]
     marts --> api2["marts_api.py<br/>marts as JSON"]
     api2 --> pq
     stg --> dq{"quality.py<br/>8 checks +<br/>8 reconciliations"}
@@ -66,7 +66,7 @@ finds exactly these and nothing else.
 | Serving | `integration/marts_api.py` | Marts as JSON (`/marts/{name}`), whitelisted names, optional API key, `/health`. |
 | Excel + Power Query | `integration/powerquery/*.pq`, `integration/excel/Debtors_Revenue_Pack.xlsx` | Three M scripts: marts from the JSON API, MYOB API direct with paging, marts from Snowflake. The workbook's Summary tab is formulas only (SUMIFS, COUNTIFS, INDEX/MATCH), plus cells that check it ties to the data tab and to the dashboard. |
 | Power Query reconciliation workbook | `integration/powerquery/github/*.pq`, `integration/excel/Law_Firm_Recon_PowerQuery.xlsx` | Four M queries reading the source JSON straight from this repo: LEAP + triConvey ↔ MYOB invoice sync (472/472 expected), matter migration (132 migrated, 1 not migrated, 1 duplicated), trust balance migration (Global Trust Bank short $5,799.21) and InfoTrack + TriSearch + PEXA disbursements by matter (439 matters, $213,752.16). Refreshed in Excel on the cut-over data (20 Nov 2026); every figure agrees with DuckDB and Snowflake. |
-| Streamlit | `views/pipeline.py` | The app's **Pipeline** page: flow, load audit, checks, reconciliation, ageing and collections, read from the committed snapshot in `integration/snapshot/`. |
+| Snapshot | `integration/snapshot/` | Committed results of the last run (load audit, checks, reconciliation). The dashboard no longer has a Pipeline page; it reads the same model directly. |
 
 ## Run it
 

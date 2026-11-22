@@ -101,16 +101,10 @@ def test_finance_call_to_action_opens_the_simulator_with_the_budget_goal():
     assert at.session_state["sim_target_kind"].startswith("Match the FY26 budget")
 
 
-def test_billing_call_to_action_loads_the_collections_preset():
-    at = new(view_kind="page", view_name="Finance")
-    button(at, "act_cta_bill").click().run(); ok(at)
-    assert at.session_state["view_name"] == "Simulator" and at.session_state["sim_dso"] == -7
-
-
-def test_team_call_to_action_loads_the_utilisation_preset():
-    at = new(view_kind="page", view_name="Team")
-    button(at, "act_cta_team").click().run(); ok(at)
-    assert at.session_state["view_name"] == "Simulator" and at.session_state["sim_util"] == 3.0
+def test_people_call_to_action_loads_the_support_restructure_preset():
+    at = new(view_kind="page", view_name="People")
+    button(at, "act_cta_people").click().run(); ok(at)
+    assert at.session_state["view_name"] == "Simulator" and at.session_state["sim_cut_support"] == 2
 
 
 def test_platform_score_uses_the_weights_just_chosen():

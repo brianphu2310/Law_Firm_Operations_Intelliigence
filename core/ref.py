@@ -9,7 +9,7 @@ PLAN_END = pd.Timestamp("2026-06-01")        # last budget month (FY26 ends 30 J
 FY_START_MONTH = 7                           # Australian financial year: 1 Jul – 30 Jun
 
 AREAS = ["Corporate", "Litigation", "IP Portfolio", "Employment", "Advisory"]
-NAV_ITEMS = ["Overview", "Matters", "Clients", "Calendar", "Finance", "Team", "Transition", "Pipeline", "Simulator"]
+NAV_ITEMS = ["Overview", "Finance", "People", "Matters", "Clients", "Calendar", "Simulator"]
 USER_NAME, USER_ROLE = "Brian Phu", "Financial Analyst"
 
 BRANCHES = [

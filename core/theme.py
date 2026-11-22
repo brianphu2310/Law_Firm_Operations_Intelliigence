@@ -227,7 +227,7 @@ section[data-testid="stSidebar"] div[data-testid="stButton"] button[kind="primar
 
 EXTRA = """<style>
 /* ---------- page furniture ---------- */
-.page-head { display:flex; align-items:flex-end; justify-content:space-between; gap:12px; margin:2px 0 16px 0; }
+.page-head { display:flex; align-items:flex-end; justify-content:space-between; gap:12px; margin:0 0 8px 0; }
 .page-title { font-size:19px; font-weight:800; color:#0f172a; line-height:1.15; }
 .page-sub { font-size:12px; color:#475569; margin-top:1px; }
 .page-tag { font-size:11px; font-weight:600; color:#475569; background:#ffffff; border:1px solid #e2e8f0; border-radius:999px; padding:3px 10px; white-space:nowrap; }
@@ -282,6 +282,28 @@ div[class*="st-key-act_"] button:disabled { opacity:.35 !important; cursor:not-a
 .goal-txt { font-size:12.5px; color:#0f172a; line-height:1.3; }
 .goal-row { display:flex; align-items:center; gap:10px; padding:7px 4px; border-bottom:1px solid #f1f5f9; font-size:12.5px; }
 .goal-row .lv { flex:0 0 190px; font-weight:600; color:#0f172a; } .goal-row .need { flex:1; color:#0f172a; }
+/* ---------- one-screen layout helpers ---------- */
+.mini-title { font-size:12.5px; font-weight:700; color:#0f172a; margin:2px 0 4px 0; }
+table.simple.compact td { padding:4px 6px; font-size:11.5px; }
+table.simple.pl td { padding:2px 8px; line-height:1.4; font-size:11.5px; } table.simple.pl th { padding:4px 8px; }
+.method { font-size:11.5px; line-height:1.55; color:#334155; }
+.sidebar-brand-name { white-space:nowrap; }
+.sidebar-brand { margin-bottom:14px !important; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,.12); }
+div[class*="st-key-act_preset_"] button, div[class*="st-key-act_reset"] button { font-size:11.5px !important; padding:3px 4px !important; min-height:30px !important; white-space:nowrap !important; }
+div[class*="st-key-act_preset_"] button p, div[class*="st-key-act_reset"] button p { font-size:11.5px !important; white-space:nowrap !important; }
+.sidebar-brand-sub { font-size:10px; color:rgba(255,255,255,.55) !important; line-height:1.2; }
+.sidebar-brand-badge { font-size:11px !important; letter-spacing:.5px; }
+/* Streamlit >= 1.50 tabs */
+[data-testid="stTabs"] [data-testid="stTab"] { font-size:12.5px; }
+[data-testid="stTabs"] [data-testid="stTab"] p { font-size:12.5px; font-weight:600; }
+.story { display:flex; align-items:center; gap:10px; font-size:12px; color:#334155; background:#ffffff; border:1px solid #dbe6ee; border-radius:12px; padding:6px 12px; margin:0 0 10px 0;
+    box-shadow:0 4px 12px rgba(15,23,42,.08); }
+.story b { color:#0f172a; } .story .k { font-size:10px; font-weight:800; letter-spacing:1px; color:#0a8496; white-space:nowrap; }
+.decision { display:flex; gap:10px; align-items:flex-start; padding:7px 2px; border-bottom:1px solid #f1f5f9; }
+.decision:last-child { border-bottom:none; }
+.decision .ic { width:26px; height:26px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; flex-shrink:0; }
+.decision .t { font-size:12px; font-weight:700; color:#0f172a; line-height:1.25; }
+.decision .d { font-size:10.5px; color:#475569; line-height:1.3; margin-top:1px; }
 </style>"""
 
 

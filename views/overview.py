@@ -9,10 +9,12 @@ from core import metrics as X
 from core import ui
 from core.charts import branch_globe_fig, revenue_stream_fig, utilisation_treemap, PAYMENT_METHODS
 from core.period import delta, stock_at, has_data
+from core import platforms as P
 from core.ref import AS_OF, AREAS
 from core.theme import (inject_css, TEAL, TEAL_TINT, INK, MUTED, FAINT, CARD, SHADOW, AREA_COLORS)
 
-SCREEN_H = 890            # visible browser height in px – all cards/globe are derived from this one number
+SCREEN_H = 810            # visible browser height on a 13-inch laptop (1440 × 810 viewport) – all cards/globe are derived from this one number
+STORY_H = 44              # the one-line "how this started" strip above the KPIs
 
 
 def _cmp_label(cmp):
@@ -22,7 +24,7 @@ def _cmp_label(cmp):
 
 
 def render(M, cur, cmp):
-    _avail = SCREEN_H - 179
+    _avail = SCREEN_H - 179 - STORY_H
     ROW_H = max(168, min(240, round(_avail * 0.31)))
     HERO_H = max(236, min(290, _avail - 2 * ROW_H))
     ROW_H = max(168, min(240, (_avail - HERO_H) // 2))
@@ -45,6 +47,10 @@ def render(M, cur, cmp):
     div[class*="st-key-cardblock_"] {{ box-shadow:{SHADOW} !important; }}
     div[class*="st-key-cardblock_r2"], div[class*="st-key-cardblock_r3"] {{ flex:0 0 {ROW_H}px !important; height:{ROW_H}px !important; min-height:{ROW_H}px !important; max-height:{ROW_H}px !important; overflow:hidden !important; }}
     .rev-legend {{ flex-wrap:wrap; gap:2px 9px !important; }} .rev-legend .legend-item {{ font-size:10px; gap:4px; }}
+    .decisions .decision {{ padding:4px 2px; gap:8px; align-items:center; }}
+    .decisions .decision .ic {{ width:24px; height:24px; font-size:11px; }}
+    .decisions .decision .t, .decisions .decision .d {{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }}
+    .decisions .decision .t {{ font-size:11.5px; }} .decisions .decision .d {{ font-size:10px; }}
     .deadline-item {{ display:flex; gap:12px; align-items:center; margin-bottom:12px; }}
     .deadline-title, .deadline-sub {{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }}
     div[class*="st-key-heroblock"], div[class*="st-key-herowrap"], div[class*="st-key-herocard"] {{ flex:0 0 {HERO_H}px !important; height:{HERO_H}px !important; min-height:{HERO_H}px !important; max-height:{HERO_H}px !important; }}
@@ -110,6 +116,14 @@ div[class*="st-key-cardblock_r"] .card-title { overflow:hidden; text-overflow:el
     end = cur.end
     dl = lambda a, b: delta(a, b) if fp is not None else None
     ppd = lambda a, b: (a - b) if (fp is not None and b is not None and not np.isnan(b)) else None
+
+    # ---------------- how this project started ----------------
+    inp = P.base_inputs(M)
+    rk = P.ranking(inp).sort_values("rank")
+    top = rk.iloc[0]
+    st.markdown(f'<div class="story"><span class="k">HOW THIS STARTED</span><span>The firm pays <b>{ui.fmt_money(P.run_rate(P.BASELINE, inp))} a year</b> for LEAP + InfoTrack, '
+                f'so the first question was which platform saves the most: <b>{top["name"]}</b> (3-year NPV {ui.fmt_money(top["npv"], sign=True)}). '
+                f'The same model now tests hiring, redundancies and new branches.</span></div>', unsafe_allow_html=True)
 
     # ---------------- KPIs ----------------
     top_short = H["top"].split(",")[0]
@@ -237,15 +251,33 @@ div[class*="st-key-cardblock_r"] .card-title { overflow:hidden; text-overflow:el
                    f'<text x="80" y="92" text-anchor="middle" font-size="7.5" font-weight="600" fill="{FAINT}" letter-spacing="1.2" font-family="Inter, sans-serif">TOTAL</text></svg>')
             st.markdown(f'<div class="bl-wrap">{svg}<div class="bl-legend">{legend}</div></div>', unsafe_allow_html=True)
     with t3:
-        with ui.card("r3_dead"):
-            st.markdown('<div class="card-title">Upcoming Court Appearances &amp; Filings</div>', unsafe_allow_html=True)
-            ui.spacer(4)
-            dlt = M["deadlines"]; nxt = dlt[dlt["date"] >= AS_OF].head(4 if ROW_H >= 208 else 3)
-            items = ""
-            for n, (_, d) in enumerate(nxt.iterrows()):
-                days = (d["date"] - AS_OF).days
-                ac, tint = ("#b45309", "#fffbeb") if days <= 30 else (TEAL, TEAL_TINT)
-                items += (f'<div class="tl-item" style="--ac:{TEAL};--t:{TEAL_TINT};--d:{0.06 * n:.2f}s;" title="{d["title"]}"><div class="tl-badge">{d["date"]:%b %d}</div>'
-                          f'<div class="tl-body"><div class="deadline-title">{d["title"]}</div><div class="deadline-sub">{d["court"]} · Assigned: {d["attorney"]}</div></div>'
-                          f'<span class="tl-chip" style="--ac:{ac};--t:{tint};">in {days}d</span></div>')
-            st.markdown(f'<div class="tl"><div class="tl-line"></div>{items}</div>', unsafe_allow_html=True)
+        with ui.card("r3_dec"):
+            st.markdown('<div class="card-title">Decisions to make</div>', unsafe_allow_html=True)
+            items = _decisions(M, cur, top)
+            html = "".join(f'<div class="decision"><div class="ic" style="background:{bg};color:{fg};">{ic}</div><div style="min-width:0;"><div class="t">{t}</div>'
+                           f'<div class="d">{d}</div></div></div>' for ic, fg, bg, t, d in items)
+            st.markdown(f'<div class="decisions">{html}</div>', unsafe_allow_html=True)
+
+
+def _decisions(M, cur, top):
+    """The four questions the model exists to answer, each with today's evidence."""
+    from core import simulate as S
+    a, b = X.fin_sum(M, cur), X.plan_sum(M, cur)
+    gap = a["op_profit"] - b["op_profit"]
+    bt = X.branch_table(M, cur)
+    weak = bt["margin"].idxmin(); wb = bt.loc[weak]
+    cash = stock_at(M["stock"], "cash", cur.end)
+    burn = a["total_costs"] / cur.days * 30.4
+    _, f = S.base_actuals(M)
+    ctx = S.context(M)
+    br = S.project(f, S.preset_state("Open a branch"), ctx=ctx)
+    return [
+        ("$", "#b91c1c" if gap < 0 else "#047857", "#fef2f2" if gap < 0 else "#f0fdf4", f"Profit {ui.fmt_money(abs(gap))} {'behind' if gap < 0 else 'ahead of'} budget",
+         f"{cur.label}: rates, utilisation or overheads? Test each in the Simulator."),
+        ("P", "#b45309", "#fffbeb", f"{weak}: {int(wb['support'])} support for {int(wb['fee_earners'])} lawyers",
+         f"Lowest branch margin ({wb['margin']:.0%}). Restructure before hiring."),
+        ("B", "#1d4ed8", "#eff6ff", f"New branch: {ui.fmt_money(br['branch_net'], sign=True)} in year one",
+         f"Pays back in {br['branch_payback']} months, but cash cover is {cash / burn:.1f} months."),
+        ("S", "#0a8496", "#ecfeff", f"Switch to {top['short']}: {ui.fmt_money(top['npv'], sign=True)} NPV",
+         f"Payback {top['payback']:.0f} months. Open it in the sidebar."),
+    ]

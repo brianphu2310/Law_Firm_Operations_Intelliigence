@@ -144,14 +144,18 @@ def base_layout(h, legend=False, **kw):
     lay = dict(margin=dict(l=8, r=8, t=6, b=4), height=h, paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
                showlegend=legend, font=dict(family="Inter, sans-serif", color=MUTED, size=10), hoverlabel=dict(font_size=11))
     if legend:
-        lay["legend"] = dict(orientation="h", y=1.14, x=0, font=dict(size=10), bgcolor="rgba(0,0,0,0)")
+        lay["legend"] = dict(orientation="h", yanchor="bottom", y=1.0, x=0, font=dict(size=10), bgcolor="rgba(0,0,0,0)")
+        lay["margin"] = dict(l=8, r=8, t=24, b=4)
     lay.update(kw)
     return lay
 
 
 def style_axes(fig, y_fmt=None, grid=True, x_grid=False):
+    """Light grid and small ticks. The number format goes on the primary y-axis only: a secondary axis (a margin %, a count)
+    keeps its own format instead of inheriting "$" from the primary one."""
     fig.update_xaxes(showgrid=x_grid, gridcolor="#f1f5f9", tickfont=dict(size=9), zeroline=False)
-    fig.update_yaxes(showgrid=grid, gridcolor="#f1f5f9", tickfont=dict(size=9), zeroline=False, tickformat=y_fmt)
+    fig.update_yaxes(tickfont=dict(size=9), zeroline=False)
+    fig.update_layout(yaxis=dict(showgrid=grid, gridcolor="#f1f5f9", tickformat=y_fmt))
     return fig
 
 
@@ -176,6 +180,11 @@ def csv_button(df, name, key):
 def money_col(label, fmt="$%,d"):
     """Whole-dollar column with thousands separators (sprintf-js format; values are rounded on display)."""
     return st.column_config.NumberColumn(label, format=fmt)
+
+
+def signed_money_col(label):
+    """Whole-dollar column that can go negative: "$" moves into the header so a negative reads -6,141, not $-6,141."""
+    return st.column_config.NumberColumn(f"{label} ($)", format="%,d")
 
 
 def render_html_table(df, num_cols=(), total_row=False, sub_rows=(), fmt=None):
@@ -231,6 +240,6 @@ def sim_cta(text, target_kind=None, preset=None, key="cta"):
         if preset:
             for k, v in S.preset_state(preset).items():
                 ss[k] = v
-    c1, c2 = st.columns([5, 1.6], vertical_alignment="center")
+    c1, c2 = st.columns([4, 1.3], vertical_alignment="center")
     c1.markdown(f'<div class="sim-cta"><span class="sim-cta-star">★</span> {text}</div>', unsafe_allow_html=True)
-    c2.button("Open the Simulator →", key=f"act_cta_{key}", on_click=go, width="stretch")
+    c2.button("Simulator →", key=f"act_cta_{key}", on_click=go, width="stretch")

@@ -36,19 +36,19 @@ def render(M, cur, cmp):
         dict(label="Average age of active", value=f"{age.mean():.0f} days", label_cmp=None, accent=TEAL, sub=f"median {age.median():.0f} days"),
         dict(label="Estimated value, active", value=ui.fmt_money(act["est_value"].sum()), label_cmp=None, accent=TEAL, sub=f"avg {ui.fmt_money(act['est_value'].mean())} per matter"),
         dict(label="WIP on active matters", value=ui.fmt_money(mt.loc[mt["status"].isin(["Open", "On Hold"]), "wip"].sum()), label_cmp=None, accent=TEAL, sub=f"as of {AS_OF:%d %b %y}"),
-    ], spacer_after=6)
+    ])
 
-    tabs = st.tabs(["Ledger", "Pipeline & flow", "WIP & ageing", "Locations"])
+    tabs = st.tabs(["Ledger", "Flow & intake", "WIP & ageing", "Locations"])
 
     # ------------------------------------------------------------- Ledger
     with tabs[0]:
         with ui.card("m1"):
             f1, f2, f3, f4, f5 = st.columns([1.1, 1.3, 1.3, 1.1, 1.6])
-            status = f1.selectbox("Status", ["Active", "All", "Open", "On Hold", "Closed"], key="m_status")
-            areas = f2.multiselect("Practice area", AREAS, key="m_area")
-            atts = f3.multiselect("Attorney", [a["short"] for a in ATTORNEYS], key="m_att")
-            branch = f4.selectbox("Branch", ["All"] + BRANCH_NAMES, key="m_branch")
-            q = f5.text_input("Search matter or client", key="m_q")
+            status = f1.selectbox("Status", ["Active", "All", "Open", "On Hold", "Closed"], key="m_status", label_visibility="collapsed")
+            areas = f2.multiselect("Practice area", AREAS, key="m_area", label_visibility="collapsed", placeholder="Practice area")
+            atts = f3.multiselect("Fee earner", [a["short"] for a in ATTORNEYS], key="m_att", label_visibility="collapsed", placeholder="Fee earner")
+            branch = f4.selectbox("Branch", ["All branches"] + BRANCH_NAMES, key="m_branch", label_visibility="collapsed")
+            q = f5.text_input("Search matter or client", key="m_q", label_visibility="collapsed", placeholder="Search matter or client")
             d = mt[mt["opened"] <= AS_OF].copy()
             if status == "Active":
                 d = d[d["status"].isin(["Open", "On Hold"])]
@@ -56,7 +56,7 @@ def render(M, cur, cmp):
                 d = d[d["status"] == status]
             if areas: d = d[d["area"].isin(areas)]
             if atts: d = d[d["attorney"].isin(atts)]
-            if branch != "All": d = d[d["branch"] == branch]
+            if branch != "All branches": d = d[d["branch"] == branch]
             if q: d = d[d["name"].str.contains(q, case=False) | d["client"].str.contains(q, case=False)]
             d = d.sort_values("opened", ascending=False)
             c1, c2 = st.columns([6, 1])
@@ -65,7 +65,7 @@ def render(M, cur, cmp):
             show = d[["id", "name", "client", "area", "attorney", "branch", "status", "opened", "est_value", "billed", "wip", "progress", "days_open"]].copy()
             show["progress"] = show["progress"] * 100
             show[["est_value", "billed", "wip"]] = show[["est_value", "billed", "wip"]].round(0)
-            st.dataframe(show, hide_index=True, width="stretch", height=430, column_config={
+            st.dataframe(show, hide_index=True, width="stretch", height=418, column_config={
                 "id": st.column_config.TextColumn("ID", width=100), "name": st.column_config.TextColumn("Matter", width=300), "client": st.column_config.TextColumn("Client", width=170), "area": st.column_config.TextColumn("Practice area", width=105),
                 "attorney": st.column_config.TextColumn("Attorney", width=95), "branch": st.column_config.TextColumn("Branch", width=80), "status": st.column_config.TextColumn("Status", width=70), "opened": st.column_config.DateColumn("Opened", format="DD MMM YY"),
                 "est_value": ui.money_col("Est. value"), "billed": ui.money_col("Billed"), "wip": ui.money_col("WIP"),
@@ -82,15 +82,14 @@ def render(M, cur, cmp):
                 fig.add_trace(go.Bar(x=o.index, y=o.round(0), name="Opened", marker_color=TEAL))
                 fig.add_trace(go.Bar(x=c.index, y=-c.round(0), name="Closed", marker_color="#94a3b8"))
                 fig.add_trace(go.Scatter(x=a.index, y=a, name="Active (right)", yaxis="y2", line=dict(color=INDIGO, width=2.5)))
-                fig.update_layout(**ui.base_layout(270, legend=True), barmode="relative", yaxis2=dict(overlaying="y", side="right", showgrid=False, tickfont=dict(size=9), tickformat=",.0f", dtick=10))
+                fig.update_layout(**ui.base_layout(205, legend=True), barmode="relative", yaxis2=dict(overlaying="y", side="right", showgrid=False, tickfont=dict(size=9), tickformat=",.0f", dtick=10))
                 fig.update_xaxes(tickformat="%b %y")
                 ui.show(ui.style_axes(fig), key="m_flow")
-                ui.note("The current month is scaled to a full-month equivalent so it is comparable with earlier months.")
         with c2:
             with ui.card("m3"):
                 ui.card_title("Active matters by practice area", f"at {end:%d %b %y}")
                 g = act.groupby("area").size().reindex(AREAS).fillna(0)
-                ui.donut(list(g.index), list(g.values), [AREA_COLORS[a] for a in g.index], h=190, center=f"<b style='font-size:20px'>{int(g.sum())}</b><br><span style='font-size:10px'>active</span>", key="m_donut")
+                ui.donut(list(g.index), list(g.values), [AREA_COLORS[a] for a in g.index], h=170, center=f"<b style='font-size:20px'>{int(g.sum())}</b><br><span style='font-size:10px'>active</span>", key="m_donut")
                 leg = "".join(f'<div class="donut-legend-item" style="margin-bottom:0;"><span class="legend-dot" style="background:{AREA_COLORS[a]}"></span>{a} ({int(g[a])})</div>' for a in g.index)
                 st.markdown(f'<div style="display:grid; grid-template-columns:1fr 1fr; gap:3px 10px;">{leg}</div>', unsafe_allow_html=True)
         c3, c4 = st.columns(2)
@@ -101,7 +100,7 @@ def render(M, cur, cmp):
                 stages = ["Inquiries", "Booked", "Held", "Letters sent", "Matters opened"]
                 vals = [f["inquiries"], f["booked"], f["held"], f["letters"], f["matters_opened"]]
                 fig = go.Figure(go.Funnel(y=stages, x=[round(v) for v in vals], textinfo="value+percent previous", marker=dict(color=[TEAL, "#2f9aa8", "#5bb4bd", "#86c9d1", "#b1dee3"])))
-                fig.update_layout(**ui.base_layout(240))
+                fig.update_layout(**ui.base_layout(185))
                 ui.show(fig, key="m_funnel")
         with c4:
             with ui.card("m5"):
@@ -109,7 +108,7 @@ def render(M, cur, cmp):
                 g = act.groupby(["attorney", "area"]).size().unstack(fill_value=0).reindex(columns=AREAS, fill_value=0)
                 g = g.loc[g.sum(axis=1).sort_values().index]
                 fig = go.Figure([go.Bar(y=g.index, x=g[a], orientation="h", name=a, marker_color=AREA_COLORS[a]) for a in AREAS])
-                fig.update_layout(**ui.base_layout(240, legend=True), barmode="stack")
+                fig.update_layout(**ui.base_layout(185, legend=True), barmode="stack")
                 ui.show(ui.style_axes(fig), key="m_att_chart")
 
     # ---------------------------------------------------------- WIP & ageing
@@ -125,14 +124,14 @@ def render(M, cur, cmp):
                 fig = go.Figure()
                 fig.add_trace(go.Bar(x=labs, y=g["n"], name="Matters", marker_color=TEAL))
                 fig.add_trace(go.Scatter(x=labs, y=g["wip"], name="WIP $ (right)", yaxis="y2", line=dict(color=AMBER, width=2.5), mode="lines+markers"))
-                fig.update_layout(**ui.base_layout(260, legend=True), yaxis2=dict(overlaying="y", side="right", showgrid=False, tickformat="$,.0f", tickfont=dict(size=9)))
+                fig.update_layout(**ui.base_layout(220, legend=True), yaxis2=dict(overlaying="y", side="right", showgrid=False, tickformat="$,.0f", tickfont=dict(size=9)))
                 ui.show(ui.style_axes(fig), key="m_age")
         with c2:
             with ui.card("m7"):
                 ui.card_title("Largest WIP balances", "top 10 active matters")
                 t = live.sort_values("wip", ascending=False).head(10).iloc[::-1]
                 fig = go.Figure(go.Bar(y=[n[:38] for n in t["name"]], x=t["wip"], orientation="h", marker_color=[AREA_COLORS[a] for a in t["area"]], hovertemplate="%{y}: $%{x:,.0f}<extra></extra>"))
-                fig.update_layout(**ui.base_layout(260, margin=dict(l=8, r=8, t=6, b=4)))
+                fig.update_layout(**ui.base_layout(220, margin=dict(l=8, r=8, t=6, b=4)))
                 ui.show(ui.style_axes(fig, None), key="m_wip")
         with ui.card("m8"):
             ui.card_title("WIP and billing by practice area")
@@ -140,7 +139,7 @@ def render(M, cur, cmp):
             g["billed_pct"] = g["billed"] / g["est_value"]
             g["avg_wip"] = g["wip"] / g["matters"].replace(0, np.nan)
             out = g.reset_index().rename(columns={"area": "Practice area", "matters": "Matters", "est_value": "Est. value", "billed": "Billed", "wip": "WIP", "billed_pct": "Billed % of est.", "avg_wip": "Avg WIP / matter"})
-            st.dataframe(out, hide_index=True, width="stretch", column_config={"Est. value": ui.money_col("Est. value"), "Billed": ui.money_col("Billed"), "WIP": ui.money_col("WIP"),
+            st.dataframe(out, hide_index=True, width="stretch", height=213, column_config={"Est. value": ui.money_col("Est. value"), "Billed": ui.money_col("Billed"), "WIP": ui.money_col("WIP"),
                                                                                "Avg WIP / matter": ui.money_col("Avg WIP / matter"), "Billed % of est.": st.column_config.NumberColumn("Billed % of est.", format="percent")})
 
     # -------------------------------------------------------------- Locations

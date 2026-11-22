@@ -21,7 +21,8 @@ def render(M, name, cur, cmp):
     base = P.base_inputs(M)
 
     # ---- scenario + assumptions (per platform, kept in session state) ----
-    with st.expander("Scenario & assumptions", expanded=False):
+    hd1, hd2 = st.columns([5, 1.25], vertical_alignment="center")
+    with hd2.popover("⚙ Scenario & assumptions", width="stretch"):
         c1, c2, c3, c4 = st.columns(4)
         scen = c1.radio("Scenario", list(P.SCENARIOS), horizontal=True, key=f"scen_{name}")
         disc = c2.slider("Discount rate", 0.05, 0.20, 0.10, 0.01, format="%.2f", key=f"disc_{name}")
@@ -43,8 +44,8 @@ def render(M, name, cur, cmp):
     rk = P.ranking(inp, weights)
     row = rk[rk["name"] == name].iloc[0]
 
-    st.markdown(f'<div class="page-head"><div><div class="page-title">{_badges(name)}&nbsp; {name}</div><div class="page-sub">{p["tagline"]}</div></div>'
-                f'<span>{ui.pill(verdict, vkind)} <span class="page-tag">Rank {int(row["rank"])} of 7 · {scen} case</span></span></div>', unsafe_allow_html=True)
+    hd1.markdown(f'<div class="page-head" style="margin:0"><div><div class="page-title">{_badges(name)}&nbsp; {name}</div><div class="page-sub">{p["tagline"]}</div></div>'
+                 f'<span>{ui.pill(verdict, vkind)} <span class="page-tag">Rank {int(row["rank"])} of 7 · {scen} case</span></span></div>', unsafe_allow_html=True)
 
     # ---- KPI row ----
     pay = "n/a" if is_base else (f"{ev['payback']} mo" if ev["payback"] else "> 36 mo")
@@ -58,7 +59,7 @@ def render(M, name, cur, cmp):
              color=INK if is_base else (GREEN if ev["npv"] > 0 else RED), sub=f"at {disc:.0%} discount rate"),
         dict(label="Payback / IRR", value=pay, label_cmp=None, accent=p["color"], sub=f"IRR {irr}"),
         dict(label="Weighted score", value=f"{score:.1f}", label_cmp=None, accent=p["color"], sub=f"current system {base_score:.1f}"),
-    ], spacer_after=6)
+    ])
 
     tabs = st.tabs(["Summary", "Cost & TCO", "Cash flow & NPV", "Scorecard", "Implementation & risk", "Sensitivity"])
 
@@ -72,7 +73,7 @@ def render(M, name, cur, cmp):
                 if is_base:
                     bullets.append(f"This is the incumbent: {ui.fmt_money(ev['run_rate'])} a year at today's volumes ({inp.searches_pm:.0f} searches a month, {inp.seats} seats).")
                     bullets.append(f"Highest reliability ({p['scores']['Reliability']}) and integration ({p['scores']['Integration']}) scores of the seven, but the weakest cost score ({p['scores']['Cost']}).")
-                    bullets.append("Every other platform is measured against this cash flow, so change nothing here unless the real contract price has changed.")
+                    bullets.append("Every other platform is measured against this cash flow. This comparison is where the project started: which platform saves the firm the most?")
                 else:
                     bullets.append(f"Run-cost is {ui.fmt_money(abs(ev['run_rate_delta']))} a year {'lower' if ev['run_rate_delta'] < 0 else 'higher'} than LEAP + InfoTrack before any productivity benefit.")
                     bullets.append(f"Switching costs {ui.fmt_money(ev['one_off'])} up front (migration, cut-over dip) and about {ev['go_live']} months of running both systems.")
@@ -80,7 +81,7 @@ def render(M, name, cur, cmp):
                     bullets.append(f"Weighted score {score:.1f} vs {base_score:.1f} for the current system ({score - base_score:+.1f}).")
                     if ev["npv"] > 0 and (ev["benefit_3y"] > 1.5 * abs(ev["tco_delta"]) and ev["tco_delta"] > 0):
                         bullets.append("Most of the value comes from the assumed productivity benefit, not lower fees – validate it in a trial before committing.")
-                st.markdown("".join(f'<div style="display:flex;gap:8px;margin:7px 0;font-size:12.5px;color:{INK}"><span style="color:{p["color"]}">●</span><span>{b}</span></div>' for b in bullets), unsafe_allow_html=True)
+                st.markdown("".join(f'<div style="display:flex;gap:8px;margin:2px 0;font-size:11.5px;line-height:1.35;color:{INK}"><span style="color:{p["color"]}">●</span><span>{b}</span></div>' for b in bullets) + '<div style="height:6px"></div>', unsafe_allow_html=True)
         with c2:
             with ui.card("ps2"):
                 ui.card_title("Profile vs current system")
@@ -88,7 +89,7 @@ def render(M, name, cur, cmp):
                 cats = P.CRITERIA + [P.CRITERIA[0]]
                 fig.add_trace(go.Scatterpolar(r=[P.PLATFORMS[P.BASELINE]["scores"][c] for c in cats], theta=cats, name="Current", line=dict(color="#94a3b8", dash="dot"), fill="none"))
                 fig.add_trace(go.Scatterpolar(r=[p["scores"][c] for c in cats], theta=cats, name=P.SHORT[name], line=dict(color=p["color"], width=2.5), fill="toself", fillcolor=ui_rgba(p["color"], 0.18)))
-                fig.update_layout(**ui.base_layout(265, legend=True, margin=dict(l=40, r=40, t=36, b=26)), polar=dict(radialaxis=dict(range=[50, 100], showticklabels=False, gridcolor="#e2e8f0"), angularaxis=dict(tickfont=dict(size=10))))
+                fig.update_layout(**ui.base_layout(138, legend=True, margin=dict(l=24, r=24, t=24, b=20)), polar=dict(radialaxis=dict(range=[50, 100], showticklabels=False, gridcolor="#e2e8f0"), angularaxis=dict(tickfont=dict(size=10))))
                 ui.show(fig, key=f"radar_{name}")
         with ui.card("ps3"):
             ui.card_title("Head-to-head: all seven platforms", "rank uses 50% weighted score + 50% NPV")
@@ -96,8 +97,8 @@ def render(M, name, cur, cmp):
             tbl["Verdict"] = [P.verdict(n, P.evaluate(n, inp)[0], s, base_score)[0] for n, s in zip(tbl["name"], tbl["score"])]
             out = pd.DataFrame({"Platform": tbl["name"], "Run-cost / yr": tbl["run_rate"].round(0), "Δ vs current": (tbl["run_rate"] - P.run_rate(P.BASELINE, inp)).round(0),
                                 "3-yr NPV": tbl["npv"].round(0), "Payback (mo)": [("—" if n == P.BASELINE else (str(int(x)) if pd.notna(x) else "> 36")) for n, x in zip(tbl["name"], tbl["payback"])], "Score": tbl["score"], "Rank": tbl["rank"], "Verdict": tbl["Verdict"]}).sort_values("Rank")
-            st.dataframe(out, hide_index=True, width="stretch", column_config={
-                "Run-cost / yr": ui.money_col("Run-cost / yr"), "Δ vs current": ui.money_col("Δ vs current"), "3-yr NPV": ui.money_col("3-yr NPV"),
+            st.dataframe(out, hide_index=True, width="stretch", height=283, column_config={
+                "Run-cost / yr": ui.money_col("Run-cost / yr"), "Δ vs current": ui.signed_money_col("Δ vs current"), "3-yr NPV": ui.signed_money_col("3-yr NPV"),
                 "Score": st.column_config.NumberColumn("Score", format="%.1f")})
 
     # ---------------------------------------------------------------- Cost & TCO
@@ -146,7 +147,7 @@ def render(M, name, cur, cmp):
                 fig.add_hline(y=0, line_color="#94a3b8", line_width=1)
                 if not is_base and ev["payback"]:
                     fig.add_vline(x=ev["payback"] - 1, line_dash="dot", line_color=GREEN, annotation_text=f"payback ~{ev['payback']} mo", annotation_font_size=10)
-                fig.update_layout(**ui.base_layout(260))
+                fig.update_layout(**ui.base_layout(222))
                 ui.show(ui.style_axes(fig, "$,.0f"), key=f"cum_{name}")
         with c2:
             with ui.card("pf2"):
@@ -158,7 +159,7 @@ def render(M, name, cur, cmp):
                 fig = go.Figure(go.Waterfall(x=[i[0] for i in items] + ["NPV"], y=[i[1] for i in items] + [0], measure=["relative"] * 4 + ["total"],
                                              increasing=dict(marker=dict(color=GREEN)), decreasing=dict(marker=dict(color=RED)), totals=dict(marker=dict(color=p["color"])),
                                              hovertemplate="%{x}: $%{y:,.0f}<extra></extra>"))
-                fig.update_layout(**ui.base_layout(260))
+                fig.update_layout(**ui.base_layout(222))
                 ui.show(ui.style_axes(fig, "$,.0f"), key=f"wf_{name}")
         with ui.card("pf3"):
             ui.card_title("Annual cash-flow table", "incremental vs current system")
@@ -178,9 +179,12 @@ def render(M, name, cur, cmp):
         with c1:
             with ui.card("pw1"):
                 ui.card_title("Criteria weights", "applies to every platform")
-                for cn in P.CRITERIA:
-                    st.slider(cn, 0, 50, P.DEFAULT_WEIGHTS[cn], 5, key=f"w_{cn}")
-                st.button("Reset weights", key="act_reset_weights", on_click=lambda: [st.session_state.__setitem__(f"w_{c}", P.DEFAULT_WEIGHTS[c]) for c in P.CRITERIA])
+                wc = st.columns(2)
+                for i_, cn in enumerate(P.CRITERIA):
+                    with wc[i_ % 2]:
+                        st.slider(cn, 0, 50, P.DEFAULT_WEIGHTS[cn], 5, key=f"w_{cn}")
+                with wc[1]:
+                    st.button("Reset weights", key="act_reset_weights", on_click=lambda: [st.session_state.__setitem__(f"w_{c}", P.DEFAULT_WEIGHTS[c]) for c in P.CRITERIA])
                 ui.note(f"Total weight {sum(weights.values())} (normalised automatically). The same weights apply to every platform.")
         with c2:
             with ui.card("pw2"):
@@ -188,10 +192,10 @@ def render(M, name, cur, cmp):
                 fig = go.Figure()
                 fig.add_trace(go.Bar(y=P.CRITERIA, x=[P.PLATFORMS[P.BASELINE]["scores"][c] for c in P.CRITERIA], orientation="h", name="Current", marker_color="#cbd5e1"))
                 fig.add_trace(go.Bar(y=P.CRITERIA, x=[p["scores"][c] for c in P.CRITERIA], orientation="h", name=P.SHORT[name], marker_color=p["color"]))
-                fig.update_layout(**ui.base_layout(260, legend=True), barmode="group")
+                fig.update_layout(**ui.base_layout(205, legend=True), barmode="group")
                 fig.update_xaxes(range=[50, 100])
                 ui.show(ui.style_axes(fig), key=f"sc_{name}")
-        ui.note("Scores are analyst judgements (0–100) and should be replaced by findings from demos, reference calls and a trial.")
+                ui.note("Scores are analyst judgements (0–100): replace them with findings from demos, reference calls and a trial.")
 
     # ----------------------------------------------- Implementation & risk
     with tabs[4]:

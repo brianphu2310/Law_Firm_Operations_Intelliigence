@@ -33,6 +33,6 @@ def test_platform_dashboard_renders(platform):
 
 @pytest.mark.parametrize("preset,compare", [("This month (MTD)", "Same period last year"), ("Last 12 months", "No comparison"), ("FY24 (two years ago)", "Prior period")])
 def test_period_settings_do_not_break_pages(preset, compare):
-    for page in ("Overview", "Finance", "Team"):
+    for page in ("Overview", "Finance", "People"):
         at = _run(view_kind="page", view_name=page, period_preset=preset, compare_mode=compare)
         assert not at.exception, (page, [e.value for e in at.exception])

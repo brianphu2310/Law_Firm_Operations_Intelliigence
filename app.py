@@ -1,11 +1,11 @@
-"""D'Agostino Legal — Financial Operations Dashboard (entry point).
+"""Law Firm Decision Support — entry point.
 
 Run:  streamlit run app.py
 """
 import plotly.graph_objects as go
 import streamlit as st
 
-st.set_page_config(page_title="D'Agostino Legal — Operations", page_icon="⚖️", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="Law Firm Decision Support", page_icon="⚖️", layout="wide", initial_sidebar_state="expanded")
 
 from core import platforms as P
 from core import theme, ui
@@ -13,11 +13,10 @@ from core.model import build_model
 from core.period import current_periods, init_state, render_period_control
 from core.ref import AS_OF, NAV_ITEMS, USER_NAME, USER_ROLE
 from core.theme import PLATFORM_COLOR_LIST
-from views import calendar_view, clients, finance, matters, overview, pipeline, platform_view, simulator, team, transition
+from views import calendar_view, clients, finance, matters, overview, people, platform_view, simulator
 
-PAGES = {"Overview": overview.render, "Matters": matters.render, "Clients": clients.render, "Calendar": calendar_view.render,
-         "Finance": finance.render, "Team": team.render, "Transition": transition.render,
-         "Pipeline": pipeline.render, "Simulator": simulator.render}
+PAGES = {"Overview": overview.render, "Finance": finance.render, "People": people.render, "Matters": matters.render,
+         "Clients": clients.render, "Calendar": calendar_view.render, "Simulator": simulator.render}
 
 
 @st.cache_resource(show_spinner="Building the financial model…")
@@ -47,7 +46,7 @@ def go_platform(name):
 
 # ----------------------------------------------------------------- sidebar ----
 with st.sidebar:
-    st.markdown('<div class="sidebar-brand"><div class="sidebar-brand-badge">D</div><div class="sidebar-brand-name">D\'Agostino Legal</div></div>', unsafe_allow_html=True)
+    st.markdown('<div class="sidebar-brand"><div class="sidebar-brand-badge">DS</div><div><div class="sidebar-brand-name">Decision Support</div><div class="sidebar-brand-sub">Law firm · sample data</div></div></div>', unsafe_allow_html=True)
     inp = P.base_inputs(M)
     names = P.NAMES
     costs = [P.run_rate(n, inp) for n in names]
@@ -82,7 +81,7 @@ with st.sidebar:
 with st.container(key="topbar"):
     nav_wrap, period_col, user_col = st.columns([6.0, 1.7, 1.4], vertical_alignment="center")
     with nav_wrap:
-        for col, item in zip(st.columns([{"Simulator": 1.45, "Transition": 1.3, "Overview": 1.2, "Calendar": 1.15}.get(i, 1.0) for i in NAV_ITEMS]), NAV_ITEMS):      # the highlighted tab gets extra room
+        for col, item in zip(st.columns([{"Simulator": 1.45, "Overview": 1.15, "Calendar": 1.1}.get(i, 1.0) for i in NAV_ITEMS]), NAV_ITEMS):      # the highlighted tab gets extra room
             with col:
                 if st.button("★ Simulator" if item == "Simulator" else item, key=f"nav_{item}", type="primary" if (ss.view_kind == "page" and ss.view_name == item) else "secondary", width="stretch"):
                     ss.view_kind, ss.view_name = "page", item

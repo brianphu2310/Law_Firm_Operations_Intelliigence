@@ -136,6 +136,13 @@ def build_model():
         return c
     ca = costs(act, d_a, coll_incl, True)
     cp = costs(pln, d_p, None, False)
+    # The budget was set before the year started, so its fixed lines carry the assumptions made then, not today's actuals:
+    # a fee-earner pay rise that has not been given yet, a support-staff vacancy, a rent review that has not been triggered,
+    # last year's software prices and a higher insurance premium.
+    for k_, m_ in (("payroll_fee", 1.012), ("payroll_support", 0.985), ("rent", 1.03), ("software", 0.96), ("insurance", 1.06)):
+        cp[k_] = cp[k_] * m_
+    cp["total_costs"] = sum(cp[k_] for k_ in COST_LINES)
+    cp["op_profit"] = cp["revenue"] - cp["total_costs"]
 
     # ---------------- cash: collections in, costs + GST credits + BAS + drawings out ----------------
     gst_net = GST * ca["revenue"] - ca["gst_credits"]

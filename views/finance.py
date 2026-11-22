@@ -31,8 +31,20 @@ def _cell(v, kind="money", fav=None):
     return f'<span style="color:{GREEN if fav else RED};font-weight:600">{txt}</span>'
 
 
+SMALL_LINES = ("cards", "merchant", "bank_fees")       # shown as one line in the statement so it fits one screen
+
+
+def _with_small(x):
+    if x is None:
+        return None
+    x = x.copy()
+    x["_small"] = sum(x[k] for k in SMALL_LINES)
+    return x
+
+
 def _pl_table(a, b, p):
     """P&L statement: actual vs budget vs prior period, favourable/(unfavourable) variances coloured."""
+    a, b, p = _with_small(a), _with_small(b), _with_small(p)
     head = ("<thead><tr><th>Line</th><th class='num'>Actual</th><th class='num'>Budget</th><th class='num'>Var $</th><th class='num'>Var %</th>"
             "<th class='num'>Prior period</th><th class='num'>Δ vs prior</th></tr></thead>")
     rows = ""
@@ -56,14 +68,17 @@ def _pl_table(a, b, p):
     rows += line("Total revenue", "revenue", False, "sub")
     rows += section("Operating costs")
     for l, k in COST_LINES:
+        if k in SMALL_LINES:
+            continue
         rows += line(l, k, True)
+    rows += line("Card, merchant & bank fees", "_small", True)
     rows += line("Total operating costs", "total_costs", True, "sub")
     rows += line("Operating profit (before partner drawings)", "op_profit", False, "total")
     ma, mb = a["op_profit"] / a["revenue"], b["op_profit"] / b["revenue"]
     mp = p["op_profit"] / p["revenue"] if p is not None else None
     rows += (f'<tr><td>Operating margin</td><td class="num">{ui.fmt_pct(ma)}</td><td class="num">{ui.fmt_pct(mb)}</td><td class="num">{_cell(ma - mb, "pp", fav=ma >= mb)}</td><td class="num"></td>'
              f'<td class="num">{ui.fmt_pct(mp) if mp is not None else "—"}</td><td class="num">{_cell(ma - mp, "pp", fav=ma >= mp) if mp is not None else "—"}</td></tr>')
-    st.markdown(f'<table class="simple">{head}<tbody>{rows}</tbody></table>', unsafe_allow_html=True)
+    st.markdown(f'<table class="simple compact pl">{head}<tbody>{rows}</tbody></table>', unsafe_allow_html=True)
 
 
 def render(M, cur, cmp):
@@ -90,45 +105,35 @@ def _pl(M, cur, cmp):
         dict(label="Operating margin", value=ui.fmt_pct(ra["margin"]), d=(ra["margin"] - rp["margin"]) if p is not None else None, kind="pp", label_cmp=lab, accent=TEAL, sub=f"budget {ui.fmt_pct(b['op_profit'] / b['revenue'])}"),
         dict(label="Realisation", value=ui.fmt_pct(ra["realisation"]), d=(ra["realisation"] - rp["realisation"]) if p is not None else None, kind="pp", label_cmp=lab, accent=TEAL, sub="fees billed ÷ value at standard rates"),
         dict(label="Effective rate", value=f"${ra['eff_rate']:,.0f}/hr", d=delta(ra["eff_rate"], rp.get("eff_rate")) if p is not None else None, label_cmp=lab, accent=TEAL, sub="fees billed ÷ billable hours"),
-    ], spacer_after=6)
+    ])
     gap = a["op_profit"] - b["op_profit"]
-    if gap < 0:
-        ui.sim_cta(f"Operating profit is <b>{ui.fmt_money(-gap)} ({-gap / b['op_profit']:.1%}) behind budget</b> for this period. See what would close the gap over a full year.",
-                   target_kind="Match the FY26 budget operating profit", key="pl")
-    else:
-        ui.sim_cta(f"Operating profit is <b>{ui.fmt_money(gap)} ahead of budget</b>. Test which decisions would protect or extend that lead.", key="pl")
-    ui.spacer(4)
-    c1, c2 = st.columns([1.55, 1])
+    c1, c2 = st.columns([1.5, 1])
     with c1:
         with ui.card("f1"):
-            ui.card_title("Income statement", f"{cur.label}; variances are favourable (green) / unfavourable (red)")
+            ui.card_title("Income statement", "green = favourable · before partner drawings, tax and depreciation")
             _pl_table(a, b, p)
-            ui.note("Operating profit is before partner drawings, income tax and depreciation. Merchant fees and card costs are included in overheads.")
     with c2:
         with ui.card("f2"):
-            ui.card_title("Revenue: actual vs budget", "last 12 months (full-month equivalents)")
+            ui.card_title("Revenue: actual vs budget", "last 12 months")
             r = X.monthly(M, "revenue", cur.end, 12); bud = M["plan"]["revenue"].loc[r.index]
             fig = go.Figure()
             fig.add_trace(go.Bar(x=r.index, y=r.values, name="Actual", marker_color=TEAL))
             fig.add_trace(go.Scatter(x=r.index, y=bud.values, name="Budget", line=dict(color=INK, dash="dot", width=2)))
-            fig.update_layout(**ui.base_layout(220, legend=True)); fig.update_xaxes(tickformat="%b %y")
+            fig.update_layout(**ui.base_layout(165, legend=True)); fig.update_xaxes(tickformat="%b %y")
             ui.show(ui.style_axes(fig, "$,.0s"), key="f_rev")
-        with ui.card("f3"):
-            ui.card_title("Where the cost dollar goes", cur.label)
-            items = [(l, a[k]) for l, k in COST_LINES]
-            top = sorted(items, key=lambda x: -x[1])
-            big, rest = top[:5], sum(v for _, v in top[5:])
-            labs = [l for l, _ in big] + ["All other"]; vals = [v for _, v in big] + [rest]
-            ui.donut(labs, vals, [TEAL, BLUE, INDIGO, VIOLET, AMBER, "#cbd5e1"], h=170, center=f"<b style='font-size:15px'>{ui.fmt_money(a['total_costs'])}</b>", key="f_costdonut")
-            leg = "".join(f'<div class="donut-legend-item" style="margin-bottom:0;"><span class="legend-dot" style="background:{c}"></span>{l} ({v / a["total_costs"]:.0%})</div>' for (l, v), c in zip(zip(labs, vals), [TEAL, BLUE, INDIGO, VIOLET, AMBER, "#cbd5e1"]))
-            st.markdown(f'<div style="display:grid; grid-template-columns:1fr; gap:2px;">{leg}</div>', unsafe_allow_html=True)
-    with ui.card("f4"):
-        ui.card_title("Variance to budget by cost line", "positive = under budget (favourable)")
-        rows = [(l, b[k] - a[k]) for l, k in COST_LINES] + [("Revenue shortfall / surplus", a["revenue"] - b["revenue"])]
-        rows = sorted(rows, key=lambda x: x[1])
-        fig = go.Figure(go.Bar(y=[r[0] for r in rows], x=[r[1] for r in rows], orientation="h", marker_color=[GREEN if r[1] >= 0 else RED for r in rows], hovertemplate="%{y}: %{x:+,.0f}<extra></extra>"))
-        fig.update_layout(**ui.base_layout(310))
-        ui.show(ui.style_axes(fig, "$,.0s"), key="f_var")
+        with ui.card("f4"):
+            ui.card_title("Variance to budget", "green = under budget / ahead")
+            rows = [(l, b[k] - a[k]) for l, k in COST_LINES] + [("Revenue", a["revenue"] - b["revenue"])]
+            rows = [r_ for r_ in sorted(rows, key=lambda x: abs(x[1]), reverse=True)[:8]]
+            rows = sorted(rows, key=lambda x: x[1])
+            fig = go.Figure(go.Bar(y=[r_[0] for r_ in rows], x=[r_[1] for r_ in rows], orientation="h", marker_color=[GREEN if r_[1] >= 0 else RED for r_ in rows],
+                                   hovertemplate="%{y}: %{x:+,.0f}<extra></extra>"))
+            fig.update_layout(**ui.base_layout(185)); fig.update_yaxes(tickfont=dict(size=9))
+            ui.show(ui.style_axes(fig, "$,.0s"), key="f_var")
+        if gap < 0:
+            ui.sim_cta(f"Profit is <b>{ui.fmt_money(-gap)} behind budget</b>. What would close it?", target_kind="Match the FY26 budget operating profit", key="pl")
+        else:
+            ui.sim_cta(f"Profit is <b>{ui.fmt_money(gap)} ahead of budget</b>. Test what protects it.", key="pl")
 
 
 # ======================================================================== outlook
@@ -142,7 +147,7 @@ def _outlook(M):
         dict(label="FY26 forecast op. profit", value=ui.fmt_money(o["fc_op"]), d=delta(o["fc_op"], o["budget_op"]), label_cmp="vs budget", accent=TEAL),
         dict(label="YTD revenue vs budget", value=f"{o['r_rev']:.1%}", label_cmp=None, accent=TEAL, sub="drives the revenue forecast"),
         dict(label="YTD costs vs budget", value=f"{o['r_cost']:.1%}", label_cmp=None, accent=TEAL, sub="drives the cost forecast"),
-    ], spacer_after=6)
+    ])
     c1, c2 = st.columns(2)
     with c1:
         with ui.card("fo1"):
@@ -153,7 +158,7 @@ def _outlook(M):
             cum = y["op_profit"].cumsum()
             fig.add_trace(go.Scatter(x=act["month"], y=cum.loc[act.index], name="Actual", line=dict(color=TEAL, width=3)))
             fig.add_trace(go.Scatter(x=pd.concat([act["month"].iloc[-1:], fc["month"]]), y=pd.concat([cum.loc[act.index[-1:]], cum.loc[fc.index]]), name="Forecast", line=dict(color=TEAL, width=3, dash="dash")))
-            fig.update_layout(**ui.base_layout(290, legend=True)); fig.update_xaxes(tickformat="%b %y")
+            fig.update_layout(**ui.base_layout(225, legend=True)); fig.update_xaxes(tickformat="%b %y")
             ui.show(ui.style_axes(fig, "$,.0s"), key="fo_cum")
     with c2:
         with ui.card("fo2"):
@@ -161,16 +166,15 @@ def _outlook(M):
             fig = go.Figure()
             fig.add_trace(go.Bar(x=y["month"], y=y["op_profit"], marker_color=[TEAL if k == "Actual" else "#9bd3db" for k in y["kind"]], name="Actual / forecast"))
             fig.add_trace(go.Scatter(x=y["month"], y=y["budget_op"], name="Budget", line=dict(color=INK, dash="dot", width=2)))
-            fig.update_layout(**ui.base_layout(290, legend=True)); fig.update_xaxes(tickformat="%b %y")
+            fig.update_layout(**ui.base_layout(225, legend=True)); fig.update_xaxes(tickformat="%b %y")
             ui.show(ui.style_axes(fig, "$,.0s"), key="fo_bar")
     with ui.card("fo3"):
-        ui.card_title("FY26 bridge: budget to forecast operating profit")
+        ui.card_title("FY26 bridge: budget to forecast operating profit", "forecast = YTD actuals + remaining budget × YTD performance; no new decisions")
         rev_gap = o["fc_rev"] - o["budget_rev"]; cost_gap = -(o["fc_cost"] - o["budget_cost"])
         fig = go.Figure(go.Waterfall(x=["Budget op. profit", "Revenue vs budget", "Costs vs budget", "Forecast op. profit"], y=[o["budget_op"], rev_gap, cost_gap, 0], measure=["absolute", "relative", "relative", "total"],
                                      increasing=dict(marker=dict(color=GREEN)), decreasing=dict(marker=dict(color=RED)), totals=dict(marker=dict(color=TEAL)), hovertemplate="%{x}: $%{y:,.0f}<extra></extra>"))
-        fig.update_layout(**ui.base_layout(240))
+        fig.update_layout(**ui.base_layout(185))
         ui.show(ui.style_axes(fig, "$,.0s"), key="fo_wf")
-        ui.note("Forecast = year-to-date actuals plus the remaining budget scaled by the year-to-date revenue and cost performance. It assumes today's run-rate persists: no new hires, rate changes or one-offs.")
 
 
 # ============================================================================ cash
@@ -188,7 +192,7 @@ def _cash(M, cur, cmp):
         dict(label="Partner drawings", value=ui.fmt_money(f["drawings"]), label_cmp=None, accent=TEAL, sub=f"{f['drawings'] / f['op_profit']:.0%} of operating profit"),
         dict(label="Cash cover", value=f"{cash / burn:.1f} months", label_cmp=None, accent=TEAL, sub="balance ÷ monthly operating costs"),
         dict(label="13-week low point", value=ui.fmt_money(low["closing"]), label_cmp=None, accent=AMBER if low["closing"] < 150000 else TEAL, sub=f"week of {low['week_start']:%d %b}"),
-    ], spacer_after=6)
+    ])
     c1, c2 = st.columns(2)
     with c1:
         with ui.card("fc1"):
@@ -196,7 +200,7 @@ def _cash(M, cur, cmp):
             s = stk["cash"].dropna().iloc[-24:]
             fig = go.Figure(go.Scatter(x=stk["date"].loc[s.index], y=s.values, mode="lines+markers", line=dict(color=TEAL, width=2.5), fill="tozeroy", fillcolor="rgba(10,132,150,.10)", hovertemplate="%{x|%d %b %y}: $%{y:,.0f}<extra></extra>"))
             fig.add_hline(y=60000, line_dash="dot", line_color=RED, annotation_text="$60K minimum operating balance", annotation_font_size=9)
-            fig.update_layout(**ui.base_layout(260))
+            fig.update_layout(**ui.base_layout(180))
             ui.show(ui.style_axes(fig, "$,.0s"), key="fc_bal")
     with c2:
         with ui.card("fc2"):
@@ -205,10 +209,16 @@ def _cash(M, cur, cmp):
             fig = go.Figure()
             fig.add_trace(go.Bar(x=m.index, y=m["cash_in"], name="Collections", marker_color=TEAL))
             fig.add_trace(go.Bar(x=m.index, y=-m["cash_out"], name="Costs, GST, BAS & drawings", marker_color="#94a3b8"))
-            fig.update_layout(**ui.base_layout(260, legend=True), barmode="relative"); fig.update_xaxes(tickformat="%b %y")
+            fig.update_layout(**ui.base_layout(180, legend=True), barmode="relative"); fig.update_xaxes(tickformat="%b %y")
             ui.show(ui.style_axes(fig, "$,.0s"), key="fc_flow")
     with ui.card("fc3"):
-        ui.card_title("13-week cash forecast", "open invoices by client payment habit + run-rate billing, payroll, rent, BAS and drawings")
+        h1, h2 = st.columns([6, 1], vertical_alignment="bottom")
+        with h1:
+            ui.card_title("13-week cash forecast", "open invoices by each client's payment habit + run-rate billing, payroll, rent, BAS and drawings")
+        tbl = wk[["week_start", "opening", "in_open", "in_new", "out_payroll", "out_drawings", "out_bas", "net", "closing"]].copy()
+        tbl[tbl.columns[1:]] = tbl[tbl.columns[1:]].round(0)
+        with h2:
+            ui.csv_button(tbl, "cash_forecast_13w", "cash13")
         fig = go.Figure()
         fig.add_trace(go.Bar(x=wk["week_start"], y=wk["in_open"], name="Open invoices", marker_color=TEAL))
         fig.add_trace(go.Bar(x=wk["week_start"], y=wk["in_new"], name="Future billing", marker_color="#86c9d1"))
@@ -216,14 +226,10 @@ def _cash(M, cur, cmp):
             fig.add_trace(go.Bar(x=wk["week_start"], y=wk[col], name=nm, marker_color=colr))
         fig.add_trace(go.Scatter(x=wk["week_start"], y=wk["closing"], name="Closing balance", line=dict(color=INK, width=3), mode="lines+markers"))
         fig.add_hline(y=60000, line_dash="dot", line_color=RED)
-        fig.update_layout(**ui.base_layout(320, legend=True), barmode="relative"); fig.update_xaxes(tickformat="%d %b")
+        fig.update_layout(**ui.base_layout(196, legend=True), barmode="relative"); fig.update_xaxes(tickformat="%d %b")
         ui.show(ui.style_axes(fig, "$,.0s"), key="fc_13w")
-        tbl = wk[["week_start", "opening", "in_open", "in_new", "out_payroll", "out_drawings", "out_bas", "net", "closing"]].copy()
-        tbl[tbl.columns[1:]] = tbl[tbl.columns[1:]].round(0)
-        st.dataframe(tbl.rename(columns={"week_start": "Week from", "opening": "Opening", "in_open": "Open invoices", "in_new": "Future billing", "out_payroll": "Payroll", "out_drawings": "Drawings", "out_bas": "BAS", "net": "Net", "closing": "Closing"}),
-                     hide_index=True, width="stretch", height=250, column_config={"Week from": st.column_config.DateColumn("Week from", format="DD MMM"), **{k: ui.money_col(k) for k in ["Opening", "Open invoices", "Future billing", "Payroll", "Drawings", "BAS", "Net", "Closing"]}})
-        ui.note("The forecast is a management estimate: expected payment dates use each client's own average days-to-pay, and overdue invoices are assumed to clear within three weeks.")
-        ui.note("Cash cover looks short because partners draw most of each month's profit; work in progress and receivables (see Billing & WIP) are the real buffer, not the bank balance.")
+    ui.note(f"Partners draw {f['drawings'] / f['op_profit']:.0%} of profit, so the bank balance covers only {cash / burn:.1f} months of costs. "
+            "Any one-off spend (a branch fit-out, redundancies, a platform migration) needs funding first: test it in the Simulator.", "warn")
 
 
 # ============================================================================ billing
@@ -242,9 +248,7 @@ def _billing(M, cur, cmp):
         dict(label="Receivables (incl. GST)", value=ui.fmt_money(ar), d=delta(ar, X.ar_total(M, cmp.end)) if cmp_ok else None, up_good=False, label_cmp=lab, accent=TEAL, spark=X.spark(M, "ar", end, 12, "stock")),
         dict(label="DSO", value=f"{dso:.0f} days", d=delta(dso, dso_p) if cmp_ok else None, up_good=False, label_cmp=lab, accent=TEAL),
         dict(label="Lock-up (WIP + debtors)", value=f"{lock:.0f} days", d=delta(lock, lock_p) if cmp_ok else None, up_good=False, label_cmp=lab, accent=TEAL, sub="days of revenue tied up"),
-    ], spacer_after=6)
-    ui.sim_cta(f"DSO is <b>{dso:.0f} days</b> and lock-up is {lock:.0f} days. See what collecting a week faster is worth in cash.", preset="Collect 7 days faster", key="bill")
-    ui.spacer(4)
+    ])
     c1, c2 = st.columns(2)
     with c1:
         with ui.card("fb1"):
@@ -253,7 +257,7 @@ def _billing(M, cur, cmp):
             fig = go.Figure()
             fig.add_trace(go.Bar(x=stk["date"].loc[w.index], y=w["wip"], name="WIP", marker_color=INDIGO))
             fig.add_trace(go.Bar(x=stk["date"].loc[w.index], y=w["ar_ex"], name="Receivables", marker_color=AMBER))
-            fig.update_layout(**ui.base_layout(260, legend=True), barmode="stack"); fig.update_xaxes(tickformat="%b %y")
+            fig.update_layout(**ui.base_layout(165, legend=True), barmode="stack"); fig.update_xaxes(tickformat="%b %y")
             ui.show(ui.style_axes(fig, "$,.0s"), key="fb_wip")
     with c2:
         with ui.card("fb2"):
@@ -267,14 +271,14 @@ def _billing(M, cur, cmp):
             fig = go.Figure()
             fig.add_trace(go.Scatter(x=t["d"], y=t["lock"], name="Lock-up", line=dict(color=INDIGO, width=2.5)))
             fig.add_trace(go.Scatter(x=t["d"], y=t["dso"], name="DSO", line=dict(color=AMBER, width=2.5)))
-            fig.update_layout(**ui.base_layout(260, legend=True)); fig.update_xaxes(tickformat="%b %y")
+            fig.update_layout(**ui.base_layout(165, legend=True)); fig.update_xaxes(tickformat="%b %y")
             ui.show(ui.style_axes(fig, ",.0f"), key="fb_lock")
     with ui.card("fb3"):
         ui.card_title("Invoice register")
         f1, f2, f3 = st.columns([1.2, 1.4, 1.6])
-        stat = f1.selectbox("Status", ["All", "Paid", "Outstanding", "Overdue"], key="fb_status")
-        areas = f2.multiselect("Practice area", AREAS, key="fb_area")
-        q = f3.text_input("Search client or invoice", key="fb_q")
+        stat = f1.selectbox("Status", ["All", "Paid", "Outstanding", "Overdue"], key="fb_status", label_visibility="collapsed")
+        areas = f2.multiselect("Practice area", AREAS, key="fb_area", label_visibility="collapsed", placeholder="Practice area")
+        q = f3.text_input("Search client or invoice", key="fb_q", label_visibility="collapsed", placeholder="Search client or invoice")
         d = issued.copy()
         d["status"] = np.where(d["paid"].notna() & (d["paid"] <= end), "Paid", np.where(d["due"] < end, "Overdue", "Outstanding"))
         if stat != "All": d = d[d["status"] == stat]
@@ -286,7 +290,7 @@ def _billing(M, cur, cmp):
         with c2: ui.csv_button(d, "invoices", "inv")
         out = d[["invoice", "client", "area", "attorney", "issue", "due", "paid", "ex_gst", "gst", "total", "status"]].copy()
         out[["ex_gst", "gst", "total"]] = out[["ex_gst", "gst", "total"]].round(0)
-        st.dataframe(out, hide_index=True, width="stretch", height=340, column_config={
+        st.dataframe(out, hide_index=True, width="stretch", height=160, column_config={
             "invoice": "Invoice", "client": "Client", "area": "Practice", "attorney": "Lead", "issue": st.column_config.DateColumn("Issued", format="DD MMM YY"), "due": st.column_config.DateColumn("Due", format="DD MMM YY"),
             "paid": st.column_config.DateColumn("Paid", format="DD MMM YY"), "ex_gst": ui.money_col("Ex GST"), "gst": ui.money_col("GST"), "total": ui.money_col("Total"), "status": "Status"})
 
@@ -304,30 +308,29 @@ def _trust(M, cur, cmp):
         dict(label="Disbursements in period", value=ui.fmt_money(dis), label_cmp=None, accent=AMBER, sub=f"{int((d['amount'] < 0).sum())} payments"),
         dict(label="Lowest client ledger", value=ui.fmt_money(bal.min()), label_cmp=None, accent=TEAL, color=RED if bal.min() < 0 else INK, sub=("no negative ledgers" if bal.min() >= 0 else "NEGATIVE: investigate now")),
         dict(label="Bank feed (CommBiz)", value=f"{cm['matched']} matched", label_cmp=None, accent=GREEN if cm["unmatched"] == 0 else AMBER, sub=f"{cm['unmatched']} unmatched · synced {cm['last_sync']}"),
-    ], spacer_after=6)
+    ])
     c1, c2 = st.columns([1.4, 1])
     with c1:
         with ui.card("ft1"):
             ui.card_title("Trust balances by client", "month-end, 18 months")
             t = tb.iloc[-18:]
             fig = go.Figure([go.Bar(x=t.index, y=t[c], name=c) for c in tb.columns])
-            fig.update_layout(**ui.base_layout(280, legend=True), barmode="stack"); fig.update_xaxes(tickformat="%b %y")
+            fig.update_layout(**ui.base_layout(200, legend=True), barmode="stack"); fig.update_xaxes(tickformat="%b %y")
             ui.show(ui.style_axes(fig, "$,.0s"), key="ft_bal")
     with c2:
         with ui.card("ft2"):
             ui.card_title("Balance by client", f"{tb.loc[:end].index[-1]:%b %y}")
             b = bal.sort_values()
             fig = go.Figure(go.Bar(y=b.index, x=b.values, orientation="h", marker_color=TEAL, hovertemplate="%{y}: $%{x:,.0f}<extra></extra>"))
-            fig.update_layout(**ui.base_layout(280))
+            fig.update_layout(**ui.base_layout(200))
             ui.show(ui.style_axes(fig, "$,.0s"), key="ft_by")
     with ui.card("ft3"):
-        ui.card_title("Trust ledger", "receipts and payments in the period")
+        ui.card_title("Trust ledger", "client money: never revenue, never office cash, never negative")
         ledger = d.sort_values("date", ascending=False).copy(); ledger["amount"] = ledger["amount"].round(0)
         c1, c2 = st.columns([6, 1])
         c1.markdown(f'<div class="tbl-note">{len(ledger)} transactions</div>', unsafe_allow_html=True)
         with c2: ui.csv_button(ledger, "trust_ledger", "trust")
-        st.dataframe(ledger, hide_index=True, width="stretch", height=280, column_config={"date": st.column_config.DateColumn("Date", format="DD MMM YY"), "client": "Client", "type": "Type", "amount": ui.money_col("Amount")})
-        ui.note("Trust money belongs to clients: it never appears in the firm's revenue or the office cash balance. Each client ledger must reconcile to the bank every month and must never go negative.")
+        st.dataframe(ledger, hide_index=True, width="stretch", height=170, column_config={"date": st.column_config.DateColumn("Date", format="DD MMM YY"), "client": "Client", "type": "Type", "amount": ui.money_col("Amount")})
 
 
 # ============================================================================ costs
@@ -342,13 +345,13 @@ def _costs(M, cur, cmp):
             with ui.card("fs1"):
                 ui.card_title("Spend by search type")
                 g = d.groupby("search_type")["cost"].sum().sort_values()
-                fig = go.Figure(go.Bar(y=g.index, x=g.values, orientation="h", marker_color=TEAL)); fig.update_layout(**ui.base_layout(240))
+                fig = go.Figure(go.Bar(y=g.index, x=g.values, orientation="h", marker_color=TEAL)); fig.update_layout(**ui.base_layout(170))
                 ui.show(ui.style_axes(fig, "$,.0f"), key="fs_it")
         with b:
             with ui.card("fs2"):
                 ui.card_title("Monthly spend", "last 12 months")
                 g = M["infotrack"].assign(m=M["infotrack"]["date"].dt.to_period("M").dt.to_timestamp()).groupby("m")["cost"].sum().iloc[-12:]
-                fig = go.Figure(go.Bar(x=g.index, y=g.values, marker_color=TEAL)); fig.update_layout(**ui.base_layout(240)); fig.update_xaxes(tickformat="%b %y")
+                fig = go.Figure(go.Bar(x=g.index, y=g.values, marker_color=TEAL)); fig.update_layout(**ui.base_layout(170)); fig.update_xaxes(tickformat="%b %y")
                 ui.show(ui.style_axes(fig, "$,.0f"), key="fs_itm")
         _table(d, "it", {"date": st.column_config.DateColumn("Date", format="DD MMM YY"), "cost": ui.money_col("Cost")}, ["date", "matter", "search_type", "branch", "cost", "status"])
     with sub[1]:
@@ -358,7 +361,7 @@ def _costs(M, cur, cmp):
         with ui.card("fs3"):
             ui.card_title("Spend by council")
             g = d.groupby("council")["cost"].sum().sort_values()
-            fig = go.Figure(go.Bar(y=g.index, x=g.values, orientation="h", marker_color=INDIGO)); fig.update_layout(**ui.base_layout(200))
+            fig = go.Figure(go.Bar(y=g.index, x=g.values, orientation="h", marker_color=INDIGO)); fig.update_layout(**ui.base_layout(165))
             ui.show(ui.style_axes(fig, "$,.0f"), key="fs_co")
         _table(d, "co", {"date": st.column_config.DateColumn("Date", format="DD MMM YY"), "cost": ui.money_col("Cost")}, ["date", "matter", "council", "search_type", "cost", "status"])
     with sub[2]:
@@ -370,12 +373,12 @@ def _costs(M, cur, cmp):
             with ui.card("fs4"):
                 ui.card_title("By category")
                 g = d.groupby("category")["amount"].sum().sort_values(ascending=False)
-                ui.donut(list(g.index), list(g.values), [TEAL, BLUE, INDIGO, VIOLET, AMBER, "#94a3b8", "#cbd5e1"][:len(g)], h=200, center=f"<b style='font-size:15px'>{ui.fmt_money(g.sum())}</b>", key="fs_cat")
+                ui.donut(list(g.index), list(g.values), [TEAL, BLUE, INDIGO, VIOLET, AMBER, "#94a3b8", "#cbd5e1"][:len(g)], h=170, center=f"<b style='font-size:15px'>{ui.fmt_money(g.sum())}</b>", key="fs_cat")
         with b:
             with ui.card("fs5"):
                 ui.card_title("By branch")
                 g = d.groupby("branch")["amount"].sum().sort_values()
-                fig = go.Figure(go.Bar(y=g.index, x=g.values, orientation="h", marker_color=TEAL)); fig.update_layout(**ui.base_layout(230))
+                fig = go.Figure(go.Bar(y=g.index, x=g.values, orientation="h", marker_color=TEAL)); fig.update_layout(**ui.base_layout(170))
                 ui.show(ui.style_axes(fig, "$,.0f"), key="fs_br")
         _table(d, "cd", {"date": st.column_config.DateColumn("Date", format="DD MMM YY"), "amount": ui.money_col("Amount")}, ["date", "card", "merchant", "category", "branch", "amount"])
     with sub[3]:
@@ -386,7 +389,7 @@ def _costs(M, cur, cmp):
         with ui.card("fs6"):
             ui.card_title("Volume by card type")
             g = d.groupby("method")["amount"].sum().sort_values()
-            fig = go.Figure(go.Bar(y=g.index, x=g.values, orientation="h", marker_color=VIOLET)); fig.update_layout(**ui.base_layout(200))
+            fig = go.Figure(go.Bar(y=g.index, x=g.values, orientation="h", marker_color=VIOLET)); fig.update_layout(**ui.base_layout(120))
             ui.show(ui.style_axes(fig, "$,.0f"), key="fs_rp")
         _table(d, "rp", {"date": st.column_config.DateColumn("Date", format="DD MMM YY"), "amount": ui.money_col("Amount"), "fee": st.column_config.NumberColumn("Fee", format="dollar")}, ["date", "client", "method", "amount", "fee"])
         ui.note("Merchant fees are 1.75% of card volume. Encouraging EFT/BPAY payment on large invoices is the cheapest way to cut this cost.")
@@ -409,4 +412,4 @@ def _table(d, key, cfg, cols):
         for c in out.columns:
             if out[c].dtype.kind == "f":
                 out[c] = out[c].round(2 if c == "fee" else 0)
-        st.dataframe(out, hide_index=True, width="stretch", height=260, column_config=cfg)
+        st.dataframe(out, hide_index=True, width="stretch", height=175, column_config=cfg)

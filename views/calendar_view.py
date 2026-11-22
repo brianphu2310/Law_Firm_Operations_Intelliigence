@@ -46,7 +46,7 @@ def render(M, cur, cmp):
         dict(label="Next 90 days", value=f"{n90}", label_cmp=None, accent=TEAL),
         dict(label="Busiest attorney (30 d)", value=up[up["days"] <= 30]["attorney"].value_counts().index[0] if n30 else "—", label_cmp=None, accent=INDIGO,
              sub=f"{up[up['days'] <= 30]['attorney'].value_counts().iloc[0]} dates" if n30 else None),
-    ], spacer_after=6)
+    ])
 
     tabs = st.tabs(["Month view", "Agenda", "Workload"])
 
