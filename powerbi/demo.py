@@ -3,8 +3,9 @@ with every number computed in Python the way the DAX measures compute it. For pe
 
     python -m powerbi.demo            # -> powerbi/demo/index.html (one self-contained file)
 
-Interactive: page navigation, the Period slicer, the Simulator presets and the Platform slicer. Lever slicers show the
-preset's values (change them in Power BI).
+Interactive: page navigation, the Period slicer, the Platform slicer and the whole Simulator: presets, every lever and the
+goal-seek target. The Simulator formulas are translated from the same spec (powerbi/sim_spec.py) that generates the DAX,
+so the browser recomputes the scenario exactly as the model does.
 """
 from __future__ import annotations
 
@@ -324,7 +325,7 @@ def sim_measures(E, m):
     m["Sim Low Point"] = lambda c: s(c)["low1"]
     today = base()["op1"]
     m["Sim Profit Caption"] = lambda c: (lambda v: f"{'▲ +' if v > 0 else ('▼ ' if v < 0 else '')}{v / abs(today) * 100:.1f}% vs base · {money(v, True)} vs today")(round(s(c)["op1"] - today))
-    m["Sim Margin Caption"] = lambda c: (lambda d: f"{'▲ +' if d > 0 else ('▼ ' if d < 0 else '')}{d:.1f} pp vs base · base {s(c)['margin0']:.1%}")(round((s(c)["margin1"] - s(c)["margin0"]) * 100, 2))
+    m["Sim Margin Caption"] = lambda c: (lambda d: f"{'▲ +' if d > 0 else ('▼ ' if d < 0 else '')}{d:.1f} pp vs base · base {s(c)['margin0']:.1%}")(round((s(c)["margin1"] - s(c)["margin0"]) * 100, 2) + 0.0)
     m["Sim Gap Caption"] = lambda c: f"budget profit {money(C['BUDGET_OP'])}"
     m["Sim Low Caption"] = lambda c: f"today {money(C['LOW0'])} · minimum {money(C['MIN_CASH'])}"
     steps = {"Today's profit": "op0", "Fees": "bridge_fees", "Disb. recovery": "bridge_disb", "Costs": "bridge_costs"}
@@ -727,6 +728,68 @@ def lever_value(E, lv, preset_short):
     return f"${v:,.0f}" if "$" in lv.fmt else (f"{v:g}")
 
 
+# ------------------------------------------------------------------------------------------- simulator in the browser ---
+class _JS(SP.ast.NodeVisitor):
+    """Formula DSL -> JavaScript expression. Every name lives on the object x (constants, levers, earlier formulas)."""
+    def visit_Expression(self, n): return self.visit(n.body)
+    def visit_Constant(self, n): return json.dumps(n.value)
+    def visit_Name(self, n): return f"x.{n.id}"
+    def visit_UnaryOp(self, n): return f"(-{self.visit(n.operand)})"
+    def visit_BinOp(self, n):
+        op = {SP.ast.Add: "+", SP.ast.Sub: "-", SP.ast.Mult: "*", SP.ast.Div: "/"}[type(n.op)]
+        return f"({self.visit(n.left)} {op} {self.visit(n.right)})"
+    def visit_BoolOp(self, n):
+        return "(" + (" && " if isinstance(n.op, SP.ast.And) else " || ").join(self.visit(v) for v in n.values) + ")"
+    def visit_Compare(self, n):
+        op = {SP.ast.Gt: ">", SP.ast.GtE: ">=", SP.ast.Lt: "<", SP.ast.LtE: "<=", SP.ast.Eq: "===", SP.ast.NotEq: "!=="}[type(n.ops[0])]
+        return f"({self.visit(n.left)} {op} {self.visit(n.comparators[0])})"
+    def visit_Call(self, n):
+        fn = n.func.id
+        a = [self.visit(x) for x in n.args]
+        if fn == "iff":
+            return f"(({a[0]}) ? ({a[1]}) : ({a[2]}))"
+        if fn == "blank":
+            return "null"
+        return {"min": "Math.min", "max": "Math.max"}.get(fn, "H." + fn) + "(" + ", ".join(a) + ")"
+
+
+def sim_payload(E, W):
+    """Everything the browser needs to run the Simulator: constants, lookup tables, levers, presets and the formulas as JS."""
+    body = "\n".join(f"x.{name} = {_JS().visit(SP.ast.parse(expr, mode='eval'))};" for name, expr in SP.FORMULAS)
+    presets = {"Today": dict(S.DEFAULTS)}
+    presets.update({S.PRESET_SHORT[n]: S.preset_state(n) for n in S.PRESETS})
+    levers = [dict(key=lv.key, label=lv.label, kind=lv.kind, table=lv.table, lo=lv.lo, hi=lv.hi, step=lv.step, fmt=lv.fmt,
+                   options=getattr(lv, "options", None)) for lv in E.levers]
+    goal = {k: dict(label=S.LEVER_LABEL[k], bounds=S.BOUNDS[k]) for k in ["sim_util", "sim_rate", "sim_real", "sim_recov", "sim_infl"]}
+    return dict(consts={k: float(v) for k, v in E.consts.items()}, tables=E.tables, presets=presets, levers=levers, goal=goal,
+                nes=S.NES_REDUNDANCY_WEEKS, formulas=body, targets=list(W["Sim Goal Target"]["Target"]))
+
+
+def live_spec(E, v, today_data):
+    """How the browser recomputes a Simulator visual: its measures and, for charts and tables, every category in model order."""
+    q = v["visual"]["query"]["queryState"]
+    meas, cat = [], None
+    for role in q.values():
+        for pr in role["projections"]:
+            fl = pr["field"]
+            if "Measure" in fl:
+                meas.append(fl["Measure"]["Property"])
+            else:
+                c = fl["Column"]
+                cat = (c["Expression"]["SourceRef"]["Entity"], c["Property"])
+    static = {"Sim Lever Effect", "Sim Compare Profit", "Sim Compare vs Today"}
+    if not meas or set(meas) & static or (cat and cat[0] == "Sim Compare"):
+        return None
+    spec = dict(measures=meas, skeleton=today_data)
+    if cat:
+        df = E.W[cat[0]]
+        if "Order" in df.columns:
+            df = df.sort_values("Order")
+        spec["cat"] = list(cat)
+        spec["cats"] = [clean(x) for x in df[cat[1]]]
+    return spec
+
+
 def build():
     inputs = B.inputs()
     M, f, ctx, consts, tables, levers = inputs
@@ -774,7 +837,7 @@ def build():
                 vis["slicerTable"] = tb
                 if tb in lever_tables:
                     lv = lever_tables[tb]
-                    vis["leverByPreset"] = {ps: lever_value(E, lv, ps) for ps in presets}
+                    vis["lever"] = lv.key
                 vis["data"] = visual_data(E, meas, fmts, v, Ctx())
                 if tb == "Period":
                     vis["data"]["options"] = periods
@@ -788,6 +851,10 @@ def build():
             if sim_dep:
                 vis["by"] = "preset"
                 vis["data"] = {ps: visual_data(E, meas, fmts, v, Ctx({("Sim Preset", "Short"): ps})) for ps in presets}
+                live = live_spec(E, v, vis["data"]["Today"])
+                if live:
+                    vis["live"] = live
+                    del vis["data"]
             elif p.section in ("Platform", "Check", "Simulator") or not period_dependent(tables_used, v):
                 vis["data"] = visual_data(E, meas, fmts, v, Ctx({("Period", "Period"): MD.DEFAULT_PERIOD, **vctx}))
             else:
@@ -798,7 +865,7 @@ def build():
     basemaps = json.loads((Path(__file__).resolve().parent / "assets" / "basemaps.json").read_text())
     from .geo import SYDNEY_CBD
     basemaps["sydney"]["cbd"] = SYDNEY_CBD
-    payload = dict(basemaps=basemaps, pages=out_pages, periods=periods, defaultPeriod=MD.DEFAULT_PERIOD, presets=presets, platforms=platforms,
+    payload = dict(sim=sim_payload(E, W), basemaps=basemaps, pages=out_pages, periods=periods, defaultPeriod=MD.DEFAULT_PERIOD, presets=presets, platforms=platforms,
                    defaultPlatform="Smokeball + GlobalX")
     html = TEMPLATE.replace("/*DATA*/", json.dumps(payload, ensure_ascii=False, separators=(",", ":")))
     OUT.parent.mkdir(parents=True, exist_ok=True)

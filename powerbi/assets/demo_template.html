@@ -48,6 +48,7 @@
   .sl label { font-size:8pt; color:var(--muted); margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .sl select { font:inherit; font-size:9pt; border:1px solid #c8d3dc; border-radius:4px; padding:3px 4px; background:#fff; width:100%; color:var(--ink); }
   .sl select:disabled { background:#f8fafc; color:#334155; }
+  .sl select.changed { border-color:var(--teal); background:#e0f2f4; font-weight:600; }
   .tiles { display:flex; gap:4px; height:100%; align-items:center; flex-wrap:nowrap; overflow:hidden; }
   .tiles button { flex:1 1 auto; font:inherit; font-size:8.5pt; border:1px solid #c8d3dc; background:#fff; color:var(--ink); border-radius:5px; height:26px; padding:0 6px; cursor:pointer; white-space:nowrap; }
   .tiles button.on { background:var(--teal); color:#fff; border-color:var(--teal); }
@@ -63,7 +64,7 @@
 <div class="app">
   <div class="top"><div class="logo"><i style="height:8px"></i><i style="height:13px"></i><i style="height:18px"></i></div>
     <span class="name">LawFirmDecisionSupport</span><span style="color:#c8c6c4">· Report preview</span>
-    <span class="note">Preview of the Power BI report built from its own page files · sample data · numbers computed in Python</span></div>
+    <span class="note">Preview of the Power BI report built from its own page files · sample data · Simulator runs live in the browser</span></div>
   <div class="stage" id="stage"><div class="rotate">↻ Turn your phone sideways for a bigger view</div><div class="canvas" id="canvas"></div></div>
   <div class="tabs" id="tabs"></div>
 </div>
@@ -71,7 +72,8 @@
 <script>
 const D = /*DATA*/;
 const PAL = ["#0a8496","#2f7fd8","#6b5bd6","#f2b134","#e2665a","#34a37a","#94a3b8","#d946ef","#0e7490","#b45309"];
-const state = { page: D.pages[0].name, period: D.defaultPeriod, preset: "Today", platform: D.defaultPlatform };
+const state = { page: D.pages[0].name, period: D.defaultPeriod, preset: "Today", platform: D.defaultPlatform,
+                levers: JSON.parse(JSON.stringify(D.sim.presets.Today)), goalTarget: D.sim.targets[0], uplift: 0 };
 const $ = s => document.querySelector(s);
 const tip = $("#tip");
 
@@ -110,6 +112,7 @@ function guessKind(name, v){ return typeof v === "number" ? "num" : "text"; }
 
 // ---------------------------------------------------------------------------------------------- navigation ---
 function render(){
+  SIMM = null;
   const page = D.pages.find(p => p.name === state.page);
   const sec = page.section;
   document.querySelectorAll(".pages a, .tabs a").forEach(a => { const pg = D.pages.find(x => x.name === a.dataset.p);
@@ -131,9 +134,152 @@ D.pages.forEach(p => {
 });
 
 function dataFor(v){
+  if (v.live) return liveData(v);
   if (!v.by) return v.data;
-  const key = v.by === "period" ? state.period : v.by === "preset" ? state.preset : state.platform;
+  const key = v.by === "period" ? state.period : v.by === "preset" ? (state.preset || "Today") : state.platform;
   return v.data[key];
+}
+
+// ------------------------------------------------------------------------- simulator (formulas from sim_spec.py) ---
+const SIM = D.sim;
+const H = {
+  ramp_sum(m, R){ const n = Math.min(m, Math.floor(R)); return n * (n + 1) / (2 * R) + (m - n); },
+  payback(L, F, R, C){ for (let m = 1; m <= 60; m++) if (-L + F * H.ramp_sum(m, R) - C * m >= 0) return m; return null; },
+  nes_redundancy(y){ let o = 0; SIM.nes.forEach(([t, w]) => { if (y >= t) o = w; }); return o; },
+  lk(t, col, key){ const tb = SIM.tables[t]; const r = tb.rows.find(r => r[0] === key); return r ? r[1 + tb.cols.indexOf(col)] : null; },
+};
+const simFormulas = new Function("x", "H", SIM.formulas + "\nreturn x;");
+function simEval(st, d){
+  const x = Object.assign({}, SIM.consts, {D: d === undefined ? 1 : d});
+  for (const k in st) if (k.startsWith("sim_")) { const v = st[k]; x["L_" + k.slice(4)] = typeof v === "boolean" ? (v ? 1 : 0) : v; }
+  return simFormulas(x, H);
+}
+function money(v, sign){ if (v === null || v === undefined) return ""; const s = v < 0 ? "-" : (sign && v > 0 ? "+" : ""); return s + "$" + Math.round(Math.abs(v)).toLocaleString("en-US"); }
+const pct = (v, n) => (v * 100).toFixed(n) + "%";
+const sgn1 = v => (v >= 0 ? "+" : "") + v.toFixed(1);
+function solve(fn, lo, hi, target){
+  if (fn(lo) >= target) return lo; if (fn(hi) < target) return null;
+  for (let i = 0; i < 60; i++) { const mid = (lo + hi) / 2; if (fn(mid) >= target) hi = mid; else lo = mid; }
+  return hi;
+}
+function rateToFund(st){
+  const target = simEval({...st, sim_pay_fe: 0, sim_pay_support: 0}).op1;
+  const x = solve(v => simEval({...st, sim_rate: v}).op1, st.sim_rate, 30, target);
+  return x === null ? null : x - st.sim_rate;
+}
+let SIMM = null;
+function simM(){
+  if (SIMM) return SIMM;
+  const st = state.levers, e = simEval(st), C = SIM.consts, today = simEval(SIM.presets.Today).op1, M = {};
+  const arrow = v => v > 0 ? "▲ +" : (v < 0 ? "▼ " : "");
+  M["Sim Operating Profit"] = () => e.op1;
+  M["Sim Margin"] = () => e.margin1;
+  M["Sim Gap to Budget"] = () => e.gap_budget;
+  M["Sim One-off Cash"] = () => e.one_off;
+  M["Sim Low Point"] = () => e.low1;
+  M["Sim Profit Caption"] = () => { const v = Math.round(e.op1 - today); return `${arrow(v)}${(v / Math.abs(today) * 100).toFixed(1)}% vs base · ${money(v, true)} vs today`; };
+  M["Sim Margin Caption"] = () => { const d = Math.round((e.margin1 - e.margin0) * 10000) / 100; return `${arrow(d)}${d.toFixed(1)} pp vs base · base ${pct(e.margin0, 1)}`; };
+  M["Sim Gap Caption"] = () => `budget profit ${money(C.BUDGET_OP)}`;
+  M["Sim Low Caption"] = () => `today ${money(C.LOW0)} · minimum ${money(C.MIN_CASH)}`;
+  const steps = {"Today's profit": "op0", "Fees": "bridge_fees", "Disb. recovery": "bridge_disb", "Costs": "bridge_costs"};
+  M["Sim Bridge Value"] = c => e[steps[c]];
+  const dl = {"100% delivered": 1, "75% delivered": 0.75, "50% delivered": 0.5};
+  M["Sim Profit at Delivery"] = c => simEval(st, dl[c]).op1;
+  M["Sim Scenario Summary"] = () => {
+    const parts = [];
+    SIM.levers.forEach(lv => { const v = st[lv.key], d = SIM.presets.Today[lv.key]; if (v === d) return;
+      if (lv.kind === "cat") parts.push(`${lv.label}: ${v}`);
+      else if (lv.kind === "bool") parts.push(`${lv.label}: ${v ? "yes" : "no"}`);
+      else parts.push(`${lv.label}: ` + (lv.fmt.includes("$") ? money(v) : (lv.step !== Math.floor(lv.step) || lv.lo < 0 ? sgn1(v) : v.toFixed(0)))); });
+    return parts.join(" · ") || "No change: today's firm, last 12 months";
+  };
+  M["Sim Warning"] = () => {
+    const w = [];
+    if (e.low1 < C.MIN_CASH) w.push("This takes the account below the $60K minimum balance. Fund it first: lower partner drawings, a loan, or stage the spend.");
+    if (e.util1 > 0.95 || e.team_util > 0.95) w.push("Utilisation above about 95% is rarely sustainable: check burnout and quality risk.");
+    if (e.mkt_capped) w.push("The team cannot take all the new work: the extra fees stop at 95% utilisation. Pair the campaign with a hire.");
+    if (e.pay_cost !== 0 && Math.min(st.sim_pay_fe, st.sim_pay_support) < 3.4) w.push("Below market wage growth (3.4%, ABS WPI): expect retention risk. Pay cuts generally need agreement and cannot go below award minimums.");
+    if (st.sim_cut_fe > 0 && e.fees_cut > e.cut_saving) w.push("The fee earner(s) leaving bill more than they cost: this cut lowers profit.");
+    return w.join(" ") || "No warnings for this scenario.";
+  };
+  M["Sim Effect"] = L => {
+    const sm = v => money(v, true), pb = v => v === null ? "not within 5 years" : `${v} months`, n0 = v => Math.round(v).toLocaleString("en-US");
+    const rows = {
+      "Billable hours a year": () => `${n0(C.H0)} → ${n0(e.hours_tot)}`,
+      "Utilisation": () => `${pct(C.UTIL0, 1)} → ${pct(e.util1, 1)}`,
+      "New hire(s): fees − cost, year one": () => st.sim_hires > 0 && sm(e.hire_net),
+      "Productivity a hire needs to break even": () => st.sim_hires > 0 && pct(e.hire_breakeven_ramp, 0),
+      "Support staff added: cost less fees freed": () => st.sim_add_support > 0 && sm(e.fees_para - e.support_added_cost),
+      "Pay review: cost a year": () => e.pay_cost !== 0 && sm(-e.pay_cost),
+      "Rate increase that would pay for it": () => { if (e.pay_cost === 0) return null; const r = rateToFund(st); return r === null ? "more than +30%" : `+${r.toFixed(1)}%`; },
+      "Marketing: extra spend a year": () => e.mkt_spend > 0 && sm(-e.mkt_spend),
+      "Extra inquiries → new matters": () => e.mkt_spend > 0 && `${e.mkt_inq.toFixed(0)} → ${e.mkt_matters.toFixed(0)}`,
+      "Fees from them in year one": () => e.mkt_spend > 0 && sm(e.fees_mkt),
+      "New matter type: fees − costs, year one": () => st.sim_new_area && sm(e.area_net),
+      "New matter type at full speed, a year": () => st.sim_new_area && sm(e.area_net_full),
+      "Launch campaign earned back after": () => st.sim_new_area && pb(e.area_payback),
+      "Fee earners leaving: pay saved": () => st.sim_cut_fe > 0 && sm(e.cut_saving),
+      "Fees lost (after work kept)": () => st.sim_cut_fe > 0 && sm(-e.fees_cut),
+      "Support roles cut: pay saved a year": () => st.sim_cut_support > 0 && sm(e.support_saving),
+      "New branch: fees − costs, year one": () => st.sim_branch && sm(e.branch_net),
+      "New branch at full speed, a year": () => st.sim_branch && sm(e.branch_net_full),
+      "Fit-out earned back after": () => st.sim_branch && pb(e.branch_payback),
+      "Platform: first-year saving": () => e.platform_annual !== 0 && sm(e.platform_annual),
+      "Redundancy pay (NES)": () => e.redundancy > 0 && `${money(e.redundancy)} · ${e.redundancy_weeks} weeks each`,
+      "Notice pay": () => e.notice_pay > 0 && `${money(e.notice_pay)} · ${e.notice_weeks} weeks each`,
+      "Branch fit-out": () => e.branch_fitout > 0 && money(e.branch_fitout),
+      "Platform migration and go-live dip": () => e.platform_one_off > 0 && money(e.platform_one_off),
+      "Launch campaign": () => e.area_launch > 0 && money(e.area_launch),
+      "Cash from collecting faster or slower": () => e.dso_cash !== 0 && sm(e.dso_cash),
+      "Office account today": () => money(C.CASH_NOW),
+      "13-week low point: today → after": () => `${money(C.LOW0)} → ${money(e.low1)}`,
+      "Cash cover after the decision": () => `${e.cash_cover.toFixed(1)} months`,
+    };
+    const f = rows[L]; const v = f ? f() : null; return v ? v : null;
+  };
+  // goal seek: how far each lever must move on its own, on top of the current levers
+  const tgt = state.goalTarget || SIM.targets[0];
+  const byMargin = /margin/i.test(tgt), extra = /extra|plus/i.test(tgt);
+  const goal = byMargin ? C.BUDGET_MARGIN : (extra ? today + state.uplift : C.BUDGET_OP);
+  const metric = s => byMargin ? simEval(s).margin1 : simEval(s).op1;
+  const caps = {sim_util: [st.sim_util, (1 - C.UTIL0) * 100], sim_rate: [st.sim_rate, 30], sim_real: [st.sim_real, (1 - C.REAL0) * 100], sim_recov: [st.sim_recov, 30]};
+  const req = {};
+  for (const k in caps) req[k] = solve(v => metric({...st, [k]: v}), caps[k][0], caps[k][1], goal);
+  const xi = solve(v => metric({...st, sim_infl: -v}), -st.sim_infl, 60, goal); req.sim_infl = xi === null ? null : -xi;
+  const keyOf = l => Object.keys(SIM.goal).find(k => SIM.goal[k].label === l);
+  M["Sim Goal Need"] = l => { const k = keyOf(l), x = req[k]; if (x === null) return "Not reachable on its own";
+    const step = SIM.goal[k].bounds[2], xr = k === "sim_infl" ? Math.floor(x / step + 1e-9) * step : Math.ceil(x / step - 1e-9) * step, cur = st[k];
+    const u = (k === "sim_rate" || k === "sim_infl") ? "%" : " pp";
+    return Math.abs(xr - cur) < 1e-9 ? "Already met" : `${sgn1(xr)}${u} (${sgn1(xr - cur)}${u} from now)`; };
+  M["Sim Goal Difficulty"] = l => { const k = keyOf(l), x = req[k], [lo, hi, step] = SIM.goal[k].bounds, cur = st[k];
+    if (x === null) return "Not reachable on its own"; const ch = x - cur; if (Math.abs(ch) < 1e-9) return "Already met";
+    const r = k === "sim_infl" ? Math.floor(x / step + 1e-9) * step : Math.ceil(x / step - 1e-9) * step;
+    const fits = lo - 1e-9 <= r && r <= hi + 1e-9, span = k === "sim_infl" ? cur - lo : hi - Math.max(cur, 0), share = span > 0 ? Math.abs(ch) / span : 9;
+    return fits && share <= 0.5 ? "Comfortable" : (fits ? "Stretch" : "Beyond a realistic range"); };
+  M["Sim Goal Caption"] = () => { const have = metric(st), f = v => byMargin ? pct(v, 1) : money(v);
+    const gap = byMargin ? `${((goal - have) * 100).toFixed(1)} pp short` : `${money(goal - have)} short`;
+    return `Target: ${f(goal)}. Your scenario gives ${f(have)} (${have >= goal ? "already met" : gap}). Each line moves one lever on its own, on top of your current levers.`; };
+  return (SIMM = M);
+}
+function liveData(v){
+  const L = v.live, M = simM(), sk = L.skeleton;
+  if (v.type === "card") return {...sk, value: M[L.measures[0]]()};
+  if (v.type === "tableEx") {
+    const rows = [];
+    L.cats.forEach(c => { const vals = L.measures.map(m => M[m](c)); if (vals.some(x => x !== null && x !== undefined && x !== "")) rows.push([c, ...vals]); });
+    return {...sk, rows, total: rows.length};
+  }
+  const cats = [], values = [], y2 = [];
+  L.cats.forEach(c => { const x = M[L.measures[0]](c); if (x !== null && x !== undefined) { cats.push(c); values.push([[x]]); y2.push([]); } });
+  return {...sk, cats, values, y2};
+}
+function leverOptions(lv){
+  if (lv.kind === "cat") return lv.options.map(o => [o, o]);
+  if (lv.kind === "bool") return [["false", "No"], ["true", "Yes"]];
+  const n = Math.round((lv.hi - lv.lo) / lv.step), out = [];
+  for (let i = 0; i <= n; i++) { const v = Math.round((lv.lo + i * lv.step) * 1e6) / 1e6;
+    out.push([String(v), lv.fmt.includes("$") ? money(v) : (lv.fmt === "0" ? v.toFixed(0) : v.toFixed(1))]); }
+  return out;
 }
 
 // ---------------------------------------------------------------------------------------------- visuals ---
@@ -214,7 +360,7 @@ function slicer(v, body, W, H, ob){
   if (tb === "Sim Preset") {
     const t = document.createElement("div"); t.className = "tiles";
     opts.forEach(o => { const b = document.createElement("button"); b.textContent = o; if (o === state.preset) b.classList.add("on");
-      b.onclick = () => { state.preset = o; render(); }; t.appendChild(b); });
+      b.onclick = () => { state.preset = o; state.levers = JSON.parse(JSON.stringify(SIM.presets[o])); render(); }; t.appendChild(b); });
     body.appendChild(t); return;
   }
   const w = document.createElement("div"); w.className = "sl";
@@ -222,9 +368,16 @@ function slicer(v, body, W, H, ob){
   const s = document.createElement("select");
   if (tb === "Period") { opts.forEach(o => s.add(new Option(o, o))); s.value = state.period; s.onchange = () => { state.period = s.value; render(); }; }
   else if (tb === "Platforms") { opts.forEach(o => s.add(new Option(o, o))); s.value = state.platform; s.onchange = () => { state.platform = s.value; render(); }; }
-  else if (v.leverByPreset) { s.add(new Option(String(v.leverByPreset[state.preset]))); s.disabled = true; s.title = "Change levers in Power BI; this preview follows the preset";
+  else if (v.lever) { const lv = SIM.levers.find(l => l.key === v.lever); const cur = String(state.levers[lv.key]);
+    const o = leverOptions(lv); if (!o.some(x => x[0] === cur)) o.unshift([cur, cur]);
+    o.forEach(([val, lab]) => s.add(new Option(lab, val))); s.value = cur;
+    if (cur !== String(SIM.presets.Today[lv.key])) s.classList.add("changed");
+    s.onchange = () => { const x = s.value; state.levers[lv.key] = lv.kind === "num" ? parseFloat(x) : (lv.kind === "bool" ? x === "true" : x);
+      state.preset = null; render(); };
     if (head && w.firstChild) w.firstChild.title = head; }
-  else if (tb === "Sim Goal Target" || tb === "Sim Goal Uplift") { s.add(new Option(tb === "Sim Goal Target" ? opts[0] : "$0")); s.disabled = true; }
+  else if (tb === "Sim Goal Target") { SIM.targets.forEach(o => s.add(new Option(o, o))); s.value = state.goalTarget; s.onchange = () => { state.goalTarget = s.value; render(); }; }
+  else if (tb === "Sim Goal Uplift") { for (let v = 0; v <= 2000000; v += 25000) s.add(new Option(money(v), String(v))); s.value = String(state.uplift);
+    s.onchange = () => { state.uplift = parseFloat(s.value); render(); }; }
   else { s.add(new Option("All")); opts.slice(0,200).forEach(o => s.add(new Option(o, o))); s.disabled = true; s.title = "Filters work in Power BI"; }
   w.appendChild(s); body.appendChild(w);
 }

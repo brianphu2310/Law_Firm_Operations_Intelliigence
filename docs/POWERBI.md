@@ -8,7 +8,10 @@ one semantic model over the warehouse. It lives in `powerbi/` as a **Power BI Pr
 
 `powerbi/demo/index.html` is a browser preview of the same 22 pages: positions, titles and fields come from the report's own
 PBIR files, and every number is computed in Python the way the DAX measures compute it (`python -m powerbi.demo`). Page
-navigation, the Period slicer, the Simulator presets and the Platform slicer work; levers and filters work only in Power BI.
+navigation, the Period slicer and the Platform slicer work, and so does the whole Simulator: presets, every lever and the
+goal-seek target. The browser runs the Simulator from the same formula spec that generates the DAX (`powerbi/sim_spec.py`,
+translated to JavaScript), and gives the same results as the Python engine for every preset. Other filters (status, area,
+office) work only in Power BI.
 
 ## Open it
 
