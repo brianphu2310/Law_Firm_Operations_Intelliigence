@@ -1,6 +1,6 @@
 # Power BI report
 
-The whole dashboard, Decision Simulator included, rebuilt as a Power BI project: 15 pages, about 290 DAX measures,
+The project's front end: the whole dashboard and the Decision Simulator as a Power BI project, 15 pages, about 290 DAX measures,
 one semantic model over the warehouse. It lives in `powerbi/` as a **Power BI Project (.pbip)**: plain text files
 (TMDL for the model, PBIR JSON for the report) that Git can diff and CI can test.
 
@@ -28,7 +28,7 @@ To load from a fork or another branch: *Transform data → Edit parameters → B
 | Simulator | Decide · Test the plan | 12 presets + 30 levers; profit bridge, effects and cash, what moves profit most, what it would take, delivery range, presets side by side |
 | Check | 1 | Assumptions, and every Simulator result in DAX compared with the Python engine |
 
-The **Period** slicer (top right, synced across pages) picks the reporting period, as in the Streamlit app.
+The **Period** slicer (top right, synced across pages) picks the reporting period, with the same periods and day weights as the Python model.
 
 ## How it is built
 
@@ -57,11 +57,10 @@ python -m powerbi.build        # data/powerbi/*.csv, then the .pbip project
 * "How sure are we" re-runs the scenario with 75% and 50% of the improvements delivered; "every preset side by side"
   evaluates each preset row in its own filter context.
 
-## Limits compared with the Streamlit app
+## Known limits
 
 * Lever slicers are dropdowns, not sliders, and show empty until you change them (the card "Levers in this scenario"
   lists what is switched on).
 * Saved scenarios are not available (report viewers cannot save state); use the presets side by side instead.
-* Overview hours and revenue charts show the 12 months to the period end, without the sparkline styling.
 * Not yet opened in Power BI Desktop by the author of this build: the files are validated against the schemas, not
   against a running Power BI. Report any error with the page and visual name.

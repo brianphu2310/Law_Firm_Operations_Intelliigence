@@ -1,7 +1,7 @@
 """Builds the Power BI semantic model (TMDL): tables from the CSVs on GitHub, relationships, and every DAX measure.
 
 Descriptive measures aggregate the warehouse facts for the reporting period picked on the Period slicer
-(the same periods and day weights as the Streamlit app). Simulator measures are generated from powerbi/sim_spec.py.
+(the same periods and day weights as the Python model). Simulator measures are generated from powerbi/sim_spec.py.
 """
 from __future__ import annotations
 

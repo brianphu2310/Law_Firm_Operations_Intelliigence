@@ -20,7 +20,7 @@ from core import metrics as X, platforms as P, simulate as S
 from core.model import build_model
 from core.period import _shift, month_weights, presets, stock_at
 from core.ref import AS_OF, BRANCHES, MARKET_WAGE_GROWTH, START
-from views.simulator import MIN_CASH
+from core.simulate import MIN_CASH
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "powerbi"
@@ -125,8 +125,42 @@ def export_decision_tables(M, out):
     return pa, dt, mk
 
 
+def _money(v):
+    a = abs(v)
+    if a >= 1_000_000:
+        return f"${a / 1_000_000:.2f}M"
+    if a >= 10_000:
+        return f"${a / 1_000:.0f}K"
+    if a >= 1_000:
+        return f"${a / 1_000:.1f}K"
+    return f"${a:,.0f}"
+
+
+def _decisions(M, cur, top):
+    """The Principal's open questions for a period, each with today's evidence and where to look in the report."""
+    a, b = X.fin_sum(M, cur), X.plan_sum(M, cur)
+    gap = a["op_profit"] - b["op_profit"]
+    pa = X.practice_area_table(M)
+    dt = X.department_table(M)
+    over = dt[dt["status"] == "Over-staffed"].sort_values("gap", ascending=False)
+    mk = X.marketing_table(M)
+    best, worst = mk["cost_per_matter"].idxmin(), mk["cost_per_matter"].idxmax()
+    items = [
+        ("$", "#b91c1c" if gap < 0 else "#047857", "", f"Profit {_money(gap)} {'behind' if gap < 0 else 'ahead of'} budget",
+         f"{cur.label}: rates, utilisation, pay or overheads? Test each in the Simulator."),
+        ("H", "#0a8496", "", f"Hire next in {pa.index[0]}",
+         f"Lawyers at {pa.iloc[0]['util']:.0%}, new matters {pa.iloc[0]['matters_growth']:+.0%}. People → Hiring & departments."),
+    ]
+    if len(over):
+        o = over.iloc[0]
+        items.append(("P", "#b45309", "", f"{o['branch']} {o['department'].lower()}: {o['headcount']} staff, {o['needed']:.1f} needed",
+                      f"{_money(o['cost_of_gap'])} a year over the workload. People → Hiring & departments."))
+    items.append(("M", "#1d4ed8", "", f"Marketing: {best} beats {worst}",
+                  f"{_money(mk.loc[best, 'cost_per_matter'])} vs {_money(mk.loc[worst, 'cost_per_matter'])} per new matter. Clients → Marketing."))
+    return items[:4]
+
+
 def export_decisions(M, out, top):
-    from views.overview import _decisions
     rows = []
     for p in periods():
         for i, (ic, fg, bg, t, d) in enumerate(_decisions(M, p["cur"], top)):

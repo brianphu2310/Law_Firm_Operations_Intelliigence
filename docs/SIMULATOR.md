@@ -2,19 +2,17 @@
 
 The Simulator answers "what should we do about it?". It takes the last 12 months of actuals as the base, lets you change the levers a firm
 actually controls (pricing, hiring, redundancies, a new branch, the practice-management platform) and shows the effect on profit, margin,
-the gap to the FY26 budget and the cash needed up front. It fits one laptop screen: levers on the left, results on the right.
-
-![Simulator](screenshots/01-simulator-decision.png)
+the gap to the FY26 budget and the cash needed up front. In the Power BI report it is two pages: **Decide** (levers and results) and **Test the plan**.
 
 ## Use it in two minutes
 
-1. Open **★ Simulator** in the top bar (or follow a link from the Finance or People pages).
-2. Click a decision in the row of buttons, or move the sliders yourself (tabs: **Pricing**, **People & pay**, **Growth**).
+1. Open **Simulator** in the report's top bar.
+2. Click a decision in the preset bar, or pick values in the lever slicers on the left (**Pricing & growth**, **Hiring, cuts & pay**,
+   **Support & branch**). An empty slicer keeps the preset's value; the card *Levers in this scenario* lists what is switched on.
 3. Read the five cards: operating profit, margin, **gap to FY26 budget**, **cash needed up front** and the **13-week cash low point**.
-4. Open **Effects & cash** for the detail of each decision: hire break-even, pay saved and fees lost, redundancy and notice pay, branch payback.
-5. Open **What would it take?**, choose a target and click **Apply** on the lever you would rather pull.
-6. Check **How sure are we?** to see how much of the result depends on delivering everything.
-7. **Save** the scenario, change the levers, save again and compare them in **Saved scenarios** (CSV export available).
+4. Read **Effects & cash** for the detail of each decision: hire break-even, pay saved and fees lost, redundancy and notice pay, branch payback.
+5. Open **Test the plan**: choose a target and read **What would it take?** for each lever on its own.
+6. Check **How sure are we?** to see how much of the result depends on delivering everything, and compare every preset side by side.
 
 ## The levers
 
@@ -28,7 +26,7 @@ the gap to the FY26 budget and the cash needed up front. It fits one laptop scre
 | New fee earners | 0 to 3 | Adds pay plus about $9,000 a year overhead each; bills at the role's rate × firm utilisation × year-one productivity |
 | Year-one productivity | 40 to 100% | How busy a new hire is relative to the firm average |
 | Change in days to collect | −15 to +15 days | One-off cash effect only; profit is unchanged |
-| Hire for (practice area) | Firm mix or one of five areas | A hire earns the area's effective rate and is as busy as the lawyers already doing that work (People → Where to hire) |
+| Hire for (practice area) | Firm mix or one of five areas | A hire earns the area's effective rate and is as busy as the lawyers already doing that work (People → Hiring & departments) |
 | Support department | Reception & admin, Paralegals & clerks, Accounts & trust, Marketing | Sets the pay of roles added or cut |
 | Support added | 0 to 3 | Pay plus $3,000 a year each; an added paralegal frees about 200 billable hours a year for fee earners |
 | Fee-earner pay / support pay | −5% to +10% | Pay review on today's team; compared with market wage growth (3.4%, ABS Wage Price Index, private sector) |
@@ -38,7 +36,7 @@ the gap to the FY26 budget and the cash needed up front. It fits one laptop scre
 | Support roles cut | 0 to 4 | Saves the department's monthly pay each |
 | Years of service of those leaving | 0 to 15 | Sets NES redundancy pay (s 119) and notice (s 117); see below |
 | New branch | on / off | Associates (1–3) and support staff (1–4), rent, fit-out, months to full productivity |
-| Platform | 7 options | First-year saving and one-off migration cost, taken from the platform evaluation pages |
+| Platform | 7 options | First-year saving and one-off migration cost, taken from the Platform page |
 
 ### Redundancy and notice (National Employment Standards)
 
@@ -56,7 +54,7 @@ The fit-out is capital: it is cash up front, not operating profit. Payback is th
 ## Worked example: closing the budget gap
 
 On the sample data the base run-rate is **$2.07M** operating profit a year against a **$2.36M** FY26 budget, a gap of **$297K**.
-Under **What would it take?**, with the target "Match the FY26 budget operating profit", each lever on its own would need to move by:
+Under **What would it take?**, with the target "FY26 budget profit", each lever on its own would need to move by:
 
 | Lever | Needed | Verdict |
 |---|---|---|

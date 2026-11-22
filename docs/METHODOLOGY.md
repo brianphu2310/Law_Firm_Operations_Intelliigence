@@ -153,7 +153,6 @@ sanity; simulator zero-lever equals base.
 rounding; "already met" and "unreachable" are reported honestly; delivery haircuts scale only improvements; hire break-even is exact; each lever moves profit in the right direction;
 `delta()` never divides by zero.
 
-`tests/test_interactions.py` — clicks and edits in the running app: Reset, presets, Apply, Save/Clear, levers surviving navigation, call-to-action links from other pages,
-platform scorecard weights updating immediately, and every page surviving reporting periods with no activity (regression tests for past bugs).
-
-`tests/test_app_smoke.py` — every page and every platform dashboard renders without an exception, under several reporting-period settings.
+`tests/test_powerbi.py` — the Simulator's formula spec matches `simulate.project` for every preset at 100/75/50% delivery and for 300 random
+lever mixes; every Power BI report file validates against Microsoft's PBIR schemas; every visual field, DAX reference and relationship
+column exists in the semantic model; the Check page covers every preset.

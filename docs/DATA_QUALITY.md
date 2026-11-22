@@ -13,7 +13,7 @@ dataset (`core/model.py`, fixed seed). The report is deterministic, so it only c
 | Validity | 18 | 18 | 0 |
 | Reconciliation | 42 | 42 | 0 |
 
-Reconciliation checks compare warehouse SQL totals with the Streamlit app's own functions in `core/metrics.py` over the actual window
+Reconciliation checks compare warehouse SQL totals with the Python model's own functions in `core/metrics.py` over the actual window
 (2023-07-01 to 2025-09-17). Flow amounts for the as-of month are pro-rated to days elapsed, exactly as the app does. Tolerance: 5 cents unless stated.
 
 ## Completeness

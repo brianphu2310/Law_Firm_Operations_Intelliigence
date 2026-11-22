@@ -121,7 +121,7 @@ def inputs(M=None):
     p, f = S.base_actuals(M)
     ctx = S.context(M)
     bt = S.budget_targets(M)
-    from views.simulator import MIN_CASH
+    from core.simulate import MIN_CASH
     consts = SP.build_constants(f, ctx, bt, stock_at(M["stock"], "cash", AS_OF), float(X.cash_forecast(M)["closing"].min()), MIN_CASH)
     return M, f, ctx, consts, SP.build_tables(ctx), SP.build_levers(ctx)
 

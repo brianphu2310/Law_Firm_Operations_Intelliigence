@@ -4,7 +4,7 @@
     python -m warehouse.quality --db warehouse.db
 
 Check families: completeness (nulls), uniqueness (duplicates), referential integrity, validity/consistency
-(business rules) and reconciliation of warehouse totals to the Streamlit app's own metric functions
+(business rules) and reconciliation of warehouse totals to the Python model's own metric functions
 (core/metrics.py), so the warehouse cannot silently drift from what the dashboards show.
 "Observations" are informational findings about the simulated data that are reported but are not pass/fail.
 Output is deterministic (no timestamps), so the committed report only changes when the data or the logic does.
@@ -278,7 +278,7 @@ def render_markdown(checks: list[Check]) -> str:
     for f in fams:
         cs = [c for c in gated if c.family == f]
         lines.append(f"| {f} | {len(cs)} | {sum(c.passed for c in cs)} | {sum(not c.passed for c in cs)} |")
-    lines += ["", "Reconciliation checks compare warehouse SQL totals with the Streamlit app's own functions in `core/metrics.py` over the actual window",
+    lines += ["", "Reconciliation checks compare warehouse SQL totals with the Python model's own functions in `core/metrics.py` over the actual window",
               f"({START:%Y-%m-%d} to {AS_OF:%Y-%m-%d}). Flow amounts for the as-of month are pro-rated to days elapsed, exactly as the app does. Tolerance: 5 cents unless stated.", ""]
     for f in fams:
         lines += [f"## {f}", "", "| Status | Check | Expected | Actual |", "|---|---|---|---|"]
