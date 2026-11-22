@@ -129,6 +129,17 @@ standard rate per hour, and a lever value be written with its unit (pp = percent
 
 With every lever at zero the scenario equals the base exactly (this is tested). Details and worked examples: [SIMULATOR.md](SIMULATOR.md).
 
+## 6c. Branch site (where clients come from)
+
+- **Demand**: Australian matters opened in the 12 months to the as-of date, by the client's suburb (`dim_suburb`, 40 suburbs of Western,
+  South-Western and North-Western Sydney).
+- **Underserved**: a suburb more than 10 km (straight line) from the nearest existing office.
+- **Candidate site**: any of the 40 suburbs. It "wins" the underserved matters within 10 km of it that are closer to it than to today's
+  offices; sites are ranked by those matters, then their estimated value. Suburb-to-suburb distances use a flat-earth approximation at
+  Sydney's latitude (within 0.5% at this scale), so the SQL needs no trigonometry and runs unchanged in Snowflake.
+- **Limits**: straight-line distance, not travel time; suburb centres, not addresses; and the suburbs themselves are sample data drawn
+  by population and distance from the handling office. The analysis shows the method; a real decision needs the firm's client addresses.
+
 ## 7. How the sample data is generated
 
 * Hours per attorney and practice area follow a Sep-2025 run-rate with seasonality, a gradual growth ramp, new-starter ramp-up

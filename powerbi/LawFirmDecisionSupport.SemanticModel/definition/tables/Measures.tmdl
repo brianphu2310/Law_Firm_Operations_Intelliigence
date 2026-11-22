@@ -1272,6 +1272,11 @@ table Measures
 		formatString: #,0
 		displayFolder: Matters
 
+	/// Matters opened in the 12 months to the as-of date, whatever the Period slicer says (the catchment map and branch-site analysis).
+	measure 'Matters Last 12 Months' = CALCULATE( COUNTROWS( 'Matter' ), REMOVEFILTERS( 'Date' ), 'Matter'[opened_date_key] > 20240917, 'Matter'[opened_date_key] <= 20250917 )
+		formatString: #,0
+		displayFolder: Matters
+
 	measure 'Matter WIP' = SUM( 'Matter Position'[wip_balance] )
 		formatString: \$#,0;-\$#,0;\$0
 		displayFolder: Matters

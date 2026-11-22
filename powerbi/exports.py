@@ -379,6 +379,9 @@ def export_all(out=OUT):
     ans, chart = answers(M)
     write("answers", ans, list(ans[0]), out)
     write("answer_chart", chart, list(chart[0]), out)
+    from core.catchment import branch_sites
+    bs = branch_sites(M)
+    write("branch_sites", bs.to_dict("records"), list(bs.columns), out)
     rows = sim_expected(M)
     write("sim_expected", rows, ["Preset", "Metric", "Expected"], out)
     write("about", [dict(AsOf=AS_OF, MarketWageGrowth=MARKET_WAGE_GROWTH, MinCash=MIN_CASH)], ["AsOf", "MarketWageGrowth", "MinCash"], out)

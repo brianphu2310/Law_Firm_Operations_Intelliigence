@@ -469,7 +469,7 @@ function bars(v, body, W, H, ob){
     d.cats.forEach((c, i) => { let pos = 0, neg = 0; series.forEach((se, j) => { const x = se[i]; if (x === null || x === undefined) return;
       let y1, y2; if (stacked) { if (x >= 0) { y1 = pos; pos += x; y2 = pos; } else { y1 = neg; neg += x; y2 = neg; } } else { y1 = 0; y2 = x; }
       const bx = left + i * band + band * 0.14 + (stacked ? 0 : j * bw);
-      const r = add(s,"rect",{x:bx,y:Math.min(Y(y1),Y(y2)),width:Math.max(1,bw-1),height:Math.max(0.5,Math.abs(Y(y2)-Y(y1))),fill:colors[j],rx:2});
+      const r = add(s,"rect",{x:bx,y:Math.min(Y(y1),Y(y2)),width:Math.max(1,bw-1),height:Math.max(0.5,Math.abs(Y(y2)-Y(y1))),fill:(d.pointColors && d.pointColors[i]) || colors[j],rx:2});
       hover(r, `${catLabel(c,d)} · ${names[j]}: ${fmt(x, d.kind)}`);
       if (labelsOn) add(s,"text",{x:bx+bw/2,y:Y(y2)-3,"font-size":8,fill:"#334155","text-anchor":"middle"}, fmt(x, d.kind, true)); }); });
   }
@@ -549,7 +549,7 @@ function geomap(v, body, W, H){
   // view: the whole world, or a frame fitted around the offices and the CBD at the panel's own aspect ratio
   let vx = 0, vy = 0, vw = bm.w, vh = bm.h;
   if (local) {
-    const xy = d.points.map(p => P(p.lat, p.lon)); if (bm.cbd) xy.push(P(bm.cbd[0], bm.cbd[1]));
+    const xy = d.points.map(p => P(p.lat, p.lon)); if (bm.cbd) xy.push(P(bm.cbd[0], bm.cbd[1])); (d.offices || []).forEach(o => xy.push(P(o[1], o[2])));
     const xs = xy.map(q => q[0]), ys = xy.map(q => q[1]);
     let x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
     const pad = 0.22 * Math.max(x1 - x0, y1 - y0); x0 -= pad * 2.2; x1 += pad; y0 -= pad; y1 += pad * 1.5;
@@ -564,26 +564,43 @@ function geomap(v, body, W, H){
   add(s, "path", {d: bm.path, fill: "#f7f9fb", stroke: "#a9bfcd", "stroke-width": (local ? 1 : 0.6) * k});
   const txt = (x, y, t, o) => { const e = add(s, "text", Object.assign({x, y, "font-size": 10 * k, fill: "#0f172a", "text-anchor": "middle",
       stroke: "#f7f9fb", "stroke-width": 3 * k, "paint-order": "stroke", "stroke-linejoin": "round"}, o || {}), t); return e; };
-  if (local && bm.ref && W > 500) Object.entries(bm.ref).forEach(([n, [la, lo]]) => { const [x, y] = P(la, lo);
+  if (local && bm.ref && W > 500 && d.points.length <= 12) Object.entries(bm.ref).forEach(([n, [la, lo]]) => { const [x, y] = P(la, lo);
     if (x < vx || x > vx + vw || y < vy || y > vy + vh) return;
     add(s, "circle", {cx: x, cy: y, r: 2 * k, fill: "#b6c4cf"}); txt(x, y - 5 * k, n, {"font-size": 8.5 * k, fill: "#94a3b8", "font-style": "italic"}); });
-  if (bm.cbd) { const [x, y] = P(bm.cbd[0], bm.cbd[1]);
+  const small = H < 300;
+  if (bm.cbd && !(small && d.offices)) { const [x, y] = P(bm.cbd[0], bm.cbd[1]);
     add(s, "rect", {x: x - 3.5 * k, y: y - 3.5 * k, width: 7 * k, height: 7 * k, fill: "#475569", transform: `rotate(45 ${x} ${y})`});
     txt(x, y + 15 * k, "Sydney CBD", {"font-size": 9 * k, fill: "#475569"}); }
   const mx = Math.max(...d.points.map(p => p.size));
-  const col = local ? "#2f7fd8" : "#0a8496";
-  const rmax = Math.min(local ? 26 : 22, (local ? 0.085 : 0.08) * Math.min(W, H));
-  d.points.sort((a, b) => b.size - a.size).forEach(p => { const [x, y] = P(p.lat, p.lon); const r = (5 + rmax * Math.sqrt(p.size / mx)) * k;
-    add(s, "circle", {cx: x, cy: y, r: r + 3 * k, fill: col, "fill-opacity": .12});
-    const c = add(s, "circle", {cx: x, cy: y, r, fill: col, "fill-opacity": .85, stroke: "#fff", "stroke-width": 1.5 * k}); hover(c, `${p.label}: ${p.size} ${d.sizeLabel.toLowerCase()}`);
+  const col = local ? "#2f7fd8" : "#0a8496", many = d.points.length > 12;
+  const rmax = Math.min(local ? 26 : 22, (many ? 0.055 : (local ? 0.085 : 0.08)) * Math.min(W, H));
+  const ranked = d.points.slice().sort((a, b) => b.size - a.size);
+  ranked.forEach((p, i) => { const [x, y] = P(p.lat, p.lon); const r = ((many ? 2.5 : 5) + rmax * Math.sqrt(p.size / mx)) * k;
+    const c0 = d.bands && p.band ? d.bands[p.band] : col;
+    if (!many) add(s, "circle", {cx: x, cy: y, r: r + 3 * k, fill: c0, "fill-opacity": .12});
+    const c = add(s, "circle", {cx: x, cy: y, r, fill: c0, "fill-opacity": many ? .78 : .85, stroke: "#fff", "stroke-width": (many ? 1 : 1.5) * k});
+    hover(c, `${p.label}: ${p.size} ${d.sizeLabel.toLowerCase()}${p.band ? " · " + p.band + " from an office" : ""}`);
+    if (many) { const isOffice = (d.offices || []).some(o => o[0] === p.label);
+      if (H > 400 && i < 6 && !isOffice) txt(x + r + 4 * k, y + 3.5 * k, `${p.label} ${p.size}`, {"font-size": 9 * k, "font-weight": 600, "text-anchor": "start"}); return; }
     const big = p.size >= mx * 0.04 && p.size >= 8;
     if (local) {
       add(s, "text", {x, y: y + 4 * k, "font-size": 11 * k, fill: "#fff", "text-anchor": "middle", "font-weight": 700}, String(p.size));
       txt(x - r - 6 * k, y + 4 * k, p.label, {"font-weight": 600, "text-anchor": "end"});
     } else if (big) txt(x, y - r - 4 * k, `${p.label} ${p.size}`, {"font-weight": 600});
   });
+  // reference layer (preview only): today's offices and the best site for a new branch
+  (d.offices || []).forEach(([n, la, lo]) => { const [x, y] = P(la, lo);
+    add(s, "rect", {x: x - 5 * k, y: y - 5 * k, width: 10 * k, height: 10 * k, rx: 2 * k, fill: "#0f172a", stroke: "#fff", "stroke-width": 1.5 * k});
+    txt(x + 8 * k, y + 4 * k, n, {"font-weight": 700, "text-anchor": "start", "font-size": (small ? 8 : 9.5) * k}); });
+  if (d.site) { const [n, la, lo, m] = d.site, [x, y] = P(la, lo), R = 9 * k;
+    const pts = Array.from({length: 10}, (_, i) => { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? R * 0.45 : R; return `${x + rr * Math.cos(a)},${y + rr * Math.sin(a)}`; }).join(" ");
+    add(s, "polygon", {points: pts, fill: "#7c3aed", stroke: "#fff", "stroke-width": 1.5 * k});
+    txt(x + 11 * k, y - (small ? 2 : 8) * k, small ? `Gap: ${n}` : `New branch? ${n}`, {"font-weight": 700, "text-anchor": "start", fill: "#6d28d9", "font-size": (small ? 8.5 : 9.5) * k}); }
+  if (d.bands) { let lx = vx + 8 * k, ly = vy + vh - (small ? 12 : 20) * k;
+    Object.entries(d.bands).forEach(([n, c]) => { add(s, "circle", {cx: lx + 4 * k, cy: ly, r: 4 * k, fill: c});
+      const t = txt(lx + 11 * k, ly + 3.5 * k, n, {"font-size": 8.5 * k, "text-anchor": "start"}); lx += (16 + n.length * 5.2) * k; }); }
   const ax = vx + vw - 6 * k, ay = vy + vh - 6 * k;
-  add(s, "text", {x: ax, y: ay, "font-size": 7.5 * k, fill: "#94a3b8", "text-anchor": "end"}, D.basemaps.attribution);
+  if (!(small && d.bands)) add(s, "text", {x: ax, y: ay, "font-size": 7.5 * k, fill: "#94a3b8", "text-anchor": "end"}, D.basemaps.attribution);
 }
 
 render();

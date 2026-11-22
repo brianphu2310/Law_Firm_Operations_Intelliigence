@@ -5,8 +5,8 @@
     "x": 199.94375,
     "y": 146.0,
     "z": 28000,
-    "width": 708.09375,
-    "height": 330.0,
+    "width": 443.625,
+    "height": 566.0,
     "tabOrder": 28000
   },
   "visual": {
@@ -20,14 +20,71 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Country Geo"
+                      "Entity": "Suburb"
                     }
                   },
-                  "Property": "Country"
+                  "Property": "Place"
                 }
               },
-              "queryRef": "Country Geo.Country",
-              "nativeQueryRef": "Country"
+              "queryRef": "Suburb.Place",
+              "nativeQueryRef": "Place"
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Suburb"
+                    }
+                  },
+                  "Property": "Distance band"
+                }
+              },
+              "queryRef": "Suburb.Distance band",
+              "nativeQueryRef": "Distance to nearest office",
+              "displayName": "Distance to nearest office"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Suburb"
+                    }
+                  },
+                  "Property": "latitude"
+                }
+              },
+              "queryRef": "Suburb.latitude",
+              "nativeQueryRef": "Latitude",
+              "displayName": "Latitude"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Suburb"
+                    }
+                  },
+                  "Property": "longitude"
+                }
+              },
+              "queryRef": "Suburb.longitude",
+              "nativeQueryRef": "Longitude",
+              "displayName": "Longitude"
             }
           ]
         },
@@ -41,12 +98,12 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "Matter Count"
+                  "Property": "Matters Last 12 Months"
                 }
               },
-              "queryRef": "Measures.Matter Count",
-              "nativeQueryRef": "Matters",
-              "displayName": "Matters"
+              "queryRef": "Measures.Matters Last 12 Months",
+              "nativeQueryRef": "Matters, last 12 months",
+              "displayName": "Matters, last 12 months"
             }
           ]
         }
@@ -69,7 +126,7 @@
       "dataPoint": [
         {
           "properties": {
-            "defaultColor": {
+            "fill": {
               "solid": {
                 "color": {
                   "expr": {
@@ -80,16 +137,131 @@
                 }
               }
             }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Suburb"
+                          }
+                        },
+                        "Property": "Distance band"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Under 5 km'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#f2b134'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Suburb"
+                          }
+                        },
+                        "Property": "Distance band"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'5–10 km'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#e2665a'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Suburb"
+                          }
+                        },
+                        "Property": "Distance band"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Over 10 km'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
           }
         }
       ],
-      "categoryLabels": [
+      "legend": [
         {
           "properties": {
             "show": {
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Bottom'"
                 }
               }
             }
@@ -124,7 +296,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Matters by client country'"
+                  "Value": "'Where clients come from: matters by client suburb'"
                 }
               }
             },
@@ -169,7 +341,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Bubble size = number of matters'"
+                  "Value": "'Last 12 months · colour = distance to the nearest office · 59 of 133 matters from 10+ km away'"
                 }
               }
             },

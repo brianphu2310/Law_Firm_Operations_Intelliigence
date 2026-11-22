@@ -9,7 +9,7 @@ flowchart LR
     period["core/period.py<br/>reporting periods,<br/>day-weighted aggregation"] --> metrics
     model --> platforms["core/platforms.py<br/>TCO, NPV, IRR,<br/>scorecard, risks"]
     metrics --> simulate["core/simulate.py<br/>Decision Simulator engine:<br/>what-if, goal-seek, delivery risk"]
-    model --> wh["warehouse/<br/>star schema, 20 tables"]
+    model --> wh["warehouse/<br/>star schema, 21 tables"]
     wh --> csv["data/warehouse/*.csv"]
     metrics --> exp["powerbi/exports.py<br/>analysis tables"]
     platforms --> exp
@@ -29,7 +29,7 @@ flowchart LR
 | Metrics | `core/metrics.py` | Pure functions from (model, period) to KPIs and tables. |
 | Evaluation | `core/platforms.py` | Platform cash flows, NPV/IRR/payback, scoring, sensitivity, risk register. Pure functions. |
 | Simulation | `core/simulate.py` | The Decision Simulator's engine: annual what-if, goal-seek, delivery-risk range, lever ranking. Pure functions, unit-tested. |
-| SQL | `warehouse/`, `sql/` | Star schema (20 tables) built from the model, data-quality suite, 13 analysis queries; queries 11–13 are tested against `metrics.py`. |
+| SQL | `warehouse/`, `sql/` | Star schema (21 tables) built from the model, data-quality suite, 14 analysis queries; queries 11–13 are tested against `metrics.py` and query 14 against `core/catchment.py`. |
 | Snowflake | `snowflake/` | Setup/load and decision-query scripts generated from the local schema and queries (`generate_*.py`), loading `data/warehouse/*.csv`. |
 | Excel | `excel/` | Principal's Decision Pack built from the SQL answers; Power Query scripts refresh it from the repository's CSV files. |
 | Power BI | `powerbi/` | The report: TMDL semantic model over the warehouse CSVs and analysis exports, PBIR pages, the Simulator as DAX generated from `sim_spec.py`. See [POWERBI.md](POWERBI.md). |

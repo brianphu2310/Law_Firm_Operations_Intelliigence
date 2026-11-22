@@ -9,6 +9,7 @@ from pathlib import Path
 import pytest
 
 from core import simulate as S
+from core.model import build_model
 from powerbi import build as B, model as MD, report as RP, sim_spec as SP
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,7 +27,7 @@ def built(inp):
     M, f, ctx, consts, tables, levers = inp
     tbls, rels, expr = MD.build_model(consts, tables, levers, ctx)
     RP.ALL_FIELDS.clear()
-    pages = RP.build_pages(dict(run_rate="$1", best="x", npv="+$1", answers=B.load_answers()), levers)
+    pages = RP.build_pages(dict(run_rate="$1", best="x", npv="+$1", answers=B.load_answers(), catchment=__import__("core.catchment", fromlist=["headline"]).headline(build_model())), levers)
     return tbls, rels, pages
 
 

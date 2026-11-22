@@ -43,6 +43,32 @@ def colour_measure(table, measure):
 
 
 # --------------------------------------------------------------------------------------------------------- fields ---
+def series_colours(table, column, colours):
+    """dataPoint fills for named series values (e.g. a map legend), keyed by the value."""
+    out = []
+    for value, c in colours.items():
+        out.append({"properties": {"fill": colour(c)},
+                    "selector": {"data": [{"scopeId": {"Comparison": {"ComparisonKind": 0,
+                                                                     "Left": {"Column": {"Expression": {"SourceRef": {"Entity": table}}, "Property": column}},
+                                                                     "Right": {"Literal": {"Value": "'" + value + "'"}}}}}]}})
+    return out
+
+
+BAND_COLOURS = {"Under 5 km": "#0a8496", "5–10 km": "#f2b134", "Over 10 km": "#e2665a"}
+
+
+def catchment_map(p, x, y, w, h, title, subtitle, key=None, size=8.0):
+    """Matters by client suburb, coloured by distance to the nearest office (sample data)."""
+    p.add("map", x, y, w, h,
+          roles={"Category": [F.c("Suburb", "Place")], "Series": [F.c("Suburb", "Distance band", "Distance to nearest office")],
+                 "Y": [F.c("Suburb", "latitude", "Latitude")], "X": [F.c("Suburb", "longitude", "Longitude")],
+                 "Size": [F.m(M, "Matters Last 12 Months", "Matters, last 12 months")]},
+          objects={"bubbles": [{"properties": {"bubbleSize": lit(size)}}], "dataPoint": series_colours("Suburb", "Distance band", BAND_COLOURS),
+                   "legend": [{"properties": {"show": lit(True), "position": lit("Bottom")}}],
+                   "mapStyles": [{"properties": {"mapTheme": lit("grayscale")}}]},
+          title=title, subtitle=subtitle, **({"key": key} if key else {}))
+
+
 class F:
     """A field reference: F.m('Measures', 'Revenue'), F.c('Branch', 'branch_name'), F.s('Where to Hire', 'priority') (sum)."""
 
@@ -227,7 +253,7 @@ def range_filter(field, lo, hi, name):
                        "Where": [{"Condition": {"And": {"Left": cmp(2, lo), "Right": cmp(4, hi)}}}]}}
 
 
-def chart(page, vtype, x, y, w, h, category, values, title=None, series=None, subtitle=None, sort=None, y2=None, labels=False, legend=True, colours=None):
+def chart(page, vtype, x, y, w, h, category, values, title=None, series=None, subtitle=None, sort=None, y2=None, labels=False, legend=True, colours=None, point_colours=None):
     roles = {"Category": category if isinstance(category, list) else [category], "Y": values}
     if series:
         roles["Series"] = [series]
@@ -239,6 +265,8 @@ def chart(page, vtype, x, y, w, h, category, values, title=None, series=None, su
             "labels": [{"properties": {"show": lit(labels), "fontSize": lit(8.0)}}]}
     if colours:
         objs["dataPoint"] = [{"properties": {"fill": colour(c)}, "selector": {"metadata": f.query_ref}} for f, c in colours]
+    if point_colours:                                  # one colour per category value
+        objs["dataPoint"] = series_colours(category.table, category.name, point_colours)
     return page.add(vtype, x, y, w, h, roles=roles, objects=objs, title=title, subtitle=subtitle, sort=sort)
 
 
@@ -369,7 +397,7 @@ def build_pages(ctx_facts, levers):
     people_branch(P["people_branch"], nav, ppl_tabs)
     mat_tabs = [("Ledger", P["matters"].name), ("Map", P["matters_map"].name)]
     matters(P["matters"], nav, mat_tabs)
-    matters_map(P["matters_map"], nav, mat_tabs)
+    matters_map(P["matters_map"], nav, mat_tabs, ctx_facts)
     clients(P["clients"], nav, cli_tabs)
     clients_mkt(P["clients_mkt"], nav, cli_tabs)
     calendar(P["calendar"], nav)
@@ -429,10 +457,9 @@ def overview(p, nav, facts, targets):
     chart(p, "clusteredBarChart", 520, 510, 386, 202, F.c("Sim Compare", "Short"), [F.m(SIM, "Sim Compare vs Today", "Profit a year vs today")],
           "Simulator: every decision vs today", sort=(F.m(SIM, "Sim Compare vs Today"), "Descending"), labels=True, legend=False,
           subtitle="Annual operating profit, from the last 12 months")
-    p.add("map", 912, 510, 354, 202, roles={"Category": [F.c("Branch", "Place")], "Size": [F.m(M, "Open Matters", "Open matters")]},
-          objects={"bubbles": [{"properties": {"bubbleSize": lit(8.0)}}], "dataPoint": [{"properties": {"defaultColor": colour("#2f7fd8")}}],
-                   "categoryLabels": [{"properties": {"show": lit(True), "fontSize": lit(9.0)}}], "mapStyles": [{"properties": {"mapTheme": lit("grayscale")}}]},
-          title="Open matters by office", subtitle="Western Sydney · full map: Matters → Map", key="ovmap")
+    cf = facts["catchment"]
+    catchment_map(p, 912, 510, 354, 202, "Where clients come from",
+                  f"{cf['share_far']:.0%} of matters from 10+ km away · gap: {cf['site']}", key="ovmap", size=6.0)
 
 
 # ---- Finance
@@ -558,22 +585,25 @@ def matter_slicers(p, y):
     slicer(p, 626, y, 300, 40, F.c("Branch", "branch_name"), "Dropdown", "Office", single=False, sync="m-office", key="s-office")
 
 
-def matters_map(p, nav, tabs):
-    frame(p, "Matters · Map", "Where the work comes from: matters by client country, and by office", nav, tabs)
+def matters_map(p, nav, tabs, facts):
+    cf = facts["catchment"]
+    frame(p, "Matters · Map", "Where the work comes from, and where a new branch would reach the clients the offices are far from", nav, tabs)
     matter_slicers(p, 100)
-    p.add("map", 14, 146, 830, 330, roles={"Category": [F.c("Country Geo", "Country")], "Size": [F.m(M, "Matter Count", "Matters")]},
+    catchment_map(p, 14, 146, 520, 566, "Where clients come from: matters by client suburb",
+                  f"Last 12 months · colour = distance to the nearest office · {cf['far']} of {cf['total']} matters from 10+ km away", size=10.0)
+    p.add("map", 540, 146, 726, 250, roles={"Category": [F.c("Country Geo", "Country")], "Size": [F.m(M, "Matter Count", "Matters")]},
           objects={"bubbles": [{"properties": {"bubbleSize": lit(10.0)}}], "dataPoint": [{"properties": {"defaultColor": colour(TEAL)}}],
                    "categoryLabels": [{"properties": {"show": lit(True)}}], "mapStyles": [{"properties": {"mapTheme": lit("grayscale")}}]},
-          title="Matters by client country", subtitle="Bubble size = number of matters")
-    p.add("map", 850, 146, 416, 330, roles={"Category": [F.c("Branch", "Place")], "Size": [F.m(M, "Open Matters", "Open matters")]},
-          objects={"bubbles": [{"properties": {"bubbleSize": lit(14.0)}}], "dataPoint": [{"properties": {"defaultColor": colour("#2f7fd8")}}],
-                   "categoryLabels": [{"properties": {"show": lit(True)}}], "mapStyles": [{"properties": {"mapTheme": lit("grayscale")}}]},
-          title="Open matters by office", subtitle="Richmond, Camden and Liverpool (Western Sydney)")
-    table(p, 14, 482, 620, 230, [F.c("Country Geo", "Country", "Country"), F.m(M, "Matter Count", "Matters"), F.m(M, "Open Matters", "Open"),
-                                 F.m(M, "Matter Estimated Value", "Est. value"), F.m(M, "Matter WIP", "WIP")], "By country",
-          sort=(F.m(M, "Matter Count"), "Descending"))
-    chart(p, "clusteredBarChart", 640, 482, 626, 230, F.c("Branch", "branch_name"), [F.m(M, "Matter Count", "All matters"), F.m(M, "Open Matters", "Open")],
-          "Matters by office", labels=True)
+          title="Matters by client country", subtitle="All matters on the ledger · bubble size = number of matters")
+    table(p, 540, 402, 440, 310, [F.c("Branch Sites", "candidate_site", "Site"), F.s("Branch Sites", "underserved_matters_ltm", "Matters in reach"),
+                                  F.s("Branch Sites", "est_value_ltm", "Est. value"), F.c("Branch Sites", "nearest_office", "Nearest office"),
+                                  F.s("Branch Sites", "km_to_nearest_office", "km")],
+          "Where a new branch would help most",
+          f"Last year's matters from 10+ km away that a new office would bring within 10 km",
+          sort=(F.s("Branch Sites", "underserved_matters_ltm"), "Descending"))
+    chart(p, "clusteredColumnChart", 986, 402, 280, 310, F.c("Suburb", "Distance band"), [F.m(M, "Matters Last 12 Months", "Matters")],
+          "Distance to nearest office", labels=True, legend=False, subtitle="Matters, last 12 months",
+          sort=(F.c("Suburb", "Distance band"), "Ascending"), point_colours=BAND_COLOURS)
 
 
 def matters(p, nav, tabs):

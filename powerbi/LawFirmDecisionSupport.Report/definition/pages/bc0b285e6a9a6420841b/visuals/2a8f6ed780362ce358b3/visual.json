@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "2a8f6ed780362ce358b3",
   "position": {
-    "x": 913.15625,
+    "x": 648.6875,
     "y": 146.0,
     "z": 29000,
-    "width": 354.90000000000003,
-    "height": 330.0,
+    "width": 619.36875,
+    "height": 250.0,
     "tabOrder": 29000
   },
   "visual": {
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Branch"
+                      "Entity": "Country Geo"
                     }
                   },
-                  "Property": "Place"
+                  "Property": "Country"
                 }
               },
-              "queryRef": "Branch.Place",
-              "nativeQueryRef": "Place"
+              "queryRef": "Country Geo.Country",
+              "nativeQueryRef": "Country"
             }
           ]
         },
@@ -41,12 +41,12 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "Open Matters"
+                  "Property": "Matter Count"
                 }
               },
-              "queryRef": "Measures.Open Matters",
-              "nativeQueryRef": "Open matters",
-              "displayName": "Open matters"
+              "queryRef": "Measures.Matter Count",
+              "nativeQueryRef": "Matters",
+              "displayName": "Matters"
             }
           ]
         }
@@ -59,7 +59,7 @@
             "bubbleSize": {
               "expr": {
                 "Literal": {
-                  "Value": "14.0D"
+                  "Value": "10.0D"
                 }
               }
             }
@@ -74,7 +74,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2f7fd8'"
+                      "Value": "'#0a8496'"
                     }
                   }
                 }
@@ -124,7 +124,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Open matters by office'"
+                  "Value": "'Matters by client country'"
                 }
               }
             },
@@ -169,7 +169,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Richmond, Camden and Liverpool (Western Sydney)'"
+                  "Value": "'All matters on the ledger · bubble size = number of matters'"
                 }
               }
             },

@@ -26,7 +26,7 @@ the cash needed up front and how much depends on things going to plan.
 | | |
 |---|---|
 | **What it does** | Brings the firm's finance, people, matters, clients and marketing data together and answers the Principal's six questions, each with a recommendation and a what-if. |
-| **How it is built** | Python model → **SQL** star schema and 13 analysis queries (SQLite locally, the same tables and decision queries in **Snowflake**) → **Excel + Power Query** decision pack → **Power BI** report (22 pages incl. a matter map, Simulator in DAX). |
+| **How it is built** | Python model → **SQL** star schema and 14 analysis queries (SQLite locally, the same tables and decision queries in **Snowflake**) → **Excel + Power Query** decision pack → **Power BI** report (22 pages incl. a matter map, Simulator in DAX). |
 | **Key answers** | Hire in Litigation first. Camden carries 1.8 more reception roles than its workload needs. Website & SEO wins a new matter for $646, LinkedIn for $2,243. A branch pays back in 17 months but needs funding first. |
 | **Tech stack** | Python (pandas, NumPy) · SQL (SQLite, Snowflake) · Excel + Power Query · Power BI (DAX, TMDL/PBIR) · pytest · GitHub Actions |
 | **Proof** | 130+ automated tests in CI. The SQL answers and the Simulator's DAX formulas are tested against the Python engine, the report files against Microsoft's Power BI schemas, and the Excel summary recalculates to the same figures. |
@@ -75,7 +75,7 @@ Built on the last 12 months of actuals. In Power BI: a preset bar, 30 lever slic
 
 ```mermaid
 flowchart LR
-    m["core/model.py<br/>simulated firm data<br/>(fixed seed)"] --> wh["warehouse/<br/>SQLite star schema<br/>20 tables, quality checks"]
+    m["core/model.py<br/>simulated firm data<br/>(fixed seed)"] --> wh["warehouse/<br/>SQLite star schema<br/>21 tables, quality checks"]
     wh --> sql["sql/analysis/<br/>13 SQL queries<br/>(P&L, hiring, staffing, marketing…)"]
     wh --> csv["data/warehouse/*.csv"]
     csv --> sf["snowflake/<br/>same tables + decision queries"]
@@ -88,10 +88,10 @@ flowchart LR
 
 | Layer | What it does | Where |
 |---|---|---|
-| **SQL** | A star schema (dimensions for date, office, practice area, fee earner, client, matter, department, marketing channel; facts for invoices, time, P&L, trust, staffing, intake, supplier orders) with a data-quality suite and 13 analysis queries. Queries 11–13 answer the hiring, staffing and marketing questions and are **tested against the dashboard's own numbers**. | [`warehouse/`](warehouse), [`sql/analysis/`](sql/analysis), [docs/DATA_MODEL.md](docs/DATA_MODEL.md), [docs/DATA_DICTIONARY.md](docs/DATA_DICTIONARY.md), [docs/DATA_QUALITY.md](docs/DATA_QUALITY.md) |
-| **Snowflake** | The same 20 tables created and loaded from `data/warehouse/*.csv` (stage + `COPY INTO`), and the decision queries in Snowflake SQL. Both scripts are generated from the local schema and queries, so they cannot drift. | [`snowflake/`](snowflake) |
+| **SQL** | A star schema (dimensions for date, office, client suburb, practice area, fee earner, client, matter, department, marketing channel; facts for invoices, time, P&L, trust, staffing, intake, supplier orders) with a data-quality suite and 14 analysis queries. Queries 11–14 answer the hiring, staffing, marketing and branch-site questions and are **tested against the dashboard's own numbers**. | [`warehouse/`](warehouse), [`sql/analysis/`](sql/analysis), [docs/DATA_MODEL.md](docs/DATA_MODEL.md), [docs/DATA_DICTIONARY.md](docs/DATA_DICTIONARY.md), [docs/DATA_QUALITY.md](docs/DATA_QUALITY.md) |
+| **Snowflake** | The same 21 tables created and loaded from `data/warehouse/*.csv` (stage + `COPY INTO`), and the decision queries in Snowflake SQL. Both scripts are generated from the local schema and queries, so they cannot drift. | [`snowflake/`](snowflake) |
 | **Excel + Power Query** | The Principal's Decision Pack: five data sheets (P&L, where to hire, staffing, marketing, receivables) and a summary that is formulas only. Power Query refreshes the data sheets straight from this repository, and one query rebuilds staffing by merging three warehouse tables. | [`excel/`](excel) |
-| **Power BI** | The full dashboard and Decision Simulator as a Power BI project: one semantic model over the warehouse, about 290 DAX measures, 22 pages (one per platform, plus a matter map). The Simulator's formulas are generated from one spec that is tested against the Python engine, and a Check page compares every DAX result with it. | [`powerbi/`](powerbi) · [docs](docs/POWERBI.md) |
+| **Power BI** | The full dashboard and Decision Simulator as a Power BI project: one semantic model over the warehouse, about 295 DAX measures, 22 pages (one per platform, plus a catchment map that shows where a new branch would reach the most clients). The Simulator's formulas are generated from one spec that is tested against the Python engine, and a Check page compares every DAX result with it. | [`powerbi/`](powerbi) · [docs](docs/POWERBI.md) |
 | **Python** | The engine behind everything: the simulated firm, the metric definitions and the Simulator (`core/simulate.py`), which the SQL and DAX results are tested against. | [`core/`](core) |
 
 ```bash

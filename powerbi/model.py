@@ -13,12 +13,16 @@ from core import simulate as S
 from . import sim_spec as SP
 from .tmdl import Column, Measure, Table, relationship, q
 
+from core.ref import AS_OF as _AS_OF
+AS_OF_KEY = _AS_OF.strftime("%Y%m%d")
+LTM_START_KEY = (_AS_OF - pd.DateOffset(years=1)).strftime("%Y%m%d")      # opened after this key = in the last 12 months
+
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_BASE_URL = "https://raw.githubusercontent.com/brianphu2310/law-firm-decision-support/main/"
 DEFAULT_PERIOD = "FY26 Q1 QTD"
 
 WAREHOUSE = [("Date", "dim_date"), ("Branch", "dim_branch"), ("Attorney", "dim_attorney"), ("Client", "dim_client"),
-             ("Department", "dim_department"), ("Channel", "dim_marketing_channel"), ("Matter", "dim_matter"),
+             ("Department", "dim_department"), ("Channel", "dim_marketing_channel"), ("Matter", "dim_matter"), ("Suburb", "dim_suburb"),
              ("Practice Area", "dim_practice_area"), ("Scenario", "dim_scenario"), ("Attorney Month", "fact_attorney_month"),
              ("Invoice", "fact_invoice"), ("Matter Position", "fact_matter_position"), ("Funnel", "fact_monthly_funnel"),
              ("PnL", "fact_monthly_pnl"), ("Snapshot", "fact_monthly_snapshot"), ("Staffing", "fact_staffing"),
@@ -30,7 +34,8 @@ ANALYSIS = [("Period", "period"), ("Period Month", "period_month"), ("Period Bal
             ("FY Outlook", "fy_outlook"), ("FY Summary", "fy_summary"), ("Deadlines", "deadlines"), ("Cards", "cards"), ("RapidPay", "rapidpay"),
             ("Commissions", "commissions"), ("Platforms", "platforms"), ("Platform Cashflow", "platform_cashflow"),
             ("Platform Scores", "platform_scores"), ("Platform Risks", "platform_risks"), ("Platform Gantt", "platform_gantt"),
-            ("Platform NPV Grid", "platform_npv_grid"), ("Sim Expected", "sim_expected"), ("Answers", "answers"), ("Answer Chart", "answer_chart")]
+            ("Platform NPV Grid", "platform_npv_grid"), ("Sim Expected", "sim_expected"), ("Answers", "answers"), ("Answer Chart", "answer_chart"),
+            ("Branch Sites", "branch_sites")]
 DATE_COLS = {"full_date", "month_start_date", "Start", "End", "PriorStart", "PriorEnd", "week_start", "month", "date"}
 INT_SUFFIX = ("_key", "Key", "Order", "order")
 HIDE = {"Period Month", "Period Balance", "Sim Expected"}
@@ -46,6 +51,7 @@ RELATIONSHIPS = [
     ("Matter", "client_key", "Client", "client_key"), ("Matter", "practice_area_key", "Practice Area", "practice_area_key"),
     ("Matter", "attorney_key", "Attorney", "attorney_key"), ("Matter", "branch_key", "Branch", "branch_key"),
     ("Matter Position", "matter_key", "Matter", "matter_key"), ("Matter", "country", "Country Geo", "Country"),
+    ("Matter", "suburb_key", "Suburb", "suburb_key"),
     ("Funnel", "month_start_date_key", "Date", "date_key"), ("Snapshot", "month_start_date_key", "Date", "date_key"),
     ("Monthly Extra", "MonthKey", "Date", "date_key"),
     ("Staffing", "branch_key", "Branch", "branch_key"), ("Staffing", "department_key", "Department", "department_key"),
@@ -119,8 +125,10 @@ def import_table(name, folder, file):
                      "balance", "value", "rev", "op", "pay", "benefit", "billed", "oneoff", "runrate", "tco", "year1", "tco", "rate", "saving", "net", "pv", "closing", "in_", "out_", "budget")
             if any(x in lc for x in ("util", "margin", "share", "realisation", "conversion", "growth", "irr", "weight", "fraction", "r_rev", "r_cost", "progress")):
                 fmt = PCT
-            elif lc == "days_open":
+            elif lc == "days_open" or lc == "population":
                 fmt = NUM
+            elif lc.startswith("km"):
+                fmt = NUM1
             elif lc in ("needed", "gap", "score", "priority", "decision", "days_to_pay", "dso", "lockup", "days") or lc.startswith(("days", "dso")):
                 fmt = NUM1
             elif any(x in lc for x in counts) and not any(lc.startswith(x) for x in ("cost", "fees")):
@@ -150,6 +158,15 @@ def import_table(name, folder, file):
         tcols.append(Column("Place", "string", expression='[branch_name] & " NSW, Australia"', category="Place"))
         tcols.append(Column("Latitude", "double", expression=sw(0), category="Latitude", summarize="none"))
         tcols.append(Column("Longitude", "double", expression=sw(1), category="Longitude", summarize="none"))
+    if name == "Suburb":
+        for c in tcols:
+            if c.name in ("latitude", "longitude"):
+                c.category, c.summarize = c.name.capitalize(), "none"
+        tcols.append(Column("Place", "string", expression='[suburb] & ", NSW, Australia"', category="Place"))
+        tcols.append(Column("Distance band", "string", expression='IF( [km_to_nearest_branch] <= 5, "Under 5 km", '
+                                                                  'IF( [km_to_nearest_branch] <= 10, "5–10 km", "Over 10 km" ) )', sort_by="Band order"))
+        tcols.append(Column("Band order", "int64", expression='IF( [km_to_nearest_branch] <= 5, 1, IF( [km_to_nearest_branch] <= 10, 2, 3 ) )',
+                            fmt="0", hidden=True))
     if name == "Period":
         for c in tcols:
             if c.name == "Period":
@@ -378,6 +395,9 @@ def descriptive_measures():
     # matters
     add("Matter Count", "COUNTROWS( 'Matter' )", NUM, "Matters")
     add("Open Matters", "CALCULATE( COUNTROWS( 'Matter' ), 'Matter'[status] <> \"Closed\" )", NUM, "Matters")
+    add("Matters Last 12 Months", "CALCULATE( COUNTROWS( 'Matter' ), REMOVEFILTERS( 'Date' ), 'Matter'[opened_date_key] > " + LTM_START_KEY
+        + ", 'Matter'[opened_date_key] <= " + AS_OF_KEY + " )", NUM, "Matters",
+        desc="Matters opened in the 12 months to the as-of date, whatever the Period slicer says (the catchment map and branch-site analysis).")
     add("Matter WIP", "SUM( 'Matter Position'[wip_balance] )", MONEY, "Matters")
     add("Matter Billed", "SUM( 'Matter Position'[billed_to_date] )", MONEY, "Matters")
     add("Matter Estimated Value", "SUM( 'Matter Position'[estimated_value] )", MONEY, "Matters")

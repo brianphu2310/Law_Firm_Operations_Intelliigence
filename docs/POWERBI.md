@@ -1,6 +1,6 @@
 # Power BI report
 
-The project's front end: the whole dashboard and the Decision Simulator as a Power BI project, 22 pages (15 report pages plus one per platform), about 290 DAX measures,
+The project's front end: the whole dashboard and the Decision Simulator as a Power BI project, 22 pages (15 report pages plus one per platform), about 295 DAX measures,
 one semantic model over the warehouse. It lives in `powerbi/` as a **Power BI Project (.pbip)**: plain text files
 (TMDL for the model, PBIR JSON for the report) that Git can diff and CI can test.
 
@@ -76,6 +76,18 @@ python -m powerbi.build        # data/powerbi/*.csv, then the .pbip project
 
 ## Matters map
 
-`Matters · Map` (a sub-tab of Matters) shows matters by client country and open matters by office (Richmond, Camden, Liverpool), with the same status, area and office slicers as the ledger. The Power BI `map` visual geocodes names through Bing/Azure Maps, so it has to be allowed in Power BI Desktop (File → Options → Security → "Use Map and Filled Map visuals"); the country and office tables also carry latitude and longitude in case geocoding is off.
+`Matters · Map` (a sub-tab of Matters) answers the "where" half of the branch question:
 
-The browser preview draws its own basemaps from Natural Earth (public domain) via the `world-atlas` package; `python -m powerbi.geo <world-atlas dir>` rebuilds `powerbi/assets/basemaps.json`.
+- **Where clients come from**: Australian matters opened in the last 12 months by client suburb, coloured by the distance to the
+  nearest office (under 5 km, 5–10 km, over 10 km). The Overview carries a small copy of it.
+- **Where a new branch would help most**: for every suburb, the matters from clients more than 10 km from every office that a new office
+  there would bring within 10 km (`core/catchment.py`, the same rules as `sql/analysis/14_branch_site.sql`; a test checks they agree).
+- Matters by client country, and the distance bands as a column chart.
+
+Client suburbs are **sample data**: each Australian matter's suburb is drawn by an indicative population and by distance from the office
+that handles it, so the result shows how the analysis works, not a real market study.
+
+The Power BI `map` visual uses the suburb's latitude and longitude, so it does not depend on geocoding names, but map visuals still have to be
+allowed in Power BI Desktop (File → Options → Security → "Use Map and Filled Map visuals"). The browser preview draws its own basemap from
+Natural Earth (public domain, via the `world-atlas` package; `python -m powerbi.geo <world-atlas dir>` rebuilds
+`powerbi/assets/basemaps.json`) and adds two reference marks Power BI does not: today's offices and the best site found.

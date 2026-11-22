@@ -36,13 +36,14 @@ REQUIRED = {
     "fact_monthly_pnl": ["fees", "revenue", "total_costs", "operating_profit", "billable_hours"],
 }
 UNIQUE = {"fact_invoice": ["invoice_number"], "dim_matter": ["matter_id"], "dim_client": ["client_name"], "dim_attorney": ["attorney_short"],
-          "dim_branch": ["branch_name"], "dim_date": ["full_date"]}
+          "dim_branch": ["branch_name"], "dim_suburb": ["suburb"], "dim_date": ["full_date"]}
 FOREIGN_KEYS = [
     ("dim_attorney", "home_branch_key", "dim_branch", "branch_key"), ("dim_attorney", "start_date_key", "dim_date", "date_key"),
     ("dim_client", "primary_practice_area_key", "dim_practice_area", "practice_area_key"),
     ("dim_client", "relationship_attorney_key", "dim_attorney", "attorney_key"),
     ("dim_matter", "client_key", "dim_client", "client_key"), ("dim_matter", "practice_area_key", "dim_practice_area", "practice_area_key"),
     ("dim_matter", "attorney_key", "dim_attorney", "attorney_key"), ("dim_matter", "branch_key", "dim_branch", "branch_key"),
+    ("dim_matter", "suburb_key", "dim_suburb", "suburb_key"), ("dim_suburb", "nearest_branch_key", "dim_branch", "branch_key"),
     ("dim_matter", "opened_date_key", "dim_date", "date_key"), ("dim_matter", "closed_date_key", "dim_date", "date_key"),
     ("fact_invoice", "client_key", "dim_client", "client_key"), ("fact_invoice", "practice_area_key", "dim_practice_area", "practice_area_key"),
     ("fact_invoice", "attorney_key", "dim_attorney", "attorney_key"), ("fact_invoice", "branch_key", "dim_branch", "branch_key"),
@@ -132,6 +133,8 @@ def validity(con):
         con, "SELECT COUNT(*) FROM fact_invoice WHERE issue_date_key > ? OR paid_date_key > ?", AS_OF_KEY, AS_OF_KEY))
     yield _chk(V, "invoices are issued on weekdays", 0, _scalar(
         con, "SELECT COUNT(*) FROM fact_invoice i JOIN dim_date d ON d.date_key = i.issue_date_key WHERE d.is_weekend = 1"))
+    yield _chk(V, "every Australian matter has a client suburb and no overseas matter has one", 0, _scalar(
+        con, "SELECT COUNT(*) FROM dim_matter WHERE (country = 'Australia') <> (suburb_key IS NOT NULL)"))
     yield _chk(V, "matter closed date is not before opened date", 0, _scalar(con, "SELECT COUNT(*) FROM dim_matter WHERE closed_date_key < opened_date_key"))
     yield _chk(V, "closed matters carry no WIP", 0, _scalar(
         con, "SELECT COUNT(*) FROM dim_matter m JOIN fact_matter_position p USING (matter_key) WHERE m.status = 'Closed' AND p.wip_balance <> 0"))

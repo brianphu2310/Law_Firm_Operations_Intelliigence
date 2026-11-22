@@ -1,16 +1,16 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
-  "name": "970733a5c73590119d6c",
+  "name": "c23058fccf76276bbcd7",
   "position": {
-    "x": 734.0,
-    "y": 482.0,
+    "x": 1029.18125,
+    "y": 402.0,
     "z": 31000,
-    "width": 534.05625,
-    "height": 230.0,
+    "width": 238.875,
+    "height": 310.0,
     "tabOrder": 31000
   },
   "visual": {
-    "visualType": "clusteredBarChart",
+    "visualType": "clusteredColumnChart",
     "query": {
       "queryState": {
         "Category": {
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Branch"
+                      "Entity": "Suburb"
                     }
                   },
-                  "Property": "branch_name"
+                  "Property": "Distance band"
                 }
               },
-              "queryRef": "Branch.branch_name",
-              "nativeQueryRef": "branch_name"
+              "queryRef": "Suburb.Distance band",
+              "nativeQueryRef": "Distance band"
             }
           ]
         },
@@ -41,30 +41,33 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "Matter Count"
+                  "Property": "Matters Last 12 Months"
                 }
               },
-              "queryRef": "Measures.Matter Count",
-              "nativeQueryRef": "All matters",
-              "displayName": "All matters"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Measures"
-                    }
-                  },
-                  "Property": "Open Matters"
-                }
-              },
-              "queryRef": "Measures.Open Matters",
-              "nativeQueryRef": "Open",
-              "displayName": "Open"
+              "queryRef": "Measures.Matters Last 12 Months",
+              "nativeQueryRef": "Matters",
+              "displayName": "Matters"
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Suburb"
+                  }
+                },
+                "Property": "Distance band"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": false
       }
     },
     "objects": {
@@ -74,7 +77,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -154,6 +157,131 @@
             }
           }
         }
+      ],
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#0a8496'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Suburb"
+                          }
+                        },
+                        "Property": "Distance band"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Under 5 km'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#f2b134'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Suburb"
+                          }
+                        },
+                        "Property": "Distance band"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'5–10 km'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#e2665a'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Suburb"
+                          }
+                        },
+                        "Property": "Distance band"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Over 10 km'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
       ]
     },
     "visualContainerObjects": {
@@ -170,7 +298,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Matters by office'"
+                  "Value": "'Distance to nearest office'"
                 }
               }
             },
@@ -194,6 +322,44 @@
                   "expr": {
                     "Literal": {
                       "Value": "'#0f172a'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Matters, last 12 months'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9.0D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#64748b'"
                     }
                   }
                 }

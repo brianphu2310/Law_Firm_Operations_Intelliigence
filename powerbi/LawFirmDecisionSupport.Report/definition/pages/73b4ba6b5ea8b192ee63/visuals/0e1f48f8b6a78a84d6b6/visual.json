@@ -20,14 +20,71 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Branch"
+                      "Entity": "Suburb"
                     }
                   },
                   "Property": "Place"
                 }
               },
-              "queryRef": "Branch.Place",
+              "queryRef": "Suburb.Place",
               "nativeQueryRef": "Place"
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Suburb"
+                    }
+                  },
+                  "Property": "Distance band"
+                }
+              },
+              "queryRef": "Suburb.Distance band",
+              "nativeQueryRef": "Distance to nearest office",
+              "displayName": "Distance to nearest office"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Suburb"
+                    }
+                  },
+                  "Property": "latitude"
+                }
+              },
+              "queryRef": "Suburb.latitude",
+              "nativeQueryRef": "Latitude",
+              "displayName": "Latitude"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Suburb"
+                    }
+                  },
+                  "Property": "longitude"
+                }
+              },
+              "queryRef": "Suburb.longitude",
+              "nativeQueryRef": "Longitude",
+              "displayName": "Longitude"
             }
           ]
         },
@@ -41,12 +98,12 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "Open Matters"
+                  "Property": "Matters Last 12 Months"
                 }
               },
-              "queryRef": "Measures.Open Matters",
-              "nativeQueryRef": "Open matters",
-              "displayName": "Open matters"
+              "queryRef": "Measures.Matters Last 12 Months",
+              "nativeQueryRef": "Matters, last 12 months",
+              "displayName": "Matters, last 12 months"
             }
           ]
         }
@@ -59,7 +116,7 @@
             "bubbleSize": {
               "expr": {
                 "Literal": {
-                  "Value": "8.0D"
+                  "Value": "6.0D"
                 }
               }
             }
@@ -69,21 +126,129 @@
       "dataPoint": [
         {
           "properties": {
-            "defaultColor": {
+            "fill": {
               "solid": {
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2f7fd8'"
+                      "Value": "'#0a8496'"
                     }
                   }
                 }
               }
             }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Suburb"
+                          }
+                        },
+                        "Property": "Distance band"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Under 5 km'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#f2b134'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Suburb"
+                          }
+                        },
+                        "Property": "Distance band"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'5–10 km'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#e2665a'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Suburb"
+                          }
+                        },
+                        "Property": "Distance band"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Over 10 km'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
           }
         }
       ],
-      "categoryLabels": [
+      "legend": [
         {
           "properties": {
             "show": {
@@ -93,10 +258,10 @@
                 }
               }
             },
-            "fontSize": {
+            "position": {
               "expr": {
                 "Literal": {
-                  "Value": "9.0D"
+                  "Value": "'Bottom'"
                 }
               }
             }
@@ -131,7 +296,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Open matters by office'"
+                  "Value": "'Where clients come from'"
                 }
               }
             },
@@ -176,7 +341,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Western Sydney · full map: Matters → Map'"
+                  "Value": "'44% of matters from 10+ km away · gap: Rouse Hill'"
                 }
               }
             },

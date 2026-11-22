@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "421609b423ee1dc094fb",
   "position": {
-    "x": 199.94375,
-    "y": 482.0,
+    "x": 648.6875,
+    "y": 402.0,
     "z": 30000,
-    "width": 528.9375,
-    "height": 230.0,
+    "width": 375.375,
+    "height": 310.0,
     "tabOrder": 30000
   },
   "visual": {
@@ -20,75 +20,90 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Country Geo"
+                      "Entity": "Branch Sites"
                     }
                   },
-                  "Property": "Country"
+                  "Property": "candidate_site"
                 }
               },
-              "queryRef": "Country Geo.Country",
-              "nativeQueryRef": "Country",
-              "displayName": "Country"
+              "queryRef": "Branch Sites.candidate_site",
+              "nativeQueryRef": "Site",
+              "displayName": "Site"
             },
             {
               "field": {
-                "Measure": {
+                "Aggregation": {
                   "Expression": {
-                    "SourceRef": {
-                      "Entity": "Measures"
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Branch Sites"
+                        }
+                      },
+                      "Property": "underserved_matters_ltm"
                     }
                   },
-                  "Property": "Matter Count"
+                  "Function": 0
                 }
               },
-              "queryRef": "Measures.Matter Count",
-              "nativeQueryRef": "Matters",
-              "displayName": "Matters"
+              "queryRef": "Sum(Branch Sites.underserved_matters_ltm)",
+              "nativeQueryRef": "Matters in reach",
+              "displayName": "Matters in reach"
             },
             {
               "field": {
-                "Measure": {
+                "Aggregation": {
                   "Expression": {
-                    "SourceRef": {
-                      "Entity": "Measures"
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Branch Sites"
+                        }
+                      },
+                      "Property": "est_value_ltm"
                     }
                   },
-                  "Property": "Open Matters"
+                  "Function": 0
                 }
               },
-              "queryRef": "Measures.Open Matters",
-              "nativeQueryRef": "Open",
-              "displayName": "Open"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Measures"
-                    }
-                  },
-                  "Property": "Matter Estimated Value"
-                }
-              },
-              "queryRef": "Measures.Matter Estimated Value",
+              "queryRef": "Sum(Branch Sites.est_value_ltm)",
               "nativeQueryRef": "Est. value",
               "displayName": "Est. value"
             },
             {
               "field": {
-                "Measure": {
+                "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Branch Sites"
                     }
                   },
-                  "Property": "Matter WIP"
+                  "Property": "nearest_office"
                 }
               },
-              "queryRef": "Measures.Matter WIP",
-              "nativeQueryRef": "WIP",
-              "displayName": "WIP"
+              "queryRef": "Branch Sites.nearest_office",
+              "nativeQueryRef": "Nearest office",
+              "displayName": "Nearest office"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Branch Sites"
+                        }
+                      },
+                      "Property": "km_to_nearest_office"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Branch Sites.km_to_nearest_office)",
+              "nativeQueryRef": "km",
+              "displayName": "km"
             }
           ]
         }
@@ -97,13 +112,18 @@
         "sort": [
           {
             "field": {
-              "Measure": {
+              "Aggregation": {
                 "Expression": {
-                  "SourceRef": {
-                    "Entity": "Measures"
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "Branch Sites"
+                      }
+                    },
+                    "Property": "underserved_matters_ltm"
                   }
                 },
-                "Property": "Matter Count"
+                "Function": 0
               }
             },
             "direction": "Descending"
@@ -205,7 +225,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'By country'"
+                  "Value": "'Where a new branch would help most'"
                 }
               }
             },
@@ -229,6 +249,44 @@
                   "expr": {
                     "Literal": {
                       "Value": "'#0f172a'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Last year''s matters from 10+ km away that a new office would bring within 10 km'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9.0D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#64748b'"
                     }
                   }
                 }

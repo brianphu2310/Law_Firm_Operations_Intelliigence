@@ -224,6 +224,8 @@ def measures(E: Engine):
     m["Area Fees"] = lambda c: ps("Time by Area", "fees_realised", c)
     m["Open Matters"] = lambda c: int((E.filt("Matter", c)["status"] != "Closed").sum())
     m["Matter Count"] = lambda c: len(E.filt("Matter", c))
+    ltm0, asof = int(MD.LTM_START_KEY), int(MD.AS_OF_KEY)
+    m["Matters Last 12 Months"] = lambda c: (lambda d: int(((d["opened_date_key"] > ltm0) & (d["opened_date_key"] <= asof)).sum()))(E.filt("Matter", c))
     m["Matter WIP"] = lambda c: float(E.filt("Matter Position", c)["wip_balance"].sum())
     m["Matter Billed"] = lambda c: float(E.filt("Matter Position", c)["billed_to_date"].sum())
     m["Matter Estimated Value"] = lambda c: float(E.filt("Matter Position", c)["estimated_value"].sum())
@@ -558,12 +560,26 @@ def visual_data(E, meas, fmts, v, ctx):
         cr = ref(projs["Category"][0])
         sr = ref(projs["Size"][0])
         pts = []
+        sub = E.W["Suburb"].set_index("Place") if cr[1] == "Suburb" else None
         for (cv,) in combos(E, [cr], ctx):
             val = ev(sr, ctx.plus((cr[1], cr[2]), cv))
-            ll = COUNTRY_LATLON.get(cv) or OFFICE_LATLON.get(str(cv).split(" NSW")[0])
+            if sub is not None:
+                r = sub.loc[cv]
+                ll, band = (float(r["latitude"]), float(r["longitude"])), r["Distance band"]
+            else:
+                ll, band = COUNTRY_LATLON.get(cv) or OFFICE_LATLON.get(str(cv).split(" NSW")[0]), None
             if val and ll:
-                pts.append({"label": str(cv).split(" NSW")[0], "lat": ll[0], "lon": ll[1], "size": val})
-        return {"points": pts, "basemap": "world" if cr[1] == "Country Geo" else "sydney", "sizeLabel": projs["Size"][0].get("displayName", "")}
+                pts.append({"label": str(cv).split(",")[0].split(" NSW")[0], "lat": ll[0], "lon": ll[1], "size": val, "band": band})
+        out = {"points": pts, "basemap": "world" if cr[1] == "Country Geo" else "sydney", "sizeLabel": projs["Size"][0].get("displayName", "")}
+        if sub is not None:
+            from core.ref import BRANCHES
+            from core.catchment import branch_sites
+            out["bands"] = RP.BAND_COLOURS
+            out["offices"] = [[b["name"], b["lat"], b["lon"]] for b in BRANCHES]
+            top = E.W["Branch Sites"].sort_values("site_rank").iloc[0]
+            r = E.W["Suburb"].set_index("suburb").loc[top["candidate_site"]]
+            out["site"] = [top["candidate_site"], float(r["latitude"]), float(r["longitude"]), int(top["underserved_matters_ltm"])]
+        return out
     cats = (projs.get("Category") or projs.get("Rows") or [])
     series = (projs.get("Series") or projs.get("Columns") or [])
     vals = (projs.get("Y") or []) + (projs.get("Values") if t in ("pivotTable",) else [])
@@ -636,6 +652,12 @@ def visual_data(E, meas, fmts, v, ctx):
         pcol = [meas[dp](ctx.plus((crefs[0][1], crefs[0][2]), d["cat"])) for d in data]
     except (KeyError, IndexError, TypeError):
         pass
+    try:
+        sel = {e["selector"]["data"][0]["scopeId"]["Comparison"]["Right"]["Literal"]["Value"].strip("'"): e["properties"]["fill"]["solid"]["color"]["expr"]["Literal"]["Value"].strip("'")
+               for e in vv["objects"]["dataPoint"]}
+        pcol = [sel.get(d["cat"]) for d in data]
+    except (KeyError, IndexError, TypeError):
+        pass
     return {"pointColors": pcol, "cats": [d["cat"] for d in data], "series": [clean(s) for s in svals] if srefs else [label(p) for p in vals],
             "multi": bool(srefs), "values": [d["vals"] for d in data], "y2": [d["y2"] for d in data],
             "y2names": [label(p) for p in y2], "vnames": [label(p) for p in vals], "kind": fk(vrefs[0]) if vrefs else "num",
@@ -693,6 +715,10 @@ def sim_tables(E):
     W["Branch"]["Place"] = W["Branch"]["branch_name"] + " NSW, Australia"
     W["Branch"]["Latitude"] = W["Branch"]["branch_name"].map(lambda b: OFFICE_LATLON[b][0])
     W["Branch"]["Longitude"] = W["Branch"]["branch_name"].map(lambda b: OFFICE_LATLON[b][1])
+    sb = W["Suburb"]
+    sb["Place"] = sb["suburb"] + ", NSW, Australia"
+    sb["Band order"] = np.where(sb["km_to_nearest_branch"] <= 5, 1, np.where(sb["km_to_nearest_branch"] <= 10, 2, 3))
+    sb["Distance band"] = sb["Band order"].map({1: "Under 5 km", 2: "5–10 km", 3: "Over 10 km"})
     W["P&L Line"] = pd.DataFrame([dict(Line=l, Order=o) for l, _, _, _, o in MD.PNL_LINES])
     W["Funnel Stage"] = pd.DataFrame(dict(Stage=["Inquiries", "Consultations booked", "Consultations held", "Engagement letters sent", "New matters opened"],
                                           Order=[1, 2, 3, 4, 5]))
@@ -802,7 +828,7 @@ def build():
     from core import platforms as PL
     inp = PL.base_inputs(M)
     top = PL.ranking(inp).sort_values("rank").iloc[0]
-    facts = dict(run_rate=f"${PL.run_rate(PL.BASELINE, inp):,.0f}", best=top["name"], npv=f"+${top['npv']:,.0f}", answers=B.load_answers())
+    facts = dict(run_rate=f"${PL.run_rate(PL.BASELINE, inp):,.0f}", best=top["name"], npv=f"+${top['npv']:,.0f}", answers=B.load_answers(), catchment=__import__("core.catchment", fromlist=["headline"]).headline(M))
     RP.ALL_FIELDS.clear()
     pages = RP.build_pages(facts, levers)
     periods = list(W["Period"].sort_values("Order")["Period"])
@@ -875,14 +901,15 @@ def build():
 
 
 STATIC = {"Where to Hire", "Dept Workload", "Marketing", "Cash Forecast", "FY Outlook", "FY Summary", "Deadlines", "Cards", "RapidPay",
-          "Commissions", "Supplier Order", "Staffing", "Matter", "Matter Position", "Platforms", "Attorney", "Department", "Branch", "Trust Txn", "Client"}
+          "Commissions", "Supplier Order", "Staffing", "Matter", "Matter Position", "Platforms", "Attorney", "Department", "Branch", "Trust Txn", "Client",
+          "Suburb", "Branch Sites"}
 
 
 def period_dependent(tables_used, v):
     meas_names = [pr["field"]["Measure"]["Property"] for r in v["visual"].get("query", {}).get("queryState", {}).values()
                   for pr in r["projections"] if "Measure" in pr["field"]]
     static_measures = {"Marketing Spend", "Marketing Matters", "Cost per Matter", "Fees per Dollar", "Hire First", "Market Wage Growth",
-                       "Deadlines Next 30 Days", "Deadlines Caption", "Deadline Count", "Matter Count", "Open Matters", "Matter WIP",
+                       "Deadlines Next 30 Days", "Deadlines Caption", "Deadline Count", "Matter Count", "Matters Last 12 Months", "Open Matters", "Matter WIP",
                        "Matter Billed", "Matter Estimated Value", "Supplier Spend", "Card Spend", "Cash Inflow", "Cash Outflow",
                        "Cash Closing", "Cash Minimum", "Cash Low Point", "FY Forecast Profit", "FY Profit Gap", "FY Path Actual Profit",
                        "FY Path Forecast Profit", "FY Path Budget Profit", "Headcount", "Answer", "Answer Evidence", "Answer Chart $", "Answer Chart Roles",

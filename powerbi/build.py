@@ -138,7 +138,7 @@ def main(export=True):
     inp = P.base_inputs(M)
     rk = P.ranking(inp).sort_values("rank")
     top = rk.iloc[0]
-    facts = dict(run_rate=f"${P.run_rate(P.BASELINE, inp):,.0f}", best=top["name"], npv=f"+${top['npv']:,.0f}", answers=load_answers())
+    facts = dict(run_rate=f"${P.run_rate(P.BASELINE, inp):,.0f}", best=top["name"], npv=f"+${top['npv']:,.0f}", answers=load_answers(), catchment=__import__("core.catchment", fromlist=["headline"]).headline(M))
     tbls = write_model(consts, tables, levers, ctx)
     pages = write_report(levers, facts)
     write_pbip()
