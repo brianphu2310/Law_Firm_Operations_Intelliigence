@@ -38,13 +38,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Attorney Utilisation"
                 }
               },
-              "queryRef": "Measures.Attorney Utilisation",
+              "queryRef": "Key Measures.Attorney Utilisation",
               "nativeQueryRef": "Utilisation",
               "displayName": "Utilisation"
             }
@@ -58,7 +58,7 @@
               "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Measures"
+                    "Entity": "Key Measures"
                   }
                 },
                 "Property": "Attorney Utilisation"

@@ -38,13 +38,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Card Spend"
                 }
               },
-              "queryRef": "Measures.Card Spend",
+              "queryRef": "Key Measures.Card Spend",
               "nativeQueryRef": "Spend",
               "displayName": "Spend"
             }
@@ -58,7 +58,7 @@
               "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Measures"
+                    "Entity": "Key Measures"
                   }
                 },
                 "Property": "Card Spend"

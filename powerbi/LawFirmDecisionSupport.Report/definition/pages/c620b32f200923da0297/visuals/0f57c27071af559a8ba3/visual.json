@@ -39,13 +39,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Trend Trust"
                 }
               },
-              "queryRef": "Measures.Trend Trust",
+              "queryRef": "Key Measures.Trend Trust",
               "nativeQueryRef": "Trust balance",
               "displayName": "Trust balance"
             }

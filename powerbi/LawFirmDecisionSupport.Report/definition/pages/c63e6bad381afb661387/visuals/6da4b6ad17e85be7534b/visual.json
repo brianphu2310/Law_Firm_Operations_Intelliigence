@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Top Biller Fees"
                 }
               },
-              "queryRef": "Measures.Top Biller Fees",
+              "queryRef": "Key Measures.Top Biller Fees",
               "nativeQueryRef": "Top biller fees",
               "displayName": "Top biller fees"
             }

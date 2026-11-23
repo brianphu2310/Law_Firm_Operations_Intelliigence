@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "FY Profit Gap"
                 }
               },
-              "queryRef": "Measures.FY Profit Gap",
+              "queryRef": "Key Measures.FY Profit Gap",
               "nativeQueryRef": "FY26 forecast vs budget",
               "displayName": "FY26 forecast vs budget"
             }

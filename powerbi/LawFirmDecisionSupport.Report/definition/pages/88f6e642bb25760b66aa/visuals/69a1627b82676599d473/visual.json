@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Matters Opened"
                 }
               },
-              "queryRef": "Measures.Matters Opened",
+              "queryRef": "Key Measures.Matters Opened",
               "nativeQueryRef": "New matters this period",
               "displayName": "New matters this period"
             }

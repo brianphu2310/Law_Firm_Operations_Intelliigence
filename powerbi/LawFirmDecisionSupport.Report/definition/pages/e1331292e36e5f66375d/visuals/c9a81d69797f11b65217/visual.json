@@ -39,13 +39,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Trend Operating Profit"
                 }
               },
-              "queryRef": "Measures.Trend Operating Profit",
+              "queryRef": "Key Measures.Trend Operating Profit",
               "nativeQueryRef": "Profit",
               "displayName": "Profit"
             }
@@ -58,13 +58,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Trend Budget Operating Profit"
                 }
               },
-              "queryRef": "Measures.Trend Budget Operating Profit",
+              "queryRef": "Key Measures.Trend Budget Operating Profit",
               "nativeQueryRef": "Budget",
               "displayName": "Budget"
             }

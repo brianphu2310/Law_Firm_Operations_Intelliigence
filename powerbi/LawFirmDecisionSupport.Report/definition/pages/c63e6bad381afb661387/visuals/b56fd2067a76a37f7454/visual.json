@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Effective Rate"
                 }
               },
-              "queryRef": "Measures.Effective Rate",
+              "queryRef": "Key Measures.Effective Rate",
               "nativeQueryRef": "Effective rate per hour",
               "displayName": "Effective rate per hour"
             }

@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Trust Funds"
                 }
               },
-              "queryRef": "Measures.Trust Funds",
+              "queryRef": "Key Measures.Trust Funds",
               "nativeQueryRef": "Trust funds held (period end)",
               "displayName": "Trust funds held (period end)"
             }

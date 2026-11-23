@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Receivables Balance"
                 }
               },
-              "queryRef": "Measures.Receivables Balance",
+              "queryRef": "Key Measures.Receivables Balance",
               "nativeQueryRef": "Receivables (incl GST)",
               "displayName": "Receivables (incl GST)"
             }

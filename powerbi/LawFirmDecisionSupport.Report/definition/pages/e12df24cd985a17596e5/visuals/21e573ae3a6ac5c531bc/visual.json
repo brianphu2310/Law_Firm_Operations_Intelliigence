@@ -39,13 +39,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Cash Inflow"
                 }
               },
-              "queryRef": "Measures.Cash Inflow",
+              "queryRef": "Key Measures.Cash Inflow",
               "nativeQueryRef": "Money in",
               "displayName": "Money in"
             },
@@ -54,13 +54,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Cash Outflow"
                 }
               },
-              "queryRef": "Measures.Cash Outflow",
+              "queryRef": "Key Measures.Cash Outflow",
               "nativeQueryRef": "Money out",
               "displayName": "Money out"
             }
@@ -73,13 +73,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Cash Closing"
                 }
               },
-              "queryRef": "Measures.Cash Closing",
+              "queryRef": "Key Measures.Cash Closing",
               "nativeQueryRef": "Closing balance",
               "displayName": "Closing balance"
             },
@@ -88,13 +88,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Cash Minimum"
                 }
               },
-              "queryRef": "Measures.Cash Minimum",
+              "queryRef": "Key Measures.Cash Minimum",
               "nativeQueryRef": "Minimum balance",
               "displayName": "Minimum balance"
             }

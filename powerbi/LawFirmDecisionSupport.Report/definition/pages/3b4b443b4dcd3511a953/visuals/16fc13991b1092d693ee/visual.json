@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Fees per Dollar"
                 }
               },
-              "queryRef": "Measures.Fees per Dollar",
+              "queryRef": "Key Measures.Fees per Dollar",
               "nativeQueryRef": "Fees per marketing dollar",
               "displayName": "Fees per marketing dollar"
             }

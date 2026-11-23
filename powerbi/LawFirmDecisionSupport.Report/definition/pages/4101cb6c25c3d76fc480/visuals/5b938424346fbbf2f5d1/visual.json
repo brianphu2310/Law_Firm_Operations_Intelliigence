@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Client Receivables"
                 }
               },
-              "queryRef": "Measures.Client Receivables",
+              "queryRef": "Key Measures.Client Receivables",
               "nativeQueryRef": "Receivables",
               "displayName": "Receivables"
             }

@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Marketing Spend"
                 }
               },
-              "queryRef": "Measures.Marketing Spend",
+              "queryRef": "Key Measures.Marketing Spend",
               "nativeQueryRef": "Marketing spend (last 12 months)",
               "displayName": "Marketing spend (last 12 months)"
             }

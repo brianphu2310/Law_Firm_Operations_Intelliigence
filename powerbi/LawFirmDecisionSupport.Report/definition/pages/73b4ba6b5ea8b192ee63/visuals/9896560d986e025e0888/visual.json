@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Utilisation"
                 }
               },
-              "queryRef": "Measures.Utilisation",
+              "queryRef": "Key Measures.Utilisation",
               "nativeQueryRef": "Fee-earner utilisation",
               "displayName": "Fee-earner utilisation"
             }

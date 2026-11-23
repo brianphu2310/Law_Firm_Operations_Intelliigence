@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "WIP Balance"
                 }
               },
-              "queryRef": "Measures.WIP Balance",
+              "queryRef": "Key Measures.WIP Balance",
               "nativeQueryRef": "Work in progress",
               "displayName": "Work in progress"
             }

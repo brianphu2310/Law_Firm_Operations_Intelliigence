@@ -80,13 +80,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Attorney Break-even Hours"
                 }
               },
-              "queryRef": "Measures.Attorney Break-even Hours",
+              "queryRef": "Key Measures.Attorney Break-even Hours",
               "nativeQueryRef": "Break-even hours",
               "displayName": "Break-even hours"
             },
@@ -95,13 +95,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Attorney Contribution"
                 }
               },
-              "queryRef": "Measures.Attorney Contribution",
+              "queryRef": "Key Measures.Attorney Contribution",
               "nativeQueryRef": "Contribution",
               "displayName": "Contribution"
             }
@@ -115,7 +115,7 @@
               "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Measures"
+                    "Entity": "Key Measures"
                   }
                 },
                 "Property": "Attorney Contribution"

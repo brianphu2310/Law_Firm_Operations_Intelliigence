@@ -39,13 +39,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "FY Path Actual Profit"
                 }
               },
-              "queryRef": "Measures.FY Path Actual Profit",
+              "queryRef": "Key Measures.FY Path Actual Profit",
               "nativeQueryRef": "Actual",
               "displayName": "Actual"
             },
@@ -54,13 +54,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "FY Path Forecast Profit"
                 }
               },
-              "queryRef": "Measures.FY Path Forecast Profit",
+              "queryRef": "Key Measures.FY Path Forecast Profit",
               "nativeQueryRef": "Forecast",
               "displayName": "Forecast"
             }
@@ -73,13 +73,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "FY Path Budget Profit"
                 }
               },
-              "queryRef": "Measures.FY Path Budget Profit",
+              "queryRef": "Key Measures.FY Path Budget Profit",
               "nativeQueryRef": "Budget",
               "displayName": "Budget"
             }

@@ -38,13 +38,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "P&L Actual"
                 }
               },
-              "queryRef": "Measures.P&L Actual",
+              "queryRef": "Key Measures.P&L Actual",
               "nativeQueryRef": "Actual",
               "displayName": "Actual"
             },
@@ -53,13 +53,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "P&L Budget"
                 }
               },
-              "queryRef": "Measures.P&L Budget",
+              "queryRef": "Key Measures.P&L Budget",
               "nativeQueryRef": "Budget",
               "displayName": "Budget"
             },
@@ -68,13 +68,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "P&L Variance"
                 }
               },
-              "queryRef": "Measures.P&L Variance",
+              "queryRef": "Key Measures.P&L Variance",
               "nativeQueryRef": "Variance",
               "displayName": "Variance"
             },
@@ -83,13 +83,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "P&L Variance %"
                 }
               },
-              "queryRef": "Measures.P&L Variance %",
+              "queryRef": "Key Measures.P&L Variance %",
               "nativeQueryRef": "Var %",
               "displayName": "Var %"
             }

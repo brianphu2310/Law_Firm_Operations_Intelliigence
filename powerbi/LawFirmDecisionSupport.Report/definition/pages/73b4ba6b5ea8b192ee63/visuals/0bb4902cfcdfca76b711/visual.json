@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Operating Profit"
                 }
               },
-              "queryRef": "Measures.Operating Profit",
+              "queryRef": "Key Measures.Operating Profit",
               "nativeQueryRef": "Operating profit this period",
               "displayName": "Operating profit this period"
             }

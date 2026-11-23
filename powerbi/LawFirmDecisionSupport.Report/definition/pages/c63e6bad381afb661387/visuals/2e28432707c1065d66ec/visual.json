@@ -39,13 +39,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Trend Attorney Utilisation"
                 }
               },
-              "queryRef": "Measures.Trend Attorney Utilisation",
+              "queryRef": "Key Measures.Trend Attorney Utilisation",
               "nativeQueryRef": "Utilisation",
               "displayName": "Utilisation"
             }

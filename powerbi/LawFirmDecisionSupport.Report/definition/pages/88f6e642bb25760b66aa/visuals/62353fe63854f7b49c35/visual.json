@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Matter Estimated Value"
                 }
               },
-              "queryRef": "Measures.Matter Estimated Value",
+              "queryRef": "Key Measures.Matter Estimated Value",
               "nativeQueryRef": "Estimated value (all matters)",
               "displayName": "Estimated value (all matters)"
             }

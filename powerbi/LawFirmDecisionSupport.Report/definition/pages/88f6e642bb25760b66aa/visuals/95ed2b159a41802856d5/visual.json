@@ -38,13 +38,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Matter Count"
                 }
               },
-              "queryRef": "Measures.Matter Count",
+              "queryRef": "Key Measures.Matter Count",
               "nativeQueryRef": "Matters",
               "displayName": "Matters"
             }

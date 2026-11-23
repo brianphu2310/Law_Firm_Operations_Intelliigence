@@ -39,13 +39,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Trend WIP"
                 }
               },
-              "queryRef": "Measures.Trend WIP",
+              "queryRef": "Key Measures.Trend WIP",
               "nativeQueryRef": "WIP",
               "displayName": "WIP"
             },
@@ -54,13 +54,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Trend Receivables"
                 }
               },
-              "queryRef": "Measures.Trend Receivables",
+              "queryRef": "Key Measures.Trend Receivables",
               "nativeQueryRef": "Receivables",
               "displayName": "Receivables"
             }

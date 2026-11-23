@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Profit vs Budget Caption"
                 }
               },
-              "queryRef": "Measures.Profit vs Budget Caption",
+              "queryRef": "Key Measures.Profit vs Budget Caption",
               "nativeQueryRef": " ",
               "displayName": " "
             }

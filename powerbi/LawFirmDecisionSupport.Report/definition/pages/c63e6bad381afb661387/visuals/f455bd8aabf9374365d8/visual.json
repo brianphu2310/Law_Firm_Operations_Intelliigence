@@ -38,13 +38,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Area Hours"
                 }
               },
-              "queryRef": "Measures.Area Hours",
+              "queryRef": "Key Measures.Area Hours",
               "nativeQueryRef": "Hours",
               "displayName": "Hours"
             }

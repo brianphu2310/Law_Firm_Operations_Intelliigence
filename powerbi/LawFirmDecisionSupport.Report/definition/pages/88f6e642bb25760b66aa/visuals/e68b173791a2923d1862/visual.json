@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Matter Billed"
                 }
               },
-              "queryRef": "Measures.Matter Billed",
+              "queryRef": "Key Measures.Matter Billed",
               "nativeQueryRef": "Billed to date",
               "displayName": "Billed to date"
             }

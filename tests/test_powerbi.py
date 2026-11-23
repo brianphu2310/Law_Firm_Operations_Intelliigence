@@ -173,6 +173,15 @@ def test_object_names_are_unique_ignoring_case(built):
     assert not (seen_measures & all_cols), seen_measures & all_cols
 
 
+def test_no_reserved_or_padded_names(built):
+    """Power BI Desktop refuses to open a project with a table called 'Measures' or a name with leading/trailing spaces."""
+    tbls, _, _ = built
+    for t in tbls:
+        assert t.name.strip().lower() != "measures", t.name
+        for n in [t.name] + [c.name for c in t.columns] + [m.name for m in t.measures]:
+            assert n == n.strip() and n and not any(ord(ch) < 32 for ch in n), repr(n)
+
+
 def test_relationship_columns_exist(built):
     tbls, _, _ = built
     cols, _ = _inventory(tbls)

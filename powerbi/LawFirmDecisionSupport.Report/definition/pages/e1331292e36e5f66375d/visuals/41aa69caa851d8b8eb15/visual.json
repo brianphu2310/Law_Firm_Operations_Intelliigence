@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "FY Forecast Profit"
                 }
               },
-              "queryRef": "Measures.FY Forecast Profit",
+              "queryRef": "Key Measures.FY Forecast Profit",
               "nativeQueryRef": "FY26 forecast profit",
               "displayName": "FY26 forecast profit"
             }

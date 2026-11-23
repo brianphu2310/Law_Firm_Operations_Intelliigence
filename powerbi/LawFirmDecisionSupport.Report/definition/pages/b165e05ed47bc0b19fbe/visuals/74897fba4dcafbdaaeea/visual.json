@@ -38,13 +38,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Platform Cumulative"
                 }
               },
-              "queryRef": "Measures.Platform Cumulative",
+              "queryRef": "Key Measures.Platform Cumulative",
               "nativeQueryRef": "Cumulative net benefit",
               "displayName": "Cumulative net benefit"
             }

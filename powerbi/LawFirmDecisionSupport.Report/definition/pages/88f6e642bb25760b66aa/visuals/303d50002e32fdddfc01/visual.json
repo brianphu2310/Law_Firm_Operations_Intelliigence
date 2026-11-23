@@ -39,13 +39,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Trend Matters Opened"
                 }
               },
-              "queryRef": "Measures.Trend Matters Opened",
+              "queryRef": "Key Measures.Trend Matters Opened",
               "nativeQueryRef": "Opened",
               "displayName": "Opened"
             },
@@ -54,13 +54,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Trend Matters Closed"
                 }
               },
-              "queryRef": "Measures.Trend Matters Closed",
+              "queryRef": "Key Measures.Trend Matters Closed",
               "nativeQueryRef": "Closed",
               "displayName": "Closed"
             }

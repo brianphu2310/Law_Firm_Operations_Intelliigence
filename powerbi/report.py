@@ -301,7 +301,7 @@ def nav_button(page, x, y, w, h, label, target, active):
 
 
 # ------------------------------------------------------------------------------------------------------------ pages --
-M = "Measures"
+M = "Key Measures"   # "Measures" is a reserved table name in Power BI
 SIM = "Simulator"
 
 

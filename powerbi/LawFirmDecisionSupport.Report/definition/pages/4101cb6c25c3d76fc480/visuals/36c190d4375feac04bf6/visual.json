@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Top 5 Client Share"
                 }
               },
-              "queryRef": "Measures.Top 5 Client Share",
+              "queryRef": "Key Measures.Top 5 Client Share",
               "nativeQueryRef": "Top 5 clients' share",
               "displayName": "Top 5 clients' share"
             }

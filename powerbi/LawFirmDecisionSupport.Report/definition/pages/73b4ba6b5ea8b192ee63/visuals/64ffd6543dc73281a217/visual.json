@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Cash Low Point"
                 }
               },
-              "queryRef": "Measures.Cash Low Point",
+              "queryRef": "Key Measures.Cash Low Point",
               "nativeQueryRef": "Cash low point, next 13 weeks",
               "displayName": "Cash low point, next 13 weeks"
             }

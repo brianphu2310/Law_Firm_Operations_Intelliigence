@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Hours Δ"
                 }
               },
-              "queryRef": "Measures.Hours Δ",
+              "queryRef": "Key Measures.Hours Δ",
               "nativeQueryRef": " ",
               "displayName": " "
             }

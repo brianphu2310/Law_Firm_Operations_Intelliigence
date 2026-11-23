@@ -38,13 +38,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Platform Grid NPV"
                 }
               },
-              "queryRef": "Measures.Platform Grid NPV",
+              "queryRef": "Key Measures.Platform Grid NPV",
               "nativeQueryRef": "NPV",
               "displayName": "NPV"
             }

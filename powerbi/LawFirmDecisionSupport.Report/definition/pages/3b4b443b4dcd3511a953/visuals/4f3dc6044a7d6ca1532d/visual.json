@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Cost per Matter"
                 }
               },
-              "queryRef": "Measures.Cost per Matter",
+              "queryRef": "Key Measures.Cost per Matter",
               "nativeQueryRef": "Average cost per new matter",
               "displayName": "Average cost per new matter"
             }

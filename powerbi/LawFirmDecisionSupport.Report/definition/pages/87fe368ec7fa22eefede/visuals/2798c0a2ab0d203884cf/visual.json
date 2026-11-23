@@ -38,13 +38,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Headcount Total"
                 }
               },
-              "queryRef": "Measures.Headcount Total",
+              "queryRef": "Key Measures.Headcount Total",
               "nativeQueryRef": "Staff",
               "displayName": "Staff"
             }

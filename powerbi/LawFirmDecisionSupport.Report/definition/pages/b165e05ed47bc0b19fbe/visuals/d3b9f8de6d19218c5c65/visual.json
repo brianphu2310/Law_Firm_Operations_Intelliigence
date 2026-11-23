@@ -38,13 +38,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Platform Criterion Score"
                 }
               },
-              "queryRef": "Measures.Platform Criterion Score",
+              "queryRef": "Key Measures.Platform Criterion Score",
               "nativeQueryRef": "Score",
               "displayName": "Score"
             }

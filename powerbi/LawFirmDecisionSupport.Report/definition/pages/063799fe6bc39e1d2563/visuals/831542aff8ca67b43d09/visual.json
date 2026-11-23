@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Hire First"
                 }
               },
-              "queryRef": "Measures.Hire First",
+              "queryRef": "Key Measures.Hire First",
               "nativeQueryRef": "Hire First"
             }
           ]

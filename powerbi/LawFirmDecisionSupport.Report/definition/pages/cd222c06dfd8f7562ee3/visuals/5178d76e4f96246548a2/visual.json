@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Deadlines Caption"
                 }
               },
-              "queryRef": "Measures.Deadlines Caption",
+              "queryRef": "Key Measures.Deadlines Caption",
               "nativeQueryRef": " ",
               "displayName": " "
             }

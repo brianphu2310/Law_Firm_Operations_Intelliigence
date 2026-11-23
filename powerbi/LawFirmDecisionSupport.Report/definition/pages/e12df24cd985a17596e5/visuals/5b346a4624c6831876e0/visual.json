@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Lockup Days"
                 }
               },
-              "queryRef": "Measures.Lockup Days",
+              "queryRef": "Key Measures.Lockup Days",
               "nativeQueryRef": "Lock-up days",
               "displayName": "Lock-up days"
             }

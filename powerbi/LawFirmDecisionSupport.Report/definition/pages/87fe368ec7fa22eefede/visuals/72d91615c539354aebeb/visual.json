@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Market Wage Growth"
                 }
               },
-              "queryRef": "Measures.Market Wage Growth",
+              "queryRef": "Key Measures.Market Wage Growth",
               "nativeQueryRef": "Market wage growth (ABS WPI, private)",
               "displayName": "Market wage growth (ABS WPI, private)"
             }

@@ -463,7 +463,7 @@ def helper_tables():
     for c in geo.columns:
         c.category = {"Country": "Country", "Latitude": "Latitude", "Longitude": "Longitude"}[c.name]
     t.append(geo)
-    meas = Table("Measures", [Column("Note", "string", calc_source="Note", hidden=True)], "calculated", 'ROW( "Note", "Measures live here" )')
+    meas = Table("Key Measures", [Column("Note", "string", calc_source="Note", hidden=True)], "calculated", 'ROW( "Note", "Measures live here" )')
     meas.measures = descriptive_measures()
     t.append(meas)
     return t

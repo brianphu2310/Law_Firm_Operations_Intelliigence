@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Client Revenue"
                 }
               },
-              "queryRef": "Measures.Client Revenue",
+              "queryRef": "Key Measures.Client Revenue",
               "nativeQueryRef": "Billed this period (ex GST)",
               "displayName": "Billed this period (ex GST)"
             }

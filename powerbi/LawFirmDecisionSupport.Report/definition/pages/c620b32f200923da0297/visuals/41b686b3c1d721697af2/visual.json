@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Disbursement Recovery"
                 }
               },
-              "queryRef": "Measures.Disbursement Recovery",
+              "queryRef": "Key Measures.Disbursement Recovery",
               "nativeQueryRef": "Disbursement recovery (period)",
               "displayName": "Disbursement recovery (period)"
             }

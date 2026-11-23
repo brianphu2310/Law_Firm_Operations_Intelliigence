@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Platform Verdict"
                 }
               },
-              "queryRef": "Measures.Platform Verdict",
+              "queryRef": "Key Measures.Platform Verdict",
               "nativeQueryRef": "Verdict",
               "displayName": "Verdict"
             }

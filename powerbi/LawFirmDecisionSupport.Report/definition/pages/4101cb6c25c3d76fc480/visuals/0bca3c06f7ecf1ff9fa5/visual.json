@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Client Overdue"
                 }
               },
-              "queryRef": "Measures.Client Overdue",
+              "queryRef": "Key Measures.Client Overdue",
               "nativeQueryRef": "Overdue",
               "displayName": "Overdue"
             }

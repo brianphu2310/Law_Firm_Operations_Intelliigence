@@ -38,13 +38,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Deadline Count"
                 }
               },
-              "queryRef": "Measures.Deadline Count",
+              "queryRef": "Key Measures.Deadline Count",
               "nativeQueryRef": "Events",
               "displayName": "Events"
             }
@@ -58,7 +58,7 @@
               "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Measures"
+                    "Entity": "Key Measures"
                   }
                 },
                 "Property": "Deadline Count"

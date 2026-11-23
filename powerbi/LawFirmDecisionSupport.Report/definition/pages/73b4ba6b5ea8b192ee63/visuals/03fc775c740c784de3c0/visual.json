@@ -38,13 +38,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Answer Chart Roles"
                 }
               },
-              "queryRef": "Measures.Answer Chart Roles",
+              "queryRef": "Key Measures.Answer Chart Roles",
               "nativeQueryRef": "Value",
               "displayName": "Value"
             }
@@ -158,7 +158,7 @@
                     "Measure": {
                       "Expression": {
                         "SourceRef": {
-                          "Entity": "Measures"
+                          "Entity": "Key Measures"
                         }
                       },
                       "Property": "Answer Chart Colour"

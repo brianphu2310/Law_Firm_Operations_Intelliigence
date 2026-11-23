@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "DSO Days"
                 }
               },
-              "queryRef": "Measures.DSO Days",
+              "queryRef": "Key Measures.DSO Days",
               "nativeQueryRef": "Days to collect (DSO)",
               "displayName": "Days to collect (DSO)"
             }

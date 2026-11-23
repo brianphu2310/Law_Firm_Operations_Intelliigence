@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Realisation Rate"
                 }
               },
-              "queryRef": "Measures.Realisation Rate",
+              "queryRef": "Key Measures.Realisation Rate",
               "nativeQueryRef": "Realisation",
               "displayName": "Realisation"
             }

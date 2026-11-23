@@ -50,13 +50,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Attorney Hours"
                 }
               },
-              "queryRef": "Measures.Attorney Hours",
+              "queryRef": "Key Measures.Attorney Hours",
               "nativeQueryRef": "Hours",
               "displayName": "Hours"
             },
@@ -65,13 +65,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Attorney Utilisation"
                 }
               },
-              "queryRef": "Measures.Attorney Utilisation",
+              "queryRef": "Key Measures.Attorney Utilisation",
               "nativeQueryRef": "Utilisation",
               "displayName": "Utilisation"
             },
@@ -80,13 +80,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Attorney Realisation"
                 }
               },
-              "queryRef": "Measures.Attorney Realisation",
+              "queryRef": "Key Measures.Attorney Realisation",
               "nativeQueryRef": "Realisation",
               "displayName": "Realisation"
             },
@@ -95,13 +95,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Attorney Effective Rate"
                 }
               },
-              "queryRef": "Measures.Attorney Effective Rate",
+              "queryRef": "Key Measures.Attorney Effective Rate",
               "nativeQueryRef": "Eff. rate",
               "displayName": "Eff. rate"
             },
@@ -110,13 +110,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Attorney Fees"
                 }
               },
-              "queryRef": "Measures.Attorney Fees",
+              "queryRef": "Key Measures.Attorney Fees",
               "nativeQueryRef": "Fees",
               "displayName": "Fees"
             },
@@ -125,13 +125,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Attorney Cost"
                 }
               },
-              "queryRef": "Measures.Attorney Cost",
+              "queryRef": "Key Measures.Attorney Cost",
               "nativeQueryRef": "Pay",
               "displayName": "Pay"
             },
@@ -140,13 +140,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Attorney Contribution"
                 }
               },
-              "queryRef": "Measures.Attorney Contribution",
+              "queryRef": "Key Measures.Attorney Contribution",
               "nativeQueryRef": "Contribution",
               "displayName": "Contribution"
             }
@@ -160,7 +160,7 @@
               "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Measures"
+                    "Entity": "Key Measures"
                   }
                 },
                 "Property": "Attorney Fees"

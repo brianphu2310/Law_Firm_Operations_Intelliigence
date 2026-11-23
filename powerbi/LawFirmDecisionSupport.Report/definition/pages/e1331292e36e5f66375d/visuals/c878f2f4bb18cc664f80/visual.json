@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Operating Margin"
                 }
               },
-              "queryRef": "Measures.Operating Margin",
+              "queryRef": "Key Measures.Operating Margin",
               "nativeQueryRef": "Operating margin",
               "displayName": "Operating margin"
             }

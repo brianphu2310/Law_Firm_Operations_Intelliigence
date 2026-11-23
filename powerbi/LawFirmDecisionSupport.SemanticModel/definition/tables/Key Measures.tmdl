@@ -1,4 +1,4 @@
-table Measures
+table 'Key Measures'
 
 	/// The reporting period picked on the Period slicer (FY26 Q1 QTD when none).
 	measure 'Period Sel' = SELECTEDVALUE( 'Period'[Period], "FY26 Q1 QTD" )
@@ -1354,7 +1354,7 @@ table Measures
 		isNameInferred
 		sourceColumn: [Note]
 
-	partition Measures = calculated
+	partition 'Key Measures' = calculated
 		mode: import
 		source =
 				ROW( "Note", "Measures live here" )

@@ -20,13 +20,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Measures"
+                      "Entity": "Key Measures"
                     }
                   },
                   "Property": "Deadlines Next 30 Days"
                 }
               },
-              "queryRef": "Measures.Deadlines Next 30 Days",
+              "queryRef": "Key Measures.Deadlines Next 30 Days",
               "nativeQueryRef": "Deadlines · next 30 days",
               "displayName": "Deadlines · next 30 days"
             }
