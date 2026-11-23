@@ -57,16 +57,18 @@ def series_colours(table, column, colours):
 BAND_COLOURS = {"Under 5 km": "#0a8496", "5–10 km": "#f2b134", "Over 10 km": "#e2665a"}
 
 
-def catchment_map(p, x, y, w, h, title, subtitle, key=None, size=8.0):
-    """Matters by client suburb, coloured by distance to the nearest office (sample data)."""
-    p.add("map", x, y, w, h,
-          roles={"Category": [F.c("Suburb", "Place")], "Series": [F.c("Suburb", "Distance band", "Distance to nearest office")],
-                 "Y": [F.c("Suburb", "latitude", "Latitude")], "X": [F.c("Suburb", "longitude", "Longitude")],
-                 "Size": [F.m(M, "Matters Last 12 Months", "Matters, last 12 months")]},
-          objects={"bubbles": [{"properties": {"bubbleSize": lit(size)}}], "dataPoint": series_colours("Suburb", "Distance band", BAND_COLOURS),
-                   "legend": [{"properties": {"show": lit(True), "position": lit("Bottom")}}],
-                   "mapStyles": [{"properties": {"mapTheme": lit("grayscale")}}]},
-          title=title, subtitle=subtitle, **({"key": key} if key else {}))
+def catchment_map(p, x, y, w, h, title, subtitle, key=None, size=8.0, heat=False):
+    """Matters by client suburb (sample data): bubbles coloured by distance to the nearest office, or a heat map of demand."""
+    roles = {"Category": [F.c("Suburb", "Place")], "Y": [F.c("Suburb", "latitude", "Latitude")], "X": [F.c("Suburb", "longitude", "Longitude")],
+             "Size": [F.m(M, "Matters Last 12 Months", "Matters, last 12 months")]}
+    objects = {"bubbles": [{"properties": {"bubbleSize": lit(size)}}], "mapStyles": [{"properties": {"mapTheme": lit("grayscale")}}]}
+    if heat:
+        objects["heatMap"] = [{"properties": {"show": lit(True), "radius": lit(30.0)}}]
+    else:
+        roles["Series"] = [F.c("Suburb", "Distance band", "Distance to nearest office")]
+        objects["dataPoint"] = series_colours("Suburb", "Distance band", BAND_COLOURS)
+        objects["legend"] = [{"properties": {"show": lit(True), "position": lit("Bottom")}}]
+    p.add("map", x, y, w, h, roles=roles, objects=objects, title=title, subtitle=subtitle, **({"key": key} if key else {}))
 
 
 class F:
@@ -452,14 +454,12 @@ def overview(p, nav, facts, targets):
             "outline": [{"properties": {"show": lit(False)}, "selector": {"id": "default"}}]},
             background=False, border=False, vco_extra={"visualLink": [{"properties": {"show": lit(True), "type": lit("PageNavigation"), "navigationSection": lit(target)}}]},
             key=f"go{i}")
-    chart(p, "lineClusteredColumnComboChart", 14, 510, 500, 202, F.c("Date", "month_start_date", "Month"), [F.m(M, "Trend Operating Profit", "Operating profit")],
+    chart(p, "lineClusteredColumnComboChart", 14, 510, 624, 202, F.c("Date", "month_start_date", "Month"), [F.m(M, "Trend Operating Profit", "Operating profit")],
           "Profit against budget, month by month", y2=[F.m(M, "Trend Budget Operating Profit", "Budget")], subtitle="12 months to the period end")
-    chart(p, "clusteredBarChart", 520, 510, 386, 202, F.c("Sim Compare", "Short"), [F.m(SIM, "Sim Compare vs Today", "Profit a year vs today")],
-          "Simulator: every decision vs today", sort=(F.m(SIM, "Sim Compare vs Today"), "Descending"), labels=True, legend=False,
-          subtitle="Annual operating profit, from the last 12 months")
     cf = facts["catchment"]
-    catchment_map(p, 912, 510, 354, 202, "Where clients come from",
-                  f"{cf['share_far']:.0%} of matters from 10+ km away · gap: {cf['site']}", key="ovmap", size=6.0)
+    catchment_map(p, 644, 510, 622, 202, "Where clients come from: and where a branch would reach them",
+                  f"Heat = matters, last 12 months · {cf['share_far']:.0%} live 10+ km from an office · biggest gap near {cf['site']}",
+                  key="ovmap", heat=True)
 
 
 # ---- Finance

@@ -31,25 +31,6 @@
             }
           ]
         },
-        "Series": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Suburb"
-                    }
-                  },
-                  "Property": "Distance band"
-                }
-              },
-              "queryRef": "Suburb.Distance band",
-              "nativeQueryRef": "Distance to nearest office",
-              "displayName": "Distance to nearest office"
-            }
-          ]
-        },
         "Y": {
           "projections": [
             {
@@ -106,6 +87,25 @@
               "displayName": "Matters, last 12 months"
             }
           ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Suburb"
+                    }
+                  },
+                  "Property": "Distance band"
+                }
+              },
+              "queryRef": "Suburb.Distance band",
+              "nativeQueryRef": "Distance to nearest office",
+              "displayName": "Distance to nearest office"
+            }
+          ]
         }
       }
     },
@@ -117,6 +117,19 @@
               "expr": {
                 "Literal": {
                   "Value": "10.0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "mapStyles": [
+        {
+          "properties": {
+            "mapTheme": {
+              "expr": {
+                "Literal": {
+                  "Value": "'grayscale'"
                 }
               }
             }
@@ -262,19 +275,6 @@
               "expr": {
                 "Literal": {
                   "Value": "'Bottom'"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "mapStyles": [
-        {
-          "properties": {
-            "mapTheme": {
-              "expr": {
-                "Literal": {
-                  "Value": "'grayscale'"
                 }
               }
             }

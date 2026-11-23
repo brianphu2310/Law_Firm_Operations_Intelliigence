@@ -574,7 +574,10 @@ def visual_data(E, meas, fmts, v, ctx):
         if sub is not None:
             from core.ref import BRANCHES
             from core.catchment import branch_sites
-            out["bands"] = RP.BAND_COLOURS
+            if v["visual"].get("objects", {}).get("heatMap"):
+                out["heat"] = True
+            else:
+                out["bands"] = RP.BAND_COLOURS
             out["offices"] = [[b["name"], b["lat"], b["lon"]] for b in BRANCHES]
             top = E.W["Branch Sites"].sort_values("site_rank").iloc[0]
             r = E.W["Suburb"].set_index("suburb").loc[top["candidate_site"]]

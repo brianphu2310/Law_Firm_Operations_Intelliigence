@@ -79,7 +79,8 @@ python -m powerbi.build        # data/powerbi/*.csv, then the .pbip project
 `Matters · Map` (a sub-tab of Matters) answers the "where" half of the branch question:
 
 - **Where clients come from**: Australian matters opened in the last 12 months by client suburb, coloured by the distance to the
-  nearest office (under 5 km, 5–10 km, over 10 km). The Overview carries a small copy of it.
+  nearest office (under 5 km, 5–10 km, over 10 km). The Overview shows the same demand as a heat map (the Map visual's heat-map
+  setting), next to the profit trend.
 - **Where a new branch would help most**: for every suburb, the matters from clients more than 10 km from every office that a new office
   there would bring within 10 km (`core/catchment.py`, the same rules as `sql/analysis/14_branch_site.sql`; a test checks they agree).
 - Matters by client country, and the distance bands as a column chart.

@@ -542,6 +542,23 @@ function scatter(v, body, W, H){
     if (pts.length <= 12) add(s,"text",{x:X(p.x),y:Y(p.y)-r-2,"font-size":7.5,fill:"#334155","text-anchor":"middle"}, String(p.label).slice(0,18)); });
 }
 
+const HEAT_STOPS = [[0, "#fde68a"], [0.45, "#f59e0b"], [0.75, "#e2665a"], [1, "#9f1239"]];
+function heatLayer(s, d, P, vx, vy, vw, vh, W, H, mx){
+  // classic density heat map: blurred alpha blobs summed on a canvas, then coloured by intensity
+  const sc = 2, cw = Math.round(W * sc), ch = Math.round(H * sc), cv = document.createElement("canvas"); cv.width = cw; cv.height = ch;
+  const g = cv.getContext("2d"), rad = Math.min(cw, ch) * 0.16;
+  d.points.forEach(p => { const [x, y] = P(p.lat, p.lon), cx = (x - vx) / vw * cw, cy = (y - vy) / vh * ch;
+    const a = Math.min(1, 0.25 + 0.75 * p.size / mx), gr = g.createRadialGradient(cx, cy, 0, cx, cy, rad);
+    gr.addColorStop(0, `rgba(0,0,0,${a * 0.35})`); gr.addColorStop(1, "rgba(0,0,0,0)"); g.fillStyle = gr; g.fillRect(cx - rad, cy - rad, rad * 2, rad * 2); });
+  const lut = document.createElement("canvas"); lut.width = 256; lut.height = 1; const lg = lut.getContext("2d"), grd = lg.createLinearGradient(0, 0, 256, 0);
+  HEAT_STOPS.forEach(([o, c]) => grd.addColorStop(o, c)); lg.fillStyle = grd; lg.fillRect(0, 0, 256, 1); const pal = lg.getImageData(0, 0, 256, 1).data;
+  const img = g.getImageData(0, 0, cw, ch), px = img.data; let top = 0;
+  for (let i = 3; i < px.length; i += 4) top = Math.max(top, px[i]);
+  for (let i = 0; i < px.length; i += 4) { const v = px[i + 3]; if (!v) continue; const t = Math.min(255, Math.round(v / top * 255)) * 4;
+    px[i] = pal[t]; px[i + 1] = pal[t + 1]; px[i + 2] = pal[t + 2]; px[i + 3] = Math.min(220, 25 + v / top * 195); }
+  g.putImageData(img, 0, 0);
+  add(s, "image", {href: cv.toDataURL(), x: vx, y: vy, width: vw, height: vh, preserveAspectRatio: "none"});
+}
 function geomap(v, body, W, H){
   const d = dataFor(v); if (!d) return; const bm = D.basemaps[d.basemap]; const [lon0, lat0, lon1, lat1] = bm.box;
   const P = (la, lo) => [(lo - lon0) / (lon1 - lon0) * bm.w, (lat1 - la) / (lat1 - lat0) * bm.h];
@@ -561,7 +578,8 @@ function geomap(v, body, W, H){
   body.appendChild(s); body.style.background = "#dbeaf2"; body.style.borderRadius = "0 0 12px 12px";
   const k = Math.max(vw / W, vh / H);                       // view units per screen pixel
   add(s, "rect", {x: vx - vw, y: vy - vh, width: vw * 3, height: vh * 3, fill: "#dbeaf2"});
-  add(s, "path", {d: bm.path, fill: "#f7f9fb", stroke: "#a9bfcd", "stroke-width": (local ? 1 : 0.6) * k});
+  if (local) add(s, "rect", {x: vx - vw, y: vy - vh, width: Math.max(0, vw - vx), height: vh * 3, fill: "#f7f9fb"});   // inland, west of the basemap box
+  add(s, "path", {d: bm.path, fill: "#f7f9fb", stroke: local ? "none" : "#a9bfcd", "stroke-width": 0.6 * k});
   const txt = (x, y, t, o) => { const e = add(s, "text", Object.assign({x, y, "font-size": 10 * k, fill: "#0f172a", "text-anchor": "middle",
       stroke: "#f7f9fb", "stroke-width": 3 * k, "paint-order": "stroke", "stroke-linejoin": "round"}, o || {}), t); return e; };
   if (local && bm.ref && W > 500 && d.points.length <= 12) Object.entries(bm.ref).forEach(([n, [la, lo]]) => { const [x, y] = P(la, lo);
@@ -572,10 +590,11 @@ function geomap(v, body, W, H){
     add(s, "rect", {x: x - 3.5 * k, y: y - 3.5 * k, width: 7 * k, height: 7 * k, fill: "#475569", transform: `rotate(45 ${x} ${y})`});
     txt(x, y + 15 * k, "Sydney CBD", {"font-size": 9 * k, fill: "#475569"}); }
   const mx = Math.max(...d.points.map(p => p.size));
+  if (d.heat) heatLayer(s, d, P, vx, vy, vw, vh, W, H, mx);
   const col = local ? "#2f7fd8" : "#0a8496", many = d.points.length > 12;
   const rmax = Math.min(local ? 26 : 22, (many ? 0.055 : (local ? 0.085 : 0.08)) * Math.min(W, H));
   const ranked = d.points.slice().sort((a, b) => b.size - a.size);
-  ranked.forEach((p, i) => { const [x, y] = P(p.lat, p.lon); const r = ((many ? 2.5 : 5) + rmax * Math.sqrt(p.size / mx)) * k;
+  if (!d.heat) ranked.forEach((p, i) => { const [x, y] = P(p.lat, p.lon); const r = ((many ? 2.5 : 5) + rmax * Math.sqrt(p.size / mx)) * k;
     const c0 = d.bands && p.band ? d.bands[p.band] : col;
     if (!many) add(s, "circle", {cx: x, cy: y, r: r + 3 * k, fill: c0, "fill-opacity": .12});
     const c = add(s, "circle", {cx: x, cy: y, r, fill: c0, "fill-opacity": many ? .78 : .85, stroke: "#fff", "stroke-width": (many ? 1 : 1.5) * k});
@@ -596,6 +615,12 @@ function geomap(v, body, W, H){
     const pts = Array.from({length: 10}, (_, i) => { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? R * 0.45 : R; return `${x + rr * Math.cos(a)},${y + rr * Math.sin(a)}`; }).join(" ");
     add(s, "polygon", {points: pts, fill: "#7c3aed", stroke: "#fff", "stroke-width": 1.5 * k});
     txt(x + 11 * k, y - (small ? 2 : 8) * k, small ? `Gap: ${n}` : `New branch? ${n}`, {"font-weight": 700, "text-anchor": "start", fill: "#6d28d9", "font-size": (small ? 8.5 : 9.5) * k}); }
+  if (d.heat) { const lx = vx + 8 * k, ly = vy + vh - 14 * k, gw = 70 * k;
+    const g = add(s, "defs", {}); const lg = add(g, "linearGradient", {id: "heatlg"});
+    HEAT_STOPS.forEach(([o, c]) => add(lg, "stop", {offset: o, "stop-color": c}));
+    add(s, "rect", {x: lx + 38 * k, y: ly - 4 * k, width: gw, height: 8 * k, rx: 4 * k, fill: "url(#heatlg)"});
+    txt(lx, ly + 3.5 * k, "Fewer", {"font-size": 8.5 * k, "text-anchor": "start"});
+    txt(lx + 44 * k + gw, ly + 3.5 * k, "More matters", {"font-size": 8.5 * k, "text-anchor": "start"}); }
   if (d.bands) { let lx = vx + 8 * k, ly = vy + vh - (small ? 12 : 20) * k;
     Object.entries(d.bands).forEach(([n, c]) => { add(s, "circle", {cx: lx + 4 * k, cy: ly, r: 4 * k, fill: c});
       const t = txt(lx + 11 * k, ly + 3.5 * k, n, {"font-size": 8.5 * k, "text-anchor": "start"}); lx += (16 + n.length * 5.2) * k; }); }
