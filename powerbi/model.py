@@ -81,10 +81,11 @@ def _infer(path: Path):
     cols = []
     for c in df.columns:
         s = df[c]
-        if c in DATE_COLS:
-            t = "dateTime"
+        if c in DATE_COLS and s.dropna().astype(str).str.match(r"^\d{4}-\d{2}-\d{2}").all():
+            t = "dateTime"      # a date column by name *and* by content ('Date'[month] is a month number, 1-12)
         elif pd.api.types.is_numeric_dtype(s):
-            t = "int64" if (c.endswith(INT_SUFFIX) or c in ("Month", "week", "rank", "Rank", "since", "Days", "IsDefault", "IsCurrent", "GoLive")) else "double"
+            t = "int64" if (c.endswith(INT_SUFFIX) or c in ("Month", "week", "rank", "Rank", "since", "Days", "IsDefault", "IsCurrent", "GoLive",
+                                                                           "month", "year", "quarter", "day_of_month", "day_of_week", "fy_start_year", "fy_quarter")) else "double"
         else:
             t = "string"
         cols.append((c, t))

@@ -15,20 +15,20 @@ table Date
 		sourceColumn: full_date
 
 	column year
-		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		dataType: int64
+		formatString: 0
 		summarizeBy: none
 		sourceColumn: year
 
 	column quarter
-		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		dataType: int64
+		formatString: 0
 		summarizeBy: none
 		sourceColumn: quarter
 
 	column month
-		dataType: dateTime
-		formatString: dd mmm yyyy
+		dataType: int64
+		formatString: 0
 		summarizeBy: none
 		sourceColumn: month
 
@@ -45,14 +45,14 @@ table Date
 		sourceColumn: month_start_date
 
 	column day_of_month
-		dataType: double
-		formatString: #,0.0
+		dataType: int64
+		formatString: 0
 		summarizeBy: none
 		sourceColumn: day_of_month
 
 	column day_of_week
-		dataType: double
-		formatString: #,0
+		dataType: int64
+		formatString: 0
 		summarizeBy: none
 		sourceColumn: day_of_week
 
@@ -74,8 +74,8 @@ table Date
 		sourceColumn: is_month_end
 
 	column fy_start_year
-		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		dataType: int64
+		formatString: 0
 		summarizeBy: none
 		sourceColumn: fy_start_year
 
@@ -85,8 +85,8 @@ table Date
 		sourceColumn: fy_label
 
 	column fy_quarter
-		dataType: double
-		formatString: \$#,0;-\$#,0;\$0
+		dataType: int64
+		formatString: 0
 		summarizeBy: none
 		sourceColumn: fy_quarter
 
@@ -97,6 +97,6 @@ table Date
 				    Source = Csv.Document(Web.Contents(BaseUrl, [RelativePath = "data/warehouse/dim_date.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
 				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
 				    Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, {"date_key", "full_date", "year", "quarter", "month", "month_start_date", "day_of_month", "day_of_week", "is_weekend", "is_month_end", "fy_start_year", "fy_quarter"}),
-				    Typed = Table.TransformColumnTypes(Blanks, {{"date_key", Int64.Type}, {"full_date", type date}, {"year", type number}, {"quarter", type number}, {"month", type date}, {"month_name", type text}, {"month_start_date", type date}, {"day_of_month", type number}, {"day_of_week", type number}, {"day_name", type text}, {"is_weekend", type number}, {"is_month_end", type number}, {"fy_start_year", type number}, {"fy_label", type text}, {"fy_quarter", type number}}, "en-US")
+				    Typed = Table.TransformColumnTypes(Blanks, {{"date_key", Int64.Type}, {"full_date", type date}, {"year", Int64.Type}, {"quarter", Int64.Type}, {"month", Int64.Type}, {"month_name", type text}, {"month_start_date", type date}, {"day_of_month", Int64.Type}, {"day_of_week", Int64.Type}, {"day_name", type text}, {"is_weekend", type number}, {"is_month_end", type number}, {"fy_start_year", Int64.Type}, {"fy_label", type text}, {"fy_quarter", Int64.Type}}, "en-US")
 				in
 				    Typed

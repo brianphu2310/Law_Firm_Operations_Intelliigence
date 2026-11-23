@@ -182,6 +182,19 @@ def test_no_reserved_or_padded_names(built):
             assert n == n.strip() and n and not any(ord(ch) < 32 for ch in n), repr(n)
 
 
+def test_date_typed_columns_hold_dates():
+    """A column typed as a date must parse as one in every row, or the refresh fails row by row."""
+    import pandas as pd
+    for folder in ("warehouse", "powerbi"):
+        for path in sorted((ROOT / "data" / folder).glob("*.csv")):
+            df = pd.read_csv(path)
+            for c, t in MD._infer(path):
+                if t == "dateTime":
+                    v = df[c].dropna().astype(str)
+                    assert v.str.match(r"^\d{4}-\d{2}-\d{2}").all(), (path.name, c)
+                    pd.to_datetime(v, format="mixed")
+
+
 def test_relationship_columns_exist(built):
     tbls, _, _ = built
     cols, _ = _inventory(tbls)
