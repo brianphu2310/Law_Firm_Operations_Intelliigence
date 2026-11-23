@@ -401,6 +401,16 @@ def descriptive_measures():
     add("Matters Last 12 Months", "CALCULATE( COUNTROWS( 'Matter' ), REMOVEFILTERS( 'Date' ), 'Matter'[opened_date_key] > " + LTM_START_KEY
         + ", 'Matter'[opened_date_key] <= " + AS_OF_KEY + " )", NUM, "Matters",
         desc="Matters opened in the 12 months to the as-of date, whatever the Period slicer says (the catchment map and branch-site analysis).")
+    add("Matters 10km+ Share", "DIVIDE( CALCULATE( [Matters Last 12 Months], 'Suburb'[km_to_nearest_branch] > 10 ), [Matters Last 12 Months] )",
+        "0%", "Matters", desc="Share of last year's Australian matters from clients more than 10 km from every office.")
+    add("Matters 10km+ Caption", "VAR far = CALCULATE( [Matters Last 12 Months], 'Suburb'[km_to_nearest_branch] > 10 ) "
+        "RETURN \"of matters live 10+ km away (\" & FORMAT( far, \"0\" ) & \" of \" & FORMAT( [Matters Last 12 Months], \"0\" ) & \")\"",
+        None, "Matters")
+    top = ("TOPN( 1, 'Branch Sites', 'Branch Sites'[underserved_matters_ltm], DESC, 'Branch Sites'[est_value_ltm], DESC )")
+    add("Best Branch Site", f"\"★ \" & MAXX( {top}, 'Branch Sites'[candidate_site] )", None, "Matters",
+        desc="The suburb where a new office would bring the most distant clients' matters within 10 km (core/catchment.py).")
+    add("Best Branch Site Caption", f"VAR t = {top} RETURN \"new branch: +\" & MAXX( t, 'Branch Sites'[underserved_matters_ltm] ) "
+        "& \" matters a year in reach\"", None, "Matters")
     add("Matter WIP", "SUM( 'Matter Position'[wip_balance] )", MONEY, "Matters")
     add("Matter Billed", "SUM( 'Matter Position'[billed_to_date] )", MONEY, "Matters")
     add("Matter Estimated Value", "SUM( 'Matter Position'[estimated_value] )", MONEY, "Matters")

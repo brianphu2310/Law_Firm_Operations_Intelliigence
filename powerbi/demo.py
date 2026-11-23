@@ -226,6 +226,16 @@ def measures(E: Engine):
     m["Matter Count"] = lambda c: len(E.filt("Matter", c))
     ltm0, asof = int(MD.LTM_START_KEY), int(MD.AS_OF_KEY)
     m["Matters Last 12 Months"] = lambda c: (lambda d: int(((d["opened_date_key"] > ltm0) & (d["opened_date_key"] <= asof)).sum()))(E.filt("Matter", c))
+    def _far(c):
+        d = E.filt("Matter", c)
+        d = d[(d["opened_date_key"] > ltm0) & (d["opened_date_key"] <= asof) & d["suburb_key"].notna()]
+        km = E.W["Suburb"].set_index("suburb_key")["km_to_nearest_branch"]
+        return int((d["suburb_key"].map(km) > 10).sum()), len(d)
+    m["Matters 10km+ Share"] = lambda c: (lambda f, t: f / t if t else None)(*_far(c))
+    m["Matters 10km+ Caption"] = lambda c: (lambda f, t: f"of matters live 10+ km away ({f} of {t})")(*_far(c))
+    _top = lambda: E.W["Branch Sites"].sort_values(["underserved_matters_ltm", "est_value_ltm"], ascending=False).iloc[0]
+    m["Best Branch Site"] = lambda c: "★ " + str(_top()["candidate_site"])
+    m["Best Branch Site Caption"] = lambda c: f"new branch: +{int(_top()['underserved_matters_ltm'])} matters a year in reach"
     m["Matter WIP"] = lambda c: float(E.filt("Matter Position", c)["wip_balance"].sum())
     m["Matter Billed"] = lambda c: float(E.filt("Matter Position", c)["billed_to_date"].sum())
     m["Matter Estimated Value"] = lambda c: float(E.filt("Matter Position", c)["estimated_value"].sum())
@@ -919,7 +929,8 @@ def period_dependent(tables_used, v):
     meas_names = [pr["field"]["Measure"]["Property"] for r in v["visual"].get("query", {}).get("queryState", {}).values()
                   for pr in r["projections"] if "Measure" in pr["field"]]
     static_measures = {"Marketing Spend", "Marketing Matters", "Cost per Matter", "Fees per Dollar", "Hire First", "Market Wage Growth",
-                       "Deadlines Next 30 Days", "Deadlines Caption", "Deadline Count", "Matter Count", "Matters Last 12 Months", "Open Matters", "Matter WIP",
+                       "Deadlines Next 30 Days", "Deadlines Caption", "Deadline Count", "Matter Count", "Matters Last 12 Months", "Matters 10km+ Share", "Matters 10km+ Caption",
+         "Best Branch Site", "Best Branch Site Caption", "Open Matters", "Matter WIP",
                        "Matter Billed", "Matter Estimated Value", "Supplier Spend", "Card Spend", "Cash Inflow", "Cash Outflow",
                        "Cash Closing", "Cash Minimum", "Cash Low Point", "FY Forecast Profit", "FY Profit Gap", "FY Path Actual Profit",
                        "FY Path Forecast Profit", "FY Path Budget Profit", "Headcount", "Answer", "Answer Evidence", "Answer Chart $", "Answer Chart Roles",

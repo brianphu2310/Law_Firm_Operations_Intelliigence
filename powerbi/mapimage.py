@@ -18,7 +18,7 @@ OUT = ROOT / "assets" / "maps"
 KM_LAT, KM_LON = 110.57, 92.45
 
 # plot area of each map in report pixels (visual size less title, subtitle and padding)
-MAPS = {"overview": (600, 146), "catchment": (500, 506)}
+MAPS = {"overview": (292, 150), "catchment": (500, 506)}
 
 
 def extents(name):
@@ -52,7 +52,7 @@ def svg(name, site):
     sx = (blon1 - blon0) / bm["w"] / (lon1 - lon0) * W
     sy = (blat1 - blat0) / bm["h"] / (lat1 - lat0) * H
     tx, ty = (blon0 - lon0) / (lon1 - lon0) * W, (lat1 - blat1) / (lat1 - lat0) * H
-    k = W / 600 if name == "overview" else W / 500
+    k = W / 292 if name == "overview" else W / 500
     k = max(1.6, min(2.2, k))
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">',
            f'<rect width="{W}" height="{H}" fill="#aacbe6"/>']
@@ -64,11 +64,14 @@ def svg(name, site):
     def label(x, y, t, size, fill, weight=400, anchor="middle", spacing=0):
         return (f'<text x="{x:.1f}" y="{y:.1f}" font-size="{size * k:.1f}" fill="{fill}" font-weight="{weight}" text-anchor="{anchor}" '
                 f'letter-spacing="{spacing * k:.1f}" style="{font}" stroke="#f2efe9" stroke-width="{3 * k:.1f}" paint-order="stroke">{t}</text>')
+    from core.ref import SUBURBS
     marks = [P(b["lat"], b["lon"]) for b in BRANCHES] + ([P(site[1], site[2])] if site else [])
+    dots = [P(sb[1], sb[2]) for sb in SUBURBS]
     for n, la, lo, rk in SYDNEY_PLACES:
         x, y = P(la, lo)
         near = any(abs(x - mx) < 70 * k and abs(y - my) < 14 * k for mx, my in marks)   # keep office and site labels readable
-        if 0 <= x <= W and 0 <= y <= H and not near:
+        under = any(abs(x - dx) < 34 * k and abs(y - dy) < 10 * k for dx, dy in dots)    # a bubble would cover it
+        if 0 <= x <= W and 0 <= y <= H and not near and not (under and rk == 2) and not (under and name == "overview"):
             out.append(label(x, y, n, 8.5 if rk == 1 else 7.5, "#7a7a7a" if rk == 1 else "#9a9a9a", 600 if rk == 1 else 400, spacing=0.5 if rk == 1 else 0))
     x, y = P(*SYDNEY_CBD)
     out.append(f'<rect x="{x - 3.5 * k:.1f}" y="{y - 3.5 * k:.1f}" width="{7 * k:.1f}" height="{7 * k:.1f}" fill="#475569" transform="rotate(45 {x:.1f} {y:.1f})"/>')

@@ -68,7 +68,7 @@ def map_image(name):
                       "scaling": lit("Fit")}}
 
 
-def catchment_map(p, x, y, w, h, title, subtitle, key=None, size=0.0, image="catchment", bands=True):
+def catchment_map(p, x, y, w, h, title, subtitle, key=None, size=0.0, image="catchment", bands=True, legend=True, plain_bg=False):
     """Matters by client suburb (sample data) as a scatter chart over a static basemap image: longitude on X, latitude on Y,
     axes pinned to the image's extent. Unlike Power BI's map visuals it needs no Bing/Azure map service, so it works where an
     organisation has switched maps off, in PDF exports and in Publish to web."""
@@ -85,10 +85,11 @@ def catchment_map(p, x, y, w, h, title, subtitle, key=None, size=0.0, image="cat
     if bands:
         roles["Series"] = [F.c("Suburb", "Distance band", "Distance to nearest office")]
         objects["dataPoint"] = series_colours("Suburb", "Distance band", BAND_COLOURS)
-        objects["legend"] = [{"properties": {"show": lit(True), "position": lit("Bottom")}}]
+        objects["legend"] = [{"properties": {"show": lit(legend), "position": lit("Bottom")}}]
     else:
         objects["legend"] = [{"properties": {"show": lit(False)}}]
-    p.add("scatterChart", x, y, w, h, roles=roles, objects=objects, title=title, subtitle=subtitle, **({"key": key} if key else {}))
+    extra = {"background": False, "border": False} if plain_bg else {}
+    p.add("scatterChart", x, y, w, h, roles=roles, objects=objects, title=title, subtitle=subtitle, **extra, **({"key": key} if key else {}))
 
 
 class F:
@@ -493,10 +494,21 @@ def overview(p, nav, facts, targets):
             key=f"go{i}")
     chart(p, "lineClusteredColumnComboChart", 14, 510, 624, 202, F.c("Date", "month_start_date", "Month"), [F.m(M, "Trend Operating Profit", "Operating profit")],
           "Profit against budget, month by month", y2=[F.m(M, "Trend Budget Operating Profit", "Budget")], subtitle="12 months to the period end")
-    cf = facts["catchment"]
-    catchment_map(p, 644, 510, 622, 202, "Where clients come from: and where a branch would reach them",
-                  f"Bubble = matters, last 12 months · {cf['share_far']:.0%} live 10+ km from an office · biggest gap near {cf['site']}",
-                  key="ovmap", image="overview", bands=False)
+    # where clients come from: the map on the left, the two numbers that matter on the right
+    p.add("shape", 644, 510, 622, 202, objects={"shape": [{"properties": {"tileShape": lit("rectangleRounded")}}],
+                                                "fill": [{"properties": {"fillColor": colour("#FFFFFF"), "transparency": lit(0.0)}}],
+                                                "outline": [{"properties": {"show": lit(True), "lineColor": colour(LINE), "weight": lit(1.0)}}]},
+          background=False, border=False, key="ovmaptile")
+    catchment_map(p, 648, 512, 312, 198, "Where clients come from", "Matters, last 12 months, by client suburb",
+                  key="ovmap", image="overview", bands=True, legend=True, plain_bg=True)
+    card(p, 964, 548, 296, 46, F.m(M, "Matters 10km+ Share"), False, 26.0, colour("#e2665a"), key="ovfar")
+    p.add("card", 964, 592, 296, 28, roles={"Values": [F.m(M, "Matters 10km+ Caption", " ")]},
+          objects={"labels": [{"properties": {"fontSize": lit(8.5), "color": colour(MUTED)}}], "categoryLabels": [{"properties": {"show": lit(False)}}]},
+          background=False, border=False, key="ovfarcap")
+    card(p, 964, 626, 296, 38, F.m(M, "Best Branch Site"), False, 18.0, colour("#7c3aed"), key="ovsite")
+    p.add("card", 964, 662, 296, 28, roles={"Values": [F.m(M, "Best Branch Site Caption", " ")]},
+          objects={"labels": [{"properties": {"fontSize": lit(8.5), "color": colour(MUTED)}}], "categoryLabels": [{"properties": {"show": lit(False)}}]},
+          background=False, border=False, key="ovsitecap")
 
 
 # ---- Finance

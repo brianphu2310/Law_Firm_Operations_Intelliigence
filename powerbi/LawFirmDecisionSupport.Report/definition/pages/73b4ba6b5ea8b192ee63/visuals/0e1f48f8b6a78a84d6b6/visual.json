@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "0e1f48f8b6a78a84d6b6",
   "position": {
-    "x": 737.4125,
-    "y": 510.0,
-    "z": 72000,
-    "width": 530.6437500000001,
-    "height": 202.0,
-    "tabOrder": 72000
+    "x": 740.825,
+    "y": 512.0,
+    "z": 73000,
+    "width": 266.175,
+    "height": 198.0,
+    "tabOrder": 73000
   },
   "visual": {
     "visualType": "scatterChart",
@@ -98,6 +98,25 @@
               "displayName": "Matters, last 12 months"
             }
           ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Suburb"
+                    }
+                  },
+                  "Property": "Distance band"
+                }
+              },
+              "queryRef": "Suburb.Distance band",
+              "nativeQueryRef": "Distance to nearest office",
+              "displayName": "Distance to nearest office"
+            }
+          ]
         }
       }
     },
@@ -115,14 +134,14 @@
             "start": {
               "expr": {
                 "Literal": {
-                  "Value": "149.1341D"
+                  "Value": "150.0691D"
                 }
               }
             },
             "end": {
               "expr": {
                 "Literal": {
-                  "Value": "152.6872D"
+                  "Value": "151.7522D"
                 }
               }
             },
@@ -240,17 +259,125 @@
       "dataPoint": [
         {
           "properties": {
-            "defaultColor": {
+            "fill": {
               "solid": {
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2a9fb0'"
+                      "Value": "'#0a8496'"
                     }
                   }
                 }
               }
             }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Suburb"
+                          }
+                        },
+                        "Property": "Distance band"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Under 5 km'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#f2b134'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Suburb"
+                          }
+                        },
+                        "Property": "Distance band"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'5–10 km'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#e2665a'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Suburb"
+                          }
+                        },
+                        "Property": "Distance band"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Over 10 km'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
           }
         }
       ],
@@ -273,7 +400,14 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Bottom'"
                 }
               }
             }
@@ -295,7 +429,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Where clients come from: and where a branch would reach them'"
+                  "Value": "'Where clients come from'"
                 }
               }
             },
@@ -340,7 +474,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Bubble = matters, last 12 months · 44% live 10+ km from an office · biggest gap near Rouse Hill'"
+                  "Value": "'Matters, last 12 months, by client suburb'"
                 }
               }
             },
@@ -371,7 +505,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -402,7 +536,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },

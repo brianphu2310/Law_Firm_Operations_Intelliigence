@@ -1273,6 +1273,21 @@ table 'Key Measures'
 		formatString: #,0
 		displayFolder: Matters
 
+	/// Share of last year's Australian matters from clients more than 10 km from every office.
+	measure 'Matters 10km+ Share' = DIVIDE( CALCULATE( [Matters Last 12 Months], 'Suburb'[km_to_nearest_branch] > 10 ), [Matters Last 12 Months] )
+		formatString: 0%
+		displayFolder: Matters
+
+	measure 'Matters 10km+ Caption' = VAR far = CALCULATE( [Matters Last 12 Months], 'Suburb'[km_to_nearest_branch] > 10 ) RETURN "of matters live 10+ km away (" & FORMAT( far, "0" ) & " of " & FORMAT( [Matters Last 12 Months], "0" ) & ")"
+		displayFolder: Matters
+
+	/// The suburb where a new office would bring the most distant clients' matters within 10 km (core/catchment.py).
+	measure 'Best Branch Site' = "★ " & MAXX( TOPN( 1, 'Branch Sites', 'Branch Sites'[underserved_matters_ltm], DESC, 'Branch Sites'[est_value_ltm], DESC ), 'Branch Sites'[candidate_site] )
+		displayFolder: Matters
+
+	measure 'Best Branch Site Caption' = VAR t = TOPN( 1, 'Branch Sites', 'Branch Sites'[underserved_matters_ltm], DESC, 'Branch Sites'[est_value_ltm], DESC ) RETURN "new branch: +" & MAXX( t, 'Branch Sites'[underserved_matters_ltm] ) & " matters a year in reach"
+		displayFolder: Matters
+
 	measure 'Matter WIP' = SUM( 'Matter Position'[wip_balance] )
 		formatString: \$#,0;-\$#,0;\$0
 		displayFolder: Matters
