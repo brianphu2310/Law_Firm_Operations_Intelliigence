@@ -23,10 +23,10 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "Realisation"
+                  "Property": "Realisation Rate"
                 }
               },
-              "queryRef": "Measures.Realisation",
+              "queryRef": "Measures.Realisation Rate",
               "nativeQueryRef": "Realisation",
               "displayName": "Realisation"
             }

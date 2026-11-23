@@ -23,10 +23,10 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "DSO"
+                  "Property": "DSO Days"
                 }
               },
-              "queryRef": "Measures.DSO",
+              "queryRef": "Measures.DSO Days",
               "nativeQueryRef": "Days to collect (DSO)",
               "displayName": "Days to collect (DSO)"
             }

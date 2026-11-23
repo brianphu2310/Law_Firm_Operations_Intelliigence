@@ -23,10 +23,10 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "WIP"
+                  "Property": "WIP Balance"
                 }
               },
-              "queryRef": "Measures.WIP",
+              "queryRef": "Measures.WIP Balance",
               "nativeQueryRef": "Work in progress",
               "displayName": "Work in progress"
             }

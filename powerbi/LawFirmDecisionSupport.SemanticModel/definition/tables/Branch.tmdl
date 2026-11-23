@@ -20,12 +20,14 @@ table Branch
 	column latitude
 		dataType: double
 		formatString: #,0.0
+		dataCategory: Latitude
 		summarizeBy: none
 		sourceColumn: latitude
 
 	column longitude
 		dataType: double
 		formatString: #,0.0
+		dataCategory: Longitude
 		summarizeBy: none
 		sourceColumn: longitude
 
@@ -44,16 +46,6 @@ table Branch
 	column Place = [branch_name] & " NSW, Australia"
 		dataType: string
 		dataCategory: Place
-		summarizeBy: none
-
-	column Latitude = SWITCH( [branch_name], "Richmond", -33.6, "Camden", -34.054, "Liverpool", -33.92, BLANK() )
-		dataType: double
-		dataCategory: Latitude
-		summarizeBy: none
-
-	column Longitude = SWITCH( [branch_name], "Richmond", 150.752, "Camden", 150.696, "Liverpool", 150.923, BLANK() )
-		dataType: double
-		dataCategory: Longitude
 		summarizeBy: none
 
 	partition Branch = m

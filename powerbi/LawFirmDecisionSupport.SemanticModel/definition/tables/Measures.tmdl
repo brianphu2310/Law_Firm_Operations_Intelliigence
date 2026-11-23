@@ -482,7 +482,7 @@ table Measures
 		formatString: 0.0%;-0.0%;0.0%
 		displayFolder: P&L
 
-	measure Revenue = [Actual Total revenue]
+	measure 'Total Revenue' = [Actual Total revenue]
 		formatString: \$#,0;-\$#,0;\$0
 		displayFolder: KPIs
 
@@ -501,11 +501,7 @@ table Measures
 		formatString: \$#,0;-\$#,0;\$0
 		displayFolder: KPIs
 
-	measure 'Budget Operating Profit' = [Budget Operating profit]
-		formatString: \$#,0;-\$#,0;\$0
-		displayFolder: KPIs
-
-	measure 'Profit vs Budget' = [Operating Profit] - [Budget Operating Profit]
+	measure 'Profit vs Budget' = [Operating Profit] - [Budget Operating profit]
 		formatString: \$#,0;-\$#,0;\$0
 		displayFolder: KPIs
 
@@ -514,11 +510,11 @@ table Measures
 			RETURN IF( ISBLANK( d ), "no budget", FORMAT( d, "▲ +$#,0;▼ -$#,0;$0" ) & " vs budget" )
 		displayFolder: KPIs
 
-	measure 'Operating Margin' = DIVIDE( [Operating Profit], [Revenue] )
+	measure 'Operating Margin' = DIVIDE( [Operating Profit], [Total Revenue] )
 		formatString: 0.0%;-0.0%;0.0%
 		displayFolder: KPIs
 
-	measure Fees = [Actual Fees]
+	measure 'Total Fees' = [Actual Fees]
 		formatString: \$#,0;-\$#,0;\$0
 		displayFolder: KPIs
 
@@ -583,11 +579,11 @@ table Measures
 		isHidden
 		displayFolder: KPIs
 
-	measure Realisation = DIVIDE( [Fees], [Standard Value] )
+	measure 'Realisation Rate' = DIVIDE( [Total Fees], [Standard Value] )
 		formatString: 0.0%;-0.0%;0.0%
 		displayFolder: KPIs
 
-	measure 'Effective Rate' = DIVIDE( [Fees], [Billable Hours] )
+	measure 'Effective Rate' = DIVIDE( [Total Fees], [Billable Hours] )
 		formatString: \$#,0;-\$#,0;\$0
 		displayFolder: KPIs
 
@@ -645,13 +641,13 @@ table Measures
 		formatString: \$#,0;-\$#,0;\$0
 		displayFolder: Balances
 
-	measure WIP =
+	measure 'WIP Balance' =
 			VAR p = [Period Sel]
 			RETURN CALCULATE( MAX( 'Period Balance'[WIP] ), REMOVEFILTERS( 'Period Balance' ), 'Period Balance'[Period] = p, 'Period Balance'[Role] = "Current" )
 		formatString: \$#,0;-\$#,0;\$0
 		displayFolder: Balances
 
-	measure Receivables =
+	measure 'Receivables Balance' =
 			VAR p = [Period Sel]
 			RETURN CALCULATE( MAX( 'Period Balance'[Receivables] ), REMOVEFILTERS( 'Period Balance' ), 'Period Balance'[Period] = p, 'Period Balance'[Role] = "Current" )
 		formatString: \$#,0;-\$#,0;\$0
@@ -664,7 +660,7 @@ table Measures
 		displayFolder: Balances
 
 	/// Days sales outstanding: receivables over the last 90 days of billing.
-	measure DSO =
+	measure 'DSO Days' =
 			VAR p = [Period Sel]
 			RETURN CALCULATE( MAX( 'Period Balance'[DSO] ), REMOVEFILTERS( 'Period Balance' ), 'Period Balance'[Period] = p, 'Period Balance'[Role] = "Current" )
 		formatString: #,0.0
@@ -677,7 +673,7 @@ table Measures
 		formatString: #,0.0
 		displayFolder: Balances
 
-	measure 'Funds Employed' = [WIP] + [Receivables] + [Trust Funds]
+	measure 'Funds Employed' = [WIP Balance] + [Receivables Balance] + [Trust Funds]
 		formatString: \$#,0;-\$#,0;\$0
 		displayFolder: Balances
 
@@ -721,9 +717,9 @@ table Measures
 		displayFolder: KPIs\Change
 
 	measure 'Revenue Δ' =
-			VAR c = [Revenue]
+			VAR c = [Total Revenue]
 			VAR pr = [Revenue (prior)]
-			VAR d = DIVIDE( [Revenue] - [Revenue (prior)], ABS( [Revenue (prior)] ) )
+			VAR d = DIVIDE( [Total Revenue] - [Revenue (prior)], ABS( [Revenue (prior)] ) )
 			RETURN IF( ISBLANK( pr ) || pr = 0, "no comparison", FORMAT( d, "▲ +0.0%;▼ -0.0%;0.0%" ) & " vs prior period" )
 		displayFolder: KPIs\Change
 
@@ -1195,7 +1191,7 @@ table Measures
 		formatString: \$#,0;-\$#,0;\$0
 		displayFolder: Finance
 
-	measure Headcount = SUM( 'Staffing'[headcount] )
+	measure 'Headcount Total' = SUM( 'Staffing'[headcount] )
 		formatString: #,0
 		displayFolder: People
 
@@ -1330,7 +1326,7 @@ table Measures
 		displayFolder: Platform
 
 	/// Use with a visual filter on Answers[Order].
-	measure Answer = SELECTEDVALUE( 'Answers'[Answer] )
+	measure 'Answer Text' = SELECTEDVALUE( 'Answers'[Answer] )
 		displayFolder: Overview
 
 	measure 'Answer Evidence' = SELECTEDVALUE( 'Answers'[Evidence] )

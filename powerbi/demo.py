@@ -829,6 +829,7 @@ def build():
     E = Engine(W, inputs)
     sim_tables(E)
     meas = measures(E)
+    meas.update({new: meas[old] for old, new in MD.RENAMED.items() if old in meas})
     mtables, _, _ = MD.build_model(consts, tables, levers, ctx)
     fmts = fmt_of(mtables)
     from core import platforms as PL

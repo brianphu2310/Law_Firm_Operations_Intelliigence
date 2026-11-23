@@ -41,10 +41,10 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "Headcount"
+                  "Property": "Headcount Total"
                 }
               },
-              "queryRef": "Measures.Headcount",
+              "queryRef": "Measures.Headcount Total",
               "nativeQueryRef": "Staff",
               "displayName": "Staff"
             }

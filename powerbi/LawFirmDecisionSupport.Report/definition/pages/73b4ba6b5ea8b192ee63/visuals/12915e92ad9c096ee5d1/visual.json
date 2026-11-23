@@ -23,10 +23,10 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "Revenue"
+                  "Property": "Total Revenue"
                 }
               },
-              "queryRef": "Measures.Revenue",
+              "queryRef": "Measures.Total Revenue",
               "nativeQueryRef": "Revenue this period",
               "displayName": "Revenue this period"
             }

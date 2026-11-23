@@ -11,6 +11,8 @@ import pandas as pd
 
 from core import simulate as S
 from . import sim_spec as SP
+import re
+
 from .tmdl import Column, Measure, Table, relationship, q
 
 from core.ref import AS_OF as _AS_OF
@@ -153,11 +155,12 @@ def import_table(name, folder, file):
             if c.name == "month_start_date":
                 c.fmt = "mmm yy"
     if name == "Branch":
-        from .geo import OFFICE_LATLON
-        sw = lambda i: "SWITCH( [branch_name], " + ", ".join(f'"{b}", {v[i]}' for b, v in OFFICE_LATLON.items()) + ", BLANK() )"
+        # dim_branch already carries latitude / longitude: categorise them (names are case-insensitive in the model,
+        # so a calculated "Latitude" next to "latitude" would be a duplicate and the project would not open)
+        for c in tcols:
+            if c.name in ("latitude", "longitude"):
+                c.category, c.summarize = c.name.capitalize(), "none"
         tcols.append(Column("Place", "string", expression='[branch_name] & " NSW, Australia"', category="Place"))
-        tcols.append(Column("Latitude", "double", expression=sw(0), category="Latitude", summarize="none"))
-        tcols.append(Column("Longitude", "double", expression=sw(1), category="Longitude", summarize="none"))
     if name == "Suburb":
         for c in tcols:
             if c.name in ("latitude", "longitude"):
@@ -262,8 +265,7 @@ def descriptive_measures():
     add("Revenue", "[Actual Total revenue]", MONEY, "KPIs")
     add("Revenue (prior)", psum(f"SUM( 'PnL'[revenue] ), {ACTUAL}", "Prior"), MONEY, "KPIs", True)
     add("Operating Profit", "[Actual Operating profit]", MONEY, "KPIs")
-    add("Budget Operating Profit", "[Budget Operating profit]", MONEY, "KPIs")
-    add("Profit vs Budget", "[Operating Profit] - [Budget Operating Profit]", MONEY, "KPIs")
+    add("Profit vs Budget", "[Operating Profit] - [Budget Operating profit]", MONEY, "KPIs")
     add("Profit vs Budget Caption", 'VAR d = [Profit vs Budget]\nRETURN IF( ISBLANK( d ), "no budget", FORMAT( d, "▲ +$#,0;▼ -$#,0;$0" ) & " vs budget" )', None, "KPIs")
     add("Operating Margin", "DIVIDE( [Operating Profit], [Revenue] )", PCT, "KPIs")
     add("Fees", "[Actual Fees]", MONEY, "KPIs")
@@ -795,6 +797,24 @@ def simulator_measures(consts, levers):
     return out
 
 
+# A measure may not share its name with ANY column or measure in the model, ignoring case (the project would not open).
+# These measures had the name of a column somewhere (e.g. 'PnL'[revenue]); they keep their caption in every visual.
+RENAMED = {"Revenue": "Total Revenue", "Fees": "Total Fees", "Realisation": "Realisation Rate", "WIP": "WIP Balance",
+           "Receivables": "Receivables Balance", "DSO": "DSO Days", "Headcount": "Headcount Total", "Answer": "Answer Text"}
+
+
+def _apply_renames(tables):
+    pat = re.compile(r"(?<!')\[(" + "|".join(re.escape(k) for k in RENAMED) + r")\]")
+    fix = lambda e: pat.sub(lambda m: "[" + RENAMED[m.group(1)] + "]", e) if e else e
+    for t in tables:
+        for m in t.measures:
+            m.name = RENAMED.get(m.name, m.name)
+            m.expression = fix(m.expression)
+        for c in t.columns:
+            if getattr(c, "expression", None):
+                c.expression = fix(c.expression)
+
+
 def build_model(consts, tables, levers, ctx, base_url=DEFAULT_BASE_URL):
     """Returns (list of Table, list of relationship strings, expressions text)."""
     out = [import_table(n, "warehouse", f) for n, f in WAREHOUSE] + [import_table(n, "powerbi", f) for n, f in ANALYSIS]
@@ -803,6 +823,7 @@ def build_model(consts, tables, levers, ctx, base_url=DEFAULT_BASE_URL):
     sim_measures = Table("Simulator", [Column("Note", "string", calc_source="Note", hidden=True)], "calculated", 'ROW( "Note", "Simulator measures live here" )')
     sim_measures.measures = simulator_measures(consts, levers)
     out += sim + [sim_measures]
+    _apply_renames(out)
     rels = [relationship(*r) for r in RELATIONSHIPS]
     expr = f'expression BaseUrl = "{base_url}" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]\n'
     return out, rels, expr

@@ -23,10 +23,10 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "Answer"
+                  "Property": "Answer Text"
                 }
               },
-              "queryRef": "Measures.Answer",
+              "queryRef": "Measures.Answer Text",
               "nativeQueryRef": " ",
               "displayName": " "
             }

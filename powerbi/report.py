@@ -81,7 +81,8 @@ class F:
 
     @classmethod
     def m(cls, table, name, label=None):
-        return cls("m", table, name, label)
+        from .model import RENAMED
+        return cls("m", table, RENAMED.get(name, name), label or (name if name in RENAMED else None))
 
     @classmethod
     def c(cls, table, name, label=None):

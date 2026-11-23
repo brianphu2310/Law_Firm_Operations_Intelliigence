@@ -155,6 +155,24 @@ def test_dax_brackets_balance(built):
             assert e.count("{") == e.count("}"), m.name
 
 
+def test_object_names_are_unique_ignoring_case(built):
+    """The tabular model compares names case-insensitively: 'Latitude' next to 'latitude' stops the project opening."""
+    tbls, _, _ = built
+    seen_tables, seen_measures = set(), set()
+    for t in tbls:
+        assert t.name.lower() not in seen_tables, t.name
+        seen_tables.add(t.name.lower())
+        names = [c.name.lower() for c in t.columns]
+        dup = {n for n in names if names.count(n) > 1}
+        assert not dup, (t.name, dup)
+        for m in t.measures:
+            assert m.name.lower() not in seen_measures, m.name
+            seen_measures.add(m.name.lower())
+    # a measure may not share its name with any column in any table (SQLBI, "Duplicated names in DAX")
+    all_cols = {c.name.lower() for t in tbls for c in t.columns}
+    assert not (seen_measures & all_cols), seen_measures & all_cols
+
+
 def test_relationship_columns_exist(built):
     tbls, _, _ = built
     cols, _ = _inventory(tbls)

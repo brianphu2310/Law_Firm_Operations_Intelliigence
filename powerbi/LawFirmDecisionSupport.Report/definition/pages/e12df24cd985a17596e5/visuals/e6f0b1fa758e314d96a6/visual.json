@@ -23,10 +23,10 @@
                       "Entity": "Measures"
                     }
                   },
-                  "Property": "Receivables"
+                  "Property": "Receivables Balance"
                 }
               },
-              "queryRef": "Measures.Receivables",
+              "queryRef": "Measures.Receivables Balance",
               "nativeQueryRef": "Receivables (incl GST)",
               "displayName": "Receivables (incl GST)"
             }
