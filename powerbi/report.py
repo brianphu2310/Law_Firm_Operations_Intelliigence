@@ -19,6 +19,7 @@ SB = 188                      # dark sidebar width; page content is laid out on 
 KX = (W - SB) / W
 SIDEBAR, SIDEBAR_ON, SIDEBAR_TEXT, SIDEBAR_MUTED = "#151b2c", "#0a8496", "#e2e8f0", "#8b95a7"
 TEAL, INK, MUTED, LINE, BG = "#0a8496", "#0f172a", "#64748b", "#dbe6ee", "#f3f6fa"
+BORDER = "#0f172a"          # outline of every chart block and tile
 GREEN, RED, AMBER = "#047857", "#b91c1c", "#b45309"
 
 
@@ -144,7 +145,7 @@ def container_objects(title=None, subtitle=None, background=True, border=True, p
     if subtitle:
         o["subTitle"] = [{"properties": {"show": lit(True), "text": lit(subtitle), "fontSize": lit(9.0), "fontColor": colour(MUTED)}}]
     o["background"] = [{"properties": {"show": lit(background), "color": colour("#FFFFFF"), "transparency": lit(0.0)}}]
-    o["border"] = [{"properties": {"show": lit(border), "color": colour(LINE), "radius": lit(12.0), "width": lit(1.0)}}]
+    o["border"] = [{"properties": {"show": lit(border), "color": colour(BORDER), "radius": lit(12.0), "width": lit(1.0)}}]
     o["dropShadow"] = [{"properties": {"show": lit(False)}}]
     if padding is not None:
         o["padding"] = [{"properties": {"top": lit(float(padding)), "bottom": lit(float(padding)), "left": lit(float(padding)), "right": lit(float(padding))}}]
@@ -247,7 +248,7 @@ def kpi(page, x, y, w, h, value, label, caption=None, colour_field=None, caption
     """A KPI tile: white box, label + big value, a caption line underneath."""
     page.add("shape", x, y, w, h, objects={"shape": [{"properties": {"tileShape": lit("rectangleRounded")}}],
                                             "fill": [{"properties": {"fillColor": colour("#FFFFFF"), "transparency": lit(0.0)}}],
-                                            "outline": [{"properties": {"show": lit(True), "lineColor": colour(LINE), "weight": lit(1.0)}}]},
+                                            "outline": [{"properties": {"show": lit(True), "lineColor": colour(BORDER), "weight": lit(1.0)}}]},
              background=False, border=False)
     card(page, x + 4, y + 2, w - 8, h - (26 if caption else 6), value, label, size, colour_field)
     if caption:
@@ -462,7 +463,7 @@ def overview(p, nav, facts, targets):
         cx, cy = 14 + (i % 3) * 421, 154 + (i // 3) * 178
         p.add("shape", cx, cy, 413, 170, objects={"shape": [{"properties": {"tileShape": lit("rectangleRounded")}}],
                                                   "fill": [{"properties": {"fillColor": colour("#FFFFFF"), "transparency": lit(0.0)}}],
-                                                  "outline": [{"properties": {"show": lit(True), "lineColor": colour(LINE), "weight": lit(1.0)}}]},
+                                                  "outline": [{"properties": {"show": lit(True), "lineColor": colour(BORDER), "weight": lit(1.0)}}]},
               background=False, border=False, key=f"tile{i}")
         p.add("shape", cx, cy + 14, 5, 26, objects={"shape": [{"properties": {"tileShape": lit("rectangle")}}],
                                                     "fill": [{"properties": {"fillColor": colour(TEAL), "transparency": lit(0.0)}}],
@@ -497,7 +498,7 @@ def overview(p, nav, facts, targets):
     # where clients come from: the map on the left, the two numbers that matter on the right
     p.add("shape", 644, 510, 622, 202, objects={"shape": [{"properties": {"tileShape": lit("rectangleRounded")}}],
                                                 "fill": [{"properties": {"fillColor": colour("#FFFFFF"), "transparency": lit(0.0)}}],
-                                                "outline": [{"properties": {"show": lit(True), "lineColor": colour(LINE), "weight": lit(1.0)}}]},
+                                                "outline": [{"properties": {"show": lit(True), "lineColor": colour(BORDER), "weight": lit(1.0)}}]},
           background=False, border=False, key="ovmaptile")
     catchment_map(p, 648, 512, 312, 198, "Where clients come from", "Matters, last 12 months, by client suburb",
                   key="ovmap", image="overview", bands=True, legend=True, plain_bg=True)
@@ -742,7 +743,7 @@ def platform(p, nav):
         x = 14 + i * 210
         p.add("shape", x, 68, 202, 70, objects={"shape": [{"properties": {"tileShape": lit("rectangleRounded")}}],
                                                 "fill": [{"properties": {"fillColor": colour("#FFFFFF"), "transparency": lit(0.0)}}],
-                                                "outline": [{"properties": {"show": lit(True), "lineColor": colour(LINE), "weight": lit(1.0)}}]},
+                                                "outline": [{"properties": {"show": lit(True), "lineColor": colour(BORDER), "weight": lit(1.0)}}]},
               background=False, border=False)
         f2 = F(fld.kind, fld.table, fld.name, lab)
         p.add("card", x + 4, 70, 194, 66, roles={"Values": [f2]},
@@ -783,7 +784,7 @@ def lever_slicers(p, levers):
     col_w, x0, y0 = 128, 14, 162
     p.add("shape", 10, 158, 402, 556, objects={"shape": [{"properties": {"tileShape": lit("rectangleRounded")}}],
                                                 "fill": [{"properties": {"fillColor": colour("#FFFFFF"), "transparency": lit(0.0)}}],
-                                                "outline": [{"properties": {"show": lit(True), "lineColor": colour(LINE), "weight": lit(1.0)}}]},
+                                                "outline": [{"properties": {"show": lit(True), "lineColor": colour(BORDER), "weight": lit(1.0)}}]},
           background=False, border=False, key="leverpanel")
     for gi, (title, keys) in enumerate(LEVER_LAYOUT):
         x = x0 + 4 + gi * (col_w + 4)
