@@ -169,6 +169,10 @@ class Page:
             for e in objects.get("shape", []):
                 if e["properties"].get("tileShape") == lit("rectangleRounded"):
                     e["properties"].setdefault("roundEdge", lit(10))
+        if objects and vtype == "card":
+            # show the measure's own format ($1,625,320), not Power BI's automatic K / M units
+            for e in objects.get("labels", []):
+                e["properties"].setdefault("labelDisplayUnits", lit(1.0))
         if objects:
             visual["objects"] = objects
         vco = container_objects(title, subtitle, background, border, padding)
