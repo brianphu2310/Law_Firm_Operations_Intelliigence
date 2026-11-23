@@ -555,12 +555,14 @@ def visual_data(E, meas, fmts, v, ctx):
         r = ref(projs["Values"][0])
         opts = list(E.W[r[1]][r[2]].dropna().astype(str).unique()) if r[1] in E.W else []
         return {"options": opts}
+    if t == "scatterChart" and ref(projs["Category"][0])[1] == "Suburb":
+        t = "map"                               # the catchment maps: a scatter over a basemap image, previewed as a map
     if t == "map":
         from .geo import COUNTRY_LATLON, OFFICE_LATLON
         cr = ref(projs["Category"][0])
         sr = ref(projs["Size"][0])
         pts = []
-        sub = E.W["Suburb"].set_index("Place") if cr[1] == "Suburb" else None
+        sub = E.W["Suburb"].set_index(cr[2]) if cr[1] == "Suburb" else None
         for (cv,) in combos(E, [cr], ctx):
             val = ev(sr, ctx.plus((cr[1], cr[2]), cv))
             if sub is not None:

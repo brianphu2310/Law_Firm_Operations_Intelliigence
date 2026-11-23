@@ -6,6 +6,8 @@ PBIR schemas in tests/test_powerbi.py. Canvas 1280 x 720 (16:9).
 from __future__ import annotations
 
 import hashlib
+import json
+from pathlib import Path
 
 from core import platforms as PL, simulate as S
 
@@ -57,21 +59,36 @@ def series_colours(table, column, colours):
 BAND_COLOURS = {"Under 5 km": "#0a8496", "5–10 km": "#f2b134", "Over 10 km": "#e2665a"}
 
 
-def catchment_map(p, x, y, w, h, title, subtitle, key=None, size=8.0, heat=False, plain=False):
-    """Matters by client suburb (sample data): bubbles coloured by distance to the nearest office, or a heat map of demand."""
-    # Location only: the suburb names carry the Place category and the table's latitude/longitude are categorised,
-    # so the map places them without extra roles (a Latitude field in the well showed up as a legend)
-    roles = {"Category": [F.c("Suburb", "Place")], "Size": [F.m(M, "Matters Last 12 Months", "Matters, last 12 months")]}
-    objects = {"bubbles": [{"properties": {"bubbleSize": lit(size)}}], "mapStyles": [{"properties": {"mapTheme": lit("grayscale")}}]}
-    if plain:                                  # Power BI's default look: road map, one bubble colour, size = matters
-        objects = {"bubbles": [{"properties": {"bubbleSize": lit(size)}}], "dataPoint": [{"properties": {"defaultColor": colour("#2a9fb0")}}]}
-    elif heat:
-        objects["heatMap"] = [{"properties": {"show": lit(True), "radius": lit(30.0)}}]
-    else:
+MAP_EXTENTS = json.loads((Path(__file__).resolve().parent / "assets" / "maps" / "extents.json").read_text())
+
+
+def map_image(name):
+    return {"image": {"name": lit(f"map_{name}.png"),
+                      "url": {"expr": {"ResourcePackageItem": {"PackageName": "RegisteredResources", "PackageType": 1, "ItemName": f"map_{name}.png"}}},
+                      "scaling": lit("Fit")}}
+
+
+def catchment_map(p, x, y, w, h, title, subtitle, key=None, size=0.0, image="catchment", bands=True):
+    """Matters by client suburb (sample data) as a scatter chart over a static basemap image: longitude on X, latitude on Y,
+    axes pinned to the image's extent. Unlike Power BI's map visuals it needs no Bing/Azure map service, so it works where an
+    organisation has switched maps off, in PDF exports and in Publish to web."""
+    lon0, lat0, lon1, lat1 = MAP_EXTENTS[image]
+    roles = {"Category": [F.c("Suburb", "suburb", "Suburb")], "X": [F.s("Suburb", "longitude", "Longitude")],
+             "Y": [F.s("Suburb", "latitude", "Latitude")], "Size": [F.m(M, "Matters Last 12 Months", "Matters, last 12 months")]}
+    axis = lambda lo, hi: [{"properties": {"show": lit(False), "start": lit(float(lo)), "end": lit(float(hi)), "gridlineShow": lit(False),
+                                           "showAxisTitle": lit(False)}}]
+    objects = {"categoryAxis": axis(lon0, lon1), "valueAxis": axis(lat0, lat1),
+               "plotArea": [{"properties": {"image": map_image(image), "transparency": lit(0.0)}}],
+               "bubbles": [{"properties": {"bubbleSize": lit(size)}}],
+               "dataPoint": [{"properties": {"defaultColor": colour("#2a9fb0")}}],
+               "categoryLabels": [{"properties": {"show": lit(False)}}]}
+    if bands:
         roles["Series"] = [F.c("Suburb", "Distance band", "Distance to nearest office")]
         objects["dataPoint"] = series_colours("Suburb", "Distance band", BAND_COLOURS)
         objects["legend"] = [{"properties": {"show": lit(True), "position": lit("Bottom")}}]
-    p.add("map", x, y, w, h, roles=roles, objects=objects, title=title, subtitle=subtitle, **({"key": key} if key else {}))
+    else:
+        objects["legend"] = [{"properties": {"show": lit(False)}}]
+    p.add("scatterChart", x, y, w, h, roles=roles, objects=objects, title=title, subtitle=subtitle, **({"key": key} if key else {}))
 
 
 class F:
@@ -479,7 +496,7 @@ def overview(p, nav, facts, targets):
     cf = facts["catchment"]
     catchment_map(p, 644, 510, 622, 202, "Where clients come from: and where a branch would reach them",
                   f"Bubble = matters, last 12 months · {cf['share_far']:.0%} live 10+ km from an office · biggest gap near {cf['site']}",
-                  key="ovmap", size=6.0, plain=True)
+                  key="ovmap", image="overview", bands=False)
 
 
 # ---- Finance
@@ -610,7 +627,7 @@ def matters_map(p, nav, tabs, facts):
     frame(p, "Matters · Map", "Where the work comes from, and where a new branch would reach the clients the offices are far from", nav, tabs)
     matter_slicers(p, 100)
     catchment_map(p, 14, 146, 520, 566, "Where clients come from: matters by client suburb",
-                  f"Last 12 months · colour = distance to the nearest office · {cf['far']} of {cf['total']} matters from 10+ km away", size=10.0)
+                  f"Last 12 months · colour = distance to the nearest office · {cf['far']} of {cf['total']} matters from 10+ km away")
     p.add("map", 540, 146, 726, 250, roles={"Category": [F.c("Country Geo", "Country")], "Size": [F.m(M, "Matter Count", "Matters")]},
           objects={"bubbles": [{"properties": {"bubbleSize": lit(10.0)}}], "dataPoint": [{"properties": {"defaultColor": colour(TEAL)}}],
                    "categoryLabels": [{"properties": {"show": lit(True)}}], "mapStyles": [{"properties": {"mapTheme": lit("grayscale")}}]},

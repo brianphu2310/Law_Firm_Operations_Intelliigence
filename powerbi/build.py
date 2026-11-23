@@ -91,6 +91,11 @@ def write_report(levers, facts):
     base_theme = ROOT / "assets" / "CY24SU10.json"
     _write(rp / "StaticResources" / "SharedResources" / "BaseThemes" / "CY24SU10.json", base_theme.read_text(encoding="utf-8"))
     _json(rp / "StaticResources" / "RegisteredResources" / f"{THEME_NAME}.json", theme())
+    maps = sorted((ROOT / "assets" / "maps").glob("*.png"))          # basemap images for the catchment scatter maps
+    for img in maps:
+        dst = rp / "StaticResources" / "RegisteredResources" / f"map_{img.name}"
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        dst.write_bytes(img.read_bytes())
     _json(d / "version.json", {"$schema": f"{RP.SCHEMA}/versionMetadata/1.0.0/schema.json", "version": "2.0.0"})
     _json(d / "report.json", {
         "$schema": f"{RP.SCHEMA}/report/1.3.0/schema.json",
@@ -98,7 +103,8 @@ def write_report(levers, facts):
                             "customTheme": {"name": f"{THEME_NAME}.json", "reportVersionAtImport": "5.61", "type": "RegisteredResources"}},
         "layoutOptimization": "None",
         "resourcePackages": [{"name": "SharedResources", "type": "SharedResources", "items": [{"name": "CY24SU10", "path": "BaseThemes/CY24SU10.json", "type": "BaseTheme"}]},
-                             {"name": "RegisteredResources", "type": "RegisteredResources", "items": [{"name": f"{THEME_NAME}.json", "path": f"{THEME_NAME}.json", "type": "CustomTheme"}]}],
+                             {"name": "RegisteredResources", "type": "RegisteredResources", "items": [{"name": f"{THEME_NAME}.json", "path": f"{THEME_NAME}.json", "type": "CustomTheme"}]
+                                       + [{"name": f"map_{i.name}", "path": f"map_{i.name}", "type": "Image"} for i in maps]}],
         "settings": {"useStylableVisualContainerHeader": True, "defaultDrillFilterOtherVisuals": True, "allowChangeFilterTypes": True,
                      "useEnhancedTooltips": True, "useDefaultAggregateDisplayName": True},
     })

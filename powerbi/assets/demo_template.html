@@ -529,6 +529,7 @@ function waterfall(v, body, W, H){
     add(s,"text",{x:left+i*band+band/2,y:H-8,"font-size":8,fill:"#334155","text-anchor":"middle"}, g.cat); });
 }
 function scatter(v, body, W, H){
+  { const d0 = dataFor(v); if (d0 && d0.basemap) return geomap(v, body, W, H); }
   const d = dataFor(v); if (!d) return; const pts = d.points.filter(p => p.x !== null && p.y !== null);
   const s = svgEl(W, H); body.appendChild(s); const left = 48, top = 8, bottom = 26, pw = W - left - 14, ph = H - top - bottom;
   const xs = niceScale(Math.min(...pts.map(p => p.x)), Math.max(...pts.map(p => p.x))), ys = niceScale(Math.min(0, ...pts.map(p => p.y)), Math.max(...pts.map(p => p.y)));

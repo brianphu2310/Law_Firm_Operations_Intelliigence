@@ -33,6 +33,16 @@
           "name": "DecisionSupport.json",
           "path": "DecisionSupport.json",
           "type": "CustomTheme"
+        },
+        {
+          "name": "map_catchment.png",
+          "path": "map_catchment.png",
+          "type": "Image"
+        },
+        {
+          "name": "map_overview.png",
+          "path": "map_overview.png",
+          "type": "Image"
         }
       ]
     }
