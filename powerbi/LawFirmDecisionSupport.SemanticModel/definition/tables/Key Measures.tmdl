@@ -1355,6 +1355,31 @@ table 'Key Measures'
 		formatString: +0.0;-0.0;0.0
 		displayFolder: Overview
 
+	/// Growth question: new matters for every $1,000 of marketing spend in a channel (1,000 / cost per new matter).
+	measure 'Answer Chart Per 1K' = DIVIDE( 1000, SUM( 'Answer Chart'[Value] ) )
+		formatString: 0.0
+		displayFolder: Overview
+
+	/// Branch question: the 13-week cash low point after opening.
+	measure 'Answer Gauge Value' = CALCULATE( SUM( 'Answer Chart'[Value] ), 'Answer Chart'[Highlight] = 1 )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Overview
+
+	/// Branch question: the minimum office-account balance.
+	measure 'Answer Gauge Target' = CALCULATE( SUM( 'Answer Chart'[Value] ), 'Answer Chart'[Item] = "Minimum cash balance" )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Overview
+
+	measure 'Answer Gauge Min' = 0
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: Overview
+
+	measure 'Answer Gauge Max' = MAX( CALCULATE( SUM( 'Answer Chart'[Value] ), 'Answer Chart'[Highlight] = 1 ), CALCULATE( SUM( 'Answer Chart'[Value] ), 'Answer Chart'[Item] = "Minimum cash balance" ) ) * 2
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: Overview
+
 	measure 'Answer Chart Colour' = IF( MAX( 'Answer Chart'[Highlight] ) = 1, "#0a8496", "#c7d2dc" )
 		isHidden
 		displayFolder: Overview

@@ -33,11 +33,11 @@ To load from a fork or another branch: *Transform data → Edit parameters → B
 | Matters | 1 | Matter ledger with filters, opened vs closed, WIP by age |
 | Clients | Clients · Marketing | Client league, concentration, payment behaviour, cost per new matter by channel |
 | Calendar | 1 | Agenda and workload by lawyer |
-| Platform | 7 (one per platform, in the sidebar) | Verdict, NPV, payback and cost of the platform; ranking, NPV, cumulative cash flow, scorecard, risks, implementation plan, NPV sensitivity |
+| Platforms | 7 (one per platform, as tabs on the Platforms page) | Verdict, NPV, payback and cost of the platform; ranking, NPV, cumulative cash flow, scorecard, risks, implementation plan, NPV sensitivity |
 | Simulator | Decide · Test the plan | 12 presets + 30 levers; profit bridge, effects and cash, what moves profit most, what it would take, delivery range, presets side by side |
 | Check | 1 | Assumptions, and every Simulator result in DAX compared with the Python engine |
 
-A dark **sidebar** on every page lists the pages and the seven platforms (one page each, like the Streamlit app had). The **Period** slicer (top right, synced across pages) picks the reporting period, with the same periods and day weights as the Python model.
+A dark **sidebar** on every page lists the pages; the seven platforms are tabs along the top of the Platforms page. On the Overview each question has the chart that fits its answer: a ranking (software), a gauge against the minimum cash balance (branch), columns (hiring), a diverging bar (support staff), a line (pay) and a treemap of new matters per $1,000 (growth). The **Period** slicer (top right, synced across pages) picks the reporting period, with the same periods and day weights as the Python model.
 
 ## How it is built
 

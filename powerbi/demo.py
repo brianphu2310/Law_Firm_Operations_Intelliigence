@@ -309,6 +309,12 @@ def measures(E: Engine):
     m["Answer"] = lambda c: (lambda d: d["Answer"].iloc[0] if len(d) == 1 else None)(E.filt("Answers", c))
     m["Answer Chart $"] = lambda c: float(E.filt("Answer Chart", c)["Value"].sum())
     m["Answer Chart Roles"] = m["Answer Chart $"]
+    _ac = lambda c: E.filt("Answer Chart", c)
+    m["Answer Chart Per 1K"] = lambda c: (lambda v: 1000 / v if v else None)(float(_ac(c)["Value"].sum()))
+    m["Answer Gauge Value"] = lambda c: float(_ac(c).query("Highlight == 1")["Value"].sum())
+    m["Answer Gauge Target"] = lambda c: float(_ac(c).query("Item == 'Minimum cash balance'")["Value"].sum())
+    m["Answer Gauge Min"] = lambda c: 0.0
+    m["Answer Gauge Max"] = lambda c: max(m["Answer Gauge Value"](c), m["Answer Gauge Target"](c)) * 2
     m["Answer Chart Colour"] = lambda c: "#0a8496" if E.filt("Answer Chart", c)["Highlight"].max() == 1 else "#c7d2dc"
     m["Answer Evidence"] = lambda c: (lambda d: d["Evidence"].iloc[0] if len(d) == 1 else None)(E.filt("Answers", c))
     m["Profit vs Budget Caption"] = lambda c: (lambda d: ("▲ +" if d > 0 else "▼ -") + f"${abs(d):,.0f} vs budget")(m["Profit vs Budget"](c))
@@ -556,6 +562,13 @@ def visual_data(E, meas, fmts, v, ctx):
     def fk(r):
         return kind_of(fmts.get((r[1], r[2])))
 
+    if t == "gauge":
+        g = lambda role: ev(ref(projs[role][0]), ctx) if role in projs else None
+        return {"value": g("Y"), "target": g("TargetValue"), "min": g("MinValue") or 0, "max": g("MaxValue"),
+                "label": label(projs["Y"][0]), "tlabel": label(projs["TargetValue"][0]) if "TargetValue" in projs else None}
+    if t == "treemap":                          # drawn like a bar chart's data: categories, values, colours
+        projs = {"Category": projs["Group"], "Y": projs["Values"]}
+        q = {"Category": q["Group"], "Y": q["Values"]}
     if t in ("card",):
         r = ref(projs["Values"][0])
         return {"value": ev(r, ctx), "kind": fk(r)}
@@ -900,7 +913,7 @@ def build():
                 if live:
                     vis["live"] = live
                     del vis["data"]
-            elif p.section in ("Platform", "Check", "Simulator") or not period_dependent(tables_used, v):
+            elif p.section in ("Platforms", "Check", "Simulator") or not period_dependent(tables_used, v):
                 vis["data"] = visual_data(E, meas, fmts, v, Ctx({("Period", "Period"): MD.DEFAULT_PERIOD, **vctx}))
             else:
                 vis["by"] = "period"
@@ -933,7 +946,7 @@ def period_dependent(tables_used, v):
          "Best Branch Site", "Best Branch Site Caption", "Open Matters", "Matter WIP",
                        "Matter Billed", "Matter Estimated Value", "Supplier Spend", "Card Spend", "Cash Inflow", "Cash Outflow",
                        "Cash Closing", "Cash Minimum", "Cash Low Point", "FY Forecast Profit", "FY Profit Gap", "FY Path Actual Profit",
-                       "FY Path Forecast Profit", "FY Path Budget Profit", "Headcount", "Answer", "Answer Evidence", "Answer Chart $", "Answer Chart Roles",
+                       "FY Path Forecast Profit", "FY Path Budget Profit", "Headcount", "Answer", "Answer Evidence", "Answer Chart $", "Answer Chart Roles", "Answer Chart Per 1K", "Answer Gauge Value", "Answer Gauge Target", "Answer Gauge Min", "Answer Gauge Max",
                        "Sim Compare vs Today"}
     if meas_names:
         return any(n not in static_measures for n in meas_names)

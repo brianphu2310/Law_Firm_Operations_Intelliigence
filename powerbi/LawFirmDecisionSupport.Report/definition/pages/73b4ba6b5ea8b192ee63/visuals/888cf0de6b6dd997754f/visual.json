@@ -2,35 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "888cf0de6b6dd997754f",
   "position": {
-    "x": 565.934375,
+    "x": 593.234375,
     "y": 214.0,
-    "z": 45000,
-    "width": 338.690625,
+    "z": 38000,
+    "width": 284.090625,
     "height": 106.0,
-    "tabOrder": 45000
+    "tabOrder": 38000
   },
   "visual": {
-    "visualType": "clusteredBarChart",
+    "visualType": "gauge",
     "query": {
       "queryState": {
-        "Category": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Answer Chart"
-                    }
-                  },
-                  "Property": "Item"
-                }
-              },
-              "queryRef": "Answer Chart.Item",
-              "nativeQueryRef": "Item"
-            }
-          ]
-        },
         "Y": {
           "projections": [
             {
@@ -41,61 +23,95 @@
                       "Entity": "Key Measures"
                     }
                   },
-                  "Property": "Answer Chart $"
+                  "Property": "Answer Gauge Value"
                 }
               },
-              "queryRef": "Key Measures.Answer Chart $",
-              "nativeQueryRef": "Value",
-              "displayName": "Value"
+              "queryRef": "Key Measures.Answer Gauge Value",
+              "nativeQueryRef": "Cash low point after",
+              "displayName": "Cash low point after"
+            }
+          ]
+        },
+        "TargetValue": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Key Measures"
+                    }
+                  },
+                  "Property": "Answer Gauge Target"
+                }
+              },
+              "queryRef": "Key Measures.Answer Gauge Target",
+              "nativeQueryRef": "Minimum balance",
+              "displayName": "Minimum balance"
+            }
+          ]
+        },
+        "MinValue": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Key Measures"
+                    }
+                  },
+                  "Property": "Answer Gauge Min"
+                }
+              },
+              "queryRef": "Key Measures.Answer Gauge Min",
+              "nativeQueryRef": "Min",
+              "displayName": "Min"
+            }
+          ]
+        },
+        "MaxValue": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Key Measures"
+                    }
+                  },
+                  "Property": "Answer Gauge Max"
+                }
+              },
+              "queryRef": "Key Measures.Answer Gauge Max",
+              "nativeQueryRef": "Max",
+              "displayName": "Max"
             }
           ]
         }
       }
     },
     "objects": {
-      "legend": [
+      "dataPoint": [
         {
           "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "categoryAxis": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "8.0D"
-                }
-              }
-            },
-            "showAxisTitle": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "color": {
+            "fill": {
               "solid": {
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#334155'"
+                      "Value": "'#e2665a'"
+                    }
+                  }
+                }
+              }
+            },
+            "target": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#0f172a'"
                     }
                   }
                 }
@@ -104,20 +120,7 @@
           }
         }
       ],
-      "valueAxis": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "labels": [
+      "calloutValue": [
         {
           "properties": {
             "show": {
@@ -130,7 +133,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "8.0D"
+                  "Value": "14.0D"
                 }
               }
             },
@@ -139,7 +142,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#334155'"
+                      "Value": "'#e2665a'"
                     }
                   }
                 }
@@ -162,34 +165,57 @@
           }
         }
       ],
-      "dataPoint": [
+      "labels": [
         {
           "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "Key Measures"
-                        }
-                      },
-                      "Property": "Answer Chart Colour"
-                    }
-                  }
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "7.0D"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1000.0D"
                 }
               }
             }
-          },
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 1
+          }
+        }
+      ],
+      "target": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
-            ]
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "8.0D"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1000.0D"
+                }
+              }
+            }
           }
         }
       ]

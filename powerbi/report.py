@@ -352,7 +352,7 @@ def side_button(page, y, label, target, active, size=10.0, key=None, h=26):
 
 
 def sidebar(page, sections, platforms):
-    """Dark sidebar on every page: app name, the pages, and one entry per platform (like the Streamlit app)."""
+    """Dark sidebar on every page: app name and the pages. The seven platforms are tabs on the Platforms page."""
     page.add("shape", 0, 0, SB, H, objects={"shape": [{"properties": {"tileShape": lit("rectangle")}}],
                                             "fill": [{"properties": {"fillColor": colour(SIDEBAR), "transparency": lit(0.0)}}],
                                             "outline": [{"properties": {"show": lit(False)}}]}, background=False, border=False, key="sidebar", raw=True)
@@ -368,14 +368,6 @@ def sidebar(page, sections, platforms):
     for label, target in sections:
         side_button(page, y, label, target, active=label.replace("★ ", "") == page.section)
         y += 29
-    y += 8
-    page.add("textbox", 12, y, SB - 20, 24, objects={"general": [{"properties": {"paragraphs": [
-        {"textRuns": [{"value": "PLATFORMS", "textStyle": {"fontSize": "7.5pt", "color": SIDEBAR_MUTED, "fontWeight": "bold", "fontFamily": "Segoe UI"}}]}]}}]},
-        background=False, border=False, key="lbl-platforms", raw=True)
-    y += 24
-    for name, target in platforms:
-        side_button(page, y, name, target, active=page.platform == name, size=9.0, key=f"plat-{name}", h=24)
-        y += 27
 
 
 def frame(page, title, subtitle, nav, sub_tabs=None):
@@ -385,7 +377,7 @@ def frame(page, title, subtitle, nav, sub_tabs=None):
                                             "fill": [{"properties": {"fillColor": colour(TEAL), "transparency": lit(0.0)}}],
                                             "outline": [{"properties": {"show": lit(False)}}]}, background=False, border=False, key="band")
     text(page, 14, 4, 900, 54, [[(title, 17, "#FFFFFF", True)], [(subtitle, 9, "#d9f2f5", False)]], key="title")
-    if page.section not in ("Simulator", "Platform", "Check"):
+    if page.section not in ("Simulator", "Platforms", "Check"):
         slicer(page, 1030, 8, 236, 44, F.c("Period", "Period"), "Dropdown", None, sync="period", default="FY26 Q1 QTD", key="period", force=True)
     if sub_tabs:
         x = 14
@@ -414,11 +406,11 @@ def build_pages(ctx_facts, levers):
         P[n] = Page(_id("page", n), d, s, i)
     plat_pages = []
     for j, name in enumerate(PL.NAMES):
-        pg = Page(_id("page", "platform", name), f"Platform · {PL.PLATFORMS[name]['short']}", "Platform", 100 + j, hidden=j > 0, platform=name)
+        pg = Page(_id("page", "platform", name), f"Platform · {PL.PLATFORMS[name]['short']}", "Platforms", 100 + j, hidden=j > 0, platform=name)
         plat_pages.append(pg)
     sections = [("Overview", P["overview"].name), ("Finance", P["finance_pl"].name), ("People", P["people_perf"].name),
                 ("Matters", P["matters"].name), ("Clients", P["clients"].name), ("Calendar", P["calendar"].name),
-                ("★ Simulator", P["sim_decide"].name), ("Check", P["check"].name)]
+                ("Platforms", plat_pages[0].name), ("★ Simulator", P["sim_decide"].name), ("Check", P["check"].name)]
     nav = (sections, [(pg.platform, pg.name) for pg in plat_pages])
     fin_tabs = [("P&L & outlook", P["finance_pl"].name), ("Cash & billing", P["finance_cash"].name), ("Trust & costs", P["finance_trust"].name)]
     ppl_tabs = [("Performance", P["people_perf"].name), ("Hiring & departments", P["people_hire"].name), ("Branches & pay", P["people_branch"].name)]
@@ -441,8 +433,9 @@ def build_pages(ctx_facts, levers):
     clients(P["clients"], nav, cli_tabs)
     clients_mkt(P["clients_mkt"], nav, cli_tabs)
     calendar(P["calendar"], nav)
+    plat_tabs = [(PL.PLATFORMS[pg.platform]["short"], pg.name) for pg in plat_pages]
     for pg in plat_pages:
-        platform(pg, nav)
+        platform(pg, nav, plat_tabs)
     sim_decide(P["sim_decide"], nav, sim_tabs, levers)
     sim_test(P["sim_test"], nav, sim_tabs, levers)
     check(P["check"], nav)
@@ -451,6 +444,50 @@ def build_pages(ctx_facts, levers):
 
 
 # ---- Overview
+# one chart type per question, each the natural shape for its answer
+TILE_CHART = {0: "clusteredBarChart",          # software: ranking of savings
+              1: "gauge",                      # branch: cash low point against the minimum balance
+              2: "clusteredColumnChart",       # hiring: year-one gain by area
+              3: "clusteredBarChart",          # support: roles over (+) or under (-) the work
+              4: "lineChart",                  # pay: cost rising with the pay increase
+              5: "treemap"}                    # growth: new matters per $1,000 by channel (biggest box = best value)
+
+
+def answer_chart(p, i, row, cx, cy):
+    flt = [cat_filter(F.c("Answer Chart", "Order"), int(row["Order"]), _id(p.name, "ch", i))]
+    vt = TILE_CHART[i]
+    unit = "Answer Chart Roles" if i == 3 else "Answer Chart $"
+    lab = {"show": lit(True), "fontSize": lit(8.0), "color": colour("#334155"),
+           "labelDisplayUnits": lit(1.0 if i == 3 else 1000.0), "labelPrecision": lit(1 if i == 3 else 0)}
+    fill = [{"properties": {"fill": colour_measure(M, "Answer Chart Colour")}, "selector": {"data": [{"dataViewWildcard": {"matchingOption": 1}}]}}]
+    box = dict(background=False, border=False, filters=flt, key=f"c{i}")
+    if vt == "gauge":
+        p.add("gauge", cx + 40, cy + 60, 333, 106,
+              roles={"Y": [F.m(M, "Answer Gauge Value", "Cash low point after")], "TargetValue": [F.m(M, "Answer Gauge Target", "Minimum balance")],
+                     "MinValue": [F.m(M, "Answer Gauge Min", "Min")], "MaxValue": [F.m(M, "Answer Gauge Max", "Max")]},
+              objects={"dataPoint": [{"properties": {"fill": colour("#e2665a"), "target": colour(INK)}}],
+                       "calloutValue": [{"properties": {"show": lit(True), "fontSize": lit(14.0), "color": colour("#e2665a"),
+                                                        "labelDisplayUnits": lit(1000.0), "labelPrecision": lit(0)}}],
+                       "labels": [{"properties": {"show": lit(True), "fontSize": lit(7.0), "labelDisplayUnits": lit(1000.0)}}],
+                       "target": [{"properties": {"show": lit(True), "fontSize": lit(8.0), "labelDisplayUnits": lit(1000.0)}}]}, **box)
+        return
+    roles = {"Category": [F.c("Answer Chart", "Item")], "Y": [F.m(M, unit, "Value")]}
+    objs = {"legend": [{"properties": {"show": lit(False)}}], "labels": [{"properties": dict(lab)}], "dataPoint": fill}
+    if vt == "treemap":
+        roles = {"Group": [F.c("Answer Chart", "Item")], "Values": [F.m(M, "Answer Chart Per 1K", "New matters per $1,000")]}
+        objs["labels"] = [{"properties": {"show": lit(True), "fontSize": lit(8.5), "color": colour("#FFFFFF"), "labelPrecision": lit(1)}}]
+        objs["categoryLabels"] = [{"properties": {"show": lit(True), "fontSize": lit(8.5), "color": colour("#FFFFFF")}}]
+    else:
+        objs["categoryAxis"] = [{"properties": {"show": lit(True), "fontSize": lit(8.0), "showAxisTitle": lit(False), "color": colour("#334155")}}]
+        objs["valueAxis"] = [{"properties": {"show": False if vt != "lineChart" else False, "showAxisTitle": lit(False)}}]
+        objs["valueAxis"][0]["properties"]["show"] = lit(False)
+    if vt == "lineChart":
+        objs.pop("dataPoint")
+        objs["dataPoint"] = [{"properties": {"fill": colour(TEAL)}}]
+        objs["lineStyles"] = [{"properties": {"showMarker": lit(True), "markerSize": lit(5.0), "strokeWidth": lit(2.5)}}]
+    p.add(vt, cx + 8, cy + 60, 397, 106, roles=roles, objects=objs, **box)
+
+
 def overview(p, nav, facts, targets):
     """The whole project on one screen: firm health, then the Principal's six questions with the answer the model gives."""
     frame(p, "Overview", "Six decisions for the Principal of a three-office law firm, answered from one model · sample data, as of 17 Sep 2025", nav)
@@ -473,17 +510,7 @@ def overview(p, nav, facts, targets):
         p.add("card", cx + 8, cy + 28, 397, 30, roles={"Values": [F.m(M, "Answer", " ")]},
               objects={"labels": [{"properties": {"fontSize": lit(13.0), "color": colour(INK)}}], "categoryLabels": [{"properties": {"show": lit(False)}}]},
               background=False, border=False, filters=flt("ans"), key=f"a{i}")
-        unit = "Answer Chart Roles" if i == 3 else "Answer Chart $"
-        p.add("clusteredBarChart", cx + 8, cy + 60, 397, 106,
-              roles={"Category": [F.c("Answer Chart", "Item")], "Y": [F.m(M, unit, "Value")]},
-              objects={"legend": [{"properties": {"show": lit(False)}}],
-                       "categoryAxis": [{"properties": {"show": lit(True), "fontSize": lit(8.0), "showAxisTitle": lit(False), "color": colour("#334155")}}],
-                       "valueAxis": [{"properties": {"show": lit(False)}}],
-                       "labels": [{"properties": {"show": lit(True), "fontSize": lit(8.0), "color": colour("#334155"),
-                                                  "labelDisplayUnits": lit(1.0 if i == 3 else 1000.0), "labelPrecision": lit(1 if i == 3 else 0)}}],
-                       "dataPoint": [{"properties": {"fill": colour_measure(M, "Answer Chart Colour")},
-                                      "selector": {"data": [{"dataViewWildcard": {"matchingOption": 1}}]}}]},
-              background=False, border=False, filters=[cat_filter(F.c("Answer Chart", "Order"), int(row["Order"]), _id(p.name, "ch", i))], key=f"c{i}")
+        answer_chart(p, i, row, cx, cy)
         label, target = targets[row["Page"]]
         p.add("actionButton", cx + 297, cy + 7, 108, 22, objects={
             "icon": [{"properties": {"show": lit(False)}, "selector": {"id": "default"}}],
@@ -728,10 +755,10 @@ def calendar(p, nav):
 
 
 # ---- Platform
-def platform(p, nav):
+def platform(p, nav, tabs):
     name = p.platform
     pl = PL.PLATFORMS[name]
-    frame(p, f"Platform · {name}", f"{pl['tagline']}. 3-year cash flows, NPV, scorecard and risk against staying on LEAP + InfoTrack", nav)
+    frame(p, f"Platform · {name}", f"{pl['tagline']}. 3-year cash flows, NPV, scorecard and risk against staying on LEAP + InfoTrack", nav, tabs)
     for t in ("Platform Risks", "Platform Gantt", "Platform NPV Grid"):
         p.filters.append({"name": _id(p.name, t), "field": F.c(t, "Platform").expr(), "type": "Categorical",
                           "filter": in_filter(F.c(t, "Platform"), [name])})
@@ -741,24 +768,24 @@ def platform(p, nav):
              (F.s("Platforms", "RunRate"), "Run cost a year"), (F.s("Platforms", "OneOff"), "One-off cost"), (F.s("Platforms", "Score"), "Weighted score")]
     for i, (fld, lab) in enumerate(tiles):
         x = 14 + i * 210
-        p.add("shape", x, 68, 202, 70, objects={"shape": [{"properties": {"tileShape": lit("rectangleRounded")}}],
+        p.add("shape", x, 98, 202, 62, objects={"shape": [{"properties": {"tileShape": lit("rectangleRounded")}}],
                                                 "fill": [{"properties": {"fillColor": colour("#FFFFFF"), "transparency": lit(0.0)}}],
                                                 "outline": [{"properties": {"show": lit(True), "lineColor": colour(BORDER), "weight": lit(1.0)}}]},
               background=False, border=False)
         f2 = F(fld.kind, fld.table, fld.name, lab)
-        p.add("card", x + 4, 70, 194, 66, roles={"Values": [f2]},
+        p.add("card", x + 4, 100, 194, 58, roles={"Values": [f2]},
               objects={"labels": [{"properties": {"fontSize": lit(16.0 if i else 13.0), "color": colour(INK)}}],
                        "categoryLabels": [{"properties": {"show": lit(True), "fontSize": lit(9.0), "color": colour(MUTED)}}]},
               background=False, border=False, filters=[cat_filter(me, name, _id(p.name, "f", i))], key=f"kpi{i}")
-    table(p, 14, 146, 760, 196, [F.c("Platforms", "Platform", "Platform"), F.c("Platforms", "Verdict", "Verdict"), F.c("Platforms", "NPV", "NPV (3 years)"),
+    table(p, 14, 166, 760, 186, [F.c("Platforms", "Platform", "Platform"), F.c("Platforms", "Verdict", "Verdict"), F.c("Platforms", "NPV", "NPV (3 years)"),
                                  F.c("Platforms", "Payback", "Payback (months)"), F.c("Platforms", "RunRate", "Run cost a year"), F.c("Platforms", "OneOff", "One-off"),
                                  F.c("Platforms", "Score", "Score"), F.c("Platforms", "Rank", "Rank")], "Ranking (50% score, 50% NPV)",
           sort=(F.c("Platforms", "Rank"), "Ascending"))
-    chart(p, "clusteredBarChart", 780, 146, 486, 196, F.c("Platforms", "Short"), [F.s("Platforms", "NPV", "NPV")], "NPV against staying on LEAP + InfoTrack",
+    chart(p, "clusteredBarChart", 780, 166, 486, 186, F.c("Platforms", "Short"), [F.s("Platforms", "NPV", "NPV")], "NPV against staying on LEAP + InfoTrack",
           sort=(F.s("Platforms", "NPV"), "Descending"), labels=True, legend=False)
-    chart(p, "lineChart", 14, 348, 620, 210, F.c("Platform Cashflow", "Month"), [F.m(M, "Platform Cumulative", "Cumulative net benefit")], "Cumulative cash flow",
+    chart(p, "lineChart", 14, 358, 620, 200, F.c("Platform Cashflow", "Month"), [F.m(M, "Platform Cumulative", "Cumulative net benefit")], "Cumulative cash flow",
           F.c("Platform Cashflow", "Platform"), "Month 1 = contract signed. Crosses zero at payback")
-    table(p, 640, 348, 626, 210, [F.m(M, "Platform Criterion Score", "Score")], "Scorecard (weights: cost 30, integration 25, reliability 20, support 15, speed 10)",
+    table(p, 640, 358, 626, 200, [F.m(M, "Platform Criterion Score", "Score")], "Scorecard (weights: cost 30, integration 25, reliability 20, support 15, speed 10)",
           matrix_rows=[F.c("Platform Scores", "Criterion")], matrix_cols=[F.c("Platforms", "Short")])
     table(p, 14, 564, 620, 148, [F.c("Platform Risks", "risk", "Risk"), F.c("Platform Risks", "score", "Score"), F.c("Platform Risks", "mitigation", "Mitigation")],
           f"Risks: {pl['short']}", sort=(F.c("Platform Risks", "score"), "Descending"))

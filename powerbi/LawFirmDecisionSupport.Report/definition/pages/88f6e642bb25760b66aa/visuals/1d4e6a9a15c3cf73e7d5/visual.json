@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "1d4e6a9a15c3cf73e7d5",
   "position": {
-    "x": 203.35625,
+    "x": 853.4375,
     "y": 102.0,
     "z": 26000,
     "width": 204.75,
-    "height": 52.0,
+    "height": 72.0,
     "tabOrder": 26000
   },
   "visual": {
@@ -23,12 +23,12 @@
                       "Entity": "Key Measures"
                     }
                   },
-                  "Property": "Active Matters"
+                  "Property": "Matter Billed"
                 }
               },
-              "queryRef": "Key Measures.Active Matters",
-              "nativeQueryRef": "Active matters (period end)",
-              "displayName": "Active matters (period end)"
+              "queryRef": "Key Measures.Matter Billed",
+              "nativeQueryRef": "Billed to date",
+              "displayName": "Billed to date"
             }
           ]
         }

@@ -429,6 +429,14 @@ def descriptive_measures():
     add("Answer Evidence", "SELECTEDVALUE( 'Answers'[Evidence] )", None, "Overview")
     add("Answer Chart $", "SUM( 'Answer Chart'[Value] )", MONEY, "Overview")
     add("Answer Chart Roles", "SUM( 'Answer Chart'[Value] )", "+0.0;-0.0;0.0", "Overview")
+    gv = "CALCULATE( SUM( 'Answer Chart'[Value] ), 'Answer Chart'[Highlight] = 1 )"
+    gt = "CALCULATE( SUM( 'Answer Chart'[Value] ), 'Answer Chart'[Item] = \"Minimum cash balance\" )"
+    add("Answer Chart Per 1K", "DIVIDE( 1000, SUM( 'Answer Chart'[Value] ) )", "0.0", "Overview",
+        desc="Growth question: new matters for every $1,000 of marketing spend in a channel (1,000 / cost per new matter).")
+    add("Answer Gauge Value", gv, MONEY, "Overview", desc="Branch question: the 13-week cash low point after opening.")
+    add("Answer Gauge Target", gt, MONEY, "Overview", desc="Branch question: the minimum office-account balance.")
+    add("Answer Gauge Min", "0", MONEY, "Overview", hidden=True)
+    add("Answer Gauge Max", f"MAX( {gv}, {gt} ) * 2", MONEY, "Overview", hidden=True)
     add("Answer Chart Colour", "IF( MAX( 'Answer Chart'[Highlight] ) = 1, \"#0a8496\", \"#c7d2dc\" )", None, "Overview", hidden=True)
     add("Story", '"HOW THIS STARTED  The Principal asked which software saves the firm the most ("'
         ' & FORMAT( CALCULATE( MAX( \'Platforms\'[RunRate] ), \'Platforms\'[IsCurrent] = 1 ), "$#,0" ) & " a year on LEAP + InfoTrack today; best: " & [Best Platform]'

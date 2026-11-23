@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "9d03c339b3be6a61e1f1",
   "position": {
-    "x": 420.05,
+    "x": 1070.13125,
     "y": 132.0,
     "z": 30000,
-    "width": 204.75,
-    "height": 72.0,
+    "width": 194.51250000000002,
+    "height": 52.0,
     "tabOrder": 30000
   },
   "visual": {
@@ -23,12 +23,12 @@
                       "Entity": "Key Measures"
                     }
                   },
-                  "Property": "Realisation Rate"
+                  "Property": "Top Biller Fees"
                 }
               },
-              "queryRef": "Key Measures.Realisation Rate",
-              "nativeQueryRef": "Realisation",
-              "displayName": "Realisation"
+              "queryRef": "Key Measures.Top Biller Fees",
+              "nativeQueryRef": "Top biller fees",
+              "displayName": "Top biller fees"
             }
           ]
         }
