@@ -57,12 +57,14 @@ def series_colours(table, column, colours):
 BAND_COLOURS = {"Under 5 km": "#0a8496", "5–10 km": "#f2b134", "Over 10 km": "#e2665a"}
 
 
-def catchment_map(p, x, y, w, h, title, subtitle, key=None, size=8.0, heat=False):
+def catchment_map(p, x, y, w, h, title, subtitle, key=None, size=8.0, heat=False, plain=False):
     """Matters by client suburb (sample data): bubbles coloured by distance to the nearest office, or a heat map of demand."""
     roles = {"Category": [F.c("Suburb", "Place")], "Y": [F.c("Suburb", "latitude", "Latitude")], "X": [F.c("Suburb", "longitude", "Longitude")],
              "Size": [F.m(M, "Matters Last 12 Months", "Matters, last 12 months")]}
     objects = {"bubbles": [{"properties": {"bubbleSize": lit(size)}}], "mapStyles": [{"properties": {"mapTheme": lit("grayscale")}}]}
-    if heat:
+    if plain:                                  # Power BI's default look: road map, one bubble colour, size = matters
+        objects = {"bubbles": [{"properties": {"bubbleSize": lit(size)}}], "dataPoint": [{"properties": {"defaultColor": colour("#2a9fb0")}}]}
+    elif heat:
         objects["heatMap"] = [{"properties": {"show": lit(True), "radius": lit(30.0)}}]
     else:
         roles["Series"] = [F.c("Suburb", "Distance band", "Distance to nearest office")]
@@ -458,8 +460,8 @@ def overview(p, nav, facts, targets):
           "Profit against budget, month by month", y2=[F.m(M, "Trend Budget Operating Profit", "Budget")], subtitle="12 months to the period end")
     cf = facts["catchment"]
     catchment_map(p, 644, 510, 622, 202, "Where clients come from: and where a branch would reach them",
-                  f"Heat = matters, last 12 months · {cf['share_far']:.0%} live 10+ km from an office · biggest gap near {cf['site']}",
-                  key="ovmap", heat=True)
+                  f"Bubble = matters, last 12 months · {cf['share_far']:.0%} live 10+ km from an office · biggest gap near {cf['site']}",
+                  key="ovmap", size=6.0, plain=True)
 
 
 # ---- Finance

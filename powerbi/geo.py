@@ -15,6 +15,12 @@ COUNTRY_LATLON = {
 }
 OFFICE_LATLON = {"Richmond": (-33.600, 150.752), "Camden": (-34.054, 150.696), "Liverpool": (-33.920, 150.923)}
 SYDNEY_CBD = (-33.8688, 151.2093)
+# town labels for the road-style preview basemap (name, lat, lon, 1 = larger centre)
+SYDNEY_PLACES = [("SYDNEY", -33.8688, 151.2093, 1), ("PARRAMATTA", -33.8150, 151.0011, 1), ("PENRITH", -33.7507, 150.6877, 1),
+                 ("BLACKTOWN", -33.7710, 150.9060, 1), ("CAMPBELLTOWN", -34.0650, 150.8142, 1), ("Windsor", -33.6120, 150.8180, 2),
+                 ("Castle Hill", -33.7300, 151.0040, 2), ("Fairfield", -33.8720, 150.9560, 2), ("Bankstown", -33.9180, 151.0350, 2),
+                 ("Picton", -34.1700, 150.6120, 2), ("Hornsby", -33.7040, 151.0990, 2), ("Sutherland", -34.0310, 151.0580, 2),
+                 ("Katoomba", -33.7150, 150.3120, 2), ("Wollongong", -34.4250, 150.8930, 1)]
 # faint reference places on the office map, for orientation only
 SYDNEY_REF = {"Parramatta": (-33.8150, 151.0011), "Penrith": (-33.7507, 150.6877), "Campbelltown": (-34.0650, 150.8142)}
 

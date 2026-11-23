@@ -569,17 +569,22 @@ function geomap(v, body, W, H){
     const xy = d.points.map(p => P(p.lat, p.lon)); if (bm.cbd) xy.push(P(bm.cbd[0], bm.cbd[1])); (d.offices || []).forEach(o => xy.push(P(o[1], o[2])));
     const xs = xy.map(q => q[0]), ys = xy.map(q => q[1]);
     let x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
-    const pad = 0.22 * Math.max(x1 - x0, y1 - y0); x0 -= pad * 2.2; x1 += pad; y0 -= pad; y1 += pad * 1.5;
+    const pad = (d.road ? 0.1 : 0.22) * Math.max(x1 - x0, y1 - y0); x0 -= pad * 2.2; x1 += pad; y0 -= pad; y1 += pad * 1.5;
     vw = x1 - x0; vh = y1 - y0; const a = W / H;
     if (vw / vh < a) { const n = vh * a; x0 -= (n - vw) / 2; vw = n; } else { const n = vw / a; y0 -= (n - vh) / 2; vh = n; }
     vx = x0; vy = y0;
   }
   const s = svgEl(W, H); s.setAttribute("viewBox", `${vx} ${vy} ${vw} ${vh}`); s.setAttribute("preserveAspectRatio", "xMidYMid meet");
-  body.appendChild(s); body.style.background = "#dbeaf2"; body.style.borderRadius = "0 0 12px 12px";
+  const road = !!d.road, LAND = road ? "#f2efe9" : "#f7f9fb", SEA = road ? "#aacbe6" : "#dbeaf2";
+  body.appendChild(s); body.style.background = SEA; body.style.borderRadius = "0 0 12px 12px";
   const k = Math.max(vw / W, vh / H);                       // view units per screen pixel
-  add(s, "rect", {x: vx - vw, y: vy - vh, width: vw * 3, height: vh * 3, fill: "#dbeaf2"});
-  if (local) add(s, "rect", {x: vx - vw, y: vy - vh, width: Math.max(0, vw - vx), height: vh * 3, fill: "#f7f9fb"});   // inland, west of the basemap box
-  add(s, "path", {d: bm.path, fill: "#f7f9fb", stroke: local ? "none" : "#a9bfcd", "stroke-width": 0.6 * k});
+  add(s, "rect", {x: vx - vw, y: vy - vh, width: vw * 3, height: vh * 3, fill: SEA});
+  if (local) add(s, "rect", {x: vx - vw, y: vy - vh, width: Math.max(0, vw - vx), height: vh * 3, fill: LAND});   // inland, west of the basemap box
+  add(s, "path", {d: bm.path, fill: LAND, stroke: local ? "none" : "#a9bfcd", "stroke-width": 0.6 * k});
+  if (road && bm.places) bm.places.forEach(([n, la, lo, rk]) => { const [x, y] = P(la, lo);
+    if (x < vx || x > vx + vw || y < vy || y > vy + vh) return;
+    add(s, "text", {x, y, "font-size": (rk === 1 ? 9 : 8) * k, fill: rk === 1 ? "#6b6b6b" : "#8a8a8a", "text-anchor": "middle", "letter-spacing": rk === 1 ? .6 * k : 0,
+      "font-weight": rk === 1 ? 600 : 400, stroke: LAND, "stroke-width": 2.5 * k, "paint-order": "stroke"}, n); });
   const txt = (x, y, t, o) => { const e = add(s, "text", Object.assign({x, y, "font-size": 10 * k, fill: "#0f172a", "text-anchor": "middle",
       stroke: "#f7f9fb", "stroke-width": 3 * k, "paint-order": "stroke", "stroke-linejoin": "round"}, o || {}), t); return e; };
   if (local && bm.ref && W > 500 && d.points.length <= 12) Object.entries(bm.ref).forEach(([n, [la, lo]]) => { const [x, y] = P(la, lo);
@@ -592,12 +597,12 @@ function geomap(v, body, W, H){
   const mx = Math.max(...d.points.map(p => p.size));
   if (d.heat) heatLayer(s, d, P, vx, vy, vw, vh, W, H, mx);
   const col = local ? "#2f7fd8" : "#0a8496", many = d.points.length > 12;
-  const rmax = Math.min(local ? 26 : 22, (many ? 0.055 : (local ? 0.085 : 0.08)) * Math.min(W, H));
+  const rmax = Math.min(local ? 26 : 22, (many ? (d.road ? 0.05 : 0.055) : (local ? 0.085 : 0.08)) * Math.min(W, H));
   const ranked = d.points.slice().sort((a, b) => b.size - a.size);
   if (!d.heat) ranked.forEach((p, i) => { const [x, y] = P(p.lat, p.lon); const r = ((many ? 2.5 : 5) + rmax * Math.sqrt(p.size / mx)) * k;
-    const c0 = d.bands && p.band ? d.bands[p.band] : col;
+    const c0 = road ? "#2a9fb0" : (d.bands && p.band ? d.bands[p.band] : col);
     if (!many) add(s, "circle", {cx: x, cy: y, r: r + 3 * k, fill: c0, "fill-opacity": .12});
-    const c = add(s, "circle", {cx: x, cy: y, r, fill: c0, "fill-opacity": many ? .78 : .85, stroke: "#fff", "stroke-width": (many ? 1 : 1.5) * k});
+    const c = add(s, "circle", {cx: x, cy: y, r, fill: c0, "fill-opacity": road ? .72 : (many ? .78 : .85), stroke: road ? "#1b6f7c" : "#fff", "stroke-width": (many ? 1 : 1.5) * k});
     hover(c, `${p.label}: ${p.size} ${d.sizeLabel.toLowerCase()}${p.band ? " · " + p.band + " from an office" : ""}`);
     if (many) { const isOffice = (d.offices || []).some(o => o[0] === p.label);
       if (H > 400 && i < 6 && !isOffice) txt(x + r + 4 * k, y + 3.5 * k, `${p.label} ${p.size}`, {"font-size": 9 * k, "font-weight": 600, "text-anchor": "start"}); return; }

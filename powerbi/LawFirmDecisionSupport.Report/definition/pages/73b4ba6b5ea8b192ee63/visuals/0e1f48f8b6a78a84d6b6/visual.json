@@ -97,40 +97,24 @@
             "bubbleSize": {
               "expr": {
                 "Literal": {
-                  "Value": "8.0D"
+                  "Value": "6.0D"
                 }
               }
             }
           }
         }
       ],
-      "mapStyles": [
+      "dataPoint": [
         {
           "properties": {
-            "mapTheme": {
-              "expr": {
-                "Literal": {
-                  "Value": "'grayscale'"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "heatMap": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "radius": {
-              "expr": {
-                "Literal": {
-                  "Value": "30.0D"
+            "defaultColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#2a9fb0'"
+                    }
+                  }
                 }
               }
             }
@@ -197,7 +181,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Heat = matters, last 12 months · 44% live 10+ km from an office · biggest gap near Rouse Hill'"
+                  "Value": "'Bubble = matters, last 12 months · 44% live 10+ km from an office · biggest gap near Rouse Hill'"
                 }
               }
             },

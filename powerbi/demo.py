@@ -574,8 +574,11 @@ def visual_data(E, meas, fmts, v, ctx):
         if sub is not None:
             from core.ref import BRANCHES
             from core.catchment import branch_sites
-            if v["visual"].get("objects", {}).get("heatMap"):
+            objs = v["visual"].get("objects", {})
+            if objs.get("heatMap"):
                 out["heat"] = True
+            elif "Series" not in projs:
+                out["road"] = True
             else:
                 out["bands"] = RP.BAND_COLOURS
             out["offices"] = [[b["name"], b["lat"], b["lon"]] for b in BRANCHES]
@@ -892,7 +895,8 @@ def build():
             pv.append(vis)
         out_pages.append(dict(name=p.name, display=p.display, section=p.section, hidden=p.hidden, visuals=pv))
     basemaps = json.loads((Path(__file__).resolve().parent / "assets" / "basemaps.json").read_text())
-    from .geo import SYDNEY_CBD, SYDNEY_REF
+    from .geo import SYDNEY_CBD, SYDNEY_REF, SYDNEY_PLACES
+    basemaps["sydney"]["places"] = SYDNEY_PLACES
     basemaps["sydney"]["cbd"] = SYDNEY_CBD
     basemaps["sydney"]["ref"] = SYDNEY_REF
     payload = dict(sim=sim_payload(E, W), basemaps=basemaps, pages=out_pages, periods=periods, defaultPeriod=MD.DEFAULT_PERIOD, presets=presets, platforms=platforms,
