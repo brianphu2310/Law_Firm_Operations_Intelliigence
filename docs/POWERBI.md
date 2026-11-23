@@ -37,7 +37,7 @@ To load from a fork or another branch: *Transform data → Edit parameters → B
 | Simulator | Decide · Test the plan | 12 presets + 30 levers; profit bridge, effects and cash, what moves profit most, what it would take, delivery range, presets side by side |
 | Check | 1 | Assumptions, and every Simulator result in DAX compared with the Python engine |
 
-A dark **sidebar** on every page lists the pages and the seven platforms by short name (one page each). On the Overview each question has the chart that fits its answer: a ranking (software), a gauge against the minimum cash balance (branch), columns (hiring), a diverging bar (support staff), a line (pay) and a treemap of new matters per $1,000 (growth). The **Period** slicer (top right, synced across pages) picks the reporting period, with the same periods and day weights as the Python model.
+A dark **sidebar** on every page lists the pages and the seven platform + search combinations (one page each). On the Overview each question has the chart that fits its answer: a ranking (software), a gauge against the minimum cash balance (branch), columns (hiring), a diverging bar (support staff), a line (pay) and a treemap of new matters per $1,000 (growth). The **Period** slicer (top right, synced across pages) picks the reporting period, with the same periods and day weights as the Python model.
 
 ## How it is built
 

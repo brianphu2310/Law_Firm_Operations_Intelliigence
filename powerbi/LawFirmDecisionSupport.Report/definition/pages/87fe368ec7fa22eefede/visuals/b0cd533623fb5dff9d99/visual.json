@@ -45,7 +45,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'MyCase'"
+                  "Value": "'MyCase + SAI Global'"
                 }
               }
             },

@@ -352,7 +352,7 @@ def side_button(page, y, label, target, active, size=10.0, key=None, h=26):
 
 
 def sidebar(page, sections, platforms):
-    """Dark sidebar on every page: app name, the pages, and the seven platforms by short name."""
+    """Dark sidebar on every page: app name, the pages, and the seven platform + search combinations."""
     page.add("shape", 0, 0, SB, H, objects={"shape": [{"properties": {"tileShape": lit("rectangle")}}],
                                             "fill": [{"properties": {"fillColor": colour(SIDEBAR), "transparency": lit(0.0)}}],
                                             "outline": [{"properties": {"show": lit(False)}}]}, background=False, border=False, key="sidebar", raw=True)
@@ -373,8 +373,8 @@ def sidebar(page, sections, platforms):
         {"textRuns": [{"value": "PLATFORMS", "textStyle": {"fontSize": "7.5pt", "color": SIDEBAR_MUTED, "fontWeight": "bold", "fontFamily": "Segoe UI"}}]}]}}]},
         background=False, border=False, key="lbl-platforms", raw=True)
     y += 24
-    for name, target in platforms:          # short names: the platform itself, not its search partner
-        label = name.split(" + ")[0] + (" (current)" if "current" in name else "")
+    for name, target in platforms:          # practice-management platform + search provider
+        label = name
         side_button(page, y, label, target, active=page.platform == name, size=9.0, key=f"plat-{name}", h=24)
         y += 27
 

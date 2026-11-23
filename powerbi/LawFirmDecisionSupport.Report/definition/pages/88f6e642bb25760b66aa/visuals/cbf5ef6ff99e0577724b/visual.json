@@ -45,7 +45,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Actionstep'"
+                  "Value": "'Actionstep + GlobalX'"
                 }
               }
             },

@@ -45,7 +45,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Clio'"
+                  "Value": "'Clio + GlobalX'"
                 }
               }
             },
