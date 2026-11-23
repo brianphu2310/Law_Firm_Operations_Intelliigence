@@ -88,7 +88,9 @@ python -m powerbi.build        # data/powerbi/*.csv, then the .pbip project
 Client suburbs are **sample data**: each Australian matter's suburb is drawn by an indicative population and by distance from the office
 that handles it, so the result shows how the analysis works, not a real market study.
 
-The Power BI `map` visual uses the suburb's latitude and longitude, so it does not depend on geocoding names, but map visuals still have to be
-allowed in Power BI Desktop (File → Options → Security → "Use Map and Filled Map visuals"). The browser preview draws its own basemap from
-Natural Earth (public domain, via the `world-atlas` package; `python -m powerbi.geo <world-atlas dir>` rebuilds
-`powerbi/assets/basemaps.json`) and adds two reference marks Power BI does not: today's offices and the best site found.
+The catchment maps are **scatter charts over a static basemap image** (longitude on X, latitude on Y, axes pinned to the image's
+extent), not Power BI map visuals. The Bing Map visual is being retired and shows a banner saying so, its Azure Maps replacement
+came up blank, and both depend on map services an organisation can switch off. The scatter version needs no map service, so it
+works on any tenant, in PDF exports and in Publish to web. `python -m powerbi.mapimage` redraws the images
+(`powerbi/assets/maps/`: Natural Earth coastline, today's offices and the best site) when the suburbs or offices change; the
+build only copies them. The client-country map is still a Power BI map visual. The browser preview draws the same maps itself.
