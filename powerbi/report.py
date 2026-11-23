@@ -59,8 +59,9 @@ BAND_COLOURS = {"Under 5 km": "#0a8496", "5–10 km": "#f2b134", "Over 10 km": "
 
 def catchment_map(p, x, y, w, h, title, subtitle, key=None, size=8.0, heat=False, plain=False):
     """Matters by client suburb (sample data): bubbles coloured by distance to the nearest office, or a heat map of demand."""
-    roles = {"Category": [F.c("Suburb", "Place")], "Y": [F.c("Suburb", "latitude", "Latitude")], "X": [F.c("Suburb", "longitude", "Longitude")],
-             "Size": [F.m(M, "Matters Last 12 Months", "Matters, last 12 months")]}
+    # Location only: the suburb names carry the Place category and the table's latitude/longitude are categorised,
+    # so the map places them without extra roles (a Latitude field in the well showed up as a legend)
+    roles = {"Category": [F.c("Suburb", "Place")], "Size": [F.m(M, "Matters Last 12 Months", "Matters, last 12 months")]}
     objects = {"bubbles": [{"properties": {"bubbleSize": lit(size)}}], "mapStyles": [{"properties": {"mapTheme": lit("grayscale")}}]}
     if plain:                                  # Power BI's default look: road map, one bubble colour, size = matters
         objects = {"bubbles": [{"properties": {"bubbleSize": lit(size)}}], "dataPoint": [{"properties": {"defaultColor": colour("#2a9fb0")}}]}
@@ -459,7 +460,8 @@ def overview(p, nav, facts, targets):
               objects={"legend": [{"properties": {"show": lit(False)}}],
                        "categoryAxis": [{"properties": {"show": lit(True), "fontSize": lit(8.0), "showAxisTitle": lit(False), "color": colour("#334155")}}],
                        "valueAxis": [{"properties": {"show": lit(False)}}],
-                       "labels": [{"properties": {"show": lit(True), "fontSize": lit(8.0), "color": colour("#334155")}}],
+                       "labels": [{"properties": {"show": lit(True), "fontSize": lit(8.0), "color": colour("#334155"),
+                                                  "labelDisplayUnits": lit(1.0 if i == 3 else 1000.0), "labelPrecision": lit(1 if i == 3 else 0)}}],
                        "dataPoint": [{"properties": {"fill": colour_measure(M, "Answer Chart Colour")},
                                       "selector": {"data": [{"dataViewWildcard": {"matchingOption": 1}}]}}]},
               background=False, border=False, filters=[cat_filter(F.c("Answer Chart", "Order"), int(row["Order"]), _id(p.name, "ch", i))], key=f"c{i}")

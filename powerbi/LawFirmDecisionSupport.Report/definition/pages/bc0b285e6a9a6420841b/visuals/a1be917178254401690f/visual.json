@@ -31,44 +31,6 @@
             }
           ]
         },
-        "Y": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Suburb"
-                    }
-                  },
-                  "Property": "latitude"
-                }
-              },
-              "queryRef": "Suburb.latitude",
-              "nativeQueryRef": "Latitude",
-              "displayName": "Latitude"
-            }
-          ]
-        },
-        "X": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Suburb"
-                    }
-                  },
-                  "Property": "longitude"
-                }
-              },
-              "queryRef": "Suburb.longitude",
-              "nativeQueryRef": "Longitude",
-              "displayName": "Longitude"
-            }
-          ]
-        },
         "Size": {
           "projections": [
             {
