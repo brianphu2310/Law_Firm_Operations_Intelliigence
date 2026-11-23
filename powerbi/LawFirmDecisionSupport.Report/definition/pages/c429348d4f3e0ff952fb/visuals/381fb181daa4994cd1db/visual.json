@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "381fb181daa4994cd1db",
   "position": {
-    "x": 1063.30625,
-    "y": 522.0,
+    "x": 984.81875,
+    "y": 162.0,
     "z": 69000,
-    "width": 204.75,
-    "height": 92.0,
+    "width": 134.79375000000002,
+    "height": 74.0,
     "tabOrder": 69000
   },
   "visual": {
@@ -23,12 +23,12 @@
                       "Entity": "Simulator"
                     }
                   },
-                  "Property": "Sim Scenario Summary"
+                  "Property": "Sim One-off Cash"
                 }
               },
-              "queryRef": "Simulator.Sim Scenario Summary",
-              "nativeQueryRef": "Levers in this scenario",
-              "displayName": "Levers in this scenario"
+              "queryRef": "Simulator.Sim One-off Cash",
+              "nativeQueryRef": "Cash needed up front",
+              "displayName": "Cash needed up front"
             }
           ]
         }
@@ -41,7 +41,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "8.0D"
+                  "Value": "14.0D"
                 }
               }
             },

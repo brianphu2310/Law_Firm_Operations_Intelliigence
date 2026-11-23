@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "12915e92ad9c096ee5d1",
   "position": {
-    "x": 739.11875,
-    "y": 118.0,
+    "x": 203.35625,
+    "y": 70.0,
     "z": 24000,
     "width": 254.23125000000002,
-    "height": 24.0,
+    "height": 52.0,
     "tabOrder": 24000
   },
   "visual": {
@@ -23,12 +23,12 @@
                       "Entity": "Key Measures"
                     }
                   },
-                  "Property": "Utilisation Δ"
+                  "Property": "Total Revenue"
                 }
               },
-              "queryRef": "Key Measures.Utilisation Δ",
-              "nativeQueryRef": " ",
-              "displayName": " "
+              "queryRef": "Key Measures.Total Revenue",
+              "nativeQueryRef": "Revenue this period",
+              "displayName": "Revenue this period"
             }
           ]
         }
@@ -41,7 +41,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "8.0D"
+                  "Value": "18.0D"
                 }
               }
             },
@@ -50,7 +50,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#64748b'"
+                      "Value": "'#0f172a'"
                     }
                   }
                 }
@@ -72,7 +72,25 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9.0D"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#64748b'"
+                    }
+                  }
                 }
               }
             }

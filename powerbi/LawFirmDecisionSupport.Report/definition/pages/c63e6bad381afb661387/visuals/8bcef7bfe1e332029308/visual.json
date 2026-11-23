@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "8bcef7bfe1e332029308",
   "position": {
-    "x": 853.4375,
+    "x": 203.35625,
     "y": 180.0,
     "z": 28000,
     "width": 204.75,
@@ -23,10 +23,10 @@
                       "Entity": "Key Measures"
                     }
                   },
-                  "Property": "Hours Δ"
+                  "Property": "Utilisation Δ"
                 }
               },
-              "queryRef": "Key Measures.Hours Δ",
+              "queryRef": "Key Measures.Utilisation Δ",
               "nativeQueryRef": " ",
               "displayName": " "
             }

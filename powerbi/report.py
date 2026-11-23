@@ -352,7 +352,7 @@ def side_button(page, y, label, target, active, size=10.0, key=None, h=26):
 
 
 def sidebar(page, sections, platforms):
-    """Dark sidebar on every page: app name and the pages. The seven platforms are tabs on the Platforms page."""
+    """Dark sidebar on every page: app name, the pages, and the seven platforms by short name."""
     page.add("shape", 0, 0, SB, H, objects={"shape": [{"properties": {"tileShape": lit("rectangle")}}],
                                             "fill": [{"properties": {"fillColor": colour(SIDEBAR), "transparency": lit(0.0)}}],
                                             "outline": [{"properties": {"show": lit(False)}}]}, background=False, border=False, key="sidebar", raw=True)
@@ -368,6 +368,15 @@ def sidebar(page, sections, platforms):
     for label, target in sections:
         side_button(page, y, label, target, active=label.replace("★ ", "") == page.section)
         y += 29
+    y += 8
+    page.add("textbox", 12, y, SB - 20, 24, objects={"general": [{"properties": {"paragraphs": [
+        {"textRuns": [{"value": "PLATFORMS", "textStyle": {"fontSize": "7.5pt", "color": SIDEBAR_MUTED, "fontWeight": "bold", "fontFamily": "Segoe UI"}}]}]}}]},
+        background=False, border=False, key="lbl-platforms", raw=True)
+    y += 24
+    for name, target in platforms:          # short names: the platform itself, not its search partner
+        label = name.split(" + ")[0] + (" (current)" if "current" in name else "")
+        side_button(page, y, label, target, active=page.platform == name, size=9.0, key=f"plat-{name}", h=24)
+        y += 27
 
 
 def frame(page, title, subtitle, nav, sub_tabs=None):
@@ -410,7 +419,7 @@ def build_pages(ctx_facts, levers):
         plat_pages.append(pg)
     sections = [("Overview", P["overview"].name), ("Finance", P["finance_pl"].name), ("People", P["people_perf"].name),
                 ("Matters", P["matters"].name), ("Clients", P["clients"].name), ("Calendar", P["calendar"].name),
-                ("Platforms", plat_pages[0].name), ("★ Simulator", P["sim_decide"].name), ("Check", P["check"].name)]
+                ("★ Simulator", P["sim_decide"].name), ("Check", P["check"].name)]
     nav = (sections, [(pg.platform, pg.name) for pg in plat_pages])
     fin_tabs = [("P&L & outlook", P["finance_pl"].name), ("Cash & billing", P["finance_cash"].name), ("Trust & costs", P["finance_trust"].name)]
     ppl_tabs = [("Performance", P["people_perf"].name), ("Hiring & departments", P["people_hire"].name), ("Branches & pay", P["people_branch"].name)]
@@ -433,9 +442,8 @@ def build_pages(ctx_facts, levers):
     clients(P["clients"], nav, cli_tabs)
     clients_mkt(P["clients_mkt"], nav, cli_tabs)
     calendar(P["calendar"], nav)
-    plat_tabs = [(PL.PLATFORMS[pg.platform]["short"], pg.name) for pg in plat_pages]
     for pg in plat_pages:
-        platform(pg, nav, plat_tabs)
+        platform(pg, nav)
     sim_decide(P["sim_decide"], nav, sim_tabs, levers)
     sim_test(P["sim_test"], nav, sim_tabs, levers)
     check(P["check"], nav)
@@ -755,10 +763,10 @@ def calendar(p, nav):
 
 
 # ---- Platform
-def platform(p, nav, tabs):
+def platform(p, nav):
     name = p.platform
     pl = PL.PLATFORMS[name]
-    frame(p, f"Platform · {name}", f"{pl['tagline']}. 3-year cash flows, NPV, scorecard and risk against staying on LEAP + InfoTrack", nav, tabs)
+    frame(p, f"Platform · {name}", f"{pl['tagline']}. 3-year cash flows, NPV, scorecard and risk against staying on LEAP + InfoTrack", nav)
     for t in ("Platform Risks", "Platform Gantt", "Platform NPV Grid"):
         p.filters.append({"name": _id(p.name, t), "field": F.c(t, "Platform").expr(), "type": "Categorical",
                           "filter": in_filter(F.c(t, "Platform"), [name])})
@@ -768,24 +776,24 @@ def platform(p, nav, tabs):
              (F.s("Platforms", "RunRate"), "Run cost a year"), (F.s("Platforms", "OneOff"), "One-off cost"), (F.s("Platforms", "Score"), "Weighted score")]
     for i, (fld, lab) in enumerate(tiles):
         x = 14 + i * 210
-        p.add("shape", x, 98, 202, 62, objects={"shape": [{"properties": {"tileShape": lit("rectangleRounded")}}],
+        p.add("shape", x, 68, 202, 70, objects={"shape": [{"properties": {"tileShape": lit("rectangleRounded")}}],
                                                 "fill": [{"properties": {"fillColor": colour("#FFFFFF"), "transparency": lit(0.0)}}],
                                                 "outline": [{"properties": {"show": lit(True), "lineColor": colour(BORDER), "weight": lit(1.0)}}]},
               background=False, border=False)
         f2 = F(fld.kind, fld.table, fld.name, lab)
-        p.add("card", x + 4, 100, 194, 58, roles={"Values": [f2]},
+        p.add("card", x + 4, 70, 194, 66, roles={"Values": [f2]},
               objects={"labels": [{"properties": {"fontSize": lit(16.0 if i else 13.0), "color": colour(INK)}}],
                        "categoryLabels": [{"properties": {"show": lit(True), "fontSize": lit(9.0), "color": colour(MUTED)}}]},
               background=False, border=False, filters=[cat_filter(me, name, _id(p.name, "f", i))], key=f"kpi{i}")
-    table(p, 14, 166, 760, 186, [F.c("Platforms", "Platform", "Platform"), F.c("Platforms", "Verdict", "Verdict"), F.c("Platforms", "NPV", "NPV (3 years)"),
+    table(p, 14, 146, 760, 196, [F.c("Platforms", "Platform", "Platform"), F.c("Platforms", "Verdict", "Verdict"), F.c("Platforms", "NPV", "NPV (3 years)"),
                                  F.c("Platforms", "Payback", "Payback (months)"), F.c("Platforms", "RunRate", "Run cost a year"), F.c("Platforms", "OneOff", "One-off"),
                                  F.c("Platforms", "Score", "Score"), F.c("Platforms", "Rank", "Rank")], "Ranking (50% score, 50% NPV)",
           sort=(F.c("Platforms", "Rank"), "Ascending"))
-    chart(p, "clusteredBarChart", 780, 166, 486, 186, F.c("Platforms", "Short"), [F.s("Platforms", "NPV", "NPV")], "NPV against staying on LEAP + InfoTrack",
+    chart(p, "clusteredBarChart", 780, 146, 486, 196, F.c("Platforms", "Short"), [F.s("Platforms", "NPV", "NPV")], "NPV against staying on LEAP + InfoTrack",
           sort=(F.s("Platforms", "NPV"), "Descending"), labels=True, legend=False)
-    chart(p, "lineChart", 14, 358, 620, 200, F.c("Platform Cashflow", "Month"), [F.m(M, "Platform Cumulative", "Cumulative net benefit")], "Cumulative cash flow",
+    chart(p, "lineChart", 14, 348, 620, 210, F.c("Platform Cashflow", "Month"), [F.m(M, "Platform Cumulative", "Cumulative net benefit")], "Cumulative cash flow",
           F.c("Platform Cashflow", "Platform"), "Month 1 = contract signed. Crosses zero at payback")
-    table(p, 640, 358, 626, 200, [F.m(M, "Platform Criterion Score", "Score")], "Scorecard (weights: cost 30, integration 25, reliability 20, support 15, speed 10)",
+    table(p, 640, 348, 626, 210, [F.m(M, "Platform Criterion Score", "Score")], "Scorecard (weights: cost 30, integration 25, reliability 20, support 15, speed 10)",
           matrix_rows=[F.c("Platform Scores", "Criterion")], matrix_cols=[F.c("Platforms", "Short")])
     table(p, 14, 564, 620, 148, [F.c("Platform Risks", "risk", "Risk"), F.c("Platform Risks", "score", "Score"), F.c("Platform Risks", "mitigation", "Mitigation")],
           f"Risks: {pl['short']}", sort=(F.c("Platform Risks", "score"), "Descending"))

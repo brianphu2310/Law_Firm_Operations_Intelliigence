@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "cf1470dda7688aa931df",
   "position": {
-    "x": 735.7062500000001,
+    "x": 203.35625,
     "y": 132.0,
     "z": 27000,
     "width": 165.50625,
-    "height": 72.0,
+    "height": 52.0,
     "tabOrder": 27000
   },
   "visual": {
@@ -23,12 +23,12 @@
                       "Entity": "Key Measures"
                     }
                   },
-                  "Property": "Operating Margin"
+                  "Property": "Total Revenue"
                 }
               },
-              "queryRef": "Key Measures.Operating Margin",
-              "nativeQueryRef": "Operating margin",
-              "displayName": "Operating margin"
+              "queryRef": "Key Measures.Total Revenue",
+              "nativeQueryRef": "Revenue",
+              "displayName": "Revenue"
             }
           ]
         }

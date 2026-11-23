@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "a869c79c724f38489e9a",
   "position": {
-    "x": 839.7875,
-    "y": 212.0,
+    "x": 549.725,
+    "y": 162.0,
     "z": 60000,
     "width": 134.79375000000002,
-    "height": 24.0,
+    "height": 54.0,
     "tabOrder": 60000
   },
   "visual": {
@@ -23,12 +23,12 @@
                       "Entity": "Simulator"
                     }
                   },
-                  "Property": "Sim Gap Caption"
+                  "Property": "Sim Operating Profit"
                 }
               },
-              "queryRef": "Simulator.Sim Gap Caption",
-              "nativeQueryRef": " ",
-              "displayName": " "
+              "queryRef": "Simulator.Sim Operating Profit",
+              "nativeQueryRef": "Operating profit (a year)",
+              "displayName": "Operating profit (a year)"
             }
           ]
         }
@@ -41,7 +41,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "8.0D"
+                  "Value": "14.0D"
                 }
               }
             },
@@ -50,7 +50,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#64748b'"
+                      "Value": "'#0f172a'"
                     }
                   }
                 }
@@ -72,7 +72,25 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9.0D"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#64748b'"
+                    }
+                  }
                 }
               }
             }
