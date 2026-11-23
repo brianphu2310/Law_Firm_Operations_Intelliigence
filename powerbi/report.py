@@ -19,7 +19,7 @@ SB = 188                      # dark sidebar width; page content is laid out on 
 KX = (W - SB) / W
 SIDEBAR, SIDEBAR_ON, SIDEBAR_TEXT, SIDEBAR_MUTED = "#151b2c", "#0a8496", "#e2e8f0", "#8b95a7"
 TEAL, INK, MUTED, LINE, BG = "#0a8496", "#0f172a", "#64748b", "#dbe6ee", "#f3f6fa"
-BORDER = "#0f172a"          # outline of every chart block and tile
+BORDER = LINE               # outline of every chart block and tile (light grey)
 GREEN, RED, AMBER = "#047857", "#b91c1c", "#b45309"
 
 
@@ -69,7 +69,7 @@ def map_image(name):
                       "scaling": lit("Fit")}}
 
 
-def catchment_map(p, x, y, w, h, title, subtitle, key=None, size=0.0, image="catchment", bands=True, legend=True, plain_bg=False):
+def catchment_map(p, x, y, w, h, title, subtitle, key=None, size=-40.0, image="catchment", bands=True, legend=True, plain_bg=False):
     """Matters by client suburb (sample data) as a scatter chart over a static basemap image: longitude on X, latitude on Y,
     axes pinned to the image's extent. Unlike Power BI's map visuals it needs no Bing/Azure map service, so it works where an
     organisation has switched maps off, in PDF exports and in Publish to web."""
@@ -457,7 +457,7 @@ TILE_CHART = {0: "clusteredBarChart",          # software: ranking of savings
               1: "gauge",                      # branch: cash low point against the minimum balance
               2: "clusteredColumnChart",       # hiring: year-one gain by area
               3: "clusteredBarChart",          # support: roles over (+) or under (-) the work
-              4: "lineChart",                  # pay: cost rising with the pay increase
+              4: "clusteredColumnChart",       # pay: cost of each pay increase, the affordable one highlighted
               5: "treemap"}                    # growth: new matters per $1,000 by channel (biggest box = best value)
 
 

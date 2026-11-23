@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Law Firm Decision Support · Power BI preview</title>
 <style>
-  :root { --teal:#0a8496; --ink:#0f172a; --muted:#64748b; --line:#dbe6ee; --bg:#f3f6fa; --border:#0f172a; }
+  :root { --teal:#0a8496; --ink:#0f172a; --muted:#64748b; --line:#dbe6ee; --bg:#f3f6fa; --border:#dbe6ee; }
   * { box-sizing: border-box; }
   html, body { margin:0; height:100%; font-family:"Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color:var(--ink); background:#e9eef4; }
   .app { display:grid; grid-template-rows: 32px 1fr 30px; grid-template-columns: 1fr; height:100vh; }
@@ -634,9 +634,9 @@ function geomap(v, body, W, H){
   const mx = Math.max(...d.points.map(p => p.size));
   if (d.heat) heatLayer(s, d, P, vx, vy, vw, vh, W, H, mx);
   const col = local ? "#2f7fd8" : "#0a8496", many = d.points.length > 12;
-  const rmax = Math.min(local ? 26 : 22, (many ? (d.road ? 0.05 : 0.055) : (local ? 0.085 : 0.08)) * Math.min(W, H));
+  const rmax = Math.min(many ? 9 : (local ? 26 : 22), (many ? 0.032 : (local ? 0.085 : 0.08)) * Math.min(W, H));
   const ranked = d.points.slice().sort((a, b) => b.size - a.size);
-  if (!d.heat) ranked.forEach((p, i) => { const [x, y] = P(p.lat, p.lon); const r = ((many ? 2.5 : 5) + rmax * Math.sqrt(p.size / mx)) * k;
+  if (!d.heat) ranked.forEach((p, i) => { const [x, y] = P(p.lat, p.lon); const r = ((many ? 2 : 5) + rmax * Math.sqrt(p.size / mx)) * k;
     const c0 = road ? "#2a9fb0" : (d.bands && p.band ? d.bands[p.band] : col);
     if (!many) add(s, "circle", {cx: x, cy: y, r: r + 3 * k, fill: c0, "fill-opacity": .12});
     const c = add(s, "circle", {cx: x, cy: y, r, fill: c0, "fill-opacity": road ? .72 : (many ? .78 : .85), stroke: road ? "#1b6f7c" : "#fff", "stroke-width": (many ? 1 : 1.5) * k});

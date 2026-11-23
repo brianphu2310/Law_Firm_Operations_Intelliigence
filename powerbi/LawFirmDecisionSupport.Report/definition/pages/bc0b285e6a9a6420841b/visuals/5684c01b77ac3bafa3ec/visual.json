@@ -249,7 +249,7 @@
             "bubbleSize": {
               "expr": {
                 "Literal": {
-                  "Value": "0.0D"
+                  "Value": "-40.0D"
                 }
               }
             }
@@ -545,7 +545,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0f172a'"
+                      "Value": "'#dbe6ee'"
                     }
                   }
                 }
