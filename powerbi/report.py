@@ -158,6 +158,17 @@ class Page:
                 f, direction = sort
                 ALL_FIELDS.append(f)
                 visual["query"]["sortDefinition"] = {"sort": [{"field": f.expr(), "direction": direction}], "isDefaultSort": False}
+        if objects and vtype == "shape":
+            # the shape visual has states (default / hover / pressed): fill and outline only apply with a "default" selector,
+            # otherwise Power BI paints the theme colour; and its rounding is set by roundEdge
+            for k in ("fill", "outline"):
+                for e in objects.get(k, []):
+                    e.setdefault("selector", {"id": "default"})
+            for e in objects.get("fill", []):
+                e["properties"].setdefault("show", lit(True))
+            for e in objects.get("shape", []):
+                if e["properties"].get("tileShape") == lit("rectangleRounded"):
+                    e["properties"].setdefault("roundEdge", lit(10))
         if objects:
             visual["objects"] = objects
         vco = container_objects(title, subtitle, background, border, padding)

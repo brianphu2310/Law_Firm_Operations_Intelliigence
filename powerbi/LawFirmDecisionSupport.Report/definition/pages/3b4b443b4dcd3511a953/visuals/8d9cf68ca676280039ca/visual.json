@@ -21,6 +21,13 @@
                   "Value": "'rectangleRounded'"
                 }
               }
+            },
+            "roundEdge": {
+              "expr": {
+                "Literal": {
+                  "Value": "10L"
+                }
+              }
             }
           }
         }
@@ -45,7 +52,17 @@
                   "Value": "0.0D"
                 }
               }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
             }
+          },
+          "selector": {
+            "id": "default"
           }
         }
       ],
@@ -77,6 +94,9 @@
                 }
               }
             }
+          },
+          "selector": {
+            "id": "default"
           }
         }
       ]
