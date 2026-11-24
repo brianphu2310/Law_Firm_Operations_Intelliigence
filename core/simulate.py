@@ -53,6 +53,8 @@ LEVER_LABEL = dict(sim_util="Utilisation (pp)", sim_rate="Rate increase (%)", si
                    sim_pay_support="Support pay change (%)", sim_mkt_channel="Marketing channel", sim_mkt_extra="Extra marketing a month",
                    sim_new_area="New matter type", sim_new_area_type="Matter type")
 
+MIN_CASH = 60_000                       # minimum operating balance the firm keeps in the office account
+
 PRESETS = {
     "Hire an associate": dict(sim_hires=1, sim_role="Associate", sim_ramp=60),
     "Raise rates 5%": dict(sim_rate=5.0),

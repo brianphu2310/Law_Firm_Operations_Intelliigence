@@ -1,0 +1,30 @@
+table 'L Platform'
+
+	column Platform
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Platform]
+		sortByColumn: Order
+
+	column Order
+		dataType: int64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Order]
+
+	partition 'L Platform' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Platform", STRING, "Order", INTEGER,
+				    {
+				    { "LEAP + InfoTrack (current)", 1 },
+				    { "triConvey + triSearch", 2 },
+				    { "Smokeball + GlobalX", 3 },
+				    { "Actionstep + GlobalX", 4 },
+				    { "PracticeEvolve + PEXA", 5 },
+				    { "Clio + GlobalX", 6 },
+				    { "MyCase + SAI Global", 7 }
+				    }
+				)

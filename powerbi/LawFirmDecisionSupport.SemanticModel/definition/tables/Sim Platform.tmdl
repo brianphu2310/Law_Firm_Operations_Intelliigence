@@ -1,0 +1,36 @@
+table 'Sim Platform'
+	isHidden
+
+	column Platform
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Platform]
+
+	column Annual
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Annual]
+
+	column OneOff
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [OneOff]
+
+	partition 'Sim Platform' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Platform", STRING, "Annual", DOUBLE, "OneOff", DOUBLE,
+				    {
+				    { "LEAP + InfoTrack (current)", 0, 0 },
+				    { "triConvey + triSearch", 22673.0600844164, 43719.33712927214 },
+				    { "Smokeball + GlobalX", 17646.02264540371, 51719.33712927214 },
+				    { "Actionstep + GlobalX", -9548.539508064903, 55719.33712927214 },
+				    { "PracticeEvolve + PEXA", -12847.619367706327, 53719.33712927214 },
+				    { "Clio + GlobalX", 8340.898146238442, 49719.33712927214 },
+				    { "MyCase + SAI Global", -7525.725945142594, 44719.33712927214 }
+				    }
+				)

@@ -1,0 +1,229 @@
+table 'Sim Preset'
+
+	column Preset
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Preset]
+		sortByColumn: Order
+
+	column Short
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Short]
+		sortByColumn: Order
+
+	column Help
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Help]
+
+	column Order
+		dataType: int64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Order]
+
+	column sim_util
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_util]
+
+	column sim_rate
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_rate]
+
+	column sim_real
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_real]
+
+	column sim_recov
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_recov]
+
+	column sim_infl
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_infl]
+
+	column sim_dso
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_dso]
+
+	column sim_hires
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_hires]
+
+	column sim_role
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_role]
+
+	column sim_ramp
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_ramp]
+
+	column sim_hire_area
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_hire_area]
+
+	column sim_cut_fe
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_cut_fe]
+
+	column sim_cut_role
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_cut_role]
+
+	column sim_keep_work
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_keep_work]
+
+	column sim_cut_support
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_cut_support]
+
+	column sim_cut_years
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_cut_years]
+
+	column sim_support_dept
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_support_dept]
+
+	column sim_add_support
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_add_support]
+
+	column sim_pay_fe
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_pay_fe]
+
+	column sim_pay_support
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_pay_support]
+
+	column sim_mkt_channel
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_mkt_channel]
+
+	column sim_mkt_extra
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_mkt_extra]
+
+	column sim_new_area
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_new_area]
+
+	column sim_new_area_type
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_new_area_type]
+
+	column sim_branch
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_branch]
+
+	column sim_branch_fe
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_branch_fe]
+
+	column sim_branch_support
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_branch_support]
+
+	column sim_branch_rent
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_branch_rent]
+
+	column sim_branch_fitout
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_branch_fitout]
+
+	column sim_branch_ramp
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_branch_ramp]
+
+	column sim_platform
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [sim_platform]
+
+	partition 'Sim Preset' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Preset", STRING, "Short", STRING, "Help", STRING, "Order", INTEGER, "sim_util", DOUBLE, "sim_rate", DOUBLE, "sim_real", DOUBLE, "sim_recov", DOUBLE, "sim_infl", DOUBLE, "sim_dso", DOUBLE, "sim_hires", DOUBLE, "sim_role", STRING, "sim_ramp", DOUBLE, "sim_hire_area", STRING, "sim_cut_fe", DOUBLE, "sim_cut_role", STRING, "sim_keep_work", DOUBLE, "sim_cut_support", DOUBLE, "sim_cut_years", DOUBLE, "sim_support_dept", STRING, "sim_add_support", DOUBLE, "sim_pay_fe", DOUBLE, "sim_pay_support", DOUBLE, "sim_mkt_channel", STRING, "sim_mkt_extra", DOUBLE, "sim_new_area", DOUBLE, "sim_new_area_type", STRING, "sim_branch", DOUBLE, "sim_branch_fe", DOUBLE, "sim_branch_support", DOUBLE, "sim_branch_rent", DOUBLE, "sim_branch_fitout", DOUBLE, "sim_branch_ramp", DOUBLE, "sim_platform", STRING,
+				    {
+				    { "Custom", "Today", "Today's firm: last 12 months, no change", 0, 0, 0, 0, 0, 0, 0, 0, "Associate", 75, "Firm mix", 0, "Associate", 30, 0, 3, "Reception & admin", 0, 0, 0, "Website & SEO", 0, 0, "Wills & Estates", 0, 2, 2, 8000, 120000, 12, "LEAP + InfoTrack (current)" },
+				    { "Hire an associate", "Hire 1", "One associate, 60% as busy as the firm average in year one", 1, 0, 0, 0, 0, 0, 0, 1, "Associate", 60, "Firm mix", 0, "Associate", 30, 0, 3, "Reception & admin", 0, 0, 0, "Website & SEO", 0, 0, "Wills & Estates", 0, 2, 2, 8000, 120000, 12, "LEAP + InfoTrack (current)" },
+				    { "Raise rates 5%", "Rates +5%", "5% across the board", 2, 0, 5, 0, 0, 0, 0, 0, "Associate", 75, "Firm mix", 0, "Associate", 30, 0, 3, "Reception & admin", 0, 0, 0, "Website & SEO", 0, 0, "Wills & Estates", 0, 2, 2, 8000, 120000, 12, "LEAP + InfoTrack (current)" },
+				    { "Lift utilisation +3 pp", "Util +3 pp", "Three more points of billable time", 3, 3, 0, 0, 0, 0, 0, 0, "Associate", 75, "Firm mix", 0, "Associate", 30, 0, 3, "Reception & admin", 0, 0, 0, "Website & SEO", 0, 0, "Wills & Estates", 0, 2, 2, 8000, 120000, 12, "LEAP + InfoTrack (current)" },
+				    { "Collect 7 days faster", "Collect faster", "DSO down by a week (one-off cash release)", 4, 0, 0, 0, 0, 0, -7, 0, "Associate", 75, "Firm mix", 0, "Associate", 30, 0, 3, "Reception & admin", 0, 0, 0, "Website & SEO", 0, 0, "Wills & Estates", 0, 2, 2, 8000, 120000, 12, "LEAP + InfoTrack (current)" },
+				    { "Cut overheads 5%", "Costs −5%", "5% off non-payroll, non-disbursement costs", 5, 0, 0, 0, 0, -5, 0, 0, "Associate", 75, "Firm mix", 0, "Associate", 30, 0, 3, "Reception & admin", 0, 0, 0, "Website & SEO", 0, 0, "Wills & Estates", 0, 2, 2, 8000, 120000, 12, "LEAP + InfoTrack (current)" },
+				    { "Pay rise 3%", "Pay +3%", "3% for fee earners and support staff, just under market wage growth", 6, 0, 0, 0, 0, 0, 0, 0, "Associate", 75, "Firm mix", 0, "Associate", 30, 0, 3, "Reception & admin", 0, 3, 3, "Website & SEO", 0, 0, "Wills & Estates", 0, 2, 2, 8000, 120000, 12, "LEAP + InfoTrack (current)" },
+				    { "Cut 2 support roles", "Cut 2 support", "Two reception/admin roles made redundant after 3 years' service: NES redundancy and notice pay are paid once", 7, 0, 0, 0, 0, 0, 0, 0, "Associate", 75, "Firm mix", 0, "Associate", 30, 2, 3, "Reception & admin", 0, 0, 0, "Website & SEO", 0, 0, "Wills & Estates", 0, 2, 2, 8000, 120000, 12, "LEAP + InfoTrack (current)" },
+				    { "More marketing", "Mktg +$3K", "An extra $3,000 a month on Website & SEO, the cheapest channel per new matter", 8, 0, 0, 0, 0, 0, 0, 0, "Associate", 75, "Firm mix", 0, "Associate", 30, 0, 3, "Reception & admin", 0, 0, 0, "Website & SEO", 3000, 0, "Wills & Estates", 0, 2, 2, 8000, 120000, 12, "LEAP + InfoTrack (current)" },
+				    { "Open a new matter type", "New service", "Wills & Estates: one associate, $25K launch campaign, full speed after 12 months", 9, 0, 0, 0, 0, 0, 0, 0, "Associate", 75, "Firm mix", 0, "Associate", 30, 0, 3, "Reception & admin", 0, 0, 0, "Website & SEO", 0, 1, "Wills & Estates", 0, 2, 2, 8000, 120000, 12, "LEAP + InfoTrack (current)" },
+				    { "Open a branch", "New branch", "Two associates and two support staff, $8,000 a month rent, $120K fit-out, full productivity after 12 months", 10, 0, 0, 0, 0, 0, 0, 0, "Associate", 75, "Firm mix", 0, "Associate", 30, 0, 3, "Reception & admin", 0, 0, 0, "Website & SEO", 0, 0, "Wills & Estates", 1, 2, 2, 8000, 120000, 12, "LEAP + InfoTrack (current)" },
+				    { "Switch platform", "Switch system", "Move from LEAP + InfoTrack to Smokeball + GlobalX, the top-ranked platform on the evaluation pages", 11, 0, 0, 0, 0, 0, 0, 0, "Associate", 75, "Firm mix", 0, "Associate", 30, 0, 3, "Reception & admin", 0, 0, 0, "Website & SEO", 0, 0, "Wills & Estates", 0, 2, 2, 8000, 120000, 12, "Smokeball + GlobalX" },
+				    { "Downturn", "Downturn", "Utilisation −5 pp and overheads +3%", 12, -5, 0, 0, 0, 3, 0, 0, "Associate", 75, "Firm mix", 0, "Associate", 30, 0, 3, "Reception & admin", 0, 0, 0, "Website & SEO", 0, 0, "Wills & Estates", 0, 2, 2, 8000, 120000, 12, "LEAP + InfoTrack (current)" }
+				    }
+				)

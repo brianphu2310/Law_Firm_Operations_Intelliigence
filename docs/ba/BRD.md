@@ -17,8 +17,8 @@ before it is made.
 |---|---|---|
 | O1 | Answer the six decisions below from one source of truth | Every number on every page reconciles to the same model (tested) |
 | O2 | Show the effect of a decision before it is made | Profit, gap to budget, one-off cash and 13-week cash low point for every decision |
-| O3 | Make the assumptions visible and challengeable | Every benchmark and assumption is listed in one file and on the Simulator's Method tab |
-| O4 | Work for a busy Principal | Every page and tab fits one laptop screen; a recommendation is visible without scrolling |
+| O3 | Make the assumptions visible and challengeable | Every benchmark and assumption is listed in one file and on the report's Check page |
+| O4 | Work for a busy Principal | Every report page fits one 16:9 screen; a recommendation is visible without scrolling |
 | O5 | Let finance refresh the numbers in the tools they use | SQL answers and an Excel pack refreshed by Power Query |
 
 ## 3. Scope
@@ -57,7 +57,7 @@ decisions; individual performance management.
 | BR12 | Show what it would take to close the gap to budget, lever by lever | All | Should | Simulator → What would it take? |
 | BR13 | Show the result if only part of a decision is delivered | All | Should | Simulator → How sure are we? |
 | BR14 | Provide the hiring, staffing, marketing and P&L answers in SQL and in Excel, refreshable by Power Query | All | Must | `sql/`, `snowflake/`, `excel/` |
-| BR15 | Every page and tab fits a 1440 × 810 browser window | All | Must | Checked for all pages and tabs |
+| BR15 | Every report page fits one 16:9 screen (1280 × 720 canvas) | All | Must | All 21 Power BI pages use a fixed 1280 × 720 canvas |
 
 ## 6. Data needed
 

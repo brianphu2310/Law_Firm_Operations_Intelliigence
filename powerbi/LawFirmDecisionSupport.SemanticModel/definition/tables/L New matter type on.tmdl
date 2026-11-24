@@ -1,0 +1,24 @@
+table 'L New matter type on'
+
+	column 'New matter type'
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [New matter type]
+
+	column Value
+		dataType: int64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value]
+
+	partition 'L New matter type on' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "New matter type", STRING, "Value", INTEGER,
+				    {
+				    { "No", 0 },
+				    { "Yes", 1 }
+				    }
+				)

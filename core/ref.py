@@ -18,6 +18,28 @@ BRANCHES = [
     {"name": "Liverpool", "lat": -33.9209, "lon": 150.8809, "council": "Liverpool City Council", "support": 7, "rent": 8200},
 ]
 BRANCH_NAMES = [b["name"] for b in BRANCHES]
+
+# Where matters come from (sample data): suburbs of Western, South-Western and North-Western Sydney with approximate
+# coordinates and a rounded, indicative population. Each Australian matter is given a client suburb, drawn by population and
+# by distance from the office that handles it (people use a nearby office). Used for the catchment map and branch-site analysis.
+SUBURBS = [
+    # name, lat, lon, population (approx., rounded)
+    ("Richmond", -33.600, 150.752, 6000), ("North Richmond", -33.587, 150.718, 5000), ("Windsor", -33.612, 150.818, 2000),
+    ("Riverstone", -33.676, 150.862, 8000), ("Schofields", -33.700, 150.870, 27000), ("Marsden Park", -33.695, 150.836, 15000),
+    ("Rouse Hill", -33.682, 150.915, 7000), ("Kellyville", -33.712, 150.957, 28000), ("Castle Hill", -33.730, 151.004, 39000),
+    ("Quakers Hill", -33.735, 150.885, 26000), ("Blacktown", -33.771, 150.906, 47000), ("Rooty Hill", -33.772, 150.844, 13000),
+    ("Mount Druitt", -33.769, 150.819, 17000), ("St Marys", -33.763, 150.774, 12000), ("Kingswood", -33.759, 150.720, 9000),
+    ("Penrith", -33.751, 150.694, 14000), ("Glenmore Park", -33.790, 150.670, 23000), ("Parramatta", -33.815, 151.001, 30000),
+    ("Merrylands", -33.836, 150.992, 28000), ("Smithfield", -33.851, 150.942, 11000), ("Bossley Park", -33.862, 150.884, 15000),
+    ("Fairfield", -33.872, 150.956, 18000), ("Cabramatta", -33.894, 150.937, 21000), ("Green Valley", -33.903, 150.867, 21000),
+    ("Liverpool", -33.920, 150.923, 31000), ("Bankstown", -33.918, 151.035, 34000), ("Prestons", -33.942, 150.871, 17000),
+    ("Casula", -33.950, 150.900, 17000), ("Edmondson Park", -33.966, 150.861, 15000), ("Leppington", -33.954, 150.810, 10000),
+    ("Ingleburn", -33.998, 150.866, 14000), ("Macquarie Fields", -33.993, 150.887, 13000), ("Oran Park", -33.994, 150.739, 15000),
+    ("Minto", -34.028, 150.846, 12000), ("Harrington Park", -34.025, 150.725, 11000), ("Narellan", -34.042, 150.735, 12000),
+    ("Mount Annan", -34.053, 150.759, 11000), ("Camden", -34.054, 150.696, 3000), ("Campbelltown", -34.065, 150.814, 13000),
+    ("Picton", -34.170, 150.612, 5000),
+]
+CATCHMENT_KM = 10.0       # how fast demand falls with distance from the office that handles the matter (exp(-d / 10 km))
 BRANCH_COUNCIL = {b["name"]: b["council"] for b in BRANCHES}
 
 # base = monthly billable hours at the Sep-2025 run-rate; real_factor = relative realisation vs firm average

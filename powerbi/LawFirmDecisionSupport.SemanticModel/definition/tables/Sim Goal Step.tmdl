@@ -1,0 +1,13 @@
+table 'Sim Goal Step'
+	isHidden
+
+	column Hundredths
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: [Value]
+
+	partition 'Sim Goal Step' = calculated
+		mode: import
+		source =
+				GENERATESERIES( -6000, 3000, 1 )

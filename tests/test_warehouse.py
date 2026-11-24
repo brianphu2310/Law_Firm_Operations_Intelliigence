@@ -1,4 +1,4 @@
-"""Tests for the dimensional warehouse (ETL, schema constraints, data-quality suite). Pure Python, no Streamlit UI."""
+"""Tests for the dimensional warehouse (ETL, schema constraints, data-quality suite)."""
 import hashlib
 import os
 import sqlite3

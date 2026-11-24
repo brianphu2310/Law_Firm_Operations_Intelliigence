@@ -1,0 +1,85 @@
+date,title,court,attorney,type,matter_id,days_from_as_of
+2025-09-22,Zenith Labs Discovery Deadline,Supreme Court NSW,"Specter, H.",Discovery Deadline,M-2025-0354,5
+2025-09-26,Pacific Rim Traders Hearing,Federal Court,"Ross, M.",Hearing,M-2024-0250,9
+2025-09-29,Hanwoo Precision Filing Deadline,IP Australia,"Sterling, C.",Filing Deadline,M-2025-0430,12
+2025-09-29,Nippon Precision Examination Response,IP Australia,"Sterling, C.",Examination Response,M-2025-0357,12
+2025-09-29,Vertex Industries Opposition Deadline,Federal Court,"Litt, L.",Opposition Deadline,M-2025-0317,12
+2025-09-29,Pacific Rim Traders Mediation,—,"Zane, R.",Mediation,M-2024-0243,12
+2025-09-30,Nova Materials Filing Deadline,IP Australia,"Litt, L.",Filing Deadline,M-2025-0371,13
+2025-10-02,Nippon Precision Examination Response,IP Australia,"Litt, L.",Examination Response,M-2025-0382,15
+2025-10-03,Okafor Mining Filing Deadline,District Court,"Ross, M.",Filing Deadline,M-2025-0325,16
+2025-10-10,Halcyon Systems Filing Deadline,IP Australia,"Litt, L.",Filing Deadline,M-2025-0407,23
+2025-10-12,Acme vs. Zenith Trial Brief Filing,Appellate Court,"Zane, R.",Key date,,25
+2025-10-13,Okafor Mining Hearing,Federal Court,"Ross, M.",Hearing,M-2025-0358,26
+2025-10-14,Hanwoo Precision Opposition Deadline,Federal Court,"Sterling, C.",Opposition Deadline,M-2025-0437,27
+2025-10-15,Meridian Holdings Due Diligence Deadline,—,"Zane, R.",Due Diligence Deadline,M-2025-0345,28
+2025-10-15,Global Trust M&A Preliminary Hearing,Chancery Court,"Specter, H.",Key date,,28
+2025-10-15,Ganges Textile Exports Discovery Deadline,Supreme Court NSW,"Zane, R.",Discovery Deadline,M-2025-0397,28
+2025-10-16,Singapore Trading Group Board Approval,—,"Pearson, J.",Board Approval,M-2025-0318,29
+2025-10-20,London Capital Partners Board Approval,—,"Zane, R.",Board Approval,M-2025-0373,33
+2025-10-20,Halcyon Systems Filing Deadline,IP Australia,"Pearson, J.",Filing Deadline,M-2024-0168,33
+2025-10-21,Okafor Mining Hearing,Federal Court,"Ross, M.",Hearing,M-2025-0365,34
+2025-10-21,Sunrise Logistics Conciliation,Fair Work Commission,"Zane, R.",Conciliation,M-2024-0251,34
+2025-10-22,Meridian Pacific Trust Completion,—,"Pearson, J.",Completion,M-2025-0343,35
+2025-10-22,Vertex Patent Portfolio Filing Deadline,USPTO,"Litt, L.",Key date,,35
+2025-10-24,Okafor Mining Hearing,Federal Court,"Ross, M.",Hearing,M-2024-0198,37
+2025-10-27,Nova Materials Examination Response,IP Australia,"Litt, L.",Examination Response,M-2025-0443,40
+2025-10-27,Meridian Holdings Completion,—,"Sterling, C.",Completion,M-2025-0421,40
+2025-10-27,Ganges Textile Exports Discovery Deadline,Supreme Court NSW,"Zane, R.",Discovery Deadline,M-2024-0199,40
+2025-10-28,Zenith Labs Hearing,Federal Court,"Specter, H.",Hearing,M-2025-0347,41
+2025-10-29,London Capital Partners Due Diligence Deadline,—,"Specter, H.",Due Diligence Deadline,M-2025-0331,42
+2025-10-29,Halcyon Trademark Portfolio Filing,IP Australia,"Pearson, J.",Key date,,42
+2025-11-03,Hanwoo Precision Examination Response,IP Australia,"Litt, L.",Examination Response,M-2025-0366,47
+2025-11-03,Blackwood Realty Board Approval,—,"Pearson, J.",Board Approval,M-2025-0431,47
+2025-11-04,Meridian Series C Closing,—,"Sterling, C.",Key date,,48
+2025-11-05,Bright Path Foundation Advice Delivery,—,"Sterling, C.",Advice Delivery,M-2025-0298,49
+2025-11-06,Harlow & Conciliation,Fair Work Commission,"Zane, R.",Conciliation,M-2025-0408,50
+2025-11-10,Pacific Rim Traders Mediation,—,"Ross, M.",Mediation,M-2025-0299,54
+2025-11-10,Blackwood Realty Lease Signing,—,"Ross, M.",Key date,,54
+2025-11-10,Halcyon Systems Opposition Deadline,Federal Court,"Pearson, J.",Opposition Deadline,M-2024-0277,54
+2025-11-12,Ganges Textile Exports Discovery Deadline,Supreme Court NSW,"Zane, R.",Discovery Deadline,M-2025-0386,56
+2025-11-13,Global Trust Bank Board Approval,—,"Specter, H.",Board Approval,M-2025-0433,57
+2025-11-13,Pacific Rim Traders Hearing,Federal Court,"Ross, M.",Hearing,M-2025-0402,57
+2025-11-14,Vertex Industries Opposition Deadline,Federal Court,"Sterling, C.",Opposition Deadline,M-2025-0356,58
+2025-11-17,Meridian Holdings Completion,—,"Sterling, C.",Completion,M-2025-0403,61
+2025-11-18,Whitmore Textiles Filing Deadline,IP Australia,"Bennett, K.",Filing Deadline,M-2025-0370,62
+2025-11-18,Zenith Labs Licensing Countersuit Hearing,District Court,"Specter, H.",Key date,,62
+2025-11-20,Bright Path Foundation Advice Delivery,—,"Sterling, C.",Advice Delivery,M-2025-0417,64
+2025-11-25,Okafor Mining Environmental Tribunal,Land & Environment Court,"Ross, M.",Key date,,69
+2025-11-25,Global Trust Bank Completion,—,"Specter, H.",Completion,M-2025-0406,69
+2025-11-28,Sunrise Logistics Hearing,Fair Work Commission,"Bennett, K.",Hearing,M-2024-0291,72
+2025-12-01,Singapore Trading Group Due Diligence Deadline,—,"Litt, L.",Due Diligence Deadline,M-2025-0392,75
+2025-12-02,Vertex vs. Halcyon IP Infringement Trial,Federal Court,"Litt, L.",Key date,,76
+2025-12-03,London Capital Partners Due Diligence Deadline,—,"Specter, H.",Due Diligence Deadline,M-2025-0423,77
+2025-12-08,Halcyon Systems Opposition Deadline,Federal Court,"Litt, L.",Opposition Deadline,M-2025-0420,82
+2025-12-10,Meridian Holdings Completion,—,"Zane, R.",Completion,M-2025-0367,84
+2025-12-12,Acme Corp Mediation,—,"Zane, R.",Mediation,M-2025-0350,86
+2025-12-15,Blackwood Realty Completion,—,"Ross, M.",Completion,M-2025-0444,89
+2025-12-15,Pacific Rim Traders Mediation,—,"Paulsen, D.",Mediation,M-2025-0297,89
+2025-12-15,Global Trust Bank Regulatory Hearing,Federal Court,"Specter, H.",Key date,,89
+2025-12-16,Meridian Pacific Trust Due Diligence Deadline,—,"Pearson, J.",Due Diligence Deadline,M-2025-0340,90
+2025-12-18,Nova Materials Examination Response,IP Australia,"Ross, M.",Examination Response,M-2025-0396,92
+2025-12-18,Auckland Ventures Review Meeting,—,"Bennett, K.",Review Meeting,M-2025-0410,92
+2025-12-19,London Capital Partners Completion,—,"Paulsen, D.",Completion,M-2025-0346,93
+2025-12-22,Nova Materials Examination Response,IP Australia,"Litt, L.",Examination Response,M-2025-0369,96
+2025-12-22,Nippon Precision Opposition Deadline,Federal Court,"Litt, L.",Opposition Deadline,M-2025-0440,96
+2025-12-22,Bright Path Foundation Review Meeting,—,"Sterling, C.",Review Meeting,M-2025-0424,96
+2025-12-25,Nova Materials Opposition Deadline,Federal Court,"Litt, L.",Opposition Deadline,M-2025-0324,99
+2025-12-29,Ganges Textile Exports Mediation,—,"Zane, R.",Mediation,M-2025-0415,103
+2026-01-02,Zenith Labs Hearing,Federal Court,"Specter, H.",Hearing,M-2024-0203,107
+2026-01-05,Nova Materials Opposition Deadline,Federal Court,"Litt, L.",Opposition Deadline,M-2025-0414,110
+2026-01-05,Acme Corp Filing Deadline,District Court,"Zane, R.",Filing Deadline,M-2025-0372,110
+2026-01-05,Delacroix & Sons Board Approval,—,"Pearson, J.",Board Approval,M-2025-0349,110
+2026-01-06,Acme Corp Hearing,Federal Court,"Zane, R.",Hearing,M-2025-0390,111
+2026-01-06,Hanwoo Precision Examination Response,IP Australia,"Ross, M.",Examination Response,M-2025-0378,111
+2026-01-12,Pacific Rim Traders Hearing,Federal Court,"Ross, M.",Hearing,M-2025-0304,117
+2026-01-12,Pacific Rim Traders Discovery Deadline,Supreme Court NSW,"Bennett, K.",Discovery Deadline,M-2024-0276,117
+2026-01-14,Delacroix Group Acquisition Completion,—,"Pearson, J.",Key date,,119
+2026-01-16,Blackwood Realty Board Approval,—,"Pearson, J.",Board Approval,M-2025-0305,121
+2026-01-20,Harlow & Response Due,—,"Sterling, C.",Response Due,M-2025-0381,125
+2026-01-20,Delacroix & Sons Board Approval,—,"Pearson, J.",Board Approval,M-2025-0338,125
+2026-01-21,Fentonville Council Review Meeting,—,"Paulsen, D.",Review Meeting,M-2025-0379,126
+2026-01-21,Whitmore Textiles Filing Deadline,IP Australia,"Litt, L.",Filing Deadline,M-2024-0283,126
+2026-01-22,Harlow & Response Due,—,"Litt, L.",Response Due,M-2025-0359,127
+2026-01-26,Harlow & Conciliation,Fair Work Commission,"Zane, R.",Conciliation,M-2025-0429,131
+2026-02-03,Fentonville Council Planning Panel Hearing,Land & Environment Court,"Paulsen, D.",Key date,,139

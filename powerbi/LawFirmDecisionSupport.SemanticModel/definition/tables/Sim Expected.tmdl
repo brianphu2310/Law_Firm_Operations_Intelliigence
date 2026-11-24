@@ -1,0 +1,29 @@
+table 'Sim Expected'
+	isHidden
+
+	column Preset
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Preset
+
+	column Metric
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Metric
+
+	column Expected
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: Expected
+
+	partition 'Sim Expected' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(BaseUrl, [RelativePath = "data/powerbi/sim_expected.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, {"Expected"}),
+				    Typed = Table.TransformColumnTypes(Blanks, {{"Preset", type text}, {"Metric", type text}, {"Expected", type number}}, "en-US")
+				in
+				    Typed

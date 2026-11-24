@@ -1,0 +1,74 @@
+table 'Dept Workload'
+
+	column branch
+		dataType: string
+		summarizeBy: none
+		sourceColumn: branch
+
+	column department
+		dataType: string
+		summarizeBy: none
+		sourceColumn: department
+
+	column headcount
+		dataType: double
+		formatString: #,0
+		summarizeBy: none
+		sourceColumn: headcount
+
+	column driver
+		dataType: string
+		summarizeBy: none
+		sourceColumn: driver
+
+	column volume
+		dataType: double
+		formatString: #,0
+		summarizeBy: none
+		sourceColumn: volume
+
+	column needed
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: needed
+
+	column gap
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: gap
+
+	column status
+		dataType: string
+		summarizeBy: none
+		sourceColumn: status
+
+	column pay_month
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: pay_month
+
+	column cost_of_gap
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: cost_of_gap
+
+	column order
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: order
+
+	partition 'Dept Workload' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(BaseUrl, [RelativePath = "data/powerbi/departments.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, {"headcount", "volume", "needed", "gap", "pay_month", "cost_of_gap", "order"}),
+				    Typed = Table.TransformColumnTypes(Blanks, {{"branch", type text}, {"department", type text}, {"headcount", type number}, {"driver", type text}, {"volume", type number}, {"needed", type number}, {"gap", type number}, {"status", type text}, {"pay_month", type number}, {"cost_of_gap", type number}, {"order", Int64.Type}}, "en-US")
+				in
+				    Typed

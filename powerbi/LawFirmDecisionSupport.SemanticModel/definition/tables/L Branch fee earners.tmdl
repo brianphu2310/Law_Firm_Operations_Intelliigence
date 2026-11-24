@@ -1,0 +1,20 @@
+table 'L Branch fee earners'
+
+	column 'Branch fee earners'
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Branch fee earners]
+
+	partition 'L Branch fee earners' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Branch fee earners", INTEGER,
+				    {
+				    { 1 },
+				    { 2 },
+				    { 3 }
+				    }
+				)

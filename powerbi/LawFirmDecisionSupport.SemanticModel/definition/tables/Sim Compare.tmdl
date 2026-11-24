@@ -1,0 +1,43 @@
+table 'Sim Compare'
+
+	column 'Compare preset'
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Compare preset]
+		sortByColumn: Order
+
+	column Short
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Short]
+		sortByColumn: Order
+
+	column Order
+		dataType: int64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Order]
+
+	partition 'Sim Compare' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Compare preset", STRING, "Short", STRING, "Order", INTEGER,
+				    {
+				    { "Custom", "Today", 0 },
+				    { "Hire an associate", "Hire 1", 1 },
+				    { "Raise rates 5%", "Rates +5%", 2 },
+				    { "Lift utilisation +3 pp", "Util +3 pp", 3 },
+				    { "Collect 7 days faster", "Collect faster", 4 },
+				    { "Cut overheads 5%", "Costs −5%", 5 },
+				    { "Pay rise 3%", "Pay +3%", 6 },
+				    { "Cut 2 support roles", "Cut 2 support", 7 },
+				    { "More marketing", "Mktg +$3K", 8 },
+				    { "Open a new matter type", "New service", 9 },
+				    { "Open a branch", "New branch", 10 },
+				    { "Switch platform", "Switch system", 11 },
+				    { "Downturn", "Downturn", 12 }
+				    }
+				)

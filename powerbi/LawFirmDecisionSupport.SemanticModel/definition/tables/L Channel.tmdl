@@ -1,0 +1,28 @@
+table 'L Channel'
+
+	column 'Marketing channel'
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Marketing channel]
+		sortByColumn: Order
+
+	column Order
+		dataType: int64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Order]
+
+	partition 'L Channel' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Marketing channel", STRING, "Order", INTEGER,
+				    {
+				    { "Google Ads", 1 },
+				    { "Website & SEO", 2 },
+				    { "Referrals", 3 },
+				    { "LinkedIn & social", 4 },
+				    { "Events & community", 5 }
+				    }
+				)

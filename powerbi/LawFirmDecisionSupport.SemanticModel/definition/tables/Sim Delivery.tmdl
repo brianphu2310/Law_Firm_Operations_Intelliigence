@@ -1,0 +1,27 @@
+table 'Sim Delivery'
+
+	column Delivery
+		dataType: double
+		formatString: 0%;-0%;0%
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Delivery]
+
+	column Label
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Label]
+		sortByColumn: Delivery
+
+	partition 'Sim Delivery' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Delivery", DOUBLE, "Label", STRING,
+				    {
+				    { 1, "100% delivered" },
+				    { 0.75, "75% delivered" },
+				    { 0.5, "50% delivered" }
+				    }
+				)

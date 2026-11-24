@@ -1,0 +1,155 @@
+Preset,Metric,Expected
+Custom,op1,2067648.306711
+Custom,rev1,7244465.287539
+Custom,cost1,5176816.980828
+Custom,one_off,0
+Custom,margin1,0.285411
+Custom,util1,0.86122
+Custom,low1,160138.739835
+Custom,op1_half_delivered,2067648.306711
+Custom,goal_rate,4.5
+Custom,goal_util,4
+Custom,goal_infl,-15
+Hire an associate,op1,2188122.777745
+Hire an associate,rev1,7668679.849855
+Hire an associate,cost1,5480557.072109
+Hire an associate,one_off,0
+Hire an associate,margin1,0.285332
+Hire an associate,util1,0.86122
+Hire an associate,low1,160138.739835
+Hire an associate,op1_half_delivered,1986585.542228
+Hire an associate,goal_rate,2.5
+Hire an associate,goal_util,2.5
+Hire an associate,goal_infl,-9
+Raise rates 5%,op1,2417870.704539
+Raise rates 5%,rev1,7594687.685367
+Raise rates 5%,cost1,5176816.980828
+Raise rates 5%,one_off,0
+Raise rates 5%,margin1,0.318363
+Raise rates 5%,util1,0.86122
+Raise rates 5%,low1,160138.739835
+Raise rates 5%,op1_half_delivered,2242759.505625
+Raise rates 5%,goal_rate,5
+Raise rates 5%,goal_util,0
+Raise rates 5%,goal_infl,0
+Lift utilisation +3 pp,op1,2310190.722445
+Lift utilisation +3 pp,rev1,7496821.344271
+Lift utilisation +3 pp,cost1,5186630.621826
+Lift utilisation +3 pp,one_off,0
+Lift utilisation +3 pp,margin1,0.308156
+Lift utilisation +3 pp,util1,0.89122
+Lift utilisation +3 pp,low1,160138.739835
+Lift utilisation +3 pp,op1_half_delivered,2188919.514578
+Lift utilisation +3 pp,goal_rate,1
+Lift utilisation +3 pp,goal_util,4
+Lift utilisation +3 pp,goal_infl,-3
+Collect 7 days faster,op1,2067648.306711
+Collect 7 days faster,rev1,7244465.287539
+Collect 7 days faster,cost1,5176816.980828
+Collect 7 days faster,one_off,0
+Collect 7 days faster,margin1,0.285411
+Collect 7 days faster,util1,0.86122
+Collect 7 days faster,low1,312967.185627
+Collect 7 days faster,op1_half_delivered,2067648.306711
+Collect 7 days faster,goal_rate,4.5
+Collect 7 days faster,goal_util,4
+Collect 7 days faster,goal_infl,-15
+Cut overheads 5%,op1,2167065.177736
+Cut overheads 5%,rev1,7244465.287539
+Cut overheads 5%,cost1,5077400.109803
+Cut overheads 5%,one_off,0
+Cut overheads 5%,margin1,0.299134
+Cut overheads 5%,util1,0.86122
+Cut overheads 5%,low1,160138.739835
+Cut overheads 5%,op1_half_delivered,2117356.742224
+Cut overheads 5%,goal_rate,3
+Cut overheads 5%,goal_util,2.5
+Cut overheads 5%,goal_infl,-15
+Pay rise 3%,op1,1949094.803367
+Pay rise 3%,rev1,7244465.287539
+Pay rise 3%,cost1,5295370.484171
+Pay rise 3%,one_off,0
+Pay rise 3%,margin1,0.269046
+Pay rise 3%,util1,0.86122
+Pay rise 3%,low1,160138.739835
+Pay rise 3%,op1_half_delivered,1949094.803367
+Pay rise 3%,goal_rate,6
+Pay rise 3%,goal_util,5.5
+Pay rise 3%,goal_infl,-21
+Pay rise 3%,rate_to_fund,1.692546
+Cut 2 support roles,op1,2179248.306711
+Cut 2 support roles,rev1,7244465.287539
+Cut 2 support roles,cost1,5065216.980828
+Cut 2 support roles,one_off,19315.384615
+Cut 2 support roles,margin1,0.300816
+Cut 2 support roles,util1,0.86122
+Cut 2 support roles,low1,140823.355219
+Cut 2 support roles,op1_half_delivered,2179248.306711
+Cut 2 support roles,goal_rate,3
+Cut 2 support roles,goal_util,2.5
+Cut 2 support roles,goal_infl,-9.5
+More marketing,op1,2107153.606752
+More marketing,rev1,7323025.648715
+More marketing,cost1,5215872.041963
+More marketing,one_off,0
+More marketing,margin1,0.287744
+More marketing,util1,0.86122
+More marketing,low1,160138.739835
+More marketing,op1_half_delivered,2069400.956732
+More marketing,goal_rate,4
+More marketing,goal_util,3.5
+More marketing,goal_infl,-13
+Open a new matter type,op1,2074124.349453
+Open a new matter type,rev1,7586590.629383
+Open a new matter type,cost1,5512466.27993
+Open a new matter type,one_off,25000
+Open a new matter type,margin1,0.273393
+Open a new matter type,util1,0.86122
+Open a new matter type,low1,135138.739835
+Open a new matter type,op1_half_delivered,1911586.328082
+Open a new matter type,goal_rate,4.5
+Open a new matter type,goal_util,4
+Open a new matter type,goal_infl,-15
+Open a new matter type,area_payback,13
+Open a branch,op1,1980621.65719
+Open a branch,rev1,8010408.247276
+Open a branch,cost1,6029786.590086
+Open a branch,one_off,120000
+Open a branch,margin1,0.247256
+Open a branch,util1,0.86122
+Open a branch,low1,40138.739835
+Open a branch,op1_half_delivered,1616734.98195
+Open a branch,goal_rate,5
+Open a branch,goal_util,4.5
+Open a branch,goal_infl,-19.5
+Open a branch,branch_payback,17
+Switch platform,op1,2085294.329357
+Switch platform,rev1,7244465.287539
+Switch platform,cost1,5159170.958182
+Switch platform,one_off,51719.337129
+Switch platform,margin1,0.287847
+Switch platform,util1,0.86122
+Switch platform,low1,108419.402705
+Switch platform,op1_half_delivered,2085294.329357
+Switch platform,goal_rate,4
+Switch platform,goal_util,3.5
+Switch platform,goal_infl,-14.5
+Downturn,op1,1603760.824541
+Downturn,rev1,6823871.859653
+Downturn,cost1,5220111.035112
+Downturn,one_off,0
+Downturn,margin1,0.235022
+Downturn,util1,0.81122
+Downturn,low1,160138.739835
+Downturn,op1_half_delivered,1603760.824541
+Downturn,goal_rate,12
+Downturn,goal_util,4.5
+Downturn,goal_infl,-35.5
+Custom,"rank: +1% pay, everyone",-39517.834448
+Custom,rank: +5 pp disbursement recovery,14086.165095
+Custom,rank: −1% overheads,19883.374205
+Custom,rank: +1 Associate hire (50% productive),53295.392529
+Custom,rank: −1 support role,55800
+Custom,rank: +1% rates,70044.479566
+Custom,rank: +1 pp realisation,77199.278816
+Custom,rank: +1 pp utilisation,80847.471911

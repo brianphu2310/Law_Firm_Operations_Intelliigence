@@ -1,0 +1,29 @@
+table 'L Hire area'
+
+	column 'Hire for'
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Hire for]
+		sortByColumn: Order
+
+	column Order
+		dataType: int64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Order]
+
+	partition 'L Hire area' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Hire for", STRING, "Order", INTEGER,
+				    {
+				    { "Firm mix", 1 },
+				    { "Litigation", 2 },
+				    { "Advisory", 3 },
+				    { "IP Portfolio", 4 },
+				    { "Corporate", 5 },
+				    { "Employment", 6 }
+				    }
+				)

@@ -9,7 +9,7 @@ period query weights months by the days it overlaps – so MTD / QTD / custom ra
 import numpy as np
 import pandas as pd
 
-from .ref import (AS_OF, START, PLAN_END, AREAS, ATTORNEYS, BRANCHES, CLIENTS, NAMED_MATTERS, NAMED_DEADLINES,
+from .ref import (AS_OF, START, PLAN_END, AREAS, ATTORNEYS, BRANCHES, CLIENTS, SUBURBS, CATCHMENT_KM, NAMED_MATTERS, NAMED_DEADLINES,
                   TRUST_TARGET, OFFICE_CASH_AT_AS_OF, SEARCH_TYPES, CARD_CATEGORIES, COMMISSIONS)
 
 SEED = 20250917
@@ -208,6 +208,7 @@ def build_model():
              H=H, H_exp=H_exp, active=active, fees_ak=fees_ak, V_ak=act["V_ak"], rate=rate, S=S)
     _gen_trust(rng, M)
     _gen_matters(rng, M)
+    _assign_suburbs(M)
     _gen_detail_tables(rng, M)
     return M
 
@@ -415,6 +416,27 @@ def _gen_matters(rng, M):
 # =====================================================================================
 # Detail tables that tie to monthly totals: searches, council searches, cards, RapidPay
 # =====================================================================================
+def km(lat1, lon1, lat2, lon2):
+    """Great-circle distance in km."""
+    p1, p2 = np.radians(lat1), np.radians(lat2)
+    a = np.sin((p2 - p1) / 2) ** 2 + np.cos(p1) * np.cos(p2) * np.sin(np.radians(lon2 - lon1) / 2) ** 2
+    return 2 * 6371.0 * np.arcsin(np.sqrt(a))
+
+
+def _assign_suburbs(M):
+    """Client suburb for every Australian matter. Its own random stream, so the rest of the sample data is unchanged."""
+    rng = np.random.default_rng(SEED + 101)
+    m = M["matters"].copy()
+    sub = pd.DataFrame(SUBURBS, columns=["suburb", "lat", "lon", "population"])
+    office = {b["name"]: (b["lat"], b["lon"]) for b in BRANCHES}
+    probs = {}
+    for b, (la, lo) in office.items():
+        w = sub["population"] * np.exp(-km(la, lo, sub["lat"], sub["lon"]) / CATCHMENT_KM)
+        probs[b] = (w / w.sum()).values
+    m["suburb"] = [str(rng.choice(sub["suburb"], p=probs[b])) if c == "Australia" else None for b, c in zip(m["branch"], m["country"])]
+    M["matters"] = m
+
+
 def _gen_detail_tables(rng, M):
     months, T_act, frac, fin = M["months"], M["T_act"], M["frac"], M["fin"]
     mt = M["matters"]

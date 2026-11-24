@@ -22,6 +22,8 @@ erDiagram
     dim_branch ||--o{ fact_supplier_order : "office"
     dim_branch ||--o{ dim_attorney : "home branch"
     dim_branch ||--o{ dim_matter : ""
+    dim_suburb ||--o{ dim_matter : "client suburb"
+    dim_branch ||--o{ dim_suburb : "nearest office"
     dim_branch ||--o{ fact_invoice : ""
     dim_practice_area ||--o{ dim_client : "primary area"
     dim_practice_area ||--o{ dim_matter : ""

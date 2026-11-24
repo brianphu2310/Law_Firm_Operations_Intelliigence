@@ -1,0 +1,38 @@
+table 'L Rates'
+
+	column 'Rate increase (%)'
+		dataType: double
+		formatString: 0.0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Rate increase (%)]
+
+	partition 'L Rates' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Rate increase (%)", DOUBLE,
+				    {
+				    { 0 },
+				    { 0.5 },
+				    { 1 },
+				    { 1.5 },
+				    { 2 },
+				    { 2.5 },
+				    { 3 },
+				    { 3.5 },
+				    { 4 },
+				    { 4.5 },
+				    { 5 },
+				    { 5.5 },
+				    { 6 },
+				    { 6.5 },
+				    { 7 },
+				    { 7.5 },
+				    { 8 },
+				    { 8.5 },
+				    { 9 },
+				    { 9.5 },
+				    { 10 }
+				    }
+				)

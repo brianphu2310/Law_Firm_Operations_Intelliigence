@@ -129,6 +129,17 @@ standard rate per hour, and a lever value be written with its unit (pp = percent
 
 With every lever at zero the scenario equals the base exactly (this is tested). Details and worked examples: [SIMULATOR.md](SIMULATOR.md).
 
+## 6c. Branch site (where clients come from)
+
+- **Demand**: Australian matters opened in the 12 months to the as-of date, by the client's suburb (`dim_suburb`, 40 suburbs of Western,
+  South-Western and North-Western Sydney).
+- **Underserved**: a suburb more than 10 km (straight line) from the nearest existing office.
+- **Candidate site**: any of the 40 suburbs. It "wins" the underserved matters within 10 km of it that are closer to it than to today's
+  offices; sites are ranked by those matters, then their estimated value. Suburb-to-suburb distances use a flat-earth approximation at
+  Sydney's latitude (within 0.5% at this scale), so the SQL needs no trigonometry and runs unchanged in Snowflake.
+- **Limits**: straight-line distance, not travel time; suburb centres, not addresses; and the suburbs themselves are sample data drawn
+  by population and distance from the handling office. The analysis shows the method; a real decision needs the firm's client addresses.
+
 ## 7. How the sample data is generated
 
 * Hours per attorney and practice area follow a Sep-2025 run-rate with seasonality, a gradual growth ramp, new-starter ramp-up
@@ -153,7 +164,6 @@ sanity; simulator zero-lever equals base.
 rounding; "already met" and "unreachable" are reported honestly; delivery haircuts scale only improvements; hire break-even is exact; each lever moves profit in the right direction;
 `delta()` never divides by zero.
 
-`tests/test_interactions.py` — clicks and edits in the running app: Reset, presets, Apply, Save/Clear, levers surviving navigation, call-to-action links from other pages,
-platform scorecard weights updating immediately, and every page surviving reporting periods with no activity (regression tests for past bugs).
-
-`tests/test_app_smoke.py` — every page and every platform dashboard renders without an exception, under several reporting-period settings.
+`tests/test_powerbi.py` — the Simulator's formula spec matches `simulate.project` for every preset at 100/75/50% delivery and for 300 random
+lever mixes; every Power BI report file validates against Microsoft's PBIR schemas; every visual field, DAX reference and relationship
+column exists in the semantic model; the Check page covers every preset.

@@ -36,6 +36,17 @@ CREATE TABLE dim_branch (
     base_monthly_rent REAL NOT NULL
 );
 
+-- Client suburbs (sample data), with the nearest existing office and the straight-line distance to it.
+CREATE TABLE dim_suburb (
+    suburb_key            INTEGER PRIMARY KEY,
+    suburb                TEXT NOT NULL UNIQUE,
+    latitude              REAL NOT NULL,
+    longitude             REAL NOT NULL,
+    population            INTEGER NOT NULL,           -- approximate, rounded; weights the sample data only
+    nearest_branch_key    INTEGER NOT NULL REFERENCES dim_branch (branch_key),
+    km_to_nearest_branch  REAL NOT NULL
+);
+
 CREATE TABLE dim_practice_area (
     practice_area_key INTEGER PRIMARY KEY,
     practice_area     TEXT NOT NULL UNIQUE
@@ -78,6 +89,7 @@ CREATE TABLE dim_matter (
     attorney_key      INTEGER NOT NULL REFERENCES dim_attorney (attorney_key),
     branch_key        INTEGER NOT NULL REFERENCES dim_branch (branch_key),
     country           TEXT NOT NULL,
+    suburb_key        INTEGER REFERENCES dim_suburb (suburb_key),   -- client suburb; NULL for overseas clients
     status            TEXT NOT NULL CHECK (status IN ('Open', 'On Hold', 'Closed')),
     opened_date_key   INTEGER NOT NULL REFERENCES dim_date (date_key),
     closed_date_key   INTEGER REFERENCES dim_date (date_key),   -- NULL unless Closed

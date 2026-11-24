@@ -34,8 +34,8 @@ def result(con, stem):
     return [dict(zip(cols, r)) for r in rows]
 
 
-def test_thirteen_queries_exist():
-    assert len(FILES) == 13
+def test_fourteen_queries_exist():
+    assert len(FILES) == 14
 
 
 @pytest.mark.parametrize("path", FILES, ids=[p.stem for p in FILES])
@@ -205,3 +205,19 @@ def test_marketing_channels_match_the_app(con):
         assert r["cost_per_new_matter"] == pytest.approx(m["cost_per_matter"], abs=1)
         assert r["fees_from_new_matters"] == pytest.approx(m["fees"], abs=1)
     assert rows[0]["channel"] == mk["cost_per_matter"].idxmin()
+
+
+def test_branch_site_query_matches_the_python_analysis(con):
+    """The SQL branch-site ranking and core.catchment (which feeds Power BI) agree row for row."""
+    from core.catchment import branch_sites
+    sql = result(con, "14_branch_site")
+    py = branch_sites(M).to_dict("records")
+    assert [r["candidate_site"] for r in sql] == [r["candidate_site"] for r in py]
+    for a, b in zip(sql, py):
+        assert a["underserved_matters_ltm"] == b["underserved_matters_ltm"] and a["site_rank"] == b["site_rank"]
+        assert abs(a["est_value_ltm"] - b["est_value_ltm"]) < 1 and a["nearest_office"] == b["nearest_office"]
+
+
+def test_every_australian_matter_has_a_suburb_and_overseas_ones_do_not(con):
+    bad = con.execute("SELECT COUNT(*) FROM dim_matter WHERE (country = 'Australia') <> (suburb_key IS NOT NULL)").fetchone()[0]
+    assert bad == 0

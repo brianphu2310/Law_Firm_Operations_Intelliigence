@@ -23,15 +23,15 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from core.model import COST_LINES, SEED, build_model
-from core.ref import (AREAS, AS_OF, ATTORNEYS, BRANCHES, CLIENTS, DEPARTMENTS, DEPT_DRIVERS, DEPT_PAY, MARKETING_CHANNELS, PLAN_END, START,
+from core.model import COST_LINES, SEED, build_model, km
+from core.ref import (AREAS, AS_OF, ATTORNEYS, BRANCHES, CLIENTS, SUBURBS, DEPARTMENTS, DEPT_DRIVERS, DEPT_PAY, MARKETING_CHANNELS, PLAN_END, START,
                       TRUST_TARGET)
 
 ROOT = Path(__file__).resolve().parent.parent
 SCHEMA_PATH = Path(__file__).resolve().parent / "schema.sql"
 DEFAULT_DB = ROOT / "warehouse.db"
 
-LOAD_ORDER = ["dim_date", "dim_branch", "dim_practice_area", "dim_scenario", "dim_attorney", "dim_client", "dim_matter",
+LOAD_ORDER = ["dim_date", "dim_branch", "dim_suburb", "dim_practice_area", "dim_scenario", "dim_attorney", "dim_client", "dim_matter",
               "fact_invoice", "fact_matter_position", "fact_attorney_month", "fact_time_by_area", "fact_monthly_pnl",
               "fact_monthly_snapshot", "fact_trust_balance", "fact_trust_txn",
               "dim_department", "fact_staffing", "dim_marketing_channel", "fact_monthly_funnel", "fact_supplier_order"]
@@ -99,6 +99,14 @@ def transform(M: dict) -> dict[str, pd.DataFrame]:
                                          longitude=b["lon"], support_headcount=b["support"], base_monthly_rent=float(b["rent"]))
                                     for i, b in enumerate(BRANCHES)])
     branch_key = dict(zip(T["dim_branch"]["branch_name"], T["dim_branch"]["branch_key"]))
+    sub_rows = []
+    for i, (name, la, lo, pop) in enumerate(SUBURBS):
+        d = {b["name"]: float(km(la, lo, b["lat"], b["lon"])) for b in BRANCHES}
+        near = min(d, key=d.get)
+        sub_rows.append(dict(suburb_key=i + 1, suburb=name, latitude=la, longitude=lo, population=int(pop),
+                             nearest_branch_key=branch_key[near], km_to_nearest_branch=round(d[near], 1)))
+    T["dim_suburb"] = pd.DataFrame(sub_rows)
+    suburb_key = dict(zip(T["dim_suburb"]["suburb"], T["dim_suburb"]["suburb_key"]))
     T["dim_practice_area"] = pd.DataFrame({"practice_area_key": range(1, len(AREAS) + 1), "practice_area": AREAS})
     area_key = dict(zip(AREAS, T["dim_practice_area"]["practice_area_key"]))
     T["dim_scenario"] = pd.DataFrame({"scenario_key": [1, 2], "scenario_name": ["Actual", "Budget"]})
@@ -125,6 +133,7 @@ def transform(M: dict) -> dict[str, pd.DataFrame]:
         "matter_key": np.arange(1, len(m) + 1), "matter_id": m["id"], "matter_name": m["name"],
         "client_key": m["client"].map(client_key), "practice_area_key": m["area"].map(area_key),
         "attorney_key": m["attorney"].map(att_key), "branch_key": m["branch"].map(branch_key), "country": m["country"],
+        "suburb_key": m["suburb"].map(suburb_key).astype("Int64"),
         "status": m["status"], "opened_date_key": date_key(m["opened"]), "closed_date_key": date_key(m["closed"]),
         "is_named_matter": m["named"].astype(int)})
     T["fact_matter_position"] = pd.DataFrame({

@@ -1,0 +1,169 @@
+table Platforms
+
+	column Platform
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Platform
+
+	column Short
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Short
+
+	column Colour
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Colour
+
+	column Tagline
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Tagline
+
+	column Score
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: Score
+
+	column NPV
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: NPV
+
+	column Payback
+		dataType: double
+		formatString: #,0
+		summarizeBy: none
+		sourceColumn: Payback
+
+	column IRR
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: IRR
+
+	column RunRate
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: RunRate
+
+	column RunRateDelta
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: RunRateDelta
+
+	column TCO3y
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: TCO3y
+
+	column TCODelta
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: TCODelta
+
+	column OneOff
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: OneOff
+
+	column Benefit3y
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: Benefit3y
+
+	column Year1Net
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: Year1Net
+
+	column GoLive
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: GoLive
+
+	column CostPerFeeEarner
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: CostPerFeeEarner
+
+	column CostPerSearch
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: CostPerSearch
+
+	column Decision
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: Decision
+
+	column Rank
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Rank
+
+	column Verdict
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Verdict
+
+	column Subscription
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: Subscription
+
+	column SearchFee
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: SearchFee
+
+	column Migration
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: Migration
+
+	column ImplWeeks
+		dataType: double
+		formatString: #,0
+		summarizeBy: none
+		sourceColumn: ImplWeeks
+
+	column Uplift
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: Uplift
+
+	column IsCurrent
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: IsCurrent
+
+	partition Platforms = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(BaseUrl, [RelativePath = "data/powerbi/platforms.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, {"Score", "NPV", "Payback", "IRR", "RunRate", "RunRateDelta", "TCO3y", "TCODelta", "OneOff", "Benefit3y", "Year1Net", "GoLive", "CostPerFeeEarner", "CostPerSearch", "Decision", "Rank", "Subscription", "SearchFee", "Migration", "ImplWeeks", "Uplift", "IsCurrent"}),
+				    Typed = Table.TransformColumnTypes(Blanks, {{"Platform", type text}, {"Short", type text}, {"Colour", type text}, {"Tagline", type text}, {"Score", type number}, {"NPV", type number}, {"Payback", type number}, {"IRR", type number}, {"RunRate", type number}, {"RunRateDelta", type number}, {"TCO3y", type number}, {"TCODelta", type number}, {"OneOff", type number}, {"Benefit3y", type number}, {"Year1Net", type number}, {"GoLive", Int64.Type}, {"CostPerFeeEarner", type number}, {"CostPerSearch", type number}, {"Decision", type number}, {"Rank", Int64.Type}, {"Verdict", type text}, {"Subscription", type number}, {"SearchFee", type number}, {"Migration", type number}, {"ImplWeeks", type number}, {"Uplift", type number}, {"IsCurrent", Int64.Type}}, "en-US")
+				in
+				    Typed

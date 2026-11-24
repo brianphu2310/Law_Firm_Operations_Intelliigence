@@ -1,0 +1,106 @@
+table 'Where to Hire'
+
+	column area
+		dataType: string
+		summarizeBy: none
+		sourceColumn: area
+
+	column matters_opened
+		dataType: double
+		formatString: #,0
+		summarizeBy: none
+		sourceColumn: matters_opened
+
+	column matters_growth
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: matters_growth
+
+	column active
+		dataType: double
+		formatString: #,0
+		summarizeBy: none
+		sourceColumn: active
+
+	column hours
+		dataType: double
+		formatString: #,0
+		summarizeBy: none
+		sourceColumn: hours
+
+	column hours_growth
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: hours_growth
+
+	column util
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: util
+
+	column eff_rate
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: eff_rate
+
+	column realisation
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: realisation
+
+	column fees
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: fees
+
+	column contribution
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: contribution
+
+	column margin
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: margin
+
+	column lawyers
+		dataType: double
+		formatString: #,0
+		summarizeBy: none
+		sourceColumn: lawyers
+
+	column priority
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: priority
+
+	column rank
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: rank
+
+	column verdict
+		dataType: string
+		summarizeBy: none
+		sourceColumn: verdict
+
+	partition 'Where to Hire' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(BaseUrl, [RelativePath = "data/powerbi/where_to_hire.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, {"matters_opened", "matters_growth", "active", "hours", "hours_growth", "util", "eff_rate", "realisation", "fees", "contribution", "margin", "lawyers", "priority", "rank"}),
+				    Typed = Table.TransformColumnTypes(Blanks, {{"area", type text}, {"matters_opened", type number}, {"matters_growth", type number}, {"active", type number}, {"hours", type number}, {"hours_growth", type number}, {"util", type number}, {"eff_rate", type number}, {"realisation", type number}, {"fees", type number}, {"contribution", type number}, {"margin", type number}, {"lawyers", type number}, {"priority", type number}, {"rank", Int64.Type}, {"verdict", type text}}, "en-US")
+				in
+				    Typed

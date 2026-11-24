@@ -1,0 +1,155 @@
+relationship 2b0c8251-4b8d-5788-9f60-c654213ea83c
+	fromColumn: PnL.month_start_date_key
+	toColumn: Date.date_key
+
+relationship bfb69d66-0d80-5d14-ac76-b6209c0f3ee3
+	fromColumn: PnL.scenario_key
+	toColumn: Scenario.scenario_key
+
+relationship a0d76bbc-c565-529b-a619-fb4490116e41
+	fromColumn: 'Attorney Month'.attorney_key
+	toColumn: Attorney.attorney_key
+
+relationship d57c4b4c-bc9b-533d-9f8c-25fcf1e7f984
+	fromColumn: 'Attorney Month'.month_start_date_key
+	toColumn: Date.date_key
+
+relationship 295886eb-a91a-54ee-b326-e6b445717722
+	fromColumn: 'Time by Area'.attorney_key
+	toColumn: Attorney.attorney_key
+
+relationship 7f6ff962-0ee3-5d34-9152-be0d11e56fc0
+	fromColumn: 'Time by Area'.practice_area_key
+	toColumn: 'Practice Area'.practice_area_key
+
+relationship ff64c71b-6f60-519c-ab9f-97e88f49a7d7
+	fromColumn: 'Time by Area'.month_start_date_key
+	toColumn: Date.date_key
+
+relationship 78c3f45e-d35f-5851-b661-d8c0ac7cbe25
+	fromColumn: Invoice.client_key
+	toColumn: Client.client_key
+
+relationship 72ec3e24-2cef-5d54-92de-34c4c81ac0c1
+	fromColumn: Invoice.practice_area_key
+	toColumn: 'Practice Area'.practice_area_key
+
+relationship 9e9b5351-f666-5d1f-b5ab-eb18fae45d77
+	fromColumn: Invoice.attorney_key
+	toColumn: Attorney.attorney_key
+
+relationship c08dc82f-dd31-51a2-a4b0-88efc8980e33
+	fromColumn: Invoice.branch_key
+	toColumn: Branch.branch_key
+
+relationship 3de548ad-a364-5243-a481-5fd0a8397d2b
+	fromColumn: Invoice.issue_date_key
+	toColumn: Date.date_key
+
+relationship cc5c55fc-37c8-5974-8872-dd4a5a29692a
+	fromColumn: Matter.client_key
+	toColumn: Client.client_key
+
+relationship 5fcf3df2-bca8-5fc4-8624-24ad94efa127
+	fromColumn: Matter.practice_area_key
+	toColumn: 'Practice Area'.practice_area_key
+
+relationship 71f514ae-c093-59b4-b2ff-8e253c599d1e
+	fromColumn: Matter.attorney_key
+	toColumn: Attorney.attorney_key
+
+relationship ebb81b4c-e074-55e3-9611-ef1a0ef46448
+	fromColumn: Matter.branch_key
+	toColumn: Branch.branch_key
+
+relationship c8ff8c08-73a1-5694-b782-8056db78a6f1
+	fromColumn: 'Matter Position'.matter_key
+	toColumn: Matter.matter_key
+
+relationship 33dbee9c-030d-5cee-8241-b3e54e7ac10d
+	fromColumn: Matter.country
+	toColumn: 'Country Geo'.Country
+
+relationship e1f8a699-002d-59f7-a943-7ef201b500de
+	fromColumn: Matter.suburb_key
+	toColumn: Suburb.suburb_key
+
+relationship 840e13d5-7338-599a-aa48-8e877878d231
+	fromColumn: Funnel.month_start_date_key
+	toColumn: Date.date_key
+
+relationship b97970c8-af56-565e-a121-d9ad1da3c001
+	fromColumn: Snapshot.month_start_date_key
+	toColumn: Date.date_key
+
+relationship 2400f16b-360d-596a-bbdf-c1095d781bb8
+	fromColumn: 'Monthly Extra'.MonthKey
+	toColumn: Date.date_key
+
+relationship cf7a3d6f-9b3a-5511-89b9-3753030eceaa
+	fromColumn: Staffing.branch_key
+	toColumn: Branch.branch_key
+
+relationship edcadd9e-8e40-581a-9815-62dd99592f00
+	fromColumn: Staffing.department_key
+	toColumn: Department.department_key
+
+relationship 86e3e829-d0ff-5a54-909c-e56c377d4e15
+	fromColumn: 'Supplier Order'.branch_key
+	toColumn: Branch.branch_key
+
+relationship 7fe1d0e4-4845-5390-a1e8-1fd4b2a8443d
+	fromColumn: 'Supplier Order'.order_date_key
+	toColumn: Date.date_key
+
+relationship 8dfd433f-5c7b-572a-926f-fac9f7ada904
+	fromColumn: 'Trust Balance'.client_key
+	toColumn: Client.client_key
+
+relationship 55ecb76c-c0bf-56b9-b30b-46c9222d3ca4
+	fromColumn: 'Trust Balance'.month_start_date_key
+	toColumn: Date.date_key
+
+relationship eb430a9d-27b6-5f35-9fc8-fab15891ec31
+	fromColumn: 'Trust Txn'.client_key
+	toColumn: Client.client_key
+
+relationship ab99121c-bf9b-50b6-9f4e-323add396959
+	fromColumn: 'Trust Txn'.txn_date_key
+	toColumn: Date.date_key
+
+relationship 4ae8c6d7-3649-594b-8ee3-ee0d20da2a8b
+	fromColumn: 'Client Period'.Period
+	toColumn: Period.Period
+
+relationship 81c3a3bc-ddd4-5b2b-8812-0148a1077b67
+	fromColumn: 'AR Ageing'.Period
+	toColumn: Period.Period
+
+relationship 8bbaf99c-8378-5224-aa72-5d04263cd2c8
+	fromColumn: 'Branch Period'.Period
+	toColumn: Period.Period
+
+relationship fe8dcbc6-e942-5029-bd0f-59e42e8dda3e
+	fromColumn: Decisions.Period
+	toColumn: Period.Period
+
+relationship 42799269-105e-530d-89ea-f4261e1d2972
+	fromColumn: 'Platform Cashflow'.Platform
+	toColumn: Platforms.Platform
+
+relationship 786cc09d-793d-5dc9-81df-ef6d3b5218f2
+	fromColumn: 'Platform Scores'.Platform
+	toColumn: Platforms.Platform
+
+relationship cb922960-2281-57ae-99f2-51fad584edf5
+	fromColumn: 'Platform Risks'.Platform
+	toColumn: Platforms.Platform
+
+relationship 5d0877dc-7412-5ac1-9d29-451366e32f9d
+	fromColumn: 'Platform Gantt'.Platform
+	toColumn: Platforms.Platform
+
+relationship 42f15f0d-d31d-519f-a39e-787fc4be605d
+	fromColumn: 'Platform NPV Grid'.Platform
+	toColumn: Platforms.Platform

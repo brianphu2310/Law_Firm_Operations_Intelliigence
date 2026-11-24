@@ -1,3 +1,5 @@
 -r requirements.txt
 pytest>=8
 openpyxl>=3.1
+jsonschema>=4.21
+referencing>=0.31

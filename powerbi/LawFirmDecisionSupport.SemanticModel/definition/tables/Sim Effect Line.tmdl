@@ -1,0 +1,58 @@
+table 'Sim Effect Line'
+
+	column Line
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Line]
+		sortByColumn: Order
+
+	column Group
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Group]
+
+	column Order
+		dataType: int64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Order]
+
+	partition 'Sim Effect Line' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Line", STRING, "Group", STRING, "Order", INTEGER,
+				    {
+				    { "Billable hours a year", "Profit effects (a year)", 0 },
+				    { "Utilisation", "Profit effects (a year)", 1 },
+				    { "New hire(s): fees − cost, year one", "Profit effects (a year)", 2 },
+				    { "Productivity a hire needs to break even", "Profit effects (a year)", 3 },
+				    { "Support staff added: cost less fees freed", "Profit effects (a year)", 4 },
+				    { "Pay review: cost a year", "Profit effects (a year)", 5 },
+				    { "Rate increase that would pay for it", "Profit effects (a year)", 6 },
+				    { "Marketing: extra spend a year", "Profit effects (a year)", 7 },
+				    { "Extra inquiries → new matters", "Profit effects (a year)", 8 },
+				    { "Fees from them in year one", "Profit effects (a year)", 9 },
+				    { "New matter type: fees − costs, year one", "Profit effects (a year)", 10 },
+				    { "New matter type at full speed, a year", "Profit effects (a year)", 11 },
+				    { "Launch campaign earned back after", "Profit effects (a year)", 12 },
+				    { "Fee earners leaving: pay saved", "Profit effects (a year)", 13 },
+				    { "Fees lost (after work kept)", "Profit effects (a year)", 14 },
+				    { "Support roles cut: pay saved a year", "Profit effects (a year)", 15 },
+				    { "New branch: fees − costs, year one", "Profit effects (a year)", 16 },
+				    { "New branch at full speed, a year", "Profit effects (a year)", 17 },
+				    { "Fit-out earned back after", "Profit effects (a year)", 18 },
+				    { "Platform: first-year saving", "Profit effects (a year)", 19 },
+				    { "Redundancy pay (NES)", "Cash", 20 },
+				    { "Notice pay", "Cash", 21 },
+				    { "Branch fit-out", "Cash", 22 },
+				    { "Platform migration and go-live dip", "Cash", 23 },
+				    { "Launch campaign", "Cash", 24 },
+				    { "Cash from collecting faster or slower", "Cash", 25 },
+				    { "Office account today", "Cash", 26 },
+				    { "13-week low point: today → after", "Cash", 27 },
+				    { "Cash cover after the decision", "Cash", 28 }
+				    }
+				)

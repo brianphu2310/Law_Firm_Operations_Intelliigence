@@ -8,7 +8,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-QUERIES = ["09_pnl_actual_vs_budget", "11_where_to_hire", "12_support_staffing", "13_marketing_channels"]
+QUERIES = ["09_pnl_actual_vs_budget", "11_where_to_hire", "12_support_staffing", "13_marketing_channels", "14_branch_site"]
 
 RULES = [
     # as-of date and rolling windows

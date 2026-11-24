@@ -38,6 +38,19 @@ Source objects come from the app's fixed-seed generator (`core.model.build_model
 | `support_headcount` | INTEGER |  | Support staff at the office | BRANCHES[].support |
 | `base_monthly_rent` | REAL |  | Monthly rent at the base wage/cost index | BRANCHES[].rent |
 
+## dim_suburb
+40 rows. Sample data: suburbs of Western, South-Western and North-Western Sydney that clients come from.
+
+| Column | Type | Key | Description | Source -> transformation rule |
+|---|---|---|---|---|
+| `suburb_key` | INTEGER | PK | Surrogate key | Row order of core.ref.SUBURBS, from 1 |
+| `suburb` | TEXT |  | Suburb name | SUBURBS[].name |
+| `latitude` | REAL |  | Approximate suburb centre latitude | SUBURBS[].lat |
+| `longitude` | REAL |  | Approximate suburb centre longitude | SUBURBS[].lon |
+| `population` | INTEGER |  | Indicative population, rounded; only weights the sample data | SUBURBS[].population |
+| `nearest_branch_key` | INTEGER | FK -> dim_branch.branch_key | Nearest existing office | Smallest great-circle distance to BRANCHES[] |
+| `km_to_nearest_branch` | REAL |  | Straight-line distance to that office, km | Haversine, rounded to 0.1 km |
+
 ## dim_practice_area
 5 rows.
 
@@ -96,6 +109,7 @@ Source objects come from the app's fixed-seed generator (`core.model.build_model
 | `attorney_key` | INTEGER | FK -> dim_attorney.attorney_key | FK to dim_attorney | Lookup matters.attorney |
 | `branch_key` | INTEGER | FK -> dim_branch.branch_key | FK to dim_branch | Lookup matters.branch (hand-set on named key matters) |
 | `country` | TEXT |  | Matter jurisdiction/country | matters.country |
+| `suburb_key` | INTEGER | FK -> dim_suburb.suburb_key | Client suburb; NULL for overseas clients | matters.suburb: drawn by population × exp(−distance from the handling office / 10 km), own random stream |
 | `status` | TEXT |  | Open / On Hold / Closed | matters.status |
 | `opened_date_key` | INTEGER | FK -> dim_date.date_key | FK to dim_date | matters.opened -> yyyymmdd |
 | `closed_date_key` | INTEGER | FK -> dim_date.date_key | FK to dim_date; NULL unless Closed | matters.closed -> yyyymmdd; NaT -> NULL |

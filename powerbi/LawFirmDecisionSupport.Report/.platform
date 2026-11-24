@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "LawFirmDecisionSupport"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "9d91c5fe-269e-5c84-9f10-2adb53444ecf"
+  }
+}
