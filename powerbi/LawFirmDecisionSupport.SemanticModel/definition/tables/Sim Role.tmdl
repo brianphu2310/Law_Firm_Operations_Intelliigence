@@ -1,0 +1,32 @@
+table 'Sim Role'
+	isHidden
+
+	column Role
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Role]
+
+	column Bill
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Bill]
+
+	column Pay
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Pay]
+
+	partition 'Sim Role' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Role", STRING, "Bill", DOUBLE, "Pay", DOUBLE,
+				    {
+				    { "Associate", 380, 120 },
+				    { "Senior Associate", 520, 170 },
+				    { "Partner", 650, 210 }
+				    }
+				)

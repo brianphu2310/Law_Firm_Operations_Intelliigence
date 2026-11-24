@@ -1,0 +1,48 @@
+table 'Supplier Order'
+
+	column order_key
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: order_key
+
+	column supplier
+		dataType: string
+		summarizeBy: none
+		sourceColumn: supplier
+
+	column order_date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: order_date_key
+
+	column branch_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: branch_key
+
+	column search_type
+		dataType: string
+		summarizeBy: none
+		sourceColumn: search_type
+
+	column amount
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: amount
+
+	partition 'Supplier Order' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(BaseUrl, [RelativePath = "data/warehouse/fact_supplier_order.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, {"order_key", "order_date_key", "branch_key", "amount"}),
+				    Typed = Table.TransformColumnTypes(Blanks, {{"order_key", Int64.Type}, {"supplier", type text}, {"order_date_key", Int64.Type}, {"branch_key", Int64.Type}, {"search_type", type text}, {"amount", type number}}, "en-US")
+				in
+				    Typed

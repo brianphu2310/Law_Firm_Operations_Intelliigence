@@ -23,16 +23,18 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from core.model import COST_LINES, SEED, build_model
-from core.ref import AREAS, AS_OF, ATTORNEYS, BRANCHES, CLIENTS, PLAN_END, START, TRUST_TARGET
+from core.model import COST_LINES, SEED, build_model, km
+from core.ref import (AREAS, AS_OF, ATTORNEYS, BRANCHES, CLIENTS, SUBURBS, DEPARTMENTS, DEPT_DRIVERS, DEPT_PAY, MARKETING_CHANNELS, PLAN_END, START,
+                      TRUST_TARGET)
 
 ROOT = Path(__file__).resolve().parent.parent
 SCHEMA_PATH = Path(__file__).resolve().parent / "schema.sql"
 DEFAULT_DB = ROOT / "warehouse.db"
 
-LOAD_ORDER = ["dim_date", "dim_branch", "dim_practice_area", "dim_scenario", "dim_attorney", "dim_client", "dim_matter",
+LOAD_ORDER = ["dim_date", "dim_branch", "dim_suburb", "dim_practice_area", "dim_scenario", "dim_attorney", "dim_client", "dim_matter",
               "fact_invoice", "fact_matter_position", "fact_attorney_month", "fact_time_by_area", "fact_monthly_pnl",
-              "fact_monthly_snapshot", "fact_trust_balance", "fact_trust_txn"]
+              "fact_monthly_snapshot", "fact_trust_balance", "fact_trust_txn",
+              "dim_department", "fact_staffing", "dim_marketing_channel", "fact_monthly_funnel", "fact_supplier_order"]
 COST_COLUMN = {"payroll_fee": "payroll_fee_earners", "disb_cost": "disbursement_cost", "payroll_support": "payroll_support",
                "rent": "rent", "software": "software", "insurance": "insurance", "marketing": "marketing",
                "prof_fees": "professional_fees", "cards": "cards", "merchant": "merchant_fees", "commission": "commission",
@@ -87,6 +89,7 @@ def transform(M: dict) -> dict[str, pd.DataFrame]:
     # --- dim_date spans every date in the data (matters opened 2022, invoices from 2023-04, plan to PLAN_END)
     trust_txn = M["trust_txns"]
     all_dates = pd.concat([inv["issue"], inv["due"], inv["paid"], mt["opened"], mt["closed"], trust_txn["date"], stock["date"],
+                           M["infotrack"]["date"], M["council"]["date"],
                            pd.Series([pd.Timestamp(a["start"]) for a in ATTORNEYS]), pd.Series([START, AS_OF, PLAN_END]),
                            pd.Series(months)]).dropna()
     T["dim_date"] = build_dim_date(all_dates.min(), all_dates.max())
@@ -96,6 +99,14 @@ def transform(M: dict) -> dict[str, pd.DataFrame]:
                                          longitude=b["lon"], support_headcount=b["support"], base_monthly_rent=float(b["rent"]))
                                     for i, b in enumerate(BRANCHES)])
     branch_key = dict(zip(T["dim_branch"]["branch_name"], T["dim_branch"]["branch_key"]))
+    sub_rows = []
+    for i, (name, la, lo, pop) in enumerate(SUBURBS):
+        d = {b["name"]: float(km(la, lo, b["lat"], b["lon"])) for b in BRANCHES}
+        near = min(d, key=d.get)
+        sub_rows.append(dict(suburb_key=i + 1, suburb=name, latitude=la, longitude=lo, population=int(pop),
+                             nearest_branch_key=branch_key[near], km_to_nearest_branch=round(d[near], 1)))
+    T["dim_suburb"] = pd.DataFrame(sub_rows)
+    suburb_key = dict(zip(T["dim_suburb"]["suburb"], T["dim_suburb"]["suburb_key"]))
     T["dim_practice_area"] = pd.DataFrame({"practice_area_key": range(1, len(AREAS) + 1), "practice_area": AREAS})
     area_key = dict(zip(AREAS, T["dim_practice_area"]["practice_area_key"]))
     T["dim_scenario"] = pd.DataFrame({"scenario_key": [1, 2], "scenario_name": ["Actual", "Budget"]})
@@ -122,6 +133,7 @@ def transform(M: dict) -> dict[str, pd.DataFrame]:
         "matter_key": np.arange(1, len(m) + 1), "matter_id": m["id"], "matter_name": m["name"],
         "client_key": m["client"].map(client_key), "practice_area_key": m["area"].map(area_key),
         "attorney_key": m["attorney"].map(att_key), "branch_key": m["branch"].map(branch_key), "country": m["country"],
+        "suburb_key": m["suburb"].map(suburb_key).astype("Int64"),
         "status": m["status"], "opened_date_key": date_key(m["opened"]), "closed_date_key": date_key(m["closed"]),
         "is_named_matter": m["named"].astype(int)})
     T["fact_matter_position"] = pd.DataFrame({
@@ -192,6 +204,27 @@ def transform(M: dict) -> dict[str, pd.DataFrame]:
     tx = trust_txn.sort_values(["date", "client", "amount"], kind="stable").reset_index(drop=True)
     T["fact_trust_txn"] = pd.DataFrame({"trust_txn_key": np.arange(1, len(tx) + 1), "client_key": tx["client"].map(client_key),
                                         "txn_date_key": date_key(tx["date"]), "txn_type": tx["type"], "amount": tx["amount"]})
+
+    # --- decision inputs: support departments, staffing, marketing channels, intake funnel, supplier orders
+    depts = list(DEPT_PAY)
+    T["dim_department"] = pd.DataFrame([dict(department_key=i + 1, department=d, monthly_pay=float(DEPT_PAY[d]), workload_driver=DEPT_DRIVERS[d]["driver"],
+                                             workload_per_fte=float(DEPT_DRIVERS[d]["per_fte"]), base_per_office=float(DEPT_DRIVERS[d]["base_per_branch"]),
+                                             is_firm_wide=int(bool(DEPT_DRIVERS[d].get("firm_wide")))) for i, d in enumerate(depts)])
+    dept_key = dict(zip(depts, T["dim_department"]["department_key"]))
+    T["fact_staffing"] = pd.DataFrame([dict(branch_key=branch_key[b], department_key=dept_key[d], headcount=int(DEPARTMENTS[b].get(d, 0)))
+                                       for b in DEPARTMENTS for d in depts])
+    T["dim_marketing_channel"] = pd.DataFrame([dict(channel_key=i + 1, channel=c, spend_share=v["spend"], inquiry_share=v["inquiries"],
+                                                    conversion_factor=v["conv"], value_factor=v["value"]) for i, (c, v) in enumerate(MARKETING_CHANNELS.items())])
+    fin = M["fin"]
+    T["fact_monthly_funnel"] = pd.DataFrame([dict(month_start_date_key=int(months[t].strftime("%Y%m%d")), month_fraction_elapsed=float(f[t]),
+                                                  inquiries=float(fin["inquiries"].iloc[t] * f[t]), consultations_booked=float(fin["booked"].iloc[t] * f[t]),
+                                                  consultations_held=float(fin["held"].iloc[t] * f[t]), letters_sent=float(fin["letters"].iloc[t] * f[t]),
+                                                  matters_opened=float(fin["matters_opened"].iloc[t] * f[t])) for t in range(T_act)])
+    so = pd.concat([M["infotrack"].assign(supplier="InfoTrack")[["supplier", "date", "branch", "search_type", "cost"]],
+                    M["council"].assign(supplier="Council")[["supplier", "date", "branch", "search_type", "cost"]]])
+    so = so.sort_values(["date", "supplier", "branch", "search_type", "cost"], kind="stable").reset_index(drop=True)
+    T["fact_supplier_order"] = pd.DataFrame({"order_key": np.arange(1, len(so) + 1), "supplier": so["supplier"], "order_date_key": date_key(so["date"]),
+                                             "branch_key": so["branch"].map(branch_key), "search_type": so["search_type"], "amount": so["cost"]})
     return T
 
 

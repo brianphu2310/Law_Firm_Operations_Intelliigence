@@ -1,0 +1,41 @@
+Period,Bucket,Order,Amount
+Sep 2025 MTD,Not yet due,1,845749.366445
+Sep 2025 MTD,1–30 days,2,156704.537618
+Sep 2025 MTD,31–60 days,3,0
+Sep 2025 MTD,61–90 days,4,51097.651601
+Sep 2025 MTD,90+ days,5,0
+Aug 2025,Not yet due,1,680093.772299
+Aug 2025,1–30 days,2,230212.395522
+Aug 2025,31–60 days,3,51097.651601
+Aug 2025,61–90 days,4,74246.226215
+Aug 2025,90+ days,5,0
+FY26 Q1 QTD,Not yet due,1,845749.366445
+FY26 Q1 QTD,1–30 days,2,156704.537618
+FY26 Q1 QTD,31–60 days,3,0
+FY26 Q1 QTD,61–90 days,4,51097.651601
+FY26 Q1 QTD,90+ days,5,0
+FY25 Q4,Not yet due,1,692121.206328
+FY25 Q4,1–30 days,2,415897.781723
+FY25 Q4,31–60 days,3,0
+FY25 Q4,61–90 days,4,0
+FY25 Q4,90+ days,5,0
+Last 6 months,Not yet due,1,845749.366445
+Last 6 months,1–30 days,2,156704.537618
+Last 6 months,31–60 days,3,0
+Last 6 months,61–90 days,4,51097.651601
+Last 6 months,90+ days,5,0
+Last 12 months,Not yet due,1,845749.366445
+Last 12 months,1–30 days,2,156704.537618
+Last 12 months,31–60 days,3,0
+Last 12 months,61–90 days,4,51097.651601
+Last 12 months,90+ days,5,0
+FY25,Not yet due,1,692121.206328
+FY25,1–30 days,2,415897.781723
+FY25,31–60 days,3,0
+FY25,61–90 days,4,0
+FY25,90+ days,5,0
+FY24,Not yet due,1,519513.032558
+FY24,1–30 days,2,122467.620473
+FY24,31–60 days,3,121491.376574
+FY24,61–90 days,4,0
+FY24,90+ days,5,0

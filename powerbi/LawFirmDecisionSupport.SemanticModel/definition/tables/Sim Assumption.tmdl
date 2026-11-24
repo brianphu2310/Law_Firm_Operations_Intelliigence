@@ -1,0 +1,46 @@
+table 'Sim Assumption'
+
+	column Assumption
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Assumption]
+		sortByColumn: Order
+
+	column Value
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value]
+
+	column Order
+		dataType: int64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Order]
+
+	partition 'Sim Assumption' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Assumption", STRING, "Value", STRING, "Order", INTEGER,
+				    {
+				    { "Base period", "Last 12 months to 17 Sep 2025, scaled to a full year", 0 },
+				    { "Billable hours a year (base)", "15,701", 1 },
+				    { "Utilisation (base)", "86.1%", 2 },
+				    { "Realisation (base)", "90.7%", 3 },
+				    { "Standard rate per hour (base)", "$492", 4 },
+				    { "New fee earner overhead", "$9,000 a year", 5 },
+				    { "Support staff (branch)", "$5,400 a month", 6 },
+				    { "Branch running costs", "$24,000 a year", 7 },
+				    { "Employees (NES small-business test)", "25", 8 },
+				    { "Paralegal frees", "200 billable hours a year", 9 },
+				    { "Marketing efficiency", "40% of the channel's current cost per inquiry, with diminishing returns", 10 },
+				    { "New matters billed in year one", "35% of a typical matter", 11 },
+				    { "FY26 budget profit", "$2,364,900", 12 },
+				    { "Office account today", "$268,400", 13 },
+				    { "13-week low point today", "$160,139", 14 },
+				    { "Minimum balance", "$60,000", 15 },
+				    { "Market wage growth", "3.4% (ABS WPI, private sector, Sep qtr 2026)", 16 }
+				    }
+				)

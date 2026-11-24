@@ -1,0 +1,5 @@
+department_key,department,monthly_pay,workload_driver,workload_per_fte,base_per_office,is_firm_wide
+1,Reception & admin,4650,Inquiries a year,600,1,0
+2,Paralegals & clerks,5600,Active matters,22,0,0
+3,Accounts & trust,5900,"Invoices, receipts and supplier orders a year",1000,0,1
+4,Marketing,5900,Marketing and referral spend a year,150000,0,1

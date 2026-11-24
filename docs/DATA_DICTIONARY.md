@@ -38,6 +38,19 @@ Source objects come from the app's fixed-seed generator (`core.model.build_model
 | `support_headcount` | INTEGER |  | Support staff at the office | BRANCHES[].support |
 | `base_monthly_rent` | REAL |  | Monthly rent at the base wage/cost index | BRANCHES[].rent |
 
+## dim_suburb
+40 rows. Sample data: suburbs of Western, South-Western and North-Western Sydney that clients come from.
+
+| Column | Type | Key | Description | Source -> transformation rule |
+|---|---|---|---|---|
+| `suburb_key` | INTEGER | PK | Surrogate key | Row order of core.ref.SUBURBS, from 1 |
+| `suburb` | TEXT |  | Suburb name | SUBURBS[].name |
+| `latitude` | REAL |  | Approximate suburb centre latitude | SUBURBS[].lat |
+| `longitude` | REAL |  | Approximate suburb centre longitude | SUBURBS[].lon |
+| `population` | INTEGER |  | Indicative population, rounded; only weights the sample data | SUBURBS[].population |
+| `nearest_branch_key` | INTEGER | FK -> dim_branch.branch_key | Nearest existing office | Smallest great-circle distance to BRANCHES[] |
+| `km_to_nearest_branch` | REAL |  | Straight-line distance to that office, km | Haversine, rounded to 0.1 km |
+
 ## dim_practice_area
 5 rows.
 
@@ -96,6 +109,7 @@ Source objects come from the app's fixed-seed generator (`core.model.build_model
 | `attorney_key` | INTEGER | FK -> dim_attorney.attorney_key | FK to dim_attorney | Lookup matters.attorney |
 | `branch_key` | INTEGER | FK -> dim_branch.branch_key | FK to dim_branch | Lookup matters.branch (hand-set on named key matters) |
 | `country` | TEXT |  | Matter jurisdiction/country | matters.country |
+| `suburb_key` | INTEGER | FK -> dim_suburb.suburb_key | Client suburb; NULL for overseas clients | matters.suburb: drawn by population × exp(−distance from the handling office / 10 km), own random stream |
 | `status` | TEXT |  | Open / On Hold / Closed | matters.status |
 | `opened_date_key` | INTEGER | FK -> dim_date.date_key | FK to dim_date | matters.opened -> yyyymmdd |
 | `closed_date_key` | INTEGER | FK -> dim_date.date_key | FK to dim_date; NULL unless Closed | matters.closed -> yyyymmdd; NaT -> NULL |
@@ -225,6 +239,65 @@ Source objects come from the app's fixed-seed generator (`core.model.build_model
 | `txn_type` | TEXT |  | Deposit / Disbursement | trust_txns.type |
 | `amount` | REAL |  | Signed amount: deposits +, disbursements - | trust_txns.amount |
 
+## dim_department
+4 rows. Support departments behind the fee earners. Pay and workload benchmarks are assumptions (core/ref.py), shown in the app.
+
+| Column | Type | Key | Description | Source -> transformation rule |
+|---|---|---|---|---|
+| `department_key` | INTEGER | PK | Surrogate key | Dense 1..n in DEPT_PAY order |
+| `department` | TEXT | UNIQUE | Reception & admin, Paralegals & clerks, Accounts & trust, Marketing | DEPT_PAY keys |
+| `monthly_pay` | REAL |  | All-in monthly cost of one role, AUD | DEPT_PAY |
+| `workload_driver` | TEXT |  | What the department's workload is measured in | DEPT_DRIVERS.driver |
+| `workload_per_fte` | REAL |  | Workload one role carries in a year | DEPT_DRIVERS.per_fte |
+| `base_per_office` | REAL |  | Roles needed in every office regardless of workload (front desk) | DEPT_DRIVERS.base_per_branch |
+| `is_firm_wide` | INTEGER |  | 1 = one team serves all offices (accounts, marketing) | DEPT_DRIVERS.firm_wide |
+
+## fact_staffing
+12 rows. Grain: support headcount per office and department at the as-of date.
+
+| Column | Type | Key | Description | Source -> transformation rule |
+|---|---|---|---|---|
+| `branch_key` | INTEGER | PK, FK -> dim_branch.branch_key | Office | DEPARTMENTS keys |
+| `department_key` | INTEGER | PK, FK -> dim_department.department_key | Department | DEPARTMENTS[office] keys; 0 where an office has no role |
+| `headcount` | INTEGER |  | People in that team; sums to dim_branch.support_headcount per office | DEPARTMENTS[office][department] |
+
+## dim_marketing_channel
+5 rows. How new clients find the firm. The shares split the firm's real totals and are assumptions.
+
+| Column | Type | Key | Description | Source -> transformation rule |
+|---|---|---|---|---|
+| `channel_key` | INTEGER | PK | Surrogate key | Dense 1..n in MARKETING_CHANNELS order |
+| `channel` | TEXT | UNIQUE | Google Ads, Website & SEO, Referrals, LinkedIn & social, Events & community | MARKETING_CHANNELS keys |
+| `spend_share` | REAL |  | Share of marketing cost; 0 for referrals, which are paid by commission | MARKETING_CHANNELS.spend |
+| `inquiry_share` | REAL |  | Share of inquiries | MARKETING_CHANNELS.inquiries |
+| `conversion_factor` | REAL |  | Inquiry-to-matter conversion relative to the firm average | MARKETING_CHANNELS.conv |
+| `value_factor` | REAL |  | Fees per matter relative to the firm average | MARKETING_CHANNELS.value |
+
+## fact_monthly_funnel
+27 rows. Grain: intake funnel per actual month; the as-of month is pro-rated like the P&L.
+
+| Column | Type | Key | Description | Source -> transformation rule |
+|---|---|---|---|---|
+| `month_start_date_key` | INTEGER | PK, FK -> dim_date.date_key | Month | fin index -> yyyymmdd |
+| `month_fraction_elapsed` | REAL |  | 1 for full months, days elapsed / days in month for the as-of month | frac |
+| `inquiries` | REAL |  | New inquiries | fin.inquiries x fraction |
+| `consultations_booked` | REAL |  | Consultations booked | fin.booked x fraction |
+| `consultations_held` | REAL |  | Consultations held | fin.held x fraction |
+| `letters_sent` | REAL |  | Engagement letters sent | fin.letters x fraction |
+| `matters_opened` | REAL |  | New matters opened (modelled rate) | fin.matters_opened x fraction |
+
+## fact_supplier_order
+6,641 rows. Grain: one search or council order; each is posted by the accounts team as a disbursement.
+
+| Column | Type | Key | Description | Source -> transformation rule |
+|---|---|---|---|---|
+| `order_key` | INTEGER | PK | Surrogate key | Dense 1..n ordered by date, supplier, office, type, amount |
+| `supplier` | TEXT |  | InfoTrack or Council | Source table |
+| `order_date_key` | INTEGER | FK -> dim_date.date_key | Order date | date -> yyyymmdd |
+| `branch_key` | INTEGER | FK -> dim_branch.branch_key | Office that ordered it | Lookup branch |
+| `search_type` | TEXT |  | Title, company, PPSR, council certificate and so on | search_type |
+| `amount` | REAL |  | Cost, AUD ex GST | cost |
+
 ## Transformations applied across tables
 
 * **Surrogate keys** are dense integers assigned in business-key order, so rebuilds are reproducible.
@@ -233,4 +306,4 @@ Source objects come from the app's fixed-seed generator (`core.model.build_model
 * **Wide to long.** The trust ledger (month x client matrix) is stacked into `fact_trust_balance` rows; the attorney x area x month arrays become `fact_time_by_area` rows (only months in which the attorney was active).
 * **Scenario rows.** Actual (`fin`) and Budget (`plan`) frames are stacked into one fact with a scenario key instead of two tables.
 * **Allocation (derived, not observed).** `fact_time_by_area.allocated_salary_cost` splits each attorney-month's salary cost across areas by hours share. It conserves the total (tested).
-* **Not loaded:** generator-only parameters on clients (billing weight, payment delay, invoice frequency); the InfoTrack / council search, corporate card, RapidPay, commission and deadline tables (out of scope for this model; they remain available in the app); the operating-funnel columns (`inquiries`, `booked`, `held`, `letters`), which are modelled ratios, not observations.
+* **Not loaded:** generator-only parameters on clients (billing weight, payment delay, invoice frequency); the corporate card, RapidPay, commission and deadline tables (out of scope for this model; they remain available in the app).

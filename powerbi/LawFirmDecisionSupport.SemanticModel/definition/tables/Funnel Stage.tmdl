@@ -1,0 +1,28 @@
+table 'Funnel Stage'
+
+	column Stage
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Stage]
+		sortByColumn: Order
+
+	column Order
+		dataType: int64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Order]
+
+	partition 'Funnel Stage' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Stage", STRING, "Order", INTEGER,
+				    {
+				    { "Inquiries", 1 },
+				    { "Consultations booked", 2 },
+				    { "Consultations held", 3 },
+				    { "Engagement letters sent", 4 },
+				    { "New matters opened", 5 }
+				    }
+				)

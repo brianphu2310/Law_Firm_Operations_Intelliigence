@@ -1,0 +1,59 @@
+table 'P&L Line'
+
+	column Line
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Line]
+		sortByColumn: Order
+
+	column Order
+		dataType: int64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Order]
+
+	column Section
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Section]
+
+	column IsCost
+		dataType: int64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [IsCost]
+
+	column IsTotal
+		dataType: int64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [IsTotal]
+
+	partition 'P&L Line' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Line", STRING, "Order", INTEGER, "Section", STRING, "IsCost", INTEGER, "IsTotal", INTEGER,
+				    {
+				    { "Fees", 1, "Revenue", 0, 0 },
+				    { "Disbursements billed", 2, "Revenue", 0, 0 },
+				    { "Total revenue", 3, "Revenue", 0, 1 },
+				    { "Fee-earner payroll", 4, "Costs", 1, 0 },
+				    { "Disbursement costs", 5, "Costs", 1, 0 },
+				    { "Support payroll", 6, "Costs", 1, 0 },
+				    { "Rent", 7, "Costs", 1, 0 },
+				    { "Software", 8, "Costs", 1, 0 },
+				    { "Insurance", 9, "Costs", 1, 0 },
+				    { "Marketing", 10, "Costs", 1, 0 },
+				    { "Professional fees", 11, "Costs", 1, 0 },
+				    { "Card expenses", 12, "Costs", 1, 0 },
+				    { "Merchant fees", 13, "Costs", 1, 0 },
+				    { "Referral commission", 14, "Costs", 1, 0 },
+				    { "Bank fees", 15, "Costs", 1, 0 },
+				    { "Other", 16, "Costs", 1, 0 },
+				    { "Total costs", 17, "Costs", 1, 1 },
+				    { "Operating profit", 18, "Result", 0, 1 }
+				    }
+				)

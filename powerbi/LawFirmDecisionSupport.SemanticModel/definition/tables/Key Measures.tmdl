@@ -1,0 +1,1400 @@
+table 'Key Measures'
+
+	/// The reporting period picked on the Period slicer (FY26 Q1 QTD when none).
+	measure 'Period Sel' = SELECTEDVALUE( 'Period'[Period], "FY26 Q1 QTD" )
+		displayFolder: Period
+
+	measure 'Period End' =
+			VAR p = [Period Sel]
+			RETURN CALCULATE( MAX( 'Period'[End] ), REMOVEFILTERS( 'Period' ), 'Period'[Period] = p )
+		formatString: dd mmm yyyy
+		displayFolder: Period
+
+	measure 'Period End Month' =
+			VAR p = [Period Sel]
+			VAR k = CALCULATE( MAX( 'Period'[MonthEndKey] ), REMOVEFILTERS( 'Period' ), 'Period'[Period] = p )
+			RETURN DATE( INT( k / 10000 ), MOD( INT( k / 100 ), 100 ), 1 )
+		formatString: dd mmm yyyy
+		isHidden
+		displayFolder: Period
+
+	measure 'Period Caption' =
+			VAR p = [Period Sel]
+			VAR s = CALCULATE( MAX( 'Period'[Start] ), REMOVEFILTERS( 'Period' ), 'Period'[Period] = p )
+			VAR e = [Period End]
+			RETURN p & " · " & FORMAT( s, "d mmm yy" ) & " – " & FORMAT( e, "d mmm yy" ) & " · vs prior period · data as of 17 Sep 2025"
+		displayFolder: Period
+
+	measure 'Actual Fees' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[fees] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Actual
+
+	measure 'Budget Fees' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[fees] ), 'PnL'[scenario_key] = 2, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Budget
+
+	measure 'Actual Disbursements billed' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[disbursements_billed] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Actual
+
+	measure 'Budget Disbursements billed' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[disbursements_billed] ), 'PnL'[scenario_key] = 2, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Budget
+
+	measure 'Actual Total revenue' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[revenue] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Actual
+
+	measure 'Budget Total revenue' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[revenue] ), 'PnL'[scenario_key] = 2, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Budget
+
+	measure 'Actual Fee-earner payroll' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[payroll_fee_earners] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Actual
+
+	measure 'Budget Fee-earner payroll' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[payroll_fee_earners] ), 'PnL'[scenario_key] = 2, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Budget
+
+	measure 'Actual Disbursement costs' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[disbursement_cost] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Actual
+
+	measure 'Budget Disbursement costs' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[disbursement_cost] ), 'PnL'[scenario_key] = 2, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Budget
+
+	measure 'Actual Support payroll' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[payroll_support] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Actual
+
+	measure 'Budget Support payroll' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[payroll_support] ), 'PnL'[scenario_key] = 2, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Budget
+
+	measure 'Actual Rent' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[rent] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Actual
+
+	measure 'Budget Rent' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[rent] ), 'PnL'[scenario_key] = 2, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Budget
+
+	measure 'Actual Software' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[software] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Actual
+
+	measure 'Budget Software' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[software] ), 'PnL'[scenario_key] = 2, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Budget
+
+	measure 'Actual Insurance' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[insurance] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Actual
+
+	measure 'Budget Insurance' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[insurance] ), 'PnL'[scenario_key] = 2, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Budget
+
+	measure 'Actual Marketing' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[marketing] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Actual
+
+	measure 'Budget Marketing' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[marketing] ), 'PnL'[scenario_key] = 2, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Budget
+
+	measure 'Actual Professional fees' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[professional_fees] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Actual
+
+	measure 'Budget Professional fees' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[professional_fees] ), 'PnL'[scenario_key] = 2, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Budget
+
+	measure 'Actual Card expenses' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[cards] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Actual
+
+	measure 'Budget Card expenses' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[cards] ), 'PnL'[scenario_key] = 2, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Budget
+
+	measure 'Actual Merchant fees' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[merchant_fees] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Actual
+
+	measure 'Budget Merchant fees' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[merchant_fees] ), 'PnL'[scenario_key] = 2, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Budget
+
+	measure 'Actual Referral commission' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[commission] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Actual
+
+	measure 'Budget Referral commission' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[commission] ), 'PnL'[scenario_key] = 2, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Budget
+
+	measure 'Actual Bank fees' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[bank_fees] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Actual
+
+	measure 'Budget Bank fees' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[bank_fees] ), 'PnL'[scenario_key] = 2, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Budget
+
+	measure 'Actual Other' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[other_costs] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Actual
+
+	measure 'Budget Other' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[other_costs] ), 'PnL'[scenario_key] = 2, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Budget
+
+	measure 'Actual Total costs' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[total_costs] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Actual
+
+	measure 'Budget Total costs' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[total_costs] ), 'PnL'[scenario_key] = 2, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Budget
+
+	measure 'Actual Operating profit' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[operating_profit] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Actual
+
+	measure 'Budget Operating profit' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[operating_profit] ), 'PnL'[scenario_key] = 2, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: P&L\Budget
+
+	measure 'P&L Actual' =
+			SWITCH( SELECTEDVALUE( 'P&L Line'[Line] ),
+			    "Fees", [Actual Fees],
+			    "Disbursements billed", [Actual Disbursements billed],
+			    "Total revenue", [Actual Total revenue],
+			    "Fee-earner payroll", [Actual Fee-earner payroll],
+			    "Disbursement costs", [Actual Disbursement costs],
+			    "Support payroll", [Actual Support payroll],
+			    "Rent", [Actual Rent],
+			    "Software", [Actual Software],
+			    "Insurance", [Actual Insurance],
+			    "Marketing", [Actual Marketing],
+			    "Professional fees", [Actual Professional fees],
+			    "Card expenses", [Actual Card expenses],
+			    "Merchant fees", [Actual Merchant fees],
+			    "Referral commission", [Actual Referral commission],
+			    "Bank fees", [Actual Bank fees],
+			    "Other", [Actual Other],
+			    "Total costs", [Actual Total costs],
+			    "Operating profit", [Actual Operating profit]
+			)
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: P&L
+
+	measure 'P&L Budget' =
+			SWITCH( SELECTEDVALUE( 'P&L Line'[Line] ),
+			    "Fees", [Budget Fees],
+			    "Disbursements billed", [Budget Disbursements billed],
+			    "Total revenue", [Budget Total revenue],
+			    "Fee-earner payroll", [Budget Fee-earner payroll],
+			    "Disbursement costs", [Budget Disbursement costs],
+			    "Support payroll", [Budget Support payroll],
+			    "Rent", [Budget Rent],
+			    "Software", [Budget Software],
+			    "Insurance", [Budget Insurance],
+			    "Marketing", [Budget Marketing],
+			    "Professional fees", [Budget Professional fees],
+			    "Card expenses", [Budget Card expenses],
+			    "Merchant fees", [Budget Merchant fees],
+			    "Referral commission", [Budget Referral commission],
+			    "Bank fees", [Budget Bank fees],
+			    "Other", [Budget Other],
+			    "Total costs", [Budget Total costs],
+			    "Operating profit", [Budget Operating profit]
+			)
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: P&L
+
+	/// Favourable is positive: more revenue or profit, or less cost, than budget.
+	measure 'P&L Variance' =
+			VAR a = [P&L Actual]
+			VAR b = [P&L Budget]
+			VAR cost = SELECTEDVALUE( 'P&L Line'[IsCost] )
+			RETURN IF( cost = 1, b - a, a - b )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: P&L
+
+	measure 'P&L Variance %' = DIVIDE( [P&L Variance], ABS( [P&L Budget] ) )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: P&L
+
+	measure 'Total Revenue' = [Actual Total revenue]
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: KPIs
+
+	measure 'Revenue (prior)' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Prior" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[revenue] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: KPIs
+
+	measure 'Operating Profit' = [Actual Operating profit]
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: KPIs
+
+	measure 'Profit vs Budget' = [Operating Profit] - [Budget Operating profit]
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: KPIs
+
+	measure 'Profit vs Budget Caption' =
+			VAR d = [Profit vs Budget]
+			RETURN IF( ISBLANK( d ), "no budget", FORMAT( d, "▲ +$#,0;▼ -$#,0;$0" ) & " vs budget" )
+		displayFolder: KPIs
+
+	measure 'Operating Margin' = DIVIDE( [Operating Profit], [Total Revenue] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: KPIs
+
+	measure 'Total Fees' = [Actual Fees]
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: KPIs
+
+	measure 'Billable Hours' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[billable_hours] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: #,0
+		displayFolder: KPIs
+
+	measure 'Billable Hours (prior)' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Prior" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[billable_hours] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: #,0
+		isHidden
+		displayFolder: KPIs
+
+	measure 'Capacity Hours' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[capacity_hours] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: #,0
+		displayFolder: KPIs
+
+	measure 'Capacity Hours (prior)' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Prior" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[capacity_hours] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: #,0
+		isHidden
+		displayFolder: KPIs
+
+	measure 'Standard Value' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'PnL'[standard_value] ), 'PnL'[scenario_key] = 1, TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: KPIs
+
+	measure Utilisation = DIVIDE( [Billable Hours], [Capacity Hours] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: KPIs
+
+	measure 'Utilisation (prior)' = DIVIDE( [Billable Hours (prior)], [Capacity Hours (prior)] )
+		formatString: 0.0%;-0.0%;0.0%
+		isHidden
+		displayFolder: KPIs
+
+	measure 'Realisation Rate' = DIVIDE( [Total Fees], [Standard Value] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: KPIs
+
+	measure 'Effective Rate' = DIVIDE( [Total Fees], [Billable Hours] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: KPIs
+
+	measure 'Disbursement Recovery' = DIVIDE( [Actual Disbursements billed], [Actual Disbursement costs] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: KPIs
+
+	measure 'Collections ex GST' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'Monthly Extra'[CollectionsExGST] ), TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: KPIs
+
+	measure 'Collections ex GST (prior)' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Prior" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'Monthly Extra'[CollectionsExGST] ), TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: KPIs
+
+	measure 'Matters Opened' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'Monthly Extra'[MattersOpened] ), TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: #,0
+		displayFolder: KPIs
+
+	measure 'Active Matters' =
+			VAR p = [Period Sel]
+			RETURN CALCULATE( MAX( 'Period Balance'[ActiveMatters] ), REMOVEFILTERS( 'Period Balance' ), 'Period Balance'[Period] = p, 'Period Balance'[Role] = "Current" )
+		formatString: #,0
+		displayFolder: Balances
+
+	measure 'Active Matters (prior)' =
+			VAR p = [Period Sel]
+			RETURN CALCULATE( MAX( 'Period Balance'[ActiveMatters] ), REMOVEFILTERS( 'Period Balance' ), 'Period Balance'[Period] = p, 'Period Balance'[Role] = "Prior" )
+		formatString: #,0
+		isHidden
+		displayFolder: Balances
+
+	measure 'Office Cash' =
+			VAR p = [Period Sel]
+			RETURN CALCULATE( MAX( 'Period Balance'[Cash] ), REMOVEFILTERS( 'Period Balance' ), 'Period Balance'[Period] = p, 'Period Balance'[Role] = "Current" )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Balances
+
+	measure 'WIP Balance' =
+			VAR p = [Period Sel]
+			RETURN CALCULATE( MAX( 'Period Balance'[WIP] ), REMOVEFILTERS( 'Period Balance' ), 'Period Balance'[Period] = p, 'Period Balance'[Role] = "Current" )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Balances
+
+	measure 'Receivables Balance' =
+			VAR p = [Period Sel]
+			RETURN CALCULATE( MAX( 'Period Balance'[Receivables] ), REMOVEFILTERS( 'Period Balance' ), 'Period Balance'[Period] = p, 'Period Balance'[Role] = "Current" )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Balances
+
+	measure 'Trust Funds' =
+			VAR p = [Period Sel]
+			RETURN CALCULATE( MAX( 'Period Balance'[Trust] ), REMOVEFILTERS( 'Period Balance' ), 'Period Balance'[Period] = p, 'Period Balance'[Role] = "Current" )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Balances
+
+	/// Days sales outstanding: receivables over the last 90 days of billing.
+	measure 'DSO Days' =
+			VAR p = [Period Sel]
+			RETURN CALCULATE( MAX( 'Period Balance'[DSO] ), REMOVEFILTERS( 'Period Balance' ), 'Period Balance'[Period] = p, 'Period Balance'[Role] = "Current" )
+		formatString: #,0.0
+		displayFolder: Balances
+
+	/// WIP plus receivables, in days of billing.
+	measure 'Lockup Days' =
+			VAR p = [Period Sel]
+			RETURN CALCULATE( MAX( 'Period Balance'[Lockup] ), REMOVEFILTERS( 'Period Balance' ), 'Period Balance'[Period] = p, 'Period Balance'[Role] = "Current" )
+		formatString: #,0.0
+		displayFolder: Balances
+
+	measure 'Funds Employed' = [WIP Balance] + [Receivables Balance] + [Trust Funds]
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Balances
+
+	measure 'Deadlines Next 30 Days' = COUNTROWS( FILTER( 'Deadlines', 'Deadlines'[days_from_as_of] >= 0 && 'Deadlines'[days_from_as_of] <= 30 ) ) + 0
+		formatString: #,0
+		displayFolder: KPIs
+
+	measure 'Deadlines Following 30 Days' = COUNTROWS( FILTER( 'Deadlines', 'Deadlines'[days_from_as_of] > 30 && 'Deadlines'[days_from_as_of] <= 60 ) ) + 0
+		formatString: #,0
+		displayFolder: KPIs
+
+	measure 'Deadlines Caption' = FORMAT( [Deadlines Following 30 Days], "0" ) & " more in the following 30 days"
+		displayFolder: KPIs
+
+	measure 'Hours Δ' =
+			VAR c = [Billable Hours]
+			VAR pr = [Billable Hours (prior)]
+			VAR d = DIVIDE( [Billable Hours] - [Billable Hours (prior)], ABS( [Billable Hours (prior)] ) )
+			RETURN IF( ISBLANK( pr ) || pr = 0, "no comparison", FORMAT( d, "▲ +0.0%;▼ -0.0%;0.0%" ) & " vs prior period" )
+		displayFolder: KPIs\Change
+
+	measure 'Collections Δ' =
+			VAR c = [Collections ex GST]
+			VAR pr = [Collections ex GST (prior)]
+			VAR d = DIVIDE( [Collections ex GST] - [Collections ex GST (prior)], ABS( [Collections ex GST (prior)] ) )
+			RETURN IF( ISBLANK( pr ) || pr = 0, "no comparison", FORMAT( d, "▲ +0.0%;▼ -0.0%;0.0%" ) & " vs prior period" )
+		displayFolder: KPIs\Change
+
+	measure 'Utilisation Δ' =
+			VAR c = [Utilisation]
+			VAR pr = [Utilisation (prior)]
+			VAR d = [Utilisation] - [Utilisation (prior)]
+			RETURN IF( ISBLANK( pr ) || pr = 0, "no comparison", FORMAT( d * 100, "▲ +0.0 ""pp"";▼ -0.0 ""pp"";0.0 ""pp""" ) & " vs prior period" )
+		displayFolder: KPIs\Change
+
+	measure 'Active Matters Δ' =
+			VAR c = [Active Matters]
+			VAR pr = [Active Matters (prior)]
+			VAR d = DIVIDE( [Active Matters] - [Active Matters (prior)], ABS( [Active Matters (prior)] ) )
+			RETURN IF( ISBLANK( pr ) || pr = 0, "no comparison", FORMAT( d, "▲ +0.0%;▼ -0.0%;0.0%" ) & " vs prior period" )
+		displayFolder: KPIs\Change
+
+	measure 'Revenue Δ' =
+			VAR c = [Total Revenue]
+			VAR pr = [Revenue (prior)]
+			VAR d = DIVIDE( [Total Revenue] - [Revenue (prior)], ABS( [Revenue (prior)] ) )
+			RETURN IF( ISBLANK( pr ) || pr = 0, "no comparison", FORMAT( d, "▲ +0.0%;▼ -0.0%;0.0%" ) & " vs prior period" )
+		displayFolder: KPIs\Change
+
+	measure 'Attorney Hours' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'Attorney Month'[billable_hours] ), TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: #,0
+		displayFolder: People
+
+	measure 'Attorney Capacity' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'Attorney Month'[capacity_hours] ), TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: #,0
+		displayFolder: People
+
+	measure 'Attorney Fees' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'Attorney Month'[fees_realised] ), TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: People
+
+	measure 'Attorney Fees (prior)' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Prior" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'Attorney Month'[fees_realised] ), TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: People
+
+	measure 'Attorney Standard Value' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'Attorney Month'[standard_value] ), TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: People
+
+	measure 'Attorney Cost' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'Attorney Month'[salary_cost] ), TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: People
+
+	measure 'Attorney Utilisation' = DIVIDE( [Attorney Hours], [Attorney Capacity] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: People
+
+	measure 'Attorney Realisation' = DIVIDE( [Attorney Fees], [Attorney Standard Value] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: People
+
+	measure 'Attorney Effective Rate' = DIVIDE( [Attorney Fees], [Attorney Hours] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: People
+
+	measure 'Attorney Contribution' = [Attorney Fees] - [Attorney Cost]
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: People
+
+	measure 'Attorney Break-even Hours' = DIVIDE( [Attorney Cost], [Attorney Effective Rate] )
+		formatString: #,0
+		displayFolder: People
+
+	measure 'Top Biller' =
+			VAR t = TOPN( 1, ALL( 'Attorney'[attorney_short] ), [Attorney Fees], DESC )
+			RETURN "Top biller · " & MAXX( t, 'Attorney'[attorney_short] )
+		displayFolder: People
+
+	measure 'Top Biller Fees' = MAXX( ALL( 'Attorney'[attorney_short] ), [Attorney Fees] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: People
+
+	measure 'Top Biller Δ' =
+			VAR t = TOPN( 1, ALL( 'Attorney'[attorney_short] ), [Attorney Fees], DESC )
+			VAR n = MAXX( t, 'Attorney'[attorney_short] )
+			VAR c = CALCULATE( [Attorney Fees], 'Attorney'[attorney_short] = n )
+			VAR pr = CALCULATE( [Attorney Fees (prior)], 'Attorney'[attorney_short] = n )
+			VAR d = DIVIDE( c - pr, ABS( pr ) )
+			RETURN IF( ISBLANK( pr ) || pr = 0, "no comparison", FORMAT( d, "▲ +0.0%;▼ -0.0%;0.0%" ) & " vs prior period" )
+		displayFolder: People
+
+	measure 'Area Hours' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'Time by Area'[billable_hours] ), TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: #,0
+		displayFolder: People
+
+	measure 'Area Fees' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'Time by Area'[fees_realised] ), TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: People
+
+	measure 'Trend Billable Hours' =
+			VAR e = [Period End Month]
+			VAR m = MAX( 'Date'[month_start_date] )
+			VAR v = CALCULATE( SUM( 'PnL'[billable_hours] ), 'PnL'[scenario_key] = 1 )
+			VAR fr = CALCULATE( MAX( 'Monthly Extra'[Fraction] ) )
+			RETURN IF( m > EDATE( e, -12 ) && m <= e && NOT ISBLANK( v ), DIVIDE( v, IF( ISBLANK( fr ), 1, fr ) ) )
+		formatString: #,0
+		displayFolder: Trends
+
+	measure 'Trend Revenue' =
+			VAR e = [Period End Month]
+			VAR m = MAX( 'Date'[month_start_date] )
+			VAR v = CALCULATE( SUM( 'PnL'[revenue] ), 'PnL'[scenario_key] = 1 )
+			VAR fr = CALCULATE( MAX( 'Monthly Extra'[Fraction] ) )
+			RETURN IF( m > EDATE( e, -12 ) && m <= e && NOT ISBLANK( v ), DIVIDE( v, IF( ISBLANK( fr ), 1, fr ) ) )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Trends
+
+	measure 'Trend Budget Revenue' =
+			VAR e = [Period End Month]
+			VAR m = MAX( 'Date'[month_start_date] )
+			VAR v = CALCULATE( SUM( 'PnL'[revenue] ), 'PnL'[scenario_key] = 2 )
+			VAR fr = CALCULATE( MAX( 'Monthly Extra'[Fraction] ) )
+			RETURN IF( m > EDATE( e, -12 ) && m <= e && NOT ISBLANK( v ), DIVIDE( v, IF( ISBLANK( fr ), 1, fr ) ) )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Trends
+
+	measure 'Trend Operating Profit' =
+			VAR e = [Period End Month]
+			VAR m = MAX( 'Date'[month_start_date] )
+			VAR v = CALCULATE( SUM( 'PnL'[operating_profit] ), 'PnL'[scenario_key] = 1 )
+			VAR fr = CALCULATE( MAX( 'Monthly Extra'[Fraction] ) )
+			RETURN IF( m > EDATE( e, -12 ) && m <= e && NOT ISBLANK( v ), DIVIDE( v, IF( ISBLANK( fr ), 1, fr ) ) )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Trends
+
+	measure 'Trend Budget Operating Profit' =
+			VAR e = [Period End Month]
+			VAR m = MAX( 'Date'[month_start_date] )
+			VAR v = CALCULATE( SUM( 'PnL'[operating_profit] ), 'PnL'[scenario_key] = 2 )
+			VAR fr = CALCULATE( MAX( 'Monthly Extra'[Fraction] ) )
+			RETURN IF( m > EDATE( e, -12 ) && m <= e && NOT ISBLANK( v ), DIVIDE( v, IF( ISBLANK( fr ), 1, fr ) ) )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Trends
+
+	measure 'Trend Utilisation' =
+			VAR e = [Period End Month]
+			VAR m = MAX( 'Date'[month_start_date] )
+			VAR v = DIVIDE( CALCULATE( SUM( 'PnL'[billable_hours] ), 'PnL'[scenario_key] = 1 ), CALCULATE( SUM( 'PnL'[capacity_hours] ), 'PnL'[scenario_key] = 1 ) )
+			VAR fr = 1
+			RETURN IF( m > EDATE( e, -12 ) && m <= e && NOT ISBLANK( v ), DIVIDE( v, IF( ISBLANK( fr ), 1, fr ) ) )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Trends
+
+	measure 'Trend Area Hours' =
+			VAR e = [Period End Month]
+			VAR m = MAX( 'Date'[month_start_date] )
+			VAR v = SUM( 'Time by Area'[billable_hours] )
+			VAR fr = CALCULATE( MAX( 'Monthly Extra'[Fraction] ) )
+			RETURN IF( m > EDATE( e, -12 ) && m <= e && NOT ISBLANK( v ), DIVIDE( v, IF( ISBLANK( fr ), 1, fr ) ) )
+		formatString: #,0
+		displayFolder: Trends
+
+	measure 'Trend Attorney Hours' =
+			VAR e = [Period End Month]
+			VAR m = MAX( 'Date'[month_start_date] )
+			VAR v = SUM( 'Attorney Month'[billable_hours] )
+			VAR fr = CALCULATE( MAX( 'Monthly Extra'[Fraction] ) )
+			RETURN IF( m > EDATE( e, -12 ) && m <= e && NOT ISBLANK( v ), DIVIDE( v, IF( ISBLANK( fr ), 1, fr ) ) )
+		formatString: #,0
+		displayFolder: Trends
+
+	measure 'Trend Attorney Utilisation' =
+			VAR e = [Period End Month]
+			VAR m = MAX( 'Date'[month_start_date] )
+			VAR v = DIVIDE( SUM( 'Attorney Month'[billable_hours] ), SUM( 'Attorney Month'[capacity_hours] ) )
+			VAR fr = 1
+			RETURN IF( m > EDATE( e, -12 ) && m <= e && NOT ISBLANK( v ), DIVIDE( v, IF( ISBLANK( fr ), 1, fr ) ) )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Trends
+
+	measure 'Trend Collections' =
+			VAR e = [Period End Month]
+			VAR m = MAX( 'Date'[month_start_date] )
+			VAR v = SUM( 'Monthly Extra'[CollectionsExGST] )
+			VAR fr = CALCULATE( MAX( 'Monthly Extra'[Fraction] ) )
+			RETURN IF( m > EDATE( e, -12 ) && m <= e && NOT ISBLANK( v ), DIVIDE( v, IF( ISBLANK( fr ), 1, fr ) ) )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Trends
+
+	measure 'Trend Matters Opened' =
+			VAR e = [Period End Month]
+			VAR m = MAX( 'Date'[month_start_date] )
+			VAR v = SUM( 'Monthly Extra'[MattersOpened] )
+			VAR fr = CALCULATE( MAX( 'Monthly Extra'[Fraction] ) )
+			RETURN IF( m > EDATE( e, -12 ) && m <= e && NOT ISBLANK( v ), DIVIDE( v, IF( ISBLANK( fr ), 1, fr ) ) )
+		formatString: #,0
+		displayFolder: Trends
+
+	measure 'Trend Matters Closed' =
+			VAR e = [Period End Month]
+			VAR m = MAX( 'Date'[month_start_date] )
+			VAR v = SUM( 'Monthly Extra'[MattersClosed] )
+			VAR fr = CALCULATE( MAX( 'Monthly Extra'[Fraction] ) )
+			RETURN IF( m > EDATE( e, -12 ) && m <= e && NOT ISBLANK( v ), DIVIDE( v, IF( ISBLANK( fr ), 1, fr ) ) )
+		formatString: #,0
+		displayFolder: Trends
+
+	measure 'Trend Active Matters' =
+			VAR e = [Period End Month]
+			VAR m = MAX( 'Date'[month_start_date] )
+			VAR v = SUM( 'Monthly Extra'[ActiveMatters] )
+			VAR fr = 1
+			RETURN IF( m > EDATE( e, -12 ) && m <= e && NOT ISBLANK( v ), DIVIDE( v, IF( ISBLANK( fr ), 1, fr ) ) )
+		formatString: #,0
+		displayFolder: Trends
+
+	measure 'Trend Inquiries' =
+			VAR e = [Period End Month]
+			VAR m = MAX( 'Date'[month_start_date] )
+			VAR v = SUM( 'Funnel'[inquiries] )
+			VAR fr = CALCULATE( MAX( 'Monthly Extra'[Fraction] ) )
+			RETURN IF( m > EDATE( e, -12 ) && m <= e && NOT ISBLANK( v ), DIVIDE( v, IF( ISBLANK( fr ), 1, fr ) ) )
+		formatString: #,0.0
+		displayFolder: Trends
+
+	measure 'Trend Cash Balance' =
+			VAR e = [Period End Month]
+			VAR m = MAX( 'Date'[month_start_date] )
+			VAR v = SUM( 'Monthly Extra'[CashBalance] )
+			VAR fr = 1
+			RETURN IF( m > EDATE( e, -12 ) && m <= e && NOT ISBLANK( v ), DIVIDE( v, IF( ISBLANK( fr ), 1, fr ) ) )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Trends
+
+	measure 'Trend WIP' =
+			VAR e = [Period End Month]
+			VAR m = MAX( 'Date'[month_start_date] )
+			VAR v = SUM( 'Snapshot'[wip_balance] )
+			VAR fr = 1
+			RETURN IF( m > EDATE( e, -12 ) && m <= e && NOT ISBLANK( v ), DIVIDE( v, IF( ISBLANK( fr ), 1, fr ) ) )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Trends
+
+	measure 'Trend Receivables' =
+			VAR e = [Period End Month]
+			VAR m = MAX( 'Date'[month_start_date] )
+			VAR v = SUM( 'Snapshot'[receivables_incl_gst] )
+			VAR fr = 1
+			RETURN IF( m > EDATE( e, -12 ) && m <= e && NOT ISBLANK( v ), DIVIDE( v, IF( ISBLANK( fr ), 1, fr ) ) )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Trends
+
+	measure 'Trend Trust' =
+			VAR e = [Period End Month]
+			VAR m = MAX( 'Date'[month_start_date] )
+			VAR v = SUM( 'Trust Balance'[closing_balance] )
+			VAR fr = 1
+			RETURN IF( m > EDATE( e, -12 ) && m <= e && NOT ISBLANK( v ), DIVIDE( v, IF( ISBLANK( fr ), 1, fr ) ) )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Trends
+
+	measure 'Trend Realisation' =
+			VAR e = [Period End Month]
+			VAR m = MAX( 'Date'[month_start_date] )
+			VAR v = DIVIDE( CALCULATE( SUM( 'PnL'[fees] ), 'PnL'[scenario_key] = 1 ), CALCULATE( SUM( 'PnL'[standard_value] ), 'PnL'[scenario_key] = 1 ) )
+			VAR fr = 1
+			RETURN IF( m > EDATE( e, -12 ) && m <= e && NOT ISBLANK( v ), DIVIDE( v, IF( ISBLANK( fr ), 1, fr ) ) )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Trends
+
+	measure 'Funnel Inquiries' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'Funnel'[inquiries] ), TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: #,0
+		isHidden
+		displayFolder: Funnel
+
+	measure 'Funnel Consultations booked' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'Funnel'[consultations_booked] ), TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: #,0
+		isHidden
+		displayFolder: Funnel
+
+	measure 'Funnel Consultations held' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'Funnel'[consultations_held] ), TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: #,0
+		isHidden
+		displayFolder: Funnel
+
+	measure 'Funnel Engagement letters sent' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'Funnel'[letters_sent] ), TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: #,0
+		isHidden
+		displayFolder: Funnel
+
+	measure 'Funnel New matters opened' =
+			VAR p = [Period Sel]
+			RETURN
+			    SUMX(
+			        FILTER( ALL( 'Period Month' ), 'Period Month'[Period] = p && 'Period Month'[Role] = "Current" ),
+			        'Period Month'[Weight] * CALCULATE( SUM( 'Funnel'[matters_opened] ), TREATAS( { 'Period Month'[MonthKey] }, 'Date'[date_key] ) )
+			    )
+		formatString: #,0
+		isHidden
+		displayFolder: Funnel
+
+	measure 'Funnel Value' =
+			SWITCH( SELECTEDVALUE( 'Funnel Stage'[Stage] ),
+			    "Inquiries", [Funnel Inquiries],
+			    "Consultations booked", [Funnel Consultations booked],
+			    "Consultations held", [Funnel Consultations held],
+			    "Engagement letters sent", [Funnel Engagement letters sent],
+			    "New matters opened", [Funnel New matters opened]
+			)
+		formatString: #,0
+		displayFolder: Funnel
+
+	measure 'Funnel Conversion' = DIVIDE( [Funnel New matters opened], [Funnel Inquiries] )
+		formatString: 0%;-0%;0%
+		displayFolder: Funnel
+
+	measure 'Funnel Step Conversion' =
+			VAR o = SELECTEDVALUE( 'Funnel Stage'[Order] )
+			VAR prev = CALCULATE( [Funnel Value], REMOVEFILTERS( 'Funnel Stage' ), 'Funnel Stage'[Order] = o - 1 )
+			RETURN IF( o = 1, 1, DIVIDE( [Funnel Value], prev ) )
+		formatString: 0%;-0%;0%
+		displayFolder: Funnel
+
+	measure 'AR Amount' = SUM( 'AR Ageing'[Amount] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'Client Revenue' = SUM( 'Client Period'[revenue] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Clients
+
+	measure 'Client Receivables' = SUM( 'Client Period'[ar] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Clients
+
+	measure 'Client Overdue' = SUM( 'Client Period'[overdue] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Clients
+
+	measure 'Top 5 Client Share' =
+			VAR t = TOPN( 5, 'Client Period', 'Client Period'[revenue], DESC )
+			RETURN DIVIDE( SUMX( t, 'Client Period'[revenue] ), SUM( 'Client Period'[revenue] ) )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Clients
+
+	measure 'Supplier Spend' = SUM( 'Supplier Order'[amount] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'Card Spend' = SUM( 'Cards'[amount] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'Trust Txn Amount' = SUM( 'Trust Txn'[amount] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'Cash Inflow' = SUM( 'Cash Forecast'[in_open] ) + SUM( 'Cash Forecast'[in_new] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'Cash Outflow' = SUM( 'Cash Forecast'[out_payroll] ) + SUM( 'Cash Forecast'[out_rent] ) + SUM( 'Cash Forecast'[out_opex] ) + SUM( 'Cash Forecast'[out_disb] ) + SUM( 'Cash Forecast'[out_bas] ) + SUM( 'Cash Forecast'[out_drawings] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'Cash Closing' = SUM( 'Cash Forecast'[closing] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'Cash Minimum' = MAX( 'Cash Forecast'[min_cash] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'Cash Low Point' = MINX( ALL( 'Cash Forecast' ), 'Cash Forecast'[closing] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'Cash Caption' = "minimum balance $60,000 · today " & FORMAT( [Office Cash], "$#,0" )
+		displayFolder: Finance
+
+	measure 'FY Forecast Profit' = MAX( 'FY Summary'[fc_op] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'FY Budget Profit' = MAX( 'FY Summary'[budget_op] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'FY Forecast Revenue' = MAX( 'FY Summary'[fc_rev] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'FY Budget Revenue' = MAX( 'FY Summary'[budget_rev] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'FY Profit Gap' = [FY Forecast Profit] - [FY Budget Profit]
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'FY Path Revenue' = SUM( 'FY Outlook'[revenue] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'FY Path Budget Revenue' = SUM( 'FY Outlook'[budget_rev] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'FY Path Profit' = SUM( 'FY Outlook'[op_profit] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'FY Path Budget Profit' = SUM( 'FY Outlook'[budget_op] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'FY Path Actual Profit' = CALCULATE( SUM( 'FY Outlook'[op_profit] ), 'FY Outlook'[kind] = "Actual" )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'FY Path Forecast Profit' = CALCULATE( SUM( 'FY Outlook'[op_profit] ), 'FY Outlook'[kind] = "Forecast" )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Finance
+
+	measure 'Headcount Total' = SUM( 'Staffing'[headcount] )
+		formatString: #,0
+		displayFolder: People
+
+	measure 'Support Needed' = SUM( 'Dept Workload'[needed] )
+		formatString: #,0.0
+		displayFolder: People
+
+	measure 'Support Headcount' = SUM( 'Dept Workload'[headcount] )
+		formatString: #,0
+		displayFolder: People
+
+	measure 'Support Gap Cost' = SUM( 'Dept Workload'[cost_of_gap] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: People
+
+	measure 'Over-staffed Cost' = CALCULATE( SUM( 'Dept Workload'[cost_of_gap] ), 'Dept Workload'[status] = "Over-staffed" )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: People
+
+	measure 'Hire Priority' = SUM( 'Where to Hire'[priority] )
+		formatString: #,0.0
+		displayFolder: People
+
+	measure 'Area Utilisation' = SUM( 'Where to Hire'[util] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: People
+
+	measure 'Area New Matter Growth' = SUM( 'Where to Hire'[matters_growth] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: People
+
+	measure 'Area Contribution' = SUM( 'Where to Hire'[contribution] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: People
+
+	measure 'Hire First' = "Hire next in " & MAXX( FILTER( ALL( 'Where to Hire' ), 'Where to Hire'[rank] = 1 ), 'Where to Hire'[area] )
+		displayFolder: People
+
+	/// ABS Wage Price Index, private sector, year to the September quarter 2026.
+	measure 'Market Wage Growth' = 0.034
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: People
+
+	measure 'Marketing Spend' = SUM( 'Marketing'[spend] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Marketing
+
+	measure 'Marketing Matters' = SUM( 'Marketing'[matters] )
+		formatString: #,0.0
+		displayFolder: Marketing
+
+	measure 'Marketing Fees' = SUM( 'Marketing'[fees] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Marketing
+
+	measure 'Cost per Matter' = DIVIDE( [Marketing Spend], [Marketing Matters] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Marketing
+
+	measure 'Fees per Dollar' = DIVIDE( [Marketing Fees], [Marketing Spend] )
+		formatString: 0.0x
+		displayFolder: Marketing
+
+	measure 'Cheapest Channel' =
+			VAR t = TOPN( 1, VALUES( 'Marketing'[channel] ), [Cost per Matter], ASC )
+			RETURN MAXX( t, 'Marketing'[channel] )
+		displayFolder: Marketing
+
+	measure 'Matter Count' = COUNTROWS( 'Matter' )
+		formatString: #,0
+		displayFolder: Matters
+
+	measure 'Open Matters' = CALCULATE( COUNTROWS( 'Matter' ), 'Matter'[status] <> "Closed" )
+		formatString: #,0
+		displayFolder: Matters
+
+	/// Matters opened in the 12 months to the as-of date, whatever the Period slicer says (the catchment map and branch-site analysis).
+	measure 'Matters Last 12 Months' = CALCULATE( COUNTROWS( 'Matter' ), REMOVEFILTERS( 'Date' ), 'Matter'[opened_date_key] > 20240917, 'Matter'[opened_date_key] <= 20250917 )
+		formatString: #,0
+		displayFolder: Matters
+
+	/// Share of last year's Australian matters from clients more than 10 km from every office.
+	measure 'Matters 10km+ Share' = DIVIDE( CALCULATE( [Matters Last 12 Months], 'Suburb'[km_to_nearest_branch] > 10 ), [Matters Last 12 Months] )
+		formatString: 0%
+		displayFolder: Matters
+
+	measure 'Matters 10km+ Caption' = VAR far = CALCULATE( [Matters Last 12 Months], 'Suburb'[km_to_nearest_branch] > 10 ) RETURN "of matters live 10+ km away (" & FORMAT( far, "0" ) & " of " & FORMAT( [Matters Last 12 Months], "0" ) & ")"
+		displayFolder: Matters
+
+	/// The suburb where a new office would bring the most distant clients' matters within 10 km (core/catchment.py).
+	measure 'Best Branch Site' = "★ " & MAXX( TOPN( 1, 'Branch Sites', 'Branch Sites'[underserved_matters_ltm], DESC, 'Branch Sites'[est_value_ltm], DESC ), 'Branch Sites'[candidate_site] )
+		displayFolder: Matters
+
+	measure 'Best Branch Site Caption' = VAR t = TOPN( 1, 'Branch Sites', 'Branch Sites'[underserved_matters_ltm], DESC, 'Branch Sites'[est_value_ltm], DESC ) RETURN "new branch: +" & MAXX( t, 'Branch Sites'[underserved_matters_ltm] ) & " matters a year in reach"
+		displayFolder: Matters
+
+	measure 'Matter WIP' = SUM( 'Matter Position'[wip_balance] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Matters
+
+	measure 'Matter Billed' = SUM( 'Matter Position'[billed_to_date] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Matters
+
+	measure 'Matter Estimated Value' = SUM( 'Matter Position'[estimated_value] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Matters
+
+	measure 'Deadline Count' = COUNTROWS( 'Deadlines' ) + 0
+		formatString: #,0
+		displayFolder: Calendar
+
+	measure 'Platform NPV' = SUM( 'Platforms'[NPV] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Platform
+
+	measure 'Platform Run Rate' = SUM( 'Platforms'[RunRate] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Platform
+
+	measure 'Platform Score' = AVERAGE( 'Platforms'[Score] )
+		formatString: #,0.0
+		displayFolder: Platform
+
+	measure 'Platform Cumulative' = SUM( 'Platform Cashflow'[Cumulative] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Platform
+
+	measure 'Platform Weighted Score' = DIVIDE( SUMX( 'Platform Scores', 'Platform Scores'[Score] * 'Platform Scores'[Weight] ), SUM( 'Platform Scores'[Weight] ) )
+		formatString: #,0.0
+		displayFolder: Platform
+
+	measure 'Platform Criterion Score' = SUM( 'Platform Scores'[Score] )
+		formatString: 0
+		displayFolder: Platform
+
+	measure 'Platform Verdict' = SELECTEDVALUE( 'Platforms'[Verdict] )
+		displayFolder: Platform
+
+	measure 'Platform Grid NPV' = SUM( 'Platform NPV Grid'[NPV] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Platform
+
+	measure 'Best Platform' =
+			VAR t = TOPN( 1, ALL( 'Platforms'[Platform] ), CALCULATE( MAX( 'Platforms'[Decision] ) ), DESC )
+			RETURN MAXX( t, 'Platforms'[Platform] )
+		displayFolder: Platform
+
+	/// Use with a visual filter on Answers[Order].
+	measure 'Answer Text' = SELECTEDVALUE( 'Answers'[Answer] )
+		displayFolder: Overview
+
+	measure 'Answer Evidence' = SELECTEDVALUE( 'Answers'[Evidence] )
+		displayFolder: Overview
+
+	measure 'Answer Chart $' = SUM( 'Answer Chart'[Value] )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Overview
+
+	measure 'Answer Chart Roles' = SUM( 'Answer Chart'[Value] )
+		formatString: +0.0;-0.0;0.0
+		displayFolder: Overview
+
+	/// Growth question: new matters for every $1,000 of marketing spend in a channel (1,000 / cost per new matter).
+	measure 'Answer Chart Per 1K' = DIVIDE( 1000, SUM( 'Answer Chart'[Value] ) )
+		formatString: 0.0
+		displayFolder: Overview
+
+	/// Branch question: the 13-week cash low point after opening.
+	measure 'Answer Gauge Value' = CALCULATE( SUM( 'Answer Chart'[Value] ), 'Answer Chart'[Highlight] = 1 )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Overview
+
+	/// Branch question: the minimum office-account balance.
+	measure 'Answer Gauge Target' = CALCULATE( SUM( 'Answer Chart'[Value] ), 'Answer Chart'[Item] = "Minimum cash balance" )
+		formatString: \$#,0;-\$#,0;\$0
+		displayFolder: Overview
+
+	measure 'Answer Gauge Min' = 0
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: Overview
+
+	measure 'Answer Gauge Max' = MAX( CALCULATE( SUM( 'Answer Chart'[Value] ), 'Answer Chart'[Highlight] = 1 ), CALCULATE( SUM( 'Answer Chart'[Value] ), 'Answer Chart'[Item] = "Minimum cash balance" ) ) * 2
+		formatString: \$#,0;-\$#,0;\$0
+		isHidden
+		displayFolder: Overview
+
+	measure 'Answer Chart Colour' = IF( MAX( 'Answer Chart'[Highlight] ) = 1, "#0a8496", "#c7d2dc" )
+		isHidden
+		displayFolder: Overview
+
+	measure Story = "HOW THIS STARTED  The Principal asked which software saves the firm the most (" & FORMAT( CALCULATE( MAX( 'Platforms'[RunRate] ), 'Platforms'[IsCurrent] = 1 ), "$#,0" ) & " a year on LEAP + InfoTrack today; best: " & [Best Platform] & ", NPV " & FORMAT( CALCULATE( MAX( 'Platforms'[NPV] ), 'Platforms'[Platform] = [Best Platform] ), "+$#,0" ) & "). The same model now answers hiring, staffing, pay, marketing, new services and branches."
+		displayFolder: Overview
+
+	column Note
+		dataType: string
+		isHidden
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Note]
+
+	partition 'Key Measures' = calculated
+		mode: import
+		source =
+				ROW( "Note", "Measures live here" )

@@ -1,0 +1,811 @@
+date,client,amount,fee,method
+2025-09-17,Blackwood Realty,7303.6,127.81,Visa
+2025-09-17,Blackwood Realty,14128.83,247.25,Mastercard
+2025-09-17,Blackwood Realty,4066.25,71.16,Mastercard
+2025-09-12,Halcyon Systems,4303.97,75.32,Amex
+2025-09-12,Halcyon Systems,5480.5,95.91,Visa
+2025-09-12,Halcyon Systems,4948.8,86.6,Visa
+2025-09-12,Halcyon Systems,2877.5,50.36,Visa
+2025-09-11,Meridian Pacific Trust,12407.37,217.13,Visa
+2025-09-11,Meridian Pacific Trust,3840.29,67.21,Amex
+2025-09-11,Meridian Pacific Trust,3937.03,68.9,Amex
+2025-09-11,Meridian Pacific Trust,7071.91,123.76,Visa
+2025-09-10,Delacroix & Sons,1958.5,34.27,Apple/Google Pay
+2025-09-10,Delacroix & Sons,4955.82,86.73,Visa
+2025-09-04,Global Trust Bank,3998.12,69.97,Apple/Google Pay
+2025-09-04,Global Trust Bank,5783.8,101.22,Visa
+2025-09-03,Vertex Industries,5356.93,93.75,Amex
+2025-09-03,Vertex Industries,5773.12,101.03,Visa
+2025-09-03,Okafor Mining Co.,1100.97,19.27,Visa
+2025-09-03,Okafor Mining Co.,4295.36,75.17,Mastercard
+2025-09-03,Okafor Mining Co.,2358.94,41.28,Apple/Google Pay
+2025-08-25,Nova Materials,8935.48,156.37,Visa
+2025-08-23,Vertex Industries,6008.06,105.14,Mastercard
+2025-08-23,Vertex Industries,6388.76,111.8,Apple/Google Pay
+2025-08-23,Vertex Industries,11109.28,194.41,Mastercard
+2025-08-23,Delacroix & Sons,6849.16,119.86,Apple/Google Pay
+2025-08-22,Zenith Labs,2072.96,36.28,Visa
+2025-08-22,Meridian Holdings Ltd.,2369.12,41.46,Apple/Google Pay
+2025-08-22,Meridian Holdings Ltd.,5698.41,99.72,Amex
+2025-08-22,Zenith Labs,4264.92,74.64,Mastercard
+2025-08-21,Global Trust Bank,4877.56,85.36,Visa
+2025-08-20,Bright Path Foundation,2089.3,36.56,Visa
+2025-08-20,Bright Path Foundation,12017.25,210.3,Apple/Google Pay
+2025-08-20,Bright Path Foundation,6452.38,112.92,Visa
+2025-08-16,Zenith Labs,2570.44,44.98,Visa
+2025-08-16,Zenith Labs,8098.71,141.73,Amex
+2025-08-16,Zenith Labs,6659.75,116.55,Mastercard
+2025-08-16,Zenith Labs,11062.77,193.6,Visa
+2025-08-16,Zenith Labs,5042.98,88.25,Amex
+2025-08-16,Zenith Labs,2886.18,50.51,Visa
+2025-08-10,London Capital Partners,3799.61,66.49,Amex
+2025-08-10,Sunrise Logistics,4614.08,80.75,Visa
+2025-08-10,London Capital Partners,3450.16,60.38,Amex
+2025-08-10,Sunrise Logistics,7801.03,136.52,Mastercard
+2025-08-10,London Capital Partners,1839.45,32.19,Visa
+2025-08-10,London Capital Partners,5486.66,96.02,Amex
+2025-08-07,Okafor Mining Co.,3789.56,66.32,Visa
+2025-08-04,Bright Path Foundation,3409.51,59.67,Amex
+2025-08-04,Bright Path Foundation,1157.26,20.25,Mastercard
+2025-08-02,Halcyon Systems,7629.25,133.51,Visa
+2025-08-02,Halcyon Systems,3167.37,55.43,Mastercard
+2025-08-02,Halcyon Systems,6776.67,118.59,Apple/Google Pay
+2025-08-02,Halcyon Systems,1815.79,31.78,Visa
+2025-08-02,Halcyon Systems,2880.48,50.41,Amex
+2025-08-02,Halcyon Systems,5149.7,90.12,Visa
+2025-08-02,Halcyon Systems,2512.94,43.98,Mastercard
+2025-08-02,Halcyon Systems,9552.19,167.16,Visa
+2025-08-01,Pacific Rim Traders,7238.65,126.68,Mastercard
+2025-08-01,Pacific Rim Traders,2967.14,51.92,Visa
+2025-07-30,Whitmore Textiles,2295.66,40.17,Amex
+2025-07-30,Whitmore Textiles,3480.62,60.91,Mastercard
+2025-07-30,Whitmore Textiles,2643.46,46.26,Visa
+2025-07-29,Nova Materials,17916.95,313.55,Amex
+2025-07-28,Ganges Textile Exports,3803.32,66.56,Mastercard
+2025-07-25,Whitmore Textiles,4742.64,83,Visa
+2025-07-25,Whitmore Textiles,9569.25,167.46,Mastercard
+2025-07-25,Auckland Ventures Ltd,8133.01,142.33,Visa
+2025-07-25,Auckland Ventures Ltd,2587.05,45.27,Apple/Google Pay
+2025-07-25,Whitmore Textiles,4601.29,80.52,Visa
+2025-07-21,Global Trust Bank,6170.36,107.98,Mastercard
+2025-07-17,Acme Corp,3279.4,57.39,Mastercard
+2025-07-17,Acme Corp,7118.15,124.57,Mastercard
+2025-07-17,Acme Corp,5967.55,104.43,Mastercard
+2025-07-14,Okafor Mining Co.,3921.21,68.62,Visa
+2025-07-14,Okafor Mining Co.,3703.67,64.81,Amex
+2025-07-14,Okafor Mining Co.,5585.24,97.74,Mastercard
+2025-07-12,Ganges Textile Exports,5506.51,96.36,Amex
+2025-07-12,Ganges Textile Exports,2072.77,36.27,Mastercard
+2025-07-12,Ganges Textile Exports,5333.72,93.34,Mastercard
+2025-07-06,Delacroix & Sons,5968.89,104.46,Mastercard
+2025-07-06,Delacroix & Sons,4077.08,71.35,Apple/Google Pay
+2025-07-06,Acme Corp,4007.22,70.13,Mastercard
+2025-07-06,Acme Corp,5648.37,98.85,Apple/Google Pay
+2025-07-06,Acme Corp,9165.46,160.4,Apple/Google Pay
+2025-07-03,Vertex Industries,7615.93,133.28,Visa
+2025-07-03,Vertex Industries,5193.61,90.89,Mastercard
+2025-07-03,Vertex Industries,1636.47,28.64,Apple/Google Pay
+2025-07-03,Vertex Industries,2045.28,35.79,Amex
+2025-07-03,Vertex Industries,4038.02,70.67,Visa
+2025-07-03,Vertex Industries,2581.32,45.17,Amex
+2025-07-03,Vertex Industries,11101.89,194.28,Visa
+2025-07-03,Vertex Industries,9193.12,160.88,Apple/Google Pay
+2025-07-01,Auckland Ventures Ltd,1222.69,21.4,Mastercard
+2025-07-01,Sunrise Logistics,3260.13,57.05,Mastercard
+2025-07-01,Sunrise Logistics,5559.92,97.3,Mastercard
+2025-07-01,Auckland Ventures Ltd,2222.84,38.9,Visa
+2025-06-30,London Capital Partners,7222.15,126.39,Visa
+2025-06-30,London Capital Partners,5517.19,96.55,Amex
+2025-06-28,Hanwoo Precision Ltd,4116.84,72.04,Visa
+2025-06-26,Nova Materials,4027.45,70.48,Mastercard
+2025-06-26,Nova Materials,7049.21,123.36,Amex
+2025-06-20,Sunrise Logistics,7175.96,125.58,Mastercard
+2025-06-20,Sunrise Logistics,3634.7,63.61,Visa
+2025-06-20,Sunrise Logistics,2718.49,47.57,Mastercard
+2025-06-19,Harlow & Co.,3467.59,60.68,Visa
+2025-06-19,Harlow & Co.,3212.55,56.22,Apple/Google Pay
+2025-06-19,Harlow & Co.,16215.99,283.78,Visa
+2025-06-15,Halcyon Systems,5744.21,100.52,Mastercard
+2025-06-15,Halcyon Systems,4612.41,80.72,Visa
+2025-06-15,Halcyon Systems,3364.87,58.89,Apple/Google Pay
+2025-06-13,Zenith Labs,3525.42,61.69,Mastercard
+2025-06-11,Blackwood Realty,1539.23,26.94,Mastercard
+2025-06-11,Blackwood Realty,8392.52,146.87,Visa
+2025-06-10,Delacroix & Sons,6665.53,116.65,Visa
+2025-06-06,Vertex Industries,7020.55,122.86,Visa
+2025-06-05,Hanwoo Precision Ltd,2740.04,47.95,Visa
+2025-05-25,Okafor Mining Co.,3018.09,52.82,Apple/Google Pay
+2025-05-25,Okafor Mining Co.,3847.4,67.33,Mastercard
+2025-05-25,Okafor Mining Co.,1338.04,23.42,Amex
+2025-05-25,Okafor Mining Co.,4822.58,84.4,Mastercard
+2025-05-25,Okafor Mining Co.,5392.25,94.36,Mastercard
+2025-05-22,Global Trust Bank,7961.21,139.32,Amex
+2025-05-22,Zenith Labs,5438.21,95.17,Mastercard
+2025-05-22,Zenith Labs,5817.43,101.81,Apple/Google Pay
+2025-05-22,Zenith Labs,3839.46,67.19,Amex
+2025-05-19,Okafor Mining Co.,2383.46,41.71,Mastercard
+2025-05-19,Okafor Mining Co.,4228.4,74,Mastercard
+2025-05-19,Okafor Mining Co.,12724.25,222.67,Visa
+2025-05-18,Acme Corp,9182.98,160.7,Mastercard
+2025-05-18,Vertex Industries,7868.06,137.69,Amex
+2025-05-18,Acme Corp,1735.16,30.37,Mastercard
+2025-05-18,Vertex Industries,8323.07,145.65,Visa
+2025-05-15,Ganges Textile Exports,3560.34,62.31,Mastercard
+2025-05-15,Ganges Textile Exports,3449.95,60.37,Visa
+2025-05-15,Ganges Textile Exports,5137.14,89.9,Visa
+2025-05-15,Ganges Textile Exports,12052,210.91,Visa
+2025-05-10,Fentonville Council,834.56,14.6,Mastercard
+2025-05-10,Fentonville Council,2344.46,41.03,Apple/Google Pay
+2025-05-10,Nova Materials,4295.7,75.17,Mastercard
+2025-05-10,Nova Materials,4328.52,75.75,Visa
+2025-05-09,Whitmore Textiles,3351.66,58.65,Mastercard
+2025-05-09,Whitmore Textiles,3283.26,57.46,Amex
+2025-05-07,Okafor Mining Co.,12464.07,218.12,Mastercard
+2025-05-07,Okafor Mining Co.,7732.06,135.31,Mastercard
+2025-05-07,Okafor Mining Co.,6784.73,118.73,Amex
+2025-05-07,Okafor Mining Co.,7891.93,138.11,Visa
+2025-05-07,Okafor Mining Co.,8386.96,146.77,Visa
+2025-05-06,Sunrise Logistics,2194.21,38.4,Mastercard
+2025-05-06,Sunrise Logistics,3834.33,67.1,Visa
+2025-05-06,Sunrise Logistics,2314.09,40.5,Mastercard
+2025-05-06,Sunrise Logistics,4179.23,73.14,Visa
+2025-05-05,Meridian Holdings Ltd.,3662.17,64.09,Apple/Google Pay
+2025-05-05,Meridian Holdings Ltd.,9070.12,158.73,Visa
+2025-05-05,Bright Path Foundation,3726.94,65.22,Visa
+2025-05-05,Bright Path Foundation,15799.47,276.49,Visa
+2025-05-05,Meridian Holdings Ltd.,629.12,11.01,Mastercard
+2025-05-03,Fentonville Council,4581.37,80.17,Mastercard
+2025-05-03,Fentonville Council,8761.96,153.33,Apple/Google Pay
+2025-05-03,Fentonville Council,5899.15,103.24,Visa
+2025-05-01,Global Trust Bank,3492.95,61.13,Mastercard
+2025-05-01,Global Trust Bank,2779.78,48.65,Apple/Google Pay
+2025-05-01,Global Trust Bank,2010.38,35.18,Visa
+2025-05-01,Global Trust Bank,4866.6,85.17,Visa
+2025-05-01,Harlow & Co.,5355.75,93.73,Amex
+2025-05-01,Singapore Trading Group,4159.26,72.79,Mastercard
+2025-05-01,Global Trust Bank,8017.17,140.3,Mastercard
+2025-05-01,Meridian Pacific Trust,2333.64,40.84,Mastercard
+2025-05-01,Global Trust Bank,2740.57,47.96,Mastercard
+2025-04-27,Zenith Labs,4403.91,77.07,Apple/Google Pay
+2025-04-27,Zenith Labs,5583.56,97.71,Amex
+2025-04-27,Global Trust Bank,4870.94,85.24,Mastercard
+2025-04-27,Global Trust Bank,5661.55,99.08,Mastercard
+2025-04-27,Global Trust Bank,4499.38,78.74,Mastercard
+2025-04-27,Bright Path Foundation,5955.36,104.22,Mastercard
+2025-04-27,Zenith Labs,9407.7,164.63,Amex
+2025-04-27,Bright Path Foundation,2979.03,52.13,Apple/Google Pay
+2025-04-27,Hanwoo Precision Ltd,3991.02,69.84,Mastercard
+2025-04-22,Nippon Precision Ltd,10653.98,186.44,Visa
+2025-04-15,Meridian Holdings Ltd.,6221.91,108.88,Visa
+2025-04-15,Meridian Holdings Ltd.,7431.2,130.05,Visa
+2025-04-10,Vertex Industries,5382.05,94.19,Amex
+2025-04-10,Vertex Industries,3181.4,55.67,Amex
+2025-04-10,Vertex Industries,1604.96,28.09,Visa
+2025-04-09,Harlow & Co.,1074.64,18.81,Mastercard
+2025-04-09,Harlow & Co.,5850,102.38,Visa
+2025-04-09,Harlow & Co.,4684.25,81.97,Amex
+2025-04-09,Harlow & Co.,9220.98,161.37,Apple/Google Pay
+2025-04-09,Harlow & Co.,2600.63,45.51,Mastercard
+2025-04-08,Acme Corp,5653.45,98.94,Apple/Google Pay
+2025-04-08,Acme Corp,2297.2,40.2,Mastercard
+2025-04-08,Acme Corp,1390.43,24.33,Visa
+2025-04-05,Sunrise Logistics,2280.36,39.91,Mastercard
+2025-04-04,Blackwood Realty,8315.42,145.52,Amex
+2025-04-04,Blackwood Realty,6358.94,111.28,Amex
+2025-04-04,Blackwood Realty,3106.77,54.37,Visa
+2025-04-01,Acme Corp,2183.37,38.21,Mastercard
+2025-04-01,Bright Path Foundation,2811.88,49.21,Apple/Google Pay
+2025-04-01,Bright Path Foundation,5866.14,102.66,Visa
+2025-04-01,Bright Path Foundation,5430.93,95.04,Apple/Google Pay
+2025-04-01,London Capital Partners,5631.18,98.55,Mastercard
+2025-04-01,London Capital Partners,2948.9,51.61,Visa
+2025-04-01,Bright Path Foundation,12567.11,219.92,Visa
+2025-04-01,London Capital Partners,10679.91,186.9,Visa
+2025-04-01,London Capital Partners,7524.33,131.68,Apple/Google Pay
+2025-04-01,Bright Path Foundation,3660.47,64.06,Mastercard
+2025-04-01,London Capital Partners,5560.16,97.3,Visa
+2025-03-27,Singapore Trading Group,5020.22,87.85,Amex
+2025-03-27,Harlow & Co.,6032.33,105.57,Visa
+2025-03-23,Vertex Industries,8250.17,144.38,Visa
+2025-03-22,Ganges Textile Exports,2970.15,51.98,Visa
+2025-03-22,Ganges Textile Exports,3165.47,55.4,Mastercard
+2025-03-22,Nippon Precision Ltd,2163.92,37.87,Visa
+2025-03-22,Ganges Textile Exports,5615.74,98.28,Visa
+2025-03-22,Ganges Textile Exports,3627.91,63.49,Mastercard
+2025-03-22,Nippon Precision Ltd,2361.89,41.33,Amex
+2025-03-15,Halcyon Systems,16120.5,282.11,Amex
+2025-03-15,Halcyon Systems,3006.45,52.61,Apple/Google Pay
+2025-03-15,Halcyon Systems,7043.06,123.25,Visa
+2025-03-15,Halcyon Systems,5106.47,89.36,Visa
+2025-03-15,Halcyon Systems,4831.57,84.55,Visa
+2025-03-15,Halcyon Systems,1871.7,32.75,Apple/Google Pay
+2025-03-13,Meridian Holdings Ltd.,9872.75,172.77,Mastercard
+2025-03-13,Meridian Holdings Ltd.,3872.89,67.78,Mastercard
+2025-03-08,Delacroix & Sons,4847.65,84.83,Mastercard
+2025-02-27,Pacific Rim Traders,5875.11,102.81,Visa
+2025-02-21,Bright Path Foundation,3608.11,63.14,Mastercard
+2025-02-21,Bright Path Foundation,971.27,17,Visa
+2025-02-19,Sunrise Logistics,9254.3,161.95,Apple/Google Pay
+2025-02-19,Sunrise Logistics,3755.85,65.73,Mastercard
+2025-02-17,Whitmore Textiles,5051.44,88.4,Apple/Google Pay
+2025-02-17,Whitmore Textiles,1415.2,24.77,Visa
+2025-02-15,Vertex Industries,7484.18,130.97,Amex
+2025-02-15,Vertex Industries,5606.39,98.11,Mastercard
+2025-02-15,Vertex Industries,1720.89,30.12,Visa
+2025-02-15,Vertex Industries,3410.99,59.69,Amex
+2025-02-14,Harlow & Co.,3677.22,64.35,Visa
+2025-02-14,Whitmore Textiles,3924.17,68.67,Mastercard
+2025-02-14,Whitmore Textiles,5040.02,88.2,Visa
+2025-02-14,Whitmore Textiles,5676.56,99.34,Visa
+2025-02-12,Global Trust Bank,5421.85,94.88,Visa
+2025-02-12,Global Trust Bank,11173.85,195.54,Mastercard
+2025-02-12,Global Trust Bank,4916.08,86.03,Visa
+2025-02-12,Global Trust Bank,4464.36,78.13,Amex
+2025-02-07,London Capital Partners,8097.14,141.7,Mastercard
+2025-02-07,London Capital Partners,11598.31,202.97,Visa
+2025-02-07,Harlow & Co.,3172.67,55.52,Apple/Google Pay
+2025-02-07,Harlow & Co.,1931.18,33.8,Amex
+2025-02-07,Harlow & Co.,3029.54,53.02,Mastercard
+2025-02-07,Harlow & Co.,3845.89,67.3,Amex
+2025-02-07,Harlow & Co.,3280.29,57.41,Visa
+2025-02-06,Okafor Mining Co.,2466.4,43.16,Visa
+2025-02-06,Okafor Mining Co.,2248.73,39.35,Amex
+2025-02-06,Okafor Mining Co.,15678.36,274.37,Amex
+2025-02-06,Okafor Mining Co.,13531.11,236.79,Mastercard
+2025-02-04,Nova Materials,2004.68,35.08,Visa
+2025-02-04,Nova Materials,4577.58,80.11,Mastercard
+2025-02-02,Sunrise Logistics,5754.48,100.7,Apple/Google Pay
+2025-02-02,Sunrise Logistics,4178.56,73.12,Mastercard
+2025-01-30,Delacroix & Sons,9414,164.74,Visa
+2025-01-30,Delacroix & Sons,4417.15,77.3,Visa
+2025-01-29,Acme Corp,8503.82,148.82,Apple/Google Pay
+2025-01-29,Meridian Holdings Ltd.,5663.79,99.12,Visa
+2025-01-29,Acme Corp,2604.19,45.57,Mastercard
+2025-01-28,Halcyon Systems,4309.53,75.42,Apple/Google Pay
+2025-01-28,Pacific Rim Traders,1786,31.25,Mastercard
+2025-01-28,Pacific Rim Traders,7501.93,131.28,Visa
+2025-01-28,Halcyon Systems,6458.29,113.02,Mastercard
+2025-01-28,Pacific Rim Traders,14719.65,257.59,Visa
+2025-01-28,Pacific Rim Traders,4005.54,70.1,Visa
+2025-01-25,Hanwoo Precision Ltd,5359.98,93.8,Visa
+2025-01-25,Hanwoo Precision Ltd,4103.82,71.82,Amex
+2025-01-25,Hanwoo Precision Ltd,5273.73,92.29,Amex
+2025-01-19,Zenith Labs,11663.19,204.11,Visa
+2025-01-19,Zenith Labs,1587.33,27.78,Mastercard
+2025-01-19,Zenith Labs,1543.14,27,Visa
+2025-01-19,Delacroix & Sons,4165.87,72.9,Visa
+2025-01-18,Global Trust Bank,3419.43,59.84,Amex
+2025-01-18,Global Trust Bank,8570.09,149.98,Amex
+2025-01-18,Global Trust Bank,7018.98,122.83,Mastercard
+2025-01-18,Global Trust Bank,1651.3,28.9,Visa
+2025-01-18,Global Trust Bank,3943.72,69.02,Amex
+2025-01-09,Okafor Mining Co.,5099.57,89.24,Visa
+2025-01-03,Sunrise Logistics,6552.36,114.67,Visa
+2025-01-03,Sunrise Logistics,3709.38,64.91,Mastercard
+2025-01-03,Sunrise Logistics,1792.56,31.37,Apple/Google Pay
+2025-01-03,Sunrise Logistics,2315.11,40.51,Apple/Google Pay
+2025-01-03,Vertex Industries,5916.3,103.54,Mastercard
+2024-12-28,Global Trust Bank,2758.91,48.28,Mastercard
+2024-12-28,Global Trust Bank,5087.17,89.03,Amex
+2024-12-28,Global Trust Bank,1543.91,27.02,Mastercard
+2024-12-28,Global Trust Bank,3342.93,58.5,Amex
+2024-12-26,Auckland Ventures Ltd,6037.07,105.65,Amex
+2024-12-23,Meridian Holdings Ltd.,7049.06,123.36,Amex
+2024-12-23,Meridian Holdings Ltd.,5377.13,94.1,Mastercard
+2024-12-23,Meridian Holdings Ltd.,5323.54,93.16,Visa
+2024-12-21,Bright Path Foundation,721.79,12.63,Visa
+2024-12-21,Bright Path Foundation,1090.51,19.08,Visa
+2024-12-21,Bright Path Foundation,3522.14,61.64,Mastercard
+2024-12-21,Bright Path Foundation,2706.38,47.36,Mastercard
+2024-12-21,Bright Path Foundation,3183.24,55.71,Visa
+2024-12-20,Delacroix & Sons,2503.68,43.81,Visa
+2024-12-20,Delacroix & Sons,5435.74,95.13,Mastercard
+2024-12-15,Blackwood Realty,4698.35,82.22,Mastercard
+2024-12-15,Blackwood Realty,9072.45,158.77,Visa
+2024-12-14,Whitmore Textiles,11399.82,199.5,Amex
+2024-12-14,Whitmore Textiles,4119.9,72.1,Apple/Google Pay
+2024-12-14,Whitmore Textiles,8377.53,146.61,Mastercard
+2024-12-13,Meridian Pacific Trust,8964.29,156.88,Visa
+2024-12-13,Meridian Pacific Trust,3639.27,63.69,Visa
+2024-12-13,Meridian Pacific Trust,5532.86,96.83,Mastercard
+2024-12-13,Nova Materials,13774.49,241.05,Visa
+2024-12-13,Meridian Pacific Trust,2609.37,45.66,Mastercard
+2024-12-13,Nova Materials,5015.57,87.77,Visa
+2024-12-13,Nova Materials,4903.66,85.81,Visa
+2024-12-13,Meridian Pacific Trust,5958.4,104.27,Visa
+2024-12-10,Vertex Industries,2583.8,45.22,Mastercard
+2024-12-10,Vertex Industries,2023.15,35.41,Mastercard
+2024-12-09,Blackwood Realty,4824.29,84.43,Mastercard
+2024-12-09,Blackwood Realty,2187.17,38.28,Amex
+2024-12-09,Blackwood Realty,5507.16,96.38,Apple/Google Pay
+2024-12-09,Blackwood Realty,2930.92,51.29,Apple/Google Pay
+2024-12-07,Meridian Holdings Ltd.,4124.35,72.18,Visa
+2024-12-07,Meridian Holdings Ltd.,6691.67,117.1,Mastercard
+2024-12-07,Meridian Holdings Ltd.,3764.46,65.88,Mastercard
+2024-12-05,Halcyon Systems,8977.79,157.11,Amex
+2024-12-05,Halcyon Systems,7785.71,136.25,Amex
+2024-12-05,Halcyon Systems,7360.41,128.81,Mastercard
+2024-12-05,Halcyon Systems,5184.4,90.73,Visa
+2024-12-05,Halcyon Systems,4792.1,83.86,Mastercard
+2024-12-05,Halcyon Systems,7336.75,128.39,Visa
+2024-12-04,Global Trust Bank,9589.17,167.81,Visa
+2024-12-04,Global Trust Bank,4318.38,75.57,Mastercard
+2024-12-04,Global Trust Bank,6571.4,115,Apple/Google Pay
+2024-12-04,Global Trust Bank,5091.68,89.1,Apple/Google Pay
+2024-11-28,London Capital Partners,13093.24,229.13,Mastercard
+2024-11-28,Vertex Industries,6539.03,114.43,Apple/Google Pay
+2024-11-28,Bright Path Foundation,8187.27,143.28,Amex
+2024-11-28,Bright Path Foundation,1569.83,27.47,Visa
+2024-11-28,Vertex Industries,3041.27,53.22,Amex
+2024-11-28,Bright Path Foundation,4119.86,72.1,Amex
+2024-11-23,Okafor Mining Co.,2365.95,41.4,Visa
+2024-11-23,Okafor Mining Co.,3613.89,63.24,Amex
+2024-11-23,Okafor Mining Co.,3929.04,68.76,Amex
+2024-11-22,Zenith Labs,3062.26,53.59,Mastercard
+2024-11-22,Pacific Rim Traders,4804.92,84.09,Mastercard
+2024-11-22,Pacific Rim Traders,1937.41,33.9,Visa
+2024-11-15,Okafor Mining Co.,6742.6,118,Mastercard
+2024-11-13,Meridian Pacific Trust,3125.84,54.7,Visa
+2024-11-13,Meridian Pacific Trust,4178.85,73.13,Visa
+2024-11-13,Meridian Pacific Trust,4195.16,73.42,Visa
+2024-11-13,Meridian Pacific Trust,2741.55,47.98,Apple/Google Pay
+2024-11-12,Sunrise Logistics,3207.59,56.13,Visa
+2024-11-10,Delacroix & Sons,9336.19,163.38,Visa
+2024-11-10,Delacroix & Sons,1803.61,31.56,Visa
+2024-11-10,Halcyon Systems,4074.07,71.3,Mastercard
+2024-11-10,Delacroix & Sons,10657.62,186.51,Visa
+2024-11-10,Halcyon Systems,8347.45,146.08,Mastercard
+2024-11-10,Halcyon Systems,3301.23,57.77,Visa
+2024-11-10,Halcyon Systems,3273.87,57.29,Visa
+2024-11-08,Meridian Holdings Ltd.,9792,171.36,Mastercard
+2024-11-06,Zenith Labs,2500.59,43.76,Mastercard
+2024-11-06,Harlow & Co.,2431.66,42.55,Visa
+2024-11-06,Zenith Labs,11986.94,209.77,Amex
+2024-11-06,Harlow & Co.,3692.41,64.62,Apple/Google Pay
+2024-11-06,Harlow & Co.,1946.83,34.07,Mastercard
+2024-11-06,Zenith Labs,2598.39,45.47,Visa
+2024-11-06,Zenith Labs,5255.11,91.96,Visa
+2024-11-06,Zenith Labs,5964.13,104.37,Mastercard
+2024-11-04,Pacific Rim Traders,9775.55,171.07,Visa
+2024-11-04,Pacific Rim Traders,11995.62,209.92,Amex
+2024-10-30,Harlow & Co.,15236.85,266.64,Visa
+2024-10-30,Harlow & Co.,9855.41,172.47,Amex
+2024-10-30,Harlow & Co.,4153.38,72.68,Visa
+2024-10-30,Harlow & Co.,7181.69,125.68,Mastercard
+2024-10-30,Harlow & Co.,5462.84,95.6,Mastercard
+2024-10-23,Nova Materials,3255.64,56.97,Mastercard
+2024-10-23,Nova Materials,1402.41,24.54,Visa
+2024-10-23,Nova Materials,5359.12,93.78,Apple/Google Pay
+2024-10-23,Nova Materials,9494.67,166.16,Mastercard
+2024-10-21,Ganges Textile Exports,1820.66,31.86,Amex
+2024-10-13,Whitmore Textiles,3640.14,63.7,Visa
+2024-10-13,Whitmore Textiles,2333.63,40.84,Amex
+2024-10-09,Acme Corp,4751.27,83.15,Apple/Google Pay
+2024-10-09,Acme Corp,5131.84,89.81,Mastercard
+2024-10-07,Bright Path Foundation,3538.21,61.92,Visa
+2024-10-07,Bright Path Foundation,2848.09,49.84,Mastercard
+2024-10-07,Bright Path Foundation,4734.97,82.86,Mastercard
+2024-10-04,Vertex Industries,4024.25,70.42,Visa
+2024-10-04,Vertex Industries,2302.14,40.29,Mastercard
+2024-10-04,Blackwood Realty,4246.08,74.31,Amex
+2024-10-03,Acme Corp,6150.58,107.64,Visa
+2024-10-02,Meridian Holdings Ltd.,13767.14,240.92,Amex
+2024-10-02,Meridian Holdings Ltd.,1783.11,31.2,Mastercard
+2024-10-02,Meridian Holdings Ltd.,3153.26,55.18,Mastercard
+2024-10-01,Sunrise Logistics,8799.55,153.99,Mastercard
+2024-10-01,Sunrise Logistics,3139.94,54.95,Mastercard
+2024-09-30,Vertex Industries,5096.25,89.18,Visa
+2024-09-30,Fentonville Council,3780.9,66.17,Visa
+2024-09-30,Vertex Industries,5966.03,104.41,Mastercard
+2024-09-30,Fentonville Council,2736.86,47.9,Visa
+2024-09-27,London Capital Partners,4509.62,78.92,Visa
+2024-09-25,Zenith Labs,2037.25,35.65,Apple/Google Pay
+2024-09-25,Zenith Labs,3665.65,64.15,Visa
+2024-09-24,Nova Materials,3384.3,59.23,Amex
+2024-09-23,Nippon Precision Ltd,2300.06,40.25,Mastercard
+2024-09-23,Nippon Precision Ltd,2352.22,41.16,Visa
+2024-09-23,Nippon Precision Ltd,5264.39,92.13,Mastercard
+2024-09-23,Nippon Precision Ltd,4998.71,87.48,Visa
+2024-09-23,Nippon Precision Ltd,11000.55,192.51,Amex
+2024-09-22,Harlow & Co.,6870.41,120.23,Mastercard
+2024-09-19,Halcyon Systems,8960.08,156.8,Amex
+2024-09-19,Halcyon Systems,2415.45,42.27,Visa
+2024-09-19,Halcyon Systems,7505.86,131.35,Amex
+2024-09-16,Ganges Textile Exports,4653.53,81.44,Mastercard
+2024-09-16,Ganges Textile Exports,1535.35,26.87,Visa
+2024-09-13,Global Trust Bank,7989.98,139.82,Apple/Google Pay
+2024-09-13,Auckland Ventures Ltd,3394.36,59.4,Apple/Google Pay
+2024-09-13,Global Trust Bank,10768.57,188.45,Mastercard
+2024-09-13,Global Trust Bank,4133.76,72.34,Mastercard
+2024-09-13,Auckland Ventures Ltd,4773.79,83.54,Amex
+2024-09-13,Global Trust Bank,15451.48,270.4,Mastercard
+2024-09-13,Auckland Ventures Ltd,3047.25,53.33,Visa
+2024-09-13,Global Trust Bank,10165.85,177.9,Amex
+2024-09-13,Global Trust Bank,2406.21,42.11,Visa
+2024-09-13,Auckland Ventures Ltd,4640.21,81.2,Amex
+2024-09-11,Fentonville Council,7824.45,136.93,Mastercard
+2024-09-11,Fentonville Council,2527.85,44.24,Mastercard
+2024-09-08,Whitmore Textiles,3535.36,61.87,Mastercard
+2024-09-08,Whitmore Textiles,1464.07,25.62,Visa
+2024-09-06,Okafor Mining Co.,1358.63,23.78,Visa
+2024-09-06,Okafor Mining Co.,9692.52,169.62,Visa
+2024-09-06,Global Trust Bank,3462.51,60.59,Apple/Google Pay
+2024-09-06,Okafor Mining Co.,9555.25,167.22,Visa
+2024-09-06,Global Trust Bank,7661.42,134.07,Amex
+2024-09-06,Global Trust Bank,3532.29,61.82,Amex
+2024-09-06,Halcyon Systems,1352.65,23.67,Visa
+2024-09-04,Meridian Holdings Ltd.,3814.2,66.75,Amex
+2024-09-04,Meridian Holdings Ltd.,9125.55,159.7,Amex
+2024-09-04,Meridian Holdings Ltd.,4805.15,84.09,Apple/Google Pay
+2024-09-03,Global Trust Bank,2952.17,51.66,Amex
+2024-09-03,Global Trust Bank,5808.26,101.64,Mastercard
+2024-08-30,Bright Path Foundation,4362.82,76.35,Mastercard
+2024-08-30,Bright Path Foundation,3184.7,55.73,Mastercard
+2024-08-30,Bright Path Foundation,715.23,12.52,Amex
+2024-08-27,Meridian Pacific Trust,4668.11,81.69,Mastercard
+2024-08-26,Blackwood Realty,9132.91,159.83,Apple/Google Pay
+2024-08-24,Delacroix & Sons,5272.89,92.28,Visa
+2024-08-24,Delacroix & Sons,5261.86,92.08,Visa
+2024-08-21,Vertex Industries,1495.45,26.17,Visa
+2024-08-21,Halcyon Systems,4641.29,81.22,Apple/Google Pay
+2024-08-20,Pacific Rim Traders,4639.23,81.19,Visa
+2024-08-20,Pacific Rim Traders,2793.88,48.89,Visa
+2024-08-19,Acme Corp,12750.42,223.13,Mastercard
+2024-08-08,Nippon Precision Ltd,7865.8,137.65,Visa
+2024-08-08,Nippon Precision Ltd,3200.78,56.01,Visa
+2024-08-08,Nippon Precision Ltd,3027.3,52.98,Mastercard
+2024-08-03,Okafor Mining Co.,6768.53,118.45,Amex
+2024-08-03,Okafor Mining Co.,8673.96,151.79,Visa
+2024-07-30,Meridian Holdings Ltd.,4208.57,73.65,Apple/Google Pay
+2024-07-30,Meridian Holdings Ltd.,3524.01,61.67,Mastercard
+2024-07-27,Auckland Ventures Ltd,1863.47,32.61,Amex
+2024-07-27,Auckland Ventures Ltd,2813.11,49.23,Mastercard
+2024-07-27,Auckland Ventures Ltd,2211.25,38.7,Amex
+2024-07-27,Auckland Ventures Ltd,7998.16,139.97,Visa
+2024-07-24,Nippon Precision Ltd,6178.9,108.13,Mastercard
+2024-07-24,Nippon Precision Ltd,3117.06,54.55,Apple/Google Pay
+2024-07-24,Nippon Precision Ltd,3598.65,62.98,Mastercard
+2024-07-23,Bright Path Foundation,9695.85,169.68,Visa
+2024-07-23,Bright Path Foundation,12898.31,225.72,Visa
+2024-07-23,Bright Path Foundation,7548.97,132.11,Apple/Google Pay
+2024-07-23,Bright Path Foundation,3420.74,59.86,Visa
+2024-07-21,Zenith Labs,3709.17,64.91,Visa
+2024-07-20,Harlow & Co.,4850.37,84.88,Visa
+2024-07-20,Harlow & Co.,5925.22,103.69,Apple/Google Pay
+2024-07-19,Blackwood Realty,6658.43,116.52,Mastercard
+2024-07-19,Blackwood Realty,4300.94,75.27,Mastercard
+2024-07-16,Delacroix & Sons,12187.87,213.29,Apple/Google Pay
+2024-07-16,Sunrise Logistics,5307,92.87,Visa
+2024-07-12,Okafor Mining Co.,3788.88,66.31,Mastercard
+2024-07-12,Okafor Mining Co.,3334.53,58.35,Amex
+2024-07-12,Whitmore Textiles,2023.35,35.41,Visa
+2024-07-12,Whitmore Textiles,4503.13,78.8,Amex
+2024-07-10,Nova Materials,1658.21,29.02,Apple/Google Pay
+2024-07-10,Nova Materials,3855.14,67.46,Mastercard
+2024-07-10,Nova Materials,4561.27,79.82,Mastercard
+2024-07-09,Zenith Labs,7834.18,137.1,Mastercard
+2024-07-06,Vertex Industries,6090.45,106.58,Visa
+2024-07-06,Vertex Industries,6343.86,111.02,Mastercard
+2024-07-04,Blackwood Realty,4452.07,77.91,Amex
+2024-07-04,Blackwood Realty,4249.43,74.37,Visa
+2024-07-01,Acme Corp,3692.59,64.62,Visa
+2024-07-01,Acme Corp,2114.21,37,Visa
+2024-07-01,Acme Corp,12998.7,227.48,Mastercard
+2024-06-27,Vertex Industries,3760.8,65.81,Mastercard
+2024-06-23,Acme Corp,3078.57,53.87,Visa
+2024-06-23,Acme Corp,3360.56,58.81,Mastercard
+2024-06-23,Meridian Pacific Trust,8013.92,140.24,Mastercard
+2024-06-20,Halcyon Systems,2154.03,37.7,Visa
+2024-06-20,Meridian Pacific Trust,4268.28,74.69,Amex
+2024-06-20,Meridian Pacific Trust,3031.17,53.05,Visa
+2024-06-17,Auckland Ventures Ltd,3929.16,68.76,Mastercard
+2024-06-16,Fentonville Council,1920.87,33.62,Amex
+2024-06-16,Fentonville Council,2419.66,42.34,Amex
+2024-06-16,Fentonville Council,8708.24,152.39,Mastercard
+2024-06-12,Whitmore Textiles,6361.68,111.33,Apple/Google Pay
+2024-06-11,Nippon Precision Ltd,11576.58,202.59,Visa
+2024-06-09,Pacific Rim Traders,10554.09,184.7,Amex
+2024-06-08,Okafor Mining Co.,3375.06,59.06,Apple/Google Pay
+2024-06-08,Okafor Mining Co.,5732.42,100.32,Visa
+2024-06-06,Whitmore Textiles,2364.22,41.37,Visa
+2024-06-06,Whitmore Textiles,5312.01,92.96,Visa
+2024-06-06,Whitmore Textiles,11470.15,200.73,Mastercard
+2024-06-05,Fentonville Council,4012.97,70.23,Mastercard
+2024-06-05,Fentonville Council,6159.52,107.79,Visa
+2024-06-03,Harlow & Co.,5894.92,103.16,Amex
+2024-06-01,Nova Materials,5458.36,95.52,Visa
+2024-06-01,Pacific Rim Traders,2231.11,39.04,Amex
+2024-06-01,Pacific Rim Traders,5627.11,98.47,Amex
+2024-05-30,London Capital Partners,3339.73,58.45,Apple/Google Pay
+2024-05-30,London Capital Partners,5326.43,93.21,Visa
+2024-05-27,Acme Corp,6567.43,114.93,Apple/Google Pay
+2024-05-27,Acme Corp,10761.47,188.33,Amex
+2024-05-24,Zenith Labs,1897.45,33.21,Visa
+2024-05-24,Zenith Labs,3704.65,64.83,Amex
+2024-05-24,Zenith Labs,7637.74,133.66,Visa
+2024-05-19,Singapore Trading Group,5123.87,89.67,Visa
+2024-05-19,Singapore Trading Group,2680.02,46.9,Visa
+2024-05-19,Singapore Trading Group,8062.21,141.09,Mastercard
+2024-05-19,Singapore Trading Group,3172.98,55.53,Amex
+2024-05-19,Singapore Trading Group,2725.64,47.7,Visa
+2024-05-19,Singapore Trading Group,5065.5,88.65,Mastercard
+2024-05-14,Halcyon Systems,4446.81,77.82,Amex
+2024-05-13,Auckland Ventures Ltd,3236.21,56.63,Visa
+2024-05-13,Auckland Ventures Ltd,5756.78,100.74,Mastercard
+2024-05-13,Auckland Ventures Ltd,4391.77,76.86,Visa
+2024-05-13,Auckland Ventures Ltd,2810.67,49.19,Visa
+2024-05-12,Vertex Industries,10596.16,185.43,Visa
+2024-05-12,Vertex Industries,3138.24,54.92,Amex
+2024-05-12,Vertex Industries,12124.8,212.18,Visa
+2024-05-12,Vertex Industries,6396.7,111.94,Mastercard
+2024-05-12,Vertex Industries,5019.99,87.85,Mastercard
+2024-05-10,Harlow & Co.,3757.79,65.76,Visa
+2024-05-08,Meridian Holdings Ltd.,3267.77,57.19,Amex
+2024-05-08,Meridian Holdings Ltd.,1484.79,25.98,Mastercard
+2024-05-08,Meridian Holdings Ltd.,9097.66,159.21,Visa
+2024-05-04,Ganges Textile Exports,9891.07,173.09,Mastercard
+2024-05-04,Ganges Textile Exports,2831.1,49.54,Visa
+2024-05-03,Whitmore Textiles,2975.41,52.07,Visa
+2024-05-02,Nova Materials,5072.02,88.76,Visa
+2024-05-02,Nova Materials,3773.83,66.04,Amex
+2024-05-02,Global Trust Bank,3455.79,60.48,Mastercard
+2024-05-02,Nova Materials,3389.28,59.31,Visa
+2024-05-02,Global Trust Bank,12476.99,218.35,Mastercard
+2024-04-28,Hanwoo Precision Ltd,6327.84,110.74,Mastercard
+2024-04-28,Hanwoo Precision Ltd,6069.92,106.22,Visa
+2024-04-28,Hanwoo Precision Ltd,7114.57,124.51,Visa
+2024-04-26,Global Trust Bank,6781.85,118.68,Mastercard
+2024-04-26,Global Trust Bank,2300.24,40.25,Visa
+2024-04-25,Auckland Ventures Ltd,4652.9,81.43,Amex
+2024-04-22,Bright Path Foundation,4277.59,74.86,Mastercard
+2024-04-22,Bright Path Foundation,5257.82,92.01,Visa
+2024-04-22,Bright Path Foundation,7600.65,133.01,Visa
+2024-04-17,Sunrise Logistics,4316.54,75.54,Visa
+2024-04-17,Sunrise Logistics,3820.27,66.85,Amex
+2024-04-16,Global Trust Bank,2322.78,40.65,Visa
+2024-04-14,Acme Corp,4867.97,85.19,Visa
+2024-04-14,Acme Corp,3216.62,56.29,Apple/Google Pay
+2024-04-14,Acme Corp,2312.07,40.46,Visa
+2024-04-14,Acme Corp,7689.22,134.56,Visa
+2024-04-14,Acme Corp,7329.76,128.27,Amex
+2024-04-13,Vertex Industries,12308.96,215.41,Visa
+2024-04-13,Vertex Industries,3057.56,53.51,Visa
+2024-04-02,Meridian Holdings Ltd.,4390.02,76.83,Visa
+2024-04-01,Vertex Industries,5635.21,98.62,Mastercard
+2024-04-01,Vertex Industries,6023.39,105.41,Visa
+2024-03-28,Delacroix & Sons,5203.26,91.06,Visa
+2024-03-28,Delacroix & Sons,8992.59,157.37,Visa
+2024-03-28,Delacroix & Sons,3192.22,55.86,Mastercard
+2024-03-28,Delacroix & Sons,7012.3,122.72,Visa
+2024-03-26,Nova Materials,4042.84,70.75,Visa
+2024-03-26,Nova Materials,8168.93,142.96,Amex
+2024-03-25,Pacific Rim Traders,4807.33,84.13,Amex
+2024-03-22,Zenith Labs,7071.32,123.75,Visa
+2024-03-21,Okafor Mining Co.,3203.33,56.06,Amex
+2024-03-17,Meridian Holdings Ltd.,9604.02,168.07,Visa
+2024-03-17,Meridian Holdings Ltd.,1473.33,25.78,Apple/Google Pay
+2024-03-16,Acme Corp,2899.72,50.75,Apple/Google Pay
+2024-03-16,Zenith Labs,6094.66,106.66,Mastercard
+2024-03-16,Zenith Labs,3986.59,69.77,Amex
+2024-03-16,Fentonville Council,5904.33,103.33,Mastercard
+2024-03-12,Nova Materials,7939.84,138.95,Mastercard
+2024-03-09,Sunrise Logistics,4776.07,83.58,Visa
+2024-03-09,Sunrise Logistics,6029.07,105.51,Visa
+2024-03-09,Sunrise Logistics,4978.48,87.12,Mastercard
+2024-03-09,London Capital Partners,5821.47,101.88,Visa
+2024-03-08,Bright Path Foundation,4910.58,85.94,Amex
+2024-03-08,Bright Path Foundation,2347.46,41.08,Visa
+2024-03-06,Whitmore Textiles,4911.97,85.96,Visa
+2024-03-06,Whitmore Textiles,1889.28,33.06,Visa
+2024-02-28,Meridian Pacific Trust,5231.17,91.55,Visa
+2024-02-27,Harlow & Co.,3194.83,55.91,Visa
+2024-02-25,Zenith Labs,2724.91,47.69,Apple/Google Pay
+2024-02-23,Global Trust Bank,5693.57,99.64,Mastercard
+2024-02-23,Global Trust Bank,8452.31,147.92,Visa
+2024-02-23,Global Trust Bank,3035.59,53.12,Amex
+2024-02-19,London Capital Partners,5191.78,90.86,Visa
+2024-02-19,London Capital Partners,7583.9,132.72,Visa
+2024-02-17,Hanwoo Precision Ltd,3566.39,62.41,Visa
+2024-02-17,Hanwoo Precision Ltd,6674.16,116.8,Mastercard
+2024-02-17,Hanwoo Precision Ltd,6479.23,113.39,Visa
+2024-02-11,Whitmore Textiles,6719.77,117.6,Mastercard
+2024-02-11,Whitmore Textiles,7096.85,124.19,Visa
+2024-02-11,Vertex Industries,7893.45,138.14,Visa
+2024-02-11,Whitmore Textiles,2369.37,41.46,Visa
+2024-02-09,Sunrise Logistics,5629.59,98.52,Visa
+2024-02-09,Sunrise Logistics,5115.55,89.52,Visa
+2024-02-03,Ganges Textile Exports,3456.33,60.49,Mastercard
+2024-02-03,Ganges Textile Exports,2052.84,35.92,Visa
+2024-02-03,Ganges Textile Exports,6005.44,105.1,Mastercard
+2024-02-01,Okafor Mining Co.,6886.88,120.52,Mastercard
+2024-02-01,Meridian Holdings Ltd.,9402.21,164.54,Visa
+2024-02-01,Okafor Mining Co.,4581.39,80.17,Amex
+2024-02-01,Auckland Ventures Ltd,3676.6,64.34,Mastercard
+2024-01-30,Halcyon Systems,4613.82,80.74,Visa
+2024-01-28,Nippon Precision Ltd,4764.97,83.39,Mastercard
+2024-01-24,Ganges Textile Exports,7731.21,135.3,Mastercard
+2024-01-24,Blackwood Realty,4042.83,70.75,Amex
+2024-01-24,Meridian Pacific Trust,6366.44,111.41,Apple/Google Pay
+2024-01-24,Meridian Pacific Trust,6683.21,116.96,Apple/Google Pay
+2024-01-24,Ganges Textile Exports,2551.29,44.65,Apple/Google Pay
+2024-01-24,Global Trust Bank,3274.13,57.3,Mastercard
+2024-01-24,Blackwood Realty,5399.63,94.49,Amex
+2024-01-24,Blackwood Realty,3509.77,61.42,Visa
+2024-01-24,Meridian Pacific Trust,10832.97,189.58,Visa
+2024-01-21,Harlow & Co.,2801.16,49.02,Visa
+2024-01-21,Harlow & Co.,3491.62,61.1,Mastercard
+2024-01-20,Okafor Mining Co.,5091.34,89.1,Visa
+2024-01-20,Okafor Mining Co.,3467.13,60.67,Apple/Google Pay
+2024-01-16,Blackwood Realty,6396.06,111.93,Visa
+2024-01-14,Halcyon Systems,4556.83,79.74,Mastercard
+2024-01-14,Nova Materials,6406.49,112.11,Visa
+2024-01-14,Nova Materials,9376.55,164.09,Visa
+2024-01-14,Nova Materials,9645.7,168.8,Mastercard
+2024-01-11,Vertex Industries,4156.74,72.74,Mastercard
+2024-01-11,Vertex Industries,3871,67.74,Visa
+2024-01-10,Sunrise Logistics,4049.99,70.87,Visa
+2024-01-09,Whitmore Textiles,1128.21,19.74,Visa
+2024-01-09,Whitmore Textiles,8115.37,142.02,Mastercard
+2024-01-07,Bright Path Foundation,2891.76,50.61,Mastercard
+2024-01-07,Bright Path Foundation,3938.88,68.93,Mastercard
+2024-01-05,Meridian Holdings Ltd.,6921.19,121.12,Visa
+2024-01-05,Meridian Holdings Ltd.,7924.04,138.67,Visa
+2024-01-05,Meridian Holdings Ltd.,4667.08,81.67,Mastercard
+2023-12-29,Vertex Industries,1436.24,25.13,Mastercard
+2023-12-29,Vertex Industries,5697.71,99.71,Mastercard
+2023-12-27,London Capital Partners,3588.33,62.8,Visa
+2023-12-22,Blackwood Realty,6638.02,116.17,Mastercard
+2023-12-22,Blackwood Realty,2755.98,48.23,Amex
+2023-12-20,Zenith Labs,6397.94,111.96,Amex
+2023-12-16,Blackwood Realty,8094.08,141.65,Visa
+2023-12-13,Nippon Precision Ltd,7274.07,127.3,Amex
+2023-12-10,Halcyon Systems,4035.72,70.63,Visa
+2023-12-10,Halcyon Systems,6961.59,121.83,Visa
+2023-12-10,Halcyon Systems,4620.17,80.85,Visa
+2023-12-10,Halcyon Systems,7440.2,130.2,Visa
+2023-12-10,Global Trust Bank,7341.76,128.48,Amex
+2023-12-10,Global Trust Bank,2808.32,49.15,Mastercard
+2023-12-09,Nippon Precision Ltd,10162.52,177.84,Visa
+2023-12-09,Nippon Precision Ltd,5259.99,92.05,Mastercard
+2023-12-09,Nippon Precision Ltd,2542.86,44.5,Apple/Google Pay
+2023-12-05,Sunrise Logistics,7632.72,133.57,Visa
+2023-12-05,Sunrise Logistics,2408.13,42.14,Visa
+2023-12-05,Sunrise Logistics,3911.6,68.45,Mastercard
+2023-12-05,Sunrise Logistics,5330.04,93.28,Mastercard
+2023-11-30,Bright Path Foundation,2817.1,49.3,Mastercard
+2023-11-30,Harlow & Co.,1952.1,34.16,Mastercard
+2023-11-30,Harlow & Co.,4018.8,70.33,Visa
+2023-11-30,Harlow & Co.,3103.8,54.32,Mastercard
+2023-11-28,Meridian Pacific Trust,6612.05,115.71,Visa
+2023-11-28,Meridian Pacific Trust,1572.59,27.52,Amex
+2023-11-28,Meridian Pacific Trust,2716.66,47.54,Mastercard
+2023-11-26,Blackwood Realty,1752.45,30.67,Visa
+2023-11-26,Blackwood Realty,2619.26,45.84,Apple/Google Pay
+2023-11-26,Meridian Holdings Ltd.,2832.15,49.56,Mastercard
+2023-11-26,Blackwood Realty,5715.31,100.02,Mastercard
+2023-11-24,Zenith Labs,6041.15,105.72,Mastercard
+2023-11-17,Acme Corp,5949.29,104.11,Visa
+2023-11-17,Acme Corp,7425.53,129.95,Visa
+2023-11-16,Auckland Ventures Ltd,4728.19,82.74,Visa
+2023-11-12,Whitmore Textiles,2685.53,47,Apple/Google Pay
+2023-11-12,Whitmore Textiles,4848.31,84.85,Mastercard
+2023-11-10,Harlow & Co.,7209.24,126.16,Visa
+2023-11-09,Halcyon Systems,7935.78,138.88,Visa
+2023-11-09,Global Trust Bank,5897.69,103.21,Mastercard
+2023-11-09,Halcyon Systems,10530.19,184.28,Mastercard
+2023-11-09,Global Trust Bank,4330.4,75.78,Visa
+2023-11-09,Global Trust Bank,11829.24,207.01,Visa
+2023-11-08,Ganges Textile Exports,3601.66,63.03,Mastercard
+2023-11-08,Ganges Textile Exports,4943.35,86.51,Mastercard
+2023-11-06,Nova Materials,2183.64,38.21,Amex
+2023-11-06,Nova Materials,3680,64.4,Visa
+2023-11-06,Fentonville Council,1976.17,34.58,Mastercard
+2023-11-06,Fentonville Council,7916.92,138.55,Visa
+2023-11-06,Meridian Holdings Ltd.,11984.8,209.73,Mastercard
+2023-11-01,Fentonville Council,4666.52,81.66,Visa
+2023-11-01,Singapore Trading Group,11638,203.66,Amex
+2023-10-29,Okafor Mining Co.,3153.11,55.18,Mastercard
+2023-10-28,Vertex Industries,5484.52,95.98,Mastercard
+2023-10-28,Vertex Industries,2668.9,46.71,Mastercard
+2023-10-25,Nippon Precision Ltd,5665.84,99.15,Visa
+2023-10-23,Bright Path Foundation,13277.21,232.35,Visa
+2023-10-23,Bright Path Foundation,2560.59,44.81,Visa
+2023-10-14,Meridian Holdings Ltd.,2710.56,47.43,Mastercard
+2023-10-14,Meridian Holdings Ltd.,1904.79,33.33,Mastercard
+2023-10-14,Zenith Labs,6888.89,120.56,Visa
+2023-10-14,Zenith Labs,3695.41,64.67,Mastercard
+2023-10-14,Zenith Labs,7232.84,126.57,Visa
+2023-10-11,Harlow & Co.,3410.75,59.69,Visa
+2023-10-11,Harlow & Co.,5409.53,94.67,Visa
+2023-10-11,Harlow & Co.,2349.06,41.11,Amex
+2023-10-11,Harlow & Co.,7373.91,129.04,Apple/Google Pay
+2023-10-11,Harlow & Co.,6204.66,108.58,Apple/Google Pay
+2023-10-11,Harlow & Co.,11240.36,196.71,Amex
+2023-10-11,Harlow & Co.,4088.92,71.56,Visa
+2023-10-09,Acme Corp,4693.15,82.13,Visa
+2023-10-09,Acme Corp,9972.58,174.52,Mastercard
+2023-10-07,Ganges Textile Exports,1442.95,25.25,Visa
+2023-10-06,Nova Materials,2802.57,49.05,Visa
+2023-10-06,Nova Materials,7558.21,132.27,Apple/Google Pay
+2023-09-23,Zenith Labs,5738.88,100.43,Mastercard
+2023-09-23,Zenith Labs,7234.5,126.6,Amex
+2023-09-23,Zenith Labs,4480.24,78.4,Amex
+2023-09-15,Meridian Pacific Trust,5834.62,102.11,Visa
+2023-09-15,Meridian Pacific Trust,9116.73,159.54,Apple/Google Pay
+2023-09-13,Acme Corp,4840.78,84.71,Amex
+2023-09-13,Acme Corp,3500.11,61.25,Visa
+2023-09-13,Acme Corp,3789.49,66.32,Amex
+2023-09-13,Acme Corp,2480.38,43.41,Visa
+2023-09-09,Auckland Ventures Ltd,4939.72,86.45,Mastercard
+2023-09-09,Auckland Ventures Ltd,6330.6,110.79,Visa
+2023-09-09,Auckland Ventures Ltd,5249.98,91.87,Visa
+2023-09-09,Auckland Ventures Ltd,4667.66,81.68,Visa
+2023-09-03,Blackwood Realty,5326.02,93.21,Mastercard
+2023-09-02,London Capital Partners,2720.97,47.62,Amex
+2023-09-02,London Capital Partners,3686.33,64.51,Visa
+2023-09-02,Global Trust Bank,16356.71,286.24,Visa
+2023-09-02,Global Trust Bank,10094.84,176.66,Visa
+2023-09-01,Meridian Holdings Ltd.,1741.07,30.47,Amex
+2023-09-01,Delacroix & Sons,2872.01,50.26,Amex
+2023-09-01,Delacroix & Sons,7402.87,129.55,Visa
+2023-09-01,Delacroix & Sons,4082.55,71.44,Mastercard
+2023-09-01,Meridian Holdings Ltd.,1702.63,29.8,Visa
+2023-09-01,Delacroix & Sons,4860.57,85.06,Mastercard
+2023-09-01,Delacroix & Sons,2049.35,35.86,Visa
+2023-08-30,Delacroix & Sons,2372.51,41.52,Visa
+2023-08-30,Delacroix & Sons,5111.61,89.45,Apple/Google Pay
+2023-08-30,Delacroix & Sons,2645.05,46.29,Visa
+2023-08-26,Vertex Industries,2605.88,45.6,Mastercard
+2023-08-26,Vertex Industries,9557.83,167.26,Visa
+2023-08-26,Vertex Industries,4666.66,81.67,Amex
+2023-08-23,Meridian Holdings Ltd.,9850.1,172.38,Visa
+2023-08-22,Fentonville Council,3779.17,66.14,Visa
+2023-08-22,Fentonville Council,4329.98,75.77,Mastercard
+2023-08-10,Auckland Ventures Ltd,1975.45,34.57,Amex
+2023-08-10,Meridian Pacific Trust,4386.31,76.76,Mastercard
+2023-08-10,Auckland Ventures Ltd,4734.08,82.85,Mastercard
+2023-08-10,Acme Corp,3689.04,64.56,Visa
+2023-08-10,Auckland Ventures Ltd,2821.85,49.38,Mastercard
+2023-08-09,Halcyon Systems,4140.63,72.46,Mastercard
+2023-08-09,Halcyon Systems,7308.95,127.91,Amex
+2023-08-07,Okafor Mining Co.,4433.33,77.58,Mastercard
+2023-08-05,Auckland Ventures Ltd,8040.35,140.71,Visa
+2023-08-04,Global Trust Bank,5845.95,102.3,Mastercard
+2023-08-04,Global Trust Bank,7279.89,127.4,Mastercard
+2023-08-04,Okafor Mining Co.,3023.26,52.91,Mastercard
+2023-08-04,Okafor Mining Co.,10247.5,179.33,Amex
+2023-08-04,Global Trust Bank,9451.38,165.4,Visa
+2023-08-04,Global Trust Bank,5968.54,104.45,Apple/Google Pay
+2023-08-01,Blackwood Realty,2855.02,49.96,Mastercard
+2023-08-01,Blackwood Realty,8230.99,144.04,Visa
+2023-08-01,Blackwood Realty,4559.29,79.79,Visa
+2023-07-31,Acme Corp,2203.52,38.56,Visa
+2023-07-31,Acme Corp,4838.58,84.68,Mastercard
+2023-07-31,Acme Corp,5933.81,103.84,Mastercard
+2023-07-28,London Capital Partners,5894.21,103.15,Visa
+2023-07-25,Halcyon Systems,11070.89,193.74,Visa
+2023-07-25,Halcyon Systems,7361.97,128.83,Amex
+2023-07-25,Halcyon Systems,2371.21,41.5,Mastercard
+2023-07-22,Ganges Textile Exports,1892.85,33.12,Mastercard
+2023-07-22,Ganges Textile Exports,2605.56,45.6,Mastercard
+2023-07-22,Ganges Textile Exports,9356.55,163.74,Mastercard
+2023-07-22,Ganges Textile Exports,3119.67,54.59,Mastercard
+2023-07-21,Nippon Precision Ltd,6477.32,113.35,Amex
+2023-07-19,Singapore Trading Group,5206.71,91.12,Visa
+2023-07-19,Singapore Trading Group,4361.14,76.32,Mastercard
+2023-07-17,Nova Materials,2134.5,37.35,Mastercard
+2023-07-16,Harlow & Co.,2591.33,45.35,Amex
+2023-07-16,Harlow & Co.,5584.6,97.73,Mastercard
+2023-07-15,Meridian Holdings Ltd.,5104.84,89.33,Amex
+2023-07-12,Singapore Trading Group,7793.04,136.38,Apple/Google Pay
+2023-07-12,Singapore Trading Group,6636.47,116.14,Apple/Google Pay
+2023-07-12,Singapore Trading Group,6467.43,113.18,Mastercard
+2023-07-10,Zenith Labs,5466.93,95.67,Visa
+2023-07-10,Zenith Labs,6536.46,114.39,Mastercard
+2023-07-10,Zenith Labs,6718.49,117.57,Amex
+2023-07-10,Zenith Labs,5713.48,99.99,Mastercard
+2023-07-09,Vertex Industries,2865.79,50.15,Visa
+2023-07-09,Acme Corp,6060.75,106.06,Visa
+2023-07-09,Vertex Industries,4245.87,74.3,Visa
+2023-07-01,Whitmore Textiles,6620.99,115.87,Mastercard
+2023-07-01,Whitmore Textiles,3339.38,58.44,Mastercard

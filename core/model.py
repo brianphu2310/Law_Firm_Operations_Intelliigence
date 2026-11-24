@@ -9,7 +9,7 @@ period query weights months by the days it overlaps – so MTD / QTD / custom ra
 import numpy as np
 import pandas as pd
 
-from .ref import (AS_OF, START, PLAN_END, AREAS, ATTORNEYS, BRANCHES, CLIENTS, NAMED_MATTERS, NAMED_DEADLINES,
+from .ref import (AS_OF, START, PLAN_END, AREAS, ATTORNEYS, BRANCHES, CLIENTS, SUBURBS, CATCHMENT_KM, NAMED_MATTERS, NAMED_DEADLINES,
                   TRUST_TARGET, OFFICE_CASH_AT_AS_OF, SEARCH_TYPES, CARD_CATEGORIES, COMMISSIONS)
 
 SEED = 20250917
@@ -136,6 +136,13 @@ def build_model():
         return c
     ca = costs(act, d_a, coll_incl, True)
     cp = costs(pln, d_p, None, False)
+    # The budget was set before the year started, so its fixed lines carry the assumptions made then, not today's actuals:
+    # a fee-earner pay rise that has not been given yet, a support-staff vacancy, a rent review that has not been triggered,
+    # last year's software prices and a higher insurance premium.
+    for k_, m_ in (("payroll_fee", 1.012), ("payroll_support", 0.985), ("rent", 1.03), ("software", 0.96), ("insurance", 1.06)):
+        cp[k_] = cp[k_] * m_
+    cp["total_costs"] = sum(cp[k_] for k_ in COST_LINES)
+    cp["op_profit"] = cp["revenue"] - cp["total_costs"]
 
     # ---------------- cash: collections in, costs + GST credits + BAS + drawings out ----------------
     gst_net = GST * ca["revenue"] - ca["gst_credits"]
@@ -201,6 +208,7 @@ def build_model():
              H=H, H_exp=H_exp, active=active, fees_ak=fees_ak, V_ak=act["V_ak"], rate=rate, S=S)
     _gen_trust(rng, M)
     _gen_matters(rng, M)
+    _assign_suburbs(M)
     _gen_detail_tables(rng, M)
     return M
 
@@ -408,6 +416,27 @@ def _gen_matters(rng, M):
 # =====================================================================================
 # Detail tables that tie to monthly totals: searches, council searches, cards, RapidPay
 # =====================================================================================
+def km(lat1, lon1, lat2, lon2):
+    """Great-circle distance in km."""
+    p1, p2 = np.radians(lat1), np.radians(lat2)
+    a = np.sin((p2 - p1) / 2) ** 2 + np.cos(p1) * np.cos(p2) * np.sin(np.radians(lon2 - lon1) / 2) ** 2
+    return 2 * 6371.0 * np.arcsin(np.sqrt(a))
+
+
+def _assign_suburbs(M):
+    """Client suburb for every Australian matter. Its own random stream, so the rest of the sample data is unchanged."""
+    rng = np.random.default_rng(SEED + 101)
+    m = M["matters"].copy()
+    sub = pd.DataFrame(SUBURBS, columns=["suburb", "lat", "lon", "population"])
+    office = {b["name"]: (b["lat"], b["lon"]) for b in BRANCHES}
+    probs = {}
+    for b, (la, lo) in office.items():
+        w = sub["population"] * np.exp(-km(la, lo, sub["lat"], sub["lon"]) / CATCHMENT_KM)
+        probs[b] = (w / w.sum()).values
+    m["suburb"] = [str(rng.choice(sub["suburb"], p=probs[b])) if c == "Australia" else None for b, c in zip(m["branch"], m["country"])]
+    M["matters"] = m
+
+
 def _gen_detail_tables(rng, M):
     months, T_act, frac, fin = M["months"], M["T_act"], M["frac"], M["fin"]
     mt = M["matters"]

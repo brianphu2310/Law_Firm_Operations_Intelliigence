@@ -1,0 +1,21 @@
+table 'L Support added'
+
+	column 'Support staff added'
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Support staff added]
+
+	partition 'L Support added' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Support staff added", INTEGER,
+				    {
+				    { 0 },
+				    { 1 },
+				    { 2 },
+				    { 3 }
+				    }
+				)

@@ -9,7 +9,7 @@ PLAN_END = pd.Timestamp("2026-06-01")        # last budget month (FY26 ends 30 J
 FY_START_MONTH = 7                           # Australian financial year: 1 Jul – 30 Jun
 
 AREAS = ["Corporate", "Litigation", "IP Portfolio", "Employment", "Advisory"]
-NAV_ITEMS = ["Overview", "Matters", "Clients", "Calendar", "Finance", "Team", "Transition", "Pipeline", "Simulator"]
+NAV_ITEMS = ["Overview", "Finance", "People", "Matters", "Clients", "Calendar", "Simulator"]
 USER_NAME, USER_ROLE = "Brian Phu", "Financial Analyst"
 
 BRANCHES = [
@@ -18,6 +18,28 @@ BRANCHES = [
     {"name": "Liverpool", "lat": -33.9209, "lon": 150.8809, "council": "Liverpool City Council", "support": 7, "rent": 8200},
 ]
 BRANCH_NAMES = [b["name"] for b in BRANCHES]
+
+# Where matters come from (sample data): suburbs of Western, South-Western and North-Western Sydney with approximate
+# coordinates and a rounded, indicative population. Each Australian matter is given a client suburb, drawn by population and
+# by distance from the office that handles it (people use a nearby office). Used for the catchment map and branch-site analysis.
+SUBURBS = [
+    # name, lat, lon, population (approx., rounded)
+    ("Richmond", -33.600, 150.752, 6000), ("North Richmond", -33.587, 150.718, 5000), ("Windsor", -33.612, 150.818, 2000),
+    ("Riverstone", -33.676, 150.862, 8000), ("Schofields", -33.700, 150.870, 27000), ("Marsden Park", -33.695, 150.836, 15000),
+    ("Rouse Hill", -33.682, 150.915, 7000), ("Kellyville", -33.712, 150.957, 28000), ("Castle Hill", -33.730, 151.004, 39000),
+    ("Quakers Hill", -33.735, 150.885, 26000), ("Blacktown", -33.771, 150.906, 47000), ("Rooty Hill", -33.772, 150.844, 13000),
+    ("Mount Druitt", -33.769, 150.819, 17000), ("St Marys", -33.763, 150.774, 12000), ("Kingswood", -33.759, 150.720, 9000),
+    ("Penrith", -33.751, 150.694, 14000), ("Glenmore Park", -33.790, 150.670, 23000), ("Parramatta", -33.815, 151.001, 30000),
+    ("Merrylands", -33.836, 150.992, 28000), ("Smithfield", -33.851, 150.942, 11000), ("Bossley Park", -33.862, 150.884, 15000),
+    ("Fairfield", -33.872, 150.956, 18000), ("Cabramatta", -33.894, 150.937, 21000), ("Green Valley", -33.903, 150.867, 21000),
+    ("Liverpool", -33.920, 150.923, 31000), ("Bankstown", -33.918, 151.035, 34000), ("Prestons", -33.942, 150.871, 17000),
+    ("Casula", -33.950, 150.900, 17000), ("Edmondson Park", -33.966, 150.861, 15000), ("Leppington", -33.954, 150.810, 10000),
+    ("Ingleburn", -33.998, 150.866, 14000), ("Macquarie Fields", -33.993, 150.887, 13000), ("Oran Park", -33.994, 150.739, 15000),
+    ("Minto", -34.028, 150.846, 12000), ("Harrington Park", -34.025, 150.725, 11000), ("Narellan", -34.042, 150.735, 12000),
+    ("Mount Annan", -34.053, 150.759, 11000), ("Camden", -34.054, 150.696, 3000), ("Campbelltown", -34.065, 150.814, 13000),
+    ("Picton", -34.170, 150.612, 5000),
+]
+CATCHMENT_KM = 10.0       # how fast demand falls with distance from the office that handles the matter (exp(-d / 10 km))
 BRANCH_COUNCIL = {b["name"]: b["council"] for b in BRANCHES}
 
 # base = monthly billable hours at the Sep-2025 run-rate; real_factor = relative realisation vs firm average
@@ -155,4 +177,48 @@ CARD_CATEGORIES = {  # (share of card spend, typical merchants)
     "Fuel": (0.08, ["Ampol", "Shell", "BP"]),
     "Equipment": (0.10, ["JB Hi-Fi", "Harvey Norman", "Apple"]),
     "Office Maintenance": (0.08, ["Bunnings", "Coles", "Cleanaway"]),
+}
+
+# ------------------------------------------------------------------ decision inputs (assumptions, shown in the app) ----
+# Support staff by department and branch (sums to each branch's "support" count above). Monthly all-in cost per role is
+# illustrative and averages close to the $5,400 the P&L model uses for support payroll.
+DEPT_PAY = {"Reception & admin": 4650, "Paralegals & clerks": 5600, "Accounts & trust": 5900, "Marketing": 5900}
+DEPARTMENTS = {
+    "Richmond": {"Reception & admin": 1, "Paralegals & clerks": 2, "Accounts & trust": 1},
+    "Camden": {"Reception & admin": 3, "Paralegals & clerks": 2, "Accounts & trust": 1},
+    "Liverpool": {"Reception & admin": 1, "Paralegals & clerks": 3, "Accounts & trust": 2, "Marketing": 1},
+}
+# Workload each role can carry in a year (benchmarks are assumptions for the method, not industry standards)
+DEPT_DRIVERS = {
+    "Reception & admin": dict(driver="Inquiries a year", per_fte=600, base_per_branch=1.0,
+                              note="one front desk per office, plus one more for every 600 inquiries a year"),
+    "Paralegals & clerks": dict(driver="Active matters", per_fte=22, base_per_branch=0.0, note="one for every 22 active matters"),
+    "Accounts & trust": dict(driver="Invoices, receipts and supplier orders a year", per_fte=1000, base_per_branch=0.0, firm_wide=True,
+                             note="one for every 1,000 invoices, trust receipts and supplier orders a year, plus payroll, BAS and reconciliations (firm-wide team)"),
+    "Marketing": dict(driver="Marketing and referral spend a year", per_fte=150000, base_per_branch=0.0, firm_wide=True,
+                      note="one for every $150K of marketing and referral spend a year"),
+}
+PARALEGAL_LEVERAGE_HOURS = 200     # billable hours a year a new paralegal frees up for fee earners (assumption)
+# Australian private-sector wages rose 3.4% in the year to the September quarter 2026 (ABS Wage Price Index, released 18 Nov 2026)
+MARKET_WAGE_GROWTH = 0.034
+
+# Where new clients come from. spend = share of the marketing budget (referrals are paid by commission instead);
+# inquiries = share of inquiries; conv = inquiry-to-matter conversion relative to the firm average; value = fee per matter relative to average.
+MARKETING_CHANNELS = {
+    "Google Ads": dict(spend=0.40, inquiries=0.30, conv=0.70, value=0.80),
+    "Website & SEO": dict(spend=0.20, inquiries=0.20, conv=1.00, value=1.00),
+    "Referrals": dict(spend=0.00, inquiries=0.30, conv=1.50, value=1.40),
+    "LinkedIn & social": dict(spend=0.25, inquiries=0.12, conv=0.60, value=0.90),
+    "Events & community": dict(spend=0.15, inquiries=0.08, conv=1.10, value=1.00),
+}
+MARKETING_EFFICIENCY = 0.4         # extra spend buys inquiries at 40% of the channel's current rate (diminishing returns)
+FIRST_YEAR_BILLING = 0.35          # share of a new matter's typical fees billed in the year it arrives (matters arrive through the year)
+
+# New matter types the firm could open. fee = average fee per matter; mature = matters a month at full speed;
+# ramp = months to reach it; staff = who it needs; launch = one-off launch campaign; monthly = ongoing marketing a month.
+NEW_AREAS = {
+    "Wills & Estates": dict(fee=2800, mature=18, ramp=12, role="Associate", support=0, launch=25000, monthly=3000),
+    "Family Law": dict(fee=14000, mature=4, ramp=9, role="Senior Associate", support=0, launch=30000, monthly=4000),
+    "Property & Conveyancing": dict(fee=1900, mature=20, ramp=6, role="Associate", support=1, launch=20000, monthly=3000),
+    "Commercial Leasing": dict(fee=6500, mature=6, ramp=9, role="Associate", support=0, launch=10000, monthly=1500),
 }

@@ -1,0 +1,60 @@
+table Branch
+
+	column branch_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: branch_key
+
+	column branch_name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: branch_name
+
+	column council_area
+		dataType: string
+		summarizeBy: none
+		sourceColumn: council_area
+
+	column latitude
+		dataType: double
+		formatString: #,0.0
+		dataCategory: Latitude
+		summarizeBy: none
+		sourceColumn: latitude
+
+	column longitude
+		dataType: double
+		formatString: #,0.0
+		dataCategory: Longitude
+		summarizeBy: none
+		sourceColumn: longitude
+
+	column support_headcount
+		dataType: double
+		formatString: #,0
+		summarizeBy: none
+		sourceColumn: support_headcount
+
+	column base_monthly_rent
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: base_monthly_rent
+
+	column Place = [branch_name] & " NSW, Australia"
+		dataType: string
+		dataCategory: Place
+		summarizeBy: none
+
+	partition Branch = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(BaseUrl, [RelativePath = "data/warehouse/dim_branch.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, {"branch_key", "latitude", "longitude", "support_headcount", "base_monthly_rent"}),
+				    Typed = Table.TransformColumnTypes(Blanks, {{"branch_key", Int64.Type}, {"branch_name", type text}, {"council_area", type text}, {"latitude", type number}, {"longitude", type number}, {"support_headcount", type number}, {"base_monthly_rent", type number}}, "en-US")
+				in
+				    Typed

@@ -1,0 +1,39 @@
+table 'L Branch fit-out'
+
+	column 'Branch fit-out'
+		dataType: int64
+		formatString: $#,0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Branch fit-out]
+
+	partition 'L Branch fit-out' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Branch fit-out", INTEGER,
+				    {
+				    { 40000 },
+				    { 50000 },
+				    { 60000 },
+				    { 70000 },
+				    { 80000 },
+				    { 90000 },
+				    { 100000 },
+				    { 110000 },
+				    { 120000 },
+				    { 130000 },
+				    { 140000 },
+				    { 150000 },
+				    { 160000 },
+				    { 170000 },
+				    { 180000 },
+				    { 190000 },
+				    { 200000 },
+				    { 210000 },
+				    { 220000 },
+				    { 230000 },
+				    { 240000 },
+				    { 250000 }
+				    }
+				)

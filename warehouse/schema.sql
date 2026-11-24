@@ -36,6 +36,17 @@ CREATE TABLE dim_branch (
     base_monthly_rent REAL NOT NULL
 );
 
+-- Client suburbs (sample data), with the nearest existing office and the straight-line distance to it.
+CREATE TABLE dim_suburb (
+    suburb_key            INTEGER PRIMARY KEY,
+    suburb                TEXT NOT NULL UNIQUE,
+    latitude              REAL NOT NULL,
+    longitude             REAL NOT NULL,
+    population            INTEGER NOT NULL,           -- approximate, rounded; weights the sample data only
+    nearest_branch_key    INTEGER NOT NULL REFERENCES dim_branch (branch_key),
+    km_to_nearest_branch  REAL NOT NULL
+);
+
 CREATE TABLE dim_practice_area (
     practice_area_key INTEGER PRIMARY KEY,
     practice_area     TEXT NOT NULL UNIQUE
@@ -78,6 +89,7 @@ CREATE TABLE dim_matter (
     attorney_key      INTEGER NOT NULL REFERENCES dim_attorney (attorney_key),
     branch_key        INTEGER NOT NULL REFERENCES dim_branch (branch_key),
     country           TEXT NOT NULL,
+    suburb_key        INTEGER REFERENCES dim_suburb (suburb_key),   -- client suburb; NULL for overseas clients
     status            TEXT NOT NULL CHECK (status IN ('Open', 'On Hold', 'Closed')),
     opened_date_key   INTEGER NOT NULL REFERENCES dim_date (date_key),
     closed_date_key   INTEGER REFERENCES dim_date (date_key),   -- NULL unless Closed
@@ -196,6 +208,56 @@ CREATE TABLE fact_trust_txn (
     txn_type       TEXT NOT NULL CHECK (txn_type IN ('Deposit', 'Disbursement')),
     amount         REAL NOT NULL,                    -- signed: deposits +, disbursements -
     CHECK ((txn_type = 'Deposit' AND amount > 0) OR (txn_type = 'Disbursement' AND amount < 0))
+);
+
+-- Grain: one support department (the roles behind the fee earners). Pay and workload benchmarks are assumptions.
+CREATE TABLE dim_department (
+    department_key   INTEGER PRIMARY KEY,
+    department       TEXT NOT NULL UNIQUE,
+    monthly_pay      REAL NOT NULL CHECK (monthly_pay > 0),
+    workload_driver  TEXT NOT NULL,
+    workload_per_fte REAL NOT NULL CHECK (workload_per_fte > 0),
+    base_per_office  REAL NOT NULL,                  -- minimum roles per office regardless of workload
+    is_firm_wide     INTEGER NOT NULL CHECK (is_firm_wide IN (0, 1))
+);
+
+-- Grain: support headcount per office and department at the as-of date.
+CREATE TABLE fact_staffing (
+    branch_key     INTEGER NOT NULL REFERENCES dim_branch (branch_key),
+    department_key INTEGER NOT NULL REFERENCES dim_department (department_key),
+    headcount      INTEGER NOT NULL CHECK (headcount >= 0),
+    PRIMARY KEY (branch_key, department_key)
+);
+
+-- Grain: one marketing channel. Shares split the firm's real totals; they are assumptions.
+CREATE TABLE dim_marketing_channel (
+    channel_key       INTEGER PRIMARY KEY,
+    channel           TEXT NOT NULL UNIQUE,
+    spend_share       REAL NOT NULL,                 -- share of the marketing budget (referrals are paid by commission instead)
+    inquiry_share     REAL NOT NULL,
+    conversion_factor REAL NOT NULL,                 -- inquiry-to-matter conversion relative to the firm average
+    value_factor      REAL NOT NULL                  -- fees per matter relative to the firm average
+);
+
+-- Grain: intake funnel per month (actual months, current month pro-rated like the P&L).
+CREATE TABLE fact_monthly_funnel (
+    month_start_date_key INTEGER PRIMARY KEY REFERENCES dim_date (date_key),
+    month_fraction_elapsed REAL NOT NULL,
+    inquiries            REAL NOT NULL,
+    consultations_booked REAL NOT NULL,
+    consultations_held   REAL NOT NULL,
+    letters_sent         REAL NOT NULL,
+    matters_opened       REAL NOT NULL
+);
+
+-- Grain: one search or council order placed with a supplier (the accounts team posts each one as a disbursement).
+CREATE TABLE fact_supplier_order (
+    order_key      INTEGER PRIMARY KEY,
+    supplier       TEXT NOT NULL CHECK (supplier IN ('InfoTrack', 'Council')),
+    order_date_key INTEGER NOT NULL REFERENCES dim_date (date_key),
+    branch_key     INTEGER NOT NULL REFERENCES dim_branch (branch_key),
+    search_type    TEXT NOT NULL,
+    amount         REAL NOT NULL CHECK (amount >= 0)
 );
 
 -- ------------------------------------------------------------------- indexes

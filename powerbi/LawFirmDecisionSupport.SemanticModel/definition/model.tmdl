@@ -1,0 +1,112 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-AU
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+ref table Date
+ref table Branch
+ref table Attorney
+ref table Client
+ref table Department
+ref table Channel
+ref table Matter
+ref table Suburb
+ref table 'Practice Area'
+ref table Scenario
+ref table 'Attorney Month'
+ref table Invoice
+ref table 'Matter Position'
+ref table Funnel
+ref table PnL
+ref table Snapshot
+ref table Staffing
+ref table 'Supplier Order'
+ref table 'Time by Area'
+ref table 'Trust Balance'
+ref table 'Trust Txn'
+ref table Period
+ref table 'Period Month'
+ref table 'Period Balance'
+ref table 'Monthly Extra'
+ref table 'Where to Hire'
+ref table 'Dept Workload'
+ref table Marketing
+ref table Decisions
+ref table 'Client Period'
+ref table 'AR Ageing'
+ref table 'Branch Period'
+ref table 'Cash Forecast'
+ref table 'FY Outlook'
+ref table 'FY Summary'
+ref table Deadlines
+ref table Cards
+ref table RapidPay
+ref table Commissions
+ref table Platforms
+ref table 'Platform Cashflow'
+ref table 'Platform Scores'
+ref table 'Platform Risks'
+ref table 'Platform Gantt'
+ref table 'Platform NPV Grid'
+ref table 'Sim Expected'
+ref table Answers
+ref table 'Answer Chart'
+ref table 'Branch Sites'
+ref table 'P&L Line'
+ref table 'Funnel Stage'
+ref table 'Country Geo'
+ref table 'Key Measures'
+ref table 'L Utilisation'
+ref table 'L Rates'
+ref table 'L Realisation'
+ref table 'L Recovery'
+ref table 'L Overheads'
+ref table 'L Days to collect'
+ref table 'L Hires'
+ref table 'L Hire role'
+ref table 'L Hire productivity'
+ref table 'L Hire area'
+ref table 'L Fee earners leaving'
+ref table 'L Leaving role'
+ref table 'L Work kept'
+ref table 'L Support cut'
+ref table 'L Years of service'
+ref table 'L Department'
+ref table 'L Support added'
+ref table 'L Fee-earner pay'
+ref table 'L Support pay'
+ref table 'L Channel'
+ref table 'L Extra marketing'
+ref table 'L New matter type on'
+ref table 'L Matter type'
+ref table 'L New branch on'
+ref table 'L Branch fee earners'
+ref table 'L Branch support'
+ref table 'L Branch rent'
+ref table 'L Branch fit-out'
+ref table 'L Branch ramp-up'
+ref table 'L Platform'
+ref table 'Sim Preset'
+ref table 'Sim Compare'
+ref table 'Sim Delivery'
+ref table 'Sim Goal Lever'
+ref table 'Sim Goal Step'
+ref table 'Sim Goal Target'
+ref table 'Sim Goal Uplift'
+ref table 'Sim Role'
+ref table 'Sim Area'
+ref table 'Sim Department'
+ref table 'Sim Channel'
+ref table 'Sim Platform'
+ref table 'Sim New Area'
+ref table 'Sim Lever Test'
+ref table 'Sim Bridge Step'
+ref table 'Sim Effect Line'
+ref table 'Sim Goal Row'
+ref table 'Sim Assumption'
+ref table Simulator

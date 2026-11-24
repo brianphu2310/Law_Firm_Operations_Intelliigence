@@ -34,8 +34,8 @@ def result(con, stem):
     return [dict(zip(cols, r)) for r in rows]
 
 
-def test_between_8_and_10_queries_exist():
-    assert 8 <= len(FILES) <= 10
+def test_fourteen_queries_exist():
+    assert len(FILES) == 14
 
 
 @pytest.mark.parametrize("path", FILES, ids=[p.stem for p in FILES])
@@ -170,3 +170,54 @@ def test_csv_has_header_and_rows(tmp_path, con):
     with open(tmp_path / "06_client_concentration.csv", newline="") as f:
         r = list(csv.reader(f))
     assert r[0][0] == "client_rank" and len(r) == 24
+
+
+# ------------------------------------------------------------ the Principal's decisions: SQL agrees with the app
+def test_where_to_hire_matches_the_app(con):
+    rows = result(con, "11_where_to_hire")
+    pa = X.practice_area_table(M)
+    assert [r["practice_area"] for r in rows] == list(pa.index)
+    for r in rows:
+        a = pa.loc[r["practice_area"]]
+        assert r["matters_opened_12m"] == a["matters_opened"]
+        assert r["lawyer_utilisation_pct"] == pytest.approx(100 * a["util"], abs=0.1)
+        assert r["margin_pct"] == pytest.approx(100 * a["margin"], abs=0.5)        # SQL allocates salary monthly, the app over the year
+        assert r["verdict"] == a["verdict"]
+
+
+def test_support_staffing_matches_the_app(con):
+    rows = result(con, "12_support_staffing")
+    dt = X.department_table(M).set_index(["branch", "department"])
+    assert len(rows) == len(dt)
+    for r in rows:
+        d = dt.loc[(r["office"], r["department"])]
+        assert r["headcount"] == d["headcount"] and r["status"] == d["status"]
+        assert r["roles_needed"] == pytest.approx(d["needed"], abs=0.05)
+
+
+def test_marketing_channels_match_the_app(con):
+    rows = result(con, "13_marketing_channels")
+    mk = X.marketing_table(M)
+    assert {r["channel"] for r in rows} == set(mk.index)
+    for r in rows:
+        m = mk.loc[r["channel"]]
+        assert r["spend_12m"] == pytest.approx(m["spend"], abs=1)
+        assert r["cost_per_new_matter"] == pytest.approx(m["cost_per_matter"], abs=1)
+        assert r["fees_from_new_matters"] == pytest.approx(m["fees"], abs=1)
+    assert rows[0]["channel"] == mk["cost_per_matter"].idxmin()
+
+
+def test_branch_site_query_matches_the_python_analysis(con):
+    """The SQL branch-site ranking and core.catchment (which feeds Power BI) agree row for row."""
+    from core.catchment import branch_sites
+    sql = result(con, "14_branch_site")
+    py = branch_sites(M).to_dict("records")
+    assert [r["candidate_site"] for r in sql] == [r["candidate_site"] for r in py]
+    for a, b in zip(sql, py):
+        assert a["underserved_matters_ltm"] == b["underserved_matters_ltm"] and a["site_rank"] == b["site_rank"]
+        assert abs(a["est_value_ltm"] - b["est_value_ltm"]) < 1 and a["nearest_office"] == b["nearest_office"]
+
+
+def test_every_australian_matter_has_a_suburb_and_overseas_ones_do_not(con):
+    bad = con.execute("SELECT COUNT(*) FROM dim_matter WHERE (country = 'Australia') <> (suburb_key IS NOT NULL)").fetchone()[0]
+    assert bad == 0

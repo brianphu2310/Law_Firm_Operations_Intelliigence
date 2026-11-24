@@ -1,0 +1,91 @@
+table 'Client Period'
+
+	column Period
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Period
+
+	column client
+		dataType: string
+		summarizeBy: none
+		sourceColumn: client
+
+	column practice
+		dataType: string
+		summarizeBy: none
+		sourceColumn: practice
+
+	column attorney
+		dataType: string
+		summarizeBy: none
+		sourceColumn: attorney
+
+	column since
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: since
+
+	column country
+		dataType: string
+		summarizeBy: none
+		sourceColumn: country
+
+	column revenue
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: revenue
+
+	column prev
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: prev
+
+	column ar
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: ar
+
+	column overdue
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: overdue
+
+	column days_to_pay
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: days_to_pay
+
+	column active_matters
+		dataType: double
+		formatString: #,0
+		summarizeBy: none
+		sourceColumn: active_matters
+
+	column since_start
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: since_start
+
+	column share
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: share
+
+	partition 'Client Period' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(BaseUrl, [RelativePath = "data/powerbi/clients.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, {"since", "revenue", "prev", "ar", "overdue", "days_to_pay", "active_matters", "since_start", "share"}),
+				    Typed = Table.TransformColumnTypes(Blanks, {{"Period", type text}, {"client", type text}, {"practice", type text}, {"attorney", type text}, {"since", Int64.Type}, {"country", type text}, {"revenue", type number}, {"prev", type number}, {"ar", type number}, {"overdue", type number}, {"days_to_pay", type number}, {"active_matters", type number}, {"since_start", type number}, {"share", type number}}, "en-US")
+				in
+				    Typed

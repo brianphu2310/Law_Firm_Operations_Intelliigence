@@ -12,9 +12,6 @@ Thumbs.db
 # Local SQLite warehouse (rebuild with: python -m warehouse.build)
 warehouse.db
 *.db-journal
-
-# Integration layer (rebuild with: python -m integration.extract_load && python -m integration.quality)
-integration/law_firm.duckdb
-integration/law_firm.duckdb.wal
-.n8n_data/
-.env
+# Power BI Desktop local files
+powerbi/**/.pbi/localSettings.json
+powerbi/**/.pbi/cache.abf

@@ -1,38 +1,26 @@
 # Stakeholders and RACI
 
-All roles are generic; the firm and people are fictional.
+## Stakeholders
 
-## Stakeholder map
-
-| Stakeholder | Interest in the cut-over | Influence | Engagement |
+| Stakeholder | Interest | Influence | What they need from this |
 |---|---|---|---|
-| Principal / Managing Partner | Regulatory exposure, cost of the change, client service | High | Decides go / no-go; weekly status |
-| Trust Account Manager | Balanced r48 statements, no ledger in debit | High | Daily during August close; owns trust findings |
-| Finance / Accounts Officer | Open invoices, MYOB tie-out, disbursements billed | Medium | Daily; owns revenue and supplier findings |
-| Practice Manager | Matters migrated and typed correctly, staff ready | Medium | Owns matter findings and the Transition page |
-| Conveyancers and solicitors | Matters, searches and trust work keep flowing | Low | Told what changes; report anomalies |
-| Smokeball / triConvey migration team | Clean migration, on-time go-live | Medium | Final collection, opening balances, fixes |
-| TriSearch account manager | Orders placed and charged correctly | Low | Auto-disbursement setting, order exports |
-| External trust account examiner | Records complete and reconciled | High (after the event) | Receives records on request |
+| Principal | Profit, growth, risk | High | One answer per decision, with the cash impact |
+| Partners (branch leads) | Their branch's results and staff | High | Branch and staffing views they can challenge |
+| Practice Manager / General Manager | Staffing, pay review, suppliers | Medium | Department workload, pay cost, platform comparison |
+| Financial Analyst / Accountant | Numbers that reconcile | Medium | SQL and Excel that tie to the dashboard |
+| Marketing coordinator | Budget and channels | Low | Cost per new matter by channel |
+| Support staff | Job security, pay | Low (affected) | Fair process, NES entitlements respected |
+| External: Fair Work rules, award | Compliance | High (constraint) | Redundancy and notice at least the NES minimum |
 
-## RACI
+## RACI by decision
 
-R = responsible (does the work) · A = accountable (one per row) · C = consulted · I = informed
+R = responsible, A = accountable, C = consulted, I = informed.
 
-| Activity | Principal | Trust Acct Mgr | Finance Officer | Practice Mgr | Vendor | Business Analyst |
+| Decision | Principal | Partners | Practice / General Manager | Financial Analyst | Marketing | Staff |
 |---|---|---|---|---|---|---|
-| Approve scope and cut-over date | A | C | C | C | C | R |
-| Final collection and LEAP freeze | I | C | C | A | R | I |
-| Map matter types | I | I | C | A | R | R |
-| Key trust opening balances | I | A | C | I | R | I |
-| Run cut-over reconciliations (pipeline) | I | C | C | I | I | A / R |
-| Fix matter and invoice findings | I | I | R | A | C | C |
-| Fix trust findings and lodge August r48 | I | A / R | C | I | C | C |
-| Fix supplier disbursement findings | I | I | A / R | C | C | C |
-| Maintain exceptions log | I | C | C | C | I | A / R |
-| Go / no-go decision | A | C | C | C | C | R |
-| Post-cut-over review | A | C | C | C | I | R |
-
-**Why the BA owns the exceptions log but not the fixes:** the people who can correct a trust ledger or re-bill a
-disbursement are the Trust Account Manager and the Finance Officer. The BA's job is to make sure every finding is found,
-explained, assigned and closed.
+| D1 Switch software | A | C | R | R (NPV, payback) | I | I |
+| D2 Open a branch | A | R | C | R (payback, cash) | C | I |
+| D3 Hire, and where | A | R | C | R (where to hire) | I | I |
+| D4 Support staffing | A | C | R | R (workload, NES cost) | I | C (consultation) |
+| D5 Pay review | A | C | R | R (cost, funding) | I | I |
+| D6 Marketing, new service | A | C | C | R (channel cost, payback) | R | I |

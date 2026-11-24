@@ -1,0 +1,84 @@
+table 'FY Summary'
+
+	column budget_rev
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: budget_rev
+
+	column budget_cost
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: budget_cost
+
+	column budget_op
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: budget_op
+
+	column fc_rev
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: fc_rev
+
+	column fc_cost
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: fc_cost
+
+	column fc_op
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: fc_op
+
+	column r_rev
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: r_rev
+
+	column r_cost
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: r_cost
+
+	column ytd_rev
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: ytd_rev
+
+	column ytd_budget_rev
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: ytd_budget_rev
+
+	column ytd_op
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: ytd_op
+
+	column ytd_budget_op
+		dataType: double
+		formatString: \$#,0;-\$#,0;\$0
+		summarizeBy: none
+		sourceColumn: ytd_budget_op
+
+	partition 'FY Summary' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(BaseUrl, [RelativePath = "data/powerbi/fy_summary.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, {"budget_rev", "budget_cost", "budget_op", "fc_rev", "fc_cost", "fc_op", "r_rev", "r_cost", "ytd_rev", "ytd_budget_rev", "ytd_op", "ytd_budget_op"}),
+				    Typed = Table.TransformColumnTypes(Blanks, {{"budget_rev", type number}, {"budget_cost", type number}, {"budget_op", type number}, {"fc_rev", type number}, {"fc_cost", type number}, {"fc_op", type number}, {"r_rev", type number}, {"r_cost", type number}, {"ytd_rev", type number}, {"ytd_budget_rev", type number}, {"ytd_op", type number}, {"ytd_budget_op", type number}}, "en-US")
+				in
+				    Typed

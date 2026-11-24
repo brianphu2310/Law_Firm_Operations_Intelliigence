@@ -1,0 +1,25 @@
+table 'L Branch ramp-up'
+
+	column 'Months to full productivity'
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Months to full productivity]
+
+	partition 'L Branch ramp-up' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Months to full productivity", INTEGER,
+				    {
+				    { 3 },
+				    { 6 },
+				    { 9 },
+				    { 12 },
+				    { 15 },
+				    { 18 },
+				    { 21 },
+				    { 24 }
+				    }
+				)

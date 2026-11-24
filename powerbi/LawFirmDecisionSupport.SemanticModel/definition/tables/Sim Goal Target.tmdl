@@ -1,0 +1,26 @@
+table 'Sim Goal Target'
+
+	column Target
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Target]
+		sortByColumn: Order
+
+	column Order
+		dataType: int64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Order]
+
+	partition 'Sim Goal Target' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Target", STRING, "Order", INTEGER,
+				    {
+				    { "FY26 budget profit", 1 },
+				    { "FY26 budget margin", 2 },
+				    { "Today's profit plus extra", 3 }
+				    }
+				)

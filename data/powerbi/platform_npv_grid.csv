@@ -1,0 +1,85 @@
+Platform,Volume,VolumeOrder,Realisation,RealisationOrder,NPV
+LEAP + InfoTrack (current),80% of today's searches,1,25%,1,0
+LEAP + InfoTrack (current),80% of today's searches,1,50%,2,0
+LEAP + InfoTrack (current),80% of today's searches,1,75%,3,0
+LEAP + InfoTrack (current),80% of today's searches,1,100%,4,0
+LEAP + InfoTrack (current),100% of today's searches,2,25%,1,0
+LEAP + InfoTrack (current),100% of today's searches,2,50%,2,0
+LEAP + InfoTrack (current),100% of today's searches,2,75%,3,0
+LEAP + InfoTrack (current),100% of today's searches,2,100%,4,0
+LEAP + InfoTrack (current),120% of today's searches,3,25%,1,0
+LEAP + InfoTrack (current),120% of today's searches,3,50%,2,0
+LEAP + InfoTrack (current),120% of today's searches,3,75%,3,0
+LEAP + InfoTrack (current),120% of today's searches,3,100%,4,0
+triConvey + triSearch,80% of today's searches,1,25%,1,41013.842145
+triConvey + triSearch,80% of today's searches,1,50%,2,65928.831669
+triConvey + triSearch,80% of today's searches,1,75%,3,90843.821193
+triConvey + triSearch,80% of today's searches,1,100%,4,115758.810717
+triConvey + triSearch,100% of today's searches,2,25%,1,44270.935998
+triConvey + triSearch,100% of today's searches,2,50%,2,69185.925522
+triConvey + triSearch,100% of today's searches,2,75%,3,94100.915046
+triConvey + triSearch,100% of today's searches,2,100%,4,119015.90457
+triConvey + triSearch,120% of today's searches,3,25%,1,47528.02985
+triConvey + triSearch,120% of today's searches,3,50%,2,72443.019374
+triConvey + triSearch,120% of today's searches,3,75%,3,97358.008898
+triConvey + triSearch,120% of today's searches,3,100%,4,122272.998422
+Smokeball + GlobalX,80% of today's searches,1,25%,1,23750.584571
+Smokeball + GlobalX,80% of today's searches,1,50%,2,107936.974849
+Smokeball + GlobalX,80% of today's searches,1,75%,3,192123.365128
+Smokeball + GlobalX,80% of today's searches,1,100%,4,276309.755407
+Smokeball + GlobalX,100% of today's searches,2,25%,1,21869.01834
+Smokeball + GlobalX,100% of today's searches,2,50%,2,106055.408619
+Smokeball + GlobalX,100% of today's searches,2,75%,3,190241.798898
+Smokeball + GlobalX,100% of today's searches,2,100%,4,274428.189177
+Smokeball + GlobalX,120% of today's searches,3,25%,1,19987.45211
+Smokeball + GlobalX,120% of today's searches,3,50%,2,104173.842389
+Smokeball + GlobalX,120% of today's searches,3,75%,3,188360.232668
+Smokeball + GlobalX,120% of today's searches,3,100%,4,272546.622947
+Actionstep + GlobalX,80% of today's searches,1,25%,1,-16560.601489
+Actionstep + GlobalX,80% of today's searches,1,50%,2,41435.239617
+Actionstep + GlobalX,80% of today's searches,1,75%,3,99431.080723
+Actionstep + GlobalX,80% of today's searches,1,100%,4,157426.921829
+Actionstep + GlobalX,100% of today's searches,2,25%,1,-21574.204306
+Actionstep + GlobalX,100% of today's searches,2,50%,2,36421.6368
+Actionstep + GlobalX,100% of today's searches,2,75%,3,94417.477906
+Actionstep + GlobalX,100% of today's searches,2,100%,4,152413.319012
+Actionstep + GlobalX,120% of today's searches,3,25%,1,-26587.807123
+Actionstep + GlobalX,120% of today's searches,3,50%,2,31408.033983
+Actionstep + GlobalX,120% of today's searches,3,75%,3,89403.875089
+Actionstep + GlobalX,120% of today's searches,3,100%,4,147399.716195
+PracticeEvolve + PEXA,80% of today's searches,1,25%,1,-41321.59176
+PracticeEvolve + PEXA,80% of today's searches,1,50%,2,-5241.710212
+PracticeEvolve + PEXA,80% of today's searches,1,75%,3,30838.171336
+PracticeEvolve + PEXA,80% of today's searches,1,100%,4,66918.052884
+PracticeEvolve + PEXA,100% of today's searches,2,25%,1,-47453.229704
+PracticeEvolve + PEXA,100% of today's searches,2,50%,2,-11373.348156
+PracticeEvolve + PEXA,100% of today's searches,2,75%,3,24706.533392
+PracticeEvolve + PEXA,100% of today's searches,2,100%,4,60786.41494
+PracticeEvolve + PEXA,120% of today's searches,3,25%,1,-53584.867648
+PracticeEvolve + PEXA,120% of today's searches,3,50%,2,-17504.9861
+PracticeEvolve + PEXA,120% of today's searches,3,75%,3,18574.895448
+PracticeEvolve + PEXA,120% of today's searches,3,100%,4,54654.776996
+Clio + GlobalX,80% of today's searches,1,25%,1,7961.900375
+Clio + GlobalX,80% of today's searches,1,50%,2,68095.036289
+Clio + GlobalX,80% of today's searches,1,75%,3,128228.172202
+Clio + GlobalX,80% of today's searches,1,100%,4,188361.308116
+Clio + GlobalX,100% of today's searches,2,25%,1,6080.334145
+Clio + GlobalX,100% of today's searches,2,50%,2,66213.470058
+Clio + GlobalX,100% of today's searches,2,75%,3,126346.605972
+Clio + GlobalX,100% of today's searches,2,100%,4,186479.741885
+Clio + GlobalX,120% of today's searches,3,25%,1,4198.767915
+Clio + GlobalX,120% of today's searches,3,50%,2,64331.903828
+Clio + GlobalX,120% of today's searches,3,75%,3,124465.039742
+Clio + GlobalX,120% of today's searches,3,100%,4,184598.175655
+MyCase + SAI Global,80% of today's searches,1,25%,1,-34425.74428
+MyCase + SAI Global,80% of today's searches,1,50%,2,-9510.754756
+MyCase + SAI Global,80% of today's searches,1,75%,3,15404.234768
+MyCase + SAI Global,80% of today's searches,1,100%,4,40319.224292
+MyCase + SAI Global,100% of today's searches,2,25%,1,-40145.126653
+MyCase + SAI Global,100% of today's searches,2,50%,2,-15230.137129
+MyCase + SAI Global,100% of today's searches,2,75%,3,9684.852395
+MyCase + SAI Global,100% of today's searches,2,100%,4,34599.841919
+MyCase + SAI Global,120% of today's searches,3,25%,1,-45864.509025
+MyCase + SAI Global,120% of today's searches,3,50%,2,-20949.519502
+MyCase + SAI Global,120% of today's searches,3,75%,3,3965.470022
+MyCase + SAI Global,120% of today's searches,3,100%,4,28880.459546

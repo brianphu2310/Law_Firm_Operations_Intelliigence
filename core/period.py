@@ -2,7 +2,6 @@
 from dataclasses import dataclass
 import numpy as np
 import pandas as pd
-import streamlit as st
 
 from .ref import AS_OF, START
 
@@ -65,28 +64,6 @@ CUSTOM = "Custom range"
 COMPARE_MODES = ["Prior period", "Same period last year", "No comparison"]
 
 
-def current_periods():
-    """(current, comparison|None) from the sidebar/topbar controls."""
-    pre = presets()
-    key = st.session_state.get("period_preset", DEFAULT_PRESET)
-    mode = st.session_state.get("compare_mode", COMPARE_MODES[0])
-    if key == CUSTOM:
-        s = pd.Timestamp(st.session_state.get("custom_start", pd.Timestamp("2025-07-01")))
-        e = pd.Timestamp(st.session_state.get("custom_end", AS_OF))
-        s, e = min(s, e), min(max(s, e), AS_OF)
-        cur, shift = Period(s, e, f"{s:%d %b} – {e:%d %b %y}"), None
-    else:
-        cur, shift = pre.get(key, pre[DEFAULT_PRESET])
-    if mode == "No comparison":
-        return cur, None
-    if mode == "Same period last year":
-        return cur, _shift(cur, -12, "same period last year")
-    if shift is None:                                    # custom: equal-length window immediately before
-        n = cur.days
-        return cur, Period(cur.start - pd.Timedelta(days=n), cur.start - pd.Timedelta(days=1), "prior period")
-    return cur, _shift(cur, -shift, "prior period")
-
-
 def month_weights(p: Period, index):
     out = {}
     for m in pd.date_range(p.start.replace(day=1), p.end, freq="MS"):
@@ -133,28 +110,3 @@ def delta(cur, prev):
     except TypeError:
         return None
     return (cur - prev) / abs(prev)
-
-
-def init_state():
-    ss = st.session_state
-    ss.setdefault("period_preset", DEFAULT_PRESET)
-    ss.setdefault("compare_mode", COMPARE_MODES[0])
-    ss.setdefault("custom_start", pd.Timestamp("2025-07-01").date())
-    ss.setdefault("custom_end", AS_OF.date())
-
-
-def render_period_control():
-    """Popover with presets, comparison mode and custom dates. Called inside the top bar."""
-    pre = presets()
-    cur, cmp_ = current_periods()
-    with st.popover(f"📅  {cur.label}", use_container_width=True):
-        st.markdown("**Reporting period**")
-        st.radio("Period", list(pre) + [CUSTOM], key="period_preset", label_visibility="collapsed")
-        if st.session_state.get("period_preset") == CUSTOM:
-            c1, c2 = st.columns(2)
-            c1.date_input("From", key="custom_start", min_value=START.date(), max_value=AS_OF.date())
-            c2.date_input("To", key="custom_end", min_value=START.date(), max_value=AS_OF.date())
-        st.markdown("**Compare with**")
-        st.radio("Compare", COMPARE_MODES, key="compare_mode", label_visibility="collapsed")
-        st.caption(f"Data as of {AS_OF:%d %b %Y} · financial year 1 Jul – 30 Jun. "
-                   f"{cur.short()} ({cur.days} days)" + (f" vs {cmp_.short()}" if cmp_ else ""))

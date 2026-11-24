@@ -1,0 +1,43 @@
+Platform,risk,probability,impact,score,mitigation
+LEAP + InfoTrack (current),Vendor price escalation,3,2,6,Negotiate multi-year price cap in the contract
+LEAP + InfoTrack (current),Trust-accounting compliance fit,1,5,5,Compliance sign-off and reconciliation test before go-live
+LEAP + InfoTrack (current),"Integration gaps (MYOB, banking, payments)",1,4,4,Confirm feeds in a proof-of-concept before signing
+LEAP + InfoTrack (current),Data migration errors,1,4,4,Trial migration + reconciliation of trust and WIP balances before cut-over
+LEAP + InfoTrack (current),Downtime during cut-over,1,4,4,"Cut over on a weekend, keep the legacy system read-only for 90 days"
+LEAP + InfoTrack (current),Staff adoption / training gap,1,3,3,"Champions per branch, phased training, 4-week hypercare"
+triConvey + triSearch,"Integration gaps (MYOB, banking, payments)",4,4,16,Confirm feeds in a proof-of-concept before signing
+triConvey + triSearch,Trust-accounting compliance fit,3,5,15,Compliance sign-off and reconciliation test before go-live
+triConvey + triSearch,Data migration errors,3,4,12,Trial migration + reconciliation of trust and WIP balances before cut-over
+triConvey + triSearch,Staff adoption / training gap,3,3,9,"Champions per branch, phased training, 4-week hypercare"
+triConvey + triSearch,Downtime during cut-over,2,4,8,"Cut over on a weekend, keep the legacy system read-only for 90 days"
+triConvey + triSearch,Vendor price escalation,2,2,4,Negotiate multi-year price cap in the contract
+Smokeball + GlobalX,Data migration errors,3,4,12,Trial migration + reconciliation of trust and WIP balances before cut-over
+Smokeball + GlobalX,"Integration gaps (MYOB, banking, payments)",3,4,12,Confirm feeds in a proof-of-concept before signing
+Smokeball + GlobalX,Trust-accounting compliance fit,2,5,10,Compliance sign-off and reconciliation test before go-live
+Smokeball + GlobalX,Staff adoption / training gap,3,3,9,"Champions per branch, phased training, 4-week hypercare"
+Smokeball + GlobalX,Downtime during cut-over,2,4,8,"Cut over on a weekend, keep the legacy system read-only for 90 days"
+Smokeball + GlobalX,Vendor price escalation,3,2,6,Negotiate multi-year price cap in the contract
+Actionstep + GlobalX,Data migration errors,4,4,16,Trial migration + reconciliation of trust and WIP balances before cut-over
+Actionstep + GlobalX,Staff adoption / training gap,4,3,12,"Champions per branch, phased training, 4-week hypercare"
+Actionstep + GlobalX,"Integration gaps (MYOB, banking, payments)",3,4,12,Confirm feeds in a proof-of-concept before signing
+Actionstep + GlobalX,Downtime during cut-over,3,4,12,"Cut over on a weekend, keep the legacy system read-only for 90 days"
+Actionstep + GlobalX,Trust-accounting compliance fit,2,5,10,Compliance sign-off and reconciliation test before go-live
+Actionstep + GlobalX,Vendor price escalation,3,2,6,Negotiate multi-year price cap in the contract
+PracticeEvolve + PEXA,Data migration errors,3,4,12,Trial migration + reconciliation of trust and WIP balances before cut-over
+PracticeEvolve + PEXA,Trust-accounting compliance fit,2,5,10,Compliance sign-off and reconciliation test before go-live
+PracticeEvolve + PEXA,Staff adoption / training gap,3,3,9,"Champions per branch, phased training, 4-week hypercare"
+PracticeEvolve + PEXA,"Integration gaps (MYOB, banking, payments)",2,4,8,Confirm feeds in a proof-of-concept before signing
+PracticeEvolve + PEXA,Downtime during cut-over,2,4,8,"Cut over on a weekend, keep the legacy system read-only for 90 days"
+PracticeEvolve + PEXA,Vendor price escalation,3,2,6,Negotiate multi-year price cap in the contract
+Clio + GlobalX,"Integration gaps (MYOB, banking, payments)",4,4,16,Confirm feeds in a proof-of-concept before signing
+Clio + GlobalX,Trust-accounting compliance fit,3,5,15,Compliance sign-off and reconciliation test before go-live
+Clio + GlobalX,Downtime during cut-over,2,4,8,"Cut over on a weekend, keep the legacy system read-only for 90 days"
+Clio + GlobalX,Data migration errors,2,4,8,Trial migration + reconciliation of trust and WIP balances before cut-over
+Clio + GlobalX,Staff adoption / training gap,2,3,6,"Champions per branch, phased training, 4-week hypercare"
+Clio + GlobalX,Vendor price escalation,3,2,6,Negotiate multi-year price cap in the contract
+MyCase + SAI Global,"Integration gaps (MYOB, banking, payments)",4,4,16,Confirm feeds in a proof-of-concept before signing
+MyCase + SAI Global,Trust-accounting compliance fit,3,5,15,Compliance sign-off and reconciliation test before go-live
+MyCase + SAI Global,Data migration errors,3,4,12,Trial migration + reconciliation of trust and WIP balances before cut-over
+MyCase + SAI Global,Staff adoption / training gap,3,3,9,"Champions per branch, phased training, 4-week hypercare"
+MyCase + SAI Global,Downtime during cut-over,2,4,8,"Cut over on a weekend, keep the legacy system read-only for 90 days"
+MyCase + SAI Global,Vendor price escalation,3,2,6,Negotiate multi-year price cap in the contract

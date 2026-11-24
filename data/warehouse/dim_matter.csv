@@ -1,0 +1,446 @@
+matter_key,matter_id,matter_name,client_key,practice_area_key,attorney_key,branch_key,country,suburb_key,status,opened_date_key,closed_date_key,is_named_matter
+1,M-2022-0001,Vertex Industries — IP Assignment,21,3,4,3,Australia,13,Closed,20220719,20250723,0
+2,M-2022-0002,Acme Corp — Debt Recovery,1,2,3,3,Australia,31,Closed,20220802,20230917,0
+3,M-2022-0003,Vertex Industries — Patent Portfolio Review,21,3,4,3,Australia,24,Closed,20220815,20231108,0
+4,M-2022-0004,Acme Corp — Debt Recovery,1,2,3,3,Australia,31,Closed,20220910,20230821,0
+5,M-2022-0005,Nova Materials — Patent Portfolio Review,16,3,4,3,Australia,24,Closed,20220930,20231107,0
+6,M-2022-0006,Okafor Mining — Injunction Application,17,2,6,1,Australia,9,Closed,20221001,20250627,0
+7,M-2022-0007,Auckland Ventures — Governance Advisory,2,5,1,1,New Zealand,,Closed,20221029,20230808,0
+8,M-2022-0008,Acme Corp — Debt Recovery,1,2,3,3,Australia,24,Closed,20221112,20231209,0
+9,M-2022-0009,Singapore Trading Group — Joint Venture Agreement,19,1,7,3,Singapore,,Closed,20221123,20231111,0
+10,M-2022-0010,Okafor Mining — Debt Recovery,17,2,2,2,Australia,31,Closed,20221124,20231026,0
+11,M-2022-0011,Vertex Industries — Opposition Response,21,3,4,3,Australia,28,Closed,20221125,20231016,0
+12,M-2022-0012,Acme Corp — Debt Recovery,1,2,3,3,Australia,23,Closed,20221128,20240516,0
+13,M-2022-0013,Meridian Holdings — Asset Purchase,13,1,7,3,Australia,24,Closed,20221202,20230815,0
+14,M-2022-0014,Meridian Holdings — Share Sale Agreement,13,1,6,1,Australia,6,Closed,20221212,20230901,0
+15,M-2022-0015,Zenith Labs — Defence of Statement of Claim,23,2,2,2,Australia,33,Closed,20221218,20230905,0
+16,M-2022-0016,Okafor Mining — Defence of Statement of Claim,17,2,6,1,Australia,5,Closed,20221225,20231019,0
+17,M-2022-0017,Singapore Trading Group — Share Sale Agreement,19,1,7,3,Singapore,,Closed,20221226,20230722,0
+18,M-2022-0018,Acme Corp — Contract Dispute,1,2,3,3,Australia,30,Closed,20221227,20240424,0
+19,M-2022-0019,Acme Corp — Mediation,1,2,2,2,Australia,27,Closed,20221227,20230717,0
+20,M-2022-0020,Acme Corp — Mediation,1,2,3,3,Australia,19,Closed,20221228,20240323,0
+21,M-2022-0021,Nippon Precision — IP Assignment,15,3,4,3,Japan,,Closed,20221231,20231118,0
+22,M-2023-0022,Whitmore Textiles — Licensing Agreement,22,3,5,2,Australia,36,Closed,20230106,20230701,0
+23,M-2023-0023,Okafor Mining — Debt Recovery,17,2,6,1,Australia,10,Closed,20230112,20241110,0
+24,M-2023-0024,Acme Corp — Debt Recovery,1,2,3,3,Australia,23,Closed,20230115,20250206,0
+25,M-2023-0025,Acme Corp — Costs Assessment,1,2,3,3,Australia,28,Closed,20230116,20230824,0
+26,M-2023-0026,Acme Corp — Defence of Statement of Claim,1,2,3,3,Australia,19,Closed,20230124,20240907,0
+27,M-2023-0027,Singapore Trading Group — Share Sale Agreement,19,1,7,3,Singapore,,Closed,20230128,20230709,0
+28,M-2023-0028,Zenith Labs — Contract Dispute,23,2,2,2,Australia,31,Closed,20230130,20231227,0
+29,M-2023-0029,Harlow & — Unfair Dismissal Defence,11,4,1,1,Australia,9,Closed,20230205,20240101,0
+30,M-2023-0030,Harlow & — Unfair Dismissal Defence,11,4,1,1,Australia,10,Closed,20230209,20240710,0
+31,M-2023-0031,Okafor Mining — Mediation,17,2,2,2,Australia,36,Closed,20230219,20231227,0
+32,M-2023-0032,Zenith Labs — Debt Recovery,23,2,2,2,Australia,35,Closed,20230220,20241016,0
+33,M-2023-0033,Fentonville Council — Board Advisory,6,5,5,2,Australia,35,Closed,20230226,20230706,0
+34,M-2023-0034,Meridian Holdings — Capital Raise,13,1,3,3,Australia,30,Closed,20230228,20230727,0
+35,M-2023-0035,London Capital Partners — Lease Review,12,1,3,3,United Kingdom,,Closed,20230307,20230808,0
+36,M-2023-0036,Acme Corp — Mediation,1,2,3,3,Australia,22,Closed,20230308,20250604,0
+37,M-2023-0037,Halcyon Systems — IP Assignment,9,3,7,3,Australia,27,Closed,20230310,20231016,0
+38,M-2023-0038,Zenith Labs — Contract Dispute,23,2,2,2,Australia,35,Closed,20230310,20240520,0
+39,M-2023-0039,Acme Corp — Defence of Statement of Claim,1,2,3,3,Australia,13,Closed,20230311,20240911,0
+40,M-2023-0040,Okafor Mining — Mediation,17,2,6,1,Australia,18,Closed,20230317,20240406,0
+41,M-2023-0041,Nova Materials — Patent Portfolio Review,16,3,1,1,Australia,11,Closed,20230320,20240223,0
+42,M-2023-0042,Meridian Holdings — Due Diligence,13,1,1,1,Australia,1,Closed,20230323,20230810,0
+43,M-2023-0043,Sunrise Logistics — Redundancy Advisory,20,4,3,3,Australia,31,Closed,20230329,20230721,0
+44,M-2023-0044,Singapore Trading Group — Capital Raise,19,1,7,3,Singapore,,Closed,20230405,20240711,0
+45,M-2023-0045,Meridian Holdings — Asset Purchase,13,1,1,1,Australia,12,Closed,20230422,20240131,0
+46,M-2023-0046,Zenith Labs — Costs Assessment,23,2,2,2,Australia,21,Closed,20230428,20240214,0
+47,M-2023-0047,Meridian Holdings — Shareholders' Agreement Review,13,1,1,1,Australia,1,Closed,20230430,20240102,0
+48,M-2023-0048,Blackwood Realty — Joint Venture Agreement,3,1,6,1,Australia,14,Closed,20230501,20240318,0
+49,M-2023-0049,Meridian Holdings — Asset Purchase,13,1,1,1,Australia,10,Closed,20230502,20240703,0
+50,M-2023-0050,Harlow & — Workplace Investigation,11,4,1,1,Australia,14,Closed,20230505,20230924,0
+51,M-2023-0051,Nova Materials — Patent Portfolio Review,16,3,4,3,Australia,11,Closed,20230506,20240109,0
+52,M-2023-0052,Auckland Ventures — Board Advisory,2,5,1,1,New Zealand,,Closed,20230507,20231003,0
+53,M-2023-0053,Halcyon Systems — Patent Portfolio Review,9,3,7,3,Australia,24,Closed,20230516,20231001,0
+54,M-2023-0054,London Capital Partners — Shareholders' Agreement Review,12,1,2,2,United Kingdom,,Closed,20230520,20240318,0
+55,M-2023-0055,Nova Materials — Opposition Response,16,3,1,1,Australia,22,Closed,20230521,20240322,0
+56,M-2023-0056,Delacroix & Sons — Capital Raise,5,1,7,3,Australia,28,Closed,20230604,20240514,0
+57,M-2023-0057,Okafor Mining — Defence of Statement of Claim,17,2,2,2,Australia,33,Closed,20230604,20231123,0
+58,M-2023-0058,Sunrise Logistics — Workplace Investigation,20,4,5,2,Australia,32,Closed,20230611,20240413,0
+59,M-2023-0059,Acme Corp — Contract Dispute,1,2,2,2,Australia,36,Closed,20230616,20240401,0
+60,M-2023-0060,Global Trust Bank — Asset Purchase,8,1,2,2,Australia,29,Closed,20230619,20240118,0
+61,M-2023-0061,Harlow & — Redundancy Advisory,11,4,7,3,Australia,22,Closed,20230620,20230820,0
+62,M-2023-0062,Ganges Textile Exports — Injunction Application,7,2,3,3,India,,Closed,20230620,20241024,0
+63,M-2023-0063,Singapore Trading Group — Lease Review,19,1,7,3,Singapore,,Closed,20230620,20231102,0
+64,M-2023-0064,Bright Path Foundation — Board Advisory,4,5,1,1,Australia,11,Closed,20230621,20230807,0
+65,M-2023-0065,Halcyon Systems — Trademark Registration,9,3,7,3,Australia,25,Closed,20230627,20240723,0
+66,M-2023-0066,Meridian Pacific Trust — Share Sale Agreement,14,1,7,3,Hong Kong,,Closed,20230705,20231218,0
+67,M-2023-0067,Fentonville Council — Regulatory Advice,6,5,8,1,Australia,9,Closed,20230710,20231123,0
+68,M-2023-0068,Harlow & — Redundancy Advisory,11,4,1,1,Australia,11,Closed,20230715,20231202,0
+69,M-2023-0069,Halcyon Systems — Opposition Response,9,3,7,3,Australia,12,Closed,20230715,20231024,0
+70,M-2023-0070,Singapore Trading Group — Joint Venture Agreement,19,1,4,3,Singapore,,Closed,20230721,20240106,0
+71,M-2023-0071,Bright Path Foundation — Regulatory Advice,4,5,1,1,Australia,5,Closed,20230730,20240212,0
+72,M-2023-0072,Sunrise Logistics — Award Compliance Review,20,4,5,2,Australia,29,Closed,20230731,20231008,0
+73,M-2023-0073,Global Trust Bank — Asset Purchase,8,1,2,2,Australia,22,Closed,20230802,20231219,0
+74,M-2023-0074,Meridian Pacific Trust — Shareholders' Agreement Review,14,1,8,1,Hong Kong,,Closed,20230803,20240406,0
+75,M-2023-0075,Acme Corp — Costs Assessment,1,2,3,3,Australia,30,Closed,20230804,20240724,0
+76,M-2023-0076,Halcyon Systems — Trademark Registration,9,3,7,3,Australia,30,Closed,20230806,20231128,0
+77,M-2023-0077,Meridian Holdings — Share Sale Agreement,13,1,7,3,Australia,26,Closed,20230811,20231026,0
+78,M-2023-0078,Meridian Pacific Trust — Capital Raise,14,1,7,3,Hong Kong,,Closed,20230815,20231123,0
+79,M-2023-0079,Meridian Pacific Trust — Joint Venture Agreement,14,1,1,1,Hong Kong,,Closed,20230816,20240128,0
+80,M-2023-0080,Zenith Labs — Injunction Application,23,2,2,2,Australia,29,Closed,20230818,20241208,0
+81,M-2023-0081,Global Trust Bank — Asset Purchase,8,1,2,2,Australia,37,Closed,20230818,20240128,0
+82,M-2023-0082,Zenith Labs — Injunction Application,23,2,2,2,Australia,22,Closed,20230819,20240328,0
+83,M-2023-0083,Acme Corp — Debt Recovery,1,2,3,3,Australia,11,Closed,20230819,20240612,0
+84,M-2023-0084,Auckland Ventures — Governance Advisory,2,5,4,3,New Zealand,,Closed,20230823,20240703,0
+85,M-2023-0085,Halcyon Systems — Opposition Response,9,3,7,3,Australia,27,Closed,20230826,20240322,0
+86,M-2023-0086,Sunrise Logistics — Redundancy Advisory,20,4,5,2,Australia,16,Closed,20230827,20231111,0
+87,M-2023-0087,Bright Path Foundation — Board Advisory,4,5,2,2,Australia,36,Closed,20230829,20240107,0
+88,M-2023-0088,Okafor Mining — Contract Dispute,17,2,2,2,Australia,35,Closed,20230829,20240528,0
+89,M-2023-0089,Zenith Labs — Mediation,23,2,2,2,Australia,33,Closed,20230831,20240426,0
+90,M-2023-0090,Nippon Precision — Trademark Registration,15,3,5,2,Japan,,Closed,20230901,20240424,0
+91,M-2023-0091,Okafor Mining — Defence of Statement of Claim,17,2,6,1,Australia,7,Closed,20230903,20250226,0
+92,M-2023-0092,Nova Materials — Trademark Registration,16,3,1,1,Australia,19,Closed,20230907,20240420,0
+93,M-2023-0093,Whitmore Textiles — Opposition Response,22,3,1,1,Australia,1,Closed,20230907,20240521,0
+94,M-2023-0094,Delacroix & Sons — Lease Review,5,1,7,3,Australia,25,Closed,20230909,20240224,0
+95,M-2023-0095,Delacroix & Sons — Capital Raise,5,1,7,3,Australia,29,Closed,20230912,20240322,0
+96,M-2023-0096,Meridian Pacific Trust — Share Sale Agreement,14,1,7,3,Hong Kong,,Closed,20230913,20240222,0
+97,M-2023-0097,Harlow & — Unfair Dismissal Defence,11,4,5,2,Australia,37,Closed,20230917,20240406,0
+98,M-2023-0098,Okafor Mining — Contract Dispute,17,2,8,1,Australia,13,Closed,20230919,20240918,0
+99,M-2023-0099,Halcyon Systems — Opposition Response,9,3,4,3,Australia,26,Closed,20230919,20240206,0
+100,M-2023-0100,Meridian Holdings — Joint Venture Agreement,13,1,6,1,Australia,10,Closed,20230927,20240213,0
+101,M-2023-0101,Sunrise Logistics — Employment Contracts,20,4,5,2,Australia,30,Closed,20231003,20240331,0
+102,M-2023-0102,Delacroix & Sons — Shareholders' Agreement Review,5,1,7,3,Australia,35,Closed,20231008,20240121,0
+103,M-2023-0103,Auckland Ventures — Compliance Review,2,5,1,1,New Zealand,,Closed,20231009,20240614,0
+104,M-2023-0104,Blackwood Realty — Share Sale Agreement,3,1,6,1,Australia,2,Closed,20231012,20240621,0
+105,M-2023-0105,Zenith Labs — Debt Recovery,23,2,1,1,Australia,6,Closed,20231017,20241216,0
+106,M-2023-0106,Meridian Holdings — Asset Purchase,13,1,3,3,Australia,27,Closed,20231020,20240315,0
+107,M-2023-0107,Bright Path Foundation — Compliance Review,4,5,1,1,Australia,16,Closed,20231024,20231224,0
+108,M-2023-0108,Blackwood Realty — Due Diligence,3,1,6,1,Australia,1,Closed,20231024,20240519,0
+109,M-2023-0109,Auckland Ventures — Governance Advisory,2,5,1,1,New Zealand,,Closed,20231026,20240221,0
+110,M-2023-0110,Harlow & — Workplace Investigation,11,4,1,1,Australia,1,Closed,20231029,20240702,0
+111,M-2023-0111,Nippon Precision — Trademark Registration,15,3,4,3,Japan,,Closed,20231029,20240321,0
+112,M-2023-0112,London Capital Partners — Shareholders' Agreement Review,12,1,2,2,United Kingdom,,Closed,20231102,20240129,0
+113,M-2023-0113,Delacroix & Sons — Shareholders' Agreement Review,5,1,7,3,Australia,39,Closed,20231109,20240419,0
+114,M-2023-0114,Global Trust Bank — Lease Review,8,1,2,2,Australia,15,Closed,20231110,20240425,0
+115,M-2023-0115,Harlow & — Award Compliance Review,11,4,3,3,Australia,27,Closed,20231112,20240226,0
+116,M-2023-0116,Auckland Ventures — Regulatory Advice,2,5,1,1,New Zealand,,Closed,20231116,20240210,0
+117,M-2023-0117,Harlow & — Award Compliance Review,11,4,1,1,Australia,28,Closed,20231118,20240410,0
+118,M-2023-0118,Global Trust Bank — Due Diligence,8,1,2,2,Australia,24,Closed,20231120,20240406,0
+119,M-2023-0119,Fentonville Council — Board Advisory,6,5,8,1,Australia,3,Closed,20231120,20240118,0
+120,M-2023-0120,Fentonville Council — Regulatory Advice,6,5,8,1,Australia,11,Closed,20231122,20240523,0
+121,M-2023-0121,Global Trust Bank — Shareholders' Agreement Review,8,1,1,1,Australia,11,Closed,20231122,20240613,0
+122,M-2023-0122,Delacroix & Sons — Shareholders' Agreement Review,5,1,7,3,Australia,24,Closed,20231122,20240320,0
+123,M-2023-0123,Global Trust Bank — Joint Venture Agreement,8,1,2,2,Australia,35,Closed,20231129,20241215,0
+124,M-2023-0124,Harlow & — Award Compliance Review,11,4,1,1,Australia,6,Closed,20231203,20240409,0
+125,M-2023-0125,Zenith Labs — Injunction Application,23,2,2,2,Australia,37,Closed,20231207,20240607,0
+126,M-2023-0126,Bright Path Foundation — Structuring Advice,4,5,1,1,Australia,34,Closed,20231209,20240408,0
+127,M-2023-0127,Nippon Precision — IP Assignment,15,3,4,3,Japan,,Closed,20231210,20240923,0
+128,M-2023-0128,Halcyon Systems — IP Assignment,9,3,7,3,Australia,8,Closed,20231212,20250117,0
+129,M-2023-0129,Meridian Holdings — Share Sale Agreement,13,1,1,1,Australia,2,Closed,20231213,20240425,0
+130,M-2023-0130,Okafor Mining — Contract Dispute,17,2,6,1,Australia,11,Closed,20231215,20240820,0
+131,M-2023-0131,Fentonville Council — Regulatory Advice,6,5,5,2,Australia,25,Closed,20231216,20240330,0
+132,M-2023-0132,Nippon Precision — Infringement Notice,15,3,4,3,Japan,,Closed,20231225,20250418,0
+133,M-2023-0133,Delacroix & Sons — Shareholders' Agreement Review,5,1,7,3,Australia,28,Closed,20231225,20241122,0
+134,M-2023-0134,Delacroix & Sons — Asset Purchase,5,1,6,1,Australia,2,Closed,20231227,20240605,0
+135,M-2023-0135,Meridian Holdings — Joint Venture Agreement,13,1,7,3,Australia,5,Closed,20231228,20241120,0
+136,M-2023-0136,Auckland Ventures — Governance Advisory,2,5,1,1,New Zealand,,Closed,20231229,20240223,0
+137,M-2023-0137,Vertex Industries — Licensing Agreement,21,3,1,1,Australia,10,Closed,20231229,20241001,0
+138,M-2024-0138,Okafor Mining — Injunction Application,17,2,6,1,Australia,11,Closed,20240104,20250129,0
+139,M-2024-0139,Nova Materials — Patent Portfolio Review,16,3,7,3,Australia,10,Closed,20240106,20241001,0
+140,M-2024-0140,Harlow & — Award Compliance Review,11,4,1,1,Australia,19,Closed,20240107,20240608,0
+141,M-2024-0141,London Capital Partners — Due Diligence,12,1,2,2,United Kingdom,,Closed,20240107,20240529,0
+142,M-2024-0142,Pacific Rim Traders — Injunction Application,18,2,5,2,United States,,Closed,20240109,20240818,0
+143,M-2024-0143,Okafor Mining — Contract Dispute,17,2,6,1,Australia,7,Closed,20240111,20240818,0
+144,M-2024-0144,Pacific Rim Traders — Mediation,18,2,7,3,United States,,Closed,20240114,20240527,0
+145,M-2024-0145,Auckland Ventures — Board Advisory,2,5,8,1,New Zealand,,Closed,20240115,20240318,0
+146,M-2024-0146,Nova Materials — Opposition Response,16,3,4,3,Australia,27,Closed,20240119,20241021,0
+147,M-2024-0147,Bright Path Foundation — Governance Advisory,4,5,5,2,Australia,19,Closed,20240124,20240605,0
+148,M-2024-0148,London Capital Partners — Capital Raise,12,1,5,2,United Kingdom,,Closed,20240128,20240901,0
+149,M-2024-0149,Sunrise Logistics — Award Compliance Review,20,4,5,2,Australia,36,Closed,20240130,20240620,0
+150,M-2024-0150,Zenith Labs — Defence of Statement of Claim,23,2,2,2,Australia,33,Closed,20240202,20241217,0
+151,M-2024-0151,Vertex Industries — Opposition Response,21,3,8,1,Australia,13,Closed,20240207,20240815,0
+152,M-2024-0152,Okafor Mining — Contract Dispute,17,2,6,1,Australia,8,Closed,20240208,20250216,0
+153,M-2024-0153,Halcyon Systems — Opposition Response,9,3,6,1,Australia,8,Open,20240211,,0
+154,M-2024-0154,Bright Path Foundation — Board Advisory,4,5,3,3,Australia,32,Closed,20240212,20241010,0
+155,M-2024-0155,Acme Corp — Contract Dispute,1,2,2,2,Australia,36,Closed,20240213,20241003,0
+156,M-2024-0156,Auckland Ventures — Compliance Review,2,5,5,2,New Zealand,,Closed,20240217,20240601,0
+157,M-2024-0157,Acme Corp — Debt Recovery,1,2,3,3,Australia,19,Closed,20240218,20240520,0
+158,M-2024-0158,Halcyon Systems — Licensing Agreement,9,3,7,3,Australia,30,Closed,20240219,20241116,0
+159,M-2024-0159,Acme Corp — Injunction Application,1,2,3,3,Australia,28,Open,20240219,,0
+160,M-2024-0160,Whitmore Textiles — Trademark Registration,22,3,5,2,Australia,38,Closed,20240221,20241013,0
+161,M-2024-0161,Singapore Trading Group — Share Sale Agreement,19,1,3,3,Singapore,,Closed,20240225,20240623,0
+162,M-2024-0162,Ganges Textile Exports — Mediation,7,2,3,3,India,,Closed,20240229,20240902,0
+163,M-2024-0163,Global Trust Bank — Asset Purchase,8,1,2,2,Australia,34,Closed,20240305,20240914,0
+164,M-2024-0164,London Capital Partners — Capital Raise,12,1,2,2,United Kingdom,,Closed,20240310,20241010,0
+165,M-2024-0165,Halcyon Systems — Patent Portfolio Review,9,3,4,3,Australia,25,Closed,20240319,20241121,0
+166,M-2024-0166,Whitmore Textiles — Patent Portfolio Review,22,3,4,3,Australia,24,Closed,20240320,20241015,0
+167,M-2024-0167,Auckland Ventures — Regulatory Advice,2,5,1,1,New Zealand,,Closed,20240320,20240724,0
+168,M-2024-0168,Halcyon Systems — Infringement Notice,9,3,7,3,Australia,24,Open,20240321,,0
+169,M-2024-0169,Bright Path Foundation — Board Advisory,4,5,1,1,Australia,1,Closed,20240321,20240704,0
+170,M-2024-0170,Meridian Pacific Trust — Due Diligence,14,1,1,1,Hong Kong,,Closed,20240326,20240903,0
+171,M-2024-0171,Meridian Pacific Trust — Asset Purchase,14,1,7,3,Hong Kong,,Closed,20240329,20240730,0
+172,M-2024-0172,Acme Corp — Contract Dispute,1,2,7,3,Australia,30,Closed,20240330,20250528,0
+173,M-2024-0173,Bright Path Foundation — Structuring Advice,4,5,5,2,Australia,25,Closed,20240331,20240814,0
+174,M-2024-0174,London Capital Partners — Joint Venture Agreement,12,1,2,2,United Kingdom,,Closed,20240331,20241017,0
+175,M-2024-0175,Vertex Industries — IP Assignment,21,3,3,3,Australia,11,Closed,20240403,20240916,0
+176,M-2024-0176,Halcyon Systems — Patent Portfolio Review,9,3,7,3,Australia,20,Closed,20240404,20241229,0
+177,M-2024-0177,London Capital Partners — Lease Review,12,1,5,2,United Kingdom,,Closed,20240405,20250228,0
+178,M-2024-0178,Zenith Labs — Defence of Statement of Claim,23,2,2,2,Australia,36,Closed,20240406,20250910,0
+179,M-2024-0179,Auckland Ventures — Regulatory Advice,2,5,1,1,New Zealand,,Closed,20240408,20240727,0
+180,M-2024-0180,Harlow & — Workplace Investigation,11,4,1,1,Australia,1,Closed,20240413,20241130,0
+181,M-2024-0181,Harlow & — Workplace Investigation,11,4,1,1,Australia,16,Closed,20240414,20241213,0
+182,M-2024-0182,Ganges Textile Exports — Contract Dispute,7,2,3,3,India,,Closed,20240415,20250614,0
+183,M-2024-0183,Delacroix & Sons — Capital Raise,5,1,7,3,Australia,21,Closed,20240418,20240929,0
+184,M-2024-0184,Nippon Precision — Patent Portfolio Review,15,3,5,2,Japan,,Closed,20240419,20240819,0
+185,M-2024-0185,Blackwood Realty — Shareholders' Agreement Review,3,1,6,1,Australia,6,Closed,20240421,20241022,0
+186,M-2024-0186,Nippon Precision — Patent Portfolio Review,15,3,4,3,Japan,,Closed,20240422,20241113,0
+187,M-2024-0187,Fentonville Council — Compliance Review,6,5,8,1,Australia,2,Closed,20240422,20240812,0
+188,M-2024-0188,Okafor Mining — Contract Dispute,17,2,5,2,Australia,35,Closed,20240425,20250113,0
+189,M-2024-0189,Zenith Labs — Mediation,23,2,2,2,Australia,27,Closed,20240428,20241128,0
+190,M-2024-0190,Bright Path Foundation — Governance Advisory,4,5,1,1,Australia,9,Closed,20240428,20240708,0
+191,M-2024-0191,Auckland Ventures — Compliance Review,2,5,8,1,New Zealand,,Closed,20240428,20241115,0
+192,M-2024-0192,Nippon Precision — Licensing Agreement,15,3,4,3,Japan,,Closed,20240502,20250518,0
+193,M-2024-0193,Zenith Labs — Mediation,23,2,2,2,Australia,37,Closed,20240507,20250724,0
+194,M-2024-0194,Fentonville Council — Compliance Review,6,5,1,1,Australia,5,Closed,20240509,20240804,0
+195,M-2024-0195,Halcyon Systems — Infringement Notice,9,3,7,3,Australia,21,Closed,20240510,20250414,0
+196,M-2024-0196,Harlow & — Workplace Investigation,11,4,1,1,Australia,26,Closed,20240511,20241220,0
+197,M-2024-0197,Okafor Mining — Debt Recovery,17,2,2,2,Australia,36,Closed,20240512,20241218,0
+198,M-2024-0198,Okafor Mining — Mediation,17,2,6,1,Australia,10,Open,20240515,,0
+199,M-2024-0199,Ganges Textile Exports — Defence of Statement of Claim,7,2,3,3,India,,Open,20240520,,0
+200,M-2024-0200,Harlow & — Workplace Investigation,11,4,1,1,Australia,5,Closed,20240523,20240626,0
+201,M-2024-0201,London Capital Partners — Capital Raise,12,1,2,2,United Kingdom,,Closed,20240523,20240818,0
+202,M-2024-0202,Zenith Labs — Defence of Statement of Claim,23,2,2,2,Australia,34,Open,20240523,,0
+203,M-2024-0203,Zenith Labs — Contract Dispute,23,2,2,2,Australia,33,Open,20240524,,0
+204,M-2024-0204,Vertex Industries — Licensing Agreement,21,3,4,3,Australia,20,Closed,20240524,20250531,0
+205,M-2024-0205,Fentonville Council — Compliance Review,6,5,8,1,Australia,13,Closed,20240527,20240916,0
+206,M-2024-0206,Harlow & — Award Compliance Review,11,4,8,1,Australia,20,Closed,20240530,20241118,0
+207,M-2024-0207,Okafor Mining — Injunction Application,17,2,6,1,Australia,5,Closed,20240601,20250628,0
+208,M-2024-0208,Auckland Ventures — Board Advisory,2,5,1,1,New Zealand,,Closed,20240608,20240913,0
+209,M-2024-0209,Global Trust Bank — Lease Review,8,1,2,2,Australia,32,Open,20240609,,0
+210,M-2024-0210,Pacific Rim Traders — Defence of Statement of Claim,18,2,6,1,United States,,Closed,20240610,20250124,0
+211,M-2024-0211,Meridian Holdings — Shareholders' Agreement Review,13,1,1,1,Australia,11,Closed,20240618,20241219,0
+212,M-2024-0212,Nova Materials Trademark Dispute,16,3,4,3,Australia,27,Closed,20240619,20241115,1
+213,M-2024-0213,Nova Materials — Licensing Agreement,16,3,4,3,Australia,24,Closed,20240620,20241220,0
+214,M-2024-0214,Global Trust Bank — Lease Review,8,1,8,1,Australia,2,Closed,20240622,20241223,0
+215,M-2024-0215,Meridian Holdings — Shareholders' Agreement Review,13,1,1,1,Australia,5,Closed,20240624,20241028,0
+216,M-2024-0216,Global Trust Bank — Due Diligence,8,1,4,3,Australia,13,Closed,20240625,20241230,0
+217,M-2024-0217,Acme Corp — Costs Assessment,1,2,3,3,Australia,9,Open,20240703,,0
+218,M-2024-0218,Meridian Holdings — Joint Venture Agreement,13,1,1,1,Australia,14,Closed,20240703,20241227,0
+219,M-2024-0219,Global Trust Bank — Lease Review,8,1,2,2,Australia,29,Closed,20240715,20241203,0
+220,M-2024-0220,Zenith Labs — Mediation,23,2,2,2,Australia,32,Closed,20240716,20250605,0
+221,M-2024-0221,Global Trust Bank — Due Diligence,8,1,3,3,Australia,27,Closed,20240717,20250105,0
+222,M-2024-0222,Nova Materials — Patent Portfolio Review,16,3,4,3,Australia,8,Open,20240721,,0
+223,M-2024-0223,Zenith Labs — Costs Assessment,23,2,2,2,Australia,11,Closed,20240722,20250509,0
+224,M-2024-0224,Pacific Rim Traders — Injunction Application,18,2,2,2,United States,,Open,20240804,,0
+225,M-2024-0225,Fentonville Council — Board Advisory,6,5,8,1,Australia,13,Closed,20240806,20250121,0
+226,M-2024-0226,Sunrise Logistics — Employment Contracts,20,4,5,2,Australia,11,Closed,20240808,20241008,0
+227,M-2024-0227,Auckland Ventures — Governance Advisory,2,5,1,1,New Zealand,,Closed,20240809,20241212,0
+228,M-2024-0228,Meridian Holdings — Lease Review,13,1,3,3,Australia,26,Closed,20240821,20250304,0
+229,M-2024-0229,Bright Path Foundation — Governance Advisory,4,5,1,1,Australia,9,Closed,20240822,20241205,0
+230,M-2024-0230,Blackwood Realty — Share Sale Agreement,3,1,6,1,Australia,19,Closed,20240822,20241122,0
+231,M-2024-0231,Nova Materials — Trademark Registration,16,3,1,1,Australia,8,Closed,20240823,20250707,0
+232,M-2024-0232,Fentonville Council — Structuring Advice,6,5,8,1,Australia,17,Closed,20240825,20241207,0
+233,M-2024-0233,Vertex Industries Licensing Dispute,21,3,4,3,Australia,12,Closed,20240830,20241230,1
+234,M-2024-0234,Global Trust Bank — Due Diligence,8,1,1,1,Australia,5,Closed,20240901,20250421,0
+235,M-2024-0235,Bright Path Foundation — Structuring Advice,4,5,1,1,Australia,14,Closed,20240901,20250505,0
+236,M-2024-0236,Blackwood Realty — Capital Raise,3,1,6,1,Australia,1,Closed,20240901,20250212,0
+237,M-2024-0237,Acme Corp — Debt Recovery,1,2,6,1,Australia,13,Closed,20240902,20250205,0
+238,M-2024-0238,Acme Supply Agreement Renewal,1,1,1,2,Australia,33,Closed,20240903,20250604,1
+239,M-2024-0239,Zenith Labs — Debt Recovery,23,2,2,2,Australia,34,Closed,20240903,20250619,0
+240,M-2024-0240,Halcyon Systems — Opposition Response,9,3,4,3,Australia,11,Closed,20240909,20250404,0
+241,M-2024-0241,Fentonville Council — Regulatory Advice,6,5,8,1,Australia,1,Closed,20240910,20241211,0
+242,M-2024-0242,Fentonville Council — Structuring Advice,6,5,8,1,Australia,5,Closed,20240911,20250205,0
+243,M-2024-0243,Pacific Rim Traders — Costs Assessment,18,2,3,3,United States,,Open,20240913,,0
+244,M-2024-0244,London Capital Partners — Joint Venture Agreement,12,1,2,2,United Kingdom,,Open,20240914,,0
+245,M-2024-0245,Auckland Ventures — Governance Advisory,2,5,1,1,New Zealand,,Closed,20240916,20250308,0
+246,M-2024-0246,Auckland Ventures — Compliance Review,2,5,1,1,New Zealand,,Closed,20240919,20250116,0
+247,M-2024-0247,Global Trust Bank — Share Sale Agreement,8,1,7,3,Australia,10,Open,20240920,,0
+248,M-2024-0248,Nippon Precision — Licensing Agreement,15,3,4,3,Japan,,Open,20240921,,0
+249,M-2024-0249,Pacific Rim Traders — Costs Assessment,18,2,2,2,United States,,Closed,20240922,20250709,0
+250,M-2024-0250,Pacific Rim Traders — Debt Recovery,18,2,6,1,United States,,Open,20240930,,0
+251,M-2024-0251,Sunrise Logistics — Unfair Dismissal Defence,20,4,3,3,Australia,20,On Hold,20241005,,0
+252,M-2024-0252,Zenith Labs — Defence of Statement of Claim,23,2,2,2,Australia,25,Closed,20241008,20250330,0
+253,M-2024-0253,Whitmore Textiles Patent Filing,22,3,5,2,Australia,26,Closed,20241012,20250704,1
+254,M-2024-0254,Meridian Holdings — Joint Venture Agreement,13,1,1,1,Australia,16,Closed,20241014,20250214,0
+255,M-2024-0255,Acme Corp — Mediation,1,2,3,3,Australia,25,Open,20241015,,0
+256,M-2024-0256,Bright Path Foundation — Regulatory Advice,4,5,1,1,Australia,17,Closed,20241016,20250320,0
+257,M-2024-0257,Blackwood Realty — Due Diligence,3,1,5,2,Australia,12,Closed,20241020,20250425,0
+258,M-2024-0258,London Capital Partners — Asset Purchase,12,1,2,2,United Kingdom,,Closed,20241024,20250826,0
+259,M-2024-0259,Bright Path Foundation — Governance Advisory,4,5,1,1,Australia,1,Closed,20241027,20250311,0
+260,M-2024-0260,London Capital Partners — Shareholders' Agreement Review,12,1,2,2,United Kingdom,,Closed,20241027,20250410,0
+261,M-2024-0261,Halcyon Systems — Licensing Agreement,9,3,1,1,Australia,11,Open,20241030,,0
+262,M-2024-0262,Global Trust Bank — Due Diligence,8,1,2,2,Australia,39,Closed,20241030,20250427,0
+263,M-2024-0263,London Capital Partners — Capital Raise,12,1,2,2,United Kingdom,,On Hold,20241031,,0
+264,M-2024-0264,Sunrise Logistics — Employment Contracts,20,4,1,1,Australia,16,Closed,20241031,20250530,0
+265,M-2024-0265,Nova Materials — IP Assignment,16,3,4,3,Australia,32,Closed,20241101,20250621,0
+266,M-2024-0266,Sunrise Logistics — Redundancy Advisory,20,4,5,2,Australia,31,Closed,20241102,20250309,0
+267,M-2024-0267,Auckland Ventures — Compliance Review,2,5,1,1,New Zealand,,Closed,20241104,20250307,0
+268,M-2024-0268,Delacroix & Sons — Shareholders' Agreement Review,5,1,7,3,Australia,21,Closed,20241104,20250308,0
+269,M-2024-0269,Halcyon Systems — Licensing Agreement,9,3,7,3,Australia,22,Closed,20241106,20250412,0
+270,M-2024-0270,Harlow Wrongful Termination Defense,11,4,1,2,Australia,39,On Hold,20241108,,1
+271,M-2024-0271,Harlow & — Unfair Dismissal Defence,11,4,1,1,Australia,11,Closed,20241110,20250210,0
+272,M-2024-0272,Ganges Textile Exports — Debt Recovery,7,2,3,3,India,,Closed,20241111,20250828,0
+273,M-2024-0273,Bright Path Foundation — Regulatory Advice,4,5,1,1,Australia,10,Closed,20241112,20250313,0
+274,M-2024-0274,Nova Materials — Licensing Agreement,16,3,4,3,Australia,31,On Hold,20241113,,0
+275,M-2024-0275,Halcyon Systems — Opposition Response,9,3,4,3,Australia,26,Closed,20241115,20250509,0
+276,M-2024-0276,Pacific Rim Traders — Injunction Application,18,2,5,2,United States,,Open,20241115,,0
+277,M-2024-0277,Halcyon Systems — Opposition Response,9,3,7,3,Australia,25,Open,20241116,,0
+278,M-2024-0278,Bright Path Foundation — Compliance Review,4,5,1,1,Australia,17,Closed,20241118,20250327,0
+279,M-2024-0279,Blackwood Realty — Asset Purchase,3,1,6,1,Australia,1,Closed,20241118,20250204,0
+280,M-2024-0280,Bright Path Foundation — Board Advisory,4,5,1,1,Australia,9,Closed,20241120,20250324,0
+281,M-2024-0281,Fentonville Council — Compliance Review,6,5,8,1,Australia,13,Closed,20241120,20250220,0
+282,M-2024-0282,Halcyon Systems — Licensing Agreement,9,3,7,3,Australia,32,Closed,20241123,20250730,0
+283,M-2024-0283,Whitmore Textiles — Trademark Registration,22,3,4,3,Australia,29,Open,20241202,,0
+284,M-2024-0284,Meridian Holdings — Capital Raise,13,1,1,1,Australia,3,Closed,20241204,20250208,0
+285,M-2024-0285,Harlow & Co. Redundancy Program Advisory,11,4,1,2,Australia,28,Closed,20241205,20250811,1
+286,M-2024-0286,Whitmore Textiles — Patent Portfolio Review,22,3,5,2,Australia,38,Closed,20241206,20250727,0
+287,M-2024-0287,Pacific Rim Traders — Injunction Application,18,2,6,1,United States,,Closed,20241206,20250722,0
+288,M-2024-0288,Meridian Holdings — Capital Raise,13,1,1,1,Australia,23,Closed,20241211,20250729,0
+289,M-2024-0289,Meridian Pacific Trust — Asset Purchase,14,1,7,3,Hong Kong,,Closed,20241212,20250908,0
+290,M-2024-0290,Bright Path Foundation — Structuring Advice,4,5,7,3,Australia,27,Closed,20241218,20250315,0
+291,M-2024-0291,Sunrise Logistics — Workplace Investigation,20,4,5,2,Australia,24,Open,20241220,,0
+292,M-2024-0292,Whitmore Textiles — IP Assignment,22,3,5,2,Australia,36,Closed,20241220,20250801,0
+293,M-2024-0293,Fentonville Council — Regulatory Advice,6,5,8,1,Australia,4,Closed,20241227,20250816,0
+294,M-2025-0294,Vertex Industries — Infringement Notice,21,3,4,3,Australia,10,Closed,20250101,20250619,0
+295,M-2025-0295,London Capital Partners — Lease Review,12,1,2,2,United Kingdom,,Closed,20250104,20250519,0
+296,M-2025-0296,Auckland Ventures — Structuring Advice,2,5,1,1,New Zealand,,Closed,20250105,20250306,0
+297,M-2025-0297,Pacific Rim Traders — Defence of Statement of Claim,18,2,8,1,United States,,Open,20250108,,0
+298,M-2025-0298,Bright Path Foundation — Board Advisory,4,5,1,1,Australia,5,Open,20250109,,0
+299,M-2025-0299,Pacific Rim Traders — Defence of Statement of Claim,18,2,6,1,United States,,Open,20250109,,0
+300,M-2025-0300,Harlow & — Redundancy Advisory,11,4,1,1,Australia,12,Open,20250111,,0
+301,M-2025-0301,Auckland Ventures NZ Trademark Filing,2,3,5,2,New Zealand,,Closed,20250118,20250903,1
+302,M-2025-0302,Meridian Series C Financing,13,1,1,1,Australia,29,Open,20250120,,1
+303,M-2025-0303,Nippon Precision — Opposition Response,15,3,4,3,Japan,,Closed,20250120,20250522,0
+304,M-2025-0304,Pacific Rim Traders — Debt Recovery,18,2,6,1,United States,,Open,20250121,,0
+305,M-2025-0305,Blackwood Realty — Asset Purchase,3,1,7,3,Australia,25,Open,20250122,,0
+306,M-2025-0306,Auckland Ventures — Governance Advisory,2,5,1,1,New Zealand,,Closed,20250122,20250601,0
+307,M-2025-0307,Whitmore Textiles — IP Assignment,22,3,5,2,Australia,35,Closed,20250124,20250820,0
+308,M-2025-0308,Nova Materials — Infringement Notice,16,3,4,3,Australia,24,Closed,20250129,20250525,0
+309,M-2025-0309,Global Trust Bank — Capital Raise,8,1,2,2,Australia,15,On Hold,20250130,,0
+310,M-2025-0310,Vertex Industries — Patent Portfolio Review,21,3,4,3,Australia,21,Closed,20250131,20250814,0
+311,M-2025-0311,Meridian Holdings — Capital Raise,13,1,8,1,Australia,10,Closed,20250203,20250511,0
+312,M-2025-0312,Okafor Mining — Costs Assessment,17,2,6,1,Australia,6,Open,20250209,,0
+313,M-2025-0313,Halcyon Trademark Portfolio Audit,9,3,7,3,Australia,18,Open,20250210,,1
+314,M-2025-0314,Fentonville Council — Structuring Advice,6,5,8,1,Australia,21,Closed,20250210,20250719,0
+315,M-2025-0315,Auckland Ventures — Board Advisory,2,5,1,1,New Zealand,,Closed,20250211,20250505,0
+316,M-2025-0316,Auckland Ventures — Board Advisory,2,5,1,1,New Zealand,,Closed,20250211,20250828,0
+317,M-2025-0317,Vertex Industries — Patent Portfolio Review,21,3,4,3,Australia,28,Open,20250214,,0
+318,M-2025-0318,Singapore Trading Group — Joint Venture Agreement,19,1,7,3,Singapore,,Open,20250216,,0
+319,M-2025-0319,Auckland Ventures — Compliance Review,2,5,1,1,New Zealand,,Closed,20250216,20250424,0
+320,M-2025-0320,Delacroix & Sons — Asset Purchase,5,1,7,3,Australia,28,Closed,20250216,20250723,0
+321,M-2025-0321,Singapore Trading Group — Lease Review,19,1,3,3,Singapore,,Closed,20250217,20250720,0
+322,M-2025-0322,Ganges Textile Exports — Defence of Statement of Claim,7,2,3,3,India,,Closed,20250219,20250905,0
+323,M-2025-0323,Acme Corp — Contract Dispute,1,2,6,1,Australia,25,On Hold,20250219,,0
+324,M-2025-0324,Nova Materials — Infringement Notice,16,3,4,3,Australia,22,Open,20250223,,0
+325,M-2025-0325,Okafor Mining — Contract Dispute,17,2,6,1,Australia,14,Open,20250223,,0
+326,M-2025-0326,Vertex Industries — Trademark Registration,21,3,1,1,Australia,18,Closed,20250225,20250725,0
+327,M-2025-0327,Zenith Labs Licensing Countersuit,23,2,2,3,Australia,32,Open,20250227,,1
+328,M-2025-0328,Blackwood Realty — Capital Raise,3,1,6,1,Australia,5,Open,20250228,,0
+329,M-2025-0329,Delacroix & Sons — Capital Raise,5,1,7,3,Australia,27,Closed,20250301,20250719,0
+330,M-2025-0330,Bright Path Foundation — Compliance Review,4,5,8,1,Australia,6,Closed,20250304,20250503,0
+331,M-2025-0331,London Capital Partners — Lease Review,12,1,2,2,United Kingdom,,Open,20250304,,0
+332,M-2025-0332,Vertex Industries — Patent Portfolio Review,21,3,4,3,Australia,27,Open,20250306,,0
+333,M-2025-0333,Vertex Industries — IP Assignment,21,3,4,3,Australia,8,Closed,20250311,20250815,0
+334,M-2025-0334,Vertex Industries — Trademark Registration,21,3,4,3,Australia,30,Open,20250312,,0
+335,M-2025-0335,Bright Path Foundation — Governance Advisory,4,5,1,1,Australia,1,Closed,20250313,20250613,0
+336,M-2025-0336,Acme vs. Zenith Trial Brief Filing,1,2,3,3,Australia,21,Open,20250314,,1
+337,M-2025-0337,Fentonville Council — Board Advisory,6,5,8,1,Australia,15,Closed,20250315,20250506,0
+338,M-2025-0338,Delacroix & Sons — Lease Review,5,1,7,3,Australia,30,Open,20250316,,0
+339,M-2025-0339,Meridian Holdings — Share Sale Agreement,13,1,3,3,Australia,28,Closed,20250316,20250629,0
+340,M-2025-0340,Meridian Pacific Trust — Asset Purchase,14,1,7,3,Hong Kong,,Open,20250316,,0
+341,M-2025-0341,Harlow & — Award Compliance Review,11,4,1,1,Australia,24,Closed,20250320,20250806,0
+342,M-2025-0342,Sunrise Logistics — Redundancy Advisory,20,4,5,2,Australia,11,Closed,20250320,20250627,0
+343,M-2025-0343,Meridian Pacific Trust — Joint Venture Agreement,14,1,7,3,Hong Kong,,Open,20250320,,0
+344,M-2025-0344,Okafor Mining Environmental Claim,17,2,6,1,Australia,1,Open,20250328,,1
+345,M-2025-0345,Meridian Holdings — Asset Purchase,13,1,3,3,Australia,24,Open,20250328,,0
+346,M-2025-0346,London Capital Partners — Asset Purchase,12,1,8,1,United Kingdom,,On Hold,20250328,,0
+347,M-2025-0347,Zenith Labs — Debt Recovery,23,2,2,2,Australia,9,Open,20250329,,0
+348,M-2025-0348,Delacroix & Sons — Asset Purchase,5,1,7,3,Australia,27,Closed,20250402,20250812,0
+349,M-2025-0349,Delacroix & Sons — Lease Review,5,1,7,3,Australia,28,Open,20250402,,0
+350,M-2025-0350,Acme Corp — Contract Dispute,1,2,3,3,Australia,10,Open,20250406,,0
+351,M-2025-0351,Nippon Precision — Trademark Registration,15,3,1,1,Japan,,Closed,20250409,20250828,0
+352,M-2025-0352,Meridian Holdings Employee Share Scheme,13,1,1,1,Australia,10,On Hold,20250411,,1
+353,M-2025-0353,Fentonville Council — Governance Advisory,6,5,8,1,Australia,9,Closed,20250412,20250626,0
+354,M-2025-0354,Zenith Labs — Mediation,23,2,2,2,Australia,35,Open,20250415,,0
+355,M-2025-0355,Vertex vs. Halcyon IP Infringement,21,3,4,3,Australia,25,Open,20250416,,1
+356,M-2025-0356,Vertex Industries — IP Assignment,21,3,1,1,Australia,9,Open,20250416,,0
+357,M-2025-0357,Nippon Precision — Patent Portfolio Review,15,3,1,1,Japan,,On Hold,20250417,,0
+358,M-2025-0358,Okafor Mining — Contract Dispute,17,2,6,1,Australia,6,Open,20250418,,0
+359,M-2025-0359,Harlow & — Unfair Dismissal Defence,11,4,4,3,Australia,27,Open,20250421,,0
+360,M-2025-0360,Nippon Precision — Trademark Registration,15,3,7,3,Japan,,Closed,20250423,20250806,0
+361,M-2025-0361,Auckland Ventures — Regulatory Advice,2,5,8,1,New Zealand,,Closed,20250424,20250803,0
+362,M-2025-0362,Nippon Precision — Licensing Agreement,15,3,8,1,Japan,,Open,20250427,,0
+363,M-2025-0363,Global Trust Bank — Asset Purchase,8,1,6,1,Australia,8,Open,20250430,,0
+364,M-2025-0364,Global Trust M&A Preliminary Hearing,8,1,2,2,Australia,21,Open,20250502,,1
+365,M-2025-0365,Okafor Mining — Mediation,17,2,6,1,Australia,36,Open,20250504,,0
+366,M-2025-0366,Hanwoo Precision — Patent Portfolio Review,10,3,4,3,South Korea,,Open,20250508,,0
+367,M-2025-0367,Meridian Holdings — Share Sale Agreement,13,1,3,3,Australia,21,On Hold,20250509,,0
+368,M-2025-0368,Meridian Holdings — Share Sale Agreement,13,1,1,1,Australia,4,Open,20250509,,0
+369,M-2025-0369,Nova Materials — Patent Portfolio Review,16,3,4,3,Australia,26,Open,20250510,,0
+370,M-2025-0370,Whitmore Textiles — Infringement Notice,22,3,5,2,Australia,37,Open,20250512,,0
+371,M-2025-0371,Nova Materials — Trademark Registration,16,3,4,3,Australia,32,Open,20250513,,0
+372,M-2025-0372,Acme Corp — Defence of Statement of Claim,1,2,3,3,Australia,17,Open,20250516,,0
+373,M-2025-0373,London Capital Partners — Asset Purchase,12,1,3,3,United Kingdom,,Open,20250516,,0
+374,M-2025-0374,Singapore Trading Group — Lease Review,19,1,7,3,Singapore,,Closed,20250516,20250902,0
+375,M-2025-0375,Blackwood Realty Lease Restructure,3,1,6,1,Australia,17,Open,20250519,,1
+376,M-2025-0376,Bright Path Foundation — Structuring Advice,4,5,1,1,Australia,17,Closed,20250522,20250830,0
+377,M-2025-0377,Auckland Ventures — Regulatory Advice,2,5,1,1,New Zealand,,Open,20250522,,0
+378,M-2025-0378,Hanwoo Precision — Licensing Agreement,10,3,6,1,South Korea,,On Hold,20250525,,0
+379,M-2025-0379,Fentonville Council — Compliance Review,6,5,8,1,Australia,5,On Hold,20250525,,0
+380,M-2025-0380,Pacific Rim Traders US Distribution Dispute,18,2,6,1,United States,,Open,20250530,,1
+381,M-2025-0381,Harlow & — Workplace Investigation,11,4,1,1,Australia,7,Open,20250531,,0
+382,M-2025-0382,Nippon Precision — Trademark Registration,15,3,4,3,Japan,,Open,20250601,,0
+383,M-2025-0383,Sunrise Logistics Award Compliance Review,20,4,5,2,Australia,11,Open,20250602,,1
+384,M-2025-0384,Acme Corp — Injunction Application,1,2,3,3,Australia,39,Open,20250602,,0
+385,M-2025-0385,Vertex Industries — Patent Portfolio Review,21,3,8,1,Australia,5,Open,20250602,,0
+386,M-2025-0386,Ganges Textile Exports — Contract Dispute,7,2,3,3,India,,Open,20250605,,0
+387,M-2025-0387,Auckland Ventures — Compliance Review,2,5,1,1,New Zealand,,Open,20250608,,0
+388,M-2025-0388,Meridian Pacific Trust — Share Sale Agreement,14,1,7,3,Hong Kong,,Open,20250609,,0
+389,M-2025-0389,Bright Path Foundation — Compliance Review,4,5,5,2,Australia,37,Closed,20250609,20250914,0
+390,M-2025-0390,Acme Corp — Injunction Application,1,2,3,3,Australia,11,Open,20250609,,0
+391,M-2025-0391,Vertex Patent Portfolio Review,21,3,4,3,Australia,11,Open,20250611,,1
+392,M-2025-0392,Singapore Trading Group — Joint Venture Agreement,19,1,4,3,Singapore,,Open,20250611,,0
+393,M-2025-0393,Singapore Trading Group Cross-Border Supply Agreement,19,1,7,3,Singapore,,Open,20250615,,1
+394,M-2025-0394,Ganges Textile Exports Contract Dispute,7,2,3,3,India,,Open,20250620,,1
+395,M-2025-0395,Meridian Holdings — Shareholders' Agreement Review,13,1,1,1,Australia,11,Open,20250622,,0
+396,M-2025-0396,Nova Materials — Opposition Response,16,3,6,1,Australia,16,Open,20250627,,0
+397,M-2025-0397,Ganges Textile Exports — Injunction Application,7,2,3,3,India,,On Hold,20250628,,0
+398,M-2025-0398,Zenith Labs — Contract Dispute,23,2,2,2,Australia,34,Open,20250629,,0
+399,M-2025-0399,Auckland Ventures — Compliance Review,2,5,1,1,New Zealand,,Closed,20250630,20250817,0
+400,M-2025-0400,Bright Path Governance Advisory,4,5,1,1,Australia,5,Open,20250701,,1
+401,M-2025-0401,Auckland Ventures NZ Market Entry Advisory,2,5,1,1,New Zealand,,Open,20250708,,1
+402,M-2025-0402,Pacific Rim Traders — Injunction Application,18,2,6,1,United States,,Open,20250711,,0
+403,M-2025-0403,Meridian Holdings — Asset Purchase,13,1,1,1,Australia,2,Open,20250714,,0
+404,M-2025-0404,Singapore Trading Group — Capital Raise,19,1,7,3,Singapore,,Open,20250714,,0
+405,M-2025-0405,Fentonville Council Planning Advisory,6,5,8,1,Australia,2,Open,20250715,,1
+406,M-2025-0406,Global Trust Bank — Joint Venture Agreement,8,1,2,2,Australia,28,Open,20250716,,0
+407,M-2025-0407,Halcyon Systems — Infringement Notice,9,3,4,3,Australia,30,Open,20250716,,0
+408,M-2025-0408,Harlow & — Award Compliance Review,11,4,3,3,Australia,28,Open,20250717,,0
+409,M-2025-0409,Pacific Rim Traders — Injunction Application,18,2,6,1,United States,,Open,20250718,,0
+410,M-2025-0410,Auckland Ventures — Board Advisory,2,5,5,2,New Zealand,,Open,20250718,,0
+411,M-2025-0411,Sunrise Logistics — Unfair Dismissal Defence,20,4,6,1,Australia,29,On Hold,20250719,,0
+412,M-2025-0412,Auckland Ventures — Governance Advisory,2,5,2,2,New Zealand,,Closed,20250720,20250824,0
+413,M-2025-0413,Nova Materials Supply Contract Review,16,1,4,3,Australia,28,Open,20250722,,1
+414,M-2025-0414,Nova Materials — Patent Portfolio Review,16,3,4,3,Australia,21,Open,20250722,,0
+415,M-2025-0415,Ganges Textile Exports — Contract Dispute,7,2,3,3,India,,Open,20250722,,0
+416,M-2025-0416,Hanwoo Precision Trademark Registration,10,3,4,2,South Korea,,On Hold,20250730,,1
+417,M-2025-0417,Bright Path Foundation — Board Advisory,4,5,1,1,Australia,11,Open,20250802,,0
+418,M-2025-0418,Delacroix Group Acquisition,5,1,7,3,Australia,11,Open,20250804,,1
+419,M-2025-0419,Harlow & — Employment Contracts,11,4,1,1,Australia,4,Open,20250804,,0
+420,M-2025-0420,Halcyon Systems — Infringement Notice,9,3,4,3,Australia,33,Open,20250806,,0
+421,M-2025-0421,Meridian Holdings — Due Diligence,13,1,1,1,Australia,16,Open,20250808,,0
+422,M-2025-0422,London Capital Partners Fund Structuring,12,1,2,2,United Kingdom,,Open,20250812,,1
+423,M-2025-0423,London Capital Partners — Capital Raise,12,1,2,2,United Kingdom,,Open,20250813,,0
+424,M-2025-0424,Bright Path Foundation — Board Advisory,4,5,1,1,Australia,1,Open,20250817,,0
+425,M-2025-0425,Harlow & — Workplace Investigation,11,4,6,1,Australia,11,Open,20250819,,0
+426,M-2025-0426,Acme Corp Data Breach Response,1,2,3,3,Australia,27,Open,20250820,,1
+427,M-2025-0427,Singapore Trading Group — Due Diligence,19,1,7,3,Singapore,,On Hold,20250823,,0
+428,M-2025-0428,Meridian Pacific Trust Structuring,14,1,7,3,Hong Kong,,Open,20250825,,1
+429,M-2025-0429,Harlow & — Award Compliance Review,11,4,3,3,Australia,25,Open,20250828,,0
+430,M-2025-0430,Hanwoo Precision — IP Assignment,10,3,1,1,South Korea,,Open,20250828,,0
+431,M-2025-0431,Blackwood Realty — Joint Venture Agreement,3,1,7,3,Australia,33,Open,20250830,,0
+432,M-2025-0432,Global Trust Bank Regulatory Investigation,8,2,2,2,Australia,38,Open,20250901,,1
+433,M-2025-0433,Global Trust Bank — Joint Venture Agreement,8,1,2,2,Australia,27,Open,20250901,,0
+434,M-2025-0434,Nippon Precision IP Licensing,15,3,4,3,Japan,,Open,20250902,,1
+435,M-2025-0435,Halcyon Systems — Infringement Notice,9,3,4,3,Australia,25,Open,20250903,,0
+436,M-2025-0436,Bright Path Foundation — Regulatory Advice,4,5,1,1,Australia,2,Open,20250904,,0
+437,M-2025-0437,Hanwoo Precision — Patent Portfolio Review,10,3,1,1,South Korea,,Open,20250908,,0
+438,M-2025-0438,Bright Path Foundation Charity Structuring,4,5,1,1,Australia,1,Open,20250910,,1
+439,M-2025-0439,Fentonville Council — Governance Advisory,6,5,2,2,Australia,31,Open,20250911,,0
+440,M-2025-0440,Nippon Precision — Opposition Response,15,3,4,3,Japan,,On Hold,20250912,,0
+441,M-2025-0441,Delacroix & Sons — Due Diligence,5,1,7,3,Australia,29,Open,20250912,,0
+442,M-2025-0442,Auckland Ventures — Structuring Advice,2,5,1,1,New Zealand,,Open,20250912,,0
+443,M-2025-0443,Nova Materials — Patent Portfolio Review,16,3,4,3,Australia,25,Open,20250913,,0
+444,M-2025-0444,Blackwood Realty — Share Sale Agreement,3,1,6,1,Australia,1,Open,20250915,,0
+445,M-2025-0445,Fentonville Council — Board Advisory,6,5,8,1,Australia,5,Open,20250917,,0

@@ -1,0 +1,20 @@
+table 'L Fee earners leaving'
+
+	column 'Fee earners leaving'
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Fee earners leaving]
+
+	partition 'L Fee earners leaving' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Fee earners leaving", INTEGER,
+				    {
+				    { 0 },
+				    { 1 },
+				    { 2 }
+				    }
+				)

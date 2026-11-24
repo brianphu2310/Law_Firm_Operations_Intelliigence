@@ -1,0 +1,27 @@
+table 'Sim Bridge Step'
+
+	column Step
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Step]
+		sortByColumn: Order
+
+	column Order
+		dataType: int64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Order]
+
+	partition 'Sim Bridge Step' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Step", STRING, "Order", INTEGER,
+				    {
+				    { "Today's profit", 1 },
+				    { "Fees", 2 },
+				    { "Disb. recovery", 3 },
+				    { "Costs", 4 }
+				    }
+				)

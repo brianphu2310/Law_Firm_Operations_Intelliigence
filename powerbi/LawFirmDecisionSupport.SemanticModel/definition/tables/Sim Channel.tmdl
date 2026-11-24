@@ -1,0 +1,46 @@
+table 'Sim Channel'
+	isHidden
+
+	column Channel
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Channel]
+
+	column Spend
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Spend]
+
+	column CostPerInquiry
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [CostPerInquiry]
+
+	column Conversion
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Conversion]
+
+	column FeePerMatter
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [FeePerMatter]
+
+	partition 'Sim Channel' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Channel", STRING, "Spend", DOUBLE, "CostPerInquiry", DOUBLE, "Conversion", DOUBLE, "FeePerMatter", DOUBLE,
+				    {
+				    { "Google Ads", 50663.71460177661, 286.2774724536428, 0.23266939696814884, 18856.31375647157 },
+				    { "Website & SEO", 25331.857300888307, 214.7081043402321, 0.3323848528116412, 23570.39219558946 },
+				    { "Referrals", 91255.73941340532, 515.6444337234176, 0.49857727921746176, 32998.54907382524 },
+				    { "LinkedIn & social", 31664.82162611038, 447.3085507088169, 0.1994309116869847, 21213.352976030514 },
+				    { "Events & community", 18998.89297566623, 402.57769563793516, 0.3656233380928054, 23570.39219558946 }
+				    }
+				)

@@ -1,0 +1,69 @@
+table 'Sim New Area'
+	isHidden
+
+	column MatterType
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MatterType]
+
+	column Fee
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Fee]
+
+	column Mature
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mature]
+
+	column Ramp
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Ramp]
+
+	column Support
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Support]
+
+	column Monthly
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Monthly]
+
+	column Launch
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Launch]
+
+	column Bill
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Bill]
+
+	column Pay
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Pay]
+
+	partition 'Sim New Area' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "MatterType", STRING, "Fee", DOUBLE, "Mature", DOUBLE, "Ramp", DOUBLE, "Support", DOUBLE, "Monthly", DOUBLE, "Launch", DOUBLE, "Bill", DOUBLE, "Pay", DOUBLE,
+				    {
+				    { "Wills & Estates", 2800, 18, 12, 0, 3000, 25000, 380, 120 },
+				    { "Family Law", 14000, 4, 9, 0, 4000, 30000, 520, 170 },
+				    { "Property & Conveyancing", 1900, 20, 6, 1, 3000, 20000, 380, 120 },
+				    { "Commercial Leasing", 6500, 6, 9, 0, 1500, 10000, 380, 120 }
+				    }
+				)

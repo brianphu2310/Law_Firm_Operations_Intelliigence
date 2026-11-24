@@ -1,259 +1,176 @@
-# D'Agostino Legal — Financial Operations Dashboard
+# Law Firm Decision Support
 
-![Python 3.12](https://img.shields.io/badge/python-3.12-blue) ![Streamlit](https://img.shields.io/badge/built%20with-Streamlit-ff4b4b) ![License: MIT](https://img.shields.io/badge/license-MIT-green)
+![Python 3.12](https://img.shields.io/badge/python-3.12-blue) ![SQL](https://img.shields.io/badge/SQL-SQLite%20%7C%20Snowflake-29b5e8) ![Excel](https://img.shields.io/badge/Excel-Power%20Query-217346) ![Power BI](https://img.shields.io/badge/Power%20BI-DAX-f2c811) ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
-**[▶ Live demo](https://lawfirmoperationsintelliigence-gkymdplvqo2g3smdqcgyxv.streamlit.app)** · [Methodology](docs/METHODOLOGY.md) · [Simulator](docs/SIMULATOR.md) · [Architecture](docs/ARCHITECTURE.md) · [Business analysis pack](docs/ba/README.md)
+**[▶ Open the live dashboard](https://brianphu2310.github.io/law-firm-decision-support/)** (no sign-in, works on phone) · [Power BI files & how to open them](docs/POWERBI.md) · [Business analysis pack](docs/ba/README.md) · [Simulator](docs/SIMULATOR.md) · [Methodology](docs/METHODOLOGY.md) · [Data model](docs/DATA_MODEL.md)
 
-An interactive financial-analysis dashboard for a fictional three-office law firm. Pick a reporting period (month-to-date,
-quarter-to-date, financial year or any custom range), compare it with the prior period or the same period last year, and see profit
-against budget, working capital, cash outlook and the return on switching practice-management software.
+[![Dashboard demo: Overview, matter map and the Decision Simulator](docs/screenshots/demo.gif)](https://brianphu2310.github.io/law-firm-decision-support/)
 
-Its centrepiece is the **★ Decision Simulator**: test a business decision *before* making it, see the effect on profit and on the
-gap to budget, and work out what it would take to close that gap.
+*The live link is a browser preview generated from the Power BI report's own page files (same layout, same numbers, Simulator runs live). The report itself is in [`powerbi/`](powerbi/) as a Power BI Project (.pbip).*
 
-![Decision Simulator](docs/screenshots/01-simulator-decision.png)
+**The brief.** The Principal of a three-office law firm needs to decide what to do next and wants the numbers behind each
+decision in one place:
+
+1. Should we **switch practice-management software**, and to which one?
+2. Should we **open another branch**?
+3. Should we **hire lawyers**, and for **which type of matter**?
+4. Are the **support teams** (reception, paralegals, accounts, marketing) the right size, or should we **add or cut roles**?
+5. Should **pay go up or down**, and what can we afford?
+6. Where is **marketing** working, and should we **open a new type of matter** (wills, family law, conveyancing)?
+
+The project started with question 1 (the firm pays about $117K a year for LEAP + InfoTrack). Answering it properly needed the
+firm's cost base, utilisation and cash position, and once that model existed it could answer the rest. Everything is brought
+together in one Power BI report, and the **★ Decision Simulator** tests each decision before it is made: profit, the gap to budget,
+the cash needed up front and how much depends on things going to plan.
 
 ## At a glance
 
-[![CI](https://github.com/brianphu2310/Law_Firm_Operations_Intelliigence/actions/workflows/ci.yml/badge.svg)](https://github.com/brianphu2310/Law_Firm_Operations_Intelliigence/actions)
+[![CI](https://github.com/brianphu2310/law-firm-decision-support/actions/workflows/ci.yml/badge.svg)](https://github.com/brianphu2310/law-firm-decision-support/actions)
 
 | | |
 |---|---|
-| **Question** | Why is a law firm behind budget even though revenue is growing, and what would it take to close the gap? |
-| **What I built** | Financial operations dashboard (profit vs budget, working capital, 13-week cash forecast, platform-switch NPV) with a Decision Simulator and goal-seek, over a SQL warehouse, fed by a MYOB API → n8n → Snowflake pipeline that reconciles to the dashboard to the cent. |
-| **Key results** | Synthetic quarter: revenue $1.63M, 1.9% below budget; margin 29.0% vs 31.0% target because costs grew 4.8% against revenue 2.9%. A 3-point utilisation gain recovers roughly three quarters of the gap. |
-| **Tech stack** | Python, pandas, Streamlit, Plotly · SQL (SQLite, DuckDB, Snowflake) · REST API + JSON · OAuth 2.0 / JWT (Auth0) · n8n · Excel + Power Query · FastAPI · GitHub Actions |
-| **Proof** | CI green; data-quality, query and pipeline tests in `tests/`; pipeline checks in [docs/PIPELINE_QUALITY.md](docs/PIPELINE_QUALITY.md). |
-| **Honest limits** | Fictional firm and synthetic data modelled on real bookkeeping work; contains no client information. Forecasts depend on stated assumptions. |
+| **What it does** | Brings the firm's finance, people, matters, clients and marketing data together and answers the Principal's six questions, each with a recommendation and a what-if. |
+| **How it is built** | Python model → **SQL** star schema and 14 analysis queries (SQLite locally, the same tables and decision queries in **Snowflake**) → **Excel + Power Query** decision pack → **Power BI** report (22 pages incl. a matter map, Simulator in DAX). |
+| **Key answers** | Hire in Litigation first. Camden carries 1.8 more reception roles than its workload needs. Website & SEO wins a new matter for $646, LinkedIn for $2,243. A branch pays back in 17 months but needs funding first. |
+| **Tech stack** | Python (pandas, NumPy) · SQL (SQLite, Snowflake) · Excel + Power Query · Power BI (DAX, TMDL/PBIR) · pytest · GitHub Actions |
+| **Proof** | 130+ automated tests in CI. The SQL answers and the Simulator's DAX formulas are tested against the Python engine, the report files against Microsoft's Power BI schemas, and the Excel summary recalculates to the same figures. |
+| **Honest limits** | Fictional firm and synthetic data, modelled on real legal-accounts work; no client information. Department benchmarks, marketing mix and new-service figures are stated assumptions. Not legal or financial advice. |
+
+## Screenshots
+
+<table>
+<tr><td width="50%"><a href="docs/screenshots/01_overview.png"><img src="docs/screenshots/01_overview.png" alt="Overview: the six decisions"></a><br><sub>Overview: the six decisions</sub></td><td width="50%"><a href="docs/screenshots/02_finance_pl.png"><img src="docs/screenshots/02_finance_pl.png" alt="Finance · P&L"></a><br><sub>Finance · P&L</sub></td></tr>
+<tr><td width="50%"><a href="docs/screenshots/03_cash_billing.png"><img src="docs/screenshots/03_cash_billing.png" alt="Finance · Cash & billing"></a><br><sub>Finance · Cash & billing</sub></td><td width="50%"><a href="docs/screenshots/04_people.png"><img src="docs/screenshots/04_people.png" alt="People · Performance"></a><br><sub>People · Performance</sub></td></tr>
+<tr><td width="50%"><a href="docs/screenshots/05_matters_map.png"><img src="docs/screenshots/05_matters_map.png" alt="Matters · Map: where clients come from"></a><br><sub>Matters · Map: where clients come from</sub></td><td width="50%"><a href="docs/screenshots/06_clients.png"><img src="docs/screenshots/06_clients.png" alt="Clients"></a><br><sub>Clients</sub></td></tr>
+<tr><td width="50%"><a href="docs/screenshots/07_simulator_decide.png"><img src="docs/screenshots/07_simulator_decide.png" alt="★ Simulator: a new branch tested"></a><br><sub>★ Simulator: a new branch tested</sub></td><td width="50%"><a href="docs/screenshots/08_simulator_test.png"><img src="docs/screenshots/08_simulator_test.png" alt="Simulator · Test the plan"></a><br><sub>Simulator · Test the plan</sub></td></tr>
+<tr><td width="50%"><a href="docs/screenshots/09_method.png"><img src="docs/screenshots/09_method.png" alt="Method & check"></a><br><sub>Method & check</sub></td></tr>
+</table>
+
+## The Principal's questions and the answers
+
+| Question | Where | Answer on the sample data |
+|---|---|---|
+| **Switch software?** | Platform | Smokeball + GlobalX has the best 3-year NPV (+$106K, payback 17 months). triConvey has the lowest run-cost ($88K a year against $117K today). |
+| **Open a branch?** | ★ Simulator (Growth levers) | Two associates and two support staff: −$87K profit in year one, +$539K a year at full speed, fit-out earned back in 17 months. But the $120K fit-out takes the 13-week cash low point from $160K to $40K, below the $60K minimum. Fund it first. |
+| **Hire, and for which matters?** | People → Hiring & departments | **Litigation**: its lawyers are at 89% utilisation, the highest of the five areas, with a 60% margin. One associate there adds about $130K in year one, against $82K in Advisory. |
+| **Support teams the right size?** | People → Hiring & departments | Camden has 3 reception/admin staff for 1.2 roles of work and 2 paralegals for 1.1. Richmond is stretched. Cutting two Camden reception roles saves $112K a year for $19K of NES redundancy and notice pay once. |
+| **Pay up or down?** | ★ Simulator (pay levers), People → Branches & pay | Every 1% on everyone's pay costs about $40K a year. A 3% rise (just under market wage growth of 3.4%) costs $119K and would need rates up about 1.7% to pay for it. |
+| **Marketing and new matter types?** | Clients → Marketing, ★ Simulator | Website & SEO wins a matter for $646; LinkedIn & social for $2,243 and loses money if increased. Wills & Estates is the best new service: break-even in year one, +$286K a year at full speed, launch paid back in 13 months. |
+
+## ★ The Decision Simulator
+
+Built on the last 12 months of actuals. In Power BI: a preset bar, 30 lever slicers on the left (Pricing & growth · Hiring, cuts & pay · Support & branch), results on the right; a second page tests the plan.
+
+* **Pricing:** rates, utilisation, realisation, disbursement recovery, overheads, days to collect.
+* **People & pay:** hire by practice area and role; fee earners leaving; support staff added or cut by department, with NES redundancy and notice pay (Fair Work Act s 117, s 119; employers with fewer than 15 employees are generally exempt, this firm has 25); pay changes for fee earners and support staff, and the rate rise that would pay for them.
+* **Growth:** extra marketing by channel (diminishing returns, capped by the team's capacity), a new matter type, a new branch, a platform switch.
+* **Cash, not just profit:** the cash needed up front (fit-out, redundancies, launch campaign, migration) and the 13-week cash low point after the decision.
+* **What would it take?** Closing the $297K gap to budget needs about **+3.7 pp utilisation**, or **+4.3% rates**, or **+3.9 pp realisation**.
+* **How sure are we?** The result if only 100% / 75% / 50% of the uncertain part is delivered. Pay, rent and setbacks are never softened.
+
+**Every preset on the sample data** (base: last 12 months, $2.07M operating profit a year, 28.5% margin; FY26 budget $2.36M):
+
+| Decision | Profit a year | Margin | Gap to budget | One-off cash | If only 50% delivered |
+|---|---|---|---|---|---|
+| Raise rates 5% | +$350K | 31.8% | +$53K | — | +$175K |
+| Lift utilisation +3 pp | +$243K | 30.8% | −$55K | — | +$121K |
+| Hire an associate (firm mix, 60% productive in year one) | +$120K | 28.5% | −$177K | — | −$81K |
+| Cut 2 reception roles (3 years' service) | +$112K | 30.1% | −$186K | $19K | +$112K |
+| Cut overheads 5% | +$99K | 29.9% | −$198K | — | +$50K |
+| Extra $3,000 a month on Website & SEO | +$40K | 28.8% | −$258K | — | +$2K |
+| Switch to Smokeball + GlobalX | +$18K | 28.8% | −$280K | $52K | +$18K |
+| Open Wills & Estates | +$6K in year one | 27.3% | −$291K | $25K | −$156K |
+| Collect 7 days faster | $0 (releases about $153K of cash once) | 28.5% | −$297K | — | $0 |
+| Open a branch (2 associates, 2 support) | −$87K in year one | 24.7% | −$384K | $120K | −$451K |
+| Pay rise 3% (everyone) | −$119K | 26.9% | −$416K | — | −$119K |
+| Downturn: −5 pp utilisation, +3% overheads | −$464K | 23.5% | −$761K | — | −$464K |
+
+## How the information comes together
+
+```mermaid
+flowchart LR
+    m["core/model.py<br/>simulated firm data<br/>(fixed seed)"] --> wh["warehouse/<br/>SQLite star schema<br/>21 tables, quality checks"]
+    wh --> sql["sql/analysis/<br/>13 SQL queries<br/>(P&L, hiring, staffing, marketing…)"]
+    wh --> csv["data/warehouse/*.csv"]
+    csv --> sf["snowflake/<br/>same tables + decision queries"]
+    sql --> res["docs/query_results/*.csv"]
+    res --> pq["excel/<br/>Power Query → Principal's<br/>Decision Pack"]
+    csv --> pq
+    csv --> pbi["powerbi/<br/>Power BI report<br/>+ ★ Simulator in DAX"]
+    m --> pbi
+```
+
+| Layer | What it does | Where |
+|---|---|---|
+| **SQL** | A star schema (dimensions for date, office, client suburb, practice area, fee earner, client, matter, department, marketing channel; facts for invoices, time, P&L, trust, staffing, intake, supplier orders) with a data-quality suite and 14 analysis queries. Queries 11–14 answer the hiring, staffing, marketing and branch-site questions and are **tested against the dashboard's own numbers**. | [`warehouse/`](warehouse), [`sql/analysis/`](sql/analysis), [docs/DATA_MODEL.md](docs/DATA_MODEL.md), [docs/DATA_DICTIONARY.md](docs/DATA_DICTIONARY.md), [docs/DATA_QUALITY.md](docs/DATA_QUALITY.md) |
+| **Snowflake** | The same 21 tables created and loaded from `data/warehouse/*.csv` (stage + `COPY INTO`), and the decision queries in Snowflake SQL. Both scripts are generated from the local schema and queries, so they cannot drift. | [`snowflake/`](snowflake) |
+| **Excel + Power Query** | The Principal's Decision Pack: five data sheets (P&L, where to hire, staffing, marketing, receivables) and a summary that is formulas only. Power Query refreshes the data sheets straight from this repository, and one query rebuilds staffing by merging three warehouse tables. | [`excel/`](excel) |
+| **Power BI** | The full dashboard and Decision Simulator as a Power BI project: one semantic model over the warehouse, about 295 DAX measures, 22 pages (one per platform, plus a catchment map that shows where a new branch would reach the most clients). The Simulator's formulas are generated from one spec that is tested against the Python engine, and a Check page compares every DAX result with it. | [`powerbi/`](powerbi) · [docs](docs/POWERBI.md) |
+| **Python** | The engine behind everything: the simulated firm, the metric definitions and the Simulator (`core/simulate.py`), which the SQL and DAX results are tested against. | [`core/`](core) |
+
+```bash
+python -m warehouse.build          # SQLite warehouse -> warehouse.db
+python -m warehouse.quality        # data-quality suite -> docs/DATA_QUALITY.md
+python sql/run_queries.py          # 13 queries -> docs/query_results/*.csv
+python -m warehouse.export         # tables -> data/warehouse/*.csv (for Snowflake and Power Query)
+python -m excel.build_pack         # -> excel/Principal_Decision_Pack.xlsx
+python -m powerbi.build            # -> powerbi/LawFirmDecisionSupport.pbip (+ data/powerbi/*.csv)
+```
+
+## Pages (Power BI)
+
+| Section | Pages | What it brings together |
+|---|---|---|
+| **Overview** | 1 | Headline KPIs vs prior period, intake funnel, workload, trust/WIP/receivables, the decisions to make now |
+| **Finance** | P&L & outlook · Cash & billing · Trust & costs | P&L vs budget, FY outlook, 13-week cash forecast, receivables ageing, trust account, supplier and card costs |
+| **People** | Performance · Hiring & departments · Branches & pay | Fee-earner performance, **where to hire**, **support staff vs workload**, office profit, cost of a pay review |
+| **Matters · Clients · Calendar** | 4 | Matter ledger and ageing; client concentration, receivables and **marketing channels**; court dates |
+| **Platform** | 1 | 3-year cost, NPV, payback, weighted scorecard, risks and sensitivity for seven platforms |
+| **★ Simulator** | Decide · Test the plan | What happens if we decide X, what would it take to hit budget, and every preset side by side |
+| **Check** | 1 | Assumptions, and every Simulator result in DAX reconciled with the Python engine |
 
 ## Business analysis pack
 
-The cut-over is also documented the way a Business Analyst would run it: a [BRD](docs/ba/BRD.md) with 13 requirements traced to the marts and tests that deliver them, a [stakeholder map and RACI](docs/ba/STAKEHOLDERS.md), [as-is / to-be process maps](docs/ba/PROCESS_MAPS.md) with 10 gaps and their controls, [16 UAT cases](docs/ba/UAT.md) (8 pass, 8 fail on the planted defects and are logged), and a [cut-over runbook](docs/ba/CUTOVER_RUNBOOK.md) with go / no-go criteria and rollback.
-
-## Demo clips
-
-**The cut-over, in the app** (LEAP → triConvey, InfoTrack → TriSearch): the August trust reconciliation that does not balance with 2 working days left, matters and invoices that did not migrate cleanly, the supplier switch, and the exceptions log. [MP4](docs/media/01_transition_page.mp4)
-
-![Transition page](docs/media/01_transition_page.gif)
-
-**The pipeline, end to end:** 16 resources from 6 mock vendor APIs into the warehouse, 15 quality checks and 12 reconciliations to the app all PASS, 28 cut-over findings for the exceptions log, then 193 tests pass. Real output from one run, replayed with the waits shortened (the test suite takes about 2 minutes). [MP4](docs/media/02_pipeline_run.mp4)
-
-![Pipeline run](docs/media/02_pipeline_run.gif)
-
-**The same load, live in the cloud:** n8n Cloud gets an Auth0 token, pulls 16 resources from the mock vendor APIs on Render and writes 7,927 records into Snowflake; every node green and the count check passes. Frames captured from the run on 20 Nov 2026, about 1 minute end to end.
-
-![n8n Cloud run](docs/media/03_n8n_cloud_run.gif)
-
-## ★ Flagship: the Decision Simulator
-
-A Financial Analyst's most useful question is not "what happened?" but **"what should we do about it?"** The Simulator answers that on the
-last 12 months of actuals:
-
-* **One-click decisions.** Hire an associate, raise rates, lift utilisation, collect faster, cut overheads or model a downturn, then adjust any lever.
-* **Gap to budget, always visible.** Every change is shown against the FY26 budget operating profit ($2.39M) on a live bridge chart.
-* **"What would it take?" (goal-seek).** Pick a target (match budget profit, reach the budget margin, or add a custom uplift) and see how far each lever
-  must move on its own. On the sample data, closing the $326K gap needs about **+4.0 pp utilisation**,
-  or **+4.7% rates**, or **+4.2 pp realisation**. One click applies the answer to the sliders.
-* **"How sure are we?"** Shows the result if only 100% / 75% / 50% of the planned improvement is delivered. Setbacks are never softened.
-* **Real hiring economics.** A new associate must be about **42% as productive as the firm average** in year one just to cover their own cost,
-  and the chart shows what happens if the ramp-up disappoints.
-* **Saved scenarios** to compare options side by side, with CSV export.
-* **Joined up with the analysis.** The Finance, billing and Team pages link straight into the Simulator with the right goal or decision pre-loaded, and your levers are kept as you move around the app.
-
-![Goal-seek and delivery risk](docs/screenshots/02-simulator-goal-seek-and-risk.png)
-
-**Example decisions on the sample data** (base: last 12 months, $2.07M operating profit a year, 28.5% margin; FY26 budget $2.39M):
-
-| Decision | Profit change a year | Margin | Gap to FY26 budget | If only 50% is delivered |
-|---|---|---|---|---|
-| Raise rates 5% | +$350K | 31.8% | +$24K | +$175K |
-| Lift utilisation +3 pp | +$243K | 30.8% | -$83K | +$121K |
-| Cut overheads 5% | +$99K | 29.9% | -$226K | +$50K |
-| Hire an associate (60% productive in year one) | +$120K | 28.5% | -$205K | -$81K |
-| Collect 7 days faster | $0 (releases about $153K of cash once) | 28.5% | -$326K | $0 |
-| Downturn: −5 pp utilisation, +3% overheads | -$464K | 23.5% | -$790K | -$464K |
-
-Method, formulas and limits: [docs/SIMULATOR.md](docs/SIMULATOR.md).
-
-## In one minute
-
-A small law firm's partners ask the same questions every month. This project answers them in one place, and shows the working behind every number:
-
-| The question | Where to look |
-|---|---|
-| **What should we do about it? What if we hire, raise rates or collect faster?** | **★ Simulator** (levers, gap to budget, goal-seek, delivery risk, saved scenarios) |
-| Are we ahead or behind budget, and why? | **Finance → P&L vs budget** (line-by-line variances, favourable / unfavourable) |
-| Where will the year land? | **Finance → FY outlook** (year-to-date actuals plus the remaining budget scaled to current performance) |
-| Will we run short of cash in the next quarter? | **Finance → Cash** (13-week forecast from client payment habits, payroll, rent, GST and drawings) |
-| Who owes us money, and who pays late? | **Clients → Receivables & payment** (ageing, days-to-pay by client, chase list) |
-| Are our lawyers busy and profitable? | **Team** (utilisation, realisation, effective rate, contribution after pay, branch results) |
-| Should we change our practice-management system? | **Seven platform dashboards** (3-year cost, NPV, payback, weighted scorecard, risks, sensitivity) |
-
-![Overview](docs/screenshots/03-overview.png)
-
-## Example findings (from the synthetic data)
-
-These come straight from the model, so they match what you see when you run it (quarter-to-date, 1 Jul – 17 Sep 2025):
-
-* **Profit is behind budget even though revenue is growing.** Revenue is $1.63M: 2.9% above the prior period but 1.9% below budget.
-  Operating margin is 29.0% against a 31.0% budget, because costs grew 4.8% against revenue's 2.9%.
-* **Working capital needs attention.** DSO is 48 days; $208K (20%) of receivables is overdue and $51K of that is more than 60 days late.
-* **The full-year forecast sits below budget.** At current performance FY26 operating profit lands near $2.20M against a $2.39M budget (−8.2%).
-* **A cash pinch is visible in late October.** The 13-week forecast dips to about $161K in the week of 23 Oct, when payroll, partner
-  drawings and the quarterly GST payment fall together.
-* **Platform switch:** Smokeball has the best 3-year NPV (+$106K) but only if at least ~19% of its assumed productivity benefit is realised;
-  triConvey has the lowest run-cost ($88K a year against $117K today); PracticeEvolve and MyCase have negative NPV on the base assumptions.
-* **What the Simulator says about it:** each extra point of utilisation is worth about $81K a year, so a 3-point improvement recovers roughly three quarters of the gap to budget.
-
-## Data engineering: warehouse, SQL and data quality
-
-Besides the Streamlit app, the repo includes a small, tested data pipeline over the same **simulated** data. It loads the app's
-fixed-seed model into a SQLite star schema, checks it, and runs SQL analysis on it. Nothing is scraped or fetched; no real client,
-matter or billing data is used.
-
-```bash
-python -m warehouse.build            # simulated data -> warehouse.db (dim_/fact_ tables, surrogate keys, FKs, indexes)
-python -m warehouse.quality          # data-quality suite -> docs/DATA_QUALITY.md
-python sql/run_queries.py            # 10 analytical queries -> docs/query_results/*.csv
-```
-
-| What | Where |
-|---|---|
-| ETL module (extract / transform / load, date dimension, pro-rating, wide-to-long) | [`warehouse/build.py`](warehouse/build.py), DDL in [`warehouse/schema.sql`](warehouse/schema.sql) |
-| Data-quality checks (nulls, duplicates, referential integrity, business rules, reconciliation to the app's metrics) | [`warehouse/quality.py`](warehouse/quality.py) -> [docs/DATA_QUALITY.md](docs/DATA_QUALITY.md) |
-| 10 SQL queries: utilisation, WIP by matter age, realisation, practice-area profitability, matter billing position, client concentration, receivables ageing, payment behaviour, P&L vs budget, trust balances | [`sql/analysis/`](sql/analysis) -> [`docs/query_results/`](docs/query_results) |
-| ER diagram, grain and keys | [docs/DATA_MODEL.md](docs/DATA_MODEL.md) |
-| Data dictionary and source-to-target mapping | [docs/DATA_DICTIONARY.md](docs/DATA_DICTIONARY.md) |
-| Skills mapped to files | [docs/SKILLS_DEMONSTRATED.md](docs/SKILLS_DEMONSTRATED.md) |
-
-Tests for the pipeline are in `tests/test_warehouse.py`, `tests/test_sql_queries.py` and `tests/test_docs.py`; CI builds the warehouse and runs the quality suite and queries on every push.
-The simulation has no per-matter cost or time-entry ledger, so WIP ageing is by matter age and profitability is analysed at practice-area level.
-
-## Integration pipeline: MYOB, LEAP, triConvey, InfoTrack, TriSearch, PEXA → n8n → Snowflake → Excel / Power Query, Streamlit
-
-How the dashboard's numbers would arrive from the firm's accounting system, built end to end, across **one cut-over**: the practice management system changes from LEAP to triConvey (Smokeball) and the search supplier from InfoTrack to TriSearch. The pipeline's job is to show what the cut-over left behind and who has to fix it by when. Details: [docs/PIPELINE.md](docs/PIPELINE.md) and [docs/TRANSITION.md](docs/TRANSITION.md) (timeline, what is sourced vs assumed, the planted defects).
-
-![Pipeline page](docs/screenshots/09-pipeline.png)
-
-| Stage | Tool | Where |
-|---|---|---|
-| Sources | Six simulated systems, each with its own API and paging style: **MYOB** (accounting), **LEAP** (practice management, frozen at the final collection), **triConvey** (Smokeball-shaped, live from go-live), **InfoTrack** (searches until go-live), **TriSearch** (searches after go-live), **PEXA** (settlements) | [`integration/mock_api.py`](integration/mock_api.py), [`integration/sources_export.py`](integration/sources_export.py), [`integration/myob_export.py`](integration/myob_export.py) |
-| Cross-system checks | LEAP + triConvey invoices = MYOB (472/472); the cut-over reconciliation finds **28 planted findings**: 1 unmigrated matter, 1 duplicate, 12 Advisory matters that fell to "General", 1 invoice missing GST, a **$5,799.21 trust gap** that leaves the August r48 ledger statement unbalanced with 2 working days left, and 22 supplier-switch disbursement exceptions (18 TriSearch orders never reached the ledger) | [`integration/sql/`](integration/sql), [docs/PIPELINE.md](docs/PIPELINE.md) |
-| Security | **OAuth 2.0 client credentials** with RS256 JWTs: **Auth0** (free) or a local issuer for CI; signature via JWKS, issuer, audience, expiry, per-resource scopes; RFC 6750 errors. 20 tests incl. forged, alg-none, HS256-confusion, expired and wrong-scope tokens | [`integration/auth.py`](integration/auth.py), [docs/AUTH.md](docs/AUTH.md) |
-| Orchestration | **n8n**: daily 6am, incremental watermarks, landing → RAW with `INSERT ALL … PARSE_JSON`, load audit, fails on count mismatch | [`integration/n8n/`](integration/n8n) |
-| Warehouse | **Snowflake**: stage + `COPY INTO`, `VARIANT`, `LATERAL FLATTEN`, `QUALIFY` de-duplication, marts (DuckDB twin for local runs and CI) | [`integration/sql/`](integration/sql) |
-| Quality | 15 checks + 12 reconciliations to the dashboard (receivables, every ageing bucket, monthly revenue, trust and matters across the freeze) | [`integration/quality.py`](integration/quality.py) → [docs/PIPELINE_QUALITY.md](docs/PIPELINE_QUALITY.md) |
-| Excel + Power Query | 4 cross-system checks that read the source JSON straight from this repo, plus M scripts for the marts API, the MYOB API (paged) and Snowflake, and a formula-driven Debtors & Revenue Pack. [`Law_Firm_Recon_PowerQuery.xlsx`](integration/excel/Law_Firm_Recon_PowerQuery.xlsx) was refreshed in Excel on the cut-over data (20 Nov 2026): 472/472 invoices matched; 132 matters migrated, M-2024-0209 not migrated, M-2024-0277 duplicated; Global Trust Bank −$5,799.21; 439 matters, $213,752.16 of disbursements. The same results as DuckDB and Snowflake | [`integration/powerquery/`](integration/powerquery), [`integration/excel/`](integration/excel) |
-| Serving and BI | Marts JSON API (FastAPI), the app's **Transition** page (r48 clock, matters, trust, AR, supplier switch, exceptions log) and **Pipeline** page (Streamlit) | [`integration/marts_api.py`](integration/marts_api.py), [`views/pipeline.py`](views/pipeline.py) |
-
-**Evidence** (screenshots from the real runs):
-
-**Cut-over run, 20 Nov 2026** (n8n Cloud → Snowflake, staging and marts built in Snowflake straight from this repo with a Git repository stage and `EXECUTE IMMEDIATE FROM`):
-
-| | |
-|---|---|
-| ![n8n Cloud cut-over run](docs/screenshots/19-n8n-cloud-run-cutover.png) **n8n Cloud:** 16 resources, 7,927 records, all nodes green, API count = loaded count | ![Snowflake load audit](docs/screenshots/22-snowflake-load-audit-cutover.png) **Snowflake:** the load audit for that run, 16/16 resources OK |
-| ![Snowflake findings by kind](docs/screenshots/20-snowflake-cutover-findings-by-kind.png) **Snowflake:** 28 cut-over findings (22 disbursement, 2 matter, 1 matter type, 1 invoice, 1 trust balance, 1 trust reconciliation), the same as the local DuckDB run | ![Snowflake exceptions](docs/screenshots/21-snowflake-cutover-exceptions.png) **Snowflake:** the exceptions log, led by the August r48 reconciliation $5,799.21 off |
-
-**Earlier single-system run** (before the cut-over was modelled):
-
-| | |
-|---|---|
-| ![Snowflake checks](docs/screenshots/10-snowflake-quality-checks.png) **Snowflake:** 8 quality checks on the loaded data, all 0 failures | ![Snowflake ageing](docs/screenshots/11-snowflake-receivables-ageing.png) **Snowflake:** receivables by age, total $1,053,551.51, same as the dashboard |
-| ![Migration dry run](docs/screenshots/14-migration-dry-run.png) **Pipeline page, migration dry run:** LEAP → triConvey rehearsal, 3 findings for the cut-over log | ![Pipeline page](docs/screenshots/09-pipeline.png) **Pipeline page:** 11 sources, 12/12 checks, 11/11 reconciliations to the app |
-| ![Snowflake cross-system checks](docs/screenshots/15-snowflake-cross-system-checks.png) **Snowflake:** cross-system checks on LEAP, MYOB, InfoTrack and PEXA data, all 0 | ![Snowflake migration findings](docs/screenshots/16-snowflake-migration-findings.png) **Snowflake:** the same 3 migration findings as the local run |
-| ![n8n Cloud run](docs/screenshots/17-n8n-cloud-run-green.jpg) **n8n Cloud, end-to-end run:** Auth0 client-credentials token → mock vendor API on Render → 7,572 records into Snowflake, all 15 nodes green | ![Snowflake load audit](docs/screenshots/18-snowflake-load-audit-from-n8n.jpg) **Snowflake:** the load audit written by that run, 11/11 sources OK, API count = loaded count |
-| ![Excel pack](docs/screenshots/13-excel-debtors-pack.png) **Excel:** Debtors & Revenue Pack, formulas only, tie-out cells read OK | |
-
-**Result:** 11 resources from 5 systems (7,572 records) load with every check at 0 failures. Receivables at the 17 Sep 2025
-report date are **$1,053,551.51** in the pipeline against $1,053,551.56 in the app, a 5-cent gap from per-invoice cent rounding.
-The ageing buckets and monthly revenue also tie out.
-**Evidence note:** the cut-over SQL has now run on Snowflake and finds the same 28 findings as DuckDB. The Excel Power Query workbook was refreshed on the same data and agrees.
-**Honest limit:** every source system is a mock serving a re-shaped copy of the app's simulated data. No real firm or client
-data is used. The LEAP, InfoTrack, TriSearch and PEXA API shapes are illustrative because those vendors gate or do not publish their API references. Supplier service fees are assumptions, not published prices. Live
-connections need vendor developer access, and switching to them is configuration, not code.
-
-```bash
-pip install -r requirements-pipeline.txt
-uvicorn integration.mock_api:app --port 8000 &        # mock MYOB API
-python -m integration.extract_load                     # API -> warehouse RAW (incremental)
-python -m integration.quality                          # staging, marts, checks, reconciliation
-python -m integration.excel.build_pack                 # Excel Debtors & Revenue Pack
-```
-
-## More screenshots
-
-| | |
-|---|---|
-| ![P&L vs budget](docs/screenshots/04-finance-pl-vs-budget.png) **P&L vs budget** (with a link into the Simulator) | ![Cash forecast](docs/screenshots/05-finance-cash-forecast.png) **Cash and 13-week forecast** |
-| ![Receivables](docs/screenshots/06-clients-receivables.png) **Receivables and payment behaviour** | ![Platform evaluation](docs/screenshots/07-platform-evaluation.png) **Platform evaluation (one per platform)** |
-| ![Team](docs/screenshots/08-team-performance.png) **Team performance** | |
-
-## What this project demonstrates
-
-**Financial analysis**
-* Decision analysis: scenario modelling, goal-seek ("what would it take?"), delivery-risk haircuts, break-even productivity for a hire, scenario comparison.
-* Management reporting: income statement with actual vs budget vs prior period, favourable/unfavourable variance logic.
-* Legal-industry KPIs: utilisation, realisation, effective rate, WIP, lock-up days, DSO, matter ageing.
-* Working capital and cash: receivables ageing, expected-collection modelling, a 13-week cash forecast, GST/BAS timing.
-* Trust-account awareness: client trust money is kept separate from firm revenue and cash, with per-client ledgers.
-* Investment appraisal: 3-year TCO, NPV, IRR, payback, scenarios (base / downside / upside), sensitivity and break-even analysis.
-* Reporting periods done properly: month-to-date, quarter-to-date, Australian financial year (1 Jul – 30 Jun), custom ranges.
-
-**Engineering**
-* Python, pandas, NumPy, Plotly and Streamlit; about 4,400 lines organised into a model layer, a metrics layer, a simulation engine and page modules.
-* One deterministic financial model as the single source of truth, so every page reconciles to every other page.
-* **130+ automated tests** (the app's 75 plus the warehouse, SQL and documentation suites): reconciliation checks (for example, the invoice ledger equals modelled revenue to the dollar, branch and attorney tables sum to firm totals),
-  simulator maths (goal-seek answers land exactly on the target), and browser-style tests that click buttons and edit controls, including regression tests for past bugs.
-* A SQLite dimensional warehouse with a data-quality suite and SQL analysis layer (see **Data engineering** above).
-* An API-to-warehouse integration layer (MYOB API, n8n, Snowflake, Power Query) reconciled to the app (see **Integration pipeline** above).
-* Continuous integration on GitHub Actions.
-
-Method notes: [docs/METHODOLOGY.md](docs/METHODOLOGY.md) (every KPI and model formula) · [docs/SIMULATOR.md](docs/SIMULATOR.md) (the Simulator) · [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) (how the code fits together).
+The same questions written up the way a Business Analyst would hand them over: a [BRD](docs/ba/BRD.md) that starts from the
+Principal's questions, [stakeholders and RACI](docs/ba/STAKEHOLDERS.md), the [monthly decision process](docs/ba/PROCESS.md),
+and [user stories with UAT](docs/ba/USER_STORIES_UAT.md) traced to the tests that prove them.
 
 ## Run it locally
 
+**The report:** open `powerbi/LawFirmDecisionSupport.pbip` in Power BI Desktop (Windows) and refresh. Data loads from this
+repository's CSVs. See [docs/POWERBI.md](docs/POWERBI.md).
+
+**The pipeline and tests:**
+
 ```bash
-git clone https://github.com/brianphu2310/Law_Firm_Operations_Intelliigence.git
-cd Law_Firm_Operations_Intelliigence
+git clone https://github.com/brianphu2310/law-firm-decision-support.git
+cd law-firm-decision-support
 python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-streamlit run app.py
+pip install -r requirements-dev.txt
+python -m pytest -q
+python -m powerbi.build            # regenerate the Power BI project after changing the model
 ```
 
-Tested with Python 3.12, Streamlit 1.64, pandas 3.0, NumPy 2.4–2.5 and Plotly 7.1. Best viewed in a browser window at least 1280 px wide.
-The model builds in about two seconds and is cached. The globe on the Overview page loads its map from Plotly's CDN, so it needs an internet connection.
-
-**Tests:** `pip install -r requirements-dev.txt && python -m pytest -q`
-
-## Deploy your own copy (free)
-
-1. Push the repository to your GitHub account.
-2. Go to [share.streamlit.io](https://share.streamlit.io), sign in with GitHub and choose **New app**.
-3. Select the repository, branch `main`, main file `app.py`; under *Advanced settings* choose Python 3.12.
-4. Optionally add the resulting URL to the top of this README as a live-demo link.
+Tested with Python 3.12, pandas 3.0 and the latest Power BI Desktop.
 
 ## Data, assumptions and disclaimers
 
-* **All data is synthetic.** The firm, its clients, matters and staff are fictional. A fixed random seed makes the data
-  reproducible, and the model is calibrated so headline balances on the as-of date (17 Sep 2025) are exact:
-  142 active matters, office cash $268,400, trust funds $535,000.
-* **Simulator results are decision aids, not forecasts.** They hold volumes, mix and client behaviour constant except for the levers you change, and assume enough work exists for any new hire.
-* **Platform figures are illustrative.** Prices, scores, migration costs and productivity uplifts for the seven platforms are
-  assumptions for demonstrating the method. They are not vendor quotes or facts, and the analysis should be re-run with
-  real quotes before it informs a decision.
-* Product names such as LEAP, InfoTrack, Smokeball, Actionstep, Clio and MyCase belong to their owners. This project is not
-  affiliated with or endorsed by any of them.
-* Some modelling shortcuts are deliberate and visible in the app: fixed costs (payroll, rent, software, insurance) equal budget
-  exactly, and cash cover looks short because partners draw most of each month's profit.
+* **All data is synthetic.** The firm, its clients, matters and staff are fictional; a fixed random seed makes it reproducible.
+* **Assumptions are visible.** Department pay and workload benchmarks, the marketing channel mix, new-service fees and volumes,
+  platform prices and scores are inputs for demonstrating the method, listed in [`core/ref.py`](core/ref.py) and on the report's Check page.
+* **Employment rules.** Redundancy and notice pay use the NES minimums only; awards, agreements and contracts can give more. Pay cuts
+  generally need the employee's agreement and cannot go below award minimums. Market wage growth (3.4%) is the ABS Wage Price
+  Index, private sector, year to the September quarter 2026. This is not legal advice.
+* **Simulator results are decision aids, not forecasts.** They hold volumes, mix and client behaviour constant except for the levers you change.
+* Product names such as LEAP, InfoTrack, Smokeball, Actionstep, Clio and MyCase belong to their owners. This project is not affiliated with any of them.
 * Operating profit is shown before partner drawings, income tax and depreciation.
 
 ## Development notes
 
-This project was developed iteratively with AI assistance (Anthropic's Claude) working from the author's requirements and
-feedback on screenshots. The financial definitions are documented in [docs/METHODOLOGY.md](docs/METHODOLOGY.md) and are
-covered by the automated tests, so they can be checked and challenged independently of how the code was written.
+Developed iteratively with AI assistance (Anthropic's Claude) from the author's requirements and feedback. The
+financial definitions are documented in [docs/METHODOLOGY.md](docs/METHODOLOGY.md) and covered by the automated tests, so they can
+be checked independently of how the code was written.
 
 ## Author
 
-Built by Brian Phu, Financial Analyst. Licensed under the [MIT License](LICENSE).
+Built by Brian Phu. Licensed under the [MIT License](LICENSE).

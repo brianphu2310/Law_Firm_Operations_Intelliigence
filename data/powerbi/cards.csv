@@ -1,0 +1,1004 @@
+date,card,merchant,category,amount,branch,country
+2025-09-17,Amex,The Grounds Cafe,Client Entertainment,12.73,Liverpool,Australia
+2025-09-17,Visa,Ampol,Fuel,110.24,Liverpool,Australia
+2025-09-17,Amex,Officeworks,Supplies,29.02,Richmond,Australia
+2025-09-17,Visa,Bunnings,Office Maintenance,13.77,Camden,Australia
+2025-09-16,Amex,Qantas Club,Travel,42.88,Liverpool,Australia
+2025-09-15,Amex,Uber,Travel,75.43,Camden,Australia
+2025-09-14,Amex,Virgin Australia,Travel,58.86,Richmond,Australia
+2025-09-14,Amex,Adobe,Software,60.64,Richmond,Australia
+2025-09-14,Amex,Virgin Australia,Travel,161.47,Richmond,Australia
+2025-09-13,Amex,The Grounds Cafe,Client Entertainment,14.92,Camden,Australia
+2025-09-13,Amex,BP,Fuel,45.58,Liverpool,Australia
+2025-09-12,Amex,Apple,Equipment,141.67,Camden,Australia
+2025-09-12,Amex,Officeworks,Supplies,17.83,Camden,Australia
+2025-09-12,Amex,Virgin Australia,Travel,67.34,Liverpool,Australia
+2025-09-12,Amex,Zoom Subscription,Software,22.3,Richmond,Australia
+2025-09-11,Visa,Coles,Office Maintenance,24.44,Camden,Australia
+2025-09-11,Visa,Qantas Club,Travel,71.99,Liverpool,Australia
+2025-09-11,Amex,Ampol,Fuel,125.24,Richmond,Australia
+2025-09-10,Amex,Qantas Club,Travel,65.16,Liverpool,Australia
+2025-09-10,Visa,Officeworks,Supplies,67.55,Camden,Australia
+2025-09-10,Amex,Ritz Carlton Dining,Client Entertainment,26.04,Liverpool,Australia
+2025-09-09,Visa,Adobe,Software,22.11,Camden,Australia
+2025-09-09,Amex,Staples,Supplies,209.79,Camden,Australia
+2025-09-08,Visa,Qantas Club,Travel,426.45,Liverpool,Australia
+2025-09-07,Amex,Zoom Subscription,Software,112.6,Camden,Australia
+2025-09-07,Visa,Adobe,Software,17.89,Richmond,Australia
+2025-09-07,Amex,Staples,Supplies,101.02,Richmond,Australia
+2025-09-06,Amex,Qantas Club,Travel,100.61,Camden,Australia
+2025-09-06,Visa,BP,Fuel,11.94,Richmond,Australia
+2025-09-05,Visa,Bunnings,Office Maintenance,129.92,Camden,Australia
+2025-09-04,Visa,Marriott Hotels,Travel,79.1,Richmond,Australia
+2025-09-03,Visa,Staples,Supplies,15.72,Camden,Australia
+2025-09-03,Visa,Microsoft 365,Software,38.89,Camden,Australia
+2025-09-02,Visa,Virgin Australia,Travel,48.61,Camden,Australia
+2025-09-02,Amex,Adobe,Software,21.87,Richmond,Australia
+2025-09-01,Visa,Virgin Australia,Travel,75.42,Liverpool,Australia
+2025-08-31,Amex,Marriott Hotels,Travel,263.12,Liverpool,Australia
+2025-08-31,Visa,Rockpool,Client Entertainment,75.98,Liverpool,Australia
+2025-08-30,Amex,Ampol,Fuel,122.74,Camden,Australia
+2025-08-29,Amex,JB Hi-Fi,Equipment,205.8,Camden,Australia
+2025-08-28,Visa,Virgin Australia,Travel,129.23,Richmond,Australia
+2025-08-28,Visa,Qantas Club,Travel,107.7,Camden,Australia
+2025-08-28,Amex,Rockpool,Client Entertainment,105.34,Camden,Australia
+2025-08-28,Amex,Harvey Norman,Equipment,160.22,Liverpool,Australia
+2025-08-27,Amex,Qantas Club,Travel,145.76,Liverpool,Australia
+2025-08-27,Visa,Adobe,Software,181.05,Camden,Australia
+2025-08-24,Visa,Zoom Subscription,Software,128.57,Liverpool,Australia
+2025-08-24,Visa,Qantas Club,Travel,330.63,Liverpool,Australia
+2025-08-24,Amex,Ritz Carlton Dining,Client Entertainment,61.51,Camden,Australia
+2025-08-24,Amex,Rockpool,Client Entertainment,87.69,Richmond,Australia
+2025-08-24,Visa,BP,Fuel,70.3,Liverpool,Australia
+2025-08-23,Visa,The Grounds Cafe,Client Entertainment,16.46,Camden,Australia
+2025-08-23,Visa,The Grounds Cafe,Client Entertainment,50.46,Liverpool,Australia
+2025-08-22,Visa,Qantas Club,Travel,136.92,Camden,Australia
+2025-08-21,Visa,Cleanaway,Office Maintenance,25.35,Liverpool,Australia
+2025-08-21,Visa,Marriott Hotels,Travel,185.57,Richmond,Australia
+2025-08-19,Visa,Staples,Supplies,110.7,Liverpool,Australia
+2025-08-17,Visa,Ampol,Fuel,58.86,Liverpool,Australia
+2025-08-16,Visa,Apple,Equipment,57.51,Liverpool,Australia
+2025-08-16,Amex,Woolworths Metro,Supplies,87.44,Richmond,Australia
+2025-08-15,Visa,Woolworths Metro,Supplies,125.43,Liverpool,Australia
+2025-08-15,Visa,Rockpool,Client Entertainment,380.18,Camden,Australia
+2025-08-14,Visa,Microsoft 365,Software,66.02,Liverpool,Australia
+2025-08-13,Visa,Marriott Hotels,Travel,297.67,Liverpool,Australia
+2025-08-13,Visa,Zoom Subscription,Software,44.73,Liverpool,Australia
+2025-08-11,Visa,Qantas Club,Travel,69.34,Richmond,Australia
+2025-08-10,Visa,Virgin Australia,Travel,50.69,Liverpool,Australia
+2025-08-09,Visa,Microsoft 365,Software,25.26,Liverpool,Australia
+2025-08-08,Amex,Woolworths Metro,Supplies,197.38,Camden,Australia
+2025-08-08,Visa,The Grounds Cafe,Client Entertainment,137.82,Liverpool,Australia
+2025-08-08,Visa,Staples,Supplies,99.26,Liverpool,Australia
+2025-08-07,Visa,Rockpool,Client Entertainment,151.23,Liverpool,Australia
+2025-08-06,Visa,Marriott Hotels,Travel,225.77,Liverpool,Australia
+2025-08-03,Visa,Zoom Subscription,Software,80.22,Liverpool,Australia
+2025-08-02,Visa,Harvey Norman,Equipment,309.26,Camden,Australia
+2025-07-31,Amex,The Grounds Cafe,Client Entertainment,79.28,Liverpool,Australia
+2025-07-30,Visa,JB Hi-Fi,Equipment,230.05,Camden,Australia
+2025-07-29,Amex,Rockpool,Client Entertainment,67.52,Liverpool,Australia
+2025-07-29,Amex,Harvey Norman,Equipment,141.98,Richmond,Australia
+2025-07-28,Visa,Virgin Australia,Travel,389.59,Liverpool,Australia
+2025-07-25,Visa,Officeworks,Supplies,198.07,Richmond,Australia
+2025-07-24,Amex,Harvey Norman,Equipment,82.22,Liverpool,Australia
+2025-07-24,Visa,Zoom Subscription,Software,239.03,Camden,Australia
+2025-07-21,Amex,Qantas Club,Travel,759.36,Camden,Australia
+2025-07-20,Visa,Zoom Subscription,Software,166.43,Camden,Australia
+2025-07-17,Amex,Marriott Hotels,Travel,290.88,Liverpool,Australia
+2025-07-14,Visa,Ritz Carlton Dining,Client Entertainment,47.61,Camden,Australia
+2025-07-14,Visa,Ritz Carlton Dining,Client Entertainment,83.56,Liverpool,Australia
+2025-07-14,Amex,Microsoft 365,Software,54.45,Camden,Australia
+2025-07-13,Visa,Qantas Club,Travel,166.44,Liverpool,Australia
+2025-07-13,Amex,BP,Fuel,49.84,Liverpool,Australia
+2025-07-12,Visa,Bunnings,Office Maintenance,75.29,Liverpool,Australia
+2025-07-12,Visa,Adobe,Software,65.08,Liverpool,Australia
+2025-07-11,Amex,Qantas Club,Travel,181.53,Camden,Australia
+2025-07-11,Amex,Staples,Supplies,63.09,Richmond,Australia
+2025-07-10,Visa,Apple,Equipment,127.46,Liverpool,Australia
+2025-07-09,Visa,Virgin Australia,Travel,238.8,Liverpool,Australia
+2025-07-08,Visa,JB Hi-Fi,Equipment,250.51,Liverpool,Australia
+2025-07-08,Amex,Woolworths Metro,Supplies,47.29,Liverpool,Australia
+2025-07-08,Amex,Ampol,Fuel,92.6,Liverpool,Australia
+2025-07-07,Amex,Virgin Australia,Travel,274.48,Camden,Australia
+2025-07-06,Amex,Rockpool,Client Entertainment,95.79,Richmond,Australia
+2025-07-05,Visa,Rockpool,Client Entertainment,232.54,Camden,Australia
+2025-07-04,Visa,Virgin Australia,Travel,676.19,Liverpool,Australia
+2025-07-04,Amex,Virgin Australia,Travel,116.42,Liverpool,Australia
+2025-07-01,Amex,Staples,Supplies,72.42,Liverpool,Australia
+2025-06-29,Amex,Officeworks,Supplies,60.71,Richmond,Australia
+2025-06-29,Visa,Cleanaway,Office Maintenance,209.68,Richmond,Australia
+2025-06-27,Visa,Ampol,Fuel,39.05,Camden,Australia
+2025-06-27,Visa,Adobe,Software,75.44,Richmond,Australia
+2025-06-26,Amex,Zoom Subscription,Software,53.72,Richmond,Australia
+2025-06-26,Amex,Rockpool,Client Entertainment,110.64,Camden,Australia
+2025-06-25,Amex,JB Hi-Fi,Equipment,63.71,Liverpool,Australia
+2025-06-24,Visa,Rockpool,Client Entertainment,171.2,Liverpool,Australia
+2025-06-24,Amex,Woolworths Metro,Supplies,110.73,Camden,Australia
+2025-06-24,Visa,Qantas Club,Travel,207.32,Liverpool,Australia
+2025-06-23,Amex,Ampol,Fuel,79.58,Richmond,Australia
+2025-06-23,Amex,Cleanaway,Office Maintenance,151.51,Camden,Australia
+2025-06-21,Amex,Officeworks,Supplies,63.38,Liverpool,Australia
+2025-06-21,Amex,Staples,Supplies,102.59,Camden,Australia
+2025-06-21,Visa,Zoom Subscription,Software,53.13,Liverpool,Australia
+2025-06-20,Amex,Virgin Australia,Travel,155.44,Richmond,Australia
+2025-06-20,Visa,Uber,Travel,1149.37,Camden,Australia
+2025-06-19,Amex,Apple,Equipment,85.18,Camden,Australia
+2025-06-17,Amex,Microsoft 365,Software,307.45,Liverpool,Australia
+2025-06-17,Amex,Adobe,Software,17.53,Liverpool,Australia
+2025-06-17,Amex,LEAP Legal Software,Software,114.17,Liverpool,Australia
+2025-06-15,Amex,JB Hi-Fi,Equipment,56.98,Liverpool,Australia
+2025-06-14,Amex,Officeworks,Supplies,69,Richmond,Australia
+2025-06-14,Amex,Zoom Subscription,Software,172.21,Camden,Australia
+2025-06-13,Visa,Adobe,Software,29.28,Camden,Australia
+2025-06-11,Amex,Cleanaway,Office Maintenance,186.54,Richmond,Australia
+2025-06-11,Amex,Staples,Supplies,35.48,Camden,Australia
+2025-06-11,Visa,LEAP Legal Software,Software,69.24,Richmond,Australia
+2025-06-11,Amex,Staples,Supplies,80.4,Richmond,Australia
+2025-06-10,Visa,Ritz Carlton Dining,Client Entertainment,77.95,Richmond,Australia
+2025-06-10,Visa,Ampol,Fuel,43.95,Liverpool,Australia
+2025-06-08,Amex,Cleanaway,Office Maintenance,39.75,Camden,Australia
+2025-06-08,Amex,Marriott Hotels,Travel,74.59,Camden,Australia
+2025-06-07,Amex,Shell,Fuel,138.02,Richmond,Australia
+2025-06-07,Amex,Rockpool,Client Entertainment,190.66,Camden,Australia
+2025-06-07,Visa,LEAP Legal Software,Software,111.06,Camden,Australia
+2025-06-05,Visa,Bunnings,Office Maintenance,166.44,Camden,Australia
+2025-06-05,Visa,Officeworks,Supplies,86.2,Richmond,Australia
+2025-06-04,Visa,Cleanaway,Office Maintenance,52.32,Richmond,Australia
+2025-06-03,Amex,Harvey Norman,Equipment,127.36,Richmond,Australia
+2025-05-30,Visa,Virgin Australia,Travel,57.98,Liverpool,Australia
+2025-05-28,Amex,Qantas Club,Travel,706.83,Richmond,Australia
+2025-05-28,Amex,Zoom Subscription,Software,17.22,Liverpool,Australia
+2025-05-28,Amex,Adobe,Software,65.08,Liverpool,Australia
+2025-05-28,Amex,Officeworks,Supplies,38.54,Liverpool,Australia
+2025-05-26,Amex,Rockpool,Client Entertainment,37.74,Camden,Australia
+2025-05-26,Amex,Adobe,Software,108.81,Camden,Australia
+2025-05-24,Visa,Staples,Supplies,32.37,Liverpool,Australia
+2025-05-23,Visa,Staples,Supplies,52.96,Liverpool,Australia
+2025-05-23,Visa,Shell,Fuel,27.04,Liverpool,Australia
+2025-05-22,Amex,Adobe,Software,100.58,Liverpool,Australia
+2025-05-22,Amex,Apple,Equipment,69.07,Liverpool,Australia
+2025-05-22,Visa,Staples,Supplies,96.62,Camden,Australia
+2025-05-21,Visa,Bunnings,Office Maintenance,36.9,Liverpool,Australia
+2025-05-21,Visa,LEAP Legal Software,Software,61.52,Liverpool,Australia
+2025-05-21,Visa,Uber,Travel,119.37,Camden,Australia
+2025-05-20,Amex,Bunnings,Office Maintenance,54.78,Richmond,Australia
+2025-05-20,Visa,Officeworks,Supplies,21.8,Richmond,Australia
+2025-05-20,Amex,Apple,Equipment,24.75,Liverpool,Australia
+2025-05-20,Amex,Marriott Hotels,Travel,48.21,Richmond,Australia
+2025-05-18,Amex,Adobe,Software,53.03,Liverpool,Australia
+2025-05-16,Amex,Uber,Travel,81.09,Liverpool,Australia
+2025-05-15,Visa,Uber,Travel,692,Liverpool,Australia
+2025-05-15,Amex,Woolworths Metro,Supplies,55.31,Richmond,Australia
+2025-05-15,Visa,Microsoft 365,Software,140.46,Richmond,Australia
+2025-05-15,Visa,LEAP Legal Software,Software,53.81,Richmond,Australia
+2025-05-14,Amex,Marriott Hotels,Travel,151.55,Camden,Australia
+2025-05-14,Visa,Staples,Supplies,48.57,Camden,Australia
+2025-05-12,Visa,JB Hi-Fi,Equipment,113.77,Liverpool,Australia
+2025-05-12,Amex,Officeworks,Supplies,21.02,Camden,Australia
+2025-05-11,Visa,Ampol,Fuel,66.27,Liverpool,Australia
+2025-05-11,Visa,JB Hi-Fi,Equipment,152.81,Liverpool,Australia
+2025-05-11,Amex,Woolworths Metro,Supplies,22.28,Liverpool,Australia
+2025-05-10,Visa,Ritz Carlton Dining,Client Entertainment,147.97,Richmond,Australia
+2025-05-08,Amex,Qantas Club,Travel,56.35,Camden,Australia
+2025-05-08,Amex,LEAP Legal Software,Software,47.08,Richmond,Australia
+2025-05-06,Amex,Uber,Travel,122.22,Liverpool,Australia
+2025-05-05,Amex,Uber,Travel,293.66,Camden,Australia
+2025-05-05,Amex,Zoom Subscription,Software,24.39,Liverpool,Australia
+2025-05-05,Amex,LEAP Legal Software,Software,41.49,Camden,Australia
+2025-05-04,Amex,Virgin Australia,Travel,62.54,Liverpool,Australia
+2025-05-03,Visa,Ritz Carlton Dining,Client Entertainment,71.88,Liverpool,Australia
+2025-05-02,Visa,JB Hi-Fi,Equipment,117.55,Camden,Australia
+2025-04-29,Amex,Marriott Hotels,Travel,426.38,Liverpool,Australia
+2025-04-27,Visa,Virgin Australia,Travel,87.86,Camden,Australia
+2025-04-25,Visa,LEAP Legal Software,Software,173.29,Liverpool,Australia
+2025-04-25,Visa,Uber,Travel,57.48,Liverpool,Australia
+2025-04-24,Visa,Ampol,Fuel,35.61,Liverpool,Australia
+2025-04-24,Amex,Adobe,Software,224.24,Richmond,Australia
+2025-04-24,Visa,Qantas Club,Travel,149.61,Liverpool,Australia
+2025-04-23,Amex,The Grounds Cafe,Client Entertainment,28.26,Liverpool,Australia
+2025-04-23,Visa,Coles,Office Maintenance,88.56,Liverpool,Australia
+2025-04-23,Amex,Qantas Club,Travel,183.78,Richmond,Australia
+2025-04-23,Visa,Cleanaway,Office Maintenance,44.74,Richmond,Australia
+2025-04-23,Visa,Marriott Hotels,Travel,154.05,Liverpool,Australia
+2025-04-22,Visa,Apple,Equipment,73.51,Liverpool,Australia
+2025-04-20,Amex,Cleanaway,Office Maintenance,187.79,Camden,Australia
+2025-04-20,Amex,Woolworths Metro,Supplies,37.42,Richmond,Australia
+2025-04-20,Visa,Rockpool,Client Entertainment,86.3,Liverpool,Australia
+2025-04-19,Amex,The Grounds Cafe,Client Entertainment,179.04,Camden,Australia
+2025-04-17,Visa,Virgin Australia,Travel,503.53,Richmond,Australia
+2025-04-17,Visa,Woolworths Metro,Supplies,129.35,Liverpool,Australia
+2025-04-16,Amex,Ampol,Fuel,66.72,Liverpool,Australia
+2025-04-14,Amex,Marriott Hotels,Travel,234.05,Liverpool,Australia
+2025-04-12,Visa,Qantas Club,Travel,209.77,Liverpool,Australia
+2025-04-12,Amex,Marriott Hotels,Travel,42.95,Camden,Australia
+2025-04-12,Visa,Qantas Club,Travel,88.15,Richmond,Australia
+2025-04-11,Amex,Uber,Travel,81.28,Richmond,Australia
+2025-04-11,Visa,Woolworths Metro,Supplies,162.91,Camden,Australia
+2025-04-09,Amex,Adobe,Software,132.01,Liverpool,Australia
+2025-04-08,Amex,Bunnings,Office Maintenance,49.84,Richmond,Australia
+2025-04-08,Amex,Bunnings,Office Maintenance,65.35,Richmond,Australia
+2025-04-07,Visa,Harvey Norman,Equipment,64.86,Liverpool,Australia
+2025-04-06,Amex,Qantas Club,Travel,190.73,Liverpool,Australia
+2025-04-06,Amex,Qantas Club,Travel,11.8,Liverpool,Australia
+2025-04-04,Amex,Woolworths Metro,Supplies,50.85,Liverpool,Australia
+2025-04-04,Visa,Harvey Norman,Equipment,28.84,Richmond,Australia
+2025-04-03,Visa,Woolworths Metro,Supplies,134.27,Camden,Australia
+2025-04-02,Visa,Cleanaway,Office Maintenance,267.92,Camden,Australia
+2025-04-02,Amex,Apple,Equipment,68.88,Liverpool,Australia
+2025-03-31,Amex,Officeworks,Supplies,262.72,Camden,Australia
+2025-03-31,Amex,Officeworks,Supplies,39.58,Camden,Australia
+2025-03-31,Amex,Coles,Office Maintenance,16.7,Richmond,Australia
+2025-03-27,Visa,Officeworks,Supplies,84.85,Liverpool,Australia
+2025-03-26,Visa,Staples,Supplies,34.71,Liverpool,Australia
+2025-03-26,Amex,The Grounds Cafe,Client Entertainment,92.21,Camden,Australia
+2025-03-26,Visa,Qantas Club,Travel,305.91,Camden,Australia
+2025-03-26,Amex,Woolworths Metro,Supplies,49.21,Liverpool,Australia
+2025-03-24,Amex,JB Hi-Fi,Equipment,205.29,Richmond,Australia
+2025-03-24,Visa,LEAP Legal Software,Software,61.02,Liverpool,Australia
+2025-03-23,Visa,Marriott Hotels,Travel,120.93,Richmond,Australia
+2025-03-22,Amex,Ritz Carlton Dining,Client Entertainment,58.33,Camden,Australia
+2025-03-21,Visa,Adobe,Software,49.85,Liverpool,Australia
+2025-03-20,Visa,Adobe,Software,44.57,Camden,Australia
+2025-03-16,Amex,Adobe,Software,46.84,Richmond,Australia
+2025-03-14,Amex,Ampol,Fuel,57.24,Liverpool,Australia
+2025-03-14,Amex,Virgin Australia,Travel,259.38,Richmond,Australia
+2025-03-13,Amex,LEAP Legal Software,Software,48.7,Richmond,Australia
+2025-03-12,Amex,Woolworths Metro,Supplies,43.58,Liverpool,Australia
+2025-03-12,Amex,Rockpool,Client Entertainment,150.18,Camden,Australia
+2025-03-11,Visa,Bunnings,Office Maintenance,190.51,Liverpool,Australia
+2025-03-11,Visa,Marriott Hotels,Travel,632.21,Camden,Australia
+2025-03-09,Amex,LEAP Legal Software,Software,49.52,Liverpool,Australia
+2025-03-08,Amex,LEAP Legal Software,Software,119.32,Liverpool,Australia
+2025-03-07,Amex,Marriott Hotels,Travel,190.95,Camden,Australia
+2025-03-07,Amex,Qantas Club,Travel,470.9,Richmond,Australia
+2025-03-06,Amex,Microsoft 365,Software,49.08,Richmond,Australia
+2025-03-06,Visa,Woolworths Metro,Supplies,87.78,Richmond,Australia
+2025-03-06,Amex,Ampol,Fuel,311.85,Camden,Australia
+2025-03-05,Amex,Cleanaway,Office Maintenance,212.98,Camden,Australia
+2025-03-04,Visa,Qantas Club,Travel,237.17,Liverpool,Australia
+2025-03-04,Visa,Cleanaway,Office Maintenance,102.71,Camden,Australia
+2025-03-02,Visa,Zoom Subscription,Software,81.85,Liverpool,Australia
+2025-03-01,Amex,Zoom Subscription,Software,51.03,Richmond,Australia
+2025-02-27,Amex,Apple,Equipment,281.3,Camden,Australia
+2025-02-27,Visa,Microsoft 365,Software,83.79,Liverpool,Australia
+2025-02-27,Visa,Uber,Travel,58.57,Liverpool,Australia
+2025-02-26,Amex,Coles,Office Maintenance,252.94,Liverpool,Australia
+2025-02-25,Amex,Coles,Office Maintenance,191.09,Camden,Australia
+2025-02-24,Visa,Adobe,Software,165.31,Liverpool,Australia
+2025-02-22,Visa,Ritz Carlton Dining,Client Entertainment,42.48,Richmond,Australia
+2025-02-22,Amex,Shell,Fuel,75.22,Camden,Australia
+2025-02-21,Visa,Apple,Equipment,99.77,Richmond,Australia
+2025-02-21,Amex,Woolworths Metro,Supplies,150.45,Camden,Australia
+2025-02-19,Visa,Woolworths Metro,Supplies,272.91,Camden,Australia
+2025-02-19,Amex,The Grounds Cafe,Client Entertainment,108.18,Richmond,Australia
+2025-02-18,Visa,Rockpool,Client Entertainment,71.63,Camden,Australia
+2025-02-17,Visa,Ampol,Fuel,83.29,Richmond,Australia
+2025-02-16,Amex,Bunnings,Office Maintenance,159.87,Richmond,Australia
+2025-02-15,Amex,Marriott Hotels,Travel,230.55,Camden,Australia
+2025-02-14,Amex,Officeworks,Supplies,99.13,Camden,Australia
+2025-02-14,Visa,Staples,Supplies,71.35,Richmond,Australia
+2025-02-12,Amex,Zoom Subscription,Software,187.75,Richmond,Australia
+2025-02-12,Visa,Rockpool,Client Entertainment,113.09,Camden,Australia
+2025-02-11,Amex,Staples,Supplies,177.61,Richmond,Australia
+2025-02-11,Amex,Qantas Club,Travel,98.94,Liverpool,Australia
+2025-02-10,Amex,Cleanaway,Office Maintenance,85.35,Camden,Australia
+2025-02-09,Amex,Harvey Norman,Equipment,175.09,Liverpool,Australia
+2025-02-09,Amex,Cleanaway,Office Maintenance,105.82,Camden,Australia
+2025-02-09,Visa,Uber,Travel,86,Liverpool,Australia
+2025-02-08,Visa,LEAP Legal Software,Software,64.93,Camden,Australia
+2025-02-08,Visa,Marriott Hotels,Travel,103.44,Liverpool,Australia
+2025-02-05,Visa,Woolworths Metro,Supplies,275.57,Richmond,Australia
+2025-02-04,Amex,Virgin Australia,Travel,348.04,Richmond,Australia
+2025-02-02,Amex,LEAP Legal Software,Software,132.98,Richmond,Australia
+2025-02-02,Visa,Uber,Travel,368.04,Liverpool,Australia
+2025-02-02,Visa,Cleanaway,Office Maintenance,142.8,Richmond,Australia
+2025-02-01,Amex,The Grounds Cafe,Client Entertainment,226.27,Camden,Australia
+2025-02-01,Amex,Apple,Equipment,248.25,Liverpool,Australia
+2025-01-31,Visa,Uber,Travel,60.75,Liverpool,Australia
+2025-01-31,Amex,JB Hi-Fi,Equipment,259.01,Richmond,Australia
+2025-01-31,Amex,Ritz Carlton Dining,Client Entertainment,129.95,Liverpool,Australia
+2025-01-29,Visa,Marriott Hotels,Travel,143.11,Liverpool,Australia
+2025-01-29,Amex,Officeworks,Supplies,157.59,Camden,Australia
+2025-01-28,Amex,Officeworks,Supplies,93.17,Camden,Australia
+2025-01-27,Amex,The Grounds Cafe,Client Entertainment,57.32,Camden,Australia
+2025-01-26,Visa,Coles,Office Maintenance,83.07,Camden,Australia
+2025-01-25,Visa,JB Hi-Fi,Equipment,163.41,Liverpool,Australia
+2025-01-25,Visa,Woolworths Metro,Supplies,33.14,Richmond,Australia
+2025-01-25,Amex,The Grounds Cafe,Client Entertainment,110.93,Richmond,Australia
+2025-01-24,Amex,Officeworks,Supplies,264.48,Richmond,Australia
+2025-01-22,Visa,Officeworks,Supplies,117.79,Richmond,Australia
+2025-01-22,Amex,BP,Fuel,83.96,Richmond,Australia
+2025-01-17,Visa,Uber,Travel,252.96,Liverpool,Australia
+2025-01-17,Visa,Qantas Club,Travel,161.63,Richmond,Australia
+2025-01-15,Visa,LEAP Legal Software,Software,116.37,Liverpool,Australia
+2025-01-15,Visa,JB Hi-Fi,Equipment,155.44,Liverpool,Australia
+2025-01-14,Visa,Marriott Hotels,Travel,145.74,Camden,Australia
+2025-01-13,Amex,Coles,Office Maintenance,101.95,Liverpool,Australia
+2025-01-13,Visa,Qantas Club,Travel,214.11,Richmond,Australia
+2025-01-11,Amex,Ampol,Fuel,65.82,Liverpool,Australia
+2025-01-11,Amex,Qantas Club,Travel,287.61,Camden,Australia
+2025-01-10,Amex,Officeworks,Supplies,112.41,Camden,Australia
+2025-01-08,Visa,Coles,Office Maintenance,203.35,Liverpool,Australia
+2025-01-08,Amex,Rockpool,Client Entertainment,435.29,Richmond,Australia
+2025-01-07,Amex,BP,Fuel,50.96,Richmond,Australia
+2025-01-07,Visa,Marriott Hotels,Travel,138.42,Camden,Australia
+2025-01-07,Amex,Qantas Club,Travel,260.56,Liverpool,Australia
+2025-01-05,Visa,Zoom Subscription,Software,136.78,Liverpool,Australia
+2025-01-04,Visa,Woolworths Metro,Supplies,79.65,Camden,Australia
+2025-01-04,Amex,Virgin Australia,Travel,98.45,Richmond,Australia
+2025-01-04,Amex,Coles,Office Maintenance,69.69,Liverpool,Australia
+2025-01-01,Amex,Coles,Office Maintenance,100.45,Richmond,Australia
+2025-01-01,Visa,Rockpool,Client Entertainment,41.04,Richmond,Australia
+2025-01-01,Visa,Woolworths Metro,Supplies,121.99,Camden,Australia
+2025-01-01,Amex,Harvey Norman,Equipment,107.15,Richmond,Australia
+2024-12-29,Amex,Adobe,Software,74.97,Liverpool,Australia
+2024-12-28,Amex,The Grounds Cafe,Client Entertainment,249.08,Richmond,Australia
+2024-12-27,Visa,Zoom Subscription,Software,18.48,Liverpool,Australia
+2024-12-27,Amex,Qantas Club,Travel,100.13,Liverpool,Australia
+2024-12-26,Visa,Uber,Travel,419.95,Liverpool,Australia
+2024-12-26,Visa,Staples,Supplies,144.87,Liverpool,Australia
+2024-12-25,Amex,Apple,Equipment,89.3,Liverpool,Australia
+2024-12-25,Visa,Qantas Club,Travel,78.33,Liverpool,Australia
+2024-12-24,Amex,Uber,Travel,148.11,Liverpool,Australia
+2024-12-24,Amex,Officeworks,Supplies,115.66,Liverpool,Australia
+2024-12-24,Visa,Cleanaway,Office Maintenance,177.61,Liverpool,Australia
+2024-12-23,Visa,Harvey Norman,Equipment,190.79,Liverpool,Australia
+2024-12-21,Amex,Zoom Subscription,Software,28.03,Liverpool,Australia
+2024-12-21,Amex,Qantas Club,Travel,74.79,Camden,Australia
+2024-12-20,Amex,Qantas Club,Travel,143.92,Camden,Australia
+2024-12-20,Visa,Adobe,Software,128.55,Liverpool,Australia
+2024-12-19,Visa,Marriott Hotels,Travel,409.19,Liverpool,Australia
+2024-12-18,Visa,The Grounds Cafe,Client Entertainment,64.12,Camden,Australia
+2024-12-18,Amex,Ritz Carlton Dining,Client Entertainment,152.7,Richmond,Australia
+2024-12-18,Amex,Zoom Subscription,Software,107.05,Liverpool,Australia
+2024-12-18,Visa,Shell,Fuel,54.05,Liverpool,Australia
+2024-12-17,Visa,Ritz Carlton Dining,Client Entertainment,47.91,Camden,Australia
+2024-12-16,Visa,Rockpool,Client Entertainment,85.57,Camden,Australia
+2024-12-16,Amex,Ampol,Fuel,92.89,Liverpool,Australia
+2024-12-14,Visa,Staples,Supplies,95.48,Richmond,Australia
+2024-12-14,Visa,Harvey Norman,Equipment,286.99,Liverpool,Australia
+2024-12-13,Visa,Uber,Travel,67.89,Liverpool,Australia
+2024-12-07,Amex,Zoom Subscription,Software,144.07,Richmond,Australia
+2024-12-05,Visa,Woolworths Metro,Supplies,55.22,Richmond,Australia
+2024-12-05,Visa,Apple,Equipment,61.06,Richmond,Australia
+2024-12-05,Visa,Staples,Supplies,43.04,Camden,Australia
+2024-12-03,Visa,Harvey Norman,Equipment,214.65,Liverpool,Australia
+2024-12-03,Visa,Virgin Australia,Travel,369.78,Richmond,Australia
+2024-12-03,Visa,Virgin Australia,Travel,106.24,Liverpool,Australia
+2024-11-30,Amex,Apple,Equipment,108.52,Camden,Australia
+2024-11-29,Amex,LEAP Legal Software,Software,95.76,Camden,Australia
+2024-11-28,Amex,Coles,Office Maintenance,327.03,Liverpool,Australia
+2024-11-28,Visa,Microsoft 365,Software,18.47,Richmond,Australia
+2024-11-27,Amex,JB Hi-Fi,Equipment,338.37,Camden,Australia
+2024-11-26,Visa,Uber,Travel,230.94,Camden,Australia
+2024-11-26,Amex,Cleanaway,Office Maintenance,63.82,Richmond,Australia
+2024-11-25,Visa,Woolworths Metro,Supplies,162.07,Camden,Australia
+2024-11-25,Amex,Rockpool,Client Entertainment,39.66,Camden,Australia
+2024-11-25,Amex,Qantas Club,Travel,113.1,Liverpool,Australia
+2024-11-25,Visa,Qantas Club,Travel,51.1,Camden,Australia
+2024-11-25,Visa,LEAP Legal Software,Software,83.23,Camden,Australia
+2024-11-23,Amex,Uber,Travel,371.8,Richmond,Australia
+2024-11-22,Amex,Staples,Supplies,274.75,Liverpool,Australia
+2024-11-22,Amex,Microsoft 365,Software,213,Camden,Australia
+2024-11-20,Visa,Woolworths Metro,Supplies,45.35,Richmond,Australia
+2024-11-20,Amex,Uber,Travel,418.59,Liverpool,Australia
+2024-11-18,Visa,Adobe,Software,208.27,Camden,Australia
+2024-11-18,Visa,LEAP Legal Software,Software,18.25,Camden,Australia
+2024-11-18,Visa,Staples,Supplies,74.82,Liverpool,Australia
+2024-11-16,Visa,Virgin Australia,Travel,137.38,Camden,Australia
+2024-11-13,Visa,Woolworths Metro,Supplies,179.85,Richmond,Australia
+2024-11-13,Amex,Shell,Fuel,46.15,Richmond,Australia
+2024-11-12,Amex,Woolworths Metro,Supplies,116.83,Camden,Australia
+2024-11-11,Amex,Coles,Office Maintenance,177.94,Richmond,Australia
+2024-11-10,Visa,Microsoft 365,Software,198.92,Richmond,Australia
+2024-11-10,Amex,Officeworks,Supplies,161.85,Richmond,Australia
+2024-11-09,Visa,Harvey Norman,Equipment,42.21,Richmond,Australia
+2024-11-09,Amex,Marriott Hotels,Travel,180.47,Richmond,Australia
+2024-11-09,Visa,Virgin Australia,Travel,175.34,Liverpool,Australia
+2024-11-08,Amex,Staples,Supplies,104.46,Liverpool,Australia
+2024-11-05,Visa,Adobe,Software,71.42,Richmond,Australia
+2024-11-04,Visa,Shell,Fuel,141.48,Richmond,Australia
+2024-11-04,Amex,Adobe,Software,62.61,Liverpool,Australia
+2024-11-04,Amex,Ritz Carlton Dining,Client Entertainment,87.32,Richmond,Australia
+2024-11-04,Visa,Apple,Equipment,336.24,Liverpool,Australia
+2024-11-03,Amex,Microsoft 365,Software,202.66,Liverpool,Australia
+2024-11-03,Amex,Uber,Travel,79.25,Liverpool,Australia
+2024-10-31,Visa,Uber,Travel,160.87,Camden,Australia
+2024-10-31,Visa,Zoom Subscription,Software,48.11,Liverpool,Australia
+2024-10-31,Visa,Apple,Equipment,60.51,Camden,Australia
+2024-10-31,Visa,Ritz Carlton Dining,Client Entertainment,42.02,Liverpool,Australia
+2024-10-28,Visa,Marriott Hotels,Travel,131.21,Camden,Australia
+2024-10-27,Amex,LEAP Legal Software,Software,162.82,Richmond,Australia
+2024-10-27,Visa,The Grounds Cafe,Client Entertainment,170.53,Richmond,Australia
+2024-10-27,Amex,JB Hi-Fi,Equipment,262.65,Richmond,Australia
+2024-10-26,Amex,LEAP Legal Software,Software,162.58,Liverpool,Australia
+2024-10-25,Visa,Virgin Australia,Travel,89.21,Liverpool,Australia
+2024-10-25,Amex,Woolworths Metro,Supplies,127,Camden,Australia
+2024-10-24,Visa,Apple,Equipment,295.76,Liverpool,Australia
+2024-10-23,Visa,BP,Fuel,133.44,Liverpool,Australia
+2024-10-21,Visa,BP,Fuel,282.44,Camden,Australia
+2024-10-20,Amex,Zoom Subscription,Software,130.95,Richmond,Australia
+2024-10-20,Amex,Bunnings,Office Maintenance,41.03,Liverpool,Australia
+2024-10-20,Amex,Cleanaway,Office Maintenance,101.82,Liverpool,Australia
+2024-10-18,Visa,Rockpool,Client Entertainment,230.95,Richmond,Australia
+2024-10-18,Amex,Zoom Subscription,Software,113.56,Richmond,Australia
+2024-10-17,Visa,LEAP Legal Software,Software,169.05,Liverpool,Australia
+2024-10-16,Amex,The Grounds Cafe,Client Entertainment,89.1,Richmond,Australia
+2024-10-16,Visa,Microsoft 365,Software,28.74,Liverpool,Australia
+2024-10-16,Amex,Staples,Supplies,148.52,Liverpool,Australia
+2024-10-15,Visa,Shell,Fuel,83.7,Richmond,Australia
+2024-10-15,Amex,Ritz Carlton Dining,Client Entertainment,42.45,Camden,Australia
+2024-10-14,Visa,Adobe,Software,147.48,Richmond,Australia
+2024-10-13,Amex,Uber,Travel,159.83,Camden,Australia
+2024-10-10,Amex,LEAP Legal Software,Software,249.13,Camden,Australia
+2024-10-09,Amex,Adobe,Software,82.35,Camden,Australia
+2024-10-08,Visa,Zoom Subscription,Software,91.65,Camden,Australia
+2024-10-08,Visa,Virgin Australia,Travel,175.92,Liverpool,Australia
+2024-10-06,Amex,Microsoft 365,Software,35.63,Richmond,Australia
+2024-10-04,Visa,Zoom Subscription,Software,113.41,Camden,Australia
+2024-10-03,Amex,Zoom Subscription,Software,99.59,Liverpool,Australia
+2024-10-01,Visa,Woolworths Metro,Supplies,30.03,Liverpool,Australia
+2024-10-01,Amex,Microsoft 365,Software,105,Camden,Australia
+2024-09-30,Visa,Marriott Hotels,Travel,480.21,Camden,Australia
+2024-09-30,Visa,Marriott Hotels,Travel,214.42,Liverpool,Australia
+2024-09-29,Visa,The Grounds Cafe,Client Entertainment,94.05,Camden,Australia
+2024-09-29,Amex,Cleanaway,Office Maintenance,79.57,Liverpool,Australia
+2024-09-29,Amex,Zoom Subscription,Software,159.52,Richmond,Australia
+2024-09-28,Visa,Qantas Club,Travel,112.37,Richmond,Australia
+2024-09-28,Visa,Shell,Fuel,52.66,Liverpool,Australia
+2024-09-25,Visa,Uber,Travel,84.55,Richmond,Australia
+2024-09-24,Amex,BP,Fuel,85.94,Richmond,Australia
+2024-09-24,Amex,Rockpool,Client Entertainment,85.13,Liverpool,Australia
+2024-09-24,Amex,Marriott Hotels,Travel,164.02,Richmond,Australia
+2024-09-22,Visa,Virgin Australia,Travel,237.16,Richmond,Australia
+2024-09-22,Visa,Qantas Club,Travel,20.01,Camden,Australia
+2024-09-20,Visa,The Grounds Cafe,Client Entertainment,116.73,Camden,Australia
+2024-09-19,Amex,Marriott Hotels,Travel,381.42,Richmond,Australia
+2024-09-19,Visa,Microsoft 365,Software,141.42,Liverpool,Australia
+2024-09-19,Amex,Cleanaway,Office Maintenance,94.32,Liverpool,Australia
+2024-09-18,Visa,BP,Fuel,255.27,Liverpool,Australia
+2024-09-17,Amex,Staples,Supplies,50.43,Liverpool,Australia
+2024-09-17,Visa,The Grounds Cafe,Client Entertainment,97.23,Richmond,Australia
+2024-09-16,Amex,Woolworths Metro,Supplies,67.39,Camden,Australia
+2024-09-16,Amex,Staples,Supplies,46.88,Camden,Australia
+2024-09-16,Amex,The Grounds Cafe,Client Entertainment,42.04,Camden,Australia
+2024-09-15,Amex,Ampol,Fuel,64.39,Liverpool,Australia
+2024-09-15,Visa,The Grounds Cafe,Client Entertainment,59.44,Richmond,Australia
+2024-09-14,Visa,Cleanaway,Office Maintenance,56.16,Liverpool,Australia
+2024-09-14,Visa,Qantas Club,Travel,231.62,Richmond,Australia
+2024-09-13,Amex,Coles,Office Maintenance,147.42,Liverpool,Australia
+2024-09-12,Amex,Qantas Club,Travel,66.63,Liverpool,Australia
+2024-09-12,Amex,Adobe,Software,78.92,Camden,Australia
+2024-09-12,Visa,Adobe,Software,124.16,Richmond,Australia
+2024-09-11,Amex,Marriott Hotels,Travel,291.35,Camden,Australia
+2024-09-09,Amex,Virgin Australia,Travel,98.85,Liverpool,Australia
+2024-09-08,Visa,Marriott Hotels,Travel,134.34,Camden,Australia
+2024-09-08,Amex,Ampol,Fuel,161.94,Camden,Australia
+2024-09-07,Visa,Marriott Hotels,Travel,249.73,Liverpool,Australia
+2024-09-06,Amex,Ritz Carlton Dining,Client Entertainment,105.48,Richmond,Australia
+2024-09-05,Amex,Apple,Equipment,158.69,Liverpool,Australia
+2024-09-05,Visa,Marriott Hotels,Travel,178.35,Richmond,Australia
+2024-09-03,Visa,The Grounds Cafe,Client Entertainment,97.59,Camden,Australia
+2024-09-03,Visa,Officeworks,Supplies,85.43,Richmond,Australia
+2024-09-01,Visa,Ritz Carlton Dining,Client Entertainment,125.32,Camden,Australia
+2024-09-01,Amex,Woolworths Metro,Supplies,134.29,Liverpool,Australia
+2024-08-30,Visa,Apple,Equipment,96.7,Camden,Australia
+2024-08-30,Visa,Uber,Travel,27.48,Camden,Australia
+2024-08-28,Amex,Officeworks,Supplies,75.2,Liverpool,Australia
+2024-08-27,Visa,Staples,Supplies,59.41,Liverpool,Australia
+2024-08-26,Visa,Qantas Club,Travel,291.13,Camden,Australia
+2024-08-24,Amex,Microsoft 365,Software,59.33,Camden,Australia
+2024-08-23,Amex,Ampol,Fuel,12.71,Liverpool,Australia
+2024-08-23,Amex,Officeworks,Supplies,114.17,Liverpool,Australia
+2024-08-22,Amex,Marriott Hotels,Travel,121.98,Liverpool,Australia
+2024-08-20,Visa,Ritz Carlton Dining,Client Entertainment,20.64,Liverpool,Australia
+2024-08-18,Visa,Marriott Hotels,Travel,57.01,Liverpool,Australia
+2024-08-18,Amex,LEAP Legal Software,Software,98.3,Camden,Australia
+2024-08-17,Visa,The Grounds Cafe,Client Entertainment,102.05,Liverpool,Australia
+2024-08-17,Visa,Virgin Australia,Travel,163.29,Liverpool,Australia
+2024-08-17,Visa,Uber,Travel,124.75,Richmond,Australia
+2024-08-16,Visa,LEAP Legal Software,Software,38.88,Camden,Australia
+2024-08-16,Amex,JB Hi-Fi,Equipment,85.32,Liverpool,Australia
+2024-08-15,Visa,Harvey Norman,Equipment,115.52,Liverpool,Australia
+2024-08-14,Amex,Qantas Club,Travel,317.05,Camden,Australia
+2024-08-14,Visa,LEAP Legal Software,Software,130.2,Camden,Australia
+2024-08-13,Amex,Ritz Carlton Dining,Client Entertainment,44.07,Liverpool,Australia
+2024-08-13,Amex,Staples,Supplies,45.87,Richmond,Australia
+2024-08-13,Visa,LEAP Legal Software,Software,79.89,Camden,Australia
+2024-08-13,Amex,JB Hi-Fi,Equipment,425.48,Camden,Australia
+2024-08-12,Amex,Officeworks,Supplies,267.34,Richmond,Australia
+2024-08-10,Amex,Officeworks,Supplies,76.7,Liverpool,Australia
+2024-08-10,Visa,The Grounds Cafe,Client Entertainment,36.19,Camden,Australia
+2024-08-09,Amex,Virgin Australia,Travel,111.5,Camden,Australia
+2024-08-09,Visa,BP,Fuel,84.92,Camden,Australia
+2024-08-09,Visa,The Grounds Cafe,Client Entertainment,154.59,Liverpool,Australia
+2024-08-08,Amex,Qantas Club,Travel,195.37,Liverpool,Australia
+2024-08-08,Amex,Virgin Australia,Travel,108.64,Liverpool,Australia
+2024-08-05,Amex,Zoom Subscription,Software,55.46,Richmond,Australia
+2024-08-04,Visa,Zoom Subscription,Software,408.76,Liverpool,Australia
+2024-08-04,Visa,Virgin Australia,Travel,82.2,Camden,Australia
+2024-08-03,Amex,Marriott Hotels,Travel,146.42,Camden,Australia
+2024-08-02,Visa,Staples,Supplies,233.23,Liverpool,Australia
+2024-07-31,Amex,Ritz Carlton Dining,Client Entertainment,88.46,Camden,Australia
+2024-07-30,Amex,Qantas Club,Travel,176.52,Camden,Australia
+2024-07-28,Visa,Harvey Norman,Equipment,47.3,Camden,Australia
+2024-07-28,Visa,Zoom Subscription,Software,30.01,Camden,Australia
+2024-07-27,Visa,Adobe,Software,77.62,Camden,Australia
+2024-07-27,Visa,Ritz Carlton Dining,Client Entertainment,58.99,Liverpool,Australia
+2024-07-26,Visa,Qantas Club,Travel,44.12,Richmond,Australia
+2024-07-25,Visa,Rockpool,Client Entertainment,91.77,Camden,Australia
+2024-07-25,Visa,Adobe,Software,168.5,Camden,Australia
+2024-07-24,Visa,Virgin Australia,Travel,73.41,Camden,Australia
+2024-07-23,Amex,Zoom Subscription,Software,41.72,Liverpool,Australia
+2024-07-22,Amex,Staples,Supplies,86.79,Liverpool,Australia
+2024-07-22,Amex,Shell,Fuel,28.04,Camden,Australia
+2024-07-22,Visa,Marriott Hotels,Travel,186.98,Liverpool,Australia
+2024-07-22,Amex,Staples,Supplies,156.32,Liverpool,Australia
+2024-07-22,Amex,Adobe,Software,72.49,Liverpool,Australia
+2024-07-21,Amex,Ritz Carlton Dining,Client Entertainment,166.12,Liverpool,Australia
+2024-07-20,Amex,Coles,Office Maintenance,272.76,Camden,Australia
+2024-07-20,Amex,Marriott Hotels,Travel,80.54,Richmond,Australia
+2024-07-19,Visa,Officeworks,Supplies,21.63,Camden,Australia
+2024-07-17,Amex,Ritz Carlton Dining,Client Entertainment,124.71,Richmond,Australia
+2024-07-16,Amex,Qantas Club,Travel,537.88,Liverpool,Australia
+2024-07-15,Amex,Microsoft 365,Software,75.92,Liverpool,Australia
+2024-07-15,Visa,Zoom Subscription,Software,67.27,Camden,Australia
+2024-07-14,Amex,Rockpool,Client Entertainment,84.82,Liverpool,Australia
+2024-07-14,Visa,Marriott Hotels,Travel,216.58,Liverpool,Australia
+2024-07-13,Amex,Adobe,Software,30.76,Richmond,Australia
+2024-07-11,Visa,Adobe,Software,126.35,Liverpool,Australia
+2024-07-11,Amex,Staples,Supplies,123.01,Camden,Australia
+2024-07-11,Amex,The Grounds Cafe,Client Entertainment,82.94,Richmond,Australia
+2024-07-10,Visa,Staples,Supplies,42.44,Liverpool,Australia
+2024-07-08,Amex,Ritz Carlton Dining,Client Entertainment,169.29,Liverpool,Australia
+2024-07-07,Visa,Microsoft 365,Software,59.13,Richmond,Australia
+2024-07-07,Visa,Shell,Fuel,30.26,Liverpool,Australia
+2024-07-03,Visa,Qantas Club,Travel,281.07,Liverpool,Australia
+2024-07-03,Visa,Apple,Equipment,204.22,Richmond,Australia
+2024-07-03,Visa,BP,Fuel,94.3,Camden,Australia
+2024-07-02,Amex,Woolworths Metro,Supplies,54.2,Camden,Australia
+2024-07-02,Amex,JB Hi-Fi,Equipment,306.45,Richmond,Australia
+2024-07-01,Visa,The Grounds Cafe,Client Entertainment,134,Richmond,Australia
+2024-06-30,Amex,Staples,Supplies,54.8,Liverpool,Australia
+2024-06-30,Visa,Marriott Hotels,Travel,104.84,Liverpool,Australia
+2024-06-30,Amex,JB Hi-Fi,Equipment,300.59,Liverpool,Australia
+2024-06-28,Visa,Ritz Carlton Dining,Client Entertainment,105.76,Camden,Australia
+2024-06-27,Amex,Staples,Supplies,60.42,Camden,Australia
+2024-06-26,Visa,BP,Fuel,26.43,Liverpool,Australia
+2024-06-26,Visa,The Grounds Cafe,Client Entertainment,93.85,Richmond,Australia
+2024-06-26,Visa,Shell,Fuel,173.61,Richmond,Australia
+2024-06-25,Visa,Marriott Hotels,Travel,271.5,Camden,Australia
+2024-06-25,Visa,Zoom Subscription,Software,154.54,Camden,Australia
+2024-06-23,Visa,Microsoft 365,Software,60.45,Camden,Australia
+2024-06-23,Visa,Virgin Australia,Travel,142.43,Camden,Australia
+2024-06-22,Amex,Coles,Office Maintenance,33.23,Liverpool,Australia
+2024-06-21,Visa,Woolworths Metro,Supplies,138.1,Camden,Australia
+2024-06-20,Visa,Uber,Travel,66,Liverpool,Australia
+2024-06-18,Amex,Qantas Club,Travel,310.63,Richmond,Australia
+2024-06-18,Amex,The Grounds Cafe,Client Entertainment,40.94,Richmond,Australia
+2024-06-18,Visa,Cleanaway,Office Maintenance,56.54,Camden,Australia
+2024-06-17,Amex,Harvey Norman,Equipment,202.81,Liverpool,Australia
+2024-06-17,Amex,Microsoft 365,Software,51.66,Richmond,Australia
+2024-06-15,Amex,Zoom Subscription,Software,58.42,Liverpool,Australia
+2024-06-13,Visa,Harvey Norman,Equipment,45.13,Liverpool,Australia
+2024-06-12,Amex,Woolworths Metro,Supplies,81.89,Camden,Australia
+2024-06-11,Visa,Woolworths Metro,Supplies,70.23,Liverpool,Australia
+2024-06-11,Amex,Uber,Travel,173.86,Liverpool,Australia
+2024-06-10,Amex,Bunnings,Office Maintenance,122.31,Richmond,Australia
+2024-06-10,Amex,Harvey Norman,Equipment,102.45,Camden,Australia
+2024-06-10,Visa,Uber,Travel,62.56,Camden,Australia
+2024-06-08,Amex,Harvey Norman,Equipment,467.08,Camden,Australia
+2024-06-08,Visa,Adobe,Software,29.99,Richmond,Australia
+2024-06-08,Visa,JB Hi-Fi,Equipment,89.19,Liverpool,Australia
+2024-06-07,Visa,Staples,Supplies,78.63,Camden,Australia
+2024-06-07,Amex,Uber,Travel,77.69,Liverpool,Australia
+2024-06-06,Amex,Cleanaway,Office Maintenance,162.25,Camden,Australia
+2024-06-04,Visa,Harvey Norman,Equipment,396.77,Richmond,Australia
+2024-06-03,Visa,Harvey Norman,Equipment,113.09,Liverpool,Australia
+2024-06-03,Amex,Uber,Travel,374.21,Camden,Australia
+2024-06-03,Amex,Virgin Australia,Travel,252.47,Richmond,Australia
+2024-06-02,Visa,Rockpool,Client Entertainment,50.16,Liverpool,Australia
+2024-06-02,Visa,Officeworks,Supplies,19.58,Liverpool,Australia
+2024-06-01,Amex,Bunnings,Office Maintenance,117.33,Camden,Australia
+2024-05-30,Amex,Zoom Subscription,Software,118.7,Camden,Australia
+2024-05-26,Amex,Virgin Australia,Travel,153.35,Richmond,Australia
+2024-05-26,Visa,Microsoft 365,Software,22.03,Richmond,Australia
+2024-05-24,Visa,Rockpool,Client Entertainment,37.74,Liverpool,Australia
+2024-05-23,Visa,Uber,Travel,63.39,Liverpool,Australia
+2024-05-22,Amex,Virgin Australia,Travel,353.26,Camden,Australia
+2024-05-21,Amex,Staples,Supplies,39.28,Liverpool,Australia
+2024-05-20,Amex,Marriott Hotels,Travel,274.73,Liverpool,Australia
+2024-05-19,Amex,The Grounds Cafe,Client Entertainment,61.3,Richmond,Australia
+2024-05-19,Amex,Cleanaway,Office Maintenance,131.09,Liverpool,Australia
+2024-05-18,Amex,Uber,Travel,460.44,Liverpool,Australia
+2024-05-18,Amex,Woolworths Metro,Supplies,83.86,Liverpool,Australia
+2024-05-17,Visa,Zoom Subscription,Software,75.57,Richmond,Australia
+2024-05-17,Amex,Adobe,Software,203.76,Liverpool,Australia
+2024-05-16,Amex,Apple,Equipment,106.76,Liverpool,Australia
+2024-05-15,Amex,Zoom Subscription,Software,44.8,Richmond,Australia
+2024-05-14,Amex,Uber,Travel,98.05,Richmond,Australia
+2024-05-14,Amex,Woolworths Metro,Supplies,149.85,Liverpool,Australia
+2024-05-14,Amex,Ritz Carlton Dining,Client Entertainment,39.87,Camden,Australia
+2024-05-14,Visa,Bunnings,Office Maintenance,81.82,Richmond,Australia
+2024-05-12,Visa,Ampol,Fuel,59.5,Camden,Australia
+2024-05-12,Amex,Rockpool,Client Entertainment,110.92,Camden,Australia
+2024-05-11,Amex,LEAP Legal Software,Software,36.33,Camden,Australia
+2024-05-10,Amex,Harvey Norman,Equipment,67.69,Camden,Australia
+2024-05-09,Amex,Zoom Subscription,Software,26.46,Camden,Australia
+2024-05-07,Visa,The Grounds Cafe,Client Entertainment,21.33,Liverpool,Australia
+2024-05-06,Amex,BP,Fuel,39.69,Camden,Australia
+2024-05-06,Visa,Uber,Travel,118.13,Camden,Australia
+2024-05-04,Visa,Apple,Equipment,338.11,Richmond,Australia
+2024-05-04,Amex,Uber,Travel,143.86,Liverpool,Australia
+2024-05-04,Visa,Qantas Club,Travel,125.38,Richmond,Australia
+2024-05-03,Visa,Coles,Office Maintenance,42.24,Liverpool,Australia
+2024-05-03,Visa,Woolworths Metro,Supplies,70.46,Camden,Australia
+2024-05-02,Visa,Rockpool,Client Entertainment,499.73,Camden,Australia
+2024-05-01,Amex,Shell,Fuel,36.77,Richmond,Australia
+2024-05-01,Visa,JB Hi-Fi,Equipment,54.04,Richmond,Australia
+2024-04-30,Amex,Marriott Hotels,Travel,120.36,Richmond,Australia
+2024-04-30,Visa,Officeworks,Supplies,37.9,Camden,Australia
+2024-04-29,Amex,Adobe,Software,103.93,Richmond,Australia
+2024-04-28,Amex,Adobe,Software,142.97,Liverpool,Australia
+2024-04-26,Amex,BP,Fuel,115.84,Camden,Australia
+2024-04-26,Visa,Uber,Travel,215.34,Richmond,Australia
+2024-04-25,Visa,The Grounds Cafe,Client Entertainment,147.8,Richmond,Australia
+2024-04-25,Amex,Staples,Supplies,40.84,Liverpool,Australia
+2024-04-25,Visa,Shell,Fuel,184.53,Camden,Australia
+2024-04-24,Amex,Marriott Hotels,Travel,30.8,Camden,Australia
+2024-04-23,Amex,Shell,Fuel,60.01,Camden,Australia
+2024-04-23,Visa,JB Hi-Fi,Equipment,63.64,Liverpool,Australia
+2024-04-22,Visa,Virgin Australia,Travel,296.41,Liverpool,Australia
+2024-04-22,Amex,Shell,Fuel,48.21,Richmond,Australia
+2024-04-21,Visa,Marriott Hotels,Travel,167.05,Richmond,Australia
+2024-04-21,Amex,JB Hi-Fi,Equipment,72.19,Camden,Australia
+2024-04-19,Amex,Adobe,Software,77.94,Richmond,Australia
+2024-04-18,Visa,Virgin Australia,Travel,48.08,Camden,Australia
+2024-04-18,Visa,The Grounds Cafe,Client Entertainment,78.1,Liverpool,Australia
+2024-04-18,Amex,Bunnings,Office Maintenance,165.51,Liverpool,Australia
+2024-04-17,Visa,The Grounds Cafe,Client Entertainment,49.3,Camden,Australia
+2024-04-17,Visa,JB Hi-Fi,Equipment,144.03,Camden,Australia
+2024-04-15,Amex,Marriott Hotels,Travel,167.36,Liverpool,Australia
+2024-04-14,Visa,Adobe,Software,40.09,Richmond,Australia
+2024-04-12,Visa,Microsoft 365,Software,118.51,Liverpool,Australia
+2024-04-12,Amex,Uber,Travel,199.82,Camden,Australia
+2024-04-12,Visa,Uber,Travel,139.56,Richmond,Australia
+2024-04-12,Amex,LEAP Legal Software,Software,333.35,Richmond,Australia
+2024-04-11,Visa,Adobe,Software,167.68,Richmond,Australia
+2024-04-11,Visa,Ampol,Fuel,19.11,Richmond,Australia
+2024-04-11,Visa,JB Hi-Fi,Equipment,136.36,Liverpool,Australia
+2024-04-11,Amex,Zoom Subscription,Software,66.44,Richmond,Australia
+2024-04-09,Visa,Officeworks,Supplies,124.21,Richmond,Australia
+2024-04-08,Amex,Uber,Travel,99.9,Camden,Australia
+2024-04-07,Amex,Zoom Subscription,Software,295.98,Camden,Australia
+2024-04-07,Visa,Virgin Australia,Travel,159.06,Liverpool,Australia
+2024-04-06,Visa,Marriott Hotels,Travel,334.23,Richmond,Australia
+2024-04-05,Visa,The Grounds Cafe,Client Entertainment,115.35,Richmond,Australia
+2024-04-05,Visa,BP,Fuel,94.44,Camden,Australia
+2024-04-03,Amex,Apple,Equipment,209.32,Liverpool,Australia
+2024-04-02,Amex,Virgin Australia,Travel,59.22,Camden,Australia
+2024-04-02,Visa,Virgin Australia,Travel,150.83,Richmond,Australia
+2024-04-02,Visa,Staples,Supplies,93.41,Liverpool,Australia
+2024-03-31,Amex,Adobe,Software,107.54,Richmond,Australia
+2024-03-31,Amex,Woolworths Metro,Supplies,22.06,Liverpool,Australia
+2024-03-30,Visa,Marriott Hotels,Travel,18.84,Liverpool,Australia
+2024-03-29,Visa,Adobe,Software,191.36,Liverpool,Australia
+2024-03-29,Amex,Rockpool,Client Entertainment,177.86,Camden,Australia
+2024-03-29,Visa,Officeworks,Supplies,190.9,Liverpool,Australia
+2024-03-29,Visa,Cleanaway,Office Maintenance,28.94,Liverpool,Australia
+2024-03-29,Amex,Marriott Hotels,Travel,132.46,Camden,Australia
+2024-03-27,Visa,LEAP Legal Software,Software,80.03,Liverpool,Australia
+2024-03-24,Amex,Adobe,Software,138.77,Liverpool,Australia
+2024-03-24,Amex,Harvey Norman,Equipment,24.43,Liverpool,Australia
+2024-03-24,Visa,Virgin Australia,Travel,70.19,Richmond,Australia
+2024-03-23,Amex,LEAP Legal Software,Software,94.53,Liverpool,Australia
+2024-03-23,Visa,Uber,Travel,106.54,Liverpool,Australia
+2024-03-23,Amex,Staples,Supplies,69.26,Camden,Australia
+2024-03-23,Visa,LEAP Legal Software,Software,95.64,Liverpool,Australia
+2024-03-22,Visa,Staples,Supplies,154.97,Richmond,Australia
+2024-03-21,Amex,Staples,Supplies,170.49,Richmond,Australia
+2024-03-21,Amex,LEAP Legal Software,Software,84.03,Richmond,Australia
+2024-03-19,Amex,Qantas Club,Travel,441.98,Liverpool,Australia
+2024-03-18,Visa,Zoom Subscription,Software,55.68,Liverpool,Australia
+2024-03-17,Visa,Marriott Hotels,Travel,72.83,Camden,Australia
+2024-03-16,Amex,Harvey Norman,Equipment,116.73,Liverpool,Australia
+2024-03-16,Visa,Woolworths Metro,Supplies,121.94,Liverpool,Australia
+2024-03-15,Amex,Harvey Norman,Equipment,124.88,Liverpool,Australia
+2024-03-14,Visa,Cleanaway,Office Maintenance,64.49,Richmond,Australia
+2024-03-13,Visa,Adobe,Software,53.24,Liverpool,Australia
+2024-03-13,Visa,Virgin Australia,Travel,123.28,Camden,Australia
+2024-03-13,Amex,Officeworks,Supplies,23.9,Richmond,Australia
+2024-03-11,Visa,Microsoft 365,Software,32.99,Liverpool,Australia
+2024-03-11,Visa,The Grounds Cafe,Client Entertainment,72.38,Liverpool,Australia
+2024-03-08,Amex,Qantas Club,Travel,65.68,Camden,Australia
+2024-03-08,Visa,Zoom Subscription,Software,47.4,Camden,Australia
+2024-03-07,Visa,Rockpool,Client Entertainment,82.21,Liverpool,Australia
+2024-03-07,Visa,JB Hi-Fi,Equipment,304.56,Liverpool,Australia
+2024-03-05,Visa,Cleanaway,Office Maintenance,139.62,Camden,Australia
+2024-03-04,Amex,Staples,Supplies,31.14,Richmond,Australia
+2024-03-04,Amex,Staples,Supplies,52.47,Liverpool,Australia
+2024-03-02,Amex,Qantas Club,Travel,114.27,Camden,Australia
+2024-03-01,Amex,Harvey Norman,Equipment,179.49,Camden,Australia
+2024-03-01,Amex,Harvey Norman,Equipment,69.83,Camden,Australia
+2024-02-29,Visa,Marriott Hotels,Travel,176.52,Richmond,Australia
+2024-02-27,Visa,Rockpool,Client Entertainment,238,Liverpool,Australia
+2024-02-27,Visa,LEAP Legal Software,Software,98.87,Richmond,Australia
+2024-02-27,Amex,The Grounds Cafe,Client Entertainment,30.32,Liverpool,Australia
+2024-02-23,Amex,Woolworths Metro,Supplies,20.95,Liverpool,Australia
+2024-02-22,Amex,Adobe,Software,233.33,Camden,Australia
+2024-02-21,Amex,Woolworths Metro,Supplies,51.16,Camden,Australia
+2024-02-21,Visa,Microsoft 365,Software,50.18,Camden,Australia
+2024-02-21,Amex,Zoom Subscription,Software,166.81,Camden,Australia
+2024-02-21,Amex,Officeworks,Supplies,181.68,Liverpool,Australia
+2024-02-21,Amex,Uber,Travel,121.9,Liverpool,Australia
+2024-02-20,Visa,Bunnings,Office Maintenance,130.54,Camden,Australia
+2024-02-18,Amex,Rockpool,Client Entertainment,69.81,Camden,Australia
+2024-02-18,Visa,Ritz Carlton Dining,Client Entertainment,79.78,Liverpool,Australia
+2024-02-17,Amex,Zoom Subscription,Software,44.03,Liverpool,Australia
+2024-02-15,Amex,The Grounds Cafe,Client Entertainment,115.97,Liverpool,Australia
+2024-02-14,Amex,Rockpool,Client Entertainment,224.18,Richmond,Australia
+2024-02-09,Amex,Marriott Hotels,Travel,140.41,Richmond,Australia
+2024-02-09,Visa,Qantas Club,Travel,102.1,Camden,Australia
+2024-02-08,Amex,Adobe,Software,49.32,Richmond,Australia
+2024-02-07,Amex,LEAP Legal Software,Software,56.96,Liverpool,Australia
+2024-02-07,Amex,Coles,Office Maintenance,156.25,Richmond,Australia
+2024-02-06,Visa,Adobe,Software,193.38,Camden,Australia
+2024-02-05,Amex,JB Hi-Fi,Equipment,712.23,Richmond,Australia
+2024-02-05,Amex,The Grounds Cafe,Client Entertainment,308.52,Liverpool,Australia
+2024-02-04,Visa,The Grounds Cafe,Client Entertainment,298.41,Liverpool,Australia
+2024-02-03,Amex,Woolworths Metro,Supplies,69.14,Camden,Australia
+2024-02-03,Amex,BP,Fuel,475.26,Liverpool,Australia
+2024-02-02,Visa,Officeworks,Supplies,202.86,Liverpool,Australia
+2024-02-02,Amex,Ritz Carlton Dining,Client Entertainment,79.27,Liverpool,Australia
+2024-01-31,Amex,Shell,Fuel,47.12,Camden,Australia
+2024-01-31,Visa,Qantas Club,Travel,309.99,Liverpool,Australia
+2024-01-31,Visa,BP,Fuel,71.64,Camden,Australia
+2024-01-31,Amex,Harvey Norman,Equipment,160.17,Richmond,Australia
+2024-01-31,Visa,Staples,Supplies,43.55,Liverpool,Australia
+2024-01-30,Visa,Virgin Australia,Travel,30.83,Camden,Australia
+2024-01-30,Visa,Woolworths Metro,Supplies,183.41,Liverpool,Australia
+2024-01-28,Visa,Marriott Hotels,Travel,155.53,Camden,Australia
+2024-01-28,Amex,Microsoft 365,Software,35.66,Liverpool,Australia
+2024-01-27,Amex,Harvey Norman,Equipment,453.75,Camden,Australia
+2024-01-26,Visa,Ritz Carlton Dining,Client Entertainment,83.67,Richmond,Australia
+2024-01-26,Amex,Zoom Subscription,Software,161.25,Richmond,Australia
+2024-01-26,Visa,Woolworths Metro,Supplies,74.5,Camden,Australia
+2024-01-25,Amex,Woolworths Metro,Supplies,32.1,Camden,Australia
+2024-01-25,Visa,Uber,Travel,149.67,Richmond,Australia
+2024-01-25,Visa,Woolworths Metro,Supplies,104.53,Camden,Australia
+2024-01-25,Visa,Woolworths Metro,Supplies,217.95,Camden,Australia
+2024-01-24,Amex,Ritz Carlton Dining,Client Entertainment,43.26,Liverpool,Australia
+2024-01-24,Visa,Ampol,Fuel,144.84,Richmond,Australia
+2024-01-23,Amex,Rockpool,Client Entertainment,72.5,Camden,Australia
+2024-01-23,Amex,Zoom Subscription,Software,55.74,Camden,Australia
+2024-01-21,Visa,Virgin Australia,Travel,71.84,Liverpool,Australia
+2024-01-21,Amex,JB Hi-Fi,Equipment,204.79,Camden,Australia
+2024-01-18,Amex,Officeworks,Supplies,41.71,Richmond,Australia
+2024-01-17,Amex,Qantas Club,Travel,119.12,Liverpool,Australia
+2024-01-16,Amex,Apple,Equipment,229.57,Camden,Australia
+2024-01-15,Amex,Ritz Carlton Dining,Client Entertainment,113.19,Camden,Australia
+2024-01-12,Amex,Officeworks,Supplies,98.59,Richmond,Australia
+2024-01-11,Amex,Microsoft 365,Software,42.35,Liverpool,Australia
+2024-01-10,Amex,Uber,Travel,137.15,Camden,Australia
+2024-01-10,Amex,Staples,Supplies,41.8,Liverpool,Australia
+2024-01-09,Visa,Virgin Australia,Travel,82.77,Liverpool,Australia
+2024-01-09,Visa,Microsoft 365,Software,109.84,Liverpool,Australia
+2024-01-09,Visa,Uber,Travel,64.04,Camden,Australia
+2024-01-06,Amex,Qantas Club,Travel,72.27,Liverpool,Australia
+2024-01-05,Visa,Marriott Hotels,Travel,52.49,Richmond,Australia
+2024-01-03,Amex,Uber,Travel,76.64,Richmond,Australia
+2024-01-02,Amex,JB Hi-Fi,Equipment,34.55,Richmond,Australia
+2024-01-01,Amex,Uber,Travel,100.54,Camden,Australia
+2023-12-31,Visa,Staples,Supplies,44.28,Liverpool,Australia
+2023-12-30,Amex,Staples,Supplies,157.06,Camden,Australia
+2023-12-28,Visa,Rockpool,Client Entertainment,49.01,Camden,Australia
+2023-12-28,Visa,Adobe,Software,154.66,Liverpool,Australia
+2023-12-27,Visa,Microsoft 365,Software,194.9,Camden,Australia
+2023-12-27,Visa,BP,Fuel,123.55,Richmond,Australia
+2023-12-27,Amex,Ritz Carlton Dining,Client Entertainment,176.48,Liverpool,Australia
+2023-12-25,Amex,Qantas Club,Travel,68.33,Camden,Australia
+2023-12-25,Visa,Virgin Australia,Travel,63.5,Camden,Australia
+2023-12-24,Amex,Uber,Travel,82.41,Liverpool,Australia
+2023-12-24,Amex,Uber,Travel,86.09,Richmond,Australia
+2023-12-23,Visa,Zoom Subscription,Software,86.25,Camden,Australia
+2023-12-23,Amex,Rockpool,Client Entertainment,54.55,Richmond,Australia
+2023-12-22,Visa,Woolworths Metro,Supplies,48.9,Liverpool,Australia
+2023-12-21,Amex,Officeworks,Supplies,147.72,Liverpool,Australia
+2023-12-21,Amex,Qantas Club,Travel,136.54,Camden,Australia
+2023-12-21,Amex,Qantas Club,Travel,86.66,Richmond,Australia
+2023-12-19,Visa,JB Hi-Fi,Equipment,79.25,Richmond,Australia
+2023-12-18,Amex,Uber,Travel,105.43,Richmond,Australia
+2023-12-17,Visa,Microsoft 365,Software,20.03,Camden,Australia
+2023-12-15,Visa,Marriott Hotels,Travel,890.73,Richmond,Australia
+2023-12-12,Amex,Woolworths Metro,Supplies,62.58,Liverpool,Australia
+2023-12-12,Visa,Staples,Supplies,145.01,Liverpool,Australia
+2023-12-11,Visa,Virgin Australia,Travel,67.7,Liverpool,Australia
+2023-12-11,Amex,Ritz Carlton Dining,Client Entertainment,95.94,Liverpool,Australia
+2023-12-11,Visa,BP,Fuel,42.82,Richmond,Australia
+2023-12-10,Visa,Coles,Office Maintenance,54.63,Camden,Australia
+2023-12-10,Visa,Coles,Office Maintenance,25.6,Liverpool,Australia
+2023-12-10,Visa,Qantas Club,Travel,44.45,Camden,Australia
+2023-12-09,Visa,Bunnings,Office Maintenance,46.09,Richmond,Australia
+2023-12-07,Visa,Uber,Travel,62.53,Camden,Australia
+2023-12-07,Visa,Bunnings,Office Maintenance,90.12,Liverpool,Australia
+2023-12-06,Amex,Coles,Office Maintenance,31.36,Richmond,Australia
+2023-12-05,Amex,Ritz Carlton Dining,Client Entertainment,40.38,Richmond,Australia
+2023-12-05,Visa,Qantas Club,Travel,74.43,Liverpool,Australia
+2023-12-04,Amex,Apple,Equipment,92.3,Liverpool,Australia
+2023-12-04,Visa,BP,Fuel,93.14,Camden,Australia
+2023-12-03,Visa,Ampol,Fuel,57.95,Richmond,Australia
+2023-12-03,Amex,The Grounds Cafe,Client Entertainment,82.58,Liverpool,Australia
+2023-12-03,Amex,Coles,Office Maintenance,54.38,Liverpool,Australia
+2023-12-01,Amex,Qantas Club,Travel,66.72,Camden,Australia
+2023-12-01,Amex,Zoom Subscription,Software,22.01,Camden,Australia
+2023-11-28,Amex,Staples,Supplies,83.66,Liverpool,Australia
+2023-11-28,Amex,Rockpool,Client Entertainment,94.73,Liverpool,Australia
+2023-11-28,Visa,Cleanaway,Office Maintenance,223.12,Richmond,Australia
+2023-11-28,Visa,Adobe,Software,318.09,Richmond,Australia
+2023-11-27,Amex,LEAP Legal Software,Software,255.58,Richmond,Australia
+2023-11-26,Visa,Virgin Australia,Travel,70.96,Richmond,Australia
+2023-11-23,Amex,Virgin Australia,Travel,72.65,Liverpool,Australia
+2023-11-22,Visa,Virgin Australia,Travel,37.11,Camden,Australia
+2023-11-22,Amex,Harvey Norman,Equipment,63.91,Camden,Australia
+2023-11-21,Amex,BP,Fuel,59.35,Richmond,Australia
+2023-11-21,Visa,The Grounds Cafe,Client Entertainment,69.85,Camden,Australia
+2023-11-20,Visa,LEAP Legal Software,Software,148.17,Liverpool,Australia
+2023-11-19,Amex,Officeworks,Supplies,37.04,Liverpool,Australia
+2023-11-19,Amex,Uber,Travel,42.35,Camden,Australia
+2023-11-18,Amex,Marriott Hotels,Travel,392.85,Liverpool,Australia
+2023-11-18,Visa,Zoom Subscription,Software,180.25,Liverpool,Australia
+2023-11-17,Visa,JB Hi-Fi,Equipment,292.53,Camden,Australia
+2023-11-17,Visa,Woolworths Metro,Supplies,252.65,Liverpool,Australia
+2023-11-17,Amex,Harvey Norman,Equipment,59.85,Richmond,Australia
+2023-11-16,Amex,Qantas Club,Travel,125.03,Camden,Australia
+2023-11-15,Amex,Harvey Norman,Equipment,71.68,Camden,Australia
+2023-11-15,Amex,Rockpool,Client Entertainment,90.54,Liverpool,Australia
+2023-11-14,Amex,Rockpool,Client Entertainment,33.83,Richmond,Australia
+2023-11-11,Amex,Staples,Supplies,214.35,Richmond,Australia
+2023-11-11,Visa,Bunnings,Office Maintenance,87.87,Liverpool,Australia
+2023-11-10,Amex,Marriott Hotels,Travel,110.38,Liverpool,Australia
+2023-11-09,Amex,Ritz Carlton Dining,Client Entertainment,85.56,Camden,Australia
+2023-11-08,Amex,JB Hi-Fi,Equipment,21.52,Liverpool,Australia
+2023-11-08,Visa,Marriott Hotels,Travel,130.03,Camden,Australia
+2023-11-07,Visa,Uber,Travel,218.83,Liverpool,Australia
+2023-11-07,Amex,Virgin Australia,Travel,917.05,Camden,Australia
+2023-11-06,Visa,Rockpool,Client Entertainment,83.36,Liverpool,Australia
+2023-11-06,Visa,Virgin Australia,Travel,102.59,Liverpool,Australia
+2023-11-04,Visa,Rockpool,Client Entertainment,37.78,Camden,Australia
+2023-11-04,Visa,JB Hi-Fi,Equipment,303.04,Liverpool,Australia
+2023-11-02,Amex,Ritz Carlton Dining,Client Entertainment,91.04,Richmond,Australia
+2023-11-01,Amex,Officeworks,Supplies,83.35,Richmond,Australia
+2023-10-31,Amex,JB Hi-Fi,Equipment,46.74,Liverpool,Australia
+2023-10-31,Amex,Virgin Australia,Travel,72.22,Camden,Australia
+2023-10-31,Amex,Cleanaway,Office Maintenance,264.99,Liverpool,Australia
+2023-10-30,Amex,Marriott Hotels,Travel,308.54,Liverpool,Australia
+2023-10-29,Visa,Virgin Australia,Travel,247.44,Richmond,Australia
+2023-10-28,Visa,Apple,Equipment,90.2,Camden,Australia
+2023-10-26,Visa,Marriott Hotels,Travel,677.32,Richmond,Australia
+2023-10-25,Visa,Coles,Office Maintenance,169.76,Richmond,Australia
+2023-10-24,Visa,Apple,Equipment,141.12,Liverpool,Australia
+2023-10-23,Amex,JB Hi-Fi,Equipment,80.88,Camden,Australia
+2023-10-20,Amex,Ampol,Fuel,125.28,Liverpool,Australia
+2023-10-20,Visa,The Grounds Cafe,Client Entertainment,132.62,Richmond,Australia
+2023-10-19,Amex,Officeworks,Supplies,115.72,Liverpool,Australia
+2023-10-17,Amex,The Grounds Cafe,Client Entertainment,105.86,Liverpool,Australia
+2023-10-17,Amex,Zoom Subscription,Software,98.02,Liverpool,Australia
+2023-10-16,Amex,Harvey Norman,Equipment,268.88,Liverpool,Australia
+2023-10-16,Visa,Qantas Club,Travel,339.17,Richmond,Australia
+2023-10-14,Visa,Marriott Hotels,Travel,227.25,Camden,Australia
+2023-10-13,Amex,Adobe,Software,139.8,Liverpool,Australia
+2023-10-13,Visa,Qantas Club,Travel,128.14,Camden,Australia
+2023-10-12,Visa,Apple,Equipment,128.29,Liverpool,Australia
+2023-10-11,Amex,Microsoft 365,Software,66.74,Liverpool,Australia
+2023-10-10,Visa,Ritz Carlton Dining,Client Entertainment,98.37,Richmond,Australia
+2023-10-09,Amex,BP,Fuel,87.19,Camden,Australia
+2023-10-05,Amex,Qantas Club,Travel,59.08,Camden,Australia
+2023-10-05,Amex,The Grounds Cafe,Client Entertainment,40.78,Camden,Australia
+2023-10-04,Amex,Marriott Hotels,Travel,156.68,Liverpool,Australia
+2023-10-03,Visa,BP,Fuel,89.65,Camden,Australia
+2023-10-03,Amex,Staples,Supplies,24.48,Richmond,Australia
+2023-10-02,Amex,Uber,Travel,49.31,Richmond,Australia
+2023-09-30,Visa,Staples,Supplies,602.06,Camden,Australia
+2023-09-29,Visa,The Grounds Cafe,Client Entertainment,162.03,Richmond,Australia
+2023-09-29,Amex,Rockpool,Client Entertainment,159.44,Richmond,Australia
+2023-09-29,Visa,Zoom Subscription,Software,210.93,Camden,Australia
+2023-09-25,Amex,The Grounds Cafe,Client Entertainment,48,Liverpool,Australia
+2023-09-24,Amex,Microsoft 365,Software,321.46,Camden,Australia
+2023-09-24,Visa,Rockpool,Client Entertainment,310.37,Liverpool,Australia
+2023-09-21,Visa,Harvey Norman,Equipment,162.3,Camden,Australia
+2023-09-21,Amex,Qantas Club,Travel,111.8,Liverpool,Australia
+2023-09-20,Amex,Rockpool,Client Entertainment,138.01,Richmond,Australia
+2023-09-18,Visa,Virgin Australia,Travel,383.78,Camden,Australia
+2023-09-17,Visa,Microsoft 365,Software,101.32,Camden,Australia
+2023-09-16,Visa,Ampol,Fuel,207.16,Richmond,Australia
+2023-09-15,Visa,Zoom Subscription,Software,110.36,Liverpool,Australia
+2023-09-14,Visa,Harvey Norman,Equipment,217.96,Camden,Australia
+2023-09-14,Visa,BP,Fuel,128.49,Liverpool,Australia
+2023-09-14,Amex,The Grounds Cafe,Client Entertainment,63.32,Liverpool,Australia
+2023-09-13,Amex,LEAP Legal Software,Software,139.9,Liverpool,Australia
+2023-09-11,Visa,Ritz Carlton Dining,Client Entertainment,169.63,Liverpool,Australia
+2023-09-11,Visa,Cleanaway,Office Maintenance,58.2,Richmond,Australia
+2023-09-10,Visa,Marriott Hotels,Travel,137.12,Camden,Australia
+2023-09-10,Amex,Coles,Office Maintenance,53.43,Liverpool,Australia
+2023-09-07,Amex,Uber,Travel,316.12,Liverpool,Australia
+2023-09-04,Visa,LEAP Legal Software,Software,55.02,Richmond,Australia
+2023-09-04,Amex,Woolworths Metro,Supplies,171.67,Richmond,Australia
+2023-09-03,Visa,Ritz Carlton Dining,Client Entertainment,191.89,Richmond,Australia
+2023-09-03,Amex,Ritz Carlton Dining,Client Entertainment,92.22,Richmond,Australia
+2023-09-03,Amex,Staples,Supplies,222.48,Liverpool,Australia
+2023-09-03,Amex,Microsoft 365,Software,60.44,Richmond,Australia
+2023-09-02,Visa,Virgin Australia,Travel,173.45,Liverpool,Australia
+2023-09-02,Amex,Virgin Australia,Travel,181.45,Richmond,Australia
+2023-08-31,Visa,The Grounds Cafe,Client Entertainment,81.91,Liverpool,Australia
+2023-08-30,Amex,Virgin Australia,Travel,140.63,Richmond,Australia
+2023-08-29,Amex,Harvey Norman,Equipment,209.32,Camden,Australia
+2023-08-25,Visa,Woolworths Metro,Supplies,34.32,Liverpool,Australia
+2023-08-25,Visa,Uber,Travel,122.94,Camden,Australia
+2023-08-24,Amex,Rockpool,Client Entertainment,58.34,Camden,Australia
+2023-08-24,Visa,Qantas Club,Travel,106.48,Liverpool,Australia
+2023-08-23,Amex,Harvey Norman,Equipment,78.51,Liverpool,Australia
+2023-08-22,Amex,Marriott Hotels,Travel,265.6,Richmond,Australia
+2023-08-21,Amex,JB Hi-Fi,Equipment,58.46,Liverpool,Australia
+2023-08-20,Amex,Officeworks,Supplies,95.49,Camden,Australia
+2023-08-20,Visa,Zoom Subscription,Software,175.16,Liverpool,Australia
+2023-08-20,Visa,BP,Fuel,323.33,Richmond,Australia
+2023-08-18,Visa,Virgin Australia,Travel,194.54,Richmond,Australia
+2023-08-13,Amex,Rockpool,Client Entertainment,69.71,Camden,Australia
+2023-08-13,Amex,Qantas Club,Travel,181,Liverpool,Australia
+2023-08-13,Visa,JB Hi-Fi,Equipment,392.84,Liverpool,Australia
+2023-08-12,Visa,Harvey Norman,Equipment,170.66,Liverpool,Australia
+2023-08-11,Visa,LEAP Legal Software,Software,247.61,Camden,Australia
+2023-08-11,Amex,Apple,Equipment,190.47,Richmond,Australia
+2023-08-09,Visa,Bunnings,Office Maintenance,47.86,Camden,Australia
+2023-08-09,Amex,Staples,Supplies,63.23,Liverpool,Australia
+2023-08-07,Amex,Rockpool,Client Entertainment,86.08,Camden,Australia
+2023-08-06,Visa,Officeworks,Supplies,161.9,Camden,Australia
+2023-08-04,Visa,JB Hi-Fi,Equipment,113.22,Liverpool,Australia
+2023-08-04,Visa,Officeworks,Supplies,121.88,Camden,Australia
+2023-08-03,Visa,Zoom Subscription,Software,162,Liverpool,Australia
+2023-08-03,Visa,Rockpool,Client Entertainment,41,Liverpool,Australia
+2023-08-02,Visa,Staples,Supplies,46.72,Liverpool,Australia
+2023-08-02,Visa,Zoom Subscription,Software,59.14,Liverpool,Australia
+2023-08-01,Visa,Virgin Australia,Travel,98.21,Richmond,Australia
+2023-08-01,Amex,Qantas Club,Travel,93.35,Liverpool,Australia
+2023-08-01,Visa,The Grounds Cafe,Client Entertainment,610.49,Camden,Australia
+2023-08-01,Visa,Zoom Subscription,Software,47.34,Richmond,Australia
+2023-07-31,Amex,Bunnings,Office Maintenance,85.99,Liverpool,Australia
+2023-07-31,Visa,Adobe,Software,48.66,Richmond,Australia
+2023-07-30,Visa,Staples,Supplies,80.11,Liverpool,Australia
+2023-07-29,Visa,Cleanaway,Office Maintenance,50.14,Camden,Australia
+2023-07-29,Amex,Qantas Club,Travel,40.89,Liverpool,Australia
+2023-07-29,Amex,Bunnings,Office Maintenance,199.62,Camden,Australia
+2023-07-27,Visa,Zoom Subscription,Software,95.44,Liverpool,Australia
+2023-07-26,Visa,Uber,Travel,161.86,Liverpool,Australia
+2023-07-25,Visa,Microsoft 365,Software,61.67,Richmond,Australia
+2023-07-25,Visa,Staples,Supplies,86.54,Camden,Australia
+2023-07-25,Visa,Marriott Hotels,Travel,373.31,Richmond,Australia
+2023-07-23,Amex,Ritz Carlton Dining,Client Entertainment,70.95,Liverpool,Australia
+2023-07-21,Visa,JB Hi-Fi,Equipment,416.99,Camden,Australia
+2023-07-21,Amex,Qantas Club,Travel,129.85,Liverpool,Australia
+2023-07-20,Visa,Qantas Club,Travel,158.47,Liverpool,Australia
+2023-07-20,Visa,Marriott Hotels,Travel,75.84,Liverpool,Australia
+2023-07-20,Visa,LEAP Legal Software,Software,59.28,Richmond,Australia
+2023-07-19,Visa,Bunnings,Office Maintenance,9.84,Liverpool,Australia
+2023-07-18,Amex,Virgin Australia,Travel,190.3,Camden,Australia
+2023-07-18,Visa,Marriott Hotels,Travel,401.1,Camden,Australia
+2023-07-16,Visa,Uber,Travel,70.06,Camden,Australia
+2023-07-15,Amex,Uber,Travel,239.95,Liverpool,Australia
+2023-07-15,Visa,Ritz Carlton Dining,Client Entertainment,64.59,Camden,Australia
+2023-07-15,Visa,Ritz Carlton Dining,Client Entertainment,76.98,Richmond,Australia
+2023-07-15,Visa,Microsoft 365,Software,61.6,Richmond,Australia
+2023-07-13,Amex,Shell,Fuel,117.85,Camden,Australia
+2023-07-12,Visa,The Grounds Cafe,Client Entertainment,95.79,Liverpool,Australia
+2023-07-11,Amex,Adobe,Software,99.06,Camden,Australia
+2023-07-10,Visa,Apple,Equipment,153.84,Liverpool,Australia
+2023-07-09,Visa,Qantas Club,Travel,249.7,Liverpool,Australia
+2023-07-08,Visa,Virgin Australia,Travel,91.43,Liverpool,Australia
+2023-07-08,Amex,Cleanaway,Office Maintenance,103.83,Richmond,Australia
+2023-07-08,Visa,Marriott Hotels,Travel,91.15,Liverpool,Australia
+2023-07-07,Amex,Zoom Subscription,Software,68.03,Camden,Australia
+2023-07-07,Visa,Qantas Club,Travel,157.2,Liverpool,Australia
+2023-07-06,Amex,LEAP Legal Software,Software,146.93,Camden,Australia
+2023-07-06,Amex,Microsoft 365,Software,110.67,Liverpool,Australia
+2023-07-04,Amex,Uber,Travel,32.39,Camden,Australia
+2023-07-02,Amex,Zoom Subscription,Software,13.59,Richmond,Australia

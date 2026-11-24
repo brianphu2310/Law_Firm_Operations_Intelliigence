@@ -1,0 +1,34 @@
+table 'Sim Goal Row'
+
+	column Lever
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Lever]
+		sortByColumn: Order
+
+	column Key
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Key]
+
+	column Order
+		dataType: int64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Order]
+
+	partition 'Sim Goal Row' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Lever", STRING, "Key", STRING, "Order", INTEGER,
+				    {
+				    { "Utilisation (pp)", "sim_util", 0 },
+				    { "Rate increase (%)", "sim_rate", 1 },
+				    { "Realisation (pp)", "sim_real", 2 },
+				    { "Disbursement recovery (pp)", "sim_recov", 3 },
+				    { "Overhead change (%)", "sim_infl", 4 }
+				    }
+				)

@@ -1,0 +1,23 @@
+table 'Sim Goal Lever'
+	isHidden
+
+	column Lever
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Lever]
+
+	partition 'Sim Goal Lever' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Lever", STRING,
+				    {
+				    { "sim_util" },
+				    { "sim_rate" },
+				    { "sim_real" },
+				    { "sim_recov" },
+				    { "sim_infl" },
+				    { "sim_pay_both" }
+				    }
+				)

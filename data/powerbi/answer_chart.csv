@@ -1,0 +1,35 @@
+Order,Item,ItemOrder,Value,Highlight,Unit
+1,Smokeball,1,106055.408619,1,$
+1,triConvey,2,69185.925522,0,$
+1,Clio,3,66213.470058,0,$
+1,Actionstep,4,36421.6368,0,$
+1,LEAP,5,0,0,$
+1,PracEvolve,6,-11373.348156,0,$
+1,MyCase,7,-15230.137129,0,$
+2,"Profit, year one",8,-81376.067539,0,$
+2,Profit at full speed,9,539213.413774,0,$
+2,Cash low point after,10,40138.739835,1,$
+2,Minimum cash balance,11,60000,0,$
+3,Litigation,12,129610.442467,1,$
+3,IP Portfolio,13,127986.955984,0,$
+3,Corporate,14,124521.17742,0,$
+3,Employment,15,99030.182628,0,$
+3,Advisory,16,81917.34483,0,$
+4,Camden reception,17,1.81811,1,roles
+4,Camden paralegals,18,0.863636,0,roles
+4,All offices accounts,19,0.599,0,roles
+4,Liverpool paralegals,20,0.090909,0,roles
+4,Liverpool reception,21,-0.38836,0,roles
+4,Richmond paralegals,22,-0.409091,0,roles
+4,Richmond reception,23,-0.41294,0,roles
+4,All offices marketing,24,-0.452767,0,roles
+5,Pay +1%,25,39517.834448,0,$
+5,Pay +2%,26,79035.668896,0,$
+5,Pay +3%,27,118553.503344,1,$
+5,Pay +4%,28,158071.337792,0,$
+5,Pay +5%,29,197589.17224,0,$
+6,Website & SEO,30,645.962361,1,$
+6,Referrals,31,1034.231713,0,$
+6,Events & community,32,1101.072207,0,$
+6,Google Ads,33,1230.404497,0,$
+6,LinkedIn & social,34,2242.924865,0,$

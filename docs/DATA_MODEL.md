@@ -15,8 +15,15 @@ erDiagram
     dim_date ||--o{ fact_monthly_snapshot : "month / snapshot date"
     dim_date ||--o{ fact_trust_balance : "month"
     dim_date ||--o{ fact_trust_txn : "transaction date"
+    dim_date ||--o{ fact_monthly_funnel : "month"
+    dim_date ||--o{ fact_supplier_order : "order date"
+    dim_branch ||--o{ fact_staffing : "office"
+    dim_department ||--o{ fact_staffing : "department"
+    dim_branch ||--o{ fact_supplier_order : "office"
     dim_branch ||--o{ dim_attorney : "home branch"
     dim_branch ||--o{ dim_matter : ""
+    dim_suburb ||--o{ dim_matter : "client suburb"
+    dim_branch ||--o{ dim_suburb : "nearest office"
     dim_branch ||--o{ fact_invoice : ""
     dim_practice_area ||--o{ dim_client : "primary area"
     dim_practice_area ||--o{ dim_matter : ""
@@ -149,6 +156,31 @@ erDiagram
         text full_date UK
         text fy_label
     }
+    dim_department {
+        int department_key PK
+        text department UK
+        real monthly_pay
+    }
+    fact_staffing {
+        int branch_key PK
+        int department_key PK
+        int headcount
+    }
+    dim_marketing_channel {
+        int channel_key PK
+        text channel UK
+        real spend_share
+    }
+    fact_monthly_funnel {
+        int month_start_date_key PK
+        real inquiries
+        real matters_opened
+    }
+    fact_supplier_order {
+        int order_key PK
+        text supplier
+        real amount
+    }
 ```
 
 (Keys and principal attributes only; every column is listed in the data dictionary.)
@@ -165,6 +197,10 @@ erDiagram
 | `fact_monthly_snapshot` | Periodic snapshot fact | month (stock balances at month end / as-of date) | month | `month_start_date_key` |
 | `fact_trust_balance` | Periodic snapshot fact | client trust ledger x month | client + month | composite PK |
 | `fact_trust_txn` | Transaction fact | trust deposit or disbursement | none in source | `trust_txn_key` |
+| `fact_staffing` | Periodic snapshot fact | office x support department, at the as-of date | office + department | composite PK |
+| `fact_monthly_funnel` | Periodic snapshot fact | month (intake funnel) | month | `month_start_date_key` |
+| `fact_supplier_order` | Transaction fact | search or council order | none in source | `order_key` |
+| `dim_department`, `dim_marketing_channel` | Dimensions (with assumptions) | support department / marketing channel | name | integer key |
 | `dim_matter` | Dimension | matter | `matter_id` (names are NOT unique) | `matter_key` |
 | `dim_client` | Dimension | client | `client_name` | `client_key` |
 | `dim_attorney` | Dimension | fee earner | `attorney_short` | `attorney_key` |
@@ -194,4 +230,8 @@ flowchart LR
     db --> dq["warehouse/quality.py<br/>docs/DATA_QUALITY.md"]
     db --> sql["sql/analysis/*.sql<br/>sql/run_queries.py"]
     sql --> csv["docs/query_results/*.csv"]
+    db --> exp["warehouse/export.py<br/>data/warehouse/*.csv"]
+    exp --> sf["Snowflake<br/>snowflake/01_setup_and_load.sql<br/>snowflake/02_decision_queries.sql"]
+    csv --> pq["Excel + Power Query<br/>excel/Principal_Decision_Pack.xlsx"]
+    exp --> pq
 ```

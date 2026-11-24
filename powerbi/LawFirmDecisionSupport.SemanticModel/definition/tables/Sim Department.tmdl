@@ -1,0 +1,27 @@
+table 'Sim Department'
+	isHidden
+
+	column Department
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Department]
+
+	column Pay
+		dataType: double
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Pay]
+
+	partition 'Sim Department' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Department", STRING, "Pay", DOUBLE,
+				    {
+				    { "Reception & admin", 4650 },
+				    { "Paralegals & clerks", 5600 },
+				    { "Accounts & trust", 5900 },
+				    { "Marketing", 5900 }
+				    }
+				)

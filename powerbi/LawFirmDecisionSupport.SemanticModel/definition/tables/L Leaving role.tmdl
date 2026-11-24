@@ -1,0 +1,26 @@
+table 'L Leaving role'
+
+	column 'Role leaving'
+		dataType: string
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Role leaving]
+		sortByColumn: Order
+
+	column Order
+		dataType: int64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Order]
+
+	partition 'L Leaving role' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Role leaving", STRING, "Order", INTEGER,
+				    {
+				    { "Associate", 1 },
+				    { "Senior Associate", 2 },
+				    { "Partner", 3 }
+				    }
+				)
