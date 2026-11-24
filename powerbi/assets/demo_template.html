@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Law Firm Decision Support · Power BI preview</title>
+<meta name="description" content="Power BI decision-support report for a Sydney law firm: finance, matters, branch-site catchment and a live what-if simulator. Sample data. By Brian Phu.">
+<meta property="og:title" content="Law Firm Decision Support · Power BI report">
+<meta property="og:description" content="22-page Power BI report with a live what-if simulator, built on a SQL warehouse and Python pipeline. Sample data.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='1' y='9' width='4' height='6' fill='%23f2c811'/%3E%3Crect x='6' y='5' width='4' height='10' fill='%23f2c811'/%3E%3Crect x='11' y='1' width='4' height='14' fill='%23f2c811'/%3E%3C/svg%3E">
 <style>
   :root { --teal:#0a8496; --ink:#0f172a; --muted:#64748b; --line:#dbe6ee; --bg:#f3f6fa; --border:#dbe6ee; }
   * { box-sizing: border-box; }
@@ -14,6 +19,9 @@
   .top .logo i { background:#f2c811; display:block; border-radius:1px; }
   .top .name { font-weight:600; }
   .top .note { margin-left:auto; color:#c8c6c4; font-size:12px; }
+  .top .gh { color:#fff; text-decoration:none; border:1px solid #605e5c; border-radius:4px; padding:3px 9px; font-size:12px; white-space:nowrap; }
+  .top .gh:hover { background:#3b3a39; }
+  @media (max-width: 900px) { .top .gh { margin-left:auto; } }
   .rotate { display:none; position:absolute; top:14px; left:0; right:0; text-align:center; font-size:13px; color:#475569; }
   @media (max-width: 700px) and (orientation: portrait) { .rotate { display:block; } }
   @media (max-width: 900px) { .top .note, .top .name + span { display:none; } }
@@ -64,7 +72,8 @@
 <div class="app">
   <div class="top"><div class="logo"><i style="height:8px"></i><i style="height:13px"></i><i style="height:18px"></i></div>
     <span class="name">LawFirmDecisionSupport</span><span style="color:#c8c6c4">· Report preview</span>
-    <span class="note">Preview of the Power BI report built from its own page files · sample data · Simulator runs live in the browser</span></div>
+    <span class="note">Preview of the Power BI report built from its own page files · sample data · Simulator runs live in the browser</span>
+    <a class="gh" href="https://github.com/brianphu2310/law-firm-decision-support" target="_blank" rel="noopener">Source on GitHub ↗</a></div>
   <div class="stage" id="stage"><div class="rotate">↻ Turn your phone sideways for a bigger view</div><div class="canvas" id="canvas"></div></div>
   <div class="tabs" id="tabs"></div>
 </div>

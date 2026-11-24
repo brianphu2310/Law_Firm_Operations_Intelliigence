@@ -2,7 +2,11 @@
 
 ![Python 3.12](https://img.shields.io/badge/python-3.12-blue) ![SQL](https://img.shields.io/badge/SQL-SQLite%20%7C%20Snowflake-29b5e8) ![Excel](https://img.shields.io/badge/Excel-Power%20Query-217346) ![Power BI](https://img.shields.io/badge/Power%20BI-DAX-f2c811) ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
-**[▶ Open the Power BI report](docs/POWERBI.md)** · [Business analysis pack](docs/ba/README.md) · [Simulator](docs/SIMULATOR.md) · [Methodology](docs/METHODOLOGY.md) · [Data model](docs/DATA_MODEL.md)
+**[▶ Open the live dashboard](https://brianphu2310.github.io/law-firm-decision-support/)** (no sign-in, works on phone) · [Power BI files & how to open them](docs/POWERBI.md) · [Business analysis pack](docs/ba/README.md) · [Simulator](docs/SIMULATOR.md) · [Methodology](docs/METHODOLOGY.md) · [Data model](docs/DATA_MODEL.md)
+
+[![Dashboard demo: Overview, matter map and the Decision Simulator](docs/screenshots/demo.gif)](https://brianphu2310.github.io/law-firm-decision-support/)
+
+*The live link is a browser preview generated from the Power BI report's own page files (same layout, same numbers, Simulator runs live). The report itself is in [`powerbi/`](powerbi/) as a Power BI Project (.pbip).*
 
 **The brief.** The Principal of a three-office law firm needs to decide what to do next and wants the numbers behind each
 decision in one place:
@@ -31,6 +35,16 @@ the cash needed up front and how much depends on things going to plan.
 | **Tech stack** | Python (pandas, NumPy) · SQL (SQLite, Snowflake) · Excel + Power Query · Power BI (DAX, TMDL/PBIR) · pytest · GitHub Actions |
 | **Proof** | 130+ automated tests in CI. The SQL answers and the Simulator's DAX formulas are tested against the Python engine, the report files against Microsoft's Power BI schemas, and the Excel summary recalculates to the same figures. |
 | **Honest limits** | Fictional firm and synthetic data, modelled on real legal-accounts work; no client information. Department benchmarks, marketing mix and new-service figures are stated assumptions. Not legal or financial advice. |
+
+## Screenshots
+
+<table>
+<tr><td width="50%"><a href="docs/screenshots/01_overview.png"><img src="docs/screenshots/01_overview.png" alt="Overview: the six decisions"></a><br><sub>Overview: the six decisions</sub></td><td width="50%"><a href="docs/screenshots/02_finance_pl.png"><img src="docs/screenshots/02_finance_pl.png" alt="Finance · P&L"></a><br><sub>Finance · P&L</sub></td></tr>
+<tr><td width="50%"><a href="docs/screenshots/03_cash_billing.png"><img src="docs/screenshots/03_cash_billing.png" alt="Finance · Cash & billing"></a><br><sub>Finance · Cash & billing</sub></td><td width="50%"><a href="docs/screenshots/04_people.png"><img src="docs/screenshots/04_people.png" alt="People · Performance"></a><br><sub>People · Performance</sub></td></tr>
+<tr><td width="50%"><a href="docs/screenshots/05_matters_map.png"><img src="docs/screenshots/05_matters_map.png" alt="Matters · Map: where clients come from"></a><br><sub>Matters · Map: where clients come from</sub></td><td width="50%"><a href="docs/screenshots/06_clients.png"><img src="docs/screenshots/06_clients.png" alt="Clients"></a><br><sub>Clients</sub></td></tr>
+<tr><td width="50%"><a href="docs/screenshots/07_simulator_decide.png"><img src="docs/screenshots/07_simulator_decide.png" alt="★ Simulator: a new branch tested"></a><br><sub>★ Simulator: a new branch tested</sub></td><td width="50%"><a href="docs/screenshots/08_simulator_test.png"><img src="docs/screenshots/08_simulator_test.png" alt="Simulator · Test the plan"></a><br><sub>Simulator · Test the plan</sub></td></tr>
+<tr><td width="50%"><a href="docs/screenshots/09_method.png"><img src="docs/screenshots/09_method.png" alt="Method & check"></a><br><sub>Method & check</sub></td></tr>
+</table>
 
 ## The Principal's questions and the answers
 
